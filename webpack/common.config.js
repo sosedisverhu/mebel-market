@@ -33,7 +33,7 @@ const common = {
     module: {
         rules: [
             {
-                test: /\.ttf$/,
+                test: /\.(ttf|otf)$/,
                 loader: 'url-loader',
                 options: {
                     limit: 1000,
@@ -82,6 +82,11 @@ const common = {
             },
             {
                 test: /\.css?$/,
+                loaders: ['style-loader', 'css-loader'],
+                include: [/node_modules/]
+            },
+            {
+                test: /\.css?$/,
                 use: [
                     ExtractCssChunks.loader,
                     {
@@ -107,7 +112,8 @@ const common = {
                             sourceMap: isSourceMapEnabled
                         }
                     }
-                ]
+                ],
+                exclude: [/node_modules/]
             }
         ]
     },
