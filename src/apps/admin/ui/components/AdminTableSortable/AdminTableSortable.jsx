@@ -32,7 +32,6 @@ import slice from '@tinkoff/utils/array/slice';
 import concat from '@tinkoff/utils/array/concat';
 import without from '@tinkoff/utils/array/without';
 import noop from '@tinkoff/utils/function/noop';
-import findIndex from '@tinkoff/utils/array/findIndex';
 import any from '@tinkoff/utils/array/any';
 
 const ButtonSortable = SortableHandle(({ imageClassName }) => (

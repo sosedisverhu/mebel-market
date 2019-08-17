@@ -3,13 +3,11 @@ import base from '../base';
 
 import setProducts from '../../actions/setProducts';
 
-export default function getProducts (req) {
+export default function getProducts () {
     return dispatch => {
-        const host = req.get('host');
-
         return base(
             request
-                .get(`${host}/api/client/product/all`)
+                .get('/api/client/product/all')
                 .timeout({
                     deadline: 2000
                 })

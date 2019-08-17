@@ -49,7 +49,6 @@ app.use('/api/admin/authentication', adminAuthenticationApi);
 app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
 
-
 // admin
 app.get(/^\/admin/, function (req, res) {
     const page = renderAdminPage();
