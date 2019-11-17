@@ -8,9 +8,6 @@ export default function getProducts () {
         return base(
             request
                 .get('/api/client/product/all')
-                .timeout({
-                    deadline: 2000
-                })
         )
             .then(products => {
                 dispatch(setProducts(products));

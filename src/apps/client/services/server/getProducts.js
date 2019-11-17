@@ -10,6 +10,9 @@ export default function getProducts (req) {
         return base(
             request
                 .get(`${host}/api/client/product/all`)
+                .timeout({
+                    deadline: 2000
+                })
         )
             .then(products => {
                 dispatch(setProducts(products));
