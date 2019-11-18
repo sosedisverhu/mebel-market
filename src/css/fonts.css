@@ -12,3 +12,13 @@
   font-family: 'HelveticaNeueCyrLight';
   src: url('./font/HelveticaNeueCyr-Light.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'RoundedElegance';
+  src: url('./font/RoundedElegance.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: url('./font/Rubik-Regular.ttf') format('truetype');
+}

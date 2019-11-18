@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
-import propOr from '@tinkoff/utils/object/propOr';
-
 import { connect } from 'react-redux';
-
 import styles from './Footer.css';
 
-const mapStateToProps = ({ application }) => {
-    return {
-        langMap: application.langMap
-    };
-};
-
 class Footer extends Component {
-    static propTypes = {
-        langMap: PropTypes.object.isRequired
-    };
-
     render () {
-        const { langMap } = this.props;
-        const text = propOr('footer', {}, langMap);
-
-        return <div className={styles.root}>
-            {text.title}
-        </div>;
+        return (
+            <div className={styles.footer}>
+                <div className={styles.footerContainer}>
+                    <div className={styles.iconsWrapper}>
+                        <a href="#" target="_blank">
+                            <div className={styles.googlePlus}></div>
+                        </a>
+                        <a href="#" target="_blank">
+                            <div className={styles.facebook}></div>
+                        </a>
+                    </div>
+                    <div className={styles.developedWrapper}>
+                        Developed by
+                        <a className={styles.stubbsText} href="#" target="_blank">Stubbs</a>
+                    </div>
+                    <div className={styles.contactsWrapper}>
+                        <div className={styles.contactsLinkWrapper}>
+                            <a className={styles.contactsLink} href="tel:+380443557720">(044) 355-77-20</a>
+                            <a className={styles.contactsLink} href="tel:+380500511000">(050) 051-10-00</a>
+                        </div>
+                        <div className={styles.contactsLinkWrapper}>
+                            <a className={styles.contactsLink} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>
+                            <a className={styles.contactsLink} href="tel:+380679000522">(067) 900-05-22</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 
-export default connect(mapStateToProps)(Footer);
+export default connect()(Footer);
