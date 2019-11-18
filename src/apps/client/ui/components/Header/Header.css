@@ -1,7 +1,71 @@
-.root {
-    text-align: center;
-    line-height: 70px;
-    font-family: sans-serif;
-    height: 70px;
-    background-color: #a3ab8a;
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.headerTop {
+    display: flex;
+    height: 50px;
+    background-color: black;
+}
+
+.content {
+    width: 1360px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoWrapper {
+    margin-right: 130px;
+}
+
+.menuItem {
+    text-decoration: none;
+    color: whiteBasic;
+    margin-right: 30px;
+}
+
+.headerTopRight {
+    display: flex;
+    align-items: center;
+}
+
+.wishWrapper,
+.cartWrapper {
+    margin-right: 20px;
+}
+
+.search {
+    position: relative;
+    transition: max-height 0s linear 0.25s;
+    margin-right: 40px;
+}
+
+.searchInput {
+    width: 202px;
+    border: none;
+    box-sizing: border-box;
+    margin-right: 15px;
+}
+
+.searchBtn {
+    width: 16px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: center no-repeat url("/src/apps/client/ui/components/Header/img/search.png");
+    border: 0;
+    cursor: pointer;
+}
+
+.logoImg,
+.wishImg,
+.cartImg {
+    display: block;
 }

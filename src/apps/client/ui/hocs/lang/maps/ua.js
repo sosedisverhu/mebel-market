@@ -9,6 +9,9 @@ export default {
         title: 'Футер'
     },
     header: {
-        title: 'Шапка'
+        deliveryAndPayment: 'Доставка и оплата',
+        partners: 'Партнёры',
+        articles: 'Статьи',
+        contacts: 'Контакты'
     }
 };
