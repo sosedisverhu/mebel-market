@@ -1,63 +1,66 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import classNames from 'classnames';
-
 import propOr from '@tinkoff/utils/object/propOr';
-
+import includes from '@tinkoff/utils/array/includes';
 import { connect } from 'react-redux';
-import setLang from '../../../actions/setLang';
 
-import { LANGS } from '../../../constants/constants';
+import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
 
 import styles from './MainPage.css';
+import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
-        lang: application.lang
-    };
-};
-
-const mapDispatchToProps = dispatch => {
-    return {
-        setLang: payload => dispatch(setLang(payload))
+        products: data.products,
+        labels: data.labels
     };
 };
 
 class MainPage extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired,
-        setLang: PropTypes.func.isRequired
-    };
-
-    handleLangClick = lang => () => {
-        this.props.setLang(lang);
+        labels: PropTypes.array.isRequired,
+        products: PropTypes.array.isRequired
     };
 
     render () {
-        const { langMap, lang } = this.props;
-        const text = propOr('content', {}, langMap);
+        const { langMap, products, labels } = this.props;
+        const text = propOr('mainPage', {}, langMap);
 
-        return <section className={styles.root}>
-            <div className={styles.title}>{text.title}</div>
-            <div className={styles.langBlock}>
-                <div className={styles.langsTitle}>{text.langs}</div>
-                <div className={styles.langs}>
-                    { LANGS.map((langItem, i) => <div
-                        key={i}
-                        onClick={this.handleLangClick(langItem)}
-                        className={classNames(styles.lang, {
-                            [styles.activeLang]: lang === langItem
-                        })}
-                    >
-                        {langItem}
-                    </div>) }
-                </div>
-            </div>
-        </section>;
+        const productsResult = products
+            .sort((prev, next) => next.date - prev.date)
+            .reduce((result, product) => {
+                if (includes('top', product.labels)) {
+                    (result.top) ? result.top.push(product) : result.top = [product];
+                }
+
+                if (product.discountPrice) {
+                    (result.discount) ? result.discount.push(product) : result.discount = [product];
+                }
+
+                if (result.new) {
+                    if (result.new.length < MAX_NEW_PROSUCTS) {
+                        result.new.push(product);
+                    }
+                } else {
+                    result.new = [product];
+                }
+
+                return result;
+            }, {});
+
+        return (
+            <div>
+                {labels.map(label => {
+                    return (
+                        <section key={label} className={styles.categorySection}>
+                            <h2 className={styles.title}>{text[label]}</h2>
+                            <ProductsSlider label={label} products={productsResult[label]} />
+                        </section>);
+                })}
+            </div>);
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps)(MainPage);

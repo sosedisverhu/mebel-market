@@ -1,14 +1,12 @@
 /* eslint-disable max-len */
 
 export default {
-    content: {
-        title: 'Контент',
-        langs: 'Выбор языка'
+    product: {
+        labelTop: 'Хит'
     },
-    footer: {
-        title: 'Футер'
-    },
-    header: {
-        title: 'Шапка'
+    mainPage: {
+        top: 'Топ продаж',
+        discount: 'Акции',
+        new: 'Новинки'
     }
 };

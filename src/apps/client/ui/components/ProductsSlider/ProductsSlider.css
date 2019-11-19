@@ -1,0 +1,152 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.slider {
+    padding: 0 45px;
+    margin: 0 auto;
+    max-width: 1274px;
+    box-sizing: content-box;
+    position: relative;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    left: -15px;
+    position: relative;
+}
+
+.products {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+}
+
+.productsPack {
+    display: flex;
+}
+
+.left,
+.right {
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+
+    &:before {
+        position: relative;
+    }
+
+    &:hover {
+        &:before {
+            top: 1px;
+        }
+    }
+
+    &:active {
+        &:before {
+            top: 2px;
+        }
+    }
+}
+
+.left {
+    left: 0;
+
+    &:before {
+        content: url("./img/left.png");
+    }
+
+    &:hover {
+        &:before {
+            left: -1px;
+        }
+    }
+
+    &:hover {
+        &:before {
+            left: -2px;
+        }
+    }
+}
+
+.right {
+    right: 0;
+
+    &:before {
+        content: url("./img/right.png");
+    }
+
+    &:hover {
+        &:before {
+            left: 1px;
+        }
+    }
+
+    &:hover {
+        &:before {
+            left: 2px;
+        }
+    }
+}
+
+
+.switch {
+    display: flex;
+    padding: 10px 0 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ellipse {
+    cursor: pointer;
+    padding: 10px 12px;
+    position: relative;
+    box-sizing: content-box;
+    width: 40px;
+    height: 6px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background: whiteBasic;
+        transition: background 0.25s ease-out;
+        width: 40px;
+        height: 6px;
+        margin-left: -20px;
+        margin-top: -3px;
+    }
+
+    &.active {
+
+        &:before {
+            background: black;
+            transition: background 0.25s ease-in;
+        }
+    }
+}
+
+.discount {
+    .ellipse {
+        &:before {
+            background: gray3;
+        }
+
+        &.active {
+            &:before {
+                background: green;
+            }
+        }
+    }
+}
