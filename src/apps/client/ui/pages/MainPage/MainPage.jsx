@@ -8,6 +8,7 @@ import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
 
 import styles from './MainPage.css';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
+import MainCategories from '../../components/MainCategories/MainCategories';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -59,6 +60,7 @@ class MainPage extends Component {
                             <ProductsSlider label={label} products={productsResult[label]} />
                         </section>);
                 })}
+                <MainCategories />
             </div>);
     }
 }
