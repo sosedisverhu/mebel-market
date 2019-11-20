@@ -1,9 +1,11 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
+@value red from '../../../../../css/colors.css';
 
 .header {
     display: flex;
     flex-direction: column;
+    font-family: RoundedElegance;
 }
 
 .headerTop {
@@ -18,14 +20,16 @@
     padding: 0 60px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    position: relative;
 }
 
 .logoWrapper {
     margin-right: 130px;
 }
 
-.menuItem {
+.menuItemTop {
+    font-size: 14px;
+    line-height: 16px;
     text-decoration: none;
     color: whiteBasic;
     margin-right: 30px;
@@ -36,8 +40,7 @@
     align-items: center;
 }
 
-.wishWrapper,
-.cartWrapper {
+.wishWrapper {
     margin-right: 20px;
 }
 
@@ -48,10 +51,25 @@
 }
 
 .searchInput {
+    font-family: RoundedElegance;
+    font-size: 14px;
+    line-height: 16px;
     width: 202px;
-    border: none;
-    box-sizing: border-box;
+    height: 17px;
     margin-right: 15px;
+    background-color: black;
+    border: none;
+    border-bottom: 1px solid whiteBasic;
+    outline: 0;
+    color: whiteBasic;
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover {
+        width: 202px;
+    }
 }
 
 .searchBtn {
@@ -59,13 +77,50 @@
     height: 100%;
     position: absolute;
     top: 0;
-    background: center no-repeat url("/src/apps/client/ui/components/Header/img/search.png");
+    background: center no-repeat url("./img/search.png");
     border: 0;
     cursor: pointer;
+
+    &:hover {
+        background-image: url("./img/search-hover.png");
+    }
 }
 
 .logoImg,
-.wishImg,
-.cartImg {
+.wishImg {
     display: block;
+}
+
+.headerBottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whiteBasic;
+    height: 50px;
+}
+
+.menuItemBottom {
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    margin-right: 50px;
+    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:not(:last-child):after {
+        position: absolute;
+        content: url("./img/meniItemLine.jpg");
+        right: -25px;
+    }
+}
+
+.menuItemBottomPromotions {
+    color: red;
+    text-shadow: -0.2px 0 red, 0 0.2px red, 0.2px 0 red, 0 -0.2px red;
 }

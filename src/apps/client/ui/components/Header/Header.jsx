@@ -8,6 +8,10 @@ import { Link, withRouter, NavLink } from 'react-router-dom';
 
 import styles from './Header.css';
 
+
+import LangSwitch from '../LangSwitch/LangSwitch.jsx';
+import Cart from '../Cart/Cart.jsx';
+
 const mapStateToProps = ({ application }) => {
     return {
         langRoute: application.langRoute,
@@ -20,6 +24,10 @@ class Header extends Component {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired
     };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+    }
 
     render () {
         const { langRoute, langMap } = this.props;
@@ -35,29 +43,30 @@ class Header extends Component {
                             </Link>
                         </div>
                         <div className={styles.menuItemWrapper}>
-                            <Link className={styles.menuItem} to={`${langRoute}/`}>{text.deliveryAndPayment}</Link>
-                            <Link className={styles.menuItem} to={`${langRoute}/`}>{text.partners}</Link>
-                            <Link className={styles.menuItem} to={`${langRoute}/`}>{text.articles}</Link>
-                            <Link className={styles.menuItem} to={`${langRoute}/`}>{text.contacts}</Link>
+                            <Link className={styles.menuItemTop} to={`${langRoute}/`}>{text.deliveryAndPayment}</Link>
+                            <Link className={styles.menuItemTop} to={`${langRoute}/`}>{text.partners}</Link>
+                            <Link className={styles.menuItemTop} to={`${langRoute}/`}>{text.articles}</Link>
+                            <Link className={styles.menuItemTop} to={`${langRoute}/`}>{text.contacts}</Link>
                         </div>
                         <div className={styles.headerTopRight}>
-                            <form className={styles.search}>
+                            <form className={styles.search} onSubmit={this.handleSubmit}>
                                 <input className={styles.searchInput} placeholder={text.search} type="text"/>
                                 <button className={styles.searchBtn} type="submit"/>
                             </form>
                             <div className={styles.wishWrapper}>
                                 <img className={styles.wishImg} src="/src/apps/client/ui/components/Header/img/wish.png" alt="Wish"/>
                             </div>
-                            <div className={styles.cartWrapper}>
-                                <img className={styles.cartImg} src="/src/apps/client/ui/components/Header/img/cart.png" alt="Wish"/>
-                            </div>
+                            <Cart/>
+                            <LangSwitch/>
                         </div>
                     </div>
                 </div>
                 <div className={styles.headerBottom}>
-                    <div className={styles.content}>
-
-                    </div>
+                    <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.beds}</Link>
+                    <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.mattresses}</Link>
+                    <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.softFurniture}</Link>
+                    <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.sleepAccessories}</Link>
+                    <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
                 </div>
             </div>
         )

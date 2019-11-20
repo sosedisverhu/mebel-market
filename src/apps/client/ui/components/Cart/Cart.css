@@ -1,0 +1,129 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value gray2 from '../../../../../css/colors.css';
+
+.cart {
+    cursor: pointer;
+    position: relative;
+    width: 18px;
+    height: 16px;
+}
+
+.iconCart:after {
+    content: url("./img/cart.png");
+}
+
+.quantityAll {
+    font-family: Rubik;
+    font-size: 10px;
+    position: absolute;
+    right: -11px;
+    top: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px;
+    height: 13px;
+    background: green;
+    color: whiteBasic;
+    border-radius: 50%;
+    /* box-sizing: content-box; */
+}
+
+.popupContainer {
+    width: 481px;
+    background: whiteBasic;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%;
+    right: -80px;
+    margin-top: 17px;
+    cursor: default;
+    display: none;
+    z-index: 1;
+
+    &.active {
+        display: block;
+    }
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(35, 35, 35, 0.5);
+}
+
+.popup {
+    font-family: RoundedElegance;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 24px;
+    line-height: 28px;
+    margin: 20px 0 40px;
+    text-align: center;
+    color: black;
+}
+
+.totalPriceContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 68px;
+    background-color: gray2;
+}
+
+.totalPriceWrapper {
+    display: flex;
+    width: 330px;
+    justify-content: space-between;
+}
+
+.totalPrice {
+    font-size: 24px;
+    line-height: 28px;
+    color: black;
+    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+}
+
+.checkoutBtn {
+    @mixin removeDefaultButton;
+    margin-top: 20px;
+    background-color: black;
+    cursor: pointer;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    color: whiteBasic;
+    padding: 10px 20px;
+}
+
+.continueShopping {
+    @mixin removeDefaultButton;
+    padding: 0;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 20px 0;
+    color: black;
+    cursor: pointer;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: black;
+        bottom: 1px;
+        left: 0;
+    }
+}
