@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
 
-import styles from './Cart.css';
+import styles from './WishList.css';
 
 
 const mapStateToProps = ({ application }) => {
@@ -15,17 +15,13 @@ const mapStateToProps = ({ application }) => {
 };
 
 @outsideClick
-class Cart extends Component {
+class WishList extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired
     };
 
     state = {
         active: false
-    }
-
-    handleClose = () => {
-        this.setState({ active: false });
     }
 
     handleClick = () => {
@@ -42,25 +38,18 @@ class Cart extends Component {
     render () {
         const { langMap } = this.props;
         const { active } = this.state;
-        const text = propOr('cart', {}, langMap);
+        const text = propOr('wishList', {}, langMap);
 
         return (
-            <div className={styles.cart}>
-                <div className={styles.iconCartWrapper} onClick={this.handleClick}>
-                    <div className={styles.iconCart} />
+            <div className={styles.wishList}>
+                <div className={styles.wishListWrapper} onClick={this.handleClick}>
+                    <div className={styles.iconWishList} />
                     <span className={styles.quantityAll}>0</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
                     <div className={styles.cover}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>{text.title}</p>
-                        <div className={styles.totalPriceContainer}>
-                            <div className={styles.totalPriceWrapper}>
-                                <p className={styles.totalPrice}>{text.totalPrice}</p>
-                                <p className={styles.totalPrice}>0&#8372;</p>
-                            </div>
-                        </div>
-                        <button className={styles.checkoutBtn}>{text.checkout}</button>
                         <button className={styles.continueShopping} onClick={this.handleClick}>{text.continueShopping}</button>
                     </div>
                 </div>
@@ -69,4 +58,4 @@ class Cart extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps)(WishList);

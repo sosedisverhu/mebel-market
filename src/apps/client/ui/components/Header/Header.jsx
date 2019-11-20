@@ -8,9 +8,9 @@ import { Link, withRouter, NavLink } from 'react-router-dom';
 
 import styles from './Header.css';
 
-
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
+import WishList from '../WishList/WishList.jsx';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -53,9 +53,7 @@ class Header extends Component {
                                 <input className={styles.searchInput} placeholder={text.search} type="text"/>
                                 <button className={styles.searchBtn} type="submit"/>
                             </form>
-                            <div className={styles.wishWrapper}>
-                                <img className={styles.wishImg} src="/src/apps/client/ui/components/Header/img/wish.png" alt="Wish"/>
-                            </div>
+                            <WishList/>
                             <Cart/>
                             <LangSwitch/>
                         </div>

@@ -9,21 +9,26 @@ export default {
         title: 'Футер'
     },
     header: {
-        deliveryAndPayment: 'Доставка и оплата',
-        partners: 'Партнёры',
-        articles: 'Статьи',
-        contacts: 'Контакты',
-        search: 'Поиск',
-        beds: 'Кровати',
-        mattresses: 'Матрасы',
-        softFurniture: 'Мягкая мебель',
-        sleepAccessories: 'Аксессуары для сна',
-        promotions: 'Акции'
+        deliveryAndPayment: 'Доставка та оплата',
+        partners: 'Партнери',
+        articles: 'Статті',
+        contacts: 'Контакти',
+        search: 'Пошук',
+        beds: 'Ліжка',
+        mattresses: 'Матраци',
+        softFurniture: `М'які меблі`,
+        sleepAccessories: 'Аксесуари для сну',
+        promotions: 'Акції'
+    },
+    wishList: {
+        title: 'Обране:',
+        continueShopping: 'Продовжити покупки',
+        toCart: 'В кошик'
     },
     cart: {
-        title: 'Корзина:',
-        totalPrice: 'Всего:',
-        checkout: 'Оформить заказ',
-        continueShopping: 'Продолжить покупки'
+        title: 'Кошик:',
+        totalPrice: 'Всього:',
+        checkout: 'Оформити замовлення',
+        continueShopping: 'Продовжити покупки'
     }
 };
