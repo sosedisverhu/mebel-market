@@ -20,11 +20,11 @@ class Footer extends Component {
                         <a className={styles.stubbsText} href="#" target="_blank">Stubbs</a>
                     </div>
                     <div className={styles.contactsWrapper}>
-                        <div className={styles.contactsLinkWrapper}>
+                        <div className={styles.contactsLinkWrapperTop}>
                             <a className={styles.contactsLink} href="tel:+380443557720">(044) 355-77-20</a>
                             <a className={styles.contactsLink} href="tel:+380500511000">(050) 051-10-00</a>
                         </div>
-                        <div className={styles.contactsLinkWrapper}>
+                        <div className={styles.contactsLinkWrapperBottom}>
                             <a className={styles.contactsLink} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>
                             <a className={styles.contactsLink} href="tel:+380679000522">(067) 900-05-22</a>
                         </div>
