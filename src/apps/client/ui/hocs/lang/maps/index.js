@@ -1,7 +1,7 @@
 import ua from './ua';
-import en from './en';
+import ru from './ru';
 
 export default {
     ua,
-    en
+    ru
 };
