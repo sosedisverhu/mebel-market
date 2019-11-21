@@ -10,13 +10,13 @@ export default {
         deliveryTitle: 'Доставка:',
         paymentTitle: 'Оплата:',
         deliveryOptions: [
-            { option: <span>Доставка курьерскими<br/> службами</span> },
-            { option: <span>Самовывоз</span> }
+            { text: <span>Доставка курьерскими<br/> службами</span> },
+            { text: <span>Самовывоз</span> }
         ],
         paymentOptions: [
-            { option: <span>Наличными в магазине</span> },
-            { option: <span>Оплата банковской картой</span> },
-            { option: <span>Приват 24</span> }
+            { text: <span>Наличными в магазине</span> },
+            { text: <span>Оплата банковской картой</span> },
+            { text: <span>Приват 24</span> }
         ]
     }
 };

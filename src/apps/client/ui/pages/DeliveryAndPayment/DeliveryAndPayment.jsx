@@ -31,16 +31,16 @@ class DeliveryAndPayment extends Component {
                     <div className={styles.delivery}>
                         <h2 className={styles.optionsTitle}>{text.deliveryTitle}</h2>
                         <ul>
-                            {text.deliveryOptions.map(option =>
-                                <li className={styles.option}>{option.option}</li>
+                            {text.deliveryOptions.map((option, i) =>
+                                <li className={styles.option} key={i}>{option.text}</li>
                             )}
                         </ul>
                     </div>
                     <div className={styles.payment}>
                         <h2 className={styles.optionsTitle}>{text.paymentTitle}</h2>
                         <ul>
-                            {text.paymentOptions.map(option =>
-                                <li className={styles.option}>{option.option}</li>
+                            {text.paymentOptions.map((option, i) =>
+                                <li className={styles.option} key={i}>{option.text}</li>
                             )}
                         </ul>
                     </div>
