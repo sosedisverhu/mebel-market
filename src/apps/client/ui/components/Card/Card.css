@@ -14,6 +14,12 @@
     overflow: hidden;
     margin: 30px 0 0 30px;
     background: whiteBasic;
+
+    @media (max-width: 640px) {
+        width: calc(50% - 10px);
+        height: auto;
+        margin: 20px 0 0 0;
+    }
 }
 
 .img {
@@ -29,12 +35,16 @@
 
 .label {
     font: 18px/21px RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
     padding: 0 18px;
     background: whiteBasic;
     color: black;
     margin-top: 8px;
+
+    @media (max-width: 640px) {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 3px 10px;
+    }
 }
 .discount {
     color: red;
@@ -42,6 +52,14 @@
 
 .bottomPanel {
     position: relative;
+
+    @media (max-width: 640px) {
+        padding: 0 9px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 }
 
 .title {
@@ -49,6 +67,12 @@
     color: black;
     padding: 5px 10px;
     text-align: center;
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 15px;
+        padding: 7px 0 5px 0;
+    }
 }
 
 .price {
@@ -56,6 +80,12 @@
     color: red;
     margin-bottom: 15px;
     text-align: center;
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 15px;
+        margin-bottom: 7px;
+    }
 }
 
 .priceOld {
@@ -65,4 +95,15 @@
     position: absolute;
     bottom: 17px;
     left: 50px;
+
+    @media (max-width: 640px) {
+        font-size: 10px;
+        line-height: 11px;
+        bottom: 9px;
+        left: 20%;
+    }
+
+    @media (max-width: 640px) {
+        left: 9px;
+    }
 }
