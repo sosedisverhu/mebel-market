@@ -30,6 +30,7 @@
 
     @media (max-width: 600px) {
         margin: 20px auto 0 0;
+        width: 100%;
     }
 
     &:before {
@@ -56,7 +57,7 @@
 
         @media (max-width: 600px) {
             width: 100px;
-            left: calc(100% + 40px);
+            right: 0;
         }
 
         @media (max-width: 359px) {
