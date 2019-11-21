@@ -179,7 +179,21 @@ const initialState = {
             date: 1573423510399
         }
     ],
-    labels: ['top', 'discount']
+    labels: ['top', 'discount'],
+    'mainSlides': [
+        {
+            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
+        },
+        {
+            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
+        },
+        {
+            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
+        },
+        {
+            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
+        }
+    ]
 };
 
 export default function (state = initialState, action) {
