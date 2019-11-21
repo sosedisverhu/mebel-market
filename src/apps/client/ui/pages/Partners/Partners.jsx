@@ -20,10 +20,14 @@ class Partners extends Component {
 
     render () {
         const { langMap } = this.props;
-        const text = propOr('deliveryAndPayment', {}, langMap);
+        const text = propOr('partners', {}, langMap);
 
         return (
-            <h1>Partners</h1>
+            <section className={styles.partners}>
+                <h1>{text.title}</h1>
+                <div className={styles.partnersContainer}>
+                </div>
+            </section>
         );
     }
 }
