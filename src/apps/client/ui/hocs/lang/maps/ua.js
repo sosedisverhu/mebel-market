@@ -1,15 +1,19 @@
 /* eslint-disable max-len */
 
 export default {
-    product: {
-        labelTop: 'Хит'
-    },
     mainPage: {
-        top: 'Топ продаж',
-        discount: 'Акции',
-        new: 'Новинки'
+        top: 'Топ продажів',
+        discount: 'Акції',
+        new: 'Новинки',
+        slider: 'Допомогти з вибором'
+    },
+    productsPage: {
+        filterBtn: 'Фільтри'
+    },
+    product: {
+        labelTop: 'Хіт'
     },
     breadcrumbs: {
-        main: 'Главная'
+        main: 'Головна'
     }
 };

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './ProductsPage.css';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -24,7 +25,8 @@ class ProductsPage extends Component {
     };
 
     render () {
-        const { products } = this.props;
+        const { products, langMap } = this.props;
+        const text = propOr('productsPage', {}, langMap);
 
         return (
             <div className={styles.productPage}>
@@ -39,7 +41,7 @@ class ProductsPage extends Component {
                     </div>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
-                            <div className={styles.btnFilter}>Фильтры</div>
+                            <div className={styles.btnFilter}>{text.filterBtn}</div>
                             <div className={styles.results}>12 результатов</div>
                             <Filters />
                             <div className={styles.sort}>

@@ -33,7 +33,7 @@ class Breadcrumbs extends Component {
                 <div className={styles.breadcrumbs}>
                     <Link className={styles.breadcrumb} to={langRoute}>{text.main}</Link>
                     {/* <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>{category.texts[lang].name}</Link> */}
-                    <Link className={styles.breadcrumb} to={langRoute}>Аксессуары для сна</Link>
+                    <Link className={styles.breadcrumb} to={langRoute}>Кровати</Link>
                     {product && <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${product.id}`}>{product.texts[lang].name}</Link>}
                 </div>
             </div>);
