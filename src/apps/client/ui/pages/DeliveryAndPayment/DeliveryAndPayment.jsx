@@ -9,19 +9,17 @@ import styles from './DeliveryAndPayment.css';
 
 const mapStateToProps = ({ application }) => {
     return {
-        langMap: application.langMap,
-        lang: application.lang
+        langMap: application.langMap
     };
 };
 
 class DeliveryAndPayment extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired
+        langMap: PropTypes.object.isRequired
     };
 
     render () {
-        const { langMap, lang } = this.props;
+        const { langMap } = this.props;
         const text = propOr('deliveryAndPayment', {}, langMap);
 
         return (
