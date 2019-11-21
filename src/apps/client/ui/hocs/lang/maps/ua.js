@@ -8,5 +8,8 @@ export default {
         top: 'Топ продаж',
         discount: 'Акции',
         new: 'Новинки'
+    },
+    main: {
+        slider: 'Допомогти з вибором'
     }
 };
