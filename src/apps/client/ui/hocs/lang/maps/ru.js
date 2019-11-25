@@ -2,6 +2,6 @@
 
 export default {
     main: {
-        slider: 'Допомогти з вибором'
+        slider: 'Помочь с выбором'
     }
 };
