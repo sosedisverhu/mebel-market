@@ -47,14 +47,14 @@
     }
 }
 
-/* .cover {
+.cover {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(35, 35, 35, 0.5);
-} */
+}
 
 .popup {
     width: 481px;
@@ -70,7 +70,7 @@
 
 /* // TEST */
     /* display: none; */
-    display: block;
+    /* display: block;
     transition: all .5s ease-in-out;
     visibility: hidden;
     opacity: 0;
@@ -78,11 +78,15 @@
     top: 33px;
     z-index: 1;
     &.active {
-        /* display: block; */
         visibility: visible;
         opacity: 1;
-    }
+    } */
 /* // TEST */
+
+    @media (max-width: 600px) {
+        width: 600px;
+        right: 0;
+    }
 }
 
 /* COVER TEST */

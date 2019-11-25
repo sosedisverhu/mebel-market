@@ -48,7 +48,13 @@ class Header extends Component {
             <div className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
-                        <div className={classNames(styles.mobileMenu, { [styles.active]: mobileMenuOpen })} onClick={this.handleMobileMenu}>
+                        <div className={styles.mobileMenu}>
+                            <button className={classNames(styles.mobileMenuBtn, { [styles.active]: mobileMenuOpen })} onClick={this.handleMobileMenu}>
+                                <span/>
+                                <span/>
+                                <span/>
+                                <span/>
+                            </button>
                             <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
@@ -56,7 +62,7 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.mattresses}</Link>
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.softFurniture}</Link>
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.sleepAccessories}</Link>
-                                        <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemBottomPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
+                                        <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
                                     </div>
                                     <div className={styles.mobileSocials}>
                                         <a href="#" target="_blank">
