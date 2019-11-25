@@ -44,11 +44,18 @@ class WishList extends Component {
             <div className={styles.wishList}>
                 <div className={styles.wishListWrapper} onClick={this.handleClick}>
                     <div className={styles.iconWishList} />
-                    <span className={styles.quantityAll}>0</span>
+                    <span className={styles.quantityAll}>2</span>
                 </div>
-                <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
+                {/*<div className={classNames(styles.popupContainer, { [styles.active]: active })}>
                     <div className={styles.cover}/>
                     <div className={styles.popup}>
+                        <p className={styles.title}>{text.title}</p>
+                        <button className={styles.continueShopping} onClick={this.handleClick}>{text.continueShopping}</button>
+                    </div>
+                </div>*/}
+                <div className={classNames(styles.popup, { [styles.active]: active })}>
+                    <div className={styles.cover}/>
+                    <div className={styles.test}>
                         <p className={styles.title}>{text.title}</p>
                         <button className={styles.continueShopping} onClick={this.handleClick}>{text.continueShopping}</button>
                     </div>

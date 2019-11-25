@@ -3,14 +3,16 @@
 @value green from '../../../../../css/colors.css';
 
 .langs {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     margin-top: -19px;
-    right: 60px;
+    right: 60px; */
     display: flex;
     flex-direction: column;
     z-index: 1;
     width: 58px;
+
+    position: relative;
 
     &.active {
         .additionalLangs {
@@ -64,6 +66,9 @@
     max-height: 0;
     transition: max-height 0.2s ease-out;
     overflow: hidden;
+    position: absolute;
+    top: 43px;
+    width: 100%;
 }
 
 .mobileLangs {

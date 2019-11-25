@@ -8,6 +8,11 @@
     position: relative;
     width: 18px;
     height: 16px;
+    margin-right: 20px;
+
+    @media (max-width: 1120px) {
+        margin-right: 15px;
+    }
 }
 
 .iconCart:after {

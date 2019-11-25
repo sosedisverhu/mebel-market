@@ -5,12 +5,29 @@
     margin-right: 20px;
     cursor: pointer;
     position: relative;
-    width: 18px;
-    height: 16px;
+
+    @media (max-width: 1120px) {
+        margin-right: 15px;
+    }
+}
+
+.wishListWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantityAll {
+    position: absolute;
+    color: whiteBasic;
+    font-size: 7px;
+    line-height: 8px;
 }
 
 .iconWishList:after {
-    content: url("./img/wish.png");
+    content: url('./img/wish.png');
+    display: block;
+    height: 16px;
 }
 
 .popupContainer {
@@ -30,14 +47,14 @@
     }
 }
 
-.cover {
+/* .cover {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(35, 35, 35, 0.5);
-}
+} */
 
 .popup {
     width: 481px;
@@ -50,7 +67,44 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+/* // TEST */
+    /* display: none; */
+    display: block;
+    transition: all .5s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    right: -20px;
+    top: 33px;
+    z-index: 1;
+    &.active {
+        /* display: block; */
+        visibility: visible;
+        opacity: 1;
+    }
+/* // TEST */
 }
+
+/* COVER TEST */
+.cover {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(35, 35, 35, 0.5);
+}
+.test {
+    position: relative;
+    z-index: 2;
+    background: whiteBasic;
+
+    font-family: RoundedElegance;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* COVER TEST */
 
 .title {
     font-size: 24px;
