@@ -180,7 +180,6 @@
     justify-content: center;
     background-color: whiteBasic;
     height: 50px;
-    z-index: 2;
 }
 
 .menuBottom {
@@ -293,12 +292,12 @@
 
 .popupContainer {
     position: fixed;
+    top: 100px;
     left: 0;
-    top: 0;
     backdrop-filter: blur(0px);
     width: 100vw;
-    height: 100vh;
-    margin-top: 48px;
+    /* height: 100vh; */
+    height: calc(100vh - 99px);
     overflow-y: auto;
     max-height: 0;
     transition: max-height 0.25s ease-out;
@@ -314,8 +313,8 @@
 
 .popupMobile {
     position: absolute;
+    top: 0;
     left: 0;
-    top: 50px;
     flex-direction: column;
     width: 100%;
     max-width: 304px;
@@ -328,4 +327,67 @@
         max-height: 1000px;
         transition: max-height 0.25s ease-in;
     }
+}
+
+.mobileMenuTop {
+    display: flex;
+    flex-direction: column;
+    background-color: whiteBasic;
+}
+
+.mobileMenuItemTop {
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.05em;
+    color: black;
+    padding: 15px 16px;
+    position: relative;
+    border-bottom: 1px solid rgba(216, 216, 216, 0.5);
+
+    &:first-child {
+        border-top: 1px solid rgba(216, 216, 216, 0.5);
+    }
+
+    &:after {
+        position: absolute;
+        content: '';
+        background: url('./img/menuItemArrow.png') center no-repeat;
+        width: 14px;
+        height: 100%;
+        right: 15px;
+        top: 0;
+    }
+}
+
+.mobileSocials {
+    display: flex;
+    align-items: center;
+    background-color: whiteBasic;
+    height: 83px;
+    padding-left: 16px;
+}
+
+.googlePlus,
+.facebook {
+    display: block;
+}
+
+.googlePlus {
+    margin-right: 30px;
+}
+
+.mobileMenuBottom {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+
+.mobileMenuItemBottom {
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 18px;
+    color: whiteBasic;
+    padding: 15px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }

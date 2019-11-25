@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import propOr from '@tinkoff/utils/object/propOr';
-
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-
+import classNames from 'classnames';
 import styles from './Header.css';
-
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
-
-import classNames from 'classnames';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -64,11 +59,11 @@ class Header extends Component {
                                         <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemBottomPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
                                     </div>
                                     <div className={styles.mobileSocials}>
-                                        <a href="#">
-                                            <div className={styles.googlePlus}/>
+                                        <a href="#" target="_blank">
+                                            <img className={styles.googlePlus} src="/src/apps/client/ui/components/Header/img/google-plus.svg" alt="google plus"/>
                                         </a>
-                                        <a href="#">
-                                             <div className={styles.facebook}/>
+                                        <a href="#" target="_blank">
+                                             <img className={styles.facebook} src="/src/apps/client/ui/components/Header/img/facebook.svg" alt="facebook"/>
                                         </a>
                                     </div>
                                     <div className={styles.mobileMenuBottom}>
@@ -116,7 +111,7 @@ class Header extends Component {
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
                             <input className={classNames(styles.searchInputBottom, { [styles.active]: searchBarOpen })} placeholder={text.search} type="text"/>
                         </label>
-                        <button onClick={this.handleSearchBar} className={styles.searchBtnBottom} type="submit"/>
+                        <button className={styles.searchBtnBottom} type="submit"/>
                     </form>
                 </div>
             </div>

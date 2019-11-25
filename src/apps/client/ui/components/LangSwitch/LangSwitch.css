@@ -9,7 +9,7 @@
     right: 60px; */
     display: flex;
     flex-direction: column;
-    z-index: 1;
+    z-index: 3;
     width: 58px;
 
     position: relative;
@@ -24,10 +24,6 @@
             transform: rotate(180deg);
             transition: transform 0.2s ease-out;
         }
-    }
-
-    @media (max-width: 850px) {
-        display: none;
     }
 }
 
