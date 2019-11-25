@@ -1,14 +1,4 @@
 @font-face {
-  font-family: 'HelveticaNeueCyr';
-  src: url('./font/HelveticaNeueCyr-Medium.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'HelveticaNeueCyrBold';
-  src: url('./font/HelveticaNeueCyr-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'HelveticaNeueCyrLight';
-  src: url('./font/HelveticaNeueCyr-Light.ttf') format('truetype');
+  font-family: 'RoundedElegance';
+  src: url('./font/RoundedElegance.ttf') format('truetype');
 }
