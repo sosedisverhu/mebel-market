@@ -24,6 +24,12 @@ class WishList extends Component {
         active: false
     }
 
+    handlePopupClose = () => {
+        this.setState({
+            active: false
+        });
+    }
+
     handleClick = () => {
         const { outsideClickEnabled } = this.props;
         const { active } = this.state;
@@ -31,7 +37,7 @@ class WishList extends Component {
         this.setState(state => ({ active: !state.active }));
 
         if (!active && !outsideClickEnabled) {
-            this.props.turnOnClickOutside(this, this.handleClose);
+            this.props.turnOnClickOutside(this, this.handlePopupClose);
         }
     }
 
@@ -43,23 +49,37 @@ class WishList extends Component {
         return (
             <div className={styles.wishList}>
                 <div className={styles.wishListWrapper} onClick={this.handleClick}>
-                    <div className={styles.iconWishList} />
+                    <img src="/src/apps/client/ui/components/WishList/img/wish.svg" alt="wish list icon"/>
                     <span className={styles.quantityAll}>2</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
-                    <div className={styles.cover}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>{text.title}</p>
-                        <button className={styles.continueShopping} onClick={this.handleClick}>{text.continueShopping}</button>
+                        <div className={styles.productsContainer}>
+                            <div className={styles.wishItemWrapper}>
+                                <div className={styles.wishItem}>
+                                    <img className={styles.productImg} src="" alt=""/>
+                                    <div>
+                                        <p className={styles.productName}>Кровать «Анталия»</p>
+                                        <p className={styles.productNumber}>Артикул: 48092</p>
+                                        <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                        <div className={styles.productPrices}>
+                                            <p className={styles.productOldPrice}>2 798&#8372;</p>
+                                            <p className={styles.productPrice}>1 399&#8372;</p>
+                                        </div>
+                                    </div>
+                                    <div className={styles.productButtons}>
+                                        <button className={styles.removeBtn}>
+                                            <img className={styles.removeBtnImg} src="src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                        </button>
+                                        <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>
                 </div>
-                {/*<div className={classNames(styles.popup, { [styles.active]: active })}>
-                    <div className={styles.cover}/>
-                    <div className={styles.test}>
-                        <p className={styles.title}>{text.title}</p>
-                        <button className={styles.continueShopping} onClick={this.handleClick}>{text.continueShopping}</button>
-                    </div>
-                </div>*/}
             </div>
         );
     }

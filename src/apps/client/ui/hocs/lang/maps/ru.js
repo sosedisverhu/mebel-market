@@ -22,11 +22,13 @@ export default {
     },
     wishList: {
         title: 'Избранное:',
+        size: 'Размер:',
         continueShopping: 'Продолжить покупки',
-        toCart: 'В корзину'
+        cartBtn: 'В корзину'
     },
     cart: {
         title: 'Корзина:',
+        size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки'

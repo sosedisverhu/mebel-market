@@ -48,8 +48,8 @@ class Header extends Component {
             <div className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
-                        <div className={styles.mobileMenu}>
-                            <button className={classNames(styles.mobileMenuBtn, { [styles.active]: mobileMenuOpen })} onClick={this.handleMobileMenu}>
+                        <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
+                            <button className={classNames(styles.mobileMenuBtn, { [styles.active]: mobileMenuOpen })}>
                                 <span/>
                                 <span/>
                                 <span/>

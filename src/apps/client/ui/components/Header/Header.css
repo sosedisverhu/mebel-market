@@ -313,8 +313,8 @@
 
     &.active span:nth-child(1) {
         top: 6px;
-        width: 0%;
         left: 50%;
+        width: 0%;
     }
 
     &.active span:nth-child(2) {
@@ -327,8 +327,8 @@
 
     &.active span:nth-child(4) {
         top: 6px;
-        width: 0%;
         left: 50%;
+        width: 0%;
     }
 }
 
@@ -339,12 +339,15 @@
     backdrop-filter: blur(0px);
     width: 100vw;
     height: calc(100vh - 99px);
+    max-height: 0;
     overflow-y: auto;
     z-index: 1;
+    transition: max-height 0.25s ease-out;
 
     &.active {
         background: rgba(255, 255, 255, 0.01);
         backdrop-filter: blur(4px);
+        max-height: 10000px;
     }
 }
 

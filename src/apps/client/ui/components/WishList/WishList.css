@@ -1,5 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
+@value gray from '../../../../../css/colors.css';
+@value red from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -24,98 +26,140 @@
     line-height: 8px;
 }
 
-.iconWishList:after {
-    content: url('./img/wish.png');
-    display: block;
-    height: 16px;
-}
-
 .popupContainer {
-    display: none;
     position: fixed;
     z-index: 10;
     left: 0;
-    top: 0;
+    top: 50px;
     width: 100%;
     height: 100%;
     cursor: default;
     overflow: auto;
-    /* background-color: rgba(35, 35, 35, 0.5); */
+    background-color: rgba(35, 35, 35, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 
     &.active {
-        display: block;
+        visibility: visible;
+        opacity: 1;
     }
-}
-
-.cover {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(35, 35, 35, 0.5);
 }
 
 .popup {
     width: 481px;
     background: whiteBasic;
     position: absolute;
-    top: 50px;
+    top: 0;
     right: 60px;
-
-    font-family: RoundedElegance;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-/* // TEST */
-    /* display: none; */
-    /* display: block;
-    transition: all .5s ease-in-out;
-    visibility: hidden;
-    opacity: 0;
-    right: -20px;
-    top: 33px;
-    z-index: 1;
-    &.active {
-        visibility: visible;
-        opacity: 1;
-    } */
-/* // TEST */
-
-    @media (max-width: 600px) {
-        width: 600px;
-        right: 0;
-    }
-}
-
-/* COVER TEST */
-.cover {
-    position: fixed;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(35, 35, 35, 0.5);
-}
-.test {
-    position: relative;
-    z-index: 2;
-    background: whiteBasic;
-
     font-family: RoundedElegance;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-
-/* COVER TEST */
 
 .title {
     font-size: 24px;
     line-height: 28px;
-    margin: 20px 0 40px;
+    margin: 20px 0;
     text-align: center;
     color: black;
+}
+
+.productsContainer {
+    max-height: 324px;
+    overflow-y: auto;
+}
+
+.wishItemWrapper {
+    position: relative;
+    width: 100%;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        background-color: rgba(216, 216, 216, 0.5);
+        width: 100%;
+        height: 1px;
+    }
+}
+
+.wishItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 25px 20px 30px;
+}
+
+.productImg {
+    width: 120px;
+    height: 120px;
+}
+
+.productName {
+    font-size: 18px;
+    line-height: 21px;
+    color: black;
+    margin-bottom: 6px;
+}
+
+.productNumber {
+    font-size: 12px;
+    line-height: 14px;
+    color: gray;
+    margin-bottom: 18px;
+}
+
+.productSize {
+    font-size: 14px;
+    line-height: 16px;
+    color: black;
+    margin-bottom: 17px;
+}
+
+.productPrices {
+    display: flex;
+    align-items: center;
+}
+
+.productOldPrice {
+    font-size: 18px;
+    line-height: 21px;
+    text-decoration-line: line-through;
+    color: gray;
+    margin-right: 20px;
+}
+
+.productPrice {
+    font-size: 24px;
+    line-height: 28px;
+    color: red;
+}
+
+.productButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.removeBtn,
+.cartBtn {
+    @mixin removeDefaultButton;
+    padding: 0;
+}
+
+.removeBtnImg {
+    display: block;
+}
+
+.cartBtn {
+    font-family: RoundedElegance;
+    font-size: 16px;
+    line-height: 18px;
+    color: whiteBasic;
+    padding: 10px 15px;
+    background-color: black;
 }
 
 .continueShopping {

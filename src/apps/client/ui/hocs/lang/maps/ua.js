@@ -22,12 +22,14 @@ export default {
     },
     wishList: {
         title: 'Обране:',
+        size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
-        toCart: 'В кошик'
+        cartBtn: 'У кошик'
     },
     cart: {
         title: 'Кошик:',
         totalPrice: 'Всього:',
+        size: 'Розмір:',
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки'
     }
