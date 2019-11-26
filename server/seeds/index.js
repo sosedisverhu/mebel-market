@@ -2,7 +2,7 @@
 const { Seeder } = require('mongo-seeding');
 const path = require('path');
 
-const DATABASE_URL = 'mongodb://localhost/react-bootstrap-app-admin';
+const DATABASE_URL = 'mongodb://localhost/mebel-market';
 
 const config = {
     database: DATABASE_URL,
