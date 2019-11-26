@@ -12,6 +12,7 @@ import '../../css/main.css';
 import Header from './ui/components/Header/Header.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
+import CheckoutPage from './ui/pages/CheckoutPage/CheckoutPage.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -62,6 +63,7 @@ class App extends Component {
                 <div className={styles.pageContent}>
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
+                        <Route exact path={`/:lang(${langs})?/order`} render={this.renderComponent(CheckoutPage)} />
                     </Switch>
                 </div>
                 <Footer />
