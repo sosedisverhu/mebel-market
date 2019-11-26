@@ -1,5 +1,4 @@
 import setLang from '../../actions/setLang';
-import { matchPath } from 'react-router';
 
 import getLangRouteParts from '../../utils/getLangRouteParts';
 import { LANGS, DEFAULT_LANG, DEFAULT_LANG_ROUTE } from '../../constants/constants';
@@ -14,12 +13,6 @@ const langRoutesMap = LANGS.map((lang, i) => {
 
 export default function getLangFromRoute (req) {
     return dispatch => {
-        const match = matchPath(req.path, { path: '/:lang(en)?' });
-
-        if (!match) {
-            return dispatch(setLang(DEFAULT_LANG));
-        }
-
         const { langRoute } = getLangRouteParts(req.path);
         const lang = compose(
             nth(1),
