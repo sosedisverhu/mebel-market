@@ -7,7 +7,6 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './WishList.css';
 
-
 const mapStateToProps = ({ application }) => {
     return {
         langMap: application.langMap
@@ -17,7 +16,9 @@ const mapStateToProps = ({ application }) => {
 @outsideClick
 class WishList extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool
     };
 
     state = {

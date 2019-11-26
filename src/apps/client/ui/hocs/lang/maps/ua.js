@@ -27,6 +27,6 @@ export default {
         continueShopping: 'Продовжити покупки'
     },
     main: {
-       slider: 'Допомогти з вибором'
-   }
+        slider: 'Допомогти з вибором'
+    }
 };

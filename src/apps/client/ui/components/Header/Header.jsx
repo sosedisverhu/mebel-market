@@ -36,7 +36,7 @@ class Header extends Component {
     }
 
     handleSearchBar = () => {
-        this.setState(state => ({ searchBarOpen: !state.searchBarOpen }))
+        this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
     }
 
     render () {
@@ -69,7 +69,7 @@ class Header extends Component {
                                             <img className={styles.googlePlus} src="/src/apps/client/ui/components/Header/img/google-plus.svg" alt="google plus"/>
                                         </a>
                                         <a href="#" target="_blank">
-                                             <img className={styles.facebook} src="/src/apps/client/ui/components/Header/img/facebook.svg" alt="facebook"/>
+                                            <img className={styles.facebook} src="/src/apps/client/ui/components/Header/img/facebook.svg" alt="facebook"/>
                                         </a>
                                     </div>
                                     <div className={styles.mobileMenuBottom}>
@@ -121,7 +121,7 @@ class Header extends Component {
                     </form>
                 </div>
             </div>
-        )
+        );
     }
 }
 
