@@ -1,0 +1,5 @@
+@value gray3 from '../../../../../css/colors.css';
+
+.articles {
+    background-color: gray3;
+}
