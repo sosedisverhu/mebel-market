@@ -1,68 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import classNames from 'classnames';
-
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import ErrorIcon from '@material-ui/icons/Error';
-import { withStyles } from '@material-ui/core/styles';
 
 import noop from '@tinkoff/utils/function/noop';
-import isEmpty from '@tinkoff/utils/is/empty';
-import isObject from '@tinkoff/utils/is/plainObject';
-import isArray from '@tinkoff/utils/is/array';
-import isString from '@tinkoff/utils/is/string';
+import isObject from '@tinkoff/utils/is/object';
 import forEach from '@tinkoff/utils/array/each';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import isNull from '@tinkoff/utils/is/nil';
-import pathOr from '@tinkoff/utils/object/pathOr';
 import any from '@tinkoff/utils/array/any';
-import clone from '@tinkoff/utils/clone';
-import forEachObj from '@tinkoff/utils/object/each';
+
+import { withStyles } from '@material-ui/core/styles';
 
 import validatorsList from './validators';
 
-const materialStyles = theme => ({
+const materialStyles = {
     form: {
         display: 'flex',
         flexDirection: 'column',
         width: '100%'
-    },
-    error: {
-        backgroundColor: theme.palette.error.dark
-    },
-    icon: {
-        fontSize: 20
-    },
-    iconVariant: {
-        opacity: 0.9,
-        marginRight: theme.spacing.unit
-    },
-    message: {
-        display: 'flex',
-        alignItems: 'center'
-    },
-    margin: {
-        margin: theme.spacing.unit
     }
-});
+};
 
 class Form extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         schema: PropTypes.object.isRequired,
         initialValues: PropTypes.object,
-        langs: PropTypes.array,
         onChange: PropTypes.func,
         onSubmit: PropTypes.func
     };
 
     static defaultProps = {
         initialValues: {},
-        langs: [],
         onChange: noop,
         onSubmit: noop
     };
@@ -71,9 +40,8 @@ class Form extends Component {
         super(...args);
 
         this.state = {
-            values: clone(this.props.initialValues),
-            validationMessages: {},
-            lang: this.props.langs[0]
+            values: this.props.initialValues,
+            validationMessages: {}
         };
         this.validators = this.getFieldsValidators();
     }
@@ -90,172 +58,21 @@ class Form extends Component {
                 return validators;
             }
 
-            const { langs } = this.props;
-            let newValidators = {};
-
-            if (field.valueLangStructure) {
-                newValidators = langs.reduce((result, lang) => {
-                    return {
-                        ...result,
-                        [`${lang}_${field.name}`]: field.validators
-                    };
-                }, {});
-            } else {
-                newValidators[field.name] = field.validators;
-            }
-
             return {
                 ...validators,
-                ...newValidators
+                [field.name]: field.validators
             };
         }, {});
 
-    getAnotherLangsChanges = (field, value) => {
-        if (!field.valueLangStructure || isString(field.valueLangStructure)) {
-            return {};
-        }
-
-        const { langs } = this.props;
-        const { values, lang: currentLang } = this.state;
-
-        if (isArray(field.valueLangStructure) && isArray(value)) {
-            if (isString(field.valueLangStructure[0])) {
-                const changesByLang = {};
-
-                value.forEach((valueItem, i) => {
-                    langs.forEach(lang => {
-                        if (currentLang !== lang) {
-                            if (!changesByLang[`${lang}_${field.name}`]) {
-                                changesByLang[`${lang}_${field.name}`] = [];
-                            }
-
-                            if (field.valueLangStructure[0] === 'depend') {
-                                changesByLang[`${lang}_${field.name}`][i] = pathOr([`${lang}_${field.name}`, i], '', values);
-                            } else {
-                                changesByLang[`${lang}_${field.name}`][i] = valueItem;
-                            }
-                        }
-                    }, {});
-                }, {});
-
-                return changesByLang;
-            }
-
-            if (isObject(field.valueLangStructure[0])) {
-                const changesByLang = {};
-
-                value.forEach((valueItem, i) => {
-                    const valueItemId = valueItem.id;
-                    let valueItemIndex = null;
-
-                    langs.forEach(lang => {
-                        if (currentLang !== lang) {
-                            if (isNull(valueItemIndex)) {
-                                valueItemIndex = findIndex(({ id }) => id === valueItemId, values[`${lang}_${field.name}`]);
-                                valueItemIndex = valueItemIndex === -1 ? i : valueItemIndex;
-                            }
-
-                            forEachObj((propValue, propName) => {
-                                if (!changesByLang[`${lang}_${field.name}`]) {
-                                    changesByLang[`${lang}_${field.name}`] = [];
-                                }
-
-                                if (propValue === 'depend') {
-                                    changesByLang[`${lang}_${field.name}`][i] = {
-                                        ...changesByLang[`${lang}_${field.name}`][i],
-                                        [propName]: pathOr([`${lang}_${field.name}`, valueItemIndex, propName], '', values)
-                                    };
-                                } else {
-                                    if (isArray(propValue) && isArray(valueItem[propName])) {
-                                        const resultArr = [];
-
-                                        if (!changesByLang[`${lang}_${field.name}`][i][propName]) {
-                                            changesByLang[`${lang}_${field.name}`][i][propName] = [];
-                                        }
-
-                                        if (propValue[0] === 'depend') {
-                                            valueItem[propName].forEach((deepItemValue, index) => {
-                                                resultArr.push(pathOr([`${lang}_${field.name}`, valueItemIndex, propName, index], '', values));
-                                            });
-                                        } else {
-                                            valueItem[propName].forEach((deepItemValue) => {
-                                                resultArr.push(deepItemValue);
-                                            });
-                                        }
-
-                                        changesByLang[`${lang}_${field.name}`][i] = {
-                                            ...changesByLang[`${lang}_${field.name}`][i],
-                                            [propName]: resultArr
-                                        };
-                                    } else {
-                                        changesByLang[`${lang}_${field.name}`][i] = {
-                                            ...changesByLang[`${lang}_${field.name}`][i],
-                                            [propName]: valueItem[propName]
-                                        };
-                                    }
-                                }
-                            }, field.valueLangStructure[0]);
-                        }
-                    }, {});
-                }, {});
-
-                if (!value.length) {
-                    langs.forEach(lang => {
-                        changesByLang[`${lang}_${field.name}`] = [];
-                    });
-                }
-
-                return changesByLang;
-            }
-        }
-
-        if (isObject(field.valueLangStructure) && isObject(value)) {
-            const changesByLang = {};
-
-            value.forEach((valueItem, i) => {
-                langs.forEach(lang => {
-                    let changes = {};
-
-                    if (currentLang !== lang) {
-                        forEachObj((propValue, propName) => {
-                            if (!changesByLang[`${lang}_${field.name}`]) {
-                                changesByLang[`${lang}_${field.name}`] = [];
-                            }
-
-                            if (propValue === 'depend') {
-                                changesByLang[`${lang}_${field.name}`][i] = {
-                                    ...changesByLang[`${lang}_${field.name}`][i],
-                                    [propName]: pathOr([`${lang}_${field.name}`, i, propName], '', values)
-                                };
-                            } else {
-                                changesByLang[`${lang}_${field.name}`][i] = {
-                                    ...changesByLang[`${lang}_${field.name}`][i],
-                                    [propName]: valueItem[propName]
-                                };
-                            }
-                        }, field.valueLangStructure);
-                    }
-
-                    return changes;
-                }, {});
-            }, {});
-
-            return changesByLang;
-        }
-
-        return {};
-    };
-
     createField = (field, i) => {
-        const { values, validationMessages, lang } = this.state;
+        const { values, validationMessages } = this.state;
         const FieldComponent = field.component;
-        const fieldName = field.valueLangStructure ? `${lang}_${field.name}` : field.name;
-        const validationMessage = validationMessages[fieldName];
+        const validationMessage = validationMessages[field.name];
         const fieldProps = {
-            onChange: this.handleFieldChange(field, fieldName),
-            onBlur: this.handleFieldBlur(field),
-            name: fieldName,
-            value: values[fieldName],
+            onChange: this.handleFieldChange(field.name),
+            onBlur: this.handleFieldBlur(field.name),
+            name: field.name,
+            value: values[field.name],
             isRequired: any(validator => validator.name === 'required', field.validators || []),
             validationMessage,
             schema: field.schema || {},
@@ -271,67 +88,24 @@ class Form extends Component {
     };
 
     validateForm = () => {
-        const { langs, schema } = this.props;
-        const { lang: currentLang } = this.state;
-        let validationMessages = {};
+        const validationMessages = {};
         let isValid = true;
-        let isAnotherLangValid = true; // Todo: добавить подсказку "Поправьте валидацию для языков: langs"
-        let isCurrentLangValid = true;
 
-        schema.fields.map((field) => {
-            let newValidationMessages = {};
+        this.props.schema.fields.map((field) => {
+            const validationMessage = this.validateField(field.name);
 
-            if (field.valueLangStructure) {
-                newValidationMessages = langs.reduce((result, lang) => {
-                    const validationMessage = this.validateField(`${lang}_${field.name}`);
-
-                    if (validationMessage) {
-                        if (isCurrentLangValid) {
-                            if (currentLang === lang) {
-                                isCurrentLangValid = false;
-                            }
-                        }
-                        if (isAnotherLangValid) {
-                            if (currentLang !== lang) {
-                                isAnotherLangValid = false;
-                            }
-                        }
-
-                        return {
-                            ...result,
-                            [`${lang}_${field.name}`]: validationMessage
-                        };
-                    }
-
-                    return result;
-                }, {});
-            } else {
-                const validationMessage = this.validateField(field.name);
-
-                if (validationMessage) {
-                    if (isCurrentLangValid) {
-                        isCurrentLangValid = false;
-                    }
-
-                    newValidationMessages[field.name] = validationMessage;
-                }
-            }
-
-            if (!isEmpty(newValidationMessages)) {
+            if (validationMessage) {
                 isValid = false;
             }
 
-            validationMessages = {
-                ...validationMessages,
-                ...newValidationMessages
-            };
+            validationMessages[field.name] = validationMessage;
         });
 
         this.setState({
             validationMessages
         });
 
-        return { isValid, isOnlyAnotherLangInvalid: !isAnotherLangValid && isCurrentLangValid };
+        return isValid;
     };
 
     validateField = (filedName) => {
@@ -344,17 +118,16 @@ class Form extends Component {
             const validator = validatorsList[name];
 
             if (validator && !validationMessage) {
-                validationMessage = validator(values[filedName], validatorOptions, values, filedName);
+                validationMessage = validator(values[filedName], validatorOptions, values);
             }
         }, validators);
 
         return validationMessage;
     };
 
-    handleFieldChange = (field, fieldName) => (value) => {
+    handleFieldChange = (name) => (value) => {
         const changes = {
-            ...this.getAnotherLangsChanges(field, value),
-            [fieldName]: value
+            [name]: value
         };
         const { values, validationMessages } = this.state;
         const newValues = {
@@ -362,32 +135,24 @@ class Form extends Component {
             ...changes
         };
 
-        if ('lang' in changes) {
-            this.setState({
-                lang: newValues.lang
-            });
-        }
-
         this.props.onChange(newValues, changes);
         this.setState({
             values: newValues,
             validationMessages: {
                 ...validationMessages,
-                [fieldName]: ''
+                [name]: ''
             }
         });
     };
 
-    handleFieldBlur = (field) => () => {
-        const { validationMessages, lang } = this.state;
-
-        const fieldName = field.valueLangStructure ? `${lang}_${field.name}` : field.name;
-        const validationMessage = this.validateField(fieldName);
+    handleFieldBlur = (name) => () => {
+        const { validationMessages } = this.state;
+        const validationMessage = this.validateField(name);
 
         this.setState({
             validationMessages: {
                 ...validationMessages,
-                [fieldName]: validationMessage
+                [name]: validationMessage
             }
         });
     };
@@ -395,58 +160,17 @@ class Form extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const { isValid, isOnlyAnotherLangInvalid } = this.validateForm();
+        const isValid = this.validateForm();
 
-        if (isValid) {
-            this.props.onSubmit(this.state.values);
-        } else {
-            if (isOnlyAnotherLangInvalid) {
-                this.setState({
-                    errorText: 'Поправьте валидацию для других языков'
-                });
-                return;
-            }
-
-            this.setState({
-                errorText: 'Поправьте валидацию'
-            });
-        }
-    };
-
-    handleHideFailMessage = () => {
-        this.setState({
-            errorText: ''
-        });
+        isValid && this.props.onSubmit(this.state.values);
     };
 
     render () {
         const { schema, classes } = this.props;
-        const { errorText } = this.state;
 
-        return <div>
-            <form onSubmit={this.handleSubmit} className={classes.form}>
-                { schema.fields.map((field, i) => this.createField(field, i)) }
-            </form>
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right'
-                }}
-                onClose={this.handleHideFailMessage}
-                open={!!errorText}
-                autoHideDuration={2000}
-            >
-                <SnackbarContent
-                    className={classNames(classes.error, classes.margin)}
-                    message={
-                        <span id='client-snackbar' className={classes.message}>
-                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
-                            { errorText }
-                        </span>
-                    }
-                />
-            </Snackbar>
-        </div>;
+        return <form onSubmit={this.handleSubmit} className={classes.form}>
+            { schema.fields.map((field, i) => this.createField(field, i)) }
+        </form>;
     }
 }
 

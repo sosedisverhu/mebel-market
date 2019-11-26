@@ -1,12 +1,15 @@
 import pick from '@tinkoff/utils/object/pick';
 
 const VALUES = [
-    'name',
     'id',
-    'date',
-    'views',
+    'texts',
     'avatar',
-    'files'
+    'files',
+    'hidden',
+    'views',
+    'date',
+    'price',
+    'categoryId'
 ];
 
 export default function getProductValues (product) {

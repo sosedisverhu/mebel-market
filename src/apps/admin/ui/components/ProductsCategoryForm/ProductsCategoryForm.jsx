@@ -1,0 +1,136 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import Form from '../Form/Form';
+import getSchema from './productsCategoryFormSchema';
+
+import { connect } from 'react-redux';
+import saveProductsCategory from '../../../services/saveProductsCategory';
+import editProductsCategory from '../../../services/editProductsCategory';
+
+import noop from '@tinkoff/utils/function/noop';
+import prop from '@tinkoff/utils/object/prop';
+import pick from '@tinkoff/utils/object/pick';
+import pathOr from '@tinkoff/utils/object/pathOr';
+
+const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
+
+const mapDispatchToProps = (dispatch) => ({
+    saveProductsCategory: payload => dispatch(saveProductsCategory(payload)),
+    editProductsCategory: payload => dispatch(editProductsCategory(payload))
+});
+
+class ProductsCategoryForm extends Component {
+    static propTypes = {
+        saveProductsCategory: PropTypes.func.isRequired,
+        editProductsCategory: PropTypes.func.isRequired,
+        onDone: PropTypes.func,
+        category: PropTypes.object,
+        categories: PropTypes.array
+    };
+
+    static defaultProps = {
+        onDone: noop,
+        category: {},
+        categories: []
+    };
+
+    constructor (...args) {
+        super(...args);
+
+        const { category } = this.props;
+
+        this.initialValues = {
+            ru_name: pathOr(['texts', 'ru', 'name'], '', category),
+            ua_name: pathOr(['texts', 'ua', 'name'], '', category),
+            ru_subCategory: pathOr(['texts', 'ru', 'subCategory'], [], category),
+            ua_subCategory: pathOr(['texts', 'ua', 'subCategory'], [], category),
+            hidden: category.hidden || false,
+            ...pick(CATEGORIES_VALUES, category)
+        };
+
+        this.state = {
+            id: prop('id', category),
+            lang: 'ua'
+        };
+    }
+
+    getCategoryPayload = (
+        {
+            ru_name: ruName,
+            ua_name: uaName,
+            ru_subCategory: ruSubCategory,
+            ua_subCategory: uaSubCategory,
+            hidden,
+            positionIndex,
+            id
+        }) => {
+        return {
+            hidden,
+            positionIndex,
+            texts: {
+                ru: {
+                    name: ruName,
+                    subCategory: ruSubCategory
+                },
+                ua: {
+                    name: uaName,
+                    subCategory: uaSubCategory
+                }
+            },
+            id
+        };
+    };
+
+    handleChange = (values, changes) => {
+        if ('lang' in changes) {
+            this.setState({
+                lang: values.lang
+            });
+        }
+    };
+
+    addSubCategory = lang => {
+        if (lang === 'ru') {
+            this.initialValues.ua_subCategory.push('');
+        } else if (lang === 'ua') {
+            this.initialValues.ru_subCategory.push('');
+        }
+    };
+
+    handleSubmit = values => {
+        event.preventDefault();
+
+        const { id } = this.state;
+        const { editProductsCategory, saveProductsCategory, categories, onDone } = this.props;
+        const categoryPayload = this.getCategoryPayload(values);
+
+        (
+            id
+                ? editProductsCategory({ ...categoryPayload, id })
+                : saveProductsCategory({
+                    ...categoryPayload,
+                    positionIndex: categoryPayload.positionIndex || categories.length
+                })
+        )
+            .then(() => {
+                onDone();
+            });
+    };
+
+    render () {
+        const { id, lang } = this.state;
+
+        return <Form
+            initialValues={this.initialValues}
+            schema={getSchema({
+                data: { title: id ? 'Редактирование категории' : 'Добавление категории', addSubCategory: this.addSubCategory },
+                settings: { lang }
+            })}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+        />;
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ProductsCategoryForm);

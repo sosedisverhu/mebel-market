@@ -1,5 +1,5 @@
 const initialState = {
-    'mainSlides': [
+    mainSlides: [
         {
             'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
         },

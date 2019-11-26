@@ -3,23 +3,19 @@ import email from './email';
 import phone from './phone';
 import max from './max';
 import min from './min';
-import sizes from './sizes';
+import featuresDouble from './featuresDouble';
 import featuresSingular from './featuresSingular';
 import requiredFiles from './requiredFiles';
-import colors from './colors';
-import requiredFilesNames from './requiredFilesNames';
-import filters from './filters';
+import requiredLangFields from './requiredLangFields';
 
 export default {
     required,
     email,
     phone,
-    sizes,
+    featuresDouble,
     featuresSingular,
     max,
     min,
     requiredFiles,
-    colors,
-    requiredFilesNames,
-    filters
+    requiredLangFields
 };
