@@ -1,13 +1,6 @@
 /* eslint-disable max-len */
 
 export default {
-    content: {
-        title: 'Контент',
-        langs: 'Выбор языка'
-    },
-    footer: {
-        title: 'Футер'
-    },
     header: {
         deliveryAndPayment: 'Доставка та оплата',
         partners: 'Партнери',
@@ -32,5 +25,8 @@ export default {
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки'
-    }
+    },
+    main: {
+       slider: 'Допомогти з вибором'
+   }
 };
