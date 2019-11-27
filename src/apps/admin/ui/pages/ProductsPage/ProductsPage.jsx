@@ -103,8 +103,7 @@ const tableCells = [
 
 const materialStyles = theme => ({
     root: {
-        display: 'flex',
-        height: '911px'
+        display: 'flex'
     },
     drawer: {
         width: '400px',
@@ -400,6 +399,7 @@ class ProductsPage extends Component {
                 filters={false}
                 onFormOpen={this.handleProductFormOpen}
                 onProductClone={this.handleProductFormClone}
+                isSmall
             />
             <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
