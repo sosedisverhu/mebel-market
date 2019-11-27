@@ -406,7 +406,7 @@ class ProductsPage extends Component {
                     <ProductForm
                         categories={productsCategories}
                         activeCategory={activeProductCategory}
-                        pruduct={editableProduct}
+                        product={editableProduct}
                         onDone={this.handleProductFormDone}/>
                 </Paper>
             </Modal>

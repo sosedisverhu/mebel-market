@@ -82,8 +82,8 @@ class Form extends Component {
 
         return <FormControl key={i} error={!!validationMessage}>
             <FieldComponent {...fieldProps} />
-            { field.hint && <FormHelperText>{field.hint}</FormHelperText> }
-            { validationMessage && <FormHelperText>{validationMessage}</FormHelperText> }
+            {field.hint && <FormHelperText>{field.hint}</FormHelperText>}
+            {validationMessage && <FormHelperText>{validationMessage}</FormHelperText>}
         </FormControl>;
     };
 
@@ -130,12 +130,14 @@ class Form extends Component {
             [name]: value
         };
         const { values, validationMessages } = this.state;
+        const { onChange } = this.props;
+
         const newValues = {
             ...values,
             ...changes
         };
 
-        this.props.onChange(newValues, changes);
+        onChange(newValues, changes);
         this.setState({
             values: newValues,
             validationMessages: {
@@ -169,7 +171,7 @@ class Form extends Component {
         const { schema, classes } = this.props;
 
         return <form onSubmit={this.handleSubmit} className={classes.form}>
-            { schema.fields.map((field, i) => this.createField(field, i)) }
+            {schema.fields.map((field, i) => this.createField(field, i))}
         </form>;
     }
 }
