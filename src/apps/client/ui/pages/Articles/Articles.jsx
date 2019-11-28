@@ -28,23 +28,23 @@ class Articles extends Component {
 
         return (
             <section className={styles.articles}>
-                {text.sections.map(article =>
-                    <div className={styles.article} key={article.id}>
-                        <Link className={styles.titleLink} to={`/articles/${article.id}`}>
-                            <h1 className={styles.title}><span className={styles.titleUnderline}>{article.title}</span></h1>
-                        </Link>
-                        {article.introduction}
-                        <div className={styles.moreInfo}>
-                            {/*<Link to={`/articles/${article.id}`}>
-                                <button className={styles.readMoreBtn}>{text.moreBtn}</button>
-                            </Link>*/}
-                            <Link to={`/articles/${article.id}`}>
-                                <button className={styles.readMoreBtn}>{text.moreBtn}</button>
+                <div className={styles.articlesContainer}>
+                    {text.sections.map(article =>
+                        [...Array(3)].map(e =>
+                        <div className={styles.article} key={article.id}>
+                            <Link className={styles.titleLink} to={`/articles/${article.id}`}>
+                                <h1 className={styles.title}><span className={styles.titleUnderline}>{article.title}</span></h1>
                             </Link>
-                            <span className={styles.date}>{article.date}</span>
+                            {article.introduction}
+                            <div className={styles.moreInfo}>
+                                <Link to={`/articles/${article.id}`}>
+                                    <button className={styles.readMoreBtn}>{text.moreBtn}</button>
+                                </Link>
+                                <span className={styles.date}>{article.date}</span>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    ))}
+                </div>
             </section>
         );
     }

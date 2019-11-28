@@ -5,6 +5,11 @@
 
 .articles {
     background-color: gray3;
+}
+
+.articlesContainer {
+    max-width: 1360px;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

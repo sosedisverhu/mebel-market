@@ -1,0 +1,83 @@
+@value black from '../../../../../css/colors.css';
+
+{/*.articles {
+    display: flex;
+    justify-content: center;
+}
+
+.article {
+    max-width: 1240px;
+    margin: 0 auto;
+    font-family: RoundedElegance;
+}*/}
+.articles {
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.article {
+    max-width: 1240px;
+    margin: 0 auto;
+    font-family: RoundedElegance;
+}
+
+.titleWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.article h1,
+.article h2 {
+    color: black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+}
+
+.article h1 {
+    font-size: 24px;
+    line-height: 28px;
+    position: relative;
+
+    &:after {
+        position: absolute;
+        content: '';
+        top: 50%;
+        transform: translateY(-50%);
+        left: calc(100% + 60px);
+        width: 190px;
+        height: 2px;
+        background-color: black;
+    }
+}
+
+.introduction {
+    margin-bottom: 30px;
+}
+
+.article h2 {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 15px;
+}
+
+.article p {
+    max-width: 900px;
+    font-size: 16px;
+    line-height: 18px;
+    color: rgba(35, 35, 35, 0.7);
+}
+
+.article li {
+    position: relative;
+    margin-left: 15px;
+
+    &:before {
+        position: absolute;
+        content: '';
+        width: 10px;
+        height: 10px;
+        left: -15px;
+        background: url('./img/bullet.png') no-repeat center;
+    }
+}
