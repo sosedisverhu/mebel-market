@@ -11,7 +11,7 @@ export default function filters (value) {
         return 'Добавьте опции для всех checkbox фильтров';
     }
 
-    if (value.some((filter) => filter.type === 'range' ? false : (filter.options || []).some(option => !option))) {
+    if (value.some((filter) => filter.type === 'range' ? false : (filter.options || []).some(option => !option.name))) {
         return 'Нельзя использовать пустые опции для checkbox фильтров';
     }
 }

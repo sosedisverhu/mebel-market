@@ -3,7 +3,6 @@ import email from './email';
 import phone from './phone';
 import max from './max';
 import min from './min';
-import sizes from './sizes';
 import featuresSingular from './featuresSingular';
 import requiredFiles from './requiredFiles';
 import colors from './colors';
@@ -14,7 +13,6 @@ export default {
     required,
     email,
     phone,
-    sizes,
     featuresSingular,
     max,
     min,

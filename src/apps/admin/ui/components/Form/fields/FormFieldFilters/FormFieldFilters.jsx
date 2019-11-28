@@ -61,7 +61,7 @@ const Filter = SortableElement((
                     <TextField
                         className={classes.filterField}
                         label='Название'
-                        value={filter.name}
+                        value={filter.name || ''}
                         onChange={onFilterChange('name', filterIndex)}
                         margin='normal'
                         variant='outlined'
@@ -84,7 +84,7 @@ const Filter = SortableElement((
                             <TextField
                                 className={classes.filterField}
                                 label={!isEditable ? 'Название новой опции' : 'Редактирование опции'}
-                                value={!isEditable ? newOptionTexts[filterIndex] : editableOptionText}
+                                value={(!isEditable ? newOptionTexts[filterIndex].name : editableOptionText) || ''}
                                 onChange={!isEditable ? onFilterNewOptionChange(filterIndex) : onFilterEditOptionChange}
                                 margin='normal'
                                 variant='outlined'
@@ -124,7 +124,7 @@ const Filter = SortableElement((
                                     filter.options &&
                                     filter.options.map((option, i) => <Chip
                                         key={i}
-                                        label={option}
+                                        label={option.name}
                                         variant={(!isEditable || editableOptionIndex !== i) && 'outlined'}
                                         color="primary"
                                         onDelete={onFilterOptionDelete(filterIndex, i)}
@@ -258,7 +258,7 @@ class FormFieldFilters extends Component {
 
     state = {
         isSorting: false,
-        newOptionTexts: [],
+        newOptionTexts: this.props.value.map(() => ({ id: uniqid(), name: '' })),
         editableOptionText: '',
         editableFilterIndex: null,
         editableOptionIndex: null
@@ -275,7 +275,7 @@ class FormFieldFilters extends Component {
         this.setState({
             newOptionTexts: [
                 ...newOptionTexts,
-                ''
+                { name: '' }
             ]
         });
     };
@@ -308,14 +308,14 @@ class FormFieldFilters extends Component {
         const { newOptionTexts } = this.state;
         const newValue = [...value];
         const newOptionTextsCopy = [...newOptionTexts];
-        const optionText = trim(newOptionTexts[i]);
+        const optionText = trim(newOptionTexts[i].name);
 
         if (!optionText) {
             return;
         }
 
-        newValue[i].options = [...newValue[i].options, optionText];
-        newOptionTextsCopy[i] = '';
+        newValue[i].options = [...newValue[i].options, { id: uniqid(), name: newOptionTexts[i].name }];
+        newOptionTextsCopy[i].name = '';
 
         this.setState({
             newOptionTexts: newOptionTextsCopy
@@ -337,7 +337,7 @@ class FormFieldFilters extends Component {
         const { newOptionTexts } = this.state;
         const newOptionTextsCopy = [...newOptionTexts];
 
-        newOptionTextsCopy[filterIndex] = event.target.value;
+        newOptionTextsCopy[filterIndex].name = event.target.value;
 
         this.setState({
             newOptionTexts: newOptionTextsCopy
@@ -355,12 +355,12 @@ class FormFieldFilters extends Component {
         const { newOptionTexts } = this.state;
         const newOptionTextsCopy = [...newOptionTexts];
 
-        newOptionTextsCopy[filterIndex] = '';
+        newOptionTextsCopy[filterIndex].name = '';
 
         this.setState({
             editableFilterIndex: filterIndex,
             editableOptionIndex: i,
-            editableOptionText: value[filterIndex].options[i],
+            editableOptionText: value[filterIndex].options[i].name,
             newOptionTexts: newOptionTextsCopy
         });
     };
@@ -376,7 +376,7 @@ class FormFieldFilters extends Component {
             return;
         }
 
-        newValue[editableFilterIndex].options[editableOptionIndex] = optionText;
+        newValue[editableFilterIndex].options[editableOptionIndex].name = optionText;
 
         this.setState({
             editableOptionText: '',
