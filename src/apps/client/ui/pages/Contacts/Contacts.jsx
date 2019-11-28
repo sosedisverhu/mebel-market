@@ -47,8 +47,7 @@ class Contacts extends Component {
                         <p className={styles.infoText}>{text.addressText}</p>
                     </div>
                 </div>
-                <div className={styles.map}>
-                </div>
+                <div className={styles.map} />
             </section>
         );
     }
