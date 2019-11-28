@@ -59,14 +59,8 @@ class ProductForm extends Component {
         this.initialValues = {
             views: 0,
             categoryId: this.props.activeCategory.id,
-            avatar: {
-                files: product.avatar ? [product.avatar] : [],
-                removedFiles: []
-            },
-            files: {
-                files: product.files ? product.files : [],
-                removedFiles: []
-            },
+            avatar: { files: product.avatar ? [product.avatar] : [] },
+            files: { files: product.files ? product.files : [] },
             date: product.date,
             ru_name: ru.name || '',
             ua_name: ua.name || '',
@@ -78,8 +72,6 @@ class ProductForm extends Component {
         this.id = prop('id', product);
         this.state = {
             lang: 'ru',
-            errorText: '',
-            removedFiles: [],
             categoryHidden
         };
     }
@@ -126,16 +118,27 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            // .then(product => {
-            //     const { files } = values.files;
-            //     if (files[0].content) {
-            //         const formData = new FormData();
-            //
-            //         formData.append(`product-${product.id}-file`, files[0].content);
-            //
-            //         return updateProductFiles(formData, product.id);
-            //     }
-            // })
+            .then(product => {
+                const { files } = values.files;
+                const formData = new FormData();
+                const removedFiles = [];
+                const oldFiles = [];
+
+                files.forEach((file, i) => {
+                    if (file.content) {
+                        formData.append(`product-${product.id}-file-${i}`, file.content);
+                    } else {
+                        oldFiles.push({
+                            path: file.path,
+                            index: i
+                        });
+                    }
+                });
+                formData.append('removedFiles', JSON.stringify(removedFiles));
+                formData.append('oldFiles', JSON.stringify(oldFiles));
+
+                return updateProductFiles(formData, product.id);
+            })
             .then(() => {
                 onDone();
             });
