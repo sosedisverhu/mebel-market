@@ -4,19 +4,28 @@
 @value gray3 from '../../../../../css/colors.css';
 
 .slider {
-    padding: 0 45px;
+    padding: 0 60px;
     margin: 0 auto;
-    max-width: 1274px;
+    max-width: 1242px;
     box-sizing: content-box;
     position: relative;
+
+    @media (max-width: 1360px) {
+        width: 924px;
+    }
+
+    @media (max-width: 1042px) and (min-width: 1021px) {
+        padding: 0 48px;
+    }
+
+    @media (max-width: 1020px) {
+        width: 606px;
+    }
 }
 
 .content {
     display: flex;
-    justify-content: center;
-    margin: 0 auto;
     overflow: hidden;
-    left: -15px;
     position: relative;
 }
 
@@ -24,10 +33,13 @@
     display: flex;
     width: 100%;
     min-width: 100%;
+    position: relative;
+    transition: left 0.7s ease-in-out;
 }
 
 .productsPack {
     display: flex;
+    width: 100%;
 }
 
 .left,
@@ -55,6 +67,10 @@
         &:before {
             top: 2px;
         }
+    }
+
+    @media (max-width: 1042px) and (min-width: 1021px) {
+        width: 38px;
     }
 }
 
@@ -129,9 +145,8 @@
     }
 
     &.active {
-
         &:before {
-            background: black;
+            background: green !important;
             transition: background 0.25s ease-in;
         }
     }
@@ -141,12 +156,6 @@
     .ellipse {
         &:before {
             background: gray3;
-        }
-
-        &.active {
-            &:before {
-                background: green;
-            }
         }
     }
 }
