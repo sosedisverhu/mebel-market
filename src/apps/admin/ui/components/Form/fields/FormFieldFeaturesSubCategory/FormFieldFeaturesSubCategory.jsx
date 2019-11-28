@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import uniqid from 'uniqid';
+
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import ReorderIcon from '@material-ui/icons/Reorder';
@@ -15,6 +17,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
+import arrayMove from '../../../../../utils/arrayMove';
 
 const materialStyles = {
     feature: {
@@ -60,7 +63,6 @@ const Feature = SortableElement(({ index, feature, validationMessage, handleFeat
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.featureGroup}>
             <TextField
-                className={classes.dimensionField}
                 label='Значение'
                 value={feature}
                 onChange={handleFeatureChange(index)}
@@ -81,47 +83,44 @@ const Feature = SortableElement(({ index, feature, validationMessage, handleFeat
 const Features = SortableContainer(({ features, classes, ...rest }) =>
     <div>
         {features.map((feature, i) => {
-            return <Feature key={i} index={i} feature={feature} {...rest} classes={classes}/>;
+            return <Feature key={i} index={i} feature={feature.name} {...rest} classes={classes}/>;
         })}
     </div>
 );
 
-class FormFieldFeaturesSingular extends Component {
+class FormFieldFeaturesSubCategory extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
-        validationMessage: PropTypes.string,
-        schema: PropTypes.object.isRequired
+        validationMessage: PropTypes.string
     };
 
     static defaultProps = {
         value: [],
         onChange: noop,
         onBlur: noop,
-        validationMessage: '',
-        schema: {}
-    };
-
-    state = {
-        isSorting: false
+        validationMessage: ''
     };
 
     handleFeatureAdd = () => {
-        const { value, schema } = this.props;
+        const { value } = this.props;
 
         this.props.onChange([
             ...value,
-            ''
+            {
+                name: '',
+                positionIndex: value.length,
+                id: uniqid()
+            }
         ]);
-        schema.addSubCategory(schema.lang);
     };
 
-    handleFeatureChange = (i) => event => {
+    handleFeatureChange = i => event => {
         const { value } = this.props;
 
-        value[i] = event.target.value;
+        value[i] = { ...value[i], name: event.target.value };
 
         this.props.onChange(value);
     };
@@ -130,6 +129,12 @@ class FormFieldFeaturesSingular extends Component {
         const { value } = this.props;
 
         this.props.onChange(remove(i, 1, value));
+    };
+
+    onDragEnd = ({ oldIndex, newIndex }) => {
+        const newValues = arrayMove(this.props.value, oldIndex, newIndex);
+
+        this.props.onChange(newValues);
     };
 
     render () {
@@ -142,6 +147,7 @@ class FormFieldFeaturesSingular extends Component {
                 handleFeatureDelete={this.handleFeatureDelete}
                 handleFeatureChange={this.handleFeatureChange}
                 onBlur={onBlur}
+                onSortEnd={this.onDragEnd}
                 classes={classes}
                 useDragHandle
                 validationMessage={validationMessage}
@@ -155,4 +161,4 @@ class FormFieldFeaturesSingular extends Component {
     }
 }
 
-export default withStyles(materialStyles)(FormFieldFeaturesSingular);
+export default withStyles(materialStyles)(FormFieldFeaturesSubCategory);

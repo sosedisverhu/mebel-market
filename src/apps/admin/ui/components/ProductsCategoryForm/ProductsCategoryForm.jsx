@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import Form from '../Form/Form';
-import getSchema from './productsCategoryFormSchema';
-
 import { connect } from 'react-redux';
-import saveProductsCategory from '../../../services/saveProductsCategory';
-import editProductsCategory from '../../../services/editProductsCategory';
 
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
+
+import saveProductsCategory from '../../../services/saveProductsCategory';
+import editProductsCategory from '../../../services/editProductsCategory';
+
+import getSchema from './productsCategoryFormSchema';
+import Form from '../Form/Form';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
 
@@ -90,14 +90,6 @@ class ProductsCategoryForm extends Component {
         }
     };
 
-    addSubCategory = lang => {
-        if (lang === 'ru') {
-            this.initialValues.ua_subCategory.push('');
-        } else if (lang === 'ua') {
-            this.initialValues.ru_subCategory.push('');
-        }
-    };
-
     handleSubmit = values => {
         event.preventDefault();
 
@@ -124,7 +116,7 @@ class ProductsCategoryForm extends Component {
         return <Form
             initialValues={this.initialValues}
             schema={getSchema({
-                data: { title: id ? 'Редактирование категории' : 'Добавление категории', addSubCategory: this.addSubCategory },
+                data: { title: id ? 'Редактирование категории' : 'Добавление категории' },
                 settings: { lang }
             })}
             onChange={this.handleChange}

@@ -3,9 +3,9 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
+import FormFieldFeaturesSubCategory from '../Form/fields/FormFieldFeaturesSubCategory/FormFieldFeaturesSubCategory';
 
-export default function ({ data: { title, addSubCategory } = {}, settings: { lang } } = {}) {
+export default function ({ data: { title } = {}, settings: { lang } } = {}) {
     return {
         fields: [
             {
@@ -51,12 +51,8 @@ export default function ({ data: { title, addSubCategory } = {}, settings: { lan
                 }
             },
             {
-                component: FormFieldFeaturesSingular,
-                name: `${lang}_subCategory`,
-                schema: {
-                    addSubCategory,
-                    lang
-                }
+                component: FormFieldFeaturesSubCategory,
+                name: `${lang}_subCategory`
             },
             {
                 component: FormFieldCheckbox,
