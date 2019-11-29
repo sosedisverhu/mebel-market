@@ -17,7 +17,13 @@ class Footer extends Component {
                     </div>
                     <div className={styles.developedWrapper}>
                         Developed by
-                        <a className={styles.stubbsText} href="#" target="_blank">Stubbs</a>
+                        <a
+                            className={styles.stubbsText}
+                            href="https://stubbs.pro/?utm_source=prev_clients&utm_campaign=mebelmarket"
+                            target="_blank"
+                        >
+                            Stubbs
+                        </a>
                     </div>
                     <div className={styles.contactsWrapper}>
                         <div className={styles.contactsLinkWrapperTop}>

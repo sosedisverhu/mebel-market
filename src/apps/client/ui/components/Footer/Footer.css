@@ -120,7 +120,12 @@
     text-decoration: none;
     font-size: 14px;
     line-height: 16px;
+    margin-top: 10px;
     color: black;
+
+    &:first-child {
+         margin-top: 0;
+     }
 
     @media (max-width: 992px) {
         margin-bottom: 10px;
