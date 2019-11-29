@@ -1,8 +1,9 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
 
 .partners {
-    font-family: RoundedElegance;
+    /* font-family: RoundedElegance;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,6 +12,26 @@
     position: relative;
 
     @media (max-width: 1270px) {
+        padding: 0 16px;
+    } */
+    background-color: gray5;
+    padding-bottom: 40px;
+}
+
+.partnersContainer {
+    background-color: whiteBasic;
+}
+
+.content {
+    max-width: 1360px;
+    margin: 0 auto;
+    font-family: RoundedElegance;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 600px) {
+        align-items: stretch;
         padding: 0 16px;
     }
 }
@@ -65,9 +86,9 @@
     }
 }
 
-.partnersContainer {
+.partnersWrapper {
     max-width: 1240px;
-    padding-top: 60px;
+    padding: 60px 0 120px;
     display: flex;
 
     @media (max-width: 1170px) {
@@ -142,8 +163,8 @@
 }
 
 .partnerText {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 18px;
     text-align: center;
     color: rgba(35, 35, 35, 0.7);
     max-width: 207px;

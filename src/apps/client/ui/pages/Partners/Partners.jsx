@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import styles from './Partners.css';
 
 const mapStateToProps = ({ application }) => {
@@ -24,17 +25,22 @@ class Partners extends Component {
 
         return (
             <section className={styles.partners}>
-                <h1 className={styles.title}>{text.title}</h1>
+                <Breadcrumbs />
                 <div className={styles.partnersContainer}>
-                    {text.sections.map((partner, i) =>
-                        <div className={styles.partnerItem} key={i}>
-                            <h2 className={styles.partnerName}>{partner.name}</h2>
-                            <div className={styles.partnerLogoWrapper}>
-                                <img className={styles.partnerLogo} src={partner.url} alt={partner.alt}/>
-                            </div>
-                            <p className={styles.partnerText}>{partner.text}</p>
+                    <div className={styles.content}>
+                        <h1 className={styles.title}>{text.title}</h1>
+                        <div className={styles.partnersWrapper}>
+                            {text.sections.map((partner, i) =>
+                                <div className={styles.partnerItem} key={i}>
+                                    <h2 className={styles.partnerName}>{partner.name}</h2>
+                                    <div className={styles.partnerLogoWrapper}>
+                                        <img className={styles.partnerLogo} src={partner.url} alt={partner.alt}/>
+                                    </div>
+                                    <p className={styles.partnerText}>{partner.text}</p>
+                                </div>
+                            )}
                         </div>
-                    )}
+                    </div>
                 </div>
             </section>
         );

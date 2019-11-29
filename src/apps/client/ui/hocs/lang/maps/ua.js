@@ -4,6 +4,9 @@ export default {
     main: {
         slider: 'Допомогти з вибором'
     },
+    breadcrumbs: {
+        main: 'Головна'
+    },
     partners: {
         title: 'Партнёры',
         sections: [
