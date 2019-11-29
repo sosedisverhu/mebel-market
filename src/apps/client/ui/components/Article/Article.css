@@ -93,11 +93,23 @@
     color: rgba(35, 35, 35, 0.7);
 }
 
-.articleContainer li {
+.articleContainer ul li {
     color: rgba(35, 35, 35, 0.7);
-    background: url('./img/bullet.png') left center no-repeat;
     padding-left: 25px;
     margin-bottom: 15px;
+    position: relative;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: black;
+    }
 
     &:last-child {
         margin-bottom: 30px;
