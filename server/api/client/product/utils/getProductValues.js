@@ -9,7 +9,8 @@ const VALUES = [
     'views',
     'date',
     'price',
-    'categoryId'
+    'categoryId',
+    'subCategoryId'
 ];
 
 export default function getProductValues (product) {

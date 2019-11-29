@@ -46,19 +46,26 @@ class ProductForm extends Component {
     constructor (...args) {
         super(...args);
 
-        const { product } = this.props;
+        const defaultLang = this.state ? this.state.lang : 'ru';
+        const { product, categories, activeCategory } = this.props;
         const ru = pathOr(['texts', 'ru'], '', product);
         const ua = pathOr(['texts', 'ua'], '', product);
-        const categoryHidden = this.props.activeCategory.hidden;
+        const categoryHidden = activeCategory.hidden;
 
-        this.categoriesOptions = this.props.categories.map(category => ({
+        this.categoriesOptions = categories.map(category => ({
             value: category.id,
-            name: category.texts.ua.name
+            name: category.texts[defaultLang].name
+        }));
+
+        this.subCategoriesOptions = activeCategory.texts[defaultLang].subCategory.map(category => ({
+            value: category.id,
+            name: category.name
         }));
 
         this.initialValues = {
             views: 0,
-            categoryId: this.props.activeCategory.id,
+            categoryId: activeCategory.id,
+            subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
             avatar: { files: product.avatar ? [product.avatar] : [] },
             files: { files: product.files ? product.files : [] },
             date: product.date,
@@ -72,6 +79,7 @@ class ProductForm extends Component {
         this.id = prop('id', product);
         this.state = {
             lang: 'ru',
+            activeCategory: activeCategory,
             categoryHidden
         };
     }
@@ -83,6 +91,7 @@ class ProductForm extends Component {
             hidden,
             price,
             categoryId,
+            subCategoryId,
             id
         }) => {
         return {
@@ -97,6 +106,7 @@ class ProductForm extends Component {
             hidden,
             price,
             categoryId,
+            subCategoryId,
             id
         };
     };
@@ -145,43 +155,51 @@ class ProductForm extends Component {
     };
 
     handleChange = (values, changes) => {
-        if ('lang' in changes) {
+        switch (Object.keys(changes)[0]) {
+        case 'lang':
             this.setState({
                 lang: changes.lang
             });
+            break;
 
-            this.categoriesOptions = this.props.categories.map(category => ({
-                value: category.id,
-                name: category.texts[changes.lang].name
-            }));
-        }
-
-        if ('categoryId' in changes) {
+        case 'categoryId':
             const activeCategory = this.props.categories.find(category => category.id === changes.categoryId);
+            const { lang } = this.state;
 
             this.setState({
                 categoryHidden: activeCategory.hidden
             });
+
+            this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
+                value: category.id,
+                name: category.name
+            }));
+
+            values.subCategoryId = activeCategory.texts[lang].subCategory[0].id;
+            break;
         }
     };
 
     render () {
         const { lang, categoryHidden } = this.state;
 
-        return <Form
-            initialValues={this.initialValues}
-            lang={lang}
-            schema={getSchema({
-                data: {
-                    title: this.id ? 'Редактирование товара' : 'Добавление товара',
-                    categoriesOptions: this.categoriesOptions,
-                    categoryHidden
-                },
-                settings: { lang }
-            })}
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmit}
-        />;
+        return <div>
+            <Form
+                initialValues={this.initialValues}
+                lang={lang}
+                schema={getSchema({
+                    data: {
+                        title: this.id ? 'Редактирование товара' : 'Добавление товара',
+                        categoriesOptions: this.categoriesOptions,
+                        subCategoriesOptions: this.subCategoriesOptions,
+                        categoryHidden
+                    },
+                    settings: { lang }
+                })}
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+            />
+        </div>;
     }
 }
 
