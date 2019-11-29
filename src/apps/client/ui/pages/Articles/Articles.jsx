@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
-
 import styles from './Articles.css';
-import { Link, Redirect } from 'react-router-dom';
 
 const mapStateToProps = ({ application, data }) => {
     return {

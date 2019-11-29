@@ -29,11 +29,11 @@ class Article extends Component {
         const article = text.sections[id];
 
         return (
-            <section className={styles.articles}>
-                <div className={styles.article}>
+            <section className={styles.article}>
+                <div className={styles.articleContainer}>
                     <div className={styles.titleWrapper}>
                         <h1 className={styles.title}>{article.title}</h1>
-                        {article.date}
+                        <span className={styles.date}>{article.date}</span>
                     </div>
                     <div className={styles.introduction}>
                         {article.introduction}
