@@ -2,11 +2,11 @@
 
 export default {
     product: {
-        labelTop: 'Хит'
+        labelTop: 'Хіт'
     },
     mainPage: {
-        top: 'Топ продаж',
-        discount: 'Акции',
+        top: 'Топ продажів',
+        discount: 'Акції',
         new: 'Новинки'
     },
     main: {
