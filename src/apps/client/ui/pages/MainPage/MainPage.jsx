@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Slider from '../../components/Slider/Slider';
+import Advantages from '../../components/Advantages/Advantages';
 
 class MainPage extends Component {
     render () {
         return (
-            <Slider />
+            <Advantages />
         );
     }
 }
