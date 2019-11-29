@@ -3,19 +3,12 @@
 @value gray5 from '../../../../../css/colors.css';
 
 .partners {
-    /* font-family: RoundedElegance;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: black;
-    background-color: whiteBasic;
-    position: relative;
-
-    @media (max-width: 1270px) {
-        padding: 0 16px;
-    } */
     background-color: gray5;
     padding-bottom: 40px;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
 }
 
 .partnersContainer {
@@ -40,7 +33,7 @@
     margin: 30px auto 0;
     font-size: 24px;
     line-height: 28px;
-    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
     position: relative;
 
     @media (max-width: 768px) {
@@ -139,7 +132,7 @@
     font-size: 18px;
     line-height: 21px;
     text-align: center;
-    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
 }
 
 .partnerLogoWrapper {
