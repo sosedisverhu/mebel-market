@@ -1,14 +1,23 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
 
 .deliveryAndPayment {
+    background-color: gray5;
+    padding-bottom: 30px;
+}
+
+.deliveryAndPaymentContainer {
+    background-color: whiteBasic;
+}
+
+.content {
+    max-width: 1360px;
+    margin: 0 auto;
     font-family: RoundedElegance;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: black;
-    background-color: whiteBasic;
-    position: relative;
 
     @media (max-width: 600px) {
         align-items: stretch;
@@ -17,19 +26,19 @@
 }
 
 .title {
-    margin: 30px auto 0;
+    margin-top: 30px;
     font-size: 24px;
     line-height: 28px;
-    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
     position: relative;
 
     @media (max-width: 768px) {
+        margin-top: 20px;
         font-size: 20px;
         line-height: 23px;
     }
 
     @media (max-width: 600px) {
-        margin: 20px auto 0 0;
         width: 100%;
     }
 
@@ -98,7 +107,7 @@
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 10px;
-    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
 
     @media (max-width: 768px) {
         font-size: 16px;
@@ -107,8 +116,20 @@
 }
 
 .option {
-    background: url('./img/bullet.png') left center no-repeat;
     padding-left: 25px;
+    position: relative;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: black;
+    }
 }
 
 .delivery .option {

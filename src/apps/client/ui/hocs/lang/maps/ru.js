@@ -5,6 +5,9 @@ export default {
     main: {
         slider: 'Помочь с выбором'
     },
+    breadcrumbs: {
+        main: 'Главная'
+    },
     deliveryAndPayment: {
         title: 'Доставка и оплата',
         deliveryTitle: 'Доставка:',
