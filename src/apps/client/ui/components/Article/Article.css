@@ -14,6 +14,10 @@
     max-width: 1240px;
     width: 100%;
     margin: 30px auto;
+
+    @media (--media-tablet-s) {
+        margin: 20px auto 30px;
+    }
 }
 
 .titleWrapper {
@@ -38,7 +42,7 @@
     line-height: 28px;
     position: relative;
 
-    @media (max-width: 767px) {
+    @media (--media-tablet-s) {
         font-size: 20px;
         line-height: 23px;
     }
