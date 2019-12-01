@@ -20,26 +20,26 @@ import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../../../utils/arrayMove';
 
 const materialStyles = {
-    feature: {
+    subCategory: {
         flexWrap: 'nowrap',
         alignItems: 'center',
         zIndex: 9999
     },
-    features: {
+    subCategories: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '210px'
     },
-    featureGroup: {
+    subCategoryGroup: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: '100%'
     },
-    featureDelButton: {
-        position: 'relative',
-        top: '4px'
+    subCategoryField: {
+        width: 'calc(50% - 20px)'
+
     },
     buttonSortable: {
         position: 'relative',
@@ -55,107 +55,120 @@ const materialStyles = {
 };
 
 const ButtonSortable = SortableHandle(({ imageClassName }) => (
-    <ReorderIcon className={imageClassName}/>
+    <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Feature = SortableElement(({ index, feature, validationMessage, handleFeatureDelete, handleFeatureChange, onBlur, classes }) => (
-    <FormGroup className={classes.feature} row>
+const SubCategory = SortableElement(({ rowIndex, subCategory, validationMessage, handleSubCategoryDelete, handleSubCategoryChange, classes }) => (
+    <FormGroup className={classes.subCategory} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
-        <div className={classes.featureGroup}>
+        <div className={classes.subCategoryGroup}>
             <TextField
-                label='Значение'
-                value={feature}
-                onChange={handleFeatureChange(index)}
-                onBlur={onBlur}
+                className={classes.subCategoryField}
+                label='Название'
+                value={subCategory.name || ''}
+                onChange={handleSubCategoryChange('name', rowIndex)}
                 margin='normal'
                 variant='outlined'
                 error={!!validationMessage}
-                required
-                fullWidth
+            />
+            <TextField
+                className={classes.subCategoryField}
+                label='Alias'
+                value={subCategory.alias}
+                onChange={handleSubCategoryChange('alias', rowIndex)}
+                margin='normal'
+                variant='outlined'
+                error={!!validationMessage}
             />
         </div>
-        <IconButton aria-label='Delete' className={classes.featureDelButton} onClick={handleFeatureDelete(index)}>
+        <IconButton aria-label='Delete' onClick={handleSubCategoryDelete(rowIndex)}>
             <DeleteIcon/>
         </IconButton>
     </FormGroup>
 ));
 
-const Features = SortableContainer(({ features, classes, ...rest }) =>
+const SubCategories = SortableContainer(({ subCategories, classes, ...rest }) =>
     <div>
-        {features.map((feature, i) => {
-            return <Feature key={i} index={i} feature={feature.name} {...rest} classes={classes}/>;
+        {subCategories.map((subCategory, i) => {
+            return <SubCategory key={i}
+                index={i}
+                rowIndex={i}
+                subCategory={subCategory}
+                {...rest}
+                classes={classes}
+            />;
         })}
     </div>
 );
 
-class FormFieldFeaturesSubCategory extends Component {
+class FormFieldSubCategories extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
-        onBlur: PropTypes.func,
         validationMessage: PropTypes.string
     };
 
     static defaultProps = {
         value: [],
         onChange: noop,
-        onBlur: noop,
         validationMessage: ''
     };
 
-    handleFeatureAdd = () => {
-        event.preventDefault();
+    state = {
+        isSorting: false
+    };
 
+    handleSubCategoryAdd = () => {
         const { value } = this.props;
 
         this.props.onChange([
             ...value,
             {
                 name: '',
-                positionIndex: value.length,
-                id: uniqid()
+                alias: '',
+                id: uniqid(),
+                positionIndex: value.length
             }
         ]);
     };
 
-    handleFeatureChange = i => event => {
+    handleSubCategoryChange = (prop, i) => event => {
         const { value } = this.props;
 
-        value[i] = { ...value[i], name: event.target.value };
+        value[i][prop] = event.target.value;
 
         this.props.onChange(value);
     };
 
-    handleFeatureDelete = i => () => {
+    handleSubCategoryDelete = i => () => {
         const { value } = this.props;
 
         this.props.onChange(remove(i, 1, value));
     };
 
     onDragEnd = ({ oldIndex, newIndex }) => {
-        const newValues = arrayMove(this.props.value, oldIndex, newIndex);
+        const { value } = this.props;
 
-        this.props.onChange(newValues);
+        this.props.onChange(arrayMove(value, oldIndex, newIndex));
     };
 
     render () {
-        const { classes, value, validationMessage, onBlur } = this.props;
+        const { classes, value, validationMessage } = this.props;
 
         return <div>
-            <Features
+            <SubCategories
                 axis='xy'
-                features={value}
-                handleFeatureDelete={this.handleFeatureDelete}
-                handleFeatureChange={this.handleFeatureChange}
-                onBlur={onBlur}
+                subCategories={value}
+                handleSubCategoryDelete={this.handleSubCategoryDelete}
+                handleSubCategoryChange={this.handleSubCategoryChange}
                 onSortEnd={this.onDragEnd}
                 classes={classes}
                 useDragHandle
                 validationMessage={validationMessage}
             />
             <div className={classes.addButton}>
-                <Fab color='primary' size='small' onClick={this.handleFeatureAdd}>
+                <Fab color='primary' size='small' onClick={this.handleSubCategoryAdd}>
                     <AddIcon/>
                 </Fab>
             </div>
@@ -163,4 +176,4 @@ class FormFieldFeaturesSubCategory extends Component {
     }
 }
 
-export default withStyles(materialStyles)(FormFieldFeaturesSubCategory);
+export default withStyles(materialStyles)(FormFieldSubCategories);

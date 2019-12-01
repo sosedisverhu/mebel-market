@@ -63,7 +63,6 @@ class ProductForm extends Component {
         }));
 
         this.initialValues = {
-            views: 0,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
             avatar: { files: product.avatar ? [product.avatar] : [] },
@@ -74,6 +73,7 @@ class ProductForm extends Component {
             lang: 'ru',
             hidden: (categoryHidden ? false : product.hidden) || false,
             price: product.price,
+            alias: product.alias,
             ...pick(PRODUCTS_VALUES, product)
         };
         this.id = prop('id', product);
@@ -92,7 +92,8 @@ class ProductForm extends Component {
             price,
             categoryId,
             subCategoryId,
-            id
+            id,
+            alias
         }) => {
         return {
             texts: {
@@ -107,7 +108,8 @@ class ProductForm extends Component {
             price,
             categoryId,
             subCategoryId,
-            id
+            id,
+            alias
         };
     };
 
@@ -186,7 +188,7 @@ class ProductForm extends Component {
         return <div>
             <Form
                 initialValues={this.initialValues}
-                lang={lang}
+                langs={['ru', 'ua']}
                 schema={getSchema({
                     data: {
                         title: this.id ? 'Редактирование товара' : 'Добавление товара',

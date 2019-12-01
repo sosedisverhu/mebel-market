@@ -45,6 +45,7 @@ class ProductsCategoryForm extends Component {
             ua_name: pathOr(['texts', 'ua', 'name'], '', category),
             ru_subCategory: pathOr(['texts', 'ru', 'subCategory'], [], category),
             ua_subCategory: pathOr(['texts', 'ua', 'subCategory'], [], category),
+            alias: category.alias || '',
             hidden: category.hidden || false,
             ...pick(CATEGORIES_VALUES, category)
         };
@@ -63,7 +64,8 @@ class ProductsCategoryForm extends Component {
             ua_subCategory: uaSubCategory,
             hidden,
             positionIndex,
-            id
+            id,
+            alias
         }) => {
         return {
             hidden,
@@ -78,7 +80,8 @@ class ProductsCategoryForm extends Component {
                     subCategory: uaSubCategory
                 }
             },
-            id
+            id,
+            alias
         };
     };
 
@@ -111,17 +114,19 @@ class ProductsCategoryForm extends Component {
     };
 
     render () {
-        const { id, lang } = this.state;
+        const { id } = this.state;
 
-        return <Form
-            initialValues={this.initialValues}
-            schema={getSchema({
-                data: { title: id ? 'Редактирование категории' : 'Добавление категории' },
-                settings: { lang }
-            })}
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmit}
-        />;
+        return <div>
+            <Form
+                initialValues={this.initialValues}
+                langs={['ru', 'ua']}
+                schema={getSchema({
+                    data: { title: id ? 'Редактирование категории' : 'Добавление категории' }
+                })}
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+            />
+        </div>;
     }
 }
 

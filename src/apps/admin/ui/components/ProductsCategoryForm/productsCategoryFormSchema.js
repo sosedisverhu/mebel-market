@@ -3,9 +3,10 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldFeaturesSubCategory from '../Form/fields/FormFieldFeaturesSubCategory/FormFieldFeaturesSubCategory';
+import FormFieldSubCategories from '../Form/fields/FormFieldSubCategories/FormFieldSubCategories';
+import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 
-export default function ({ data: { title } = {}, settings: { lang } } = {}) {
+export default function ({ data: { title } = {} } = {}) {
     return {
         fields: [
             {
@@ -20,7 +21,7 @@ export default function ({ data: { title } = {}, settings: { lang } } = {}) {
                 component: FormFieldLangs,
                 name: 'lang',
                 schema: {
-                    langs: ['ua', 'ru']
+                    langs: ['ru', 'ua']
                 },
                 validators: [
                     {
@@ -34,12 +35,23 @@ export default function ({ data: { title } = {}, settings: { lang } } = {}) {
             },
             {
                 component: FormFieldInput,
-                name: `${lang}_name`,
+                name: 'name',
+                valueLangStructure: 'depend',
                 schema: {
                     label: 'Название'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните название категории' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'alias',
+                schema: {
+                    label: 'Alias'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните alias' } }
                 ]
             },
             {
@@ -51,8 +63,14 @@ export default function ({ data: { title } = {}, settings: { lang } } = {}) {
                 }
             },
             {
-                component: FormFieldFeaturesSubCategory,
-                name: `${lang}_subCategory`
+                component: FormFieldSubCategories,
+                name: 'subCategory',
+                valueLangStructure: [{
+                    name: 'depend',
+                    alias: 'notDepend',
+                    positionIndex: 'notDepend',
+                    id: 'notDepend'
+                }]
             },
             {
                 component: FormFieldCheckbox,

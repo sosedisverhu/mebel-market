@@ -36,12 +36,23 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: `${lang}_name`,
+                name: 'name',
+                valueLangStructure: 'depend',
                 schema: {
                     label: 'Название'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните название товара' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'alias',
+                schema: {
+                    label: 'Alias'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните alias' } }
                 ]
             },
             {

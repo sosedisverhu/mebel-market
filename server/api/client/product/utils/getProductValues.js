@@ -6,11 +6,11 @@ const VALUES = [
     'avatar',
     'files',
     'hidden',
-    'views',
     'date',
     'price',
     'categoryId',
-    'subCategoryId'
+    'subCategoryId',
+    'alias'
 ];
 
 export default function getProductValues (product) {

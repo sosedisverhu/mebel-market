@@ -1,5 +1,5 @@
 export default function getCategory (body) {
-    const { texts, hidden, id, positionIndex } = body;
+    const { texts, hidden, id, positionIndex, alias } = body;
 
-    return { texts, hidden, id, positionIndex };
+    return { texts, hidden, id, positionIndex, alias };
 }

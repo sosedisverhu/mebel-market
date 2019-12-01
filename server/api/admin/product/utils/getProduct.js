@@ -1,5 +1,5 @@
 export default function getProduct (body) {
-    const { id, texts, avatar, files, hidden, views, date, price, categoryId, subCategoryId } = body;
+    const { id, texts, avatar, files, hidden, date, price, categoryId, subCategoryId, alias } = body;
 
     return {
         id,
@@ -7,10 +7,10 @@ export default function getProduct (body) {
         avatar,
         files,
         hidden,
-        views,
         date,
         price,
         categoryId,
-        subCategoryId
+        subCategoryId,
+        alias
     };
 }
