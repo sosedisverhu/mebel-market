@@ -19,8 +19,8 @@ class Article extends Component {
     render () {
         const { langMap } = this.props;
         const text = propOr('articles', {}, langMap);
-        const id = this.props.match.params.id - 1;
-        const article = text.sections[id];
+        const articleId = this.props.match.params.id - 1;
+        const article = text.sections[articleId];
 
         return (
             <section className={styles.article}>
