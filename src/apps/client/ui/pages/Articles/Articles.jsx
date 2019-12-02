@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
-import styles from './Articles.css';
-
 import Pagination from '../../components/Pagination/Pagination.jsx';
+import styles from './Articles.css';
 
 const mapStateToProps = ({ application }) => {
     return {

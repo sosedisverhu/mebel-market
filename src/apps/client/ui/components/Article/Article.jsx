@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-
+import { withRouter } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
-
 import styles from './Article.css';
-import { withRouter, matchPath } from 'react-router-dom';
 
 const mapStateToProps = ({ application }) => {
     return {
-        langMap: application.langMap,
-        lang: application.lang
+        langMap: application.langMap
     };
 };
 
 class Article extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired
+        langMap: PropTypes.object.isRequired
     };
 
     render () {
-        const { langMap, lang } = this.props;
+        const { langMap } = this.props;
         const text = propOr('articles', {}, langMap);
-
         const id = this.props.match.params.id - 1;
         const article = text.sections[id];
 
