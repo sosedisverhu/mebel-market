@@ -7,7 +7,7 @@ import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
 
-export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {}, settings: { lang } } = {}) {
+export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
     return {
         fields: [
             {

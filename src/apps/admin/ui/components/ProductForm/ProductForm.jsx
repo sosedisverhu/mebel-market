@@ -183,7 +183,7 @@ class ProductForm extends Component {
     };
 
     render () {
-        const { lang, categoryHidden } = this.state;
+        const { categoryHidden } = this.state;
 
         return <div>
             <Form
@@ -195,8 +195,7 @@ class ProductForm extends Component {
                         categoriesOptions: this.categoriesOptions,
                         subCategoriesOptions: this.subCategoriesOptions,
                         categoryHidden
-                    },
-                    settings: { lang }
+                    }
                 })}
                 onChange={this.handleChange}
                 onSubmit={this.handleSubmit}
