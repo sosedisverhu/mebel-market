@@ -47,7 +47,7 @@
 
 .leftArrow,
 .rightArrow {
-    background: url('/src/apps/client/ui/components/Pagination/img/arrow.svg') no-repeat;
+    background: url('./img/arrow.svg');
     width: 12px;
     height: 18px;
     cursor: pointer;

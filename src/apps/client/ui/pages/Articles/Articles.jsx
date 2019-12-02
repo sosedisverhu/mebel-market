@@ -22,7 +22,7 @@ class Articles extends Component {
         postsPerPage: 6
     }
 
-    paginate = (pageNumber) => this.setState({currentPage: Number(pageNumber.target.id)});
+    paginate = pageNumber => this.setState({ currentPage: Number(pageNumber.target.id) });
 
     render () {
         const { langMap } = this.props;
@@ -34,13 +34,13 @@ class Articles extends Component {
 
         const previousPage = (pageNumber) => {
             if (currentPage > 1) {
-                this.setState({currentPage: Number(pageNumber.target.id) - 1});
+                this.setState({ currentPage: Number(pageNumber.target.id) - 1 });
             }
         };
 
         const nextPage = (pageNumber) => {
             if (currentPage < text.sections.length / postsPerPage) {
-                this.setState({currentPage: Number(pageNumber.target.id) + 1});
+                this.setState({ currentPage: Number(pageNumber.target.id) + 1 });
             }
         };
 
