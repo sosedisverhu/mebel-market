@@ -30,6 +30,8 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
@@ -208,6 +210,7 @@ class ProductsPage extends Component {
     };
 
     state = {
+        loading: true,
         activeProductCategory: DEFAULT_ACTIVE_CATEGORY,
         productFormShowed: false,
         categoryFormShowed: false,
@@ -225,6 +228,7 @@ class ProductsPage extends Component {
         ])
             .then(() => {
                 this.setState({
+                    loading: false,
                     productsCategories: this.props.categories,
                     activeProductCategory: this.props.categories[0] || DEFAULT_ACTIVE_CATEGORY,
                     products: this.getCategoryProducts(this.props.categories[0])
@@ -367,12 +371,19 @@ class ProductsPage extends Component {
     renderTable = () => {
         const { classes } = this.props;
         const {
+            loading,
             activeProductCategory,
             editableProduct,
             productFormShowed,
             productsCategories,
             products
         } = this.state;
+
+        if (loading) {
+            return <div className={classes.loader}>
+                <CircularProgress/>
+            </div>;
+        }
 
         if (!productsCategories.length) {
             return <div>
