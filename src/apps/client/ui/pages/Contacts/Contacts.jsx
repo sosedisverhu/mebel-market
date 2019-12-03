@@ -7,15 +7,88 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Contacts.css';
 
+import mapStyles from './map';
+
 const mapStateToProps = ({ application }) => {
     return {
         langMap: application.langMap
     };
 };
 
+const COORDS_MARKER = [50.42812164667449, 30.357138111679724];
+const directionsRenderer = new window.google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#000000", strokeWeight: 8 } });
+const directionsService = new window.google.maps.DirectionsService();
+
 class Contacts extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired
+    };
+
+    state = {
+        latitude: COORDS_MARKER[0],
+        longitude: COORDS_MARKER[1]
+    };
+
+    componentDidMount () {
+        this.setMap();
+    }
+
+    setMap () {
+        const mapOptions = {
+            zoom: 17,
+            center: new window.google.maps.LatLng(50.42922841856509, 30.359888593853466),
+            styles: mapStyles,
+            fullscreenControl: false,
+            mapTypeControl: false
+        };
+        const map = new window.google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsRenderer.setMap(map);
+        const marker = new window.google.maps.Marker({
+            position: { lat: COORDS_MARKER[0], lng: COORDS_MARKER[1] },
+            icon: {
+                url: '/src/apps/client/ui/pages/Contacts/img/placemark.png',
+                labelOrigin: new window.google.maps.Point(10, -10)
+            }
+        });
+
+        marker.setMap(map);
+    }
+
+    handleGetDirections = (e) => {
+        e.preventDefault();
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        const { latitude, longitude } = position.coords;
+                        this.setState({
+                            latitude,
+                            longitude
+                        }, () => this.calculateAndDisplayRoute(directionsService, directionsRenderer));
+                    },
+                    () => {
+                        const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
+                        win.focus();
+                    });
+            } else {
+                const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
+                win.focus();
+            }
+    }
+
+    calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
+        const { latitude, longitude } = this.state;
+        const origin = { lat: latitude, lng: longitude };
+        directionsService.route({
+            origin,
+            destination: { lat: COORDS_MARKER[0], lng: COORDS_MARKER[1] },
+            travelMode: 'DRIVING'
+        }, function (response, status) {
+            if (status === 'OK') {
+                directionsRenderer.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
     };
 
     render () {
@@ -24,30 +97,37 @@ class Contacts extends Component {
 
         return (
             <section className={styles.contacts}>
-                <h1 className={styles.title}>{text.title}</h1>
-                <div className={styles.info}>
-                    <div className={styles.phonesContainer}>
-                        <h2 className={styles.infoTitle}>{text.phonesTitle}</h2>
-                        <a className={styles.infoText} href="tel:+380443557720">(044) 355-77-20</a>
-                        <a className={styles.infoText} href="tel:+380500511000">(050) 051-10-00</a>
-                        <a className={styles.infoText} href="tel:+380679000522">(067) 900-05-22</a>
-                    </div>
-                    <div className={styles.emailScheduleContainer}>
-                        <div className={styles.emailContainer}>
-                            <h2 className={styles.infoTitle}>{text.emailTitle}</h2>
-                            <a className={styles.infoText} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>
+                <div className={styles.contactsContainer}>
+                    <h1 className={styles.title}>{text.title}</h1>
+                    <div className={styles.info}>
+                        <div className={styles.phonesContainer}>
+                            <h2 className={styles.infoTitle}>{text.phonesTitle}</h2>
+                            <a className={styles.infoText} href="tel:+380443557720">(044) 355-77-20</a>
+                            <a className={styles.infoText} href="tel:+380500511000">(050) 051-10-00</a>
+                            <a className={styles.infoText} href="tel:+380679000522">(067) 900-05-22</a>
                         </div>
-                        <div className={styles.scheduleContainer}>
-                            <h2 className={styles.infoTitle}>{text.scheduleTitle}</h2>
-                            <p className={styles.infoText}>{text.scheduleDays} 10:00 - 19:00</p>
+                        <div className={styles.emailScheduleContainer}>
+                            <div className={styles.emailContainer}>
+                                <h2 className={styles.infoTitle}>{text.emailTitle}</h2>
+                                <a className={styles.infoText} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>
+                            </div>
+                            <div className={styles.scheduleContainer}>
+                                <h2 className={styles.infoTitle}>{text.scheduleTitle}</h2>
+                                <p className={styles.infoText}>{text.scheduleDays} 10:00 - 19:00</p>
+                            </div>
+                        </div>
+                        <div className={styles.addressContainer}>
+                            <h2 className={styles.infoTitle}>{text.addressTitle}</h2>
+                            <p className={styles.infoText}>{text.addressText}</p>
                         </div>
                     </div>
-                    <div className={styles.addressContainer}>
-                        <h2 className={styles.infoTitle}>{text.addressTitle}</h2>
-                        <p className={styles.infoText}>{text.addressText}</p>
+                    <div className={styles.mapContainer}>
+                        <button className={styles.getDirectionsBtn} onClick={this.handleGetDirections}>
+                            {text.getDirectionsBtn}
+                        </button>
+                        <div className={styles.map} id='map'/>
                     </div>
                 </div>
-                <div className={styles.map} />
             </section>
         );
     }

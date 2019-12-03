@@ -11,6 +11,7 @@ export default {
         scheduleTitle: 'График работы:',
         scheduleDays: 'ПН-ВС:',
         addressTitle: 'Наш адрес:',
-        addressText: 'Киев, ул. Большая Окружная, 4'
+        addressText: 'Киев, ул. Большая Окружная, 4',
+        getDirectionsBtn: 'Проложить маршрут'
     }
 };

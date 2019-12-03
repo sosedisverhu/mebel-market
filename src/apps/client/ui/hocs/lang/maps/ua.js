@@ -11,6 +11,7 @@ export default {
         scheduleTitle: 'Графік роботи:',
         scheduleDays: 'ПН-НД:',
         addressTitle: 'Наша адреса:',
-        addressText: 'Київ, вул. Велика Окружна, 4'
+        addressText: 'Київ, вул. Велика Окружна, 4',
+        getDirectionsBtn: 'Прокласти маршрут'
     }
 };
