@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Contacts.css';
-
 import mapStyles from './map';
 
 const mapStateToProps = ({ application }) => {
@@ -16,8 +15,8 @@ const mapStateToProps = ({ application }) => {
 };
 
 const COORDS_MARKER = [50.42812164667449, 30.357138111679724];
-const directionsRenderer = new window.google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#000000", strokeWeight: 8 } });
-const directionsService = new window.google.maps.DirectionsService();
+let directionsRenderer;
+let directionsService;
 
 class Contacts extends Component {
     static propTypes = {
@@ -34,6 +33,8 @@ class Contacts extends Component {
     }
 
     setMap () {
+        directionsRenderer = new window.google.maps.DirectionsRenderer({ suppressMarkers: true, polylineOptions: { strokeColor: '#000000', strokeWeight: 8 } });
+        directionsService = new window.google.maps.DirectionsService();
         const mapOptions = {
             zoom: 17,
             center: new window.google.maps.LatLng(50.42922841856509, 30.359888593853466),
@@ -52,27 +53,28 @@ class Contacts extends Component {
         });
 
         marker.setMap(map);
+
+        this.getDirections;
     }
 
-    handleGetDirections = (e) => {
-        e.preventDefault();
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    position => {
-                        const { latitude, longitude } = position.coords;
-                        this.setState({
-                            latitude,
-                            longitude
-                        }, () => this.calculateAndDisplayRoute(directionsService, directionsRenderer));
-                    },
-                    () => {
-                        const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
-                        win.focus();
-                    });
-            } else {
-                const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
-                win.focus();
-            }
+    getDirections = (e) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    this.setState({
+                        latitude,
+                        longitude
+                    }, () => this.calculateAndDisplayRoute(directionsService, directionsRenderer));
+                },
+                () => {
+                    const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
+                    win.focus();
+                });
+        } else {
+            const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
+            win.focus();
+        }
     }
 
     calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
@@ -122,7 +124,7 @@ class Contacts extends Component {
                         </div>
                     </div>
                     <div className={styles.mapContainer}>
-                        <button className={styles.getDirectionsBtn} onClick={this.handleGetDirections}>
+                        <button className={styles.getDirectionsBtn} onClick={this.getDirections}>
                             {text.getDirectionsBtn}
                         </button>
                         <div className={styles.map} id='map'/>
