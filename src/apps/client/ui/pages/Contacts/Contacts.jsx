@@ -56,7 +56,7 @@ class Contacts extends Component {
         this.getDirections;
     }
 
-    getDirections = (e) => {
+    getDirections = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 position => {
