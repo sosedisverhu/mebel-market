@@ -1,66 +1,77 @@
-@value limeGreen from '../../../../../css/colors.css';
-@value lightGreyBasic from '../../../../../css/colors.css';
+@value gray6 from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
 
-.style strong{
-    font-family: 'Gotham Medium', 'Arial Black';
+.style strong {
+    font-family: RoundedElegance;
 }
 
-.style em{
+.style em {
     font-style: italic;
-    font-family: 'Gotham Italic', Arial;
+    font-family: RoundedElegance;
     font-style: italic;
 }
 
-.style pre{
+.style pre {
     display: inline-block;
-    background-color: lightGreyBasic;
 }
 
-.style ul, .style ol{
+.style ul,
+.style ol {
     padding-left: 20px;
-    margin-bottom: 15px;
-    font-family: 'Gotham Pro', Arial;
+    margin: 20px 0 15px 0;
+    font-family: RoundedElegance;
     position: relative;
-    z-index: 11;
 }
 
-.style ul li, .style ol li{
-    padding: 5px 0;
+.style ul li,
+.style ol li {
+    margin: 15px 0;
+    font: 16px/18px RoundedElegance;
+    color: gray6;
 }
 
-.style ul{
-    list-style: square outside;
+.style ul li {
+    position: relative;
+    padding-left: 5px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        margin-top: -5px;
+        background: black;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
 }
 
-.style ol{
+.style ol {
     list-style: decimal outside;
 }
 
-.style h1, h2, h3, h4, h5, h6  { font-weight: bolder }
-.style h1              { font-size: 2em; margin: .67em 0; line-height: normal }
-.style h2              { font-size: 1.5em; margin: .75em 0; line-height: normal }
-.style h3              { font-size: 1.17em; margin: .83em 0; line-height: normal }
-.style h3              { font-size: 1em; margin: 1em 0; line-height: normal }
-.style h5              { font-size: .83em; margin: 1.5em 0; line-height: normal }
-.style h6              { font-size: .75em; margin: 1.67em 0; line-height: normal }
+.style h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: RoundedElegance;
+    color: black;
+    margin: 30px 0 15px 0;
+}
+
+.style h4 {
+    font-size: 18px;
+    line-height: 21px;
+}
 
 .style blockquote {
-    overflow: hidden;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
-    margin-left: 0;
-    font-style: italic;
-    border-left: 5px solid limeGreen;
-    margin-bottom: 15px;
-
     p {
-        display: block;
-        font-size: 1em;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        line-height: 1.4em;
-        font-family: 'Gotham Italic', Arial;
-        font-style: italic;
+        margin: 25px 0;
+        font: 16px/18px RoundedElegance;
+        color: gray6;
     }
 }
 
@@ -115,34 +126,42 @@
 }
 
 .style p {
-    font-family: 'Gotham Light', Arial;
+    font-family: RoundedElegance;
     letter-spacing: 1px;
     text-align: left;
     font-size: 16px;
     line-height: 19px;
-    color: #000000;
+    color: gray6;
     position: relative;
-    z-index: 11;
-    margin: 15px 0;
+    margin-top: 15px;
 
-    @media (max-width: 780px){
+    @media (max-width: 780px) {
         font-size: 14px;
         line-height: 17px;
     }
 }
 
 .style a {
-    font-family: 'Gotham Medium', 'Arial Black';
-    color: limeGreen;
-    transition: .2s ease;
+    font-family: RoundedElegance;
+    color: gray6;
+    transition: 0.2s ease;
     opacity: 0.7;
 }
 
-.style a:hover{
+.style a:hover {
     opacity: 1;
 }
 
 .style * {
     position: relative;
-    z-index: 11;
+}
+
+.style .media {
+    margin: 15px auto 30px auto;
+
+    @media (max-width: 1024px) {
+        width: calc(100% + 32px);
+        position: relative;
+        left: -16px;
+    }
 }

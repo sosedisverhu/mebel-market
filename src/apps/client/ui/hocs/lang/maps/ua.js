@@ -3,5 +3,8 @@
 export default {
     main: {
         slider: 'Допомогти з вибором'
+    },
+    articlePage: {
+        year: 'року'
     }
 };

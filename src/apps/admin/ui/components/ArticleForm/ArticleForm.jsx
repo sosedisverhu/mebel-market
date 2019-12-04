@@ -17,7 +17,7 @@ const NEWS_VALUES = ['name', 'hidden'];
 
 const mapDispatchToProps = (dispatch) => ({
     saveArticle: payload => dispatch(saveArticle(payload)),
-    editArticle: payload => dispatch(editArticle(payload)),
+    editArticle: payload => dispatch(editArticle(payload))
 });
 
 class ArticleForm extends Component {
@@ -39,7 +39,6 @@ class ArticleForm extends Component {
         const { article } = this.props;
         const ru = pathOr(['texts', 'ru'], '', article);
         const ua = pathOr(['texts', 'ua'], '', article);
-
 
         this.initialValues = {
             date: article.date,
@@ -97,7 +96,7 @@ class ArticleForm extends Component {
         const articlePayload = this.getArticlePayload(values);
         const { editArticle, saveArticle, onDone } = this.props;
 
-        (this.id ? editArticle({ ...articlePayload, id: this.id }) : saveArticle(articlePayload))            
+        (this.id ? editArticle({ ...articlePayload, id: this.id }) : saveArticle(articlePayload))
             .then(() => {
                 onDone();
             });
