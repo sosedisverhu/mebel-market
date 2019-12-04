@@ -10,18 +10,17 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ErrorIcon from '@material-ui/icons/Error';
 import { withStyles } from '@material-ui/core/styles';
 
+import getLangsValuesForArray from './utils/getLangsValuesForArray';
+import getLangsValuesForObject from './utils/getLangsValuesForObject';
+
 import noop from '@tinkoff/utils/function/noop';
 import isEmpty from '@tinkoff/utils/is/empty';
 import isObject from '@tinkoff/utils/is/plainObject';
 import isArray from '@tinkoff/utils/is/array';
 import isString from '@tinkoff/utils/is/string';
 import forEach from '@tinkoff/utils/array/each';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import isNull from '@tinkoff/utils/is/nil';
-import pathOr from '@tinkoff/utils/object/pathOr';
 import any from '@tinkoff/utils/array/any';
 import clone from '@tinkoff/utils/clone';
-import forEachObj from '@tinkoff/utils/object/each';
 
 import validatorsList from './validators';
 
@@ -117,133 +116,34 @@ class Form extends Component {
 
         const { langs } = this.props;
         const { values, lang: currentLang } = this.state;
+        const changesByLang = {};
 
-        if (isArray(field.valueLangStructure) && isArray(value)) {
-            if (isString(field.valueLangStructure[0])) {
-                const changesByLang = {};
-
-                value.forEach((valueItem, i) => {
-                    langs.forEach(lang => {
-                        if (currentLang !== lang) {
-                            if (!changesByLang[`${lang}_${field.name}`]) {
-                                changesByLang[`${lang}_${field.name}`] = [];
-                            }
-
-                            if (field.valueLangStructure[0] === 'depend') {
-                                changesByLang[`${lang}_${field.name}`][i] = pathOr([`${lang}_${field.name}`, i], '', values);
-                            } else {
-                                changesByLang[`${lang}_${field.name}`][i] = valueItem;
-                            }
-                        }
-                    }, {});
-                }, {});
-
-                return changesByLang;
-            }
-
-            if (isObject(field.valueLangStructure[0])) {
-                const changesByLang = {};
-
-                value.forEach((valueItem, i) => {
-                    const valueItemId = valueItem.id;
-                    let valueItemIndex = null;
-
-                    langs.forEach(lang => {
-                        if (currentLang !== lang) {
-                            if (isNull(valueItemIndex)) {
-                                valueItemIndex = findIndex(({ id }) => id === valueItemId, values[`${lang}_${field.name}`]);
-                                valueItemIndex = valueItemIndex === -1 ? i : valueItemIndex;
-                            }
-
-                            forEachObj((propValue, propName) => {
-                                if (!changesByLang[`${lang}_${field.name}`]) {
-                                    changesByLang[`${lang}_${field.name}`] = [];
-                                }
-
-                                if (propValue === 'depend') {
-                                    changesByLang[`${lang}_${field.name}`][i] = {
-                                        ...changesByLang[`${lang}_${field.name}`][i],
-                                        [propName]: pathOr([`${lang}_${field.name}`, valueItemIndex, propName], '', values)
-                                    };
-                                } else {
-                                    if (isArray(propValue) && isArray(valueItem[propName])) {
-                                        const resultArr = [];
-
-                                        if (!changesByLang[`${lang}_${field.name}`][i][propName]) {
-                                            changesByLang[`${lang}_${field.name}`][i][propName] = [];
-                                        }
-
-                                        if (propValue[0] === 'depend') {
-                                            valueItem[propName].forEach((deepItemValue, index) => {
-                                                resultArr.push(pathOr([`${lang}_${field.name}`, valueItemIndex, propName, index], '', values));
-                                            });
-                                        } else {
-                                            valueItem[propName].forEach((deepItemValue) => {
-                                                resultArr.push(deepItemValue);
-                                            });
-                                        }
-
-                                        changesByLang[`${lang}_${field.name}`][i] = {
-                                            ...changesByLang[`${lang}_${field.name}`][i],
-                                            [propName]: resultArr
-                                        };
-                                    } else {
-                                        changesByLang[`${lang}_${field.name}`][i] = {
-                                            ...changesByLang[`${lang}_${field.name}`][i],
-                                            [propName]: valueItem[propName]
-                                        };
-                                    }
-                                }
-                            }, field.valueLangStructure[0]);
-                        }
-                    }, {});
-                }, {});
-
-                if (!value.length) {
-                    langs.forEach(lang => {
-                        changesByLang[`${lang}_${field.name}`] = [];
-                    });
+        langs.forEach(lang => {
+            if (currentLang !== lang) {
+                if (isArray(field.valueLangStructure) && isArray(value)) {
+                    return getLangsValuesForArray(
+                        [`${lang}_${field.name}`],
+                        [`${lang}_${field.name}`],
+                        value,
+                        field.valueLangStructure,
+                        values, changesByLang
+                    );
                 }
 
-                return changesByLang;
+                if (isObject(field.valueLangStructure) && isObject(value)) {
+                    return getLangsValuesForObject(
+                        [`${lang}_${field.name}`],
+                        [`${lang}_${field.name}`],
+                        value,
+                        field.valueLangStructure,
+                        values,
+                        changesByLang
+                    );
+                }
             }
-        }
+        }, {});
 
-        if (isObject(field.valueLangStructure) && isObject(value)) {
-            const changesByLang = {};
-
-            value.forEach((valueItem, i) => {
-                langs.forEach(lang => {
-                    let changes = {};
-
-                    if (currentLang !== lang) {
-                        forEachObj((propValue, propName) => {
-                            if (!changesByLang[`${lang}_${field.name}`]) {
-                                changesByLang[`${lang}_${field.name}`] = [];
-                            }
-
-                            if (propValue === 'depend') {
-                                changesByLang[`${lang}_${field.name}`][i] = {
-                                    ...changesByLang[`${lang}_${field.name}`][i],
-                                    [propName]: pathOr([`${lang}_${field.name}`, i, propName], '', values)
-                                };
-                            } else {
-                                changesByLang[`${lang}_${field.name}`][i] = {
-                                    ...changesByLang[`${lang}_${field.name}`][i],
-                                    [propName]: valueItem[propName]
-                                };
-                            }
-                        }, field.valueLangStructure);
-                    }
-
-                    return changes;
-                }, {});
-            }, {});
-
-            return changesByLang;
-        }
-
-        return {};
+        return changesByLang;
     };
 
     createField = (field, i) => {
