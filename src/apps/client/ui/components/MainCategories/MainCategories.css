@@ -1,0 +1,85 @@
+
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
+
+.categoriesWrap {
+    background: gray5;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 16px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1240px;
+    box-sizing: border-box;
+
+    @media (max-width: 825px) {
+        justify-content: center;
+        padding-top: 0;
+    }
+}
+
+.category {
+    max-width: 605px;
+    width: calc(50% - 15px);
+    position: relative;
+    margin-top: 30px;
+
+    @media (max-width: 825px) {
+        width: 100%;
+    }
+}
+
+.imgWrap {    
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 400px) {
+        height: 187px;
+    }
+}
+
+.img {
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    font: 24px/28px RoundedElegance;
+    color: black;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    width: 393px;
+    box-sizing: border-box;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    background: whiteBasic;
+    justify-content: space-between;
+
+    &:after {
+        content: '';
+        width: 30px;
+        height: 3px;
+        background: black;
+        padding-left: 18px;
+    }
+
+    @media (max-width: 870px) and (min-width: 826px) {
+        width: 100%;
+    }
+
+    @media (max-width: 455px) {
+        font-size: 18px;
+        line-height: 21px;
+        width: 80%;
+        min-width: 270px;
+        padding: 5px 10px;
+    }
+}

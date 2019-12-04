@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint src server --ext .js,.jsx",
     "lint-fix": "eslint src server --ext .js,.jsx --fix",
+    "seeds": "node server/seeds",
     "static": "prun static",
     "server": "prun server",
     "build:static:dev": "prun build:static:dev",
@@ -71,6 +72,7 @@
     "find-package": "^1.0.0",
     "forever": "0.15.3",
     "json-loader": "^0.5.7",
+    "mongo-seeding": "^3.4.0-alpha.1",
     "optimize-js-plugin": "0.0.4",
     "postcss-at-rules-variables": "^0.1.6",
     "postcss-calc": "^6.0.1",
