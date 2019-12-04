@@ -1,1 +1,100 @@
 @value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
+
+.root {
+    background: gray5;
+    padding-bottom: 30px;
+}
+
+.articleWrap {
+    background: whiteBasic;
+}
+
+.article {    
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 30px 16px;
+    box-sizing: content-box;
+    position: relative;
+
+    @media (max-width: 600px) {
+        padding-top: 20px;
+    }
+}
+
+.title {
+    font: 24px/28px RoundedElegance;
+    color: black;
+    padding-right: 440px;
+    position: relative;
+    display: inline-block;
+
+    &:after {
+        content: '';
+        width: 190px;
+        height: 2px;
+        background: black;
+        position: absolute;
+        top: 13px;    
+        right: 200px;
+    }    
+
+    @media (max-width: 900px) {
+        padding: 0 170px 10px 0;
+
+        &:after {
+            left: 0;
+            bottom: 0;
+            top: auto;
+        }
+    }
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+        line-height: 23px;
+        padding: 0;
+
+        &:after {
+            display: none;
+        }
+    }
+}
+
+.date {
+    font: 14px/16px RoundedElegance;
+    position: absolute;
+    right: 16px;
+    top: 36px;
+    overflow: hidden;
+
+    @media (max-width: 600px) {
+        position: relative;
+        text-align: right;
+        right: auto;
+        top: auto;
+        margin-top: 10px;
+
+        &:after {
+            content: '';
+            width: 190px;
+            height: 2px;
+            background: black;
+            position: absolute;
+            top: 50%;    
+            margin-top: -1px;
+            left: 0;
+        }
+    }
+
+    @media (max-width: 390px) {
+        &:after {
+            left: auto;
+            right: 167px;
+        }
+    }
+}
+
+.content {
+    max-width: 900px;
+}

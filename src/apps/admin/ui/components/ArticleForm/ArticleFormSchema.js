@@ -84,7 +84,7 @@ export default function ({ data: { title } = {} } = {}) {
                 validators: [
                     { name: 'required', options: { text: 'Наполните контент' } }
                 ]
-            },            
+            },
             {
                 component: FormFieldDivider,
                 name: 'divider'

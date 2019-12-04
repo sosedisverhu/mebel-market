@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './ArticlePage.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import getDateFormatted from '../../../../../../utils/getDateFormatted';
+import getDateFormatted from '../../../../../../utils/getDateFormatted';
 import { withRouter, matchPath } from 'react-router-dom';
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -19,19 +19,15 @@ const mapStateToProps = ({ application, data }) => {
 
 class ArticlePage extends Component {
     static propTypes = {
-        // mediaWidth: PropTypes.number.isRequired,
-        // activeCategoryIndex: PropTypes.number.isRequired,
-        // setActiveCategoryIndex: PropTypes.func.isRequired,
-        // news: PropTypes.array.isRequired,
-        // categories: PropTypes.array.isRequired,
-        // location: PropTypes.object.isRequired,
-        // langRoute: PropTypes.string,
-        // lang: PropTypes.string.isRequired,
-        // langMap: PropTypes.object.isRequired
+        articles: PropTypes.array.isRequired,
+        langRoute: PropTypes.string,
+        lang: PropTypes.string.isRequired,
+        langMap: PropTypes.object.isRequired
     };
 
     static defaultProps = {
-        langRoute: ''
+        langRoute: '',
+        articles: []
     };
 
     constructor (...args) {
@@ -46,7 +42,7 @@ class ArticlePage extends Component {
         const { location: { pathname }, langRoute, articles } = props;
         const PRODUCT_PATH = `${langRoute}/articles/:alias`;
         const match = matchPath(pathname, { path: PRODUCT_PATH, exact: true });
-        const article = find(news => news.alias === match.params.alias, articles);
+        const article = find(articles => articles.alias === match.params.alias, articles);
         this.notFoundPage = !article;
 
         return {
@@ -57,19 +53,22 @@ class ArticlePage extends Component {
     render () {
         const { article } = this.state;
         const { langMap, lang } = this.props;
-        const text = propOr('news', {}, langMap);
+        const text = propOr('articlePage', {}, langMap);
 
         if (this.notFoundPage) {
-            return <div>Not Article</div>;
+            return <div>No Article</div>;
         }
 
-        return <section className={styles.newsContainer}>
-            <div className={styles.newsDate}>
-                {/* {getDateFormatted(article.date, lang)} */}
+        return <section className={styles.root}>
+            <div className={styles.articleWrap}>
+                <div className={styles.article}>
+                    <h1 className={styles.title}>{article.texts[lang].name}</h1>
+                    <div className={styles.date}>
+                        {getDateFormatted(article.date, lang) + ' ' + text.year}
+                    </div>
+                    <div className={styles.content}><StyleRenderer html={article.texts[lang].content} /></div>
+                </div>
             </div>
-            <div className={styles.newsTitle}>{article.texts[lang].name}</div>
-            <div className={styles.newsTitle}>{article.texts[lang].preview}</div>
-            <div className={styles.newsText}><StyleRenderer html={article.texts[lang].content} /></div>
         </section>;
     }
 }
