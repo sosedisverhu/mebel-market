@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
 
 import styles from './MainPage.css';
+import Slider from '../../components/Slider/Slider';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
+import MainCategories from '../../components/MainCategories/MainCategories';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -52,6 +54,7 @@ class MainPage extends Component {
 
         return (
             <div>
+                <Slider />
                 {labels.map(label => {
                     return (
                         <section key={label} className={styles.categorySection}>
@@ -59,6 +62,7 @@ class MainPage extends Component {
                             <ProductsSlider label={label} products={productsResult[label]} />
                         </section>);
                 })}
+                <MainCategories />
             </div>);
     }
 }

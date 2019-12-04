@@ -146,7 +146,7 @@
 
     &.active {
         &:before {
-            background: green !important;
+            background: green;
             transition: background 0.25s ease-in;
         }
     }
@@ -156,6 +156,12 @@
     .ellipse {
         &:before {
             background: gray3;
+        }
+
+        &.active {
+            &:before {
+                background: green;
+            }
         }
     }
 }

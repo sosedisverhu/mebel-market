@@ -5,7 +5,7 @@
 .categorySection {
     background: gray5;
 
-    &:nth-child(even) {
+    &:nth-child(odd) {
         background: whiteBasic; 
 
         .title {

@@ -2,12 +2,16 @@
 
 export default {
     product: {
-        labelTop: 'Хит'
+        labelTop: 'Хіт'
     },
     mainPage: {
-        top: 'Топ продаж',
-        discount: 'Акции',
-        new: 'Новинки'
+        top: 'Топ продажів',
+        discount: 'Акції',
+        new: 'Новинки',
+        bedsTitle: 'Ліжка',
+        mattressesTitle: 'Матраци',
+        furnitureTitle: 'М\'які меблі',
+        accessoriesTitle: 'Аксесуари для сну'
     },
     main: {
         slider: 'Допомогти з вибором'
