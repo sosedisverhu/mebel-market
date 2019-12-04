@@ -154,7 +154,7 @@ h6 {
 .style .media {
     margin: 15px auto 30px auto;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 600px) {
         width: calc(100% + 32px);
         position: relative;
         left: -16px;
