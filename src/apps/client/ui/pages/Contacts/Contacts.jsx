@@ -47,8 +47,7 @@ class Contacts extends Component {
         const marker = new window.google.maps.Marker({
             position: { lat: COORDS_MARKER[0], lng: COORDS_MARKER[1] },
             icon: {
-                url: '/src/apps/client/ui/pages/Contacts/img/placemark.png',
-                labelOrigin: new window.google.maps.Point(10, -10)
+                url: '/src/apps/client/ui/pages/Contacts/img/placemark.png'
             }
         });
 
