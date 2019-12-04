@@ -32,6 +32,7 @@ class ProductsSlider extends Component {
         let productsNumber = 4;
         if (widthWindow < 1361) productsNumber = 3;
         if (widthWindow < 1021) productsNumber = 2;
+        if (widthWindow < 760) productsNumber = 1; // TODO: переделать через application.media.width
 
         const productsPacks = splitEvery(productsNumber, products);
 
@@ -51,7 +52,7 @@ class ProductsSlider extends Component {
     handleArrowClick = (addValue) => {
         const { activeIndex } = this.state;
         this.setActiveIndex(activeIndex + addValue);
-    }
+    };
 
     render () {
         const { label } = this.props;
@@ -64,7 +65,7 @@ class ProductsSlider extends Component {
                     <div
                         className={styles.products}
                         ref={products => { this.products = products; }}
-                        style={{ left: left + 'px' }}>
+                        style={{ left }}>
                         {productsPacks.map((products, index) => {
                             return <div key={index} className={styles.productsPack}>
                                 {products.map(product => <Card key={product.id} product={product} />)}
