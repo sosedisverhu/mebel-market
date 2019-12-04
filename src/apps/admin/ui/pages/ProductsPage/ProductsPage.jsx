@@ -114,7 +114,8 @@ const materialStyles = theme => ({
     drawerPaper: {
         top: '0px',
         width: '400px',
-        position: 'relative'
+        position: 'relative',
+        minHeight: '100vh'
     },
     content: {
         flexGrow: 1,
@@ -244,16 +245,6 @@ class ProductsPage extends Component {
         this.setState({
             productFormShowed: true,
             editableProduct: product
-        });
-    };
-
-    handleProductFormClone = product => () => {
-        this.setState({
-            productFormShowed: true,
-            editableProduct: {
-                ...product,
-                id: null
-            }
         });
     };
 
@@ -409,7 +400,6 @@ class ProductsPage extends Component {
                 deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
                 filters={false}
                 onFormOpen={this.handleProductFormOpen}
-                onProductClone={this.handleProductFormClone}
                 isSmall
             />
             <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>

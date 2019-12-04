@@ -63,7 +63,6 @@ class AdminTable extends React.Component {
         headerText: PropTypes.string,
         deleteValueWarningTitle: PropTypes.string,
         deleteValuesWarningTitle: PropTypes.string,
-        onProductClone: PropTypes.func,
         onDelete: PropTypes.func,
         onFormOpen: PropTypes.func,
         onFiltersOpen: PropTypes.func,
@@ -278,9 +277,6 @@ class AdminTable extends React.Component {
                                             {tableCells.map((tableCell, i) => <TableCell key={i}>{tableCell.prop(value)}</TableCell>)}
                                             <TableCell padding='checkbox' align='right'>
                                                 <div className={classes.valueActions}>
-                                                    <IconButton onClick={this.props.onProductClone(value)}>
-                                                        <DublicateIcon/>
-                                                    </IconButton>
                                                     <IconButton onClick={this.props.onFormOpen(value)}>
                                                         <EditIcon/>
                                                     </IconButton>
