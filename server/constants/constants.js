@@ -7,3 +7,6 @@ export const DATABASE_URL = 'mongodb://localhost/mebel-market';
 
 export const PRODUCT_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
 export const PRODUCT_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
+
+export const COOKIE_BASKET_ID = 'mebel-market-basket-id';
+export const COOKIE_YEARS = 100;

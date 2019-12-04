@@ -13,6 +13,7 @@ import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
+import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import isNull from '@tinkoff/utils/is/nil';
@@ -79,6 +80,7 @@ class App extends Component {
             <Switch>
                 <Route exact path='/admin' component={MainPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
+                <Route exact path='/admin/orders' component={OrdersPage} />
             </Switch>
         </main>;
     }

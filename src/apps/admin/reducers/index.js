@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 
 import application from './application';
 import products from './products';
+import orders from './orders';
 
 const reducers = combineReducers({
     application,
-    products
+    products,
+    orders
 });
 
 export default reducers;
