@@ -7,5 +7,6 @@ export const DATABASE_URL = 'mongodb://localhost/mebel-market';
 
 export const PRODUCT_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
 export const PRODUCT_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
-export const NEWS_ITEM_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
-export const NEWS_ITEM_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
+export const EDITOR_FILE_NAME_REGEX = /editor-file/g;
+export const ARTICLES_ITEM_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
+export const ARTICLES_ITEM_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;

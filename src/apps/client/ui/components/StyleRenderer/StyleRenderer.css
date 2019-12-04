@@ -1,0 +1,148 @@
+@value limeGreen from '../../../../../css/colors.css';
+@value lightGreyBasic from '../../../../../css/colors.css';
+
+.style strong{
+    font-family: 'Gotham Medium', 'Arial Black';
+}
+
+.style em{
+    font-style: italic;
+    font-family: 'Gotham Italic', Arial;
+    font-style: italic;
+}
+
+.style pre{
+    display: inline-block;
+    background-color: lightGreyBasic;
+}
+
+.style ul, .style ol{
+    padding-left: 20px;
+    margin-bottom: 15px;
+    font-family: 'Gotham Pro', Arial;
+    position: relative;
+    z-index: 11;
+}
+
+.style ul li, .style ol li{
+    padding: 5px 0;
+}
+
+.style ul{
+    list-style: square outside;
+}
+
+.style ol{
+    list-style: decimal outside;
+}
+
+.style h1, h2, h3, h4, h5, h6  { font-weight: bolder }
+.style h1              { font-size: 2em; margin: .67em 0; line-height: normal }
+.style h2              { font-size: 1.5em; margin: .75em 0; line-height: normal }
+.style h3              { font-size: 1.17em; margin: .83em 0; line-height: normal }
+.style h3              { font-size: 1em; margin: 1em 0; line-height: normal }
+.style h5              { font-size: .83em; margin: 1.5em 0; line-height: normal }
+.style h6              { font-size: .75em; margin: 1.67em 0; line-height: normal }
+
+.style blockquote {
+    overflow: hidden;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+    margin-left: 0;
+    font-style: italic;
+    border-left: 5px solid limeGreen;
+    margin-bottom: 15px;
+
+    p {
+        display: block;
+        font-size: 1em;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        line-height: 1.4em;
+        font-family: 'Gotham Italic', Arial;
+        font-style: italic;
+    }
+}
+
+.style {
+    & :global {
+        .image img {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            padding: 5px 0;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.style {
+    & :global {
+        .image-style-align-left {
+            margin-right: 20px;
+            float: left;
+            width: 50%;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                float: none;
+                margin-right: 0;
+            }
+        }
+    }
+}
+.style {
+    & :global {
+        .image-style-align-right {
+            float: right;
+            margin-left: 20px;
+            width: 50%;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                float: none;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.style p {
+    font-family: 'Gotham Light', Arial;
+    letter-spacing: 1px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    position: relative;
+    z-index: 11;
+    margin: 15px 0;
+
+    @media (max-width: 780px){
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.style a {
+    font-family: 'Gotham Medium', 'Arial Black';
+    color: limeGreen;
+    transition: .2s ease;
+    opacity: 0.7;
+}
+
+.style a:hover{
+    opacity: 1;
+}
+
+.style * {
+    position: relative;
+    z-index: 11;
+}
