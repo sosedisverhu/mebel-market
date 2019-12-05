@@ -32,39 +32,40 @@ class Articles extends Component {
         }, 0);
     });
 
+    previousPage = (pageNumber) => {
+        const { currentPage } = this.state;
+        if (currentPage > 1) {
+            this.setState({ currentPage: Number(pageNumber.target.id) - 1 }, () => {
+                setTimeout(() => {
+                    window.scroll({ top: 10000000, left: 0 });
+                    setTimeout(() => {
+                        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    }, 50);
+                }, 0);
+            });
+        }
+    };
+
+    nextPage = (pageNumber) => {
+        const { currentPage, postsPerPage } = this.state;
+        if (currentPage < propOr('articles', {}, this.props.langMap).sections.length / postsPerPage) {
+            this.setState({ currentPage: Number(pageNumber.target.id) + 1 }, () => {
+                setTimeout(() => {
+                    window.scroll({ top: 10000000, left: 0 });
+                    setTimeout(() => {
+                        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                    }, 50);
+                }, 0);
+            });
+        }
+    };
+
     render () {
         const { langMap } = this.props;
         const { currentPage, postsPerPage } = this.state;
         const text = propOr('articles', {}, langMap);
-
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-        const previousPage = (pageNumber) => {
-            if (currentPage > 1) {
-                this.setState({ currentPage: Number(pageNumber.target.id) - 1 }, () => {
-                    setTimeout(() => {
-                        window.scroll({ top: 10000000, left: 0 });
-                        setTimeout(() => {
-                            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-                        }, 50);
-                    }, 0);
-                });
-            }
-        };
-
-        const nextPage = (pageNumber) => {
-            if (currentPage < text.sections.length / postsPerPage) {
-                this.setState({ currentPage: Number(pageNumber.target.id) + 1 }, () => {
-                    setTimeout(() => {
-                        window.scroll({ top: 10000000, left: 0 });
-                        setTimeout(() => {
-                            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-                        }, 50);
-                    }, 0);
-                });
-            }
-        };
 
         return (
             <section className={styles.articles}>
@@ -84,17 +85,17 @@ class Articles extends Component {
                             </div>
                         </div>
                     )}
-                    {text.sections.length > postsPerPage &&
-                        <Pagination
-                            postsPerPage={postsPerPage}
-                            totalPosts={text.sections.length}
-                            currentPage={currentPage}
-                            paginate={this.paginate}
-                            previousPage={previousPage}
-                            nextPage={nextPage}
-                        />
-                    }
                 </div>
+                {text.sections.length > postsPerPage &&
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={text.sections.length}
+                        currentPage={currentPage}
+                        paginate={this.paginate}
+                        previousPage={this.previousPage}
+                        nextPage={this.nextPage}
+                    />
+                }
             </section>
         );
     }

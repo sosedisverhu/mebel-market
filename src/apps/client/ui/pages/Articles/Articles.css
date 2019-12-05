@@ -4,7 +4,10 @@
 @value black1 from '../../../../../css/colors.css';
 
 .articles {
+    position: relative;
+    height: 100%;
     background-color: gray3;
+    padding-bottom: 81px;
 }
 
 .articlesContainer {
