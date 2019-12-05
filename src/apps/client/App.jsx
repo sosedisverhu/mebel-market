@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../../../client/vendor';
+import '../../css/main.css';
+
 import media from './ui/hocs/media/media.jsx';
 import lang from './ui/hocs/lang/lang.jsx';
 
 import { connect } from 'react-redux';
-
-import '../../../client/vendor';
-import '../../css/main.css';
 
 import Header from './ui/components/Header/Header.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
@@ -15,6 +15,8 @@ import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
 import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
 import Partners from './ui/pages/Partners/Partners.jsx';
+import Articles from './ui/pages/Articles/Articles.jsx';
+import Article from './ui/components/Article/Article.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
@@ -68,6 +70,8 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
+                        <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
+                        <Route exact path={`/:lang(${langs})?/articles/:id`} render={this.renderComponent(Article)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
                         <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
