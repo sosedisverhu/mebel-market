@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../../../client/vendor';
+import '../../css/main.css';
+
 import media from './ui/hocs/media/media.jsx';
 import lang from './ui/hocs/lang/lang.jsx';
 
 import { connect } from 'react-redux';
 
-import '../../../client/vendor';
-import '../../css/main.css';
-
 import Header from './ui/components/Header/Header.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
+import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
 import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
+import Partners from './ui/pages/Partners/Partners.jsx';
+import Articles from './ui/pages/Articles/Articles.jsx';
+import Article from './ui/components/Article/Article.jsx';
 import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
+import Contacts from './ui/pages/Contacts/Contacts.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import getLangRouteParts from './utils/getLangRouteParts';
 
-import { DEFAULT_LANG, LANGS } from './constants/constants';
+import { LANGS } from './constants/constants';
 
 import styles from './App.css';
 
@@ -46,7 +51,7 @@ class App extends Component {
         langRoute: ''
     };
 
-    renderComponent = Component => ({ match: { params: { lang: langUrl = DEFAULT_LANG }, path }, location: { pathname } }) => {
+    renderComponent = Component => ({ match: { params: { lang: langUrl = this.props.lang }, path }, location: { pathname } }) => {
         if (typeof window === 'undefined') {
             return <Component />;
         }
@@ -65,7 +70,12 @@ class App extends Component {
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
+                        <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
+                        <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
+                        <Route exact path={`/:lang(${langs})?/articles/:id`} render={this.renderComponent(Article)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
+                        <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
                 </div>
                 <Footer />
