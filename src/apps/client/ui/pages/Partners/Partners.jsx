@@ -8,19 +8,23 @@ import propOr from '@tinkoff/utils/object/propOr';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import styles from './Partners.css';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        lang: application.lang,
+        partners: data.partners
     };
 };
 
 class Partners extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
+        partners: PropTypes.array
     };
 
     render () {
-        const { langMap } = this.props;
+        const { langMap, lang, partners } = this.props;
         const text = propOr('partners', {}, langMap);
 
         return (
@@ -30,13 +34,13 @@ class Partners extends Component {
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>
                         <div className={styles.partnersWrapper}>
-                            {text.sections.map((partner, i) =>
+                            {partners.map((partner, i) =>
                                 <div className={styles.partnerItem} key={i}>
-                                    <h2 className={styles.partnerName}>{partner.name}</h2>
+                                    <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
                                     <div className={styles.partnerLogoWrapper}>
                                         <img className={styles.partnerLogo} src={partner.url} alt={partner.alt}/>
                                     </div>
-                                    <p className={styles.partnerText}>{partner.text}</p>
+                                    <p className={styles.partnerText}>{partner.texts[lang].text}</p>
                                 </div>
                             )}
                         </div>
