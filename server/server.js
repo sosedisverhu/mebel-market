@@ -13,6 +13,8 @@ import map from '@tinkoff/utils/array/map';
 import adminAuthenticationApi from './api/admin/authentication';
 import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
+import adminProductsCategoryApi from './api/admin/productsCategory';
+import clientProductsCategoryApi from './api/client/productsCategory';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -48,6 +50,8 @@ app.use(cookieParser());
 app.use('/api/admin/authentication', adminAuthenticationApi);
 app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
+app.use('/api/admin/productsCategory', adminProductsCategoryApi);
+app.use('/api/client/productsCategory', clientProductsCategoryApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {
