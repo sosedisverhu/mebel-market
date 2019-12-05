@@ -21,9 +21,16 @@ class Articles extends Component {
     state = {
         currentPage: 1,
         postsPerPage: 6
-    }
+    };
 
-    paginate = pageNumber => this.setState({ currentPage: Number(pageNumber.target.id) });
+    paginate = pageNumber => this.setState({ currentPage: Number(pageNumber.target.id) }, () => {
+        setTimeout(() => {
+            window.scroll({ top: 10000000, left: 0 });
+            setTimeout(() => {
+                window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+            }, 50);
+        }, 0);
+    });
 
     render () {
         const { langMap } = this.props;
@@ -35,13 +42,27 @@ class Articles extends Component {
 
         const previousPage = (pageNumber) => {
             if (currentPage > 1) {
-                this.setState({ currentPage: Number(pageNumber.target.id) - 1 });
+                this.setState({ currentPage: Number(pageNumber.target.id) - 1 }, () => {
+                    setTimeout(() => {
+                        window.scroll({ top: 10000000, left: 0 });
+                        setTimeout(() => {
+                            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                        }, 50);
+                    }, 0);
+                });
             }
         };
 
         const nextPage = (pageNumber) => {
             if (currentPage < text.sections.length / postsPerPage) {
-                this.setState({ currentPage: Number(pageNumber.target.id) + 1 });
+                this.setState({ currentPage: Number(pageNumber.target.id) + 1 }, () => {
+                    setTimeout(() => {
+                        window.scroll({ top: 10000000, left: 0 });
+                        setTimeout(() => {
+                            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+                        }, 50);
+                    }, 0);
+                });
             }
         };
 
