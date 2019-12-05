@@ -11,7 +11,7 @@ import styles from './NotFoundPage.css';
 const mapStateToProps = ({ application }) => {
     return {
         langMap: application.langMap,
-        langRoute: application.lang
+        langRoute: application.langRoute
     };
 };
 
