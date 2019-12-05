@@ -14,6 +14,7 @@ import Footer from './ui/components/Footer/Footer.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
 import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
+import Partners from './ui/pages/Partners/Partners.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -65,6 +66,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
+                        <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
                 </div>
