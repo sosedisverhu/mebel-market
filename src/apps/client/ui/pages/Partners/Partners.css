@@ -77,7 +77,7 @@
 
 .partnersWrapper {
     max-width: 1240px;
-    padding: 60px 0 120px;
+    margin-top: 60px;
     display: flex;
 
     @media (max-width: 1170px) {
