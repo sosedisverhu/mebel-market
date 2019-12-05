@@ -1,20 +1,16 @@
 export default function getProduct (body) {
-    const { name, company, price, discountPrice, description, features, filters, categoryId, tags, hidden, notAvailable, id, date, views } = body;
+    const { id, texts, avatar, files, hidden, date, price, categoryId, subCategoryId, alias } = body;
 
     return {
-        name,
-        company,
-        price,
-        discountPrice,
-        description,
-        features,
-        filters,
-        categoryId,
-        tags,
-        notAvailable,
+        id,
+        texts,
+        avatar,
+        files,
         hidden,
         date,
-        views,
-        id
+        price,
+        categoryId,
+        subCategoryId,
+        alias
     };
 }
