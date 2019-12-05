@@ -82,7 +82,6 @@
 }
 
 .options {
-    /* padding: 110px 0 168px; */
     margin: 110px 0 168px;
     display: flex;
     font-size: 14px;
@@ -90,7 +89,6 @@
 
     @media (max-width: 600px) {
         flex-direction: column;
-        /* padding: 20px 0 30px; */
         margin: 20px 0 30px;
     }
 }
