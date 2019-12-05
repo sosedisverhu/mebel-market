@@ -1,19 +1,66 @@
 /* eslint-disable max-len */
+import React from 'react';
 
 export default {
+    product: {
+        labelTop: 'Хіт'
+    },
     mainPage: {
         top: 'Топ продажів',
         discount: 'Акції',
         new: 'Новинки',
+        bedsTitle: 'Ліжка',
+        mattressesTitle: 'Матраци',
+        furnitureTitle: 'М\'які меблі',
+        accessoriesTitle: 'Аксесуари для сну',        
         slider: 'Допомогти з вибором'
+    },
+    breadcrumbs: {
+        main: 'Головна'
+    },
+    deliveryAndPayment: {
+        title: 'Доставка та оплата',
+        deliveryTitle: 'Доставка:',
+        paymentTitle: 'Оплата:',
+        deliveryOptions: [
+            { text: <span>Доставка кур'єрськимии<br/> службами</span> },
+            { text: <span>Самовивіз</span> }
+        ],
+        paymentOptions: [
+            { text: <span>Готівкою в магазині</span> },
+            { text: <span>Оплата банківською картою</span> },
+            { text: <span>Приват 24</span> }
+        ]
+    },
+    header: {
+        deliveryAndPayment: 'Доставка та оплата',
+        partners: 'Партнери',
+        articles: 'Статті',
+        contacts: 'Контакти',
+        search: 'Пошук',
+        beds: 'Ліжка',
+        mattresses: 'Матраци',
+        softFurniture: `М'які меблі`,
+        sleepAccessories: 'Аксесуари для сну',
+        promotions: 'Акції'
+    },
+    wishList: {
+        title: 'Обране:',
+        size: 'Розмір:',
+        continueShopping: 'Продовжити покупки',
+        cartBtn: 'У кошик'
+    },
+    cart: {
+        title: 'Кошик:',
+        totalPrice: 'Всього:',
+        size: 'Розмір:',
+        checkout: 'Оформити замовлення',
+        continueShopping: 'Продовжити покупки'
     },
     productsPage: {
         filterBtn: 'Фільтри'
     },
     product: {
         labelTop: 'Хіт'
-    },
-    breadcrumbs: {
-        main: 'Головна'
     }
 };

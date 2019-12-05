@@ -13,6 +13,7 @@ import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
+import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -63,6 +64,7 @@ class App extends Component {
                 <div className={styles.pageContent}>
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
+                        <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
                         <Route exact path={`/:lang(${langs})?/:categoryId`} render={this.renderComponent(ProductsPage)} />
                     </Switch>
                 </div>
