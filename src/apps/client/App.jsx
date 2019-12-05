@@ -19,7 +19,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import getLangRouteParts from './utils/getLangRouteParts';
 
-import { DEFAULT_LANG, LANGS } from './constants/constants';
+import { LANGS } from './constants/constants';
 
 import styles from './App.css';
 
@@ -46,7 +46,7 @@ class App extends Component {
         langRoute: ''
     };
 
-    renderComponent = Component => ({ match: { params: { lang: langUrl = DEFAULT_LANG }, path }, location: { pathname } }) => {
+    renderComponent = Component => ({ match: { params: { lang: langUrl = this.props.lang }, path }, location: { pathname } }) => {
         if (typeof window === 'undefined') {
             return <Component />;
         }
