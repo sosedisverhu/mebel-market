@@ -62,6 +62,16 @@ export default {
     partners: {
         title: 'Партнёры'
     },
+    contacts: {
+        title: 'Контакты',
+        phonesTitle: 'Наши телефоны:',
+        emailTitle: 'Наша почта:',
+        scheduleTitle: 'График работы:',
+        scheduleDays: 'ПН-ВС:',
+        addressTitle: 'Наш адрес:',
+        addressText: 'Киев, ул. Большая Окружная, 4',
+        getDirectionsBtn: 'Проложить маршрут'
+    },
     notFoundPage: {
         text1: 'К сожалению, страница, которую вы ищете ',
         text2: 'не существует :(',

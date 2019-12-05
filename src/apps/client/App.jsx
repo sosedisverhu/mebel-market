@@ -17,6 +17,7 @@ import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment
 import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';
 import Article from './ui/components/Article/Article.jsx';
+import Contacts from './ui/pages/Contacts/Contacts.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -71,6 +72,7 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:id`} render={this.renderComponent(Article)} />
+                        <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
                         <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
                 </div>
