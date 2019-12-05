@@ -40,6 +40,9 @@ export default class FormFieldDate extends Component {
             margin='normal'
             variant='outlined'
             type='date'
+            InputLabelProps={{
+                shrink: true
+            }}
         />;
     }
 }
