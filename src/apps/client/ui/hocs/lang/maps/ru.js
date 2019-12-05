@@ -61,5 +61,10 @@ export default {
     },
     partners: {
         title: 'Партнёры'
+    },
+    notFoundPage: {
+        text1: 'К сожалению, страница, которую вы ищете ',
+        text2: 'не существует :(',
+        link: 'На главную'
     }
 };
