@@ -20,20 +20,6 @@ export default {
     breadcrumbs: {
         main: 'Главная'
     },
-    deliveryAndPayment: {
-        title: 'Доставка и оплата',
-        deliveryTitle: 'Доставка:',
-        paymentTitle: 'Оплата:',
-        deliveryOptions: [
-            { text: <span>Доставка курьерскими<br/> службами</span> },
-            { text: <span>Самовывоз</span> }
-        ],
-        paymentOptions: [
-            { text: <span>Наличными в магазине</span> },
-            { text: <span>Оплата банковской картой</span> },
-            { text: <span>Приват 24</span> }
-        ]
-    },
     header: {
         deliveryAndPayment: 'Доставка и оплата',
         partners: 'Партнёры',
@@ -58,6 +44,28 @@ export default {
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки'
+    },
+    deliveryAndPayment: {
+        title: 'Доставка и оплата',
+        deliveryTitle: 'Доставка:',
+        paymentTitle: 'Оплата:',
+        deliveryOptions: [
+            { text: <span>Доставка курьерскими<br/> службами</span> },
+            { text: <span>Самовывоз</span> }
+        ],
+        paymentOptions: [
+            { text: <span>Наличными в магазине</span> },
+            { text: <span>Оплата банковской картой</span> },
+            { text: <span>Приват 24</span> }
+        ]
+    },
+    partners: {
+        title: 'Партнёры'
+    },
+    notFoundPage: {
+        text1: 'К сожалению, страница, которую вы ищете ',
+        text2: 'не существует :(',
+        link: 'На главную'
     },
     articles: {
         moreBtn: 'Подробнее',

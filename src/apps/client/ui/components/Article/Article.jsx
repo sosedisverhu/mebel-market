@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
 import styles from './Article.css';
+import Breadcrumbs from '..//Breadcrumbs/Breadcrumbs.jsx';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -25,15 +26,18 @@ class Article extends Component {
 
         return (
             <section className={styles.article}>
+                <Breadcrumbs />
                 <div className={styles.articleContainer}>
-                    <div className={styles.titleWrapper}>
-                        <h1 className={styles.title}>{article.title}</h1>
-                        <span className={styles.date}>{article.date}</span>
+                    <div className={styles.content}>
+                        <div className={styles.titleWrapper}>
+                            <h1 className={styles.title}>{article.title}</h1>
+                            <span className={styles.date}>{article.date}</span>
+                        </div>
+                        <div className={styles.introduction}>
+                            {article.introduction}
+                        </div>
+                        {article.content}
                     </div>
-                    <div className={styles.introduction}>
-                        {article.introduction}
-                    </div>
-                    {article.content}
                 </div>
             </section>
         );

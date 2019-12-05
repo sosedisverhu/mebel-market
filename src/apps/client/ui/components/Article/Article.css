@@ -1,22 +1,33 @@
 @value blackBasic from '../../../../../css/colors.css';
+@value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .article {
-    font-family: RoundedElegance;
-
-    @media (max-width: 1280px) {
-        padding: 0 16px;
-    }
+    height: 100%;
+    padding-bottom: 30px;
+    background-color: gray3;
 }
 
 .articleContainer {
+    height: calc(100% - 40px);
+    background-color: whiteBasic;
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    font-family: RoundedElegance;
     max-width: 1240px;
     width: 100%;
-    margin: 30px auto;
+    padding: 30px 0;
+
+    @media (max-width: 1280px) {
+        padding: 30px 16px;
+    }
 
     @media (--media-tablet-s) {
-        margin: 20px auto 30px;
+        padding-top: 20px;
     }
 }
 

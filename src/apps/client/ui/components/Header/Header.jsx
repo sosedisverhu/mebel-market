@@ -20,7 +20,7 @@ class Header extends Component {
     state = {
         mobileMenuOpen: false,
         searchBarOpen: false
-    }
+    };
 
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
@@ -29,15 +29,15 @@ class Header extends Component {
 
     handleMobileMenu = () => {
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
-    }
+    };
 
     handleSearchSubmit = (e) => {
         e.preventDefault();
-    }
+    };
 
     handleSearchBar = () => {
         this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
-    }
+    };
 
     render () {
         const { langRoute, langMap } = this.props;
@@ -62,11 +62,19 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.mattresses}</Link>
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.softFurniture}</Link>
                                         <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.sleepAccessories}</Link>
-                                        <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
+                                        <Link
+                                            className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
+                                            to={`${langRoute}/`}>
+                                            {text.promotions}
+                                        </Link>
                                     </div>
                                     <div className={styles.mobileSocials}>
                                         <a href="#" target="_blank">
-                                            <img className={styles.googlePlus} src="/src/apps/client/ui/components/Header/img/google-plus.svg" alt="google plus"/>
+                                            <img
+                                                className={styles.googlePlus}
+                                                src="/src/apps/client/ui/components/Header/img/google-plus.svg"
+                                                alt="google plus"
+                                            />
                                         </a>
                                         <a href="#" target="_blank">
                                             <img className={styles.facebook} src="/src/apps/client/ui/components/Header/img/facebook.svg" alt="facebook"/>
@@ -95,7 +103,11 @@ class Header extends Component {
                         <div className={styles.headerTopRight}>
                             <form className={styles.search} onSubmit={this.handleSearchSubmit}>
                                 <label className={classNames(styles.searchInputWrapper, { [styles.active]: searchBarOpen })}>
-                                    <input className={classNames(styles.searchInput, { [styles.active]: searchBarOpen })} placeholder={text.search} type="text"/>
+                                    <input
+                                        className={classNames(styles.searchInput, { [styles.active]: searchBarOpen })}
+                                        placeholder={text.search}
+                                        type="text"
+                                    />
                                 </label>
                                 <button onClick={this.handleSearchBar} className={styles.searchBtn} type="submit"/>
                             </form>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import styles from './Articles.css';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -46,6 +47,7 @@ class Articles extends Component {
 
         return (
             <section className={styles.articles}>
+                <Breadcrumbs />
                 <div className={styles.articlesContainer}>
                     {text.sections.slice(indexOfFirstPost, indexOfLastPost).map(article =>
                         <div className={styles.article} key={article.id}>
