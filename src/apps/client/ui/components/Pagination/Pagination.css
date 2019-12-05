@@ -1,0 +1,60 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+
+.pagination {
+    position: absolute;
+    bottom: 0;
+    padding: 15px 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray3;
+    width: 100%;
+
+    @media (max-width: 600px) {
+        padding: 10px 0 30px;
+    }
+}
+
+.pageLink {
+    @mixin removeDefaultButton;
+    padding: 0;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    margin-right: 20px;
+    background-color: whiteBasic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+
+    &:first-of-type {
+        margin-left: 50px;
+    }
+
+    &:last-of-type {
+        margin-right: 50px;
+    }
+
+    &.active {
+        background-color: black;
+        color: whiteBasic;
+    }
+}
+
+.leftArrow,
+.rightArrow {
+    background: url('./img/arrow.svg');
+    width: 12px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.rightArrow {
+    transform: rotate(-180deg);
+}
