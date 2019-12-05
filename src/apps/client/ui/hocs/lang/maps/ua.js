@@ -18,20 +18,6 @@ export default {
     breadcrumbs: {
         main: 'Головна'
     },
-    deliveryAndPayment: {
-        title: 'Доставка та оплата',
-        deliveryTitle: 'Доставка:',
-        paymentTitle: 'Оплата:',
-        deliveryOptions: [
-            { text: <span>Доставка кур'єрськимии<br/> службами</span> },
-            { text: <span>Самовивіз</span> }
-        ],
-        paymentOptions: [
-            { text: <span>Готівкою в магазині</span> },
-            { text: <span>Оплата банківською картою</span> },
-            { text: <span>Приват 24</span> }
-        ]
-    },
     header: {
         deliveryAndPayment: 'Доставка та оплата',
         partners: 'Партнери',
@@ -57,10 +43,44 @@ export default {
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки'
     },
+<<<<<<< HEAD
     productsPage: {
         filterBtn: 'Фільтри'
     },
     product: {
         labelTop: 'Хіт'
+=======
+    deliveryAndPayment: {
+        title: 'Доставка та оплата',
+        deliveryTitle: 'Доставка:',
+        paymentTitle: 'Оплата:',
+        deliveryOptions: [
+            { text: <span>Доставка кур'єрськимии<br/> службами</span> },
+            { text: <span>Самовивіз</span> }
+        ],
+        paymentOptions: [
+            { text: <span>Готівкою в магазині</span> },
+            { text: <span>Оплата банківською картою</span> },
+            { text: <span>Приват 24</span> }
+        ]
+    },
+    partners: {
+        title: 'Партнери'
+    },
+    contacts: {
+        title: 'Контакти',
+        phonesTitle: 'Наші телефони:',
+        emailTitle: 'Наша пошта:',
+        scheduleTitle: 'Графік роботи:',
+        scheduleDays: 'ПН-НД:',
+        addressTitle: 'Наша адреса:',
+        addressText: 'Київ, вул. Велика Окружна, 4',
+        getDirectionsBtn: 'Прокласти маршрут'
+    },
+    notFoundPage: {
+        text1: 'На жаль, сторінка, яку ви шукаєте ',
+        text2: 'не існує :(',
+        link: 'На главную'
+>>>>>>> master
     }
 };

@@ -4,7 +4,6 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldSubCategories from '../Form/fields/FormFieldSubCategories/FormFieldSubCategories';
-import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 
 export default function ({ data: { title } = {} } = {}) {
     return {

@@ -549,6 +549,78 @@ const initialState = {
         {
             'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
         }
+    ],
+    partners: [
+        {
+            url: '/src/apps/client/ui/pages/Partners/img/fusion-metal.png',
+            alt: 'Fusion Metal',
+            texts: {
+                ru: {
+                    name: 'Fusion Metal',
+                    text: '[ru] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                },
+                ua: {
+                    name: 'Fusion Metal',
+                    text: '[ua] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                }
+            }
+        },
+        {
+            url: '/src/apps/client/ui/pages/Partners/img/emm.png',
+            alt: 'Emm',
+            texts: {
+                ru: {
+                    name: 'EMM',
+                    text: '[ru] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                },
+                ua: {
+                    name: 'EMM',
+                    text: '[ua] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                }
+            }
+        },
+        {
+            url: '/src/apps/client/ui/pages/Partners/img/matroluxe.png',
+            alt: 'Matroluxe',
+            texts: {
+                ru: {
+                    name: 'Matroluxe',
+                    text: '[ru] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                },
+                ua: {
+                    name: 'Matroluxe',
+                    text: '[ua] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                }
+            }
+        },
+        {
+            url: '/src/apps/client/ui/pages/Partners/img/fusion-metal.png',
+            alt: 'Fusion Metal',
+            texts: {
+                ru: {
+                    name: 'Fusion Metal',
+                    text: '[ru] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                },
+                ua: {
+                    name: 'Fusion Metal',
+                    text: '[ua] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                }
+            }
+        },
+        {
+            url: '/src/apps/client/ui/pages/Partners/img/matroluxe.png',
+            alt: 'Matroluxe',
+            texts: {
+                ru: {
+                    name: 'Matroluxe',
+                    text: '[ru] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                },
+                ua: {
+                    name: 'Matroluxe',
+                    text: '[ua] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eu tincidunt eros. Duis elementum nisl sed mi sollicitudin aliquet.'
+                }
+            }
+        }
     ]
 };
 
