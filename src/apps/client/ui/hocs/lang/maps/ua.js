@@ -2,9 +2,6 @@
 import React from 'react';
 
 export default {
-    product: {
-        labelTop: 'Хіт'
-    },
     mainPage: {
         top: 'Топ продажів',
         discount: 'Акції',
@@ -12,7 +9,7 @@ export default {
         bedsTitle: 'Ліжка',
         mattressesTitle: 'Матраци',
         furnitureTitle: 'М\'які меблі',
-        accessoriesTitle: 'Аксесуари для сну',        
+        accessoriesTitle: 'Аксесуари для сну',
         slider: 'Допомогти з вибором'
     },
     breadcrumbs: {

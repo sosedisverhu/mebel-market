@@ -8,10 +8,16 @@ import splitEvery from '@tinkoff/utils/array/splitEvery';
 import styles from './ProductsSlider.css';
 import Card from '../Card/Card';
 
+const mapStateToProps = ({ application }) => {
+    return {
+        widthWindow: application.media.width
+    };
+};
 class ProductsSlider extends Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
-        products: PropTypes.array.isRequired
+        products: PropTypes.array.isRequired,
+        widthWindow: PropTypes.number.isRequired
     };
 
     constructor (props) {
@@ -24,15 +30,18 @@ class ProductsSlider extends Component {
         };
     }
 
+    componentWillReceiveProps () {
+
+    }
+
     componentDidMount () {
-        const { products } = this.props;
+        const { products, widthWindow } = this.props;
         const width = this.products.clientWidth;
-        const widthWindow = window.innerWidth;
 
         let productsNumber = 4;
         if (widthWindow < 1361) productsNumber = 3;
         if (widthWindow < 1021) productsNumber = 2;
-        if (widthWindow < 760) productsNumber = 1; // TODO: переделать через application.media.width
+        if (widthWindow < 761) productsNumber = 4;
 
         const productsPacks = splitEvery(productsNumber, products);
 
@@ -58,6 +67,7 @@ class ProductsSlider extends Component {
         const { label } = this.props;
         const { width, activeIndex, productsPacks } = this.state;
         const left = -1 * (width * activeIndex);
+        const hidden = productsPacks.length <= 1;
 
         return (
             <div className={classNames(styles.slider, styles[label])}>
@@ -68,14 +78,14 @@ class ProductsSlider extends Component {
                         style={{ left }}>
                         {productsPacks.map((products, index) => {
                             return <div key={index} className={styles.productsPack}>
-                                {products.map(product => <Card key={product.id} product={product} />)}
+                                {products.map(product => <Card newClass='sliderProduct' labelClass={label} key={product.id} product={product} />)}
                             </div>;
                         })}
                     </div>
                 </div>
-                <div className={styles.left} onClick={() => this.handleArrowClick(-1)} />
-                <div className={styles.right} onClick={() => this.handleArrowClick(1)} />
-                <div className={styles.switch}>
+                <div className={classNames(styles.left, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(-1)} />
+                <div className={classNames(styles.right, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(1)} />
+                <div className={classNames(styles.switch, { [styles.hidden]: hidden })}>
                     {productsPacks.map((products, index) => {
                         return (
                             <div
@@ -89,4 +99,4 @@ class ProductsSlider extends Component {
     }
 }
 
-export default connect()(ProductsSlider);
+export default connect(mapStateToProps)(ProductsSlider);

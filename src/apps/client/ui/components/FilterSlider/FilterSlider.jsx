@@ -23,6 +23,7 @@ class FilterSlider extends Component {
             title: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired
         }),
+        onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
     };

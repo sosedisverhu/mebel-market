@@ -11,12 +11,9 @@ import '../../css/main.css';
 
 import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
-<<<<<<< HEAD
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
-=======
 import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
->>>>>>> master
 import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
 import Partners from './ui/pages/Partners/Partners.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
