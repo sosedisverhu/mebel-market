@@ -3,8 +3,7 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldSubCategories from '../Form/fields/FormFieldSubCategories/FormFieldSubCategories';
-import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
+import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -63,14 +62,16 @@ export default function ({ data: { title } = {} } = {}) {
                 }
             },
             {
-                component: FormFieldSubCategories,
+                component: FormFieldFeaturesDouble,
                 name: 'subCategory',
                 valueLangStructure: [{
                     name: 'depend',
                     alias: 'notDepend',
-                    positionIndex: 'notDepend',
                     id: 'notDepend'
-                }]
+                }],
+                validators: [
+                    { name: 'required', options: { text: 'Заполните подкатегории' } }
+                ]
             },
             {
                 component: FormFieldCheckbox,

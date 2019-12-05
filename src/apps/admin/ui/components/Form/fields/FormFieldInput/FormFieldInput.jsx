@@ -41,7 +41,6 @@ export default class FormFieldInput extends Component {
             variant='outlined'
             multiline={schema.multiline}
             type={schema.type || 'text'}
-            multiline={schema.multiline}
         />;
     }
 }

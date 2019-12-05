@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import uniqid from 'uniqid';
+
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import ReorderIcon from '@material-ui/icons/Reorder';
@@ -15,6 +17,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
+import arrayMove from '../../../../../utils/arrayMove';
+import pathOr from '@tinkoff/utils/object/pathOr';
 
 const materialStyles = {
     feature: {
@@ -36,6 +40,7 @@ const materialStyles = {
     },
     featureField: {
         width: 'calc(50% - 20px)'
+
     },
     buttonSortable: {
         position: 'relative',
@@ -54,38 +59,47 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Feature = SortableElement(({ index, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes }) => (
-    <FormGroup className={classes.feature} row>
-        <ButtonSortable imageClassName={classes.buttonSortable}/>
-        <div className={classes.featureGroup}>
-            <TextField
-                className={classes.featureField}
-                label='Свойство'
-                value={feature.prop}
-                onChange={handleFeatureChange('prop', index)}
-                margin='normal'
-                variant='outlined'
-                error={!!validationMessage}
-            />
-            <TextField
-                className={classes.featureField}
-                label='Значение'
-                value={feature.value}
-                onChange={handleFeatureChange('value', index)}
-                margin='normal'
-                variant='outlined'
-                error={!!validationMessage}
-            />
-        </div>
-        <IconButton aria-label='Delete' className={classes.featureDelButton} onClick={handleFeatureDelete(index)}>
-            <DeleteIcon />
-        </IconButton>
-    </FormGroup>
-));
+const Feature =
+    SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
+        <FormGroup className={classes.feature} row>
+            <ButtonSortable imageClassName={classes.buttonSortable}/>
+            <div className={classes.featureGroup}>
+                <TextField
+                    className={classes.featureField}
+                    label={schema.name || ''}
+                    value={feature.name || ''}
+                    onChange={handleFeatureChange('name', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                    error={!!validationMessage}
+                />
+                <TextField
+                    className={classes.featureField}
+                    label={schema.value}
+                    value={feature.value || ''}
+                    onChange={handleFeatureChange('value', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                    error={!!validationMessage}
+                />
+            </div>
+            <IconButton aria-label='Delete' onClick={handleFeatureDelete(rowIndex)}>
+                <DeleteIcon/>
+            </IconButton>
+        </FormGroup>
+    ));
 
 const Features = SortableContainer(({ features, classes, ...rest }) =>
     <div>
-        {features.map((feature, i) => <Feature key={i} index={i} feature={feature} {...rest} classes={classes}/>)}
+        {features.map((feature, i) => {
+            return <Feature key={i}
+                index={i}
+                rowIndex={i}
+                feature={feature}
+                {...rest}
+                classes={classes}
+            />;
+        })}
     </div>
 );
 
@@ -94,13 +108,15 @@ class FormFieldFeaturesDouble extends Component {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
-        validationMessage: PropTypes.string
+        validationMessage: PropTypes.string,
+        schema: PropTypes.object
     };
 
     static defaultProps = {
         value: [],
         onChange: noop,
-        validationMessage: ''
+        validationMessage: '',
+        schema: {}
     };
 
     state = {
@@ -112,7 +128,11 @@ class FormFieldFeaturesDouble extends Component {
 
         this.props.onChange([
             ...value,
-            { prop: '', value: '' }
+            {
+                name: '',
+                value: '',
+                id: uniqid()
+            }
         ]);
     };
 
@@ -130,8 +150,14 @@ class FormFieldFeaturesDouble extends Component {
         this.props.onChange(remove(i, 1, value));
     };
 
+    onDragEnd = ({ oldIndex, newIndex }) => {
+        const { value } = this.props;
+
+        this.props.onChange(arrayMove(value, oldIndex, newIndex));
+    };
+
     render () {
-        const { classes, value, validationMessage } = this.props;
+        const { classes, value, validationMessage, schema } = this.props;
 
         return <div>
             <Features
@@ -139,13 +165,15 @@ class FormFieldFeaturesDouble extends Component {
                 features={value}
                 handleFeatureDelete={this.handleFeatureDelete}
                 handleFeatureChange={this.handleFeatureChange}
+                onSortEnd={this.onDragEnd}
                 classes={classes}
                 useDragHandle
                 validationMessage={validationMessage}
+                schema={schema}
             />
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleFeatureAdd}>
-                    <AddIcon />
+                    <AddIcon/>
                 </Fab>
             </div>
         </div>;

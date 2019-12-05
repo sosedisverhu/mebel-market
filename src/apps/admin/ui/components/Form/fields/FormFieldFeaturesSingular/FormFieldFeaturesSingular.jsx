@@ -58,15 +58,14 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}/>
 ));
 
-const Feature = SortableElement(({ index, feature, validationMessage, handleFeatureDelete, handleFeatureChange, onBlur, classes }) => (
+const Feature = SortableElement(({ index, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
     <FormGroup className={classes.feature} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.featureGroup}>
             <TextField
-                label='Значение'
-                value={feature}
+                label={schema.name}
+                value={feature || ''}
                 onChange={handleFeatureChange(index)}
-                onBlur={onBlur}
                 margin='normal'
                 variant='outlined'
                 error={!!validationMessage}
@@ -88,20 +87,20 @@ const Features = SortableContainer(({ features, classes, ...rest }) =>
     </div>
 );
 
-class FormFieldFeaturesSubCategory extends Component {
+class FormFieldFeaturesSingular extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
-        onBlur: PropTypes.func,
-        validationMessage: PropTypes.string
+        validationMessage: PropTypes.string,
+        schema: PropTypes.object
     };
 
     static defaultProps = {
         value: [],
         onChange: noop,
-        onBlur: noop,
-        validationMessage: ''
+        validationMessage: '',
+        schema: {}
     };
 
     handleFeatureAdd = () => {
@@ -113,7 +112,6 @@ class FormFieldFeaturesSubCategory extends Component {
             ...value,
             {
                 name: '',
-                positionIndex: value.length,
                 id: uniqid()
             }
         ]);
@@ -122,7 +120,7 @@ class FormFieldFeaturesSubCategory extends Component {
     handleFeatureChange = i => event => {
         const { value } = this.props;
 
-        value[i] = { ...value[i], name: event.target.value };
+        value[i] = { ...value[i], name: event.target.value, id: uniqid() };
 
         this.props.onChange(value);
     };
@@ -140,7 +138,7 @@ class FormFieldFeaturesSubCategory extends Component {
     };
 
     render () {
-        const { classes, value, validationMessage, onBlur } = this.props;
+        const { classes, value, validationMessage, schema } = this.props;
 
         return <div>
             <Features
@@ -148,11 +146,11 @@ class FormFieldFeaturesSubCategory extends Component {
                 features={value}
                 handleFeatureDelete={this.handleFeatureDelete}
                 handleFeatureChange={this.handleFeatureChange}
-                onBlur={onBlur}
                 onSortEnd={this.onDragEnd}
                 classes={classes}
                 useDragHandle
                 validationMessage={validationMessage}
+                schema={schema}
             />
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleFeatureAdd}>
@@ -163,4 +161,4 @@ class FormFieldFeaturesSubCategory extends Component {
     }
 }
 
-export default withStyles(materialStyles)(FormFieldFeaturesSubCategory);
+export default withStyles(materialStyles)(FormFieldFeaturesSingular);

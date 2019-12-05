@@ -6,6 +6,8 @@ import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
+import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
+import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 
 export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
     return {
@@ -47,6 +49,29 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
+                name: 'description',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните описание товара' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'warranty',
+                schema: {
+                    label: 'Гарантия',
+                    type: 'number'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Укажите гарантию' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
                 name: 'alias',
                 schema: {
                     label: 'Alias'
@@ -81,11 +106,74 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 component: FormFieldInput,
                 name: `price`,
                 schema: {
-                    label: 'Цена'
+                    label: 'Цена',
+                    type: 'number'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните цену товара' } }
                 ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'discount',
+                schema: {
+                    label: 'Скидка на товар (%)',
+                    type: 'number'
+                },
+                validators: [
+                    { name: 'max', options: { maxValue: 99 } },
+                    { name: 'min', options: { minValue: 0 } }
+                ]
+            },
+            {
+                component: FormFieldTitle,
+                name: 'size-title',
+                schema: {
+                    label: 'Размеры товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldFeaturesSingular,
+                name: 'sizes',
+                schema: {
+                    name: 'Размер'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните размеры товара' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'characteristics-title',
+                schema: {
+                    label: 'Характеристики товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldFeaturesDouble,
+                name: 'characteristics',
+                valueLangStructure: [{
+                    name: 'depend',
+                    value: 'depend',
+                    id: 'notDepend'
+                }],
+                schema: {
+                    name: 'Название характеристики',
+                    value: 'Значения'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните характеристики товара' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
             },
             {
                 component: FormFieldTitle,
@@ -126,10 +214,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]
-            },
-            {
-                component: FormFieldDivider,
-                name: 'divider'
             },
             {
                 component: FormFieldCheckbox,
