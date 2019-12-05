@@ -46,6 +46,7 @@ class Partners extends Component {
                         </div>
                     </div>
                 </div>
+                <div className={styles.bottomBackground}/>
             </section>
         );
     }

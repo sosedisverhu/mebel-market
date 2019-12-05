@@ -3,12 +3,8 @@
 @value gray5 from '../../../../../css/colors.css';
 
 .partners {
-    background-color: gray5;
-    padding-bottom: 40px;
-
-    @media (max-width: 600px) {
-        padding-bottom: 30px;
-    }
+    position: relative;
+    height: 100%;
 }
 
 .partnersContainer {
@@ -162,4 +158,16 @@
     color: rgba(35, 35, 35, 0.7);
     max-width: 207px;
     width: 100%;
+}
+
+.bottomBackground {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    background-color: gray5;
+    bottom: 0;
+
+    @media (max-width: 600px) {
+        height: 30px;
+    }
 }
