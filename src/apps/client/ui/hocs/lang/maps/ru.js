@@ -40,13 +40,12 @@ export default {
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки'
     },
-<<<<<<< HEAD
     productsPage: {
         filterBtn: 'Фильтры'
     },
     product: {
         labelTop: 'Хит'
-=======
+    },
     deliveryAndPayment: {
         title: 'Доставка и оплата',
         deliveryTitle: 'Доставка:',
@@ -78,6 +77,5 @@ export default {
         text1: 'К сожалению, страница, которую вы ищете ',
         text2: 'не существует :(',
         link: 'На главную'
->>>>>>> master
     }
 };

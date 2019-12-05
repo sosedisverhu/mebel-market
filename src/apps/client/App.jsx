@@ -71,13 +71,10 @@ class App extends Component {
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
-<<<<<<< HEAD
-                        <Route exact path={`/:lang(${langs})?/:categoryId`} render={this.renderComponent(ProductsPage)} />
-=======
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route exact path={`/:lang(${langs})?/:categoryId`} render={this.renderComponent(ProductsPage)} />
                         <Route render={this.renderComponent(NotFoundPage)}/>
->>>>>>> master
                     </Switch>
                 </div>
                 <Footer />

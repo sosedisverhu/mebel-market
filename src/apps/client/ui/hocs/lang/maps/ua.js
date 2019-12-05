@@ -43,13 +43,12 @@ export default {
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки'
     },
-<<<<<<< HEAD
     productsPage: {
         filterBtn: 'Фільтри'
     },
     product: {
         labelTop: 'Хіт'
-=======
+    },
     deliveryAndPayment: {
         title: 'Доставка та оплата',
         deliveryTitle: 'Доставка:',
@@ -81,6 +80,5 @@ export default {
         text1: 'На жаль, сторінка, яку ви шукаєте ',
         text2: 'не існує :(',
         link: 'На главную'
->>>>>>> master
     }
 };
