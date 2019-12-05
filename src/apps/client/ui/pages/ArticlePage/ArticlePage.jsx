@@ -56,7 +56,7 @@ class ArticlePage extends Component {
         const text = propOr('articlePage', {}, langMap);
 
         if (this.notFoundPage) {
-            return <div>No Article</div>;
+            return <div>No Article</div>; // TODO: NotFoundPage
         }
 
         return <section className={styles.root}>

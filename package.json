@@ -114,7 +114,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.4",
-    "date-fns": "^1.30.1",
+    "date-fns": "^2.8.1",
     "device": "^0.3.9",
     "express": "^4.16.3",
     "express-http-to-https": "^1.1.4",

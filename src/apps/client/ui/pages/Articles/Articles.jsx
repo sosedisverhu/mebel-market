@@ -63,7 +63,7 @@ class Articles extends Component {
     render () {
         const { langMap } = this.props;
         const { currentPage, postsPerPage } = this.state;
-        const text = propOr('articles', {}, langMap);
+        const text = propOr('article', {}, langMap);
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
