@@ -3,11 +3,13 @@
 @value gray3 from '../../../../../css/colors.css';
 
 .contacts {
+    height: 100%;
     background-color: gray3;
     padding-bottom: 30px;
 }
 
 .contactsContainer {
+    height: calc(100% - 40px);
     display: flex;
     flex-direction: column;
     align-items: center;

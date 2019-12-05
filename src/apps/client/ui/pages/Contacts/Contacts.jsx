@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+
 import styles from './Contacts.css';
 import mapStyles from './map';
 
@@ -98,6 +100,7 @@ class Contacts extends Component {
 
         return (
             <section className={styles.contacts}>
+                <Breadcrumbs />
                 <div className={styles.contactsContainer}>
                     <h1 className={styles.title}>{text.title}</h1>
                     <div className={styles.info}>
