@@ -1,6 +1,11 @@
 import uniqid from 'uniqid';
 
-import { OKEY_STATUS_CODE, SERVER_ERROR_STATUS_CODE } from '../../../../constants/constants';
+import {
+    MONGODB_DUPLICATE_CODE,
+    NOT_FOUND_STATUS_CODE,
+    OKEY_STATUS_CODE,
+    SERVER_ERROR_STATUS_CODE
+} from '../../../../constants/constants';
 
 import prepareArticle from '../utils/prepareArticle';
 
@@ -15,7 +20,11 @@ export default function saveArticle (req, res) {
         .then(article => {
             res.status(OKEY_STATUS_CODE).send(article);
         })
-        .catch(() => {
+        .catch((err) => {
+            if (err.code === MONGODB_DUPLICATE_CODE) {
+                return res.status(NOT_FOUND_STATUS_CODE).send({ code: 'duplication' });
+            }
+
             res.status(SERVER_ERROR_STATUS_CODE).end();
         });
 }
