@@ -53,7 +53,7 @@ class App extends Component {
 
         const { lang, langRoute } = this.props;
         const { routeWithoutLang } = getLangRouteParts(pathname);
-        console.log(lang, langRoute, langUrl);
+
         return lang === langUrl ? <Component /> : <Redirect to={`${langRoute}${routeWithoutLang}`} />;
     };
 
