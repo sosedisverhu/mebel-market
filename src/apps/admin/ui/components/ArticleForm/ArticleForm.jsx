@@ -115,8 +115,6 @@ class ArticleForm extends Component {
     };
 
     handleSubmit = values => {
-        event.preventDefault();
-
         const articlePayload = this.getArticlePayload(values);
         const { editArticle, saveArticle, onDone } = this.props;
 
@@ -135,6 +133,12 @@ class ArticleForm extends Component {
                     });
                 }
             });
+    };
+
+    handleHideFailMessage = () => {
+        this.setState({
+            errorText: ''
+        });
     };
 
     render () {
