@@ -9,6 +9,8 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 // import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+
 import styles from './SearchPage.css';
 import Sort from '../../components/Sort/Sort';
 
@@ -41,6 +43,7 @@ class SearchPage extends Component {
 
         return (
             <section className={styles.search}>
+                <Breadcrumbs />
                 {products.length
                     ? (
                         <div>
