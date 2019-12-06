@@ -12,7 +12,6 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import DublicateIcon from '@material-ui/icons/FileCopy';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -63,11 +62,11 @@ class AdminTable extends React.Component {
         headerText: PropTypes.string,
         deleteValueWarningTitle: PropTypes.string,
         deleteValuesWarningTitle: PropTypes.string,
-        onProductClone: PropTypes.func,
         onDelete: PropTypes.func,
         onFormOpen: PropTypes.func,
         onFiltersOpen: PropTypes.func,
-        filters: PropTypes.bool
+        filters: PropTypes.bool,
+        isSmall: PropTypes.bool
     };
 
     static defaultProps = {
@@ -80,7 +79,8 @@ class AdminTable extends React.Component {
         onDelete: noop,
         onFormOpen: noop,
         onFiltersOpen: noop,
-        filters: true
+        filters: false,
+        isSmall: false
     };
 
     constructor (...args) {
@@ -217,7 +217,7 @@ class AdminTable extends React.Component {
     isSelected = id => any(value => value.id === id, this.state.selected);
 
     render () {
-        const { classes, headerRows, tableCells, values, headerText, deleteValueWarningTitle, deleteValuesWarningTitle, filters } = this.props;
+        const { classes, headerRows, tableCells, values, headerText, deleteValueWarningTitle, deleteValuesWarningTitle, filters, isSmall } = this.props;
         const { selected, rowsPerPage, page, checkboxIndeterminate, valueForDelete } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, values.length - page * rowsPerPage);
 
@@ -234,7 +234,7 @@ class AdminTable extends React.Component {
                     filters={filters}
                 />
                 <div className={classes.tableWrapper}>
-                    <Table className={classes.table} aria-labelledby='tableTitle'>
+                    <Table className={!isSmall && classes.table} aria-labelledby='tableTitle'>
                         <TableHead>
                             <TableRow>
                                 <TableCell padding='checkbox'>
@@ -251,7 +251,7 @@ class AdminTable extends React.Component {
                                         </TableCell>
                                     )
                                 )}
-                                <TableCell align='right' />
+                                <TableCell align='right'/>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -271,19 +271,16 @@ class AdminTable extends React.Component {
                                             className={classes.row}
                                         >
                                             <TableCell padding='checkbox'>
-                                                <Checkbox checked={isSelected} onClick={this.handleClick(value)} />
+                                                <Checkbox checked={isSelected} onClick={this.handleClick(value)}/>
                                             </TableCell>
-                                            { tableCells.map((tableCell, i) => <TableCell key={i}>{tableCell.prop(value)}</TableCell>) }
+                                            {tableCells.map((tableCell, i) => <TableCell key={i}>{tableCell.prop(value)}</TableCell>)}
                                             <TableCell padding='checkbox' align='right'>
                                                 <div className={classes.valueActions}>
-                                                    <IconButton onClick={this.props.onProductClone(value)}>
-                                                        <DublicateIcon />
-                                                    </IconButton>
                                                     <IconButton onClick={this.props.onFormOpen(value)}>
-                                                        <EditIcon />
+                                                        <EditIcon/>
                                                     </IconButton>
                                                     <IconButton onClick={this.handleDelete(value)}>
-                                                        <DeleteIcon />
+                                                        <DeleteIcon/>
                                                     </IconButton>
                                                 </div>
                                             </TableCell>
@@ -292,7 +289,7 @@ class AdminTable extends React.Component {
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={6} />
+                                    <TableCell colSpan={6}/>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -313,7 +310,7 @@ class AdminTable extends React.Component {
                 >
                     <DialogTitle>{deleteValueWarningTitle}</DialogTitle>
                     <DialogContent className={classes.warningContent}>
-                        <DialogContentText>{ valueForDelete && valueForDelete.name }</DialogContentText>
+                        <DialogContentText>{valueForDelete && valueForDelete.name}</DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleWarningDisagree} color='primary'>

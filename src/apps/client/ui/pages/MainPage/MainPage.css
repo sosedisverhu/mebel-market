@@ -1,0 +1,57 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
+
+.categorySection {
+    background: gray5;
+
+    &:nth-child(odd) {
+        background: whiteBasic; 
+
+        .title {
+            &:before {
+                left: auto;
+                right: 0;
+            }
+        }       
+    }
+
+    &.top {
+        .title {
+            @media (max-width: 600px) {
+                padding-top: 30px;
+            }
+        }    
+    }
+}
+
+.title {
+    font: 36px/41px RoundedElegance;
+    text-align: center;
+    color: black;
+    margin: 0 auto;
+    padding-top: 8px;
+    max-width: 1244px;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 24px;
+        width: 25%;
+        height: 2px;
+        background: black;
+    }
+
+    @media (max-width: 600px) {
+        padding-top: 15px;
+        font-size: 24px;
+        line-height: 28px;
+
+        &:before {
+            bottom: 15px;
+            width: 20%;
+        }
+    }
+}
