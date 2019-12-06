@@ -12,6 +12,12 @@ export default {
         accessoriesTitle: 'Аксесуари для сну',
         slider: 'Допомогти з вибором'
     },
+    product: {
+        datails: 'Детальні характеристики',
+        advantages: 'Основні плюси:',
+        buy: 'Купити',        
+        labelTop: 'Хіт'
+    },
     breadcrumbs: {
         main: 'Головна'
     },
@@ -42,9 +48,6 @@ export default {
     },
     productsPage: {
         filterBtn: 'Фільтри'
-    },
-    product: {
-        labelTop: 'Хіт'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

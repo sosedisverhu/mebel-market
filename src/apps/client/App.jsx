@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
+import ProductPage from './ui/pages/ProductPage/ProductPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
 import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
@@ -74,7 +75,8 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
-                        <Route exact path={`/:lang(${langs})?/:categoryId`} render={this.renderComponent(ProductsPage)} />
+                        <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
+                        <Route exact path={`/:lang(${langs})?/:categoryAlias/:alias`} render={this.renderComponent(ProductPage)}/>
                         <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
                 </div>
