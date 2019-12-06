@@ -431,12 +431,14 @@
     padding: 23px 16px;
 }
 
-.googlePlus,
-.facebook {
+.instagram,
+.facebook,
+.youtube {
     display: block;
 }
 
-.googlePlus {
+.instagram,
+.facebook {
     margin-right: 30px;
 }
 
