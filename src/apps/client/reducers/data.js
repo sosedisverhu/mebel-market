@@ -635,7 +635,7 @@ export default function (state = initialState, action) {
     case SET_ARTICLES:
         return { ...state, articles: action.payload };
     case SET_CATEGORIES:
-        return { ...state, articles: action.payload };
+        return { ...state, categories: action.payload };
     default:
         return state;
     }

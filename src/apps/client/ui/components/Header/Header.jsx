@@ -13,6 +13,7 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
         langMap: application.langMap,
+        lang: application.lang,
         categories: data.categories
     };
 };
@@ -21,6 +22,7 @@ class Header extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         categories: PropTypes.array
     };
 
@@ -42,13 +44,12 @@ class Header extends Component {
     };
 
     render () {
-        const { langRoute, langMap, categories } = this.props;
+        const { langRoute, langMap, lang, categories } = this.props;
         const { mobileMenuOpen, searchBarOpen } = this.state;
         const text = propOr('header', {}, langMap);
 
         return (
             <div className={styles.header}>
-                {console.log(categories)}
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
                         <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
@@ -61,15 +62,13 @@ class Header extends Component {
                             <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
-                                        <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.beds}</Link>
-                                        <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.mattresses}</Link>
-                                        <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.softFurniture}</Link>
-                                        <Link className={styles.mobileMenuItemTop} to={`${langRoute}/`}>{text.sleepAccessories}</Link>
-                                        <Link
-                                            className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
-                                            to={`${langRoute}/`}>
-                                            {text.promotions}
-                                        </Link>
+                                        {categories.map((category) => {
+                                            return <Link key={category.alias} className={styles.mobileMenuItemTop} to={`${langRoute}/${category.alias}`}>
+                                                {category.texts[lang].name}
+                                            </Link>;
+                                        })}
+                                        <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
+                                              to={`${langRoute}/`}>{text.promotions}</Link>
                                     </div>
                                     <div className={styles.mobileSocials}>
                                         <a href="#" target="_blank">
@@ -122,10 +121,11 @@ class Header extends Component {
                 </div>
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
-                        <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.beds}</Link>
-                        <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.mattresses}</Link>
-                        <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.softFurniture}</Link>
-                        <Link className={styles.menuItemBottom} to={`${langRoute}/`}>{text.sleepAccessories}</Link>
+                        {categories.map((category) => {
+                            return <Link key={category.alias} className={styles.menuItemBottom} to={`${langRoute}/${category.alias}`}>
+                                {category.texts[lang].name}
+                            </Link>;
+                        })}
                         <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`} to={`${langRoute}/`}>{text.promotions}</Link>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
