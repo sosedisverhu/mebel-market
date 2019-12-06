@@ -13,14 +13,14 @@ class Product extends Component {
         product: PropTypes.object.isRequired
     };
 
-    getDiscount = (priceOld, price) => {
-        const discount = Math.round((priceOld - price) / priceOld * 100);
+    getDiscount = (basePrice, price) => {
+        const discount = Math.round((basePrice - price) / basePrice * 100);
         return `-${discount}%`;
     }
 
     render () {
         const { product } = this.props;
-        const discount = this.getDiscount(product.priceOld, product.price);
+        const discount = this.getDiscount(product.basePrice, product.price);
 
         return <div className={styles.product}>
             <AboutProductTop newClass='mobile' product={product} />

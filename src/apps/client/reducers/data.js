@@ -2,7 +2,8 @@ const initialState = {
     products: [
         {
             photos: [
-                '/src/apps/client/ui/components/Card/img/products/bed-praga.jpg'
+                '/src/apps/client/ui/components/Card/img/products/antalya.jpg',
+                '/src/apps/client/ui/components/Card/img/products/antalya.jpg'
             ],
             sizes: [
                 {
@@ -21,7 +22,8 @@ const initialState = {
                     id: 'k2t250qz'
                 }
             ],
-            price: '1 399',
+            price: 1399,
+            basePrice: 2798,
             labels: [
                 'top'
             ],
@@ -66,7 +68,7 @@ const initialState = {
                 }
             ],
             price: '1 399',
-            basePrice: '2 798',
+            basePrice: '2798',
             discountPrice: 50,
             labels: [
                 'top'
