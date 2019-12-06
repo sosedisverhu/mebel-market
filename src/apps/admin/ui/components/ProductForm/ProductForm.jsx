@@ -163,10 +163,11 @@ class ProductForm extends Component {
                 const formData = new FormData();
                 const removedFiles = [];
                 const oldFiles = [];
+                const id = pathOr(['id'], this.id, product);
 
                 files.forEach((file, i) => {
                     if (file.content) {
-                        formData.append(`product-${product.id}-file-${i}`, file.content);
+                        formData.append(`product-${id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
                             path: file.path,
@@ -176,7 +177,7 @@ class ProductForm extends Component {
                 });
                 formData.append('removedFiles', JSON.stringify(removedFiles));
                 formData.append('oldFiles', JSON.stringify(oldFiles));
-                return updateProductFiles(formData, product.id);
+                return updateProductFiles(formData, id);
             })
             .then(() => {
                 onDone();
