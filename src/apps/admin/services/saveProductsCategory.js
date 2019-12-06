@@ -9,7 +9,7 @@ export default function saveCategory (category) {
 
         return base(
             request
-                .post('/api/admin/productsCategory/save')
+                .post('/api/admin/category/save')
                 .send(category)
                 .query({ token })
         );

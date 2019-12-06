@@ -9,7 +9,7 @@ export default function editCategory (category) {
 
         return base(
             request
-                .post('/api/admin/productsCategory/edit')
+                .post('/api/admin/category/edit')
                 .send(category)
                 .query({ token })
         );
