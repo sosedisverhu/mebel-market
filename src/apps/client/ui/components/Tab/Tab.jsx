@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import setScroll from '../../../actions/setScroll';
 
 import styles from './Tab.css';
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ data }) => {
     return {
         tabs: [
             {
@@ -16,25 +17,47 @@ const mapStateToProps = () => {
                 id: 'caracteristic',
                 title: 'Характеристики'
             }
-        ]
+        ],
+        scroll: data.scroll
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setScroll: payload => dispatch(setScroll(payload))
     };
 };
 
 class Tab extends Component {
     static propTypes = {
-        tabs: PropTypes.array.isRequired
+        tabs: PropTypes.array.isRequired,
+        scroll: PropTypes.bool.isRequired,
+        setScroll: PropTypes.func.isRequired
     };
 
     static defaultProps = {
-        tabs: []
+        tabs: [],
+        scroll: false
     };
 
-    state = {
-        activeId: this.props.tabs[0] && this.props.tabs[0].id
+    constructor (props) {
+        super(props);
+        this.state = {
+            activeId: this.props.tabs[0] && this.props.tabs[0].id
+        };
+        this.tabTitles = React.createRef();
     }
 
     handleChange (id) {
         this.setState({ activeId: id });
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.scroll !== this.props.scroll && nextProps.scroll) {
+            this.tabTitles.current.scrollIntoView({ behavior: 'smooth' });
+            this.setState({ activeId: 'caracteristic' });
+            this.props.setScroll(false);
+        }
     }
 
     getContent () {
@@ -61,6 +84,30 @@ class Tab extends Component {
                     <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
                 </div>
                 <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
+                    <h3 className={styles.caracterTitle}>Цвет</h3>
+                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                </div>
+                <div className={styles.row}>
                     <h3 className={styles.caracterTitle}>Гарантия</h3>
                     <p className={styles.caracterText}>12 месяцев</p>
                 </div>
@@ -80,7 +127,7 @@ class Tab extends Component {
         const { activeId } = this.state;
 
         return <div className={styles.root}>
-            <div className={styles.titles}>
+            <div ref={this.tabTitles} className={styles.titles}>
                 {tabs.map(({ id, title }) => {
                     return <h2
                         key={id}
@@ -99,4 +146,4 @@ class Tab extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Tab);
+export default connect(mapStateToProps, mapDispatchToProps)(Tab);

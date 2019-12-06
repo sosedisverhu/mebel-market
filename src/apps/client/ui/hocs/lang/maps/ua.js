@@ -13,7 +13,7 @@ export default {
         slider: 'Допомогти з вибором'
     },
     product: {
-        datails: 'Детальні характеристики',
+        details: 'Детальні характеристики',
         advantages: 'Основні плюси:',
         buy: 'Купити',
         labelTop: 'Хіт'

@@ -3,6 +3,7 @@
 @value black1 from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value red from '../../../../../css/colors.css';
+@value gray from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .root {
@@ -23,10 +24,6 @@
     margin: 15px 0 10px 0;
     font: 16px/18px RoundedElegance;
     color: black1;
-
-    /* @media (max-width: 1000px) {
-        margin-top: 10px;
-    } */
 }
 
 
@@ -55,6 +52,7 @@
     text-decoration: underline;
     margin-top: 10px;
     display: block;
+    cursor: pointer;
 }
 
 .priceOld {
@@ -79,6 +77,22 @@
 
 .select {
     margin-top: 6px;
+    position: relative;
+    width: 202px;
+
+    &.active {
+        .activeOption {
+            &:before {
+                transform: rotate(180deg);
+                transition: 0.25s ease-out;
+                border-color: black transparent transparent transparent;
+            }
+        }
+
+        .listOptions {
+            display: inline-block;
+        }
+    }
 }
 
 .activeOption {
@@ -88,11 +102,9 @@
     color: black;
     padding: 5px 30px 4px 9px;
     position: relative;
-    display: inline-block;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
-    min-width: 202px;
 
     &:before {
         content: "";
@@ -108,22 +120,32 @@
         transition: 0.25s ease-in;
         transition-property: transform, border-color;
     }
-
-    &:hover {
-        &:before {
-            transform: rotate(180deg);
-            transition: 0.25s ease-out;
-            border-color: black transparent transparent transparent;
-        }
-    }
-
-    /* @media (max-width: 600px) {
-        line-height: 16px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        width: 100%;
-    } */
 }
+
+.listOptions {
+    border: 2px solid gray;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: whiteBasic;
+    min-width: 100%;
+    width: max-content;
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 3;
+}
+
+.option {
+    padding: 5px;
+    font: 18px/21px RoundedElegance;
+    cursor: pointer;
+    color:gray;
+
+    &.active {
+        color: black;
+    }
+} 
 
 .buttons {
     margin-top: 22px;
