@@ -1,7 +1,7 @@
 import { SET_ARTICLES } from '../types/types';
 
 const initialState = {
-    'products': [
+    products: [
         {
             photos: [
                 '/src/apps/client/ui/components/Card/img/products/bed-praga.jpg'
@@ -538,7 +538,7 @@ const initialState = {
         }
     ],
     labels: ['top', 'discount'],
-    'mainSlides': [
+    mainSlides: [
         {
             'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
         },
