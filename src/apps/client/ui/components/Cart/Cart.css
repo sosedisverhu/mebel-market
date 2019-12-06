@@ -61,7 +61,6 @@
     position: absolute;
     top: 0;
     right: 60px;
-
     font-family: RoundedElegance;
     display: flex;
     flex-direction: column;
@@ -228,7 +227,7 @@
     font-size: 24px;
     line-height: 28px;
     color: black;
-    text-shadow: -0.1px 0 black, 0 0.1px black, 0.1px 0 black, 0 -0.1px black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
 }
 
 .checkoutBtn {

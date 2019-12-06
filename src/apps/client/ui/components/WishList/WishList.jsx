@@ -26,6 +26,7 @@ class WishList extends Component {
     }
 
     handlePopupClose = () => {
+        document.body.style.overflowY = 'visible';
         this.setState({
             active: false
         });
@@ -35,6 +36,7 @@ class WishList extends Component {
         const { outsideClickEnabled } = this.props;
         const { active } = this.state;
 
+        document.body.style.overflowY = (!active) ? 'hidden' : 'visible';
         this.setState(state => ({ active: !state.active }));
 
         if (!active && !outsideClickEnabled) {
