@@ -60,7 +60,7 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 ));
 
 const Feature =
-    SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
+    SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema, depended }) => (
         <FormGroup className={classes.feature} row>
             <ButtonSortable imageClassName={classes.buttonSortable}/>
             <div className={classes.featureGroup}>
@@ -73,15 +73,26 @@ const Feature =
                     variant='outlined'
                     error={!!validationMessage}
                 />
-                <TextField
-                    className={classes.featureField}
-                    label={schema.value}
-                    value={feature.value || ''}
-                    onChange={handleFeatureChange('value', rowIndex)}
-                    margin='normal'
-                    variant='outlined'
-                    error={!!validationMessage}
-                />
+                {depended
+                    ? <TextField
+                        className={classes.featureField}
+                        label={schema.value}
+                        value={feature.value || ''}
+                        onChange={handleFeatureChange('value', rowIndex)}
+                        margin='normal'
+                        variant='outlined'
+                        error={!!validationMessage}
+                    />
+                    : <TextField
+                        className={classes.featureField}
+                        label={schema.value}
+                        value={feature.value}
+                        onChange={handleFeatureChange('value', rowIndex)}
+                        margin='normal'
+                        variant='outlined'
+                        error={!!validationMessage}
+                    />
+                }
             </div>
             <IconButton aria-label='Delete' onClick={handleFeatureDelete(rowIndex)}>
                 <DeleteIcon/>
@@ -158,6 +169,7 @@ class FormFieldFeaturesDouble extends Component {
 
     render () {
         const { classes, value, validationMessage, schema } = this.props;
+        const depended = pathOr(['isSecondFieldDepended'], false, schema);
 
         return <div>
             <Features
@@ -170,6 +182,7 @@ class FormFieldFeaturesDouble extends Component {
                 useDragHandle
                 validationMessage={validationMessage}
                 schema={schema}
+                depended={depended}
             />
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleFeatureAdd}>
