@@ -2,9 +2,6 @@
 import React from 'react';
 
 export default {
-    product: {
-        labelTop: 'Хіт'
-    },
     mainPage: {
         top: 'Топ продажів',
         discount: 'Акції',
@@ -12,10 +9,14 @@ export default {
         bedsTitle: 'Ліжка',
         mattressesTitle: 'Матраци',
         furnitureTitle: 'М\'які меблі',
-        accessoriesTitle: 'Аксесуари для сну'
-    },
-    main: {
+        accessoriesTitle: 'Аксесуари для сну',
         slider: 'Допомогти з вибором'
+    },
+    product: {
+        datails: 'Детальні характеристики',
+        advantages: 'Основні плюси:',
+        buy: 'Купити',
+        labelTop: 'Хіт'
     },
     breadcrumbs: {
         main: 'Головна'
@@ -44,6 +45,9 @@ export default {
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки'
+    },
+    productsPage: {
+        filterBtn: 'Фільтри'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

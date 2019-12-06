@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Card.css';
@@ -16,7 +17,9 @@ const mapStateToProps = ({ application }) => {
 class Card extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        product: PropTypes.object.isRequired
+        product: PropTypes.object.isRequired,
+        newClass: PropTypes.string,
+        labelClass: PropTypes.string
     };
 
     getLabels = (labels, discountPrice) => {
@@ -36,13 +39,19 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, labels, discountPrice, photos: [logo], basePrice, price }
+            product: { texts, labels, discountPrice, photos: [logo], basePrice, price },
+            newClass,
+            labelClass
         } = this.props;
 
         const lang = 'ru';
 
         return (
-            <a className={styles.product}>
+            <a className={classNames(
+                styles.product,
+                { [styles[newClass]]: newClass },
+                { [styles[labelClass]]: labelClass }
+            )}>
                 <div className={styles.labels}>
                     {this.getLabels(labels, discountPrice)}
                 </div>

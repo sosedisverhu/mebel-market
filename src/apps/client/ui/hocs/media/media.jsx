@@ -36,6 +36,9 @@ const media = WrappedComponent => {
         constructor (...args) {
             super(...args);
 
+            if (typeof window !== 'undefined') {
+                this.updateMediaInfo();
+            }
             this.updateMediaInfoDebounced = debounce(() => this.props.setMediaInfo(this.getMediaInfo()), DEBOUNCE_DURATION);
         }
 
@@ -45,7 +48,6 @@ const media = WrappedComponent => {
             }
 
             this.updateMediaInfo();
-
             window.addEventListener('resize', this.updateMediaInfoDebounced);
         }
 

@@ -21,6 +21,20 @@
     @media (max-width: 1020px) {
         width: 606px;
     }
+
+    @media (max-width: 760px) {
+        width: 430px;
+    }
+
+    @media (max-width: 560px) {
+        width: 390px;
+        padding: 0 16px;
+    }
+
+    @media (max-width: 430px) {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
 .content {
@@ -40,6 +54,12 @@
 .productsPack {
     display: flex;
     width: 100%;
+
+    @media (max-width: 760px) {
+        flex-wrap: wrap;
+        min-width: 100%;
+        justify-content: space-between;
+    }
 }
 
 .left,
@@ -57,18 +77,6 @@
         position: relative;
     }
 
-    &:hover {
-        &:before {
-            top: 1px;
-        }
-    }
-
-    &:active {
-        &:before {
-            top: 2px;
-        }
-    }
-
     @media (max-width: 1042px) and (min-width: 1021px) {
         width: 38px;
     }
@@ -81,16 +89,12 @@
         content: url("./img/left.png");
     }
 
-    &:hover {
-        &:before {
-            left: -1px;
-        }
+    &.hidden {
+        display: none;
     }
 
-    &:hover {
-        &:before {
-            left: -2px;
-        }
+    @media (max-width: 760px) {
+        opacity: 0;
     }
 }
 
@@ -101,16 +105,12 @@
         content: url("./img/right.png");
     }
 
-    &:hover {
-        &:before {
-            left: 1px;
-        }
+    &.hidden {
+        display: none;
     }
 
-    &:hover {
-        &:before {
-            left: 2px;
-        }
+    @media (max-width: 760px) {
+        opacity: 0;
     }
 }
 
@@ -121,6 +121,16 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+    &.hidden {
+        opacity: 0;
+        padding: 0;
+        height: 30px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 0;
+    }
 }
 
 .ellipse {
@@ -149,6 +159,10 @@
             background: green;
             transition: background 0.25s ease-in;
         }
+    }
+
+    @media (max-width: 600px) {
+        padding: 15px 12px;
     }
 }
 

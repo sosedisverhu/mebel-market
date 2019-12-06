@@ -11,7 +11,7 @@ export default function getCategories () {
 
         return base(
             request
-                .get('/api/admin/productsCategory/all')
+                .get('/api/admin/category/all')
                 .query({ token })
         )
             .then(categories => {

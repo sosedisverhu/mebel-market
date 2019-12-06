@@ -89,17 +89,24 @@ class ProductForm extends Component {
         }));
 
         this.initialValues = {
-            categoryId: activeCategory.id,
-            subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
-            avatar: { files: product.avatar ? [product.avatar] : [] },
-            files: { files: product.files ? product.files : [] },
-            date: product.date,
             ru_name: ru.name || '',
             ua_name: ua.name || '',
-            lang: 'ru',
+            ru_description: ru.description || '',
+            ua_description: ua.description || '',
+            ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
+            ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
+            warranty: product.warranty || '',
+            sizes: product.sizes || [],
+            avatar: { files: product.avatar ? [product.avatar] : [] },
+            files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
+            date: product.date,
             price: product.price,
+            discount: product.discount,
+            categoryId: activeCategory.id,
+            subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
             alias: product.alias,
+            lang: 'ru',
             ...pick(PRODUCTS_VALUES, product)
         };
         this.id = prop('id', product);
@@ -115,8 +122,16 @@ class ProductForm extends Component {
         {
             ru_name: ruName,
             ua_name: uaName,
+            ru_description: ruDescription,
+            ua_description: uaDescription,
+            ru_characteristics: ruCharacteristics,
+            ua_characteristics: uaCharacteristics,
+            maxWeight,
+            warranty,
+            sizes,
             hidden,
             price,
+            discount,
             categoryId,
             subCategoryId,
             id,
@@ -125,14 +140,27 @@ class ProductForm extends Component {
         return {
             texts: {
                 ru: {
-                    name: ruName
+                    name: ruName,
+                    description: ruDescription
                 },
                 ua: {
-                    name: uaName
+                    name: uaName,
+                    description: uaDescription
                 }
             },
+            characteristics: {
+                ru: {
+                    characteristics: ruCharacteristics
+                },
+                ua: {
+                    characteristics: uaCharacteristics
+                }
+            },
+            warranty,
+            sizes,
             hidden,
             price,
+            discount,
             categoryId,
             subCategoryId,
             id,
@@ -160,10 +188,11 @@ class ProductForm extends Component {
                 const formData = new FormData();
                 const removedFiles = [];
                 const oldFiles = [];
+                const id = pathOr(['id'], this.id, product);
 
                 files.forEach((file, i) => {
                     if (file.content) {
-                        formData.append(`product-${product.id}-file-${i}`, file.content);
+                        formData.append(`product-${id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
                             path: file.path,
@@ -173,8 +202,7 @@ class ProductForm extends Component {
                 });
                 formData.append('removedFiles', JSON.stringify(removedFiles));
                 formData.append('oldFiles', JSON.stringify(oldFiles));
-
-                return updateProductFiles(formData, product.id);
+                return updateProductFiles(formData, id);
             })
             .then(() => {
                 onDone();

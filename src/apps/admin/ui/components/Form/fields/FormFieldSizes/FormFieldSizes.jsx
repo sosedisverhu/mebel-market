@@ -82,7 +82,7 @@ const Size = SortableElement(({ rowIndex, size, validationMessage, handleSizeDel
                 error={!!validationMessage}
             />
         </div>
-        <IconButton aria-label='Delete' className={classes.sizeDelButton} onClick={handleSizeDelete(rowIndex)}>
+        <IconButton aria-label='Delete' onClick={handleSizeDelete(rowIndex)}>
             <DeleteIcon />
         </IconButton>
     </FormGroup>

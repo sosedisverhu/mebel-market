@@ -11,7 +11,7 @@ export default function deleteCategory (ids) {
 
         return base(
             request
-                .post('/api/admin/productsCategory/delete')
+                .post('/api/admin/category/delete')
                 .send({ ids })
                 .query({ token })
         )

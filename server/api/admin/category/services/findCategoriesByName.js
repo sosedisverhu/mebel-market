@@ -1,6 +1,6 @@
 import { OKEY_STATUS_CODE, SERVER_ERROR_STATUS_CODE } from '../../../../constants/constants';
 
-import findCategoriesByNameQuery from '../../../client/productsCategory/queries/findCategoriesByName';
+import findCategoriesByNameQuery from '../../../client/category/queries/findCategoriesByName';
 
 export default function findCategoriesByName (req, res) {
     const { text } = req.query;

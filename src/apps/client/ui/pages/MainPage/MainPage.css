@@ -9,13 +9,19 @@
         background: whiteBasic; 
 
         .title {
-            padding-top: 30px;
-
             &:before {
                 left: auto;
                 right: 0;
             }
         }       
+    }
+
+    &.top {
+        .title {
+            @media (max-width: 600px) {
+                padding-top: 30px;
+            }
+        }    
     }
 }
 
@@ -36,5 +42,16 @@
         width: 25%;
         height: 2px;
         background: black;
+    }
+
+    @media (max-width: 600px) {
+        padding-top: 15px;
+        font-size: 24px;
+        line-height: 28px;
+
+        &:before {
+            bottom: 15px;
+            width: 20%;
+        }
     }
 }

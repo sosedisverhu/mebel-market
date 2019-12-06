@@ -9,7 +9,7 @@ import {
 
 import prepareCategory from '../utils/prepareCategory';
 
-import saveCategoryQuery from '../../../client/productsCategory/queries/saveCategory';
+import saveCategoryQuery from '../../../client/category/queries/saveCategory';
 
 export default function saveCategory (req, res) {
     const category = prepareCategory(req.body);

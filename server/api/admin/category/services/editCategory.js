@@ -6,9 +6,9 @@ import {
 } from '../../../../constants/constants';
 
 import prepareCategory from '../utils/prepareCategory';
-import getCategory from '../../../client/productsCategory/queries/getCategoryById';
+import getCategory from '../../../client/category/queries/getCategoryById';
 
-import editCategoryQuery from '../../../client/productsCategory/queries/editCategory';
+import editCategoryQuery from '../../../client/category/queries/editCategory';
 import toggleHiddenNewsByCategory from '../../../client/product/queries/toggleHiddenProductsByCategory';
 
 export default function editCategory (req, res) {

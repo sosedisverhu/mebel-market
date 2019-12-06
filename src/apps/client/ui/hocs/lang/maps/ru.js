@@ -2,9 +2,6 @@
 import React from 'react';
 
 export default {
-    product: {
-        labelTop: 'Хит'
-    },
     mainPage: {
         top: 'Топ продаж',
         discount: 'Акции',
@@ -12,10 +9,14 @@ export default {
         bedsTitle: 'Кровати',
         mattressesTitle: 'Матрасы',
         furnitureTitle: 'Мягкая мебель',
-        accessoriesTitle: 'Аксессуары для сна'
-    },
-    main: {
+        accessoriesTitle: 'Аксессуары для сна',
         slider: 'Помочь с выбором'
+    },
+    product: {
+        datails: 'Подробные характеристики',
+        advantages: 'Основные плюсы:',
+        buy: 'Купить',
+        labelTop: 'Хит'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -44,6 +45,9 @@ export default {
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки'
+    },
+    productsPage: {
+        filterBtn: 'Фильтры'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',
