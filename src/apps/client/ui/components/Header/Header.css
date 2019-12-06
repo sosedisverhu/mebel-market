@@ -355,8 +355,8 @@
     top: 100px;
     left: 0;
     backdrop-filter: blur(0px);
-    width: 100vw;
-    height: calc(100vh - 99px);
+    width: 100%;
+    height: calc(100% - 99px);
     max-height: 0;
     overflow-y: auto;
     z-index: 2;
