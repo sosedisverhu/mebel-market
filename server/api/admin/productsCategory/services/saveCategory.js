@@ -4,7 +4,7 @@ import { OKEY_STATUS_CODE, SERVER_ERROR_STATUS_CODE } from '../../../../constant
 
 import prepareCategory from '../utils/prepareCategory';
 
-import saveCategoryQuery from '../../../client/category/queries/saveCategory';
+import saveCategoryQuery from '../../../client/productsCategory/queries/saveCategory';
 
 export default function saveCategory (req, res) {
     const category = prepareCategory(req.body);

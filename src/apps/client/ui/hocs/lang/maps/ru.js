@@ -15,7 +15,7 @@ export default {
     product: {
         datails: 'Подробные характеристики',
         advantages: 'Основные плюсы:',
-        buy: 'Купить',
+        buy: 'Купить',        
         labelTop: 'Хит'
     },
     breadcrumbs: {

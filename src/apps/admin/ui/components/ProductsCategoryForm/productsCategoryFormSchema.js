@@ -72,7 +72,7 @@ export default function ({ data: { title } = {} } = {}) {
                 component: FormFieldCheckbox,
                 name: 'hidden',
                 schema: {
-                    label: 'Скрыть категорию и все товары в ней'
+                    label: 'Скрыть категорию и все новости в ней'
                 }
             },
             {
