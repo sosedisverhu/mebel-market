@@ -7,3 +7,4 @@ public/
 server/compiled/
 webpackAssets.json
 src/apps/admin/files
+*.DS_Store
