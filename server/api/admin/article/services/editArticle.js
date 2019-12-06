@@ -1,4 +1,9 @@
-import { OKEY_STATUS_CODE, NOT_FOUND_STATUS_CODE, SERVER_ERROR_STATUS_CODE, MONGODB_DUPLICATE_CODE } from '../../../../constants/constants';
+import {
+    OKEY_STATUS_CODE,
+    NOT_FOUND_STATUS_CODE,
+    SERVER_ERROR_STATUS_CODE,
+    MONGODB_DUPLICATE_CODE
+} from '../../../../constants/constants';
 
 import prepareArticle from '../utils/prepareArticle';
 
