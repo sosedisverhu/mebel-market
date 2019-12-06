@@ -1,3 +1,5 @@
+import { GOOGLE_MAPS_KEY } from './constants/constants';
+
 export default function (html, helmet, preloadedState = {}) {
     return `
     <!doctype html>
@@ -17,6 +19,9 @@ export default function (html, helmet, preloadedState = {}) {
                 // WARNING: See the following for security issues around embedding JSON in HTML:
                 // http://redux.js.org/recipes/ServerRendering.html#security-considerations
                 window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\\\\\\\u003c')}
+            </script>
+            <script defer
+                 src="https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_KEY}">
             </script>
             <script src='/public/vendors-client.chunk.js' defer='defer'></script>
             <script src='/public/client.chunk.js' defer='defer'></script>

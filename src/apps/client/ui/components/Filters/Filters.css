@@ -1,0 +1,13 @@
+.filters {
+    display: flex;
+    padding-left: 25px;
+    flex-wrap: wrap;
+
+    @media (max-width: 960px) {
+        padding-left: 0;
+    }
+
+    @media (max-width: 600px) {
+        display: none;
+    }
+}

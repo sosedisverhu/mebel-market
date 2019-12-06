@@ -1,0 +1,114 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.filter {
+    &.active {
+        .title {
+            background: green;
+            color: whiteBasic;        
+            transition: 0.25s ease-out;
+    
+            &:before {
+                transform: rotate(180deg);
+                transition: 0.25s ease-out;
+                border-color: whiteBasic transparent transparent transparent;
+            }
+        }
+
+        .options {
+            z-index: 1;
+            max-height: 500px;
+            transition: max-height 0.25s ease-in;
+        }
+    }
+}
+
+.title {
+    box-sizing: border-box;
+    font: 300 14px/16px RoundedElegance;
+    color: black;
+    padding: 17px 45px 17px 25px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.25s ease-in;
+    transition-property: background, color;
+
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: green transparent transparent  transparent;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        margin-top: -5px;
+        transition: 0.25s ease-in;
+        transition-property: transform, border-color;
+    }    
+}
+
+.options {
+    z-index: -1;
+    max-height: 0px;
+    overflow: hidden;
+    position: absolute;
+    padding: 8px 25px;
+    transition: max-height 0.25s ease-out;
+    background: green;
+    min-width: 242px;
+}
+
+.option {
+    font: 14px/16px RoundedElegance;
+    color: white;
+    padding: 9px 30px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+
+    &:checked {
+        + .circle {
+            &:before {                
+                background: black;
+            }
+        }
+    }
+}
+
+.circle {
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 16px;
+    height: 16px;
+    background: whiteBasic;
+    border-radius: 50%;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        margin-left: -5px;
+        transition: background 0.25s ease-in;
+        background: whiteBasic;
+        border-radius: 50%;        
+    }
+}
