@@ -156,8 +156,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 }],
                 schema: {
                     name: 'Название характеристики',
-                    value: 'Значения',
-                    isSecondFieldDepended: true
+                    value: 'Значения'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните характеристики товара' } }

@@ -57,9 +57,13 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'subCategory',
                 valueLangStructure: [{
                     name: 'depend',
-                    alias: 'notDepend',
+                    value: 'notDepend',
                     id: 'notDepend'
                 }],
+                schema: {
+                    name: 'Название подкатегории',
+                    value: 'Alias'
+                },
                 validators: [
                     { name: 'required', options: { text: 'Заполните подкатегории' } }
                 ]
