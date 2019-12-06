@@ -21,10 +21,12 @@ import deleteArticlesByIds from '../../../services/deleteArticlesByIds';
 const DEFAULT_LANG = 'ru';
 const headerRows = [
     { id: 'name', label: 'Название' },
+    { id: 'alias', label: 'Alias' },
     { id: 'active', label: 'Active' }
 ];
 const tableCells = [
     { prop: article => pathOr(['texts', DEFAULT_LANG, 'name'], '', article) },
+    { prop: article => <a target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{pathOr(['alias'], '', article)}</a> },
     { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 

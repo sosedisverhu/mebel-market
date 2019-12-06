@@ -16,6 +16,8 @@ import clientProductApi from './api/client/product';
 import adminArticleApi from './api/admin/article';
 import clientArticleApi from './api/client/article';
 import adminFilesApi from './api/admin/files';
+import adminProductsCategoryApi from './api/admin/productsCategory';
+import clientProductsCategoryApi from './api/client/productsCategory';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -51,6 +53,8 @@ app.use(cookieParser());
 app.use('/api/admin/authentication', adminAuthenticationApi);
 app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
+app.use('/api/admin/productsCategory', adminProductsCategoryApi);
+app.use('/api/client/productsCategory', clientProductsCategoryApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/files', adminFilesApi);

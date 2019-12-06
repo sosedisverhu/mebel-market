@@ -15,7 +15,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
-import arrayMove from '../../../../../utils/arrayMove';
 
 const materialStyles = {
     feature: {
@@ -35,9 +34,8 @@ const materialStyles = {
         alignItems: 'center',
         width: '100%'
     },
-    featureDelButton: {
-        position: 'relative',
-        top: '4px'
+    featureField: {
+        width: 'calc(50% - 20px)'
     },
     buttonSortable: {
         position: 'relative',
@@ -48,32 +46,38 @@ const materialStyles = {
     addButton: {
         display: 'flex',
         justifyContent: 'flex-end',
-        paddingRight: '50px'
+        paddingRight: '80px'
     }
 };
 
 const ButtonSortable = SortableHandle(({ imageClassName }) => (
-    <ReorderIcon className={imageClassName} />
+    <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Feature = SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, onBlur, classes }) => (
+const Feature = SortableElement(({ index, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes }) => (
     <FormGroup className={classes.feature} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.featureGroup}>
             <TextField
-                className={classes.dimensionField}
-                label='Значение'
-                value={feature}
-                onChange={handleFeatureChange(rowIndex)}
-                onBlur={onBlur}
+                className={classes.featureField}
+                label='Свойство'
+                value={feature.prop}
+                onChange={handleFeatureChange('prop', index)}
                 margin='normal'
                 variant='outlined'
                 error={!!validationMessage}
-                required
-                fullWidth
+            />
+            <TextField
+                className={classes.featureField}
+                label='Значение'
+                value={feature.value}
+                onChange={handleFeatureChange('value', index)}
+                margin='normal'
+                variant='outlined'
+                error={!!validationMessage}
             />
         </div>
-        <IconButton aria-label='Delete' className={classes.featureDelButton} onClick={handleFeatureDelete(rowIndex)}>
+        <IconButton aria-label='Delete' className={classes.featureDelButton} onClick={handleFeatureDelete(index)}>
             <DeleteIcon />
         </IconButton>
     </FormGroup>
@@ -81,23 +85,21 @@ const Feature = SortableElement(({ rowIndex, feature, validationMessage, handleF
 
 const Features = SortableContainer(({ features, classes, ...rest }) =>
     <div>
-        {features.map((feature, i) => <Feature key={i} rowIndex={i} feature={feature} {...rest} classes={classes}/>)}
+        {features.map((feature, i) => <Feature key={i} index={i} feature={feature} {...rest} classes={classes}/>)}
     </div>
 );
 
-class FormFieldFeaturesSingular extends Component {
+class FormFieldFeaturesDouble extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
-        onBlur: PropTypes.func,
         validationMessage: PropTypes.string
     };
 
     static defaultProps = {
         value: [],
         onChange: noop,
-        onBlur: noop,
         validationMessage: ''
     };
 
@@ -110,20 +112,14 @@ class FormFieldFeaturesSingular extends Component {
 
         this.props.onChange([
             ...value,
-            ''
+            { prop: '', value: '' }
         ]);
     };
 
-    onDragEnd = ({ oldIndex, newIndex }) => {
+    handleFeatureChange = (prop, i) => event => {
         const { value } = this.props;
 
-        this.props.onChange(arrayMove(value, oldIndex, newIndex));
-    };
-
-    handleFeatureChange = (i) => event => {
-        const { value } = this.props;
-
-        value[i] = event.target.value;
+        value[i][prop] = event.target.value;
 
         this.props.onChange(value);
     };
@@ -143,8 +139,6 @@ class FormFieldFeaturesSingular extends Component {
                 features={value}
                 handleFeatureDelete={this.handleFeatureDelete}
                 handleFeatureChange={this.handleFeatureChange}
-                onSortEnd={this.onDragEnd}
-                onBlur={this.props.onBlur}
                 classes={classes}
                 useDragHandle
                 validationMessage={validationMessage}
@@ -158,4 +152,4 @@ class FormFieldFeaturesSingular extends Component {
     }
 }
 
-export default withStyles(materialStyles)(FormFieldFeaturesSingular);
+export default withStyles(materialStyles)(FormFieldFeaturesDouble);

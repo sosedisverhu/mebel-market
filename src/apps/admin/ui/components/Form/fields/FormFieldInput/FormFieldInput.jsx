@@ -7,7 +7,7 @@ import noop from '@tinkoff/utils/function/noop';
 
 export default class FormFieldInput extends Component {
     static propTypes = {
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        value: PropTypes.string,
         schema: PropTypes.object,
         onChange: PropTypes.func,
         onBlur: PropTypes.func,
@@ -39,6 +39,7 @@ export default class FormFieldInput extends Component {
             error={!!validationMessage}
             margin='normal'
             variant='outlined'
+            multiline={schema.multiline}
             type={schema.type || 'text'}
             multiline={schema.multiline}
         />;

@@ -6,7 +6,6 @@ export default function getDateFormatted (miliseconds, lang) {
         day: 'numeric'
     };
     lang = (lang === 'ua') ? 'uk' : lang;
-    const dateFormatted = date.toLocaleString(lang, options).slice(0, -3);
-    
-    return dateFormatted;
+
+    return date.toLocaleString(lang, options).slice(0, -3);
 }

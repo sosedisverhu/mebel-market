@@ -77,6 +77,14 @@ h6 {
 
 .style {
     & :global {
+        .image {
+            margin-top: 15px;
+        }
+    }
+}
+
+.style {
+    & :global {
         .image img {
             max-width: 100%;
             width: auto;

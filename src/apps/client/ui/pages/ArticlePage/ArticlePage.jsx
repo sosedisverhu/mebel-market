@@ -6,6 +6,9 @@ import getDateFormatted from '../../../../../../utils/getDateFormatted';
 import { withRouter, matchPath } from 'react-router-dom';
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
+
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import NotFoundPage from '../../components/NotFoundPage/NotFoundPage';
 import StyleRenderer from '../../components/StyleRenderer/StyleRenderer';
 
 const mapStateToProps = ({ application, data }) => {
@@ -53,13 +56,14 @@ class ArticlePage extends Component {
     render () {
         const { article } = this.state;
         const { langMap, lang } = this.props;
-        const text = propOr('articlePage', {}, langMap);
+        const text = propOr('article', {}, langMap);
 
         if (this.notFoundPage) {
-            return <div>No Article</div>;
+            return <NotFoundPage />;
         }
 
         return <section className={styles.root}>
+            <Breadcrumbs />
             <div className={styles.articleWrap}>
                 <div className={styles.article}>
                     <h1 className={styles.title}>{article.texts[lang].name}</h1>

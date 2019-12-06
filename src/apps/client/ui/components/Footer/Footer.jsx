@@ -9,10 +9,13 @@ class Footer extends Component {
                 <div className={styles.footerContainer}>
                     <div className={styles.iconsWrapper}>
                         <a href="#" target="_blank">
-                            <div className={styles.googlePlus}/>
+                            <div className={styles.instagram}/>
                         </a>
                         <a href="#" target="_blank">
                             <div className={styles.facebook}/>
+                        </a>
+                        <a href="#" target="_blank">
+                            <div className={styles.youtube}/>
                         </a>
                     </div>
                     <div className={styles.developedWrapper}>

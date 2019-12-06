@@ -30,13 +30,13 @@ export default class FormFieldSelect extends Component {
     };
 
     render () {
-        const { value, schema, validationMessage } = this.props;
+        const { value, schema, validationMessage, onBlur } = this.props;
 
         return <TextField
             label={schema.label}
             value={value}
             onChange={this.handleChange}
-            onBlur={this.props.onBlur}
+            onBlur={onBlur}
             error={!!validationMessage}
             margin='normal'
             variant='outlined'

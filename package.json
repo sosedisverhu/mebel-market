@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint src server --ext .js,.jsx",
     "lint-fix": "eslint src server --ext .js,.jsx --fix",
+    "seeds": "node server/seeds",
     "static": "prun static",
     "server": "prun server",
     "build:static:dev": "prun build:static:dev",
@@ -71,6 +72,7 @@
     "find-package": "^1.0.0",
     "forever": "0.15.3",
     "json-loader": "^0.5.7",
+    "mongo-seeding": "^3.4.0-alpha.1",
     "optimize-js-plugin": "0.0.4",
     "postcss-at-rules-variables": "^0.1.6",
     "postcss-calc": "^6.0.1",
@@ -112,7 +114,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.4",
-    "date-fns": "^1.30.1",
+    "date-fns": "^2.8.1",
     "device": "^0.3.9",
     "express": "^4.16.3",
     "express-http-to-https": "^1.1.4",
@@ -138,6 +140,7 @@
     "react-swipeable-views": "^0.13.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "style-loader": "^1.0.0",
     "superagent": "3.5.2",
     "uniqid": "^5.0.3"
