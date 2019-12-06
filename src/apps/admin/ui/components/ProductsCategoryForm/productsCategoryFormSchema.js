@@ -21,16 +21,7 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'lang',
                 schema: {
                     langs: ['ru', 'ua']
-                },
-                validators: [
-                    {
-                        name: 'requiredLangFields',
-                        options: {
-                            text: 'Заполните форму для всех языков',
-                            fields: ['ru_name', 'ua_name']
-                        }
-                    }
-                ]
+                }
             },
             {
                 component: FormFieldInput,
