@@ -2,6 +2,7 @@
 @value black from '../../../../../css/colors.css';
 @value red from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 
 .product {
@@ -16,6 +17,79 @@
     overflow: hidden;
     margin: 30px 30px 0 0;
     background: whiteBasic;
+
+    @media (max-width: 640px) {
+        width: calc(50% - 10px);
+        min-width: 100px;
+        height: auto;
+        margin: 20px 0 0 0;
+    }
+
+    &.discount {
+        background: gray3;
+    }
+
+    &.sliderProduct {
+        @media (max-width: 760px) {
+            width: 200px;
+            min-width: 200px;
+            height: auto;
+
+            .label {
+                font-size: 14px;
+                line-height: 16px;
+                padding: 3px 10px;
+            }
+
+            .bottomPanel {
+                padding: 0 9px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            .title {
+                font-size: 13px;
+                line-height: 15px;
+                padding: 7px 0 5px 0;
+            }
+
+            .price {
+                font-size: 13px;
+                line-height: 15px;
+                margin-bottom: 7px;
+            }
+
+            .priceOld {
+                font-size: 10px;
+                line-height: 11px;
+                bottom: 9px;
+                left: 9px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            width: 200px;
+            min-width: 200px;
+            margin: 20px 0 0 0;
+        }
+
+        @media (max-width: 560px) {
+            width: 180px;
+            min-width: 180px;
+        }
+
+        @media (max-width: 410px) {
+            width: 154px;
+            min-width: 154px;
+        }
+
+        @media (max-width: 350px) {
+            width: 134px;
+            min-width: 134px;
+        }
+    }
 }
 
 .img {
@@ -31,20 +105,32 @@
 
 .label {
     font: 18px/21px RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
     padding: 0 18px;
     background: green;
     color: whiteBasic;
     margin-top: 8px;
+
+    @media (max-width: 640px) {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 3px 10px;
+    }
 }
 .discount {
-    color: red;    
+    color: red;
     background: whiteBasic;
 }
 
 .bottomPanel {
     position: relative;
+
+    @media (max-width: 640px) {
+        padding: 0 9px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 }
 
 .title {
@@ -52,6 +138,12 @@
     color: black;
     padding: 5px 10px;
     text-align: center;
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 15px;
+        padding: 7px 0 5px 0;
+    }
 }
 
 .price {
@@ -59,6 +151,12 @@
     color: red;
     margin-bottom: 15px;
     text-align: center;
+
+    @media (max-width: 640px) {
+        font-size: 13px;
+        line-height: 15px;
+        margin-bottom: 7px;
+    }
 }
 
 .priceOld {
@@ -68,4 +166,11 @@
     position: absolute;
     bottom: 17px;
     left: 50px;
+
+    @media (max-width: 640px) {
+        font-size: 10px;
+        line-height: 11px;
+        bottom: 9px;
+        left: 9px;
+    }
 }

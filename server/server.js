@@ -13,6 +13,9 @@ import map from '@tinkoff/utils/array/map';
 import adminAuthenticationApi from './api/admin/authentication';
 import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
+import adminArticleApi from './api/admin/article';
+import clientArticleApi from './api/client/article';
+import adminFilesApi from './api/admin/files';
 import adminProductsCategoryApi from './api/admin/productsCategory';
 import clientProductsCategoryApi from './api/client/productsCategory';
 
@@ -52,6 +55,9 @@ app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
 app.use('/api/admin/productsCategory', adminProductsCategoryApi);
 app.use('/api/client/productsCategory', clientProductsCategoryApi);
+app.use('/api/admin/article', adminArticleApi);
+app.use('/api/client/article', clientArticleApi);
+app.use('/api/admin/files', adminFilesApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

@@ -3,19 +3,24 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
+import getDateFormatted from '../../../../../../utils/getDateFormatted';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import styles from './Articles.css';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        lang: application.lang,
+        articles: data.articles
     };
 };
 
 class Articles extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
+        articles: PropTypes.array.isRequired
     };
 
     state = {
@@ -47,8 +52,9 @@ class Articles extends Component {
     };
 
     nextPage = (pageNumber) => {
+        const { articles } = this.props;
         const { currentPage, postsPerPage } = this.state;
-        if (currentPage < propOr('articles', {}, this.props.langMap).sections.length / postsPerPage) {
+        if (currentPage < articles.length / postsPerPage) {
             this.setState({ currentPage: Number(pageNumber.target.id) + 1 }, () => {
                 setTimeout(() => {
                     window.scroll({ top: 10000000, left: 0 });
@@ -61,9 +67,9 @@ class Articles extends Component {
     };
 
     render () {
-        const { langMap } = this.props;
+        const { langMap, lang, articles } = this.props;
         const { currentPage, postsPerPage } = this.state;
-        const text = propOr('articles', {}, langMap);
+        const text = propOr('article', {}, langMap);
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
@@ -71,25 +77,25 @@ class Articles extends Component {
             <section className={styles.articles}>
                 <Breadcrumbs />
                 <div className={styles.articlesContainer}>
-                    {text.sections.slice(indexOfFirstPost, indexOfLastPost).map(article =>
+                    {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
                         <div className={styles.article} key={article.id}>
-                            <Link className={styles.titleLink} to={`/articles/${article.id}`}>
-                                <h1 className={styles.title}><span className={styles.titleUnderline}>{article.title}</span></h1>
+                            <Link className={styles.titleLink} to={`/articles/${article.alias}`}>
+                                <h1 className={styles.title}><span className={styles.titleUnderline}>{article.texts[lang].name}</span></h1>
                             </Link>
-                            {article.introduction}
+                            <p>{article.texts[lang].preview}</p>
                             <div className={styles.moreInfo}>
-                                <Link to={`/articles/${article.id}`}>
+                                <Link to={`/articles/${article.alias}`}>
                                     <button className={styles.readMoreBtn}>{text.moreBtn}</button>
                                 </Link>
-                                <span className={styles.date}>{article.date}</span>
+                                <span className={styles.date}>{getDateFormatted(article.date, lang) + ' ' + text.year}</span>
                             </div>
                         </div>
                     )}
                 </div>
-                {text.sections.length > postsPerPage &&
+                {articles.length > postsPerPage &&
                     <Pagination
                         postsPerPage={postsPerPage}
-                        totalPosts={text.sections.length}
+                        totalPosts={articles.length}
                         currentPage={currentPage}
                         paginate={this.paginate}
                         previousPage={this.previousPage}

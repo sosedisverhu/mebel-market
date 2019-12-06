@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
 
@@ -22,6 +23,7 @@ class ProductPage extends Component {
 
         return (
             <div>
+                <Breadcrumbs />
                 <Product product={product} />
                 <Tab />
             </div>

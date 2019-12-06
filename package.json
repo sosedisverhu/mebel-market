@@ -105,6 +105,8 @@
     "webpack-stylish": "^0.1.8"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
+    "@ckeditor/ckeditor5-react": "^2.0.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@tinkoff/utils": "^2.0.0",
@@ -112,7 +114,7 @@
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.4",
-    "date-fns": "^1.30.1",
+    "date-fns": "^2.8.1",
     "device": "^0.3.9",
     "express": "^4.16.3",
     "express-http-to-https": "^1.1.4",

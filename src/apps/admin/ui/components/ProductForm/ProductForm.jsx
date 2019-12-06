@@ -114,8 +114,6 @@ class ProductForm extends Component {
     };
 
     handleSubmit = values => {
-        event.preventDefault();
-
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
 

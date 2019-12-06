@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import propOr from '@tinkoff/utils/object/propOr';
 import includes from '@tinkoff/utils/array/includes';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
@@ -57,7 +58,7 @@ class MainPage extends Component {
                 <Slider />
                 {labels.map(label => {
                     return (
-                        <section key={label} className={styles.categorySection}>
+                        <section key={label} className={classNames(styles.categorySection, styles[label])}>
                             <h2 className={styles.title}>{text[label]}</h2>
                             <ProductsSlider label={label} products={productsResult[label]} />
                         </section>);

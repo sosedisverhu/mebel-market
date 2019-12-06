@@ -53,7 +53,7 @@ class Slider extends Component {
         const { langMap, banners } = this.props;
         const { width, activeIndex } = this.state;
         const left = -1 * (width * (activeIndex));
-        const text = propOr('main', {}, langMap);
+        const text = propOr('mainPage', {}, langMap);
 
         return (
             <section className={styles.slider}>
