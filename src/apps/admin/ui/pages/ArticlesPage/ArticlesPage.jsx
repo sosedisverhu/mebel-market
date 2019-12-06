@@ -26,7 +26,7 @@ const headerRows = [
 ];
 const tableCells = [
     { prop: article => pathOr(['texts', DEFAULT_LANG, 'name'], '', article) },
-    { prop: article => <a target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{pathOr(['alias'], '', article)}</a> },
+    { prop: article => <a target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{`/articles/${pathOr(['alias'], '', article)}`}</a> },
     { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 
