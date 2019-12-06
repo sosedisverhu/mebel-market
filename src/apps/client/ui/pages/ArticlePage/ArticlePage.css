@@ -1,17 +1,19 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value black from '../../../../../css/colors.css';
-@value gray5 from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
 
 .root {
-    background: gray5;
+    background: gray3;
     padding-bottom: 30px;
+    height: 100%;
 }
 
 .articleWrap {
     background: whiteBasic;
+    height: calc(100% - 40px);
 }
 
-.article {    
+.article {
     max-width: 1240px;
     margin: 0 auto;
     padding: 30px 16px;
@@ -36,9 +38,9 @@
         height: 2px;
         background: black;
         position: absolute;
-        top: 13px;    
+        top: 13px;
         right: 200px;
-    }    
+    }
 
     @media (max-width: 900px) {
         padding: 0 170px 10px 0;
@@ -81,7 +83,7 @@
             height: 2px;
             background: black;
             position: absolute;
-            top: 50%;    
+            top: 50%;
             margin-top: -1px;
             left: 0;
         }

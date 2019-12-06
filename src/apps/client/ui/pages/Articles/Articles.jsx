@@ -12,7 +12,8 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         lang: application.lang,
-        articles: data.articles
+        articles: data.articles,
+        mediaWidth: application.media.width
     };
 };
 
@@ -20,13 +21,22 @@ class Articles extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        articles: PropTypes.array.isRequired
+        articles: PropTypes.array.isRequired,
+        mediaWidth: PropTypes.number.isRequired
     };
 
     state = {
         currentPage: 1,
         postsPerPage: 6
     };
+
+    static getDerivedStateFromProps(props) {
+        const { mediaWidth } = props;
+
+        return mediaWidth <= 600
+            ? { postsPerPage: 8 }
+            : { postsPerPage: 6 };
+    }
 
     paginate = pageNumber => this.setState({ currentPage: Number(pageNumber.target.id) }, () => {
         setTimeout(() => {
