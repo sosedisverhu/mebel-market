@@ -1,4 +1,4 @@
-import { SET_ARTICLES } from '../types/types';
+import { SET_ARTICLES, SET_CATEGORIES } from '../types/types';
 
 const initialState = {
     products: [
@@ -626,12 +626,15 @@ const initialState = {
             }
         }
     ],
-    articles: []
+    articles: [],
+    categories: []
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
     case SET_ARTICLES:
+        return { ...state, articles: action.payload };
+    case SET_CATEGORIES:
         return { ...state, articles: action.payload };
     default:
         return state;

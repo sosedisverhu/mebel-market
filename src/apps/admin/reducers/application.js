@@ -5,7 +5,7 @@ import {
 
 const initialState = {
     authenticated: null,
-    productsCategories: []
+    categories: []
 };
 
 export default function (state = initialState, action) {
@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
     case SET_AUTHENTICATED:
         return { ...state, authenticated: action.payload };
     case SET_CATEGORIES:
-        return { ...state, productsCategories: action.payload };
+        return { ...state, categories: action.payload };
     default:
         return state;
     }

@@ -7,23 +7,23 @@ import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
 
-import saveProductsCategory from '../../../services/saveProductsCategory';
-import editProductsCategory from '../../../services/editProductsCategory';
+import saveCategory from '../../../services/saveCategory';
+import editCategory from '../../../services/editCategory';
 
-import getSchema from './productsCategoryFormSchema';
+import getSchema from './CategoryFormSchema';
 import Form from '../Form/Form';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
 
 const mapDispatchToProps = (dispatch) => ({
-    saveProductsCategory: payload => dispatch(saveProductsCategory(payload)),
-    editProductsCategory: payload => dispatch(editProductsCategory(payload))
+    saveCategory: payload => dispatch(saveCategory(payload)),
+    editCategory: payload => dispatch(editCategory(payload))
 });
 
-class ProductsCategoryForm extends Component {
+class CategoryForm extends Component {
     static propTypes = {
-        saveProductsCategory: PropTypes.func.isRequired,
-        editProductsCategory: PropTypes.func.isRequired,
+        saveCategory: PropTypes.func.isRequired,
+        editCategory: PropTypes.func.isRequired,
         onDone: PropTypes.func,
         category: PropTypes.object,
         categories: PropTypes.array
@@ -97,13 +97,13 @@ class ProductsCategoryForm extends Component {
         event.preventDefault();
 
         const { id } = this.state;
-        const { editProductsCategory, saveProductsCategory, categories, onDone } = this.props;
+        const { editCategory, saveCategory, categories, onDone } = this.props;
         const categoryPayload = this.getCategoryPayload(values);
 
         (
             id
-                ? editProductsCategory({ ...categoryPayload, id })
-                : saveProductsCategory({
+                ? editCategory({ ...categoryPayload, id })
+                : saveCategory({
                     ...categoryPayload,
                     positionIndex: categoryPayload.positionIndex || categories.length
                 })
@@ -130,4 +130,4 @@ class ProductsCategoryForm extends Component {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductsCategoryForm);
+export default connect(null, mapDispatchToProps)(CategoryForm);

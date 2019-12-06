@@ -36,12 +36,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import ProductForm from '../../components/ProductForm/ProductForm';
-import ProductsCategoryForm from '../../components/ProductsCategoryForm/ProductsCategoryForm';
+import CategoryForm from '../../components/CategoryForm/CategoryForm';
 
 import arrayMove from '../../../utils/arrayMove';
 
 import getCategories from '../../../services/getCategories';
-import editProductsCategory from '../../../services/editProductsCategory';
+import editCategory from '../../../services/editCategory';
 import deleteCategoriesByIds from '../../../services/deleteCategoriesByIds';
 import getProducts from '../../../services/getProducts';
 import deleteProductsByIds from '../../../services/deleteProductsByIds';
@@ -77,12 +77,12 @@ const ItemSortable = SortableElement(({ onFormOpen, onCategoryDelete, name, onCa
 
 const SortableWrapper = SortableContainer((
     {
-        productsCategory,
+        category,
         ...rest
     }) =>
     <List>
         {
-            productsCategory.map((value, i) => {
+            category.map((value, i) => {
                 const name = pathOr(['texts', DEFAULT_LANG, 'name'], '', value);
 
                 return <ItemSortable key={i} name={name} value={value} index={i} {...rest}/>;
@@ -173,7 +173,7 @@ const materialStyles = theme => ({
 
 const mapStateToProps = ({ application, products }) => {
     return {
-        categories: application.productsCategories,
+        categories: application.categories,
         products: products.products
     };
 };
@@ -181,7 +181,7 @@ const mapStateToProps = ({ application, products }) => {
 const mapDispatchToProps = (dispatch) => ({
     getCategories: payload => dispatch(getCategories(payload)),
     deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
-    editProductsCategory: payload => dispatch(editProductsCategory(payload)),
+    editCategory: payload => dispatch(editCategory(payload)),
     getProducts: payload => dispatch(getProducts(payload)),
     deleteProducts: payload => dispatch(deleteProductsByIds(payload))
 });
@@ -195,7 +195,7 @@ class ProductsPage extends Component {
         categories: PropTypes.array.isRequired,
         getCategories: PropTypes.func.isRequired,
         deleteCategories: PropTypes.func.isRequired,
-        editProductsCategory: PropTypes.func.isRequired,
+        editCategory: PropTypes.func.isRequired,
         getProducts: PropTypes.func.isRequired,
         deleteProducts: PropTypes.func.isRequired,
         products: PropTypes.array
@@ -206,18 +206,18 @@ class ProductsPage extends Component {
         products: [],
         getCategories: noop,
         deleteCategories: noop,
-        editProductsCategory: noop,
+        editCategory: noop,
         getProducts: noop
     };
 
     state = {
         loading: true,
-        activeProductCategory: DEFAULT_ACTIVE_CATEGORY,
+        activeCategory: DEFAULT_ACTIVE_CATEGORY,
         productFormShowed: false,
         categoryFormShowed: false,
         editableCategory: {},
         editableProduct: {},
-        productsCategories: [],
+        categories: [],
         products: [],
         valueForDelete: null
     };
@@ -230,14 +230,14 @@ class ProductsPage extends Component {
             .then(() => {
                 this.setState({
                     loading: false,
-                    productsCategories: this.props.categories,
-                    activeProductCategory: this.props.categories[0] || DEFAULT_ACTIVE_CATEGORY,
-                    products: this.getCategoryProducts(this.props.categories[0])
+                    categories: this.props.categories,
+                    activeCategory: this.props.categories[0] || DEFAULT_ACTIVE_CATEGORY,
+                    products: this.getCategory(this.props.categories[0])
                 });
             });
     }
 
-    getCategoryProducts = (activeCategory = this.state.activeProductCategory) => {
+    getCategory = (activeCategory = this.state.activeCategory) => {
         return this.props.products.filter(product => product.categoryId === activeCategory.id);
     };
 
@@ -256,22 +256,22 @@ class ProductsPage extends Component {
     };
 
     handleCategoryFormDone = () => {
-        const { activeProductCategory } = this.state;
+        const { activeCategory } = this.state;
 
         this.props.getCategories()
             .then(() => {
                 const { categories } = this.props;
 
                 this.setState({
-                    productsCategories: categories,
-                    activeProductCategory: categories.find(category => category.id === activeProductCategory.id) || categories[0]
+                    categories: categories,
+                    activeCategory: categories.find(category => category.id === activeCategory.id) || categories[0]
                 });
                 this.handleCloseCategoryForm();
 
                 this.props.getProducts()
                     .then(() => {
                         this.setState({
-                            products: this.getCategoryProducts()
+                            products: this.getCategory()
                         });
                     });
             });
@@ -281,7 +281,7 @@ class ProductsPage extends Component {
         this.props.getProducts()
             .then(() => {
                 this.setState({
-                    products: this.getCategoryProducts()
+                    products: this.getCategory()
                 });
                 this.handleCloseProductForm();
             });
@@ -299,7 +299,7 @@ class ProductsPage extends Component {
                 this.props.getProducts()
                     .then(() => {
                         this.setState({
-                            products: this.getCategoryProducts()
+                            products: this.getCategory()
                         });
                     });
             });
@@ -312,13 +312,13 @@ class ProductsPage extends Component {
     };
 
     handleWarningAgree = () => {
-        const { valueForDelete, activeProductCategory } = this.state;
+        const { valueForDelete, activeCategory } = this.state;
 
         this.props.deleteCategories(valueForDelete.id)
             .then(() => {
                 this.setState({
-                    productsCategories: this.props.categories,
-                    activeProductCategory: activeProductCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
+                    categories: this.props.categories,
+                    activeCategory: activeCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
                     valueForDelete: null
                 });
             });
@@ -339,23 +339,23 @@ class ProductsPage extends Component {
 
     handleCategoryClick = category => () => {
         this.setState({
-            activeProductCategory: category,
-            products: this.getCategoryProducts(category)
+            activeCategory: category,
+            products: this.getCategory(category)
         });
     };
 
     onDragEnd = ({ oldIndex, newIndex }) => {
-        const { productsCategories } = this.state;
-        const newValues = arrayMove(productsCategories, oldIndex, newIndex);
+        const { categories } = this.state;
+        const newValues = arrayMove(categories, oldIndex, newIndex);
 
         newValues.forEach((category, i) => {
             category.positionIndex = i;
 
-            this.props.editProductsCategory(category);
+            this.props.editCategory(category);
         });
 
         this.setState({
-            productsCategories: newValues
+            categories: newValues
         });
     };
 
@@ -363,10 +363,10 @@ class ProductsPage extends Component {
         const { classes } = this.props;
         const {
             loading,
-            activeProductCategory,
+            activeCategory,
             editableProduct,
             productFormShowed,
-            productsCategories,
+            categories,
             products
         } = this.state;
 
@@ -376,13 +376,13 @@ class ProductsPage extends Component {
             </div>;
         }
 
-        if (!productsCategories.length) {
+        if (!categories.length) {
             return <div>
                 <Typography variant='h6' className={classes.categoryTitle}>Создайте сначала категорию</Typography>
             </div>;
         }
 
-        if (!activeProductCategory) {
+        if (!activeCategory) {
             return <div>
                 <Typography variant='h6' className={classes.categoryTitle}>Выберите категорию</Typography>
             </div>;
@@ -394,7 +394,7 @@ class ProductsPage extends Component {
                 headerRows={headerRows}
                 tableCells={tableCells}
                 values={products}
-                headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeProductCategory)}"`}
+                headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
                 onDelete={this.handleProductDelete}
                 deleteValueWarningTitle='Вы точно хотите удалить товар?'
                 deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
@@ -405,8 +405,8 @@ class ProductsPage extends Component {
             <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
                     <ProductForm
-                        categories={productsCategories}
-                        activeCategory={activeProductCategory}
+                        categories={categories}
+                        activeCategory={activeCategory}
                         product={editableProduct}
                         onDone={this.handleProductFormDone}/>
                 </Paper>
@@ -419,7 +419,7 @@ class ProductsPage extends Component {
         const {
             editableCategory,
             valueForDelete,
-            productsCategories,
+            categories,
             lang,
             categoryFormShowed
         } = this.state;
@@ -452,7 +452,7 @@ class ProductsPage extends Component {
                     onCategoryDelete={this.handleCategoryDelete}
                     onCategoryClick={this.handleCategoryClick}
                     onSortEnd={this.onDragEnd}
-                    productsCategory={productsCategories}
+                    category={categories}
                     lang={lang}
                     useDragHandle
                     classes={classes}
@@ -460,7 +460,7 @@ class ProductsPage extends Component {
             </Drawer>
             <Modal open={categoryFormShowed} onClose={this.handleCloseCategoryForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
-                    <ProductsCategoryForm categories={productsCategories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
+                    <CategoryForm categories={categories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
                 </Paper>
             </Modal>
             <Dialog

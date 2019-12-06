@@ -9,22 +9,24 @@ import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
-        langMap: application.langMap
+        langMap: application.langMap,
+        categories: data.categories
     };
 };
 
 class Header extends Component {
+    static propTypes = {
+        langRoute: PropTypes.string.isRequired,
+        langMap: PropTypes.object.isRequired,
+        categories: PropTypes.array
+    };
+
     state = {
         mobileMenuOpen: false,
         searchBarOpen: false
-    };
-
-    static propTypes = {
-        langRoute: PropTypes.string.isRequired,
-        langMap: PropTypes.object.isRequired
     };
 
     handleMobileMenu = () => {
@@ -40,12 +42,13 @@ class Header extends Component {
     };
 
     render () {
-        const { langRoute, langMap } = this.props;
+        const { langRoute, langMap, categories } = this.props;
         const { mobileMenuOpen, searchBarOpen } = this.state;
         const text = propOr('header', {}, langMap);
 
         return (
             <div className={styles.header}>
+                {console.log(categories)}
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
                         <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>

@@ -1,7 +1,7 @@
 import request from 'superagent';
 import base from '../base';
 
-import setNewsCategories from '../../actions/setProductsCategories';
+import setCategories from '../../actions/setCategories';
 
 export default function getCategories (req) {
     return dispatch => {
@@ -9,16 +9,16 @@ export default function getCategories (req) {
 
         return base(
             request
-                .get(`${host}/api/client/productsCategory/all`)
+                .get(`${host}/api/client/category/all`)
                 .timeout({
                     deadline: 2000
                 })
         )
             .then(categories => {
-                dispatch(setNewsCategories(categories));
+                dispatch(setCategories(categories));
             })
             .catch(() => {
-                dispatch(setNewsCategories([]));
+                dispatch(setCategories([]));
             });
     };
 }
