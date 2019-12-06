@@ -180,10 +180,9 @@ class ProductForm extends Component {
                 onDone();
             })
             .catch(error => {
-                console.log(error.code);
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для статьи'
+                        errorText: 'Введите уникальные алиас для товара'
                     });
                 } else {
                     this.setState({
