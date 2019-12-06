@@ -73,10 +73,10 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
-                        <Route exact path={`/:lang(${langs})?/articles/:id`} render={this.renderComponent(ArticlePage)} />
+                        <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
-                        <Route exact path={`/:lang(${langs})?/:categoryId/:id`} render={this.renderComponent(ProductPage)}/>
-                        <Route exact path={`/:lang(${langs})?/:categoryId`} render={this.renderComponent(ProductsPage)} />
+                        <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
+                        <Route exact path={`/:lang(${langs})?/:categoryAlias/:alias`} render={this.renderComponent(ProductPage)}/>
                         <Route render={this.renderComponent(NotFoundPage)}/>
                     </Switch>
                 </div>
