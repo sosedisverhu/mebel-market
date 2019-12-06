@@ -1,36 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Divider from '@material-ui/core/Divider';
-import { withStyles } from '@material-ui/core/styles';
-
-import ProductFormFiles from '../ProductFormFiles/ProductFormFiles.jsx';
-import ProductAvatarFile from '../ProductAvatarFile/ProductAvatarFile.jsx';
-
 import { connect } from 'react-redux';
+
+import getSchema from './ProductFormSchema';
 import saveProduct from '../../../services/saveProduct';
 import editProduct from '../../../services/editProduct';
 import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
 
+import Form from '../Form/Form';
+
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
+import pathOr from '@tinkoff/utils/object/pathOr';
 
 const PRODUCTS_VALUES = ['name', 'hidden'];
-
-const materialStyles = theme => ({
-    divider: {
-        marginTop: 2 * theme.spacing.unit,
-        marginBottom: 2 * theme.spacing.unit
-    }
-});
 
 const mapDispatchToProps = (dispatch) => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
@@ -41,66 +26,146 @@ const mapDispatchToProps = (dispatch) => ({
 
 class ProductForm extends Component {
     static propTypes = {
-        classes: PropTypes.object.isRequired,
         saveProduct: PropTypes.func.isRequired,
         editProduct: PropTypes.func.isRequired,
         updateProductFiles: PropTypes.func.isRequired,
         updateProductAvatar: PropTypes.func.isRequired,
         onDone: PropTypes.func,
-        product: PropTypes.object
+        product: PropTypes.object,
+        categories: PropTypes.array,
+        activeCategory: PropTypes.object
     };
 
     static defaultProps = {
         onDone: noop,
-        product: {}
+        product: {},
+        categories: [],
+        activeCategory: {}
     };
 
     constructor (...args) {
         super(...args);
 
-        const { product } = this.props;
-        const newProduct = {
-            hidden: false,
+        const defaultLang = this.state ? this.state.lang : 'ru';
+        const { product, categories, activeCategory } = this.props;
+        const ru = pathOr(['texts', 'ru'], '', product);
+        const ua = pathOr(['texts', 'ua'], '', product);
+        const categoryHidden = activeCategory.hidden;
+
+        this.categoriesOptions = categories.map(category => ({
+            value: category.id,
+            name: category.texts[defaultLang].name
+        }));
+
+        this.subCategoriesOptions = activeCategory.texts[defaultLang].subCategory.map(category => ({
+            value: category.id,
+            name: category.name
+        }));
+
+        this.initialValues = {
+            ru_name: ru.name || '',
+            ua_name: ua.name || '',
+            ru_description: ru.description || '',
+            ua_description: ua.description || '',
+            ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
+            ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
+            warranty: product.warranty || '',
+            sizes: product.sizes || [],
+            avatar: { files: product.avatar ? [product.avatar] : [] },
+            files: { files: product.files ? product.files : [] },
+            hidden: (categoryHidden ? false : product.hidden) || false,
+            date: product.date,
+            price: product.price,
+            discount: product.discount,
+            categoryId: activeCategory.id,
+            subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
+            alias: product.alias,
+            lang: 'ru',
             ...pick(PRODUCTS_VALUES, product)
         };
-
+        this.id = prop('id', product);
         this.state = {
-            product: newProduct,
-            id: prop('id', product),
-            initialAvatarFile: product.avatar,
-            initialFiles: product.files,
-            removedFiles: []
+            lang: 'ru',
+            activeCategory: activeCategory,
+            categoryHidden
         };
     }
 
     getProductPayload = (
         {
-            name,
+            ru_name: ruName,
+            ua_name: uaName,
+            ru_description: ruDescription,
+            ua_description: uaDescription,
+            ru_characteristics: ruCharacteristics,
+            ua_characteristics: uaCharacteristics,
+            maxWeight,
+            warranty,
+            sizes,
             hidden,
-            id
+            price,
+            discount,
+            categoryId,
+            subCategoryId,
+            id,
+            alias
         }) => {
         return {
-            name,
+            texts: {
+                ru: {
+                    name: ruName,
+                    description: ruDescription
+                },
+                ua: {
+                    name: uaName,
+                    description: uaDescription
+                }
+            },
+            characteristics: {
+                ru: {
+                    characteristics: ruCharacteristics
+                },
+                ua: {
+                    characteristics: uaCharacteristics
+                }
+            },
+            warranty,
+            sizes,
             hidden,
-            id
+            price,
+            discount,
+            categoryId,
+            subCategoryId,
+            id,
+            alias
         };
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = values => {
+        const productPayload = this.getProductPayload(values);
+        const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
 
-        const { id, product } = this.state;
-        const productPayload = this.getProductPayload(product);
-
-        (id ? this.props.editProduct({ ...productPayload, id }) : this.props.saveProduct(productPayload))
+        (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
             .then(product => {
-                const { files, removedFiles } = this.state;
+                const { files } = values.avatar;
+                if (files[0].content) {
+                    const formData = new FormData();
+
+                    formData.append(`product-${product.id}-avatar`, files[0].content);
+
+                    return updateProductAvatar(formData, product.id);
+                }
+            })
+            .then(product => {
+                const { files } = values.files;
                 const formData = new FormData();
+                const removedFiles = [];
                 const oldFiles = [];
+                const id = pathOr(['id'], this.id, product);
 
                 files.forEach((file, i) => {
                     if (file.content) {
-                        formData.append(`product-${product.id}-file-${i}`, file.content);
+                        formData.append(`product-${id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
                             path: file.path,
@@ -110,94 +175,57 @@ class ProductForm extends Component {
                 });
                 formData.append('removedFiles', JSON.stringify(removedFiles));
                 formData.append('oldFiles', JSON.stringify(oldFiles));
-
-                return this.props.updateProductFiles(formData, product.id);
-            })
-            .then(product => {
-                const { avatar } = this.state;
-
-                if (avatar.content) {
-                    const formData = new FormData();
-
-                    formData.append(`product-${product.id}-avatar`, avatar.content);
-
-                    return this.props.updateProductAvatar(formData, product.id);
-                }
+                return updateProductFiles(formData, id);
             })
             .then(() => {
-                this.props.onDone();
+                onDone();
             });
     };
 
-    handleChange = prop => event => {
-        this.setState({
-            product: {
-                ...this.state.product,
-                [prop]: event.target.value
-            }
-        });
-    };
+    handleChange = (values, changes) => {
+        switch (Object.keys(changes)[0]) {
+        case 'lang':
+            this.setState({
+                lang: changes.lang
+            });
+            break;
 
-    handleCheckboxChange = prop => (event, value) => {
-        this.setState({
-            product: {
-                ...this.state.product,
-                [prop]: value
-            }
-        });
-    };
+        case 'categoryId':
+            const activeCategory = this.props.categories.find(category => category.id === changes.categoryId);
+            const { lang } = this.state;
 
-    handleAvatarFileUpload = avatar => {
-        this.setState({
-            avatar
-        });
-    };
+            this.setState({
+                categoryHidden: activeCategory.hidden
+            });
 
-    handleFilesUpload = (files, removedFiles) => {
-        this.setState({
-            files,
-            removedFiles
-        });
+            this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
+                value: category.id,
+                name: category.name
+            }));
+
+            values.subCategoryId = activeCategory.texts[lang].subCategory[0].id;
+            break;
+        }
     };
 
     render () {
-        const { classes } = this.props;
-        const { product, id, initialFiles, initialAvatarFile } = this.state;
+        const { categoryHidden } = this.state;
 
-        return <form onSubmit={this.handleSubmit}>
-            <Typography variant='h5'>{id ? 'Редактирование товара' : 'Добавление нового товара'}</Typography>
-            <TextField
-                label='Название'
-                value={product.name}
-                onChange={this.handleChange('name')}
-                margin='normal'
-                variant='outlined'
-                fullWidth
-                required
-            />
-            <Divider className={classes.divider}/>
-            <ProductAvatarFile onAvatarFileUpload={this.handleAvatarFileUpload} initialAvatarFile={initialAvatarFile}/>
-            <Divider className={classes.divider}/>
-            <ProductFormFiles onFilesUpload={this.handleFilesUpload} initialFiles={initialFiles}/>
-            <div>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={product.hidden}
-                            onChange={this.handleCheckboxChange('hidden')}
-                            color='primary'
-                        />
-                    }
-                    label='Скрыть товар'
-                />
-            </div>
-            <FormControl margin='normal'>
-                <Button variant='contained' color='primary' type='submit'>
-                    Сохранить
-                </Button>
-            </FormControl>
-        </form>;
+        return <Form
+            initialValues={this.initialValues}
+            langs={['ru', 'ua']}
+            schema={getSchema({
+                data: {
+                    title: this.id ? 'Редактирование товара' : 'Добавление товара',
+                    categoriesOptions: this.categoriesOptions,
+                    subCategoriesOptions: this.subCategoriesOptions,
+                    categoryHidden
+                }
+            })}
+            onChange={this.handleChange}
+            onSubmit={this.handleSubmit}
+        />;
     }
 }
 
-export default connect(null, mapDispatchToProps)(withStyles(materialStyles)(ProductForm));
+export default connect(null, mapDispatchToProps)(ProductForm);

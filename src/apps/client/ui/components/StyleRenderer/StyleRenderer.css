@@ -1,0 +1,170 @@
+@value gray6 from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+
+.style strong {
+    font-family: RoundedElegance;
+}
+
+.style em {
+    font-style: italic;
+    font-family: RoundedElegance;
+    font-style: italic;
+}
+
+.style pre {
+    display: inline-block;
+}
+
+.style ul,
+.style ol {
+    padding-left: 20px;
+    margin: 20px 0 15px 0;
+    font-family: RoundedElegance;
+    position: relative;
+}
+
+.style ul li,
+.style ol li {
+    margin: 15px 0;
+    font: 16px/18px RoundedElegance;
+    color: gray6;
+}
+
+.style ul li {
+    position: relative;
+    padding-left: 5px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: -20px;
+        top: 50%;
+        margin-top: -5px;
+        background: black;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+}
+
+.style ol {
+    list-style: decimal outside;
+}
+
+.style h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: RoundedElegance;
+    color: black;
+    margin: 30px 0 15px 0;
+}
+
+.style h4 {
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.style blockquote {
+    p {
+        margin: 25px 0;
+        font: 16px/18px RoundedElegance;
+        color: gray6;
+    }
+}
+
+.style {
+    & :global {
+        .image {
+            margin-top: 15px;
+        }
+    }
+}
+
+.style {
+    & :global {
+        .image img {
+            max-width: 100%;
+            width: auto;
+            height: auto;
+        }
+    }
+}
+
+.style {
+    & :global {
+        .image-style-align-left {
+            margin-right: 20px;
+            float: left;
+            width: 50%;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                float: none;
+                margin-right: 0;
+            }
+        }
+    }
+}
+.style {
+    & :global {
+        .image-style-align-right {
+            float: right;
+            margin-left: 20px;
+            width: 50%;
+
+            @media (max-width: 1024px) {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                float: none;
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+.style p {
+    font-family: RoundedElegance;
+    letter-spacing: 1px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 19px;
+    color: gray6;
+    position: relative;
+    margin-top: 15px;
+
+    @media (max-width: 780px) {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+.style a {
+    font-family: RoundedElegance;
+    color: gray6;
+    transition: 0.2s ease;
+    opacity: 0.7;
+}
+
+.style a:hover {
+    opacity: 1;
+}
+
+.style * {
+    position: relative;
+}
+
+.style .media {
+    margin: 15px auto 30px auto;
+
+    @media (max-width: 600px) {
+        width: calc(100% + 32px);
+        position: relative;
+        left: -16px;
+    }
+}

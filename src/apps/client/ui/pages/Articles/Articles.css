@@ -1,0 +1,130 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value black1 from '../../../../../css/colors.css';
+
+.articles {
+    position: relative;
+    height: 100%;
+    background-color: gray3;
+    padding-bottom: 76px;
+
+    @media (max-width: 850px) {
+        padding-bottom: 96px;
+    }
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
+}
+
+.articlesContainer {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.article {
+    max-width: 605px;
+    width: 50%;
+    background-color: whiteBasic;
+    padding: 20px;
+    margin: 15px;
+    font-family: RoundedElegance;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 1280px) {
+        width: 45%;
+    }
+
+    @media (max-width: 850px) {
+        width: 100%;
+        margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    @media (max-width: 600px) {
+        margin: 0 0 20px 0;
+        padding: 20px 16px;
+    }
+}
+
+.titleLink {
+    text-decoration: none;
+}
+
+.title {
+    font-size: 24px;
+    line-height: 28px;
+    color: black;
+    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    margin-bottom: 20px;
+
+    @media (--media-tablet-s) {
+        font-size: 18px;
+        line-height: 21px;
+        margin-bottom: 10px;
+    }
+}
+
+.titleUnderline {
+    border-bottom: 1px solid black;
+}
+
+.article p {
+    font-size: 18px;
+    line-height: 21px;
+    color: rgba(35, 35, 35, 0.7);
+    margin-bottom: 20px;
+    height: 100%;
+
+    @media (--media-tablet-s) {
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: 15px;
+    }
+}
+
+.moreInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.readMoreBtn {
+    @mixin removeDefaultButton;
+    padding: 0;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    color: black1;
+    cursor: pointer;
+    position: relative;
+
+    &:after {
+        position: absolute;
+        content: '';
+        bottom: 1px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: black1;
+    }
+
+    @media (--media-tablet-s) {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+.date {
+    font-size: 14px;
+    line-height: 16px;
+}

@@ -1,0 +1,17 @@
+.product {
+    display: flex;
+    max-width: 1240px;
+    padding: 0 16px 30px 16px;
+    box-sizing: content-box;
+    margin: 0 auto;
+
+    @media (max-width: 1000px) {
+        flex-direction: column;
+        padding-top: 20px;
+        align-items: center;
+    }
+
+    @media (max-width: 600px) {
+        padding-bottom: 20px;
+    }
+}

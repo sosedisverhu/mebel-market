@@ -1,6 +1,6 @@
 import pick from '@tinkoff/utils/object/pick';
 
-const VALUES = ['name', 'company', 'price', 'discountPrice', 'description', 'features', 'filters', 'categoryId', 'tags', 'hidden', 'notAvailable', 'id'];
+const VALUES = ['id', 'texts', 'characteristics', 'warranty', 'sizes', 'avatar', 'files', 'hidden', 'date', 'price', 'discount', 'categoryId', 'subCategoryId', 'alias'];
 
 export default function prepareProduct (body) {
     return pick(VALUES, body);
