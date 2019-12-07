@@ -14,7 +14,7 @@ const mapStateToProps = ({ data }) => {
                 title: 'Описание'
             },
             {
-                id: 'caracteristic',
+                id: 'characteristic',
                 title: 'Характеристики'
             }
         ],
@@ -54,9 +54,10 @@ class Tab extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (nextProps.scroll !== this.props.scroll && nextProps.scroll) {
-            this.tabTitles.current.scrollIntoView({ behavior: 'smooth' });
-            this.setState({ activeId: 'caracteristic' });
-            this.props.setScroll(false);
+            this.setState({ activeId: 'characteristic' }, () => {
+                this.tabTitles.current.scrollIntoView({ behavior: 'smooth' });
+                this.props.setScroll(false);
+            });
         }
     }
 
