@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import propOr from '@tinkoff/utils/object/propOr';
-import setScroll from '../../../actions/setScroll';
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import outsideClick from '../../hocs/outsideClick';
 
 import styles from './AboutProduct.css';
@@ -39,7 +39,7 @@ const mapStateToProps = ({ application }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScroll: payload => dispatch(setScroll(payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
     };
 };
 
@@ -48,7 +48,7 @@ class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired,
-        setScroll: PropTypes.func.isRequired,
+        setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
     };
@@ -63,7 +63,7 @@ class AboutProduct extends Component {
     }
 
     scrollToTitles = () => {
-        this.props.setScroll(true);
+        this.props.setScrollToCharacteristic(true);
     }
 
     handleOptionClick = activeOption => {

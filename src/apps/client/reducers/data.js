@@ -1,4 +1,4 @@
-import { SET_ARTICLES, SET_SCROLL } from '../types/types';
+import { SET_ARTICLES, SET_SCROLLTOCHARACTERISTIC } from '../types/types';
 
 const initialState = {
     products: [
@@ -627,15 +627,15 @@ const initialState = {
         }
     ],
     articles: [],
-    scroll: false
+    scrollToCharacteristic: false
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
     case SET_ARTICLES:
         return { ...state, articles: action.payload };
-    case SET_SCROLL:
-        return { ...state, scroll: action.payload };
+    case SET_SCROLLTOCHARACTERISTIC:
+        return { ...state, scrollToCharacteristic: action.payload };
     default:
         return state;
     }

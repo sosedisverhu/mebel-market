@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import setScroll from '../../../actions/setScroll';
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 
 import styles from './Tab.css';
 
@@ -18,13 +18,13 @@ const mapStateToProps = ({ data }) => {
                 title: 'Характеристики'
             }
         ],
-        scroll: data.scroll
+        scroll: data.scrollToCharacteristic
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScroll: payload => dispatch(setScroll(payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
     };
 };
 
@@ -32,7 +32,7 @@ class Tab extends Component {
     static propTypes = {
         tabs: PropTypes.array.isRequired,
         scroll: PropTypes.bool.isRequired,
-        setScroll: PropTypes.func.isRequired
+        setScrollToCharacteristic: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -56,7 +56,7 @@ class Tab extends Component {
         if (nextProps.scroll !== this.props.scroll && nextProps.scroll) {
             this.setState({ activeId: 'characteristic' }, () => {
                 this.tabTitles.current.scrollIntoView({ behavior: 'smooth' });
-                this.props.setScroll(false);
+                this.props.setScrollToCharacteristic(false);
             });
         }
     }
