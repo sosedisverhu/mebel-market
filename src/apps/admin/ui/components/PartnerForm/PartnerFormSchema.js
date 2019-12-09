@@ -45,6 +45,16 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
+                component: FormFieldInput,
+                name: 'alias',
+                schema: {
+                    label: 'Alias'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните alias' } }
+                ]
+            },
+            {
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {

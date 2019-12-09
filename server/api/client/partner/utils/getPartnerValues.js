@@ -3,7 +3,8 @@ import pick from '@tinkoff/utils/object/pick';
 const VALUES = [
     'id',
     'texts',
-    'hidden'
+    'hidden',
+    'alias'
 ];
 
 export default function getPartnerValues (product) {

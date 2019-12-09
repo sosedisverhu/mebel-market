@@ -14,9 +14,8 @@ import savePartnerQuery from '../../../client/partner/queries/savePartner';
 export default function savePartner (req, res) {
     const partner = preparePartner(req.body);
     const id = uniqid();
-    const date = Date.now();
 
-    savePartnerQuery({ ...partner, date, id })
+    savePartnerQuery({ ...partner, id })
         .then(partner => {
             res.status(OKEY_STATUS_CODE).send(partner);
         })

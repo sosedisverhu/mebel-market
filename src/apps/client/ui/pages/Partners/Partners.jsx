@@ -7,7 +7,6 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import styles from './Partners.css';
-import StyleRenderer from '../../components/StyleRenderer/StyleRenderer';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -27,7 +26,7 @@ class Partners extends Component {
     render () {
         const { langMap, lang, partners } = this.props;
         const text = propOr('partners', {}, langMap);
-        
+console.log(partners)
         return (
             <section className={styles.partners}>
                 <Breadcrumbs />
@@ -47,7 +46,7 @@ class Partners extends Component {
                             {partners.map((partner, i) =>
                                 <div className={styles.partnerItem} key={i}>
                                     <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
-                                    <div className={styles.content}><StyleRenderer html={partner.texts[lang].content} /></div>
+                                    <div dangerouslySetInnerHTML={{ __html: partner.texts[lang].content.replace(/\\/g, '') }}/>
                                 </div>
                             )}
                         </div>

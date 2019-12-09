@@ -165,3 +165,29 @@
     max-width: 207px;
     width: 100%;
 }
+
+figure {
+    position: relative;
+    margin-bottom: 40px;
+    text-align: center;
+
+    &:after {
+        position: absolute;
+        content: '';
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -20px;
+        width: 109px;
+        height: 2px;
+        background-color: black;
+    }
+}
+
+.partnerItem p {
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: rgba(35, 35, 35, 0.7);
+    max-width: 207px;
+    width: 100%;
+}
