@@ -14,19 +14,15 @@ import ErrorIcon from '@material-ui/icons/Error';
 import { withStyles } from '@material-ui/core/styles';
 
 import Form from '../Form/Form';
-import getSchema from './ProductFormSchema';
-import saveProduct from '../../../services/saveProduct';
-import editProduct from '../../../services/editProduct';
-import updateProductFiles from '../../../services/updateProductFiles';
-import updateProductAvatar from '../../../services/updateProductAvatar';
+import getSchema from './SubCategoryFormSchema';
+import saveSubCategory from '../../../services/saveSubCategory';
+import editSubCategory from '../../../services/editSubCategory';
 
-const PRODUCTS_VALUES = ['name', 'hidden'];
+const SUB_CATEGORIES_VALUES = ['name', 'hidden'];
 
 const mapDispatchToProps = (dispatch) => ({
-    saveProduct: payload => dispatch(saveProduct(payload)),
-    editProduct: payload => dispatch(editProduct(payload)),
-    updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
-    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
+    saveSubCategory: payload => dispatch(saveSubCategory(payload)),
+    editSubCategory: payload => dispatch(editSubCategory(payload))
 });
 
 const materialStyles = theme => ({
@@ -49,104 +45,68 @@ const materialStyles = theme => ({
     }
 });
 
-class ProductForm extends Component {
+class SubCategoryForm extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        saveProduct: PropTypes.func.isRequired,
-        editProduct: PropTypes.func.isRequired,
-        updateProductFiles: PropTypes.func.isRequired,
-        updateProductAvatar: PropTypes.func.isRequired,
+        saveSubCategory: PropTypes.func.isRequired,
+        editSubCategory: PropTypes.func.isRequired,
         onDone: PropTypes.func,
-        product: PropTypes.object,
+        subCategory: PropTypes.object,
         categories: PropTypes.array,
-        subCategories: PropTypes.array,
         activeCategory: PropTypes.object
     };
 
     static defaultProps = {
         onDone: noop,
-        product: {},
+        subCategory: {},
         categories: [],
-        subCategories: [],
         activeCategory: {}
     };
 
     constructor (...args) {
         super(...args);
 
-        const defaultLang = this.state ? this.state.lang : 'ru';
-        const { product, categories, activeCategory, subCategories } = this.props;
-        const ru = pathOr(['texts', 'ru'], '', product);
-        const ua = pathOr(['texts', 'ua'], '', product);
+        const { subCategory, activeCategory } = this.props;
+        const ru = pathOr(['texts', 'ru'], '', subCategory);
+        const ua = pathOr(['texts', 'ua'], '', subCategory);
         const categoryHidden = activeCategory.hidden;
-
-        this.categoriesOptions = categories.map(category => ({
-            value: category.id,
-            name: category.texts[defaultLang].name
-        }));
-
-        this.subCategoriesOptions = subCategories.map(subCategory => ({
-            value: subCategory.id,
-            name: subCategory.texts[defaultLang].name
-        }));
 
         this.initialValues = {
             ru_name: ru.name || '',
             ua_name: ua.name || '',
-            ru_description: ru.description || '',
-            ua_description: ua.description || '',
             ru_seoTitle: ru.seoTitle || '',
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
             ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
-            ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
-            ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
-            warranty: product.warranty || '',
-            sizes: product.sizes || [],
-            avatar: { files: product.avatar ? [product.avatar] : [] },
-            files: { files: product.files ? product.files : [] },
-            hidden: (categoryHidden ? false : product.hidden) || false,
-            date: product.date,
-            price: product.price,
-            discount: product.discount,
             categoryId: activeCategory.id,
-            subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
-            alias: product.alias,
+            hidden: (categoryHidden ? false : subCategory.hidden) || false,
+            alias: subCategory.alias,
             lang: 'ru',
-            ...pick(PRODUCTS_VALUES, product)
+            ...pick(SUB_CATEGORIES_VALUES, subCategory)
         };
-        this.id = prop('id', product);
+        this.id = prop('id', subCategory);
         this.state = {
             lang: 'ru',
-            activeCategory,
+            activeCategory: activeCategory,
             categoryHidden,
             errorText: ''
         };
     }
 
-    getProductPayload = (
+    getSubCategoryPayload = (
         {
             ru_name: ruName,
             ua_name: uaName,
-            ru_description: ruDescription,
-            ua_description: uaDescription,
             ua_seoTitle: uaSeoTitle,
             ru_seoTitle: ruSeoTitle,
             ua_seoDescription: uaSeoDescription,
             ru_seoDescription: ruSeoDescription,
             ua_seoKeywords: uaSeoKeywords,
             ru_seoKeywords: ruSeoKeywords,
-            ru_characteristics: ruCharacteristics,
-            ua_characteristics: uaCharacteristics,
-            warranty,
-            sizes,
             hidden,
-            price,
-            discount,
             categoryId,
-            subCategoryId,
             id,
             alias
         }) => {
@@ -154,82 +114,36 @@ class ProductForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    description: ruDescription,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
                     seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
-                    description: uaDescription,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
-            characteristics: {
-                ru: {
-                    characteristics: ruCharacteristics
-                },
-                ua: {
-                    characteristics: uaCharacteristics
-                }
-            },
-            warranty,
-            sizes,
             hidden,
-            price,
-            discount,
             categoryId,
-            subCategoryId,
             id,
             alias
         };
     };
 
     handleSubmit = values => {
-        const productPayload = this.getProductPayload(values);
-        const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
+        const subCategoryPayload = this.getSubCategoryPayload(values);
+        const { editSubCategory, saveSubCategory, onDone } = this.props;
 
-        (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
-            .then(product => {
-                const { files } = values.avatar;
-                if (files[0].content) {
-                    const formData = new FormData();
-
-                    formData.append(`product-${product.id}-avatar`, files[0].content);
-
-                    return updateProductAvatar(formData, product.id);
-                }
-            })
-            .then(product => {
-                const { files } = values.files;
-                const formData = new FormData();
-                const removedFiles = [];
-                const oldFiles = [];
-                const id = pathOr(['id'], this.id, product);
-
-                files.forEach((file, i) => {
-                    if (file.content) {
-                        formData.append(`product-${id}-file-${i}`, file.content);
-                    } else {
-                        oldFiles.push({
-                            path: file.path,
-                            index: i
-                        });
-                    }
-                });
-                formData.append('removedFiles', JSON.stringify(removedFiles));
-                formData.append('oldFiles', JSON.stringify(oldFiles));
-                return updateProductFiles(formData, id);
-            })
+        (this.id ? editSubCategory({ ...subCategoryPayload, id: this.id }) : saveSubCategory(subCategoryPayload))
             .then(() => {
                 onDone();
             })
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для товара'
+                        errorText: 'Введите уникальные алиас для подкатегории'
                     });
                 } else {
                     this.setState({
@@ -255,11 +169,6 @@ class ProductForm extends Component {
                 categoryHidden: activeCategory.hidden
             });
 
-            this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
-                value: category.id,
-                name: category.name
-            }));
-
             values.subCategoryId = activeCategory.texts[lang].subCategory[0].id;
             break;
         }
@@ -281,9 +190,7 @@ class ProductForm extends Component {
                 langs={['ru', 'ua']}
                 schema={getSchema({
                     data: {
-                        title: this.id ? 'Редактирование товара' : 'Добавление товара',
-                        categoriesOptions: this.categoriesOptions,
-                        subCategoriesOptions: this.subCategoriesOptions,
+                        title: this.id ? 'Редактирование подкатегории' : 'Добавление подкатегории',
                         categoryHidden
                     }
                 })}
@@ -313,4 +220,4 @@ class ProductForm extends Component {
     }
 }
 
-export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(ProductForm));
+export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(SubCategoryForm));

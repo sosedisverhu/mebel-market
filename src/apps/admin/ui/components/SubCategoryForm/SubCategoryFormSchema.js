@@ -3,16 +3,15 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 
-export default function ({ data: { title } = {} } = {}) {
+export default function ({ data: { title, categoryHidden } = {} } = {}) {
     return {
         fields: [
             {
                 component: FormFieldTitle,
-                name: 'title',
+                name: 'form-title',
                 schema: {
                     label: title,
                     variant: 'h5'
@@ -33,7 +32,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Название'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните название категории' } }
+                    { name: 'required', options: { text: 'Заполните название подкатегории' } }
                 ]
             },
             {
@@ -45,6 +44,10 @@ export default function ({ data: { title } = {} } = {}) {
                 validators: [
                     { name: 'required', options: { text: 'Заполните alias' } }
                 ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
             },
             {
                 component: FormFieldTitle,
@@ -88,10 +91,16 @@ export default function ({ data: { title } = {} } = {}) {
                 }
             },
             {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
                 component: FormFieldCheckbox,
                 name: 'hidden',
+                hint: categoryHidden && 'Подкатегория будет скрыта, т.к. она находится в скрытой категории',
                 schema: {
-                    label: 'Скрыть категорию и все товары в ней'
+                    label: 'Скрыть подкатегорию',
+                    disabled: categoryHidden
                 }
             },
             {

@@ -14,8 +14,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Form from '../Form/Form';
 import getSchema from './CategoryFormSchema';
-import saveProductsCategory from '../../../services/saveProductsCategory';
-import editProductsCategory from '../../../services/editProductsCategory';
+import saveProductsCategory from '../../../services/saveCategory';
+import editProductsCategory from '../../../services/editCategory';
 import classNames from 'classnames';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
@@ -71,8 +71,6 @@ class CategoryForm extends Component {
         this.initialValues = {
             ru_name: ru.name || '',
             ua_name: ua.name || '',
-            ru_subCategory: ru.subCategory,
-            ua_subCategory: ua.subCategory,
             ru_seoTitle: ru.seoTitle || '',
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
@@ -95,8 +93,6 @@ class CategoryForm extends Component {
         {
             ru_name: ruName,
             ua_name: uaName,
-            ru_subCategory: ruSubCategory,
-            ua_subCategory: uaSubCategory,
             ua_seoTitle: uaSeoTitle,
             ru_seoTitle: ruSeoTitle,
             ua_seoDescription: uaSeoDescription,
@@ -114,14 +110,12 @@ class CategoryForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    subCategory: ruSubCategory,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
                     seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
-                    subCategory: uaSubCategory,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')

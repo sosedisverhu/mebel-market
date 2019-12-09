@@ -5,20 +5,10 @@ module.exports = [
         id: 'category0',
         texts: {
             ru: {
-                name: 'Кровати',
-                subCategory: [
-                    { name: 'Металлические кровати', value: 'metal', id: 'metal' },
-                    { name: 'Деревянные кровати', value: 'wooden', id: 'wooden' },
-                    { name: 'Двухъярусные кровати', value: 'two-tier', id: 'two-tier' }
-                ]
+                name: 'Кровати'
             },
             ua: {
-                name: 'Ліжка',
-                subCategory: [
-                    { name: 'Металеві ліжка', value: 'metal', id: 'metal' },
-                    { name: 'Дерев\'яні ліжка', value: 'wooden', id: 'wooden' },
-                    { name: 'Двоярусні ліжка', value: 'two-tier', id: 'two-tier' }
-                ]
+                name: 'Ліжка'
             }
         },
         hidden: false,
@@ -29,18 +19,10 @@ module.exports = [
         id: 'category1',
         texts: {
             ru: {
-                name: 'Матрасы',
-                subCategory: [
-                    { name: 'Пружинные матрасы', value: 'spring', id: 'spring' },
-                    { name: 'Беспружинные матрасы', value: 'no-spring', id: 'no-spring' }
-                ]
+                name: 'Матрасы'
             },
             ua: {
-                name: 'Матраци',
-                subCategory: [
-                    { name: 'Пружинні матраци', value: 'spring', id: 'spring' },
-                    { name: 'Безпружинні матраци', value: 'no-spring', id: 'no-spring' }
-                ]
+                name: 'Матраци'
             }
         },
         hidden: false,
@@ -51,20 +33,10 @@ module.exports = [
         id: 'category2',
         texts: {
             ru: {
-                name: 'Мягкая мебель',
-                subCategory: [
-                    { name: 'Диваны', value: 'sofas', id: 'sofas' },
-                    { name: 'Угловые диваны', value: 'corner-sofa', id: 'corner-sofa' },
-                    { name: 'Детские диваны', value: 'kids-sofa', id: 'kids-sofa' }
-                ]
+                name: 'Мягкая мебель'
             },
             ua: {
-                name: 'М\'які меблі',
-                subCategory: [
-                    { name: 'Дивани', value: 'sofas', id: 'sofas' },
-                    { name: 'Кутові дивани', value: 'corner-sofa', id: 'corner-sofa' },
-                    { name: 'Детячі дивани', value: 'kids-sofa', id: 'kids-sofa' }
-                ]
+                name: 'М\'які меблі'
             }
         },
         hidden: false,
@@ -75,20 +47,10 @@ module.exports = [
         id: 'category3',
         texts: {
             ru: {
-                name: 'Аксессуары для сна',
-                subCategory: [
-                    { name: 'Подушки', value: 'pillows', id: 'pillows' },
-                    { name: 'Одеяла', value: 'blankets', id: 'blankets' },
-                    { name: 'Наматрасники', value: 'mattress-covers', id: 'mattress-covers' }
-                ]
+                name: 'Аксессуары для сна'
             },
             ua: {
-                name: 'Аксесуари для сну',
-                subCategory: [
-                    { name: 'Подушки', value: 'pillows', id: 'pillows' },
-                    { name: 'Ковдри', value: 'blankets', id: 'blankets' },
-                    { name: 'Наматрацники', value: 'mattress-covers', id: 'mattress-covers' }
-                ]
+                name: 'Аксесуари для сну'
             }
         },
         hidden: false,
