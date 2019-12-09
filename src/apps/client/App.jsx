@@ -20,6 +20,7 @@ import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';
 import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
+import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -72,6 +73,7 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
+                        <Route exact path={`/:lang(${langs})?/search`} render={this.renderComponent(SearchPage)} />
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />

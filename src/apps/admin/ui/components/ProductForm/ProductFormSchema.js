@@ -8,6 +8,7 @@ import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
 import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
+import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 
 export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
     return {
@@ -205,6 +206,55 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'seoTitle',
+                schema: {
+                    label: 'Сео',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoTitle',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Тайтл',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео тайтл' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео описание' } }
+                ]
+            },
+            {
+                component: FormFieldKeywords,
+                name: 'seoKeywords',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Ключевые слова',
+                    multiline: false
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
             },
             {
                 component: FormFieldCheckbox,

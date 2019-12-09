@@ -11,6 +11,7 @@ import styles from './MainPage.css';
 import Slider from '../../components/Slider/Slider';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 import MainCategories from '../../components/MainCategories/MainCategories';
+import Advantages from '../../components/Advantages/Advantages';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -64,6 +65,7 @@ class MainPage extends Component {
                         </section>);
                 })}
                 <MainCategories />
+                <Advantages />
             </div>);
     }
 }

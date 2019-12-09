@@ -7,7 +7,10 @@ const Product = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
-            description: { type: String, required: true }
+            description: { type: String, required: true },
+            seoTitle: { type: String },
+            seoDescription: { type: String },
+            seoKeywords: { type: String }
         }
     },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
@@ -21,7 +24,7 @@ const Product = new Schema({
     discount: { type: Number },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
-    alias: { type: String, required: true }
+    alias: { type: String, required: true, unique: true }
 });
 
 export default mongoose.model('Product', Product);

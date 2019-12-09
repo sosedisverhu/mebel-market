@@ -30,7 +30,7 @@ class Articles extends Component {
         postsPerPage: 6
     };
 
-    static getDerivedStateFromProps(props) {
+    static getDerivedStateFromProps (props) {
         const { mediaWidth } = props;
 
         return mediaWidth <= 600

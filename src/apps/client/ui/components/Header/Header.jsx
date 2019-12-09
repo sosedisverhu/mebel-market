@@ -68,7 +68,7 @@ class Header extends Component {
                                             </Link>;
                                         })}
                                         <Link className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
-                                              to={`${langRoute}/`}>{text.promotions}</Link>
+                                            to={`${langRoute}/`}>{text.promotions}</Link>
                                     </div>
                                     <div className={styles.mobileSocials}>
                                         <a href="#" target="_blank">
