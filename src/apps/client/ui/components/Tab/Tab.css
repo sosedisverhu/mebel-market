@@ -84,6 +84,14 @@
     }
 }
 
+.descr {
+    margin-top: -30px;
+
+    @media (max-width: 600px) {
+        margin-top: -15px;
+    }
+}
+
 .descrTitle {
     font: 18px/21px RoundedElegance;
     color: black;
@@ -91,11 +99,6 @@
 
     &:first-child {
         margin-top: 0;
-    }
-
-    @media (max-width: 600px) {
-        font-size: 16px;
-        line-height: 18px;
     }
 }
 
@@ -125,7 +128,7 @@
     }
 }
 
-.caracterTitle {
+.characterTitle {
     width: 50%;
     font: 18px/21px RoundedElegance;
     color: black;
@@ -137,7 +140,7 @@
     }
 }
 
-.caracterText {
+.characterText {
     width: 50%;
     font: 16px/18px RoundedElegance;
     color: rgba(35, 35, 35, 0.7);
@@ -150,7 +153,7 @@
     }
 }
 
-.caracterSpan {
+.characterSpan {
     color: gray;
     font-size: 12px;
 
