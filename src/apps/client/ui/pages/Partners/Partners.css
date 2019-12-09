@@ -135,6 +135,8 @@
     line-height: 21px;
     text-align: center;
     text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+
+    margin: 0 0 15px 0;
 }
 
 .partnerLogoWrapper {
