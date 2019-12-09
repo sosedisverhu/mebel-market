@@ -100,5 +100,15 @@ export default {
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
         link: 'Зв\'яжіться з нами'
+    },
+    checkoutPage: {
+        checkout: 'Оформлення замовлення',
+        details: 'Подробиці замовлення',
+        delivery: 'Доставка',
+        payment: 'Оплата',
+        productPrice: 'Вартість товару:',
+        deliveryPrice: 'Доставка:',
+        allPrice: 'Всього:',
+        btnConfirm: 'Підтвердити замовлення'
     }
 };
