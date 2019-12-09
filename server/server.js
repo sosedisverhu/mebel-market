@@ -15,6 +15,8 @@ import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
 import adminArticleApi from './api/admin/article';
 import clientArticleApi from './api/client/article';
+import adminPartnerApi from './api/admin/partner';
+import clientPartnerApi from './api/client/partner';
 import adminFilesApi from './api/admin/files';
 import adminProductsCategoryApi from './api/admin/category';
 import clientProductsCategoryApi from './api/client/category';
@@ -57,6 +59,8 @@ app.use('/api/admin/category', adminProductsCategoryApi);
 app.use('/api/client/category', clientProductsCategoryApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
+app.use('/api/admin/partner', adminPartnerApi);
+app.use('/api/client/partner', clientPartnerApi);
 app.use('/api/admin/files', adminFilesApi);
 
 // admin

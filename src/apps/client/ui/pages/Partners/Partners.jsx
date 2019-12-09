@@ -7,6 +7,7 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import styles from './Partners.css';
+import StyleRenderer from '../../components/StyleRenderer/StyleRenderer';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -26,7 +27,7 @@ class Partners extends Component {
     render () {
         const { langMap, lang, partners } = this.props;
         const text = propOr('partners', {}, langMap);
-
+        
         return (
             <section className={styles.partners}>
                 <Breadcrumbs />
@@ -34,13 +35,19 @@ class Partners extends Component {
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>
                         <div className={styles.partnersWrapper}>
-                            {partners.map((partner, i) =>
+                            {/*{partners.map((partner, i) =>
                                 <div className={styles.partnerItem} key={i}>
                                     <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
                                     <div className={styles.partnerLogoWrapper}>
                                         <img className={styles.partnerLogo} src={partner.url} alt={partner.alt}/>
                                     </div>
                                     <p className={styles.partnerText}>{partner.texts[lang].text}</p>
+                                </div>
+                            )}*/}
+                            {partners.map((partner, i) =>
+                                <div className={styles.partnerItem} key={i}>
+                                    <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
+                                    <div className={styles.content}><StyleRenderer html={partner.texts[lang].content} /></div>
                                 </div>
                             )}
                         </div>
