@@ -1,0 +1,100 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value red from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value gray1 from '../../../../../css/colors.css';
+
+.gallery {
+    margin: 30px 55px 0 0;
+    max-width: 680px;
+    background: whiteBasic;
+    position: relative;
+
+    @media (max-width: 1060px) {
+        margin-right: 30px;
+    }
+
+    @media (max-width: 1000px) {
+        margin: 15px 0 0 0;
+    }
+
+    @media (max-width: 600px) {
+        width: calc(100% + 32px);
+        margin-top: 10px;
+    }
+}
+
+.discount {
+    position: absolute;
+    padding: 4px 10px;
+    top: 6px;
+    right: 0;
+    font: 18px/21px RoundedElegance;
+    color: whiteBasic;
+    background: red;
+}
+
+.mainImg {
+    width: 100%;
+    height: auto;
+}
+
+.additionalImgs {
+    display: flex;
+    flex-wrap: wrap;
+
+    @media (max-width: 600px) {
+        justify-content: center;
+        margin-top: 6px;
+    }
+}
+
+.additionalImgWrap {
+    width: calc(100% / 6);
+    cursor: pointer;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        margin-left: -5px;
+        margin-top: -5px;
+        display: none;
+        background: gray1;
+    }
+
+    &.active {
+        .additionalImg {
+            opacity: 1;
+            transition: opacity 0.2s ease-out;
+        }
+
+        &:before {
+            background: green;
+        }
+    }
+
+    @media (max-width: 600px) {
+        width: 18px;
+        height: 18px;
+        border-radius: 2px;
+        position: relative;
+
+        &:before {
+            display: block;
+        }
+    }
+}
+
+.additionalImg {
+    width: 100%;
+    opacity: 0.6;
+    transition: opacity 0.2s ease-in;
+
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
