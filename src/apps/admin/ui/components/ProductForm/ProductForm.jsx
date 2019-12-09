@@ -93,6 +93,12 @@ class ProductForm extends Component {
             ua_name: ua.name || '',
             ru_description: ru.description || '',
             ua_description: ua.description || '',
+            ru_seoTitle: ru.seoTitle || '',
+            ua_seoTitle: ua.seoTitle || '',
+            ru_seoDescription: ru.seoDescription || '',
+            ua_seoDescription: ua.seoDescription || '',
+            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
+            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
             warranty: product.warranty || '',
@@ -124,9 +130,14 @@ class ProductForm extends Component {
             ua_name: uaName,
             ru_description: ruDescription,
             ua_description: uaDescription,
+            ua_seoTitle: uaSeoTitle,
+            ru_seoTitle: ruSeoTitle,
+            ua_seoDescription: uaSeoDescription,
+            ru_seoDescription: ruSeoDescription,
+            ua_seoKeywords: uaSeoKeywords,
+            ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
-            maxWeight,
             warranty,
             sizes,
             hidden,
@@ -141,11 +152,17 @@ class ProductForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    description: ruDescription
+                    description: ruDescription,
+                    seoTitle: ruSeoTitle,
+                    seoDescription: ruSeoDescription,
+                    seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
-                    description: uaDescription
+                    description: uaDescription,
+                    seoTitle: uaSeoTitle,
+                    seoDescription: uaSeoDescription,
+                    seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
             characteristics: {

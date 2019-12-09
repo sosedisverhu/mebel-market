@@ -75,6 +75,12 @@ class ArticleForm extends Component {
             ua_preview: ua.preview || '',
             ru_content: ru.content || '',
             ua_content: ua.content || '',
+            ru_seoTitle: ru.seoTitle || '',
+            ua_seoTitle: ua.seoTitle || '',
+            ru_seoDescription: ru.seoDescription || '',
+            ua_seoDescription: ua.seoDescription || '',
+            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
+            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             hidden: article.hidden || false,
             alias: article.alias,
             ...pick(NEWS_VALUES, article)
@@ -93,6 +99,12 @@ class ArticleForm extends Component {
             ua_preview: uaPreview,
             ru_content: ruContent,
             ua_content: uaContent,
+            ua_seoTitle: uaSeoTitle,
+            ru_seoTitle: ruSeoTitle,
+            ua_seoDescription: uaSeoDescription,
+            ru_seoDescription: ruSeoDescription,
+            ua_seoKeywords: uaSeoKeywords,
+            ru_seoKeywords: ruSeoKeywords,
             hidden,
             id,
             alias
@@ -102,12 +114,18 @@ class ArticleForm extends Component {
                 ru: {
                     name: ruName,
                     preview: ruPreview,
-                    content: ruContent
+                    content: ruContent,
+                    seoTitle: ruSeoTitle,
+                    seoDescription: ruSeoDescription,
+                    seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
                     preview: uaPreview,
-                    content: uaContent
+                    content: uaContent,
+                    seoTitle: uaSeoTitle,
+                    seoDescription: uaSeoDescription,
+                    seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
             hidden,

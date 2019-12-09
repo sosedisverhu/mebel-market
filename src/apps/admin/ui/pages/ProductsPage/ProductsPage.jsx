@@ -36,7 +36,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import ProductForm from '../../components/ProductForm/ProductForm';
-import ProductsCategoryForm from '../../components/ProductsCategoryForm/ProductsCategoryForm';
+import CategoryForm from '../../components/CategoryForm/CategoryForm';
 
 import arrayMove from '../../../utils/arrayMove';
 
@@ -460,7 +460,7 @@ class ProductsPage extends Component {
             </Drawer>
             <Modal open={categoryFormShowed} onClose={this.handleCloseCategoryForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
-                    <ProductsCategoryForm categories={productsCategories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
+                    <CategoryForm categories={productsCategories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
                 </Paper>
             </Modal>
             <Dialog

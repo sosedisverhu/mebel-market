@@ -7,7 +7,10 @@ const Product = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
-            description: { type: String, required: true }
+            description: { type: String, required: true },
+            seoTitle: { type: String },
+            seoDescription: { type: String },
+            seoKeywords: { type: String }
         }
     },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
