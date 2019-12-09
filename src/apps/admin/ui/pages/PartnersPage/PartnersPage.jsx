@@ -132,7 +132,7 @@ class PartnersPage extends Component {
                 <CircularProgress/>
             </div>;
         }
-        
+
         return <div>
             <AdminTable
                 headerRows={headerRows}
