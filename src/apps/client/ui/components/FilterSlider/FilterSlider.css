@@ -1,0 +1,215 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value gray1 from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.filter {
+    &.active {
+        .title {
+            background: green;
+            color: whiteBasic;        
+            transition: 0.25s ease-out;
+    
+            &:before {
+                transform: rotate(180deg);
+                transition: 0.25s ease-out;
+                border-color: whiteBasic transparent transparent transparent;
+            }
+        }
+
+        .sliderWrapper {
+            z-index: 1;
+            max-height: 500px;
+            transition: max-height 0.25s ease-in;
+        }
+    }
+}
+
+.title {
+    box-sizing: border-box;
+    font: 300 14px/16px RoundedElegance;
+    color: black;
+    padding: 17px 45px 17px 25px;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.25s ease-in;
+    transition-property: background, color;
+
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: green transparent transparent  transparent;
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        margin-top: -5px;
+        transition: 0.25s ease-in;
+        transition-property: transform, border-color;
+    }    
+}
+
+.sliderWrapper {
+    z-index: -1;
+    max-height: 0px;
+    overflow: hidden;
+    position: absolute;
+    padding: 0 25px;
+    transition: max-height 0.25s ease-out;
+    background: green;
+    min-width: 242px;
+}
+
+
+
+
+
+
+
+
+.slider {
+    width: 100%;
+    height: 4px;
+    background: whiteBasic;
+    border-radius: 7px;
+    margin: 25px 0 5px;
+    position: relative;
+}
+
+.activeSquare {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 14px;
+    border-radius: 7px;
+    background: green;
+}
+
+.minCurrentValue,
+.maxCurrentValue {
+    position: absolute;
+    top: -20px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        width: 14px;
+        height: 14px;
+        background: whiteBasic;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border: 2px solid green;
+        top: 15px;
+    }
+}
+
+.minCurrentValue {
+    left: -7px;
+
+    &:before {
+        left: 0;
+    }
+}
+
+.maxCurrentValue {
+    right: -7px;
+
+    &:before {
+        right: 0;
+    }
+}
+
+.limits {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.inputRange {
+    height: 1rem;
+    position: relative;
+    margin: 15px 0 17px 0;
+    padding: 0 6px;
+}
+
+.label, .minLabel, .maxLabel {
+    display: none;
+}
+
+.customLabels {
+    margin-top: 17px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 16px;
+        margin-left: -8px;
+        height: 1px;
+        background: whiteBasic;
+
+    }
+}
+
+.customLabel {
+    font: 14px/16px RoundedElegance;
+    padding: 4px 12px 3px 12px;
+    color: whiteBasic;
+    border: 1px solid whiteBasic;
+    border-radius: 2px;
+}
+
+.track {
+    left: 0;
+    margin-top: -0.15rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    background: gray1;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: block;
+    height: 0.3rem;
+    position: relative;
+}
+
+.activeTrack {
+    background: whiteBasic;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: block;
+    height: 0.3rem;
+    position: relative;
+}
+
+.sliderContainer {
+    width: 16px;
+    height: 16px;
+}
+
+.slider {
+    appearance: none;
+    background: whiteBasic;
+    border: 2px solid green;
+    border-radius: 100%;
+    cursor: pointer;
+    display: block;
+    height: 1rem;
+    margin-left: -0.5rem;
+    margin-top: -0.65rem;
+    outline: none;
+    position: absolute;
+    width: 1rem;
+}

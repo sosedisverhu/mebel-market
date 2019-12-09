@@ -16,6 +16,11 @@ import clientProductApi from './api/client/product';
 import clientBasketApi from './api/client/basket';
 import clientOrderApi from './api/client/order';
 import adminOrderApi from './api/admin/order';
+import adminArticleApi from './api/admin/article';
+import clientArticleApi from './api/client/article';
+import adminFilesApi from './api/admin/files';
+import adminProductsCategoryApi from './api/admin/category';
+import clientProductsCategoryApi from './api/client/category';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -54,6 +59,11 @@ app.use('/api/client/product', clientProductApi);
 app.use('/api/client/basket', clientBasketApi);
 app.use('/api/admin/order', adminOrderApi);
 app.use('/api/client/order', clientOrderApi);
+app.use('/api/admin/category', adminProductsCategoryApi);
+app.use('/api/client/category', clientProductsCategoryApi);
+app.use('/api/admin/article', adminArticleApi);
+app.use('/api/client/article', clientArticleApi);
+app.use('/api/admin/files', adminFilesApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

@@ -12,7 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 const materialStyles = {
     root: {
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        marginTop: '15px'
     },
     langNav: {
         maxWidth: '50px',

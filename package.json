@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint src server --ext .js,.jsx",
     "lint-fix": "eslint src server --ext .js,.jsx --fix",
+    "seeds": "node server/seeds",
     "static": "prun static",
     "server": "prun server",
     "build:static:dev": "prun build:static:dev",
@@ -71,6 +72,7 @@
     "find-package": "^1.0.0",
     "forever": "0.15.3",
     "json-loader": "^0.5.7",
+    "mongo-seeding": "^3.4.0-alpha.1",
     "optimize-js-plugin": "0.0.4",
     "postcss-at-rules-variables": "^0.1.6",
     "postcss-calc": "^6.0.1",
@@ -103,6 +105,8 @@
     "webpack-stylish": "^0.1.8"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
+    "@ckeditor/ckeditor5-react": "^2.0.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
     "@tinkoff/utils": "^2.0.0",
@@ -137,6 +141,7 @@
     "react-swipeable-views": "^0.13.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "style-loader": "^1.0.0",
     "superagent": "3.5.2",
     "uniqid": "^5.0.3"

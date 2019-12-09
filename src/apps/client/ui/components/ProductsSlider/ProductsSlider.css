@@ -1,0 +1,181 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.slider {
+    padding: 0 60px;
+    margin: 0 auto;
+    max-width: 1242px;
+    box-sizing: content-box;
+    position: relative;
+
+    @media (max-width: 1360px) {
+        width: 924px;
+    }
+
+    @media (max-width: 1042px) and (min-width: 1021px) {
+        padding: 0 48px;
+    }
+
+    @media (max-width: 1020px) {
+        width: 606px;
+    }
+
+    @media (max-width: 760px) {
+        width: 430px;
+    }
+
+    @media (max-width: 560px) {
+        width: 390px;
+        padding: 0 16px;
+    }
+
+    @media (max-width: 430px) {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.content {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.products {
+    display: flex;
+    width: 100%;
+    min-width: 100%;
+    position: relative;
+    transition: left 0.7s ease-in-out;
+}
+
+.productsPack {
+    display: flex;
+    width: 100%;
+
+    @media (max-width: 760px) {
+        flex-wrap: wrap;
+        min-width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.left,
+.right {
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+
+    &:before {
+        position: relative;
+    }
+
+    @media (max-width: 1042px) and (min-width: 1021px) {
+        width: 38px;
+    }
+}
+
+.left {
+    left: 0;
+
+    &:before {
+        content: url("./img/left.png");
+    }
+
+    &.hidden {
+        display: none;
+    }
+
+    @media (max-width: 760px) {
+        opacity: 0;
+    }
+}
+
+.right {
+    right: 0;
+
+    &:before {
+        content: url("./img/right.png");
+    }
+
+    &.hidden {
+        display: none;
+    }
+
+    @media (max-width: 760px) {
+        opacity: 0;
+    }
+}
+
+
+.switch {
+    display: flex;
+    padding: 10px 0 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &.hidden {
+        opacity: 0;
+        padding: 0;
+        height: 30px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 0;
+    }
+}
+
+.ellipse {
+    cursor: pointer;
+    padding: 10px 12px;
+    position: relative;
+    box-sizing: content-box;
+    width: 40px;
+    height: 6px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background: whiteBasic;
+        transition: background 0.25s ease-out;
+        width: 40px;
+        height: 6px;
+        margin-left: -20px;
+        margin-top: -3px;
+    }
+
+    &.active {
+        &:before {
+            background: green;
+            transition: background 0.25s ease-in;
+        }
+    }
+
+    @media (max-width: 600px) {
+        padding: 15px 12px;
+    }
+}
+
+.discount {
+    .ellipse {
+        &:before {
+            background: gray3;
+        }
+
+        &.active {
+            &:before {
+                background: green;
+            }
+        }
+    }
+}

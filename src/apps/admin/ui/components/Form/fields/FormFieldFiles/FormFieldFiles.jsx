@@ -11,7 +11,6 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import WarningIcon from '@material-ui/icons/Warning';
-import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 import map from '@tinkoff/utils/array/map';
@@ -32,10 +31,7 @@ const materialStyles = theme => ({
     upload: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: theme.spacing.unit,
-        '@media (max-width: 425px)': {
-            display: 'block'
-        }
+        marginTop: theme.spacing.unit
     },
     uploadIcon: {
         marginLeft: theme.spacing.unit
@@ -53,20 +49,11 @@ const materialStyles = theme => ({
         cursor: 'grab',
         '&:hover $fileItemDeleteContainer': {
             visibility: 'visible'
-        },
-        '@media (max-width: 500px)': {
-            width: '100%'
         }
     },
     fileItemSorting: {
         '&:hover $fileItemDeleteContainer': {
             visibility: 'hidden'
-        }
-    },
-    fileName: {
-        marginBottom: '20px',
-        '@media (max-width: 500px)': {
-            width: '100%'
         }
     },
     fileImage: {
@@ -86,11 +73,7 @@ const materialStyles = theme => ({
     warning: {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '20px',
-        '@media (max-width: 425px)': {
-            marginLeft: '0',
-            marginTop: '10px'
-        }
+        marginLeft: '20px'
     },
     warningIcon: {
         color: '#ffae42',
@@ -109,30 +92,21 @@ const Image = SortableHandle(({ imageClassName, src, onLoad }) => (
     <img className={imageClassName} src={src} onLoad={onLoad} />
 ));
 
-const FilePreview = SortableElement(({ file, fileIndex, classes, onFileDelete, isSorting, onFileLoad, schema, onNameChange }) =>
+const FilePreview = SortableElement(({ file, index, classes, onFileDelete, isSorting, onFileLoad }) =>
     <div className={classNames(classes.fileItem, {
         [classes.fileItemSorting]: isSorting
     })}>
-        { schema.name && <TextField
-            label='Название'
-            className={classes.fileName}
-            value={file.name || ''}
-            onChange={onNameChange(fileIndex)}
-            margin='normal'
-            variant='outlined'
-            type='text'
-        /> }
         <div className={classes.fileItemDeleteContainer}>
             <IconButton
                 aria-label='Delete'
-                onClick={onFileDelete(fileIndex)}
+                onClick={onFileDelete(index)}
             >
                 <DeleteIcon />
             </IconButton>
         </div>
         <Image src={file.path} imageClassName={classNames(classes.fileImage, {
             [classes.fileImageError]: file.wrongDimensions
-        })} onLoad={onFileLoad(fileIndex)} />
+        })} onLoad={onFileLoad(index)} />
     </div>);
 
 const FilesPreviews = SortableContainer(({ files, classes, ...rest }) => {
@@ -141,7 +115,6 @@ const FilesPreviews = SortableContainer(({ files, classes, ...rest }) => {
             {files.map((file, i) => <FilePreview
                 key={i}
                 index={i}
-                fileIndex={i}
                 file={file}
                 classes={classes}
                 {...rest}
@@ -174,8 +147,7 @@ class FormFieldFiles extends Component {
 
         this.state = {
             files: map(file => ({
-                path: file.path || '/wrong-path',
-                name: file.name || ''
+                path: file || '/wrong-path'
             }), value.files),
             isSorting: false
         };
@@ -197,7 +169,7 @@ class FormFieldFiles extends Component {
             files = files.slice(files.length - schema.max);
 
             removedFiles.forEach(file => {
-                if (file.path && !file.content) {
+                if (file.path) {
                     this.removedFiles.push(file);
                 }
             });
@@ -239,23 +211,12 @@ class FormFieldFiles extends Component {
     handleFileDelete = i => () => {
         const { files } = this.state;
 
-        if (files[i].path && !files[i].content) {
+        if (files[i].path) {
             this.removedFiles.push(files[i]);
         }
 
         this.setState({
             files: remove(i, 1, files)
-        }, this.handleFilesChange);
-    };
-
-    handleNameChange = i => event => {
-        const { files } = this.state;
-        const newFiles = [...files];
-
-        newFiles[i].name = event.target.value;
-
-        this.setState({
-            files: newFiles
         }, this.handleFilesChange);
     };
 
@@ -307,7 +268,7 @@ class FormFieldFiles extends Component {
     };
 
     render () {
-        const { classes, name, schema } = this.props;
+        const { classes, name } = this.props;
         const { files, isSorting } = this.state;
         const inputId = `${name}-${+Date.now()}`;
 
@@ -335,12 +296,10 @@ class FormFieldFiles extends Component {
                 files={files}
                 onFileLoad={this.handleFileLoad}
                 onFileDelete={this.handleFileDelete}
-                onNameChange={this.handleNameChange}
                 onSortStart={this.onDragStart}
                 onSortEnd={this.onDragEnd}
                 isSorting={isSorting}
                 useDragHandle
-                schema={schema}
             />
         </div>;
     }
