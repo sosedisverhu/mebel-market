@@ -7,7 +7,15 @@
     position: relative;
     height: 100%;
     background-color: gray3;
-    padding-bottom: 81px;
+    padding-bottom: 76px;
+
+    @media (max-width: 850px) {
+        padding-bottom: 96px;
+    }
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
 }
 
 .articlesContainer {
@@ -28,7 +36,6 @@
     font-family: RoundedElegance;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     @media (max-width: 1280px) {
         width: 45%;
@@ -37,6 +44,10 @@
     @media (max-width: 850px) {
         width: 100%;
         margin-bottom: 20px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     @media (max-width: 600px) {
@@ -72,6 +83,7 @@
     line-height: 21px;
     color: rgba(35, 35, 35, 0.7);
     margin-bottom: 20px;
+    height: 100%;
 
     @media (--media-tablet-s) {
         font-size: 14px;

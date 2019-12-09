@@ -4,20 +4,20 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
-import getSchema from './ArticleFormSchema';
-import saveArticle from '../../../services/saveArticle';
-import editArticle from '../../../services/editArticle';
+import noop from '@tinkoff/utils/function/noop';
+import prop from '@tinkoff/utils/object/prop';
+import pick from '@tinkoff/utils/object/pick';
+import pathOr from '@tinkoff/utils/object/pathOr';
 
-import Form from '../Form/Form';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import ErrorIcon from '@material-ui/icons/Error';
 import { withStyles } from '@material-ui/core/styles';
 
-import noop from '@tinkoff/utils/function/noop';
-import prop from '@tinkoff/utils/object/prop';
-import pick from '@tinkoff/utils/object/pick';
-import pathOr from '@tinkoff/utils/object/pathOr';
+import Form from '../Form/Form';
+import getSchema from './ArticleFormSchema';
+import saveArticle from '../../../services/saveArticle';
+import editArticle from '../../../services/editArticle';
 
 const NEWS_VALUES = ['name', 'hidden'];
 
@@ -80,7 +80,9 @@ class ArticleForm extends Component {
             ...pick(NEWS_VALUES, article)
         };
         this.id = prop('id', article);
-        this.state = {};
+        this.state = {
+            errorText: ''
+        };
     }
 
     getArticlePayload = (

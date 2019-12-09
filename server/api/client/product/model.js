@@ -21,7 +21,7 @@ const Product = new Schema({
     discount: { type: Number },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
-    alias: { type: String, required: true }
+    alias: { type: String, required: true, unique: true }
 });
 
 export default mongoose.model('Product', Product);
