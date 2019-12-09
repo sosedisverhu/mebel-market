@@ -1,0 +1,116 @@
+@value blackBasic from '../../../../../css/colors.css';
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.root {
+    height: 100%;
+    padding-bottom: 40px;
+    background: gray3;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
+}
+
+.contentWrap {
+    background: whiteBasic;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    max-width: 1240px;
+    padding: 0 16px 30px 16px;
+    box-sizing: content-box;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 1060px) {
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0 16px;
+        overflow: hidden;
+    }
+
+    @media (max-width: 710px) {
+        padding-bottom: 20px;
+    }
+}
+
+.title {
+    font: 144px/166px RoundedElegance;
+    letter-spacing: 0.17em;
+    color: blackBasic;
+    margin-top: 17px;
+    padding: 0 60px;
+    position: relative;
+    text-align: center;
+
+    &:before {
+        content: "";
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        width: 287px;
+        height: 2px;
+        margin-top: -1px;
+        background: black;
+    }
+
+    @media (max-width: 710px) {
+        align-self: flex-end;
+        padding-right: 0;
+        right: -20px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 96px;
+        line-height: 110px;
+        line-height: 110px;
+        width: 100%;
+        text-align: right;
+
+        &:before {
+            right: auto;
+            left: -20px;
+            width: 38%;
+        }
+    }
+
+    @media (max-width: 360px) {
+        &:before {
+            width: 31%;
+        }
+    }
+
+    @media (max-width: 340px) {
+        &:before {
+            width: 24%;
+        }
+    }
+}
+
+.text {
+    font: 24px/28px RoundedElegance;
+    color: blackBasic;
+    margin-top: 20px;
+    max-width: 315px;
+}
+
+.link {
+    font: 18px/21px RoundedElegance;
+    color: whiteBasic;
+    padding: 10px 20px;
+    background: black;
+    margin-top: 70px;
+    text-decoration: none;
+
+    @media (max-width: 710px) {
+        margin-top: 60px;
+    }
+}
