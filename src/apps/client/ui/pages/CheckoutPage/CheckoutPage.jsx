@@ -120,7 +120,7 @@ class CheckoutPage extends Component {
         customerEmail: '',
         customerComment: '',
         customerAddress: ''
-    }
+    };
 
     handleChange = fieldName => e => {
         this.setState({ [fieldName]: e.target.value, [`${fieldName}Error`]: false });

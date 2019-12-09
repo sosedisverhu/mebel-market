@@ -18,7 +18,6 @@ import { withStyles } from '@material-ui/core/styles';
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../../../utils/arrayMove';
-import pathOr from '@tinkoff/utils/object/pathOr';
 
 const materialStyles = {
     feature: {
