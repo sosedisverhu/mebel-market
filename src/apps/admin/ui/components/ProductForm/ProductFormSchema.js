@@ -9,7 +9,7 @@ import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx'
 import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 
-export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
+export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, filters } = {} } = {}) {
     return {
         fields: [
             {
@@ -162,6 +162,48 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     { name: 'required', options: { text: 'Заполните характеристики товара' } }
                 ]
             },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            ...(filters.length ? [{
+                component: FormFieldTitle,
+                name: 'filtersTitle',
+                schema: {
+                    label: 'Фильтры',
+                    variant: 'h6'
+                }
+            }] : []),
+            ...(filters.map(filter => {
+                if (filter.type === 'checkbox') {
+                    return ({
+                        component: FormFieldSelect,
+                        name: `filter-${filter.id}`,
+                        schema: {
+                            label: filter.name,
+                            options: filter.options.map(option => ({
+                                value: option.id,
+                                name: option.name
+                            }))
+                        },
+                        validators: [
+                            { name: 'required', options: { text: 'Выберите значение фильтра' } }
+                        ]
+                    });
+                }
+
+                return ({
+                    component: FormFieldInput,
+                    name: `filter-${filter.id}`,
+                    schema: {
+                        label: filter.name,
+                        type: 'number'
+                    },
+                    validators: [
+                        { name: 'required', options: { text: 'Заполните значение фильтра' } }
+                    ]
+                });
+            })),
             {
                 component: FormFieldDivider,
                 name: 'divider'

@@ -4,6 +4,8 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
+import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
+import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -66,6 +68,31 @@ export default function ({ data: { title } = {} } = {}) {
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните подкатегории' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'filtersTitle',
+                schema: {
+                    label: 'Фильтры категории',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldFilters,
+                name: 'filters',
+                valueLangStructure: [{
+                    id: 'notDepend',
+                    type: 'notDepend',
+                    name: 'depend',
+                    options: ['depend']
+                }],
+                validators: [
+                    { name: 'filters' }
                 ]
             },
             {

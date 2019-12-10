@@ -72,6 +72,9 @@ class ProductsCategoryForm extends Component {
             ru_subCategory: pathOr(['texts', 'ru', 'subCategory'], [], category),
             ua_subCategory: pathOr(['texts', 'ua', 'subCategory'], [], category),
             alias: category.alias || '',
+            filters: [],
+            ua_filters: pathOr(['filters', 'ua'], [], category),
+            ru_filters: pathOr(['filters', 'ru'], [], category),
             hidden: category.hidden || false,
             ...pick(CATEGORIES_VALUES, category)
         };
@@ -92,7 +95,9 @@ class ProductsCategoryForm extends Component {
             hidden,
             positionIndex,
             id,
-            alias
+            alias,
+            ua_filters: uaFilters,
+            ru_filters: ruFilters
         }) => {
         return {
             hidden,
@@ -106,6 +111,10 @@ class ProductsCategoryForm extends Component {
                     name: uaName,
                     subCategory: uaSubCategory
                 }
+            },
+            filters: {
+                ua: uaFilters,
+                ru: ruFilters
             },
             id,
             alias

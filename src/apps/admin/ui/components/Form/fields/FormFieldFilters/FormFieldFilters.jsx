@@ -258,7 +258,7 @@ class FormFieldFilters extends Component {
 
     state = {
         isSorting: false,
-        newOptionTexts: this.props.value.map(() => ({ id: uniqid(), name: '' })),
+        newOptionTexts: this.props.value.map(() => ({ id: uniqid(), name: '', options: [] })),
         editableOptionText: '',
         editableFilterIndex: null,
         editableOptionIndex: null
@@ -315,8 +315,8 @@ class FormFieldFilters extends Component {
         }
 
         newValue[i].options = [...newValue[i].options, { id: uniqid(), name: newOptionTexts[i].name }];
-        newOptionTextsCopy[i].name = '';
-
+        newOptionTextsCopy[i] = '';
+        
         this.setState({
             newOptionTexts: newOptionTextsCopy
         });

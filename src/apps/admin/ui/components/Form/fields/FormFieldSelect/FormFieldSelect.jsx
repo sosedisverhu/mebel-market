@@ -43,11 +43,11 @@ export default class FormFieldSelect extends Component {
             select
         >
             {
-                (schema.options || []).map(({ value, name }, i) => (
-                    <MenuItem key={i} value={value}>
-                        {name}
-                    </MenuItem>
-                ))
+                (schema.options || []).map(({ value, name }, i) => {
+                    return <MenuItem key={i} value={value}>
+                            {name}
+                        </MenuItem>;
+                })
             }
         </TextField>;
     }
