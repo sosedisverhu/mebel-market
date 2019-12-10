@@ -5,7 +5,8 @@ const VALUES = [
     'texts',
     'hidden',
     'categoryId',
-    'alias'
+    'alias',
+    'positionIndex'
 ];
 
 export default function getSubCategoryValues (product) {

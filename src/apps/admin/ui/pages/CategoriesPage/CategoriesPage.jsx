@@ -33,7 +33,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
-import AdminTable from '../../components/AdminTable/AdminTable.jsx';
+import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import SubCategoryForm from '../../components/SubCategoryForm/SubCategoryForm';
 import CategoryForm from '../../components/CategoryForm/CategoryForm';
 
@@ -41,6 +41,7 @@ import arrayMove from '../../../utils/arrayMove';
 
 import getCategories from '../../../services/getCategories';
 import editCategory from '../../../services/editCategory';
+import editSubCategory from '../../../services/editSubCategory';
 import deleteCategoriesByIds from '../../../services/deleteCategoriesByIds';
 import getSubCategories from '../../../services/getSubCategories';
 import deleteSubCategoriesByIds from '../../../services/deleteSubCategoriesByIds';
@@ -179,6 +180,7 @@ const mapDispatchToProps = (dispatch) => ({
     getCategories: payload => dispatch(getCategories(payload)),
     deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
     editCategory: payload => dispatch(editCategory(payload)),
+    editSubCategory: payload => dispatch(editSubCategory(payload)),
     getSubCategories: payload => dispatch(getSubCategories(payload)),
     deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload))
 });
@@ -193,6 +195,7 @@ class CategoriesPage extends Component {
         getCategories: PropTypes.func.isRequired,
         deleteCategories: PropTypes.func.isRequired,
         editCategory: PropTypes.func.isRequired,
+        editSubCategory: PropTypes.func.isRequired,
         getSubCategories: PropTypes.func.isRequired,
         deleteSubCategories: PropTypes.func.isRequired,
         subCategories: PropTypes.array
@@ -313,6 +316,16 @@ class CategoriesPage extends Component {
 
         this.props.deleteCategories(valueForDelete.id)
             .then(() => {
+                getCategories();
+            })
+            .then(() => {
+                this.props.subCategories.forEach((subCategory) => {
+                    if (subCategory.categoryId === valueForDelete.id) {
+                        this.handleSubCategoryDelete(subCategory.id);
+                    }
+                });
+            })
+            .then(() => {
                 this.setState({
                     categories: this.props.categories,
                     activeCategory: activeCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
@@ -356,6 +369,21 @@ class CategoriesPage extends Component {
         });
     };
 
+    onDragSubCategoryEnd = (oldIndex, newIndex) => {
+        const { subCategories } = this.state;
+        const newValues = arrayMove(subCategories, oldIndex, newIndex);
+
+        newValues.forEach((subCategory, i) => {
+            subCategory.positionIndex = i;
+
+            this.props.editSubCategory(subCategory);
+        });
+
+        this.setState({
+            subCategories: newValues
+        });
+    };
+
     renderTable = () => {
         const { classes } = this.props;
         const {
@@ -375,19 +403,23 @@ class CategoriesPage extends Component {
 
         if (!categories.length) {
             return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>Создайте сначала категорию</Typography>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Создайте сначала категорию
+                </Typography>
             </div>;
         }
 
         if (!activeCategory) {
             return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>Выберите категорию</Typography>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Выберите категорию
+                </Typography>
             </div>;
         }
 
         return <div>
             <div className={classes.toolbar}/>
-            <AdminTable
+            <AdminTableSortable
                 headerRows={headerRows}
                 tableCells={tableCells}
                 values={subCategories}
@@ -397,12 +429,19 @@ class CategoriesPage extends Component {
                 deleteValuesWarningTitle='Вы точно хотите удалить следующие подкатегории?'
                 filters={false}
                 onFormOpen={this.handleSubCategoryFormOpen}
+                onDragEnd={this.onDragSubCategoryEnd}
                 isSmall
             />
-            <Modal open={subCategoryFormShowed} onClose={this.handleCloseSubCategoryForm} className={classes.modal} disableEnforceFocus>
+            <Modal
+                open={subCategoryFormShowed}
+                onClose={this.handleCloseSubCategoryForm}
+                className={classes.modal}
+                disableEnforceFocus
+            >
                 <Paper className={classes.modalContent}>
                     <SubCategoryForm
                         categories={categories}
+                        subCategories={subCategories}
                         activeCategory={activeCategory}
                         subCategory={editableSubCategory}
                         onDone={this.handleSubCategoryFormDone}/>
@@ -434,7 +473,9 @@ class CategoriesPage extends Component {
                 }}
             >
                 <div className={classes.toolbarNav}>
-                    <Typography variant='h6' className={classes.categoryTitle}>Категории</Typography>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        Категории
+                    </Typography>
                     <Tooltip title='Добавление'>
                         <IconButton aria-label='Add' onClick={this.handleCategoryFormOpen()}>
                             <AddIcon/>
@@ -455,16 +496,24 @@ class CategoriesPage extends Component {
                     classes={classes}
                 />
             </Drawer>
-            <Modal open={categoryFormShowed} onClose={this.handleCloseCategoryForm} className={classes.modal} disableEnforceFocus>
+            <Modal
+                open={categoryFormShowed}
+                onClose={this.handleCloseCategoryForm}
+                className={classes.modal}
+                disableEnforceFocus
+            >
                 <Paper className={classes.modalContent}>
-                    <CategoryForm categories={categories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
+                    <CategoryForm
+                        categories={categories}
+                        category={editableCategory}
+                        onDone={this.handleCategoryFormDone}
+                    />
                 </Paper>
             </Modal>
-            <Dialog
-                open={!!valueForDelete}
-                onClose={this.handleWarningDisagree}
-            >
-                <DialogTitle>Вы точно хотите удалить категорию?</DialogTitle>
+            <Dialog open={!!valueForDelete} onClose={this.handleWarningDisagree}>
+                <DialogTitle>
+                    Вы точно хотите удалить категорию?
+                </DialogTitle>
                 <DialogContent className={classes.warningContent}>
                     <DialogContentText>{valueForDelete && valueForDelete.name}</DialogContentText>
                 </DialogContent>

@@ -18,7 +18,7 @@ import getSchema from './SubCategoryFormSchema';
 import saveSubCategory from '../../../services/saveSubCategory';
 import editSubCategory from '../../../services/editSubCategory';
 
-const SUB_CATEGORIES_VALUES = ['name', 'hidden'];
+const SUB_CATEGORIES_VALUES = ['name', 'hidden', 'positionIndex'];
 
 const mapDispatchToProps = (dispatch) => ({
     saveSubCategory: payload => dispatch(saveSubCategory(payload)),
@@ -53,6 +53,7 @@ class SubCategoryForm extends Component {
         onDone: PropTypes.func,
         subCategory: PropTypes.object,
         categories: PropTypes.array,
+        subCategories: PropTypes.array,
         activeCategory: PropTypes.object
     };
 
@@ -60,6 +61,7 @@ class SubCategoryForm extends Component {
         onDone: noop,
         subCategory: {},
         categories: [],
+        subCategories: [],
         activeCategory: {}
     };
 
@@ -107,6 +109,7 @@ class SubCategoryForm extends Component {
             ru_seoKeywords: ruSeoKeywords,
             hidden,
             categoryId,
+            positionIndex,
             id,
             alias
         }) => {
@@ -127,6 +130,7 @@ class SubCategoryForm extends Component {
             },
             hidden,
             categoryId,
+            positionIndex,
             id,
             alias
         };
@@ -134,9 +138,14 @@ class SubCategoryForm extends Component {
 
     handleSubmit = values => {
         const subCategoryPayload = this.getSubCategoryPayload(values);
-        const { editSubCategory, saveSubCategory, onDone } = this.props;
+        const { editSubCategory, saveSubCategory, onDone, subCategories } = this.props;
 
-        (this.id ? editSubCategory({ ...subCategoryPayload, id: this.id }) : saveSubCategory(subCategoryPayload))
+        (this.id
+            ? editSubCategory({ ...subCategoryPayload, id: this.id })
+            : saveSubCategory({
+                ...subCategoryPayload,
+                positionIndex: subCategoryPayload.positionIndex || subCategories.length
+            }))
             .then(() => {
                 onDone();
             })

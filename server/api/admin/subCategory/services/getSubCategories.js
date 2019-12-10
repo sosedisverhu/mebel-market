@@ -5,7 +5,10 @@ import getAllSubCategories from '../../../client/subCategory/queries/getAllSubCa
 export default function getSubCategories (req, res) {
     getAllSubCategories()
         .then(subCategories => {
-            res.status(OKEY_STATUS_CODE).send(subCategories);
+            const sortableSubCategories = subCategories
+                .sort((oldCategory, newCategory) => oldCategory.positionIndex - newCategory.positionIndex);
+
+            res.status(OKEY_STATUS_CODE).send(sortableSubCategories);
         })
         .catch(() => {
             res.status(SERVER_ERROR_STATUS_CODE).end();
