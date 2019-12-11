@@ -1,8 +1,8 @@
 import { SET_CATEGORIES } from '../types/types';
 
-const setNewsCategories = payload => ({
+const setCategories = payload => ({
     type: SET_CATEGORIES,
     payload
 });
 
-export default setNewsCategories;
+export default setCategories;

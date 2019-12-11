@@ -1,6 +1,7 @@
 import {
     SET_ARTICLES,
-    SET_CATEGORIES
+    SET_CATEGORIES,
+    SET_SUB_CATEGORIES
 } from '../types/types';
 
 const initialState = {
@@ -630,7 +631,8 @@ const initialState = {
         }
     ],
     articles: [],
-    categories: []
+    categories: [],
+    subCategories: []
 };
 
 export default function (state = initialState, action) {
@@ -639,6 +641,8 @@ export default function (state = initialState, action) {
         return { ...state, articles: action.payload };
     case SET_CATEGORIES:
         return { ...state, categories: action.payload };
+    case SET_SUB_CATEGORIES:
+        return { ...state, subCategories: action.payload };
     default:
         return state;
     }

@@ -1,24 +1,24 @@
 import request from 'superagent';
 import base from '../base';
 
-import setCategories from '../../actions/setCategories';
+import setSubCategories from '../../actions/setSubCategories';
 
-export default function getCategories (req) {
+export default function getSubCategories (req) {
     return dispatch => {
         const host = req.get('host');
 
         return base(
             request
-                .get(`${host}/api/client/category/all`)
+                .get(`${host}/api/client/subCategory/all`)
                 .timeout({
                     deadline: 2000
                 })
         )
-            .then(categories => {
-                dispatch(setCategories(categories));
+            .then(subCategories => {
+                dispatch(setSubCategories(subCategories));
             })
             .catch(() => {
-                dispatch(setCategories([]));
+                dispatch(setSubCategories([]));
             });
     };
 }

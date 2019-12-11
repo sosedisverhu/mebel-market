@@ -5,4 +5,5 @@ export const // eslint-disable-line one-var
     SET_LANG = 'SET_LANG',
     SET_MEDIA_INFO = 'SET_MEDIA_INFO',
     SET_CATEGORIES = 'SET_CATEGORIES',
+    SET_SUB_CATEGORIES = 'SET_SUB_CATEGORIES',
     SET_ARTICLES = 'SET_ARTICLES';

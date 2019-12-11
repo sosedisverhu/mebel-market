@@ -178,10 +178,10 @@ const mapStateToProps = ({ data }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getCategories: payload => dispatch(getCategories(payload)),
-    deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
+    getSubCategories: payload => dispatch(getSubCategories(payload)),
     editCategory: payload => dispatch(editCategory(payload)),
     editSubCategory: payload => dispatch(editSubCategory(payload)),
-    getSubCategories: payload => dispatch(getSubCategories(payload)),
+    deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
     deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload))
 });
 
@@ -191,23 +191,19 @@ const DEFAULT_ACTIVE_CATEGORY = { name: '', id: '' };
 class CategoriesPage extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        categories: PropTypes.array.isRequired,
         getCategories: PropTypes.func.isRequired,
-        deleteCategories: PropTypes.func.isRequired,
+        getSubCategories: PropTypes.func.isRequired,
         editCategory: PropTypes.func.isRequired,
         editSubCategory: PropTypes.func.isRequired,
-        getSubCategories: PropTypes.func.isRequired,
+        deleteCategories: PropTypes.func.isRequired,
         deleteSubCategories: PropTypes.func.isRequired,
+        categories: PropTypes.array.isRequired,
         subCategories: PropTypes.array
     };
 
     static defaultProps = {
         categories: [],
-        subCategories: [],
-        getCategories: noop,
-        deleteCategories: noop,
-        editCategory: noop,
-        getSubCategories: noop
+        subCategories: []
     };
 
     state = {
