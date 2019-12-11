@@ -5,10 +5,16 @@ module.exports = [
         id: 'category0',
         texts: {
             ru: {
-                name: 'Кровати'
+                name: 'Кровати',
+                seoDescription: 'beds',
+                seoKeywords: 'beds',
+                seoTitle: 'beds'
             },
             ua: {
-                name: 'Ліжка'
+                name: 'Ліжка',
+                seoDescription: 'beds',
+                seoKeywords: 'beds',
+                seoTitle: 'beds'
             }
         },
         hidden: false,
@@ -19,10 +25,16 @@ module.exports = [
         id: 'category1',
         texts: {
             ru: {
-                name: 'Матрасы'
+                name: 'Матрасы',
+                seoDescription: 'mattresses',
+                seoKeywords: 'mattresses',
+                seoTitle: 'mattresses'
             },
             ua: {
-                name: 'Матраци'
+                name: 'Матраци',
+                seoDescription: 'mattresses',
+                seoKeywords: 'mattresses',
+                seoTitle: 'mattresses'
             }
         },
         hidden: false,
@@ -33,10 +45,16 @@ module.exports = [
         id: 'category2',
         texts: {
             ru: {
-                name: 'Мягкая мебель'
+                name: 'Мягкая мебель',
+                seoDescription: 'soft-furniture',
+                seoKeywords: 'soft-furniture',
+                seoTitle: 'soft-furniture'
             },
             ua: {
-                name: 'М\'які меблі'
+                name: 'М\'які меблі',
+                seoDescription: 'soft-furniture',
+                seoKeywords: 'soft-furniture',
+                seoTitle: 'soft-furniture'
             }
         },
         hidden: false,
@@ -47,10 +65,16 @@ module.exports = [
         id: 'category3',
         texts: {
             ru: {
-                name: 'Аксессуары для сна'
+                name: 'Аксессуары для сна',
+                seoDescription: 'accessories',
+                seoKeywords: 'accessories',
+                seoTitle: 'accessories'
             },
             ua: {
-                name: 'Аксесуари для сну'
+                name: 'Аксесуари для сну',
+                seoDescription: 'accessories',
+                seoKeywords: 'accessories',
+                seoTitle: 'accessories'
             }
         },
         hidden: false,

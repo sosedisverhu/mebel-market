@@ -6,7 +6,7 @@ export default function getSubCategories (req, res) {
     getAllSubCategories()
         .then(subCategories => {
             const sortableSubCategories = subCategories
-                .sort((oldCategory, newCategory) => oldCategory.positionIndex - newCategory.positionIndex);
+                .sort((oldSubCategory, newSubCategory) => oldSubCategory.positionIndex - newSubCategory.positionIndex);
 
             res.status(OKEY_STATUS_CODE).send(sortableSubCategories);
         })

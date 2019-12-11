@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const SumCategory = new Schema({
+const SubCategory = new Schema({
     id: { type: String, required: true },
     texts: {
         type: {
@@ -18,4 +18,4 @@ const SumCategory = new Schema({
     positionIndex: { type: Number, required: true, unique: true }
 });
 
-export default mongoose.model('SumCategory', SumCategory);
+export default mongoose.model('SubCategory', SubCategory);

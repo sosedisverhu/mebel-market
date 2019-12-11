@@ -155,7 +155,7 @@ class CategoryForm extends Component {
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас'
+                        errorText: 'Введите уникальные алиас для категории'
                     });
                 } else {
                     this.setState({
