@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import getSchema from './PartnerFormSchema';
 import savePartner from '../../../services/savePartner';
 import editPartner from '../../../services/editPartner';
+import updatePartnerLogo from '../../../services/updatePartnerLogo';
 
 import Form from '../Form/Form';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -19,11 +20,12 @@ import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
 
-const PARTNERS_VALUES = ['name', 'hidden'];
+const PARTNERS_VALUES = ['name', 'hidden', 'texts'];
 
 const mapDispatchToProps = (dispatch) => ({
     savePartner: payload => dispatch(savePartner(payload)),
-    editPartner: payload => dispatch(editPartner(payload))
+    editPartner: payload => dispatch(editPartner(payload)),
+    updatePartnerLogo: (...payload) => dispatch(updatePartnerLogo(...payload))
 });
 
 const materialStyles = theme => ({
@@ -52,7 +54,8 @@ class PartnerForm extends Component {
         editPartner: PropTypes.func.isRequired,
         classes: PropTypes.object.isRequired,
         onDone: PropTypes.func,
-        partner: PropTypes.object
+        partner: PropTypes.object,
+        updatePartnerLogo: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -70,10 +73,14 @@ class PartnerForm extends Component {
         this.initialValues = {
             ru_name: ru.name || '',
             ua_name: ua.name || '',
-            ru_content: ru.content || '',
-            ua_content: ua.content || '',
+            ru_description: ru.description || '',
+            ua_description: ua.description || '',
             hidden: partner.hidden || false,
             alias: partner.alias,
+            logo: {
+                files: partner.logo ? [partner.avatar] : [],
+                removedFiles: []
+            },
             ...pick(PARTNERS_VALUES, partner)
         };
         this.id = prop('id', partner);
@@ -84,8 +91,8 @@ class PartnerForm extends Component {
         {
             ru_name: ruName,
             ua_name: uaName,
-            ru_content: ruContent,
-            ua_content: uaContent,
+            ru_description: ruDescription,
+            ua_description: uaDescription,
             hidden,
             id,
             alias
@@ -94,11 +101,11 @@ class PartnerForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    content: ruContent
+                    description: ruDescription
                 },
                 ua: {
                     name: uaName,
-                    content: uaContent
+                    description: uaDescription
                 }
             },
             hidden,
@@ -112,6 +119,17 @@ class PartnerForm extends Component {
         const { editPartner, savePartner, onDone } = this.props;
 
         (this.id ? editPartner({ ...partnerPayload, id: this.id }) : savePartner(partnerPayload))
+            .then(partner => {
+                const { files } = values.logo;
+
+                if (files[0].content) {
+                    const formData = new FormData();
+
+                    formData.append(`partner-${partner.id}-logo`, files[0].content);
+
+                    return this.props.updatePartnerLogo(formData, partner.id);
+                }
+            })
             .then(() => {
                 onDone();
             })

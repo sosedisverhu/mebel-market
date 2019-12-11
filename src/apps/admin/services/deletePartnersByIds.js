@@ -1,11 +1,11 @@
 import request from 'superagent';
 import base from './base';
 
-import setPartnersAction from '../actions/setPartners';
+import setPartners from '../actions/setPartners';
 
 import { TOKEN_LOCAL_STORAGE_NAME } from '../constants/constants';
 
-export default function savePartners (ids) {
+export default function deletePartners (ids) {
     return dispatch => {
         const token = localStorage.getItem(TOKEN_LOCAL_STORAGE_NAME);
 
@@ -16,7 +16,7 @@ export default function savePartners (ids) {
                 .query({ token })
         )
             .then(partners => {
-                return dispatch(setPartnersAction(partners));
+                return dispatch(setPartners(partners));
             });
     };
 }

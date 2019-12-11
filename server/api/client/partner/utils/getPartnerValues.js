@@ -4,7 +4,8 @@ const VALUES = [
     'id',
     'texts',
     'hidden',
-    'alias'
+    'alias',
+    'logo'
 ];
 
 export default function getPartnerValues (product) {

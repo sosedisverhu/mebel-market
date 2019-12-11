@@ -131,11 +131,9 @@
     text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
 }
 
-.partnerItem figure {
+.logoWrapper {
     position: relative;
     margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
 
     &:after {
         position: absolute;
@@ -149,7 +147,11 @@
     }
 }
 
-.partnerItem p {
+.logoWrapper {
+    display: block;
+}
+
+.partnerDescription {
     font-size: 14px;
     line-height: 16px;
     text-align: center;

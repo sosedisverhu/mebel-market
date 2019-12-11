@@ -37,7 +37,10 @@ class Partners extends Component {
                             {partners.map((partner, i) =>
                                 <div className={styles.partnerItem} key={i}>
                                     <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
-                                    <div dangerouslySetInnerHTML={{ __html: partner.texts[lang].content.replace(/\\/g, '') }}/>
+                                    <div className={styles.logoWrapper}>
+                                        <img className={styles.logo} src={partner.logo} alt=""/>
+                                    </div>
+                                    <p className={styles.partnerDescription}>{partner.texts[lang].description}</p>
                                 </div>
                             )}
                         </div>

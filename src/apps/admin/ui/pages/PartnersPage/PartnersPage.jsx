@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import omit from '@tinkoff/utils/object/omit';
 import pathOr from '@tinkoff/utils/object/pathOr';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -109,13 +108,6 @@ class PartnersPage extends Component {
         });
     };
 
-    handlePartnerClone = partner => () => {
-        this.setState({
-            formShowed: true,
-            editablePartner: omit(['id'], partner)
-        });
-    };
-
     handleClosePartnerForm = () => {
         this.setState({
             formShowed: false,
@@ -142,7 +134,6 @@ class PartnersPage extends Component {
                 deleteValueWarningTitle='Вы точно хотите удалить партнёра?'
                 deleteValuesWarningTitle='Вы точно хотите удалить следующих партнёров?'
                 onDelete={this.props.deletePartners}
-                onProductClone={this.handlePartnerClone}
                 onFormOpen={this.handleFormOpen}
             />
             <Modal open={formShowed} onClose={this.handleClosePartnerForm} className={classes.modal}>

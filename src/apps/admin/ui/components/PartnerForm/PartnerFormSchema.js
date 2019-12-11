@@ -4,7 +4,7 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
-import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
+import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -28,7 +28,7 @@ export default function ({ data: { title } = {} } = {}) {
                         name: 'requiredLangFields',
                         options: {
                             text: 'Заполните форму для всех языков',
-                            fields: ['ru_name', 'ua_name']
+                            fields: ['ru_name', 'ua_name', 'ru_description', 'ua_description']
                         }
                     }
                 ]
@@ -56,22 +56,32 @@ export default function ({ data: { title } = {} } = {}) {
             },
             {
                 component: FormFieldTitle,
-                name: 'content-title',
+                name: 'title',
                 schema: {
-                    label: 'Контент',
+                    label: 'Логотип',
                     variant: 'h6'
                 }
             },
             {
-                component: FormFieldEditor,
-                name: `content`,
+                component: FormFieldFiles,
+                name: 'logo',
+                schema: {
+                    max: 1
+                },
+                validators: [
+                    { name: 'requiredFiles', options: { text: 'Добавьте логотип' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'description',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Контент',
+                    label: 'Описание',
                     multiline: true
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Наполните контент' } }
+                    { name: 'required', options: { text: 'Заполните описание для партнёра' } }
                 ]
             },
             {

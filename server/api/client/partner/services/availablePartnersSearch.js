@@ -8,8 +8,7 @@ export default function availablePartnersSearch (req, res) {
     findPartnerByName(text)
         .then(partners => {
             const availablePartners = partners
-                .filter(partner => !partner.hidden)
-                .sort((prev, next) => next.date - prev.date);
+                .filter(partner => !partner.hidden);
 
             res.status(OKEY_STATUS_CODE).send(availablePartners);
         })

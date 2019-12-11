@@ -6,8 +6,7 @@ import getPartners from './services/getPartners';
 import savePartner from './services/savePartner';
 import editPartner from './services/editPartner';
 import deleteByIds from './services/deleteByIds';
-import updateFiles from './services/updateFiles';
-import updateAvatar from './services/updateAvatar';
+import updateLogo from './services/updateLogo';
 import findPartnerByName from './services/findPartnerByName';
 
 const router = express.Router();
@@ -26,11 +25,8 @@ router.route('/edit')
 router.route('/delete-few')
     .post(deleteByIds);
 
-router.route('/update-files')
-    .post(updateFiles);
-
-router.route('/update-avatar')
-    .post(updateAvatar);
+router.route('/update-logo')
+    .post(updateLogo);
 
 router.route('/find')
     .get(findPartnerByName);
