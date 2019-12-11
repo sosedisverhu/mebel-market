@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import queryString from 'query-string';
+
+import { Link, withRouter } from 'react-router-dom';
 
 import propOr from '@tinkoff/utils/object/propOr';
+import searchByText from '../../../services/client/searchByText';
 
 // import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 
@@ -22,6 +25,12 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
+const mapDispatchToProps = dispatch => {
+    return {
+        searchByText: payload => dispatch(searchByText(payload))
+    };
+};
+
 class SearchPage extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired
@@ -32,13 +41,41 @@ class SearchPage extends Component {
 
         this.state = {
             products: [],
-            searchText: 'Кровати металлические'
+            articles: [],
+            searchText: '',
+            loading: true
         };
+    }
+
+    componentDidMount () {
+        const { location: { search } } = this.props;
+        const query = queryString.parse(search);
+
+        this.searchByText(query.text)
+            .then(() => {
+                this.setState({
+                    loading: false
+                });
+            });
+    }
+
+    searchByText (text) {
+        return this.props.searchByText(text)
+            .then((result) => {                
+                console.log('result', result);
+                // console.log('products', products);
+                // console.log('articles', articles);
+                this.setState({
+                    // products,
+                    // articles,
+                    searchText: text
+                });
+            });
     }
 
     render () {
         const { langMap } = this.props;
-        const { products, searchText } = this.state;
+        const { products, searchText, articles } = this.state;
         const text = propOr('searchPage', {}, langMap);
 
         return (
@@ -77,4 +114,4 @@ class SearchPage extends Component {
     }
 }
 
-export default connect(mapStateToProps)(SearchPage);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
