@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
+import CheckoutPage from './ui/pages/CheckoutPage/CheckoutPage.jsx';
 import ProductPage from './ui/pages/ProductPage/ProductPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
@@ -71,6 +72,7 @@ class App extends Component {
                 <div className={styles.pageContent}>
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
+                        <Route exact path={`/:lang(${langs})?/order`} render={this.renderComponent(CheckoutPage)} />
                         <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route exact path={`/:lang(${langs})?/search`} render={this.renderComponent(SearchPage)} />
