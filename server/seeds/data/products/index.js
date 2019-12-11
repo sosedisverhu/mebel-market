@@ -24,7 +24,7 @@ module.exports = [
         },
         discount: 5,
         hidden: false,
-        price: 1999,
+        basePrice: 1999,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Prague.png'],
         sizes: [
@@ -81,7 +81,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 2799,
+        basePrice: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Classic.png'],
         sizes: [
@@ -138,7 +138,7 @@ module.exports = [
         },
         discount: 10,
         hidden: false,
-        price: 3799,
+        basePrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -195,7 +195,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -252,7 +252,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -309,7 +309,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -366,7 +366,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -423,7 +423,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -480,7 +480,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 1799,
+        basePrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -537,7 +537,7 @@ module.exports = [
         },
         discount: 0,
         hidden: false,
-        price: 2000,
+        basePrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [

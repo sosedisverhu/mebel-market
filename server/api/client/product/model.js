@@ -20,8 +20,9 @@ const Product = new Schema({
     files: [{ type: String, required: true }],
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
-    price: { type: Number, required: true },
     discount: { type: Number },
+    basePrice: { type: Number, required: true },
+    price: { type: Number },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true }

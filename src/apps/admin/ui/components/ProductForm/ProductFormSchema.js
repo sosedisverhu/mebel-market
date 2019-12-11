@@ -96,7 +96,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: `price`,
+                name: 'basePrice',
                 schema: {
                     label: 'Цена',
                     type: 'number'

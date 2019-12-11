@@ -43,13 +43,11 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, discount, files: [logo], price },
+            product: { texts, discount, files: [logo], basePrice, price },
             newClass,
             labelClass,
             lang
         } = this.props;
-        const discountSum = price / 100 * discount;
-        const totalPrice = price - discountSum;
 
         return (
             <a className={classNames(
@@ -68,10 +66,10 @@ class Card extends Component {
                         {texts[lang].name}
                     </div>
                     {discount ? <div className={styles.priceOld}>
-                        {price} &#8372;
+                        {basePrice} &#8372;
                     </div> : null}
                     <div className={styles.price}>
-                        {totalPrice} &#8372;
+                        {price} &#8372;
                     </div>
                 </div>
             </a>);
