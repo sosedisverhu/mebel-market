@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import pathOr from '@tinkoff/utils/object/pathOr';
-import noop from '@tinkoff/utils/function/noop';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';

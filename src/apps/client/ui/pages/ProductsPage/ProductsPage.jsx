@@ -92,7 +92,7 @@ class ProductsPage extends Component {
                             {subCategories.map((subCategory) => {
                                 return (
                                     <Link className={styles.subCategory}
-                                        to={``}
+                                        to=''
                                         key={subCategory.id}
                                     >
                                         {subCategory.texts[lang].name}
