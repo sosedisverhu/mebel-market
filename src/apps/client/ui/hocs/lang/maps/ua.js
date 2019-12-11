@@ -94,12 +94,13 @@ export default {
     },
     searchPage: {
         results: 'результатів за запитом',
-        products: 'Товари',
+        products: 'Товари:',
         noResults: 'Нам не вдалось знайти результати за запитом:',
         tryAgain: 'Спробуйте ще:',
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
-        link: 'Зв\'яжіться з нами'
+        link: 'Зв\'яжіться з нами',
+        articles: 'Статті:'
     },
     checkoutPage: {
         checkout: 'Оформлення замовлення',

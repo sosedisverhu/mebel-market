@@ -86,7 +86,7 @@ app.get('*', function (req, res) {
                         location={req.originalUrl}
                         context={context}
                     >
-                        <App />
+                        <div />
                     </StaticRouter>
                 </Provider>
             );

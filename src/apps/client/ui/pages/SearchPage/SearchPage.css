@@ -163,6 +163,7 @@
 .searchButton {
     background: none;
     border: none;
+    outline: none;
     position: relative;
     top: 3px;
     left: 4px;
@@ -197,4 +198,21 @@
     @media (max-width: 600px) {
         margin-top: 15px;
     }
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.articlesContainer {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }

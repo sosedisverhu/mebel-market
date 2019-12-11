@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import propOr from '@tinkoff/utils/object/propOr';
-import getDateFormatted from '../../../../../../utils/getDateFormatted';
-import Pagination from '../../components/Pagination/Pagination.jsx';
+
 import styles from './Articles.css';
+
+import Pagination from '../../components/Pagination/Pagination.jsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -77,29 +77,19 @@ class Articles extends Component {
     };
 
     render () {
-        const { langMap, lang, articles } = this.props;
+        const { articles } = this.props;
         const { currentPage, postsPerPage } = this.state;
-        const text = propOr('article', {}, langMap);
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+        console.log('articles', articles.slice(indexOfFirstPost, indexOfLastPost));
 
         return (
             <section className={styles.articles}>
                 <Breadcrumbs />
                 <div className={styles.articlesContainer}>
                     {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
-                        <div className={styles.article} key={article.id}>
-                            <Link className={styles.titleLink} to={`/articles/${article.alias}`}>
-                                <h1 className={styles.title}><span className={styles.titleUnderline}>{article.texts[lang].name}</span></h1>
-                            </Link>
-                            <p>{article.texts[lang].preview}</p>
-                            <div className={styles.moreInfo}>
-                                <Link to={`/articles/${article.alias}`}>
-                                    <button className={styles.readMoreBtn}>{text.moreBtn}</button>
-                                </Link>
-                                <span className={styles.date}>{getDateFormatted(article.date, lang) + ' ' + text.year}</span>
-                            </div>
-                        </div>
+                         <ArticlePreview key={article.id} article={article} />
                     )}
                 </div>
                 {articles.length > postsPerPage &&

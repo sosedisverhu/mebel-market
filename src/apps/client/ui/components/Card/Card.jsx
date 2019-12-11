@@ -41,10 +41,9 @@ class Card extends Component {
         const {
             product: { texts, labels, discountPrice, photos: [logo], basePrice, price },
             newClass,
-            labelClass
-        } = this.props;
-
-        const lang = 'ru';
+            labelClass,
+            lang
+        } = this.props;        
 
         return (
             <a className={classNames(
