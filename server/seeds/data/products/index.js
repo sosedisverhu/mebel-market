@@ -22,7 +22,7 @@ module.exports = [
             }
 
         },
-        discount: 0,
+        discount: 5,
         hidden: false,
         price: 1999,
         avatar: '/server/seeds/data/products/images/Prague.png',
@@ -136,7 +136,7 @@ module.exports = [
             }
 
         },
-        discount: 0,
+        discount: 10,
         hidden: false,
         price: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import classNames from 'classnames';
 import propOr from '@tinkoff/utils/object/propOr';
 
@@ -22,10 +23,13 @@ class Card extends Component {
         labelClass: PropTypes.string
     };
 
-    getLabels = (labels, discountPrice) => {
-        if (discountPrice) {
+    getLabels = (labels, discount) => {
+        if (discount) {
             return labels.map((label, index) => {
-                return <div key={index} className={`${styles.label} ${styles.discount}`}>-{discountPrice} %</div>;
+                return (
+                    <div key={index} className={`${styles.label} ${styles.discount}`}>
+                        -{discount} %
+                    </div>);
             });
         } else if (labels) {
             return labels.map((label, index) => {
@@ -39,12 +43,13 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, labels, discountPrice, photos: [logo], basePrice, price },
+            product: { texts, discount, files: [logo], price },
             newClass,
-            labelClass
+            labelClass,
+            lang
         } = this.props;
-
-        const lang = 'ru';
+        const discountSum = price / 100 * discount;
+        const totalPrice = price - discountSum;
 
         return (
             <a className={classNames(
@@ -53,15 +58,21 @@ class Card extends Component {
                 { [styles[labelClass]]: labelClass }
             )}>
                 <div className={styles.labels}>
-                    {this.getLabels(labels, discountPrice)}
+                    {this.getLabels(['top'], discount)}
                 </div>
-                <div className={styles.imgWrap}>
-                    <img className={styles.img} src={logo} alt="" />
+                <div>
+                    <img className={styles.img} src={logo} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
-                    <div className={styles.title}>{texts[lang].name}</div>
-                    {discountPrice ? <div className={styles.priceOld}>{basePrice} &#8372;</div> : null}
-                    <div className={styles.price}>{price} &#8372;</div>
+                    <div className={styles.title}>
+                        {texts[lang].name}
+                    </div>
+                    {discount ? <div className={styles.priceOld}>
+                        {price} &#8372;
+                    </div> : null}
+                    <div className={styles.price}>
+                        {totalPrice} &#8372;
+                    </div>
                 </div>
             </a>);
     }
