@@ -78,7 +78,7 @@ class PartnerForm extends Component {
             hidden: partner.hidden || false,
             alias: partner.alias,
             logo: {
-                files: partner.logo ? [partner.avatar] : [],
+                files: partner.logo ? [partner.logo] : [],
                 removedFiles: []
             },
             ...pick(PARTNERS_VALUES, partner)

@@ -14,7 +14,7 @@ export default function updateLogo (req, res) {
     const { id } = req.query;
 
     getPartnerById(id)
-        .then((partner) => {
+        .then(([partner]) => {
             uploader(req, res, (err) => {
                 if (err) {
                     return res.status(SERVER_ERROR_STATUS_CODE).end();
