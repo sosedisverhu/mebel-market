@@ -7,12 +7,6 @@
 
 .search {
     height: 100%;
-    background: gray3;
-    padding-bottom: 40px;
-
-    @media (max-width: 600px) {
-        padding-bottom: 30px;
-    }
 }
 
 .panelTop {
@@ -39,11 +33,11 @@
 }
 
 .productsSectionWrap {
-    background: gray5;
+    background: gray3;
     padding: 30px 0;
 
     @media (max-width: 600px) {
-        padding: 20px 0 15px 0;
+        padding: 20px 0 30px 0;
     }
 }
 
@@ -57,6 +51,14 @@
     display: flex;
     align-items: center;
     box-sizing: content-box;
+
+    &.quantityArticle {
+        padding-top: 60px;
+
+        @media (max-width: 600px) {
+            padding-top: 20px;
+        }
+    }
 
     &:after {
         content: "";
@@ -75,6 +77,15 @@
         &:after {
             width: 30%;
         }
+    }
+}
+
+.searchSection {
+    padding-bottom: 40px;
+    background: gray5;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
     }
 }
 
@@ -163,7 +174,6 @@
 .searchButton {
     background: none;
     border: none;
-    outline: none;
     position: relative;
     top: 3px;
     left: 4px;
@@ -206,6 +216,15 @@
     align-items: center;
     flex-grow: 1;
     height: 100%;
+}
+
+.articlesSection {
+    padding-bottom: 40px;
+    background: gray3;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
 }
 
 .articlesContainer {

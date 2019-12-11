@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-
 import queryString from 'query-string';
+import classNames from 'classnames';
 
 import { Link, withRouter } from 'react-router-dom';
 
@@ -39,44 +38,75 @@ class SearchPage extends Component {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        searchByText: PropTypes.func.isRequired
+        searchByText: PropTypes.func.isRequired,
+        location: PropTypes.object,
+        history: PropTypes.object.isRequired
     };
 
-    constructor(...args) {
+    constructor (...args) {
         super(...args);
 
         this.state = {
             products: [],
             articles: [],
             searchText: '',
+            newText: '',
             loading: true
         };
     }
 
-    componentDidMount() {
-        const { location: { search } } = this.props;
+    componentDidMount () {
+        this.searchByText();
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.location !== this.props.location) {
+            this.searchByText(nextProps);
+        }
+    }
+
+    searchByText (props = this.props) {
+        const { location: { search } } = props;
         const query = queryString.parse(search);
 
-        this.searchByText(query.text)
-            .then(() => {
+        if (!query.text) {
+            return this.setState({
+                loading: false
+            });
+        }
+
+        this.setState({
+            loading: true
+        });
+
+        this.props.searchByText(query.text)
+            .then(({ products, articles }) => {
                 this.setState({
+                    products,
+                    articles,
+                    searchText: query.text,
                     loading: false
                 });
             });
     }
 
-    searchByText(text) {
-        return this.props.searchByText(text)
-            .then(({ products, articles }) => {
-                this.setState({
-                    products,
-                    articles,
-                    searchText: text
-                });
-            });
+    handleSearchSubmit = (e) => {
+        e.preventDefault();
+        const { langRoute } = this.props;
+        const { newText } = this.state;
+
+        if (newText) {
+            this.props.history.push(`${langRoute}/search?text=${newText}`);
+        }
+    };
+
+    handleInputChange = (e) => {
+        this.setState({
+            newText: e.target.value
+        });
     }
 
-    render() {
+    render () {
         const { langMap } = this.props;
         const { products, searchText, articles, loading } = this.state;
         const text = propOr('searchPage', {}, langMap);
@@ -94,59 +124,57 @@ class SearchPage extends Component {
             <section className={styles.search}>
                 <Breadcrumbs />
                 {products.length
+                    ? (<div>
+                        <div className={styles.panelTop}>
+                            <h3 className={styles.panelTopTitle}>{`${products.length + articles.length} ${text.results} “${searchText}”`}</h3>
+                            <Sort />
+                        </div>
+                        <div className={styles.productsSectionWrap}>
+                            <h1 className={styles.quantity}>{`${text.products} ${products.length}`}</h1>
+                            <div>Test Products</div>
+                            {/* <ProductsGrid products={products} /> */}
+                        </div>
+                    </div>)
+                    : null}
+                {articles.length
+                    ? (<div className={styles.articlesSection}>
+                        <h1 className={classNames(styles.quantity, styles.quantityArticle)}>{`${text.articles} ${articles.length}`}</h1>
+                        <div className={styles.articlesContainer}>
+                            {articles.map(article =>
+                                <ArticlePreview key={article.id} article={article} />
+                            )}
+                        </div>
+                    </div>)
+                    : null}
+                {(!products.length && !articles.length)
                     ? (
-                        <div>
-                            <div className={styles.panelTop}>
-                                <h3 className={styles.panelTopTitle}>{`${products.length} ${text.results} “${searchText}”`}</h3>
-                                <Sort />
-                            </div>
-                            <div className={styles.productsSectionWrap}>
-                                <h1 className={styles.quantity}>{`${text.products} ${products.length}`}</h1>
-                                <div>Test Products</div>
-                                {/* <ProductsGrid products={products} /> */}
-                                {articles.length
-                                    ? (
-                                        <div>
-                                            <h1 className={styles.quantity}>{`${text.articles} ${articles.length}`}</h1>
-                                            <div className={styles.articlesContainer}>
-                                                {articles.map(article =>
-                                                    <ArticlePreview key={article.id} article={article} />
-                                                )}
-                                            </div>
+                        <div className={styles.searchSection}>
+                            <div className={styles.searchNotFoundWrap}>
+                                <div className={styles.searchNotFound}>
+                                    <h2 className={styles.searchNotFoundText}>{`${text.noResults} “${searchText}”`}</h2>
+                                    <h3 className={styles.tryAgain}>{text.tryAgain}</h3>
+                                    <form className={styles.form} onSubmit={this.handleSearchSubmit}>
+                                        <div className={styles.searchInputWrap}>
+                                            <input
+                                                className={styles.searchInput}
+                                                type="text"
+                                                placeholder={text.placeholder}
+                                                value={this.state.newText}
+                                                onChange={this.handleInputChange}
+                                            />
                                         </div>
-
-                                            )
-                                            : null}
+                                        <button className={styles.searchButton} type="submit"></button>
+                                    </form>
+                                    <p className={styles.needHelp}>{text.needHelp}</p>
+                                    <Link className={styles.link} to="#" >{text.link}</Link>
+                                </div>
                             </div>
                         </div>)
-                        : null}
-                {(!products.length && !articles.length)
-                                ? (
-                                    <div className={styles.searchNotFoundWrap}>
-                                        <div className={styles.searchNotFound}>
-                                            <h2 className={styles.searchNotFoundText}>{`${text.noResults} “${searchText}”`}</h2>
-                                            <h3 className={styles.tryAgain}>{text.tryAgain}</h3>
-                                            <form className={styles.form} onSubmit={this.handleSearchSubmit}>
-                                                <div className={styles.searchInputWrap}>
-                                                    <input
-                                                        className={styles.searchInput}
-                                                        type="text"
-                                                        placeholder={text.placeholder}
-                                                        value={this.state.searchText}
-                                                        onChange={this.handleInputChange}
-                                                    />
-                                                </div>
-                                                <button className={styles.searchButton} type="submit"></button>
-                                            </form>
-                                            <p className={styles.needHelp}>{text.needHelp}</p>
-                                            <Link className={styles.link} to="#" >{text.link}</Link>
-                                        </div>
-                                    </div>)
-                                : null}
+                    : null}
 
             </section>
-                    );
-            }
-        }
-        
-        export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));
+        );
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SearchPage));

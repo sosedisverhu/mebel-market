@@ -19,7 +19,8 @@ class Card extends Component {
         langMap: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired,
         newClass: PropTypes.string,
-        labelClass: PropTypes.string
+        labelClass: PropTypes.string,
+        lang: PropTypes.string.isRequired
     };
 
     getLabels = (labels, discountPrice) => {
@@ -43,7 +44,7 @@ class Card extends Component {
             newClass,
             labelClass,
             lang
-        } = this.props;        
+        } = this.props;
 
         return (
             <a className={classNames(

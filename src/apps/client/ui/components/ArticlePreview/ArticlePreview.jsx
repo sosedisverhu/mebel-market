@@ -19,18 +19,17 @@ const mapStateToProps = ({ application }) => {
 class Card extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        article: PropTypes.object.isRequired
+        article: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired
     };
 
-    render() {
-        console.log('this.props.article', this.props.article);
+    render () {
         const {
             article: { id, alias, texts, date },
             lang,
             langMap
         } = this.props;
 
-        
         const text = propOr('article', {}, langMap);
 
         return (

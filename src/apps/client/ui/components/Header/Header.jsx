@@ -25,7 +25,8 @@ class Header extends Component {
 
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
     };
 
     handleMobileMenu = () => {

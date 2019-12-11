@@ -10,7 +10,7 @@ export default function availableProductsArticlesSearch (req, res) {
         findProductsByText(text),
         findArticlesByText(text)
     ])
-        
+
         .then(([productsAll, articlesAll]) => {
             const availableProducts = productsAll
                 .filter(product => !product.hidden)

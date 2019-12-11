@@ -22,7 +22,9 @@ class Articles extends Component {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         articles: PropTypes.array.isRequired,
-        mediaWidth: PropTypes.number.isRequired
+        mediaWidth: PropTypes.number.isRequired,
+        location: PropTypes.object,
+        history: PropTypes.object.isRequired
     };
 
     state = {
@@ -82,14 +84,12 @@ class Articles extends Component {
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-        console.log('articles', articles.slice(indexOfFirstPost, indexOfLastPost));
-
         return (
             <section className={styles.articles}>
                 <Breadcrumbs />
                 <div className={styles.articlesContainer}>
                     {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
-                         <ArticlePreview key={article.id} article={article} />
+                        <ArticlePreview key={article.id} article={article} />
                     )}
                 </div>
                 {articles.length > postsPerPage &&
