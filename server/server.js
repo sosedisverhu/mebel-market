@@ -18,6 +18,7 @@ import clientArticleApi from './api/client/article';
 import adminFilesApi from './api/admin/files';
 import adminProductsCategoryApi from './api/admin/category';
 import clientProductsCategoryApi from './api/client/category';
+import clientSearchApi from './api/client/search';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -55,6 +56,7 @@ app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
 app.use('/api/admin/category', adminProductsCategoryApi);
 app.use('/api/client/category', clientProductsCategoryApi);
+app.use('/api/client/search', clientSearchApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/files', adminFilesApi);

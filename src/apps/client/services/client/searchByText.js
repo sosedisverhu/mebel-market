@@ -6,7 +6,7 @@ export default function searchByText (text) {
         console.log('text sBT', text);
         return base(
             request
-                .get(`/api/client/search/all`)
+                .get(`/api/client/search/`)
                 .query({ text })
         );
     };

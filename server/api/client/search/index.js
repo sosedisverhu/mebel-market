@@ -4,8 +4,7 @@ import search from './services/search';
 
 const router = express.Router();
 
-console.log('index', index);
-router.route('/all')
+router.route('/')
     .get(search);
 
 export default router;

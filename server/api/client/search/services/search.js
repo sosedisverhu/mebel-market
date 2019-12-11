@@ -6,8 +6,6 @@ import findArticlesByText from '../../article/queries/findArticlesByText';
 export default function availableProductsArticlesSearch (req, res) {
     const { text = '' } = req.query;
 
-    console.log('text search.js', text);
-
     Promise.all([
         findProductsByText(text),
         findArticlesByText(text)

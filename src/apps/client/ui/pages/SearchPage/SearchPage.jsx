@@ -61,13 +61,10 @@ class SearchPage extends Component {
 
     searchByText (text) {
         return this.props.searchByText(text)
-            .then((result) => {                
-                console.log('result', result);
-                // console.log('products', products);
-                // console.log('articles', articles);
+            .then(({products, articles}) => {
                 this.setState({
-                    // products,
-                    // articles,
+                    products,
+                    articles,
                     searchText: text
                 });
             });
@@ -77,6 +74,9 @@ class SearchPage extends Component {
         const { langMap } = this.props;
         const { products, searchText, articles } = this.state;
         const text = propOr('searchPage', {}, langMap);
+        
+        console.log('products', products);
+        console.log('articles', articles);
 
         return (
             <section className={styles.search}>
