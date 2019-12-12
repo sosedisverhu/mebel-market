@@ -15,6 +15,7 @@ const mapStateToProps = ({ application }) => {
         langRoute: application.langRoute
     };
 };
+
 class Breadcrumbs extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
@@ -22,6 +23,11 @@ class Breadcrumbs extends Component {
         lang: PropTypes.string.isRequired,
         category: PropTypes.object,
         product: PropTypes.object
+    };
+
+    static defaultProps = {
+        category: {},
+        product: {}
     };
 
     render () {
@@ -32,9 +38,11 @@ class Breadcrumbs extends Component {
             <div className={styles.breadcrumbsWrap}>
                 <div className={styles.breadcrumbs}>
                     <Link className={styles.breadcrumb} to={langRoute}>{text.main}</Link>
-                    {/* <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>{category.texts[lang].name}</Link> */}
-                    <Link className={styles.breadcrumb} to={langRoute}>Доставка и оплата</Link>
-                    {product && <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${product.id}`}>{product.texts[lang].name}</Link>}
+                    {category.texts &&
+                    <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
+                        {category.texts[lang].name}
+                    </Link>}
+                    {/* {product && <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${product.id}`}>{product.texts[lang].name}</Link>} */}
                 </div>
             </div>);
     }

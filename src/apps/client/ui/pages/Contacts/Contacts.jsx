@@ -54,8 +54,6 @@ class Contacts extends Component {
         });
 
         marker.setMap(map);
-
-        this.getDirections;
     }
 
     getDirections = () => {

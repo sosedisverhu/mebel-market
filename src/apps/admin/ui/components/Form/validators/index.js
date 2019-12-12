@@ -5,6 +5,8 @@ import max from './max';
 import min from './min';
 import featuresSingular from './featuresSingular';
 import requiredFiles from './requiredFiles';
+import discountPrice from './discountPrice';
+import discount from './discount';
 
 export default {
     required,
@@ -13,5 +15,7 @@ export default {
     featuresSingular,
     max,
     min,
-    requiredFiles
+    requiredFiles,
+    discountPrice,
+    discount
 };

@@ -5,7 +5,7 @@ import setProductsAction from '../actions/setProducts';
 
 import { TOKEN_LOCAL_STORAGE_NAME } from '../constants/constants';
 
-export default function saveProduct (ids) {
+export default function deleteProduct (ids) {
     return dispatch => {
         const token = localStorage.getItem(TOKEN_LOCAL_STORAGE_NAME);
 

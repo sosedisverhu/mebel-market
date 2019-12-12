@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
-
+import { MAX_QUANTITY } from '../../../constants/constants';
 import styles from './Cart.css';
 
 const mapStateToProps = ({ application }) => {
@@ -22,17 +22,20 @@ class Cart extends Component {
     };
 
     state = {
-        active: false
+        active: false,
+        quantity: 1
     }
 
     handlePopupClose = () => {
+        document.body.style.overflowY = 'visible';
         this.setState({ active: false });
     }
 
-    handleClick = () => {
+    handleClick = (test) => {
         const { outsideClickEnabled } = this.props;
         const { active } = this.state;
 
+        document.body.style.overflowY = (!active) ? 'hidden' : 'visible';
         this.setState(state => ({ active: !state.active }));
 
         if (!active && !outsideClickEnabled) {
@@ -40,9 +43,15 @@ class Cart extends Component {
         }
     }
 
+    quantityChange = (value) => {
+        if (value >= 0 && value <= MAX_QUANTITY) {
+            this.setState({ quantity: value });
+        }
+    };
+
     render () {
         const { langMap } = this.props;
-        const { active } = this.state;
+        const { active, quantity } = this.state;
         const text = propOr('cart', {}, langMap);
 
         return (
@@ -52,6 +61,7 @@ class Cart extends Component {
                     <span className={styles.quantityAll}>0</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
+                    <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>{text.title}</p>
                         <div className={styles.productsContainer}>
@@ -71,9 +81,21 @@ class Cart extends Component {
                                         </div>
                                         <p className={styles.productSize}>{text.size} 190 х 200</p>
                                         <div className={styles.productQuantity}>
-                                            <button className={styles.quantitySub}>-</button>
-                                            <input className={styles.quantityInput} type="text"/>
-                                            <button className={styles.quantityAdd}>+</button>
+                                            <button
+                                                className={styles.quantitySub}
+                                                onClick={() => this.quantityChange(quantity - 1)}
+                                                disabled={quantity <= 1}>-</button>
+                                            <input
+                                                className={styles.quantityInput}
+                                                type="text"
+                                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                                value={quantity}
+                                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                            />
+                                            <button
+                                                className={styles.quantityAdd}
+                                                onClick={() => this.quantityChange(quantity + 1)}
+                                                disabled={quantity >= MAX_QUANTITY}>+</button>
                                         </div>
                                         <div className={styles.productPrices}>
                                             <p className={styles.productOldPrice}>2 798&#8372;</p>
