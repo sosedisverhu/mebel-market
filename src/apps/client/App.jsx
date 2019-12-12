@@ -26,6 +26,7 @@ import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import getLangRouteParts from './utils/getLangRouteParts';
+import getLangFromRoute from './utils/getLangFromRoute';
 
 import { LANGS } from './constants/constants';
 
@@ -54,12 +55,13 @@ class App extends Component {
         langRoute: ''
     };
 
-    renderComponent = Component => ({ match: { params: { lang: langUrl = this.props.lang }, path }, location: { pathname } }) => {
+    renderComponent = Component => ({ location: { pathname } }) => {
         if (typeof window === 'undefined') {
             return <Component />;
         }
 
         const { lang, langRoute } = this.props;
+        const langUrl = getLangFromRoute(pathname);
         const { routeWithoutLang } = getLangRouteParts(pathname);
 
         return lang === langUrl ? <Component /> : <Redirect to={`${langRoute}${routeWithoutLang}`} />;
