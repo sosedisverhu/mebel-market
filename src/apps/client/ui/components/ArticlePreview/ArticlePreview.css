@@ -42,7 +42,7 @@
     text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
     margin-bottom: 20px;
 
-    @media (--media-tablet-s) {
+    @media (max-width: 600px) {
         font-size: 18px;
         line-height: 21px;
         margin-bottom: 10px;
@@ -60,7 +60,7 @@
     margin-bottom: 20px;
     height: 100%;
 
-    @media (--media-tablet-s) {
+    @media (max-width: 600px) {
         font-size: 14px;
         line-height: 16px;
         margin-bottom: 15px;
@@ -93,7 +93,7 @@
         background-color: black1;
     }
 
-    @media (--media-tablet-s) {
+    @media (max-width: 600px) {
         font-size: 16px;
         line-height: 18px;
     }
