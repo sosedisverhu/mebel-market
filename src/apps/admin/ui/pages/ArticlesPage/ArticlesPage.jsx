@@ -57,9 +57,9 @@ const materialStyles = theme => ({
     }
 });
 
-const mapStateToProps = ({ articles }) => {
+const mapStateToProps = ({ data }) => {
     return {
-        articles: articles.articles
+        articles: data.articles
     };
 };
 

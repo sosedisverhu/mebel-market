@@ -1,0 +1,19 @@
+import { OKEY_STATUS_CODE, SERVER_ERROR_STATUS_CODE } from '../../../../constants/constants';
+
+import getAllSubCategories from '../../../client/subCategory/queries/getAllSubCategories';
+import deleteByIdsQuery from '../../../client/subCategory/queries/deleteByIds';
+
+export default function deleteByIds (req, res) {
+    const { ids } = req.body;
+
+    deleteByIdsQuery(ids)
+        .then(() => {
+            getAllSubCategories()
+                .then(subCategories => {
+                    res.status(OKEY_STATUS_CODE).send(subCategories);
+                });
+        })
+        .catch(() => {
+            res.status(SERVER_ERROR_STATUS_CODE).end();
+        });
+}

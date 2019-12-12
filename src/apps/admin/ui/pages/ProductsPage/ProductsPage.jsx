@@ -5,101 +5,39 @@ import { connect } from 'react-redux';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import noop from '@tinkoff/utils/function/noop';
 
-import DialogTitle from '@material-ui/core/DialogTitle';
-import AddIcon from '@material-ui/icons/Add';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Tooltip from '@material-ui/core/Tooltip';
-import DialogActions from '@material-ui/core/DialogActions';
-import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-import ReorderIcon from '@material-ui/icons/Reorder';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import FolderIcon from '@material-ui/icons/Folder';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
 import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import ProductForm from '../../components/ProductForm/ProductForm';
-import ProductsCategoryForm from '../../components/ProductsCategoryForm/ProductsCategoryForm';
-
-import arrayMove from '../../../utils/arrayMove';
 
 import getCategories from '../../../services/getCategories';
-import editProductsCategory from '../../../services/editProductsCategory';
-import deleteCategoriesByIds from '../../../services/deleteCategoriesByIds';
+import getSubCategories from '../../../services/getSubCategories';
+import editCategory from '../../../services/editCategory';
 import getProducts from '../../../services/getProducts';
 import deleteProductsByIds from '../../../services/deleteProductsByIds';
 
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-
-const ButtonSortable = SortableHandle(({ classes }) => (
-    <ReorderIcon className={classes.buttonSortable}> reorder </ReorderIcon>
-));
-
-const ItemSortable = SortableElement(({ onFormOpen, onCategoryDelete, name, onCategoryClick, value, classes }) => (
-    <ListItem onClick={onCategoryClick(value)} button className={classes.row}>
-        <ButtonSortable classes={classes}/>
-        <ListItemIcon>
-            <FolderIcon/>
-        </ListItemIcon>
-        <ListItemText
-            className={classes.listItemText}
-            primary={name}
-        />
-        <div className={classes.valueActions}>
-            <ListItemSecondaryAction>
-                <IconButton onClick={onFormOpen(value)}>
-                    <EditIcon/>
-                </IconButton>
-                <IconButton onClick={onCategoryDelete(value)} edge="end" aria-label="delete">
-                    <DeleteIcon/>
-                </IconButton>
-            </ListItemSecondaryAction>
-        </div>
-    </ListItem>
-));
-
-const SortableWrapper = SortableContainer((
-    {
-        productsCategory,
-        ...rest
-    }) =>
-    <List>
-        {
-            productsCategory.map((value, i) => {
-                const name = pathOr(['texts', DEFAULT_LANG, 'name'], '', value);
-
-                return <ItemSortable key={i} name={name} value={value} index={i} {...rest}/>;
-            })
-        }
-    </List>
-);
-
 const headerRows = [
     { id: 'name', label: 'Название' },
-    { id: 'price', label: 'Цена' },
+    { id: 'discountPrice', label: 'Цена' },
     { id: 'active', label: 'Active' }
 ];
 
 const tableCells = [
     { prop: product => pathOr(['texts', DEFAULT_LANG, 'name'], '', product) },
-    { prop: product => product.price },
+    { prop: product => product.discountPrice },
     { prop: product => product.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 
@@ -121,9 +59,6 @@ const materialStyles = theme => ({
         flexGrow: 1,
         padding: '30px'
     },
-    toolbar: {
-        height: '0px'
-    },
     toolbarNav: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -132,11 +67,6 @@ const materialStyles = theme => ({
     },
     categoryTitle: {
         height: '30px'
-    },
-    buttonSortable: {
-        position: 'relative',
-        marginRight: '12px',
-        cursor: 'pointer'
     },
     modal: {
         display: 'flex',
@@ -153,9 +83,6 @@ const materialStyles = theme => ({
             backgroundColor: 'rgba(0, 0, 0, 0.07)'
         }
     },
-    valueActions: {
-        visibility: 'hidden'
-    },
     listItemText: {
         cursor: 'default'
     },
@@ -171,17 +98,18 @@ const materialStyles = theme => ({
     }
 });
 
-const mapStateToProps = ({ application, products }) => {
+const mapStateToProps = ({ data }) => {
     return {
-        categories: application.productsCategories,
-        products: products.products
+        categories: data.categories,
+        subCategories: data.subCategories,
+        products: data.products
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     getCategories: payload => dispatch(getCategories(payload)),
-    deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
-    editProductsCategory: payload => dispatch(editProductsCategory(payload)),
+    getSubCategories: payload => dispatch(getSubCategories(payload)),
+    editCategory: payload => dispatch(editCategory(payload)),
     getProducts: payload => dispatch(getProducts(payload)),
     deleteProducts: payload => dispatch(deleteProductsByIds(payload))
 });
@@ -193,51 +121,55 @@ class ProductsPage extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         categories: PropTypes.array.isRequired,
+        subCategories: PropTypes.array.isRequired,
+        products: PropTypes.array,
         getCategories: PropTypes.func.isRequired,
-        deleteCategories: PropTypes.func.isRequired,
-        editProductsCategory: PropTypes.func.isRequired,
+        getSubCategories: PropTypes.func.isRequired,
         getProducts: PropTypes.func.isRequired,
-        deleteProducts: PropTypes.func.isRequired,
-        products: PropTypes.array
+        deleteProducts: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         categories: [],
+        subCategories: [],
         products: [],
         getCategories: noop,
-        deleteCategories: noop,
-        editProductsCategory: noop,
         getProducts: noop
     };
 
     state = {
         loading: true,
-        activeProductCategory: DEFAULT_ACTIVE_CATEGORY,
+        activeCategory: DEFAULT_ACTIVE_CATEGORY,
         productFormShowed: false,
-        categoryFormShowed: false,
-        editableCategory: {},
         editableProduct: {},
-        productsCategories: [],
+        categories: [],
+        subCategories: [],
         products: [],
         valueForDelete: null
     };
 
     componentDidMount () {
+        const { getProducts, getCategories, getSubCategories } = this.props;
+
         Promise.all([
-            this.props.getProducts(),
-            this.props.getCategories()
+            getProducts(),
+            getCategories(),
+            getSubCategories()
         ])
             .then(() => {
+                const { categories, subCategories } = this.props;
+
                 this.setState({
                     loading: false,
-                    productsCategories: this.props.categories,
-                    activeProductCategory: this.props.categories[0] || DEFAULT_ACTIVE_CATEGORY,
-                    products: this.getCategoryProducts(this.props.categories[0])
+                    categories: categories,
+                    activeCategory: categories[0] || DEFAULT_ACTIVE_CATEGORY,
+                    products: this.getCategoryProducts(categories[0]),
+                    subCategories: subCategories.filter((category) => categories[0].id === category.categoryId)
                 });
             });
     }
 
-    getCategoryProducts = (activeCategory = this.state.activeProductCategory) => {
+    getCategoryProducts = (activeCategory = this.state.activeCategory) => {
         return this.props.products.filter(product => product.categoryId === activeCategory.id);
     };
 
@@ -248,35 +180,6 @@ class ProductsPage extends Component {
         });
     };
 
-    handleCategoryFormOpen = category => () => {
-        this.setState({
-            categoryFormShowed: true,
-            editableCategory: category
-        });
-    };
-
-    handleCategoryFormDone = () => {
-        const { activeProductCategory } = this.state;
-
-        this.props.getCategories()
-            .then(() => {
-                const { categories } = this.props;
-
-                this.setState({
-                    productsCategories: categories,
-                    activeProductCategory: categories.find(category => category.id === activeProductCategory.id) || categories[0]
-                });
-                this.handleCloseCategoryForm();
-
-                this.props.getProducts()
-                    .then(() => {
-                        this.setState({
-                            products: this.getCategoryProducts()
-                        });
-                    });
-            });
-    };
-
     handleProductFormDone = () => {
         this.props.getProducts()
             .then(() => {
@@ -285,12 +188,6 @@ class ProductsPage extends Component {
                 });
                 this.handleCloseProductForm();
             });
-    };
-
-    handleCategoryDelete = category => () => {
-        this.setState({
-            valueForDelete: category
-        });
     };
 
     handleProductDelete = product => {
@@ -305,25 +202,6 @@ class ProductsPage extends Component {
             });
     };
 
-    handleWarningDisagree = () => {
-        this.setState({
-            valueForDelete: null
-        });
-    };
-
-    handleWarningAgree = () => {
-        const { valueForDelete, activeProductCategory } = this.state;
-
-        this.props.deleteCategories(valueForDelete.id)
-            .then(() => {
-                this.setState({
-                    productsCategories: this.props.categories,
-                    activeProductCategory: activeProductCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
-                    valueForDelete: null
-                });
-            });
-    };
-
     handleCloseProductForm = () => {
         this.setState({
             productFormShowed: false,
@@ -331,31 +209,11 @@ class ProductsPage extends Component {
         });
     };
 
-    handleCloseCategoryForm = () => {
-        this.setState({
-            categoryFormShowed: false
-        });
-    };
-
     handleCategoryClick = category => () => {
         this.setState({
-            activeProductCategory: category,
-            products: this.getCategoryProducts(category)
-        });
-    };
-
-    onDragEnd = ({ oldIndex, newIndex }) => {
-        const { productsCategories } = this.state;
-        const newValues = arrayMove(productsCategories, oldIndex, newIndex);
-
-        newValues.forEach((category, i) => {
-            category.positionIndex = i;
-
-            this.props.editProductsCategory(category);
-        });
-
-        this.setState({
-            productsCategories: newValues
+            activeCategory: category,
+            products: this.getCategoryProducts(category),
+            subCategories: this.props.subCategories.filter((subCategory) => category.id === subCategory.categoryId)
         });
     };
 
@@ -363,10 +221,11 @@ class ProductsPage extends Component {
         const { classes } = this.props;
         const {
             loading,
-            activeProductCategory,
+            activeCategory,
             editableProduct,
             productFormShowed,
-            productsCategories,
+            categories,
+            subCategories,
             products
         } = this.state;
 
@@ -376,25 +235,30 @@ class ProductsPage extends Component {
             </div>;
         }
 
-        if (!productsCategories.length) {
+        if (!categories.length) {
             return <div>
                 <Typography variant='h6' className={classes.categoryTitle}>Создайте сначала категорию</Typography>
             </div>;
         }
 
-        if (!activeProductCategory) {
+        if (!subCategories.length) {
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>В категории нет подкатегорий</Typography>
+            </div>;
+        }
+
+        if (!activeCategory) {
             return <div>
                 <Typography variant='h6' className={classes.categoryTitle}>Выберите категорию</Typography>
             </div>;
         }
 
         return <div>
-            <div className={classes.toolbar}/>
             <AdminTable
                 headerRows={headerRows}
                 tableCells={tableCells}
                 values={products}
-                headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeProductCategory)}"`}
+                headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
                 onDelete={this.handleProductDelete}
                 deleteValueWarningTitle='Вы точно хотите удалить товар?'
                 deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
@@ -405,8 +269,9 @@ class ProductsPage extends Component {
             <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
                     <ProductForm
-                        categories={productsCategories}
-                        activeCategory={activeProductCategory}
+                        categories={categories}
+                        subCategories={subCategories}
+                        activeCategory={activeCategory}
                         product={editableProduct}
                         onDone={this.handleProductFormDone}/>
                 </Paper>
@@ -416,13 +281,7 @@ class ProductsPage extends Component {
 
     render () {
         const { classes } = this.props;
-        const {
-            editableCategory,
-            valueForDelete,
-            productsCategories,
-            lang,
-            categoryFormShowed
-        } = this.state;
+        const { categories } = this.state;
 
         return <main className={classes.root}>
             <div className={classes.content}>
@@ -438,48 +297,27 @@ class ProductsPage extends Component {
             >
                 <div className={classes.toolbarNav}>
                     <Typography variant='h6' className={classes.categoryTitle}>Категории товаров</Typography>
-                    <Tooltip title='Добавление'>
-                        <IconButton aria-label='Add' onClick={this.handleCategoryFormOpen()}>
-                            <AddIcon/>
-                        </IconButton>
-                    </Tooltip>
                 </div>
                 <Divider/>
-                <div className={classes.toolbar}/>
-                <SortableWrapper
-                    axis='xy'
-                    onFormOpen={this.handleCategoryFormOpen}
-                    onCategoryDelete={this.handleCategoryDelete}
-                    onCategoryClick={this.handleCategoryClick}
-                    onSortEnd={this.onDragEnd}
-                    productsCategory={productsCategories}
-                    lang={lang}
-                    useDragHandle
-                    classes={classes}
-                />
+                <List>
+                    {categories.map((category) => {
+                        return <ListItem
+                            onClick={this.handleCategoryClick(category)}
+                            className={classes.row}
+                            button
+                            key={category.id}
+                        >
+                            <ListItemIcon>
+                                <FolderIcon/>
+                            </ListItemIcon>
+                            <ListItemText
+                                className={classes.listItemText}
+                                primary={category.texts.ru.name}
+                            />
+                        </ListItem>;
+                    })}
+                </List>
             </Drawer>
-            <Modal open={categoryFormShowed} onClose={this.handleCloseCategoryForm} className={classes.modal} disableEnforceFocus>
-                <Paper className={classes.modalContent}>
-                    <ProductsCategoryForm categories={productsCategories} category={editableCategory} onDone={this.handleCategoryFormDone}/>
-                </Paper>
-            </Modal>
-            <Dialog
-                open={!!valueForDelete}
-                onClose={this.handleWarningDisagree}
-            >
-                <DialogTitle>Вы точно хотите удалить категорию?</DialogTitle>
-                <DialogContent className={classes.warningContent}>
-                    <DialogContentText>{valueForDelete && valueForDelete.name}</DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.handleWarningDisagree} color='primary'>
-                        Нет
-                    </Button>
-                    <Button onClick={this.handleWarningAgree} color='primary' autoFocus>
-                        Да
-                    </Button>
-                </DialogActions>
-            </Dialog>
         </main>;
     }
 }

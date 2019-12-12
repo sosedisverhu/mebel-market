@@ -7,12 +7,9 @@ const Category = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
-            subCategory: [{
-                name: { type: String, required: true },
-                alias: { type: String, required: true },
-                positionIndex: { type: Number, required: true },
-                id: { type: String, required: true }
-            }]
+            seoTitle: { type: String },
+            seoDescription: { type: String },
+            seoKeywords: { type: String }
         }
     },
     alias: { type: String, required: true, unique: true },

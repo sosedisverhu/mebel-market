@@ -10,6 +10,7 @@ const VALUES = [
     'files',
     'hidden',
     'date',
+    'discountPrice',
     'price',
     'discount',
     'categoryId',
