@@ -56,28 +56,44 @@ class ProductsPage extends Component {
         if (this.props.location.pathname !== nextProps.location.pathname) {
             const category = this.getCategory(nextProps);
 
-            this.setNewState(category);
+            this.setNewState(category, nextProps);
         }
     }
 
-    setNewState = (category) => {
-        const { products, subCategories } = this.props;
+    setNewState = (category, props = this.props) => {
+        const { products, subCategories } = props;
+        const match = this.getMatch(props);
+        const filteredProducts = products.filter(product => product.categoryId === category.id);
+        const subCategory = this.getSubCategory(props);
 
         this.setState({
-            products: products.filter(product => product.categoryId === category.id),
+            products: match.params.subCategoryAlias ? filteredProducts.filter(product => product.subCategoryId === subCategory.id) : filteredProducts,
             category,
-            subCategories: subCategories.filter((subCategory) => {
+            subCategories: subCategories.filter(subCategory => {
                 return subCategory.categoryId === category.id;
             })
         });
     };
 
-    getCategory = (props = this.props) => {
-        const { location: { pathname }, langRoute, categories } = props;
-        const CATEGORY_PATH = `${langRoute}/:categoryAlias`;
-        const match = matchPath(pathname, { path: CATEGORY_PATH, exact: true });
+    getMatch = props => {
+        const { location: { pathname }, langRoute } = props;
+        const subCategoryAlias = pathname.split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
+        const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
 
-        return find(category => category.alias === match.params.categoryAlias, categories);
+        return matchPath(pathname, { path: CATEGORY_PATH, exact: true });
+    };
+
+    getCategory = (props = this.props) => {
+        const match = this.getMatch(props);
+
+        return find(category => category.alias === match.params.categoryAlias, props.categories);
+    };
+
+    getSubCategory = (props = this.props) => {
+        const match = this.getMatch(props);
+        const category = this.getCategory(props);
+
+        return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === match.params.subCategoryAlias), props.subCategories);
     };
 
     render () {
