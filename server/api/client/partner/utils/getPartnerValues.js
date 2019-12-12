@@ -4,7 +4,6 @@ const VALUES = [
     'id',
     'texts',
     'hidden',
-    'alias',
     'logo'
 ];
 

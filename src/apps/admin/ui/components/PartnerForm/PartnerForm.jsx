@@ -76,7 +76,6 @@ class PartnerForm extends Component {
             ru_description: ru.description || '',
             ua_description: ua.description || '',
             hidden: partner.hidden || false,
-            alias: partner.alias,
             logo: {
                 files: partner.logo ? [partner.logo] : [],
                 removedFiles: []
@@ -94,8 +93,7 @@ class PartnerForm extends Component {
             ru_description: ruDescription,
             ua_description: uaDescription,
             hidden,
-            id,
-            alias
+            id
         }) => {
         return {
             texts: {
@@ -109,8 +107,7 @@ class PartnerForm extends Component {
                 }
             },
             hidden,
-            id,
-            alias
+            id
         };
     };
 
