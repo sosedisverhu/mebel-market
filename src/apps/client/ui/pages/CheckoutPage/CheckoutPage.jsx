@@ -9,6 +9,7 @@ import propOr from '@tinkoff/utils/object/propOr';
 import noop from '@tinkoff/utils/function/noop';
 
 import styles from './CheckoutPage.css';
+import PopupOrder from '../../components/PopupOrder/PopupOrder';
 
 const deliveryOptions = [
     {
@@ -36,14 +37,14 @@ const paymentOptions = [
         }
     },
     {
-        id: 'card',
+        id: 'cod',
         texts: {
             ru: { option: 'Наложенный платеж' },
             ua: { option: 'Накладений платіж' }
         }
     },
     {
-        id: 'cod',
+        id: 'card',
         texts: {
             ru: { option: 'На карту' },
             ua: { option: 'На картку' }
@@ -119,8 +120,9 @@ class CheckoutPage extends Component {
         customerTel: '+380',
         customerEmail: '',
         customerComment: '',
-        customerAddress: ''
-    };
+        customerAddress: '',
+        popupActive: false
+    }
 
     handleChange = fieldName => e => {
         this.setState({ [fieldName]: e.target.value, [`${fieldName}Error`]: false });
@@ -130,10 +132,19 @@ class CheckoutPage extends Component {
         this.setState({ [`${fieldName}Error`]: !this.state[fieldName] });
     };
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.handlePopupChange();
+    }
+
+    handlePopupChange = () => {
+        this.setState({ popupActive: !this.state.popupActive });
+    }
+
     render () {
         const { langMap, lang } = this.props;
 
-        const { deliveryChecked, paymentChecked } = this.state;
+        const { deliveryChecked, paymentChecked, popupActive } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
 
@@ -235,8 +246,11 @@ class CheckoutPage extends Component {
                             <p className={styles.priceTotal}>{text.allPrice} <span>3 723₴</span></p>
                         </div>
                     </div>
-                    <button className={styles.buttonSubmit}>{text.btnConfirm}</button>
+                    <button type="submit" onClick={this.handleSubmit} className={styles.buttonSubmit}>{text.btnConfirm}</button>
                 </form>
+                {(popupActive)
+                    ? <PopupOrder delivery={deliveryChecked} payment={paymentChecked} />
+                    : null}
             </section>
         );
     }
