@@ -23,9 +23,9 @@ class ProductPage extends Component {
 
         return (
             <div>
-                <Breadcrumbs />
-                <Product product={product} />
-                <Tab product={product} />
+                <Breadcrumbs/>
+                <Product product={product}/>
+                <Tab product={product}/>
             </div>
         );
     }

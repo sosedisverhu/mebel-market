@@ -8,7 +8,7 @@ import styles from './Gallery.css';
 class Gallery extends Component {
     static propTypes = {
         photos: PropTypes.array.isRequired,
-        discount: PropTypes.string
+        discount: PropTypes.number
     };
 
     state = {
@@ -22,8 +22,8 @@ class Gallery extends Component {
         const { activeImg } = this.state;
         return (
             <div className={styles.gallery}>
-                {discount ? <div className={styles.discount}>{discount}</div> : null}
-                <div className={styles.mainImgWrap}>
+                {discount ? <div className={styles.discount}>{discount}%</div> : null}
+                <div>
                     <img className={styles.mainImg} src={photos[activeImg]} width="681" height="400" alt="main image" />
                 </div>
                 {photos.length > 1 && <div className={styles.additionalImgs}>
