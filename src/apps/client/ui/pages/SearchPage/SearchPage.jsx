@@ -106,7 +106,7 @@ class SearchPage extends Component {
 
     render () {
         const { langMap } = this.props;
-        const { products, searchText, articles, loading } = this.state;
+        const { products, searchText, articles, loading, newText } = this.state;
         const text = propOr('searchPage', {}, langMap);
 
         if (loading) {
@@ -154,7 +154,7 @@ class SearchPage extends Component {
                                                 className={styles.searchInput}
                                                 type="text"
                                                 placeholder={text.placeholder}
-                                                value={this.state.newText}
+                                                value={newText}
                                                 onChange={this.handleInputChange}
                                             />
                                         </div>
@@ -166,7 +166,6 @@ class SearchPage extends Component {
                             </div>
                         </div>)
                     : null}
-
             </section>
         );
     }
