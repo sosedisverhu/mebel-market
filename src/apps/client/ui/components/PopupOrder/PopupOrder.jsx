@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import propOr from '@tinkoff/utils/object/propOr';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import styles from './PopupOrder.css';
@@ -19,8 +19,7 @@ class PopupOrder extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         delivery: PropTypes.string.isRequired,
-        payment: PropTypes.string.isRequired,
-        history: PropTypes.object.isRequired
+        payment: PropTypes.string.isRequired
     };
 
     popup = React.createRef();
@@ -33,18 +32,12 @@ class PopupOrder extends Component {
         clearAllBodyScrollLocks();
     }
 
-    goToMain = () => {
-        const { history, langRoute } = this.props;
-
-        history.push(`${langRoute}/`);
-    }
-
     render () {
         const { langMap, langRoute, delivery, payment } = this.props;
         const text = propOr('checkoutPage', {}, langMap);
 
         return <div className={styles.root}>
-            <div className={styles.cover} onClick={this.goToMain} />
+            <div className={styles.cover} />
             <div className={styles.popup} ref={this.popup} >
                 <div className={styles.message}>
                     <h2 className={styles.title}>{text.popupTitle} №123456</h2>
@@ -75,10 +68,10 @@ class PopupOrder extends Component {
                     <h3 className={styles.price}>{text.price} <span className={styles.priceValue}>3 723₴</span></h3>
                     <Link to={`${langRoute}/`} className={styles.link}>{text.toMain}</Link>
                 </div>
-                <div className={styles.close} onClick={this.goToMain} />
+                <Link to={`${langRoute}/`} className={styles.close} />
             </div>
         </div>;
     }
 }
 
-export default withRouter(connect(mapStateToProps)(PopupOrder));
+export default connect(mapStateToProps)(PopupOrder);
