@@ -75,5 +75,5 @@ module.exports = [
         hidden: false,
         id: '5',
         logo: '/server/seeds/data/partners/images/matroluxe.png'
-    },
+    }
 ];
