@@ -49,14 +49,6 @@ class Tab extends Component {
             return (
                 <div className={styles.descr}>
                     <StyleRenderer newClass='description' html={product.texts[lang].description} />
-                    {/* <h3 className={styles.descrTitle}>Особенности конструкции</h3>
-                    <p className={styles.descrText}>В ногах кровати отсутствует спинка, ...</p>
-                    <h3 className={styles.descrTitle}>Цена на кровать АНТАЛИЯ</h3>
-                    <p className={styles.descrText}>Цена на металлическую кровать АНТАЛИЯ ...</p>
-                    <h3 className={styles.descrTitle}>Плюсы материала</h3>
-                    <p className={styles.descrText}>Каркас кровати выполнен из бесшовных металлических ...</p>
-                    <h3 className={styles.descrTitle}>Использование</h3>
-                    <p className={styles.descrText}>Как небольшая уютная спальня, ...</p> */}
                 </div>);
         }
 

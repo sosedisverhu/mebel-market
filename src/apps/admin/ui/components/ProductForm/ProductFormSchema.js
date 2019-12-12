@@ -56,7 +56,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     multiline: true
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Наполните контент' } }
+                    { name: 'required', options: { text: 'Заполните описание товара' } }
                 ]
             },
             {
