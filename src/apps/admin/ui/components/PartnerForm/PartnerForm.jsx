@@ -131,15 +131,9 @@ class PartnerForm extends Component {
                 onDone();
             })
             .catch(error => {
-                if (error.code === 'duplication') {
-                    this.setState({
-                        errorText: 'Введите уникальные алиас'
-                    });
-                } else {
-                    this.setState({
-                        errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
-                    });
-                }
+                this.setState({
+                    errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
+                });
             });
     };
 
