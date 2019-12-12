@@ -65,17 +65,16 @@
         width: 287px;
         height: 2px;
         background: black;
-        margin-left: 60px;
+        margin-left: 67px;
     }
 
     @media (max-width: 600px) {
         font-size: 24px;
         line-height: 28px;
         justify-content: space-between;
-        margin-left: 15px;
 
         &:after {
-            width: 30%;
+            width: 100px;
         }
     }
 }
@@ -222,6 +221,7 @@
 .articlesSection {
     padding-bottom: 40px;
     background: gray3;
+    height: 100%;
 
     @media (max-width: 600px) {
         padding-bottom: 30px;

@@ -125,7 +125,7 @@ class SearchPage extends Component {
                             <Sort />
                         </div>
                         <div className={styles.productsSectionWrap}>
-                            <h1 className={styles.quantity}>{`${text.products} ${products.length}`}</h1>
+                            <h1 className={styles.quantity}>{text.products} {products.length}</h1>
                             <div>Test Products</div>
                             {/* <ProductsGrid products={products} /> */}
                         </div>
@@ -133,7 +133,7 @@ class SearchPage extends Component {
                     : null}
                 {articles.length
                     ? (<div className={styles.articlesSection}>
-                        <h1 className={classNames(styles.quantity, styles.quantityArticle)}>{`${text.articles} ${articles.length}`}</h1>
+                        <h1 className={classNames(styles.quantity, styles.quantityArticle)}>{text.articles} {articles.length}</h1>
                         <div className={styles.articlesContainer}>
                             {articles.map(article =>
                                 <ArticlePreview key={article.id} article={article} />
