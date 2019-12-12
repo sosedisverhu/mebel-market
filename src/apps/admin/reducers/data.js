@@ -2,14 +2,16 @@ import {
     SET_PRODUCTS,
     SET_ARTICLES,
     SET_CATEGORIES,
-    SET_SUB_CATEGORIES
+    SET_SUB_CATEGORIES,
+    SET_PARTNERS
 } from '../types/types';
 
 const initialState = {
     products: [],
     articles: [],
     categories: [],
-    subCategories: []
+    subCategories: [],
+    partners: []
 };
 
 export default function (state = initialState, action) {
@@ -22,6 +24,8 @@ export default function (state = initialState, action) {
         return { ...state, categories: action.payload };
     case SET_SUB_CATEGORIES:
         return { ...state, subCategories: action.payload };
+    case SET_PARTNERS:
+        return { ...state, partners: action.payload };
     default:
         return state;
     }
