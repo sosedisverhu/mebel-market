@@ -25,7 +25,7 @@ class ProductPage extends Component {
             <div>
                 <Breadcrumbs />
                 <Product product={product} />
-                <Tab />
+                <Tab product={product} />
             </div>
         );
     }

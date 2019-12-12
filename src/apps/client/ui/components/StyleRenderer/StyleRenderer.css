@@ -51,20 +51,30 @@
     list-style: decimal outside;
 }
 
-.style h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: RoundedElegance;
-    color: black;
-    margin: 30px 0 15px 0;
+.style {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: RoundedElegance;
+        color: black;
+        margin: 30px 0 15px 0;
+    }
 }
 
 .style h4 {
     font-size: 18px;
     line-height: 21px;
+}
+
+.style.description h4 {
+    @media (max-width: 600px) {
+        font-size: 16px;
+        line-height: 18px;
+        margin-bottom: 10px;
+    }
 }
 
 .style blockquote {
@@ -141,6 +151,14 @@ h6 {
     @media (max-width: 780px) {
         font-size: 14px;
         line-height: 17px;
+    }
+}
+
+.style.description p {
+    @media (max-width: 600px) {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 16px;
     }
 }
 
