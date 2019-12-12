@@ -7,10 +7,6 @@ export default function getAvailableProducts (req, res) {
         .then(products => {
             const availableProducts = products
                 .filter(product => !product.hidden)
-                .map((product) => {
-                    product.price = product.discount ? Math.round(product.basePrice - (product.basePrice / 100 * product.discount)) : product.basePrice;
-                    return product;
-                })
                 .sort((prev, next) => next.date - prev.date);
 
             res.status(OKEY_STATUS_CODE).send(availableProducts);

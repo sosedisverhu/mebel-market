@@ -9,6 +9,7 @@ import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx'
 import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
+import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 
 export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
     return {
@@ -40,8 +41,16 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
-                component: FormFieldInput,
-                name: 'description',
+                component: FormFieldTitle,
+                name: 'content-title',
+                schema: {
+                    label: 'Описание',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldEditor,
+                name: `description`,
                 valueLangStructure: 'depend',
                 schema: {
                     label: 'Описание',
@@ -96,7 +105,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: 'basePrice',
+                name: 'price',
                 schema: {
                     label: 'Цена',
                     type: 'number'
@@ -107,14 +116,26 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: 'discount',
+                name: 'discountPrice',
                 schema: {
-                    label: 'Скидка на товар (%)',
+                    label: 'Скидочная цена (грн)',
                     type: 'number'
                 },
                 validators: [
-                    { name: 'max', options: { maxValue: 99 } },
-                    { name: 'min', options: { minValue: 0 } }
+                    { name: 'discountPrice', options: { text: 'Введите значение скидки' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'discount',
+                schema: {
+                    label: 'Размер скидки (%)',
+                    type: 'number'
+                },
+                validators: [
+                    { name: 'discount', options: { text: 'Введите процент скидки' } },
+                    { name: 'min', options: { minValue: 0 } },
+                    { name: 'max', options: { maxValue: 100 } }
                 ]
             },
             {

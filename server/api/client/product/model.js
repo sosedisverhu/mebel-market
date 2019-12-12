@@ -21,8 +21,8 @@ const Product = new Schema({
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
     discount: { type: Number },
-    basePrice: { type: Number, required: true },
-    price: { type: Number },
+    discountPrice: { type: Number },
+    price: { type: Number, required: true },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true }

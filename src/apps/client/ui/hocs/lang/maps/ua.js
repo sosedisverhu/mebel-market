@@ -54,7 +54,9 @@ export default {
         continueShopping: 'Продовжити покупки'
     },
     productsPage: {
-        filterBtn: 'Фільтри'
+        filterBtn: 'Фільтри',
+        results: 'Результатів',
+        popular: 'Популярні'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

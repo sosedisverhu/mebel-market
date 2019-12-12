@@ -18,6 +18,7 @@ const mapStateToProps = ({ application }) => {
 class Card extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         newClass: PropTypes.string,
         labelClass: PropTypes.string
@@ -43,7 +44,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, discount, files: [logo], basePrice, price },
+            product: { texts, files: [logo], discount, discountPrice, price },
             newClass,
             labelClass,
             lang
@@ -66,10 +67,10 @@ class Card extends Component {
                         {texts[lang].name}
                     </div>
                     {discount ? <div className={styles.priceOld}>
-                        {basePrice} &#8372;
+                        {price} &#8372;
                     </div> : null}
                     <div className={styles.price}>
-                        {price} &#8372;
+                        {discountPrice} &#8372;
                     </div>
                 </div>
             </a>);

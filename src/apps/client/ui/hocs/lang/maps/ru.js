@@ -54,7 +54,9 @@ export default {
         continueShopping: 'Продолжить покупки'
     },
     productsPage: {
-        filterBtn: 'Фильтры'
+        filterBtn: 'Фильтры',
+        results: 'Результатов',
+        popular: 'Популярные'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',

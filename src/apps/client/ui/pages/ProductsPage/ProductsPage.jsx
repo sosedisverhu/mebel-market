@@ -29,7 +29,6 @@ class ProductsPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         lang: PropTypes.string.isRequired,
-        labels: PropTypes.array.isRequired,
         products: PropTypes.array,
         categories: PropTypes.array,
         subCategories: PropTypes.array
@@ -42,6 +41,7 @@ class ProductsPage extends Component {
     };
 
     state = {
+        products: [],
         category: {},
         subCategories: []
     };
@@ -49,26 +49,28 @@ class ProductsPage extends Component {
     componentDidMount () {
         const category = this.getCategory();
 
-        this.setState({
-            category,
-            subCategories: this.props.subCategories.filter((subCategory) => {
-                return subCategory.categoryId === category.id;
-            })
-        });
+        this.setNewState(category);
     }
 
     componentWillReceiveProps (nextProps) {
-        if (this.props.location.pathname !== nextProps.location.pathname || this.props.lang !== nextProps.lang) {
+        if (this.props.location.pathname !== nextProps.location.pathname) {
             const category = this.getCategory(nextProps);
 
-            this.setState({
-                category,
-                subCategories: this.props.subCategories.filter((subCategory) => {
-                    return subCategory.categoryId === category.id;
-                })
-            });
+            this.setNewState(category);
         }
     }
+
+    setNewState = (category) => {
+        const { products, subCategories } = this.props;
+
+        this.setState({
+            products: products.filter(product => product.categoryId === category.id),
+            category,
+            subCategories: subCategories.filter((subCategory) => {
+                return subCategory.categoryId === category.id;
+            })
+        });
+    };
 
     getCategory = (props = this.props) => {
         const { location: { pathname }, langRoute, categories } = props;
@@ -79,8 +81,8 @@ class ProductsPage extends Component {
     };
 
     render () {
-        const { langMap, lang, products } = this.props;
-        const { category, subCategories } = this.state;
+        const { langMap, langRoute, lang } = this.props;
+        const { products, category, subCategories } = this.state;
         const text = propOr('productsPage', {}, langMap);
 
         return (
@@ -92,7 +94,7 @@ class ProductsPage extends Component {
                             {subCategories.map((subCategory) => {
                                 return (
                                     <Link className={styles.subCategory}
-                                        to=''
+                                        to={`${langRoute}/${category.alias}/${subCategory.alias}`}
                                         key={subCategory.id}
                                     >
                                         {subCategory.texts[lang].name}
@@ -102,11 +104,17 @@ class ProductsPage extends Component {
                     </div>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
-                            <div className={styles.btnFilter}>{text.filterBtn}</div>
-                            <div className={styles.results}>12 результатов</div>
+                            <div className={styles.btnFilter}>
+                                {text.filterBtn}
+                            </div>
+                            <div className={styles.results}>
+                                {`${products.length} ${text.results}`}
+                            </div>
                             <Filters/>
                             <div className={styles.sort}>
-                                <div className={styles.activeOption}>Популярные</div>
+                                <div className={styles.activeOption}>
+                                    {text.popular}
+                                </div>
                             </div>
                         </div>
                     </div>

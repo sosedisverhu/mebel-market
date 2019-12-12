@@ -4,6 +4,7 @@ module.exports = [
     {
         alias: 'prague',
         categoryId: 'category0',
+        id: '0',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -22,9 +23,10 @@ module.exports = [
             }
 
         },
-        discount: 5,
         hidden: false,
-        basePrice: 1999,
+        discount: 10,
+        discountPrice: 1799,
+        price: 1999,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Prague.png'],
         sizes: [
@@ -61,6 +63,7 @@ module.exports = [
     {
         alias: 'classic',
         categoryId: 'category0',
+        id: '1',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -79,9 +82,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 2799,
+        discount: 0,
+        discountPrice: 2799,
+        price: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Classic.png'],
         sizes: [
@@ -118,6 +122,7 @@ module.exports = [
     {
         alias: 'glory',
         categoryId: 'category0',
+        id: '2',
         subCategoryId: 'subCategory1',
         characteristics: {
             ru: {
@@ -136,9 +141,10 @@ module.exports = [
             }
 
         },
-        discount: 10,
         hidden: false,
-        basePrice: 3799,
+        discount: 0,
+        discountPrice: 3799,
+        price: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -175,7 +181,8 @@ module.exports = [
     {
         alias: 'standart',
         categoryId: 'category1',
-        subCategoryId: 'subCategory0',
+        id: '3',
+        subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -193,9 +200,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -232,7 +240,8 @@ module.exports = [
     {
         alias: 'eko-42',
         categoryId: 'category1',
-        subCategoryId: 'subCategory1',
+        id: '4',
+        subCategoryId: 'subCategory5',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -250,9 +259,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -289,7 +299,8 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        subCategoryId: 'subCategory0',
+        id: '5',
+        subCategoryId: 'subCategory5',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -307,9 +318,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 0,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -346,7 +358,8 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        subCategoryId: 'subCategory0',
+        id: '6',
+        subCategoryId: 'subCategory6',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -364,9 +377,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -403,7 +417,8 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        subCategoryId: 'subCategory1',
+        id: '7',
+        subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -421,9 +436,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -460,7 +476,8 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        subCategoryId: 'subCategory2',
+        id: '8',
+        subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -478,9 +495,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 1799,
+        discount: 0,
+        discountPrice: 1799,
+        price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -517,7 +535,8 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category3',
-        subCategoryId: 'subCategory2',
+        id: '9',
+        subCategoryId: 'subCategory8',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -535,9 +554,10 @@ module.exports = [
             }
 
         },
-        discount: 0,
         hidden: false,
-        basePrice: 2000,
+        discount: 0,
+        discountPrice: 2000,
+        price: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [

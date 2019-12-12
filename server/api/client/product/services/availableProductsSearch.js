@@ -9,11 +9,6 @@ export default function availableProductsSearch (req, res) {
         .then(products => {
             const availableProducts = products
                 .filter(product => !product.hidden)
-                .map((product) => {
-                    product.price = product.discount ? Math.round(product.price - (product.price / 100 * product.discount)) : product.price;
-
-                    return product;
-                })
                 .sort((prev, next) => next.date - prev.date);
 
             res.status(OKEY_STATUS_CODE).send(availableProducts);
