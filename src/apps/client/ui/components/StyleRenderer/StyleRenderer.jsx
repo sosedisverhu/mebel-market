@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import getInstagramTemplate from './utils/getInstagramTemplate';
 
@@ -7,7 +8,8 @@ import styles from './StyleRenderer.css';
 
 export default class StyleRenderer extends Component {
     static propTypes = {
-        html: PropTypes.string
+        html: PropTypes.string,
+        newClass: PropTypes.string
     };
 
     static defaultProps = {
@@ -31,7 +33,9 @@ export default class StyleRenderer extends Component {
     };
 
     render () {
-        return <span className={styles.style}>
+        const { newClass } = this.props;
+
+        return <span className={classNames(styles.style, { [styles[newClass]]: newClass })}>
             <div dangerouslySetInnerHTML={{ __html: this.props.html.replace(/\\/g, '') }}/>
         </span>;
     }

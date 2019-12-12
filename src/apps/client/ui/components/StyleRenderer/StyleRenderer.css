@@ -69,6 +69,14 @@
     line-height: 21px;
 }
 
+.style.description h4 {
+    @media (max-width: 600px) {
+        font-size: 16px;
+        line-height: 18px;
+        margin-bottom: 10px;
+    }
+}
+
 .style blockquote {
     p {
         margin: 25px 0;
@@ -143,6 +151,14 @@
     @media (max-width: 780px) {
         font-size: 14px;
         line-height: 17px;
+    }
+}
+
+.style.description p {
+    @media (max-width: 600px) {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 16px;
     }
 }
 

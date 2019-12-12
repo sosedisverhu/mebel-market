@@ -54,7 +54,9 @@ export default {
         continueShopping: 'Продовжити покупки'
     },
     productsPage: {
-        filterBtn: 'Фільтри'
+        filterBtn: 'Фільтри',
+        results: 'Результатів',
+        popular: 'Популярні'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',
@@ -110,6 +112,14 @@ export default {
         productPrice: 'Вартість товару:',
         deliveryPrice: 'Доставка:',
         allPrice: 'Всього:',
-        btnConfirm: 'Підтвердити замовлення'
+        btnConfirm: 'Підтвердити замовлення',
+        popupTitle: 'Ваше замовлення',
+        addressTitle: 'Чекаємо Вас за адресою:',
+        addressText: 'Велика Кільцева вул., 4б, Київ, 08130',
+        sms: 'Вам на телефон прийде код з відстеженням',
+        cardTitle: 'Сплатіть на картку:',
+        cardDescr: '(вкажіть номер замовлення в описі платежу)',
+        price: 'Вартість замовлення:',
+        toMain: 'На головну'
     }
 };

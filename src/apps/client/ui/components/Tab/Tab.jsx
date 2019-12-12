@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import styles from './Tab.css';
+import StyleRenderer from '../StyleRenderer/StyleRenderer';
 
-const mapStateToProps = () => {
+const mapStateToProps = ({ application }) => {
     return {
         tabs: [
             {
@@ -13,16 +14,19 @@ const mapStateToProps = () => {
                 title: 'Описание'
             },
             {
-                id: 'caracteristic',
+                id: 'characteristic',
                 title: 'Характеристики'
             }
-        ]
+        ],
+        lang: application.lang
     };
 };
 
 class Tab extends Component {
     static propTypes = {
-        tabs: PropTypes.array.isRequired
+        tabs: PropTypes.array.isRequired,
+        lang: PropTypes.string.isRequired,
+        product: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -39,38 +43,32 @@ class Tab extends Component {
 
     getContent () {
         const { activeId } = this.state;
+        const { product, lang } = this.props;
 
         if (activeId === 'description') {
             return (
                 <div className={styles.descr}>
-                    <h3 className={styles.descrTitle}>Особенности конструкции</h3>
-                    <p className={styles.descrText}>В ногах кровати отсутствует спинка, ...</p>
-                    <h3 className={styles.descrTitle}>Цена на кровать АНТАЛИЯ</h3>
-                    <p className={styles.descrText}>Цена на металлическую кровать АНТАЛИЯ ...</p>
-                    <h3 className={styles.descrTitle}>Плюсы материала</h3>
-                    <p className={styles.descrText}>Каркас кровати выполнен из бесшовных металлических ...</p>
-                    <h3 className={styles.descrTitle}>Использование</h3>
-                    <p className={styles.descrText}>Как небольшая уютная спальня, ...</p>
+                    <StyleRenderer newClass='description' html={product.texts[lang].description} />
                 </div>);
         }
 
         return (
-            <div className={styles.caracter}>
+            <div className={styles.character}>
                 <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
+                    <h3 className={styles.characterTitle}>Цвет</h3>
+                    <p className={styles.characterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
                 </div>
                 <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Гарантия</h3>
-                    <p className={styles.caracterText}>12 месяцев</p>
+                    <h3 className={styles.characterTitle}>Гарантия</h3>
+                    <p className={styles.characterText}>12 месяцев</p>
                 </div>
                 <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Материал</h3>
-                    <p className={styles.caracterText}>Металл</p>
+                    <h3 className={styles.characterTitle}>Материал</h3>
+                    <p className={styles.characterText}>Металл</p>
                 </div>
                 <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Максимальная нагрузка <span className={styles.caracterSpan}>(на одно спальное место)</span></h3>
-                    <p className={styles.caracterText}>200 кг</p>
+                    <h3 className={styles.characterTitle}>Максимальная нагрузка <span className={styles.characterSpan}>(на одно спальное место)</span></h3>
+                    <p className={styles.characterText}>200 кг</p>
                 </div>
             </div>);
     }

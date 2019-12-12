@@ -6,19 +6,15 @@ module.exports = [
         texts: {
             ru: {
                 name: 'Кровати',
-                subCategory: [
-                    { name: 'Металлические кровати', value: 'metal', id: 'metal' },
-                    { name: 'Деревянные кровати', value: 'wooden', id: 'wooden' },
-                    { name: 'Двухъярусные кровати', value: 'two-tier', id: 'two-tier' }
-                ]
+                seoDescription: 'beds',
+                seoKeywords: 'beds',
+                seoTitle: 'beds'
             },
             ua: {
                 name: 'Ліжка',
-                subCategory: [
-                    { name: 'Металеві ліжка', value: 'metal', id: 'metal' },
-                    { name: 'Дерев\'яні ліжка', value: 'wooden', id: 'wooden' },
-                    { name: 'Двоярусні ліжка', value: 'two-tier', id: 'two-tier' }
-                ]
+                seoDescription: 'beds',
+                seoKeywords: 'beds',
+                seoTitle: 'beds'
             }
         },
         hidden: false,
@@ -30,17 +26,15 @@ module.exports = [
         texts: {
             ru: {
                 name: 'Матрасы',
-                subCategory: [
-                    { name: 'Пружинные матрасы', value: 'spring', id: 'spring' },
-                    { name: 'Беспружинные матрасы', value: 'no-spring', id: 'no-spring' }
-                ]
+                seoDescription: 'mattresses',
+                seoKeywords: 'mattresses',
+                seoTitle: 'mattresses'
             },
             ua: {
                 name: 'Матраци',
-                subCategory: [
-                    { name: 'Пружинні матраци', value: 'spring', id: 'spring' },
-                    { name: 'Безпружинні матраци', value: 'no-spring', id: 'no-spring' }
-                ]
+                seoDescription: 'mattresses',
+                seoKeywords: 'mattresses',
+                seoTitle: 'mattresses'
             }
         },
         hidden: false,
@@ -52,19 +46,15 @@ module.exports = [
         texts: {
             ru: {
                 name: 'Мягкая мебель',
-                subCategory: [
-                    { name: 'Диваны', value: 'sofas', id: 'sofas' },
-                    { name: 'Угловые диваны', value: 'corner-sofa', id: 'corner-sofa' },
-                    { name: 'Детские диваны', value: 'kids-sofa', id: 'kids-sofa' }
-                ]
+                seoDescription: 'soft-furniture',
+                seoKeywords: 'soft-furniture',
+                seoTitle: 'soft-furniture'
             },
             ua: {
                 name: 'М\'які меблі',
-                subCategory: [
-                    { name: 'Дивани', value: 'sofas', id: 'sofas' },
-                    { name: 'Кутові дивани', value: 'corner-sofa', id: 'corner-sofa' },
-                    { name: 'Детячі дивани', value: 'kids-sofa', id: 'kids-sofa' }
-                ]
+                seoDescription: 'soft-furniture',
+                seoKeywords: 'soft-furniture',
+                seoTitle: 'soft-furniture'
             }
         },
         hidden: false,
@@ -76,19 +66,15 @@ module.exports = [
         texts: {
             ru: {
                 name: 'Аксессуары для сна',
-                subCategory: [
-                    { name: 'Подушки', value: 'pillows', id: 'pillows' },
-                    { name: 'Одеяла', value: 'blankets', id: 'blankets' },
-                    { name: 'Наматрасники', value: 'mattress-covers', id: 'mattress-covers' }
-                ]
+                seoDescription: 'accessories',
+                seoKeywords: 'accessories',
+                seoTitle: 'accessories'
             },
             ua: {
                 name: 'Аксесуари для сну',
-                subCategory: [
-                    { name: 'Подушки', value: 'pillows', id: 'pillows' },
-                    { name: 'Ковдри', value: 'blankets', id: 'blankets' },
-                    { name: 'Наматрацники', value: 'mattress-covers', id: 'mattress-covers' }
-                ]
+                seoDescription: 'accessories',
+                seoKeywords: 'accessories',
+                seoTitle: 'accessories'
             }
         },
         hidden: false,
