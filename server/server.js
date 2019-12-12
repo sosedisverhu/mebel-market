@@ -62,8 +62,6 @@ app.use('/api/admin/category', adminCategoryApi);
 app.use('/api/client/category', clientCategoryApi);
 app.use('/api/admin/subCategory', adminSubCategoryApi);
 app.use('/api/client/subCategory', clientSubCategoryApi);
-app.use('/api/admin/category', adminProductsCategoryApi);
-app.use('/api/client/category', clientProductsCategoryApi);
 app.use('/api/client/search', clientSearchApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
