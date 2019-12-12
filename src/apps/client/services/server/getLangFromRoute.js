@@ -1,23 +1,10 @@
 import setLang from '../../actions/setLang';
 
-import getLangRouteParts from '../../utils/getLangRouteParts';
-import { LANGS, DEFAULT_LANG, DEFAULT_LANG_ROUTE } from '../../constants/constants';
-
-import find from '@tinkoff/utils/array/find';
-import nth from '@tinkoff/utils/array/nth';
-import compose from '@tinkoff/utils/function/compose';
-
-const langRoutesMap = LANGS.map((lang, i) => {
-    return !i ? [DEFAULT_LANG_ROUTE, DEFAULT_LANG] : [`/${lang}`, lang];
-});
+import getLangFromRouteUtil from '../../utils/getLangFromRoute';
 
 export default function getLangFromRoute (req) {
     return dispatch => {
-        const { langRoute } = getLangRouteParts(req.path);
-        const lang = compose(
-            nth(1),
-            find(langRouteArr => langRouteArr[0] === langRoute)
-        )(langRoutesMap) || DEFAULT_LANG;
+        const lang = getLangFromRouteUtil(req.path);
 
         return dispatch(setLang(lang));
     };
