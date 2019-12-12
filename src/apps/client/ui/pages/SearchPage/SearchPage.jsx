@@ -20,7 +20,6 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
         langMap: application.langMap,
-        lang: application.lang,
         products: data.products,
         labels: data.labels,
         articles: data.articles
@@ -37,7 +36,6 @@ class SearchPage extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired,
         searchByText: PropTypes.func.isRequired,
         location: PropTypes.object,
         history: PropTypes.object.isRequired
@@ -110,9 +108,6 @@ class SearchPage extends Component {
         const { langMap } = this.props;
         const { products, searchText, articles, loading } = this.state;
         const text = propOr('searchPage', {}, langMap);
-
-        console.log('products', products);
-        console.log('articles', articles);
 
         if (loading) {
             return <div className={styles.loader}>
