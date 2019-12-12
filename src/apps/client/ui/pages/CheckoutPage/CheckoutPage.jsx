@@ -249,7 +249,7 @@ class CheckoutPage extends Component {
                     <button type="submit" onClick={this.handleSubmit} className={styles.buttonSubmit}>{text.btnConfirm}</button>
                 </form>
                 {(popupActive)
-                    ? <PopupOrder onPopupChange={this.handlePopupChange} delivery={deliveryChecked} payment={paymentChecked} />
+                    ? <PopupOrder delivery={deliveryChecked} payment={paymentChecked} />
                     : null}
             </section>
         );

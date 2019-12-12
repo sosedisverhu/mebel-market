@@ -51,15 +51,17 @@
     list-style: decimal outside;
 }
 
-.style h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: RoundedElegance;
-    color: black;
-    margin: 30px 0 15px 0;
+.style {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: RoundedElegance;
+        color: black;
+        margin: 30px 0 15px 0;
+    }
 }
 
 .style h4 {
