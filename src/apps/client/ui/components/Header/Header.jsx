@@ -36,6 +36,7 @@ class Header extends Component {
     };
 
     handleMobileMenu = () => {
+        document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
@@ -85,15 +86,19 @@ class Header extends Component {
                                     <div className={styles.mobileSocials}>
                                         <a href="#" target="_blank">
                                             <img
-                                                className={styles.googlePlus}
-                                                src="/src/apps/client/ui/components/Header/img/google-plus.svg"
-                                                alt="google plus"
-                                            />
+                                                className={styles.instagram}
+                                                src="/src/apps/client/ui/components/Header/img/instagram.svg"
+                                                alt="instagram"/>
                                         </a>
                                         <a href="#" target="_blank">
                                             <img className={styles.facebook}
                                                 src="/src/apps/client/ui/components/Header/img/facebook.svg"
                                                 alt="facebook"/>
+                                        </a>
+                                        <a href="#" target="_blank">
+                                            <img className={styles.youtube}
+                                                src="/src/apps/client/ui/components/Header/img/youtube.svg"
+                                                alt="youtube"/>
                                         </a>
                                     </div>
                                     <div className={styles.mobileMenuBottom}>

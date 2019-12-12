@@ -283,6 +283,7 @@ textarea {
     background: black;
     min-width: 200px;
     display: block;
+    cursor: pointer;
 
     @media (max-width: 450px) {
         margin-top: 20px;

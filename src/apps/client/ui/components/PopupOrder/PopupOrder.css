@@ -1,0 +1,177 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value black from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+    overflow-y: auto;
+    
+    @media (max-width: 800px) {
+        display: block;
+    }
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.popup {
+    position: relative;
+    background: whiteBasic;
+    padding: 30px 45px;
+    width: 600px;    
+    border-radius: 5px;
+    z-index: 100;
+
+    @media (max-width: 800px) {
+        width: auto;
+        max-width: 600px;
+        margin: 30px auto;
+    }
+
+    @media (max-width: 630px) {
+        margin: 30px 16px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 30px;
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+
+.title {
+    font: 24px/28px RoundedElegance;
+    padding-bottom: 30px;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+        line-height: 23px;
+        padding-bottom: 40px;
+    }
+}
+
+.addressTitle {
+    font: 18px/21px RoundedElegance;
+    text-align: center;
+}
+
+.addressText {
+    font: 18px/21px RoundedElegance;
+    margin: 15px auto 0 auto;
+    max-width: 222px;
+    text-align: center;
+}
+
+.phones {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.phone {
+    font: 18px/21px RoundedElegance;
+    margin-top: 6px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.sms {
+    font: 18px/21px RoundedElegance;
+    text-align: center;
+}
+
+.cardTitle {
+    font: 18px/21px RoundedElegance;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.cardCode {
+    font: 24px/28px RoundedElegance;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.cardDescr {
+    font: 16px/18px RoundedElegance;
+    margin-top: 5px;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+        line-height: 16px;
+        margin-top: 5px;
+    }
+}
+
+.price {
+    font: 24px/28px RoundedElegance;
+    padding-top: 30px;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+        line-height: 23px;
+        padding-top: 40px;
+    }
+}
+
+.priceValue {    
+    white-space: nowrap;
+}
+
+.link {
+    font: 18px/21px RoundedElegance;
+    padding: 10px 20px;
+    border: none;
+    color: whiteBasic;
+    background: black;
+    min-width: 200px;
+    display: block;
+    cursor: pointer;
+    margin-top: 30px;
+    text-decoration: none;
+    text-align: center;
+
+    @media (max-width: 600px) {
+        margin-top: 40px;
+    }
+}
+
+.close {
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    &:after {
+      content: url("./img/close.png");
+    }
+
+    @media (max-width: 600px) {
+        top: 6px;
+        right: 6px;
+    }
+}
