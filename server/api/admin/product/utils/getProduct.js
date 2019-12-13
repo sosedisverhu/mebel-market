@@ -1,4 +1,4 @@
-export default function getProduct(body) {
+export default function getProduct (body) {
     const {
         id,
         texts,

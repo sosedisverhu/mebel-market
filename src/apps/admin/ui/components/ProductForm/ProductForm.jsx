@@ -125,63 +125,17 @@ class ProductForm extends Component {
             ...(product.filters || [])
                 .reduce((filters, filter) => ({ ...filters, [`filter-${filter.id}`]: isObject(filter.value.ru) ? filter.value.ru.name : filter.value.ru }), {})
         };
-        console.log('this.initialValues', this.initialValues);
         this.id = prop('id', product);
 
-        const filtersCategory = pathOr(['filters', 'ru'], [], activeCategory);        
-        const activeSubCategory = subCategories.find(subCategory => subCategory.id === this.initialValues.subCategoryId);
-        const filtersSubCategory = pathOr(['filters', 'ru'], [], activeSubCategory);
+        const filters = pathOr(['filters', 'ru'], [], activeCategory);
 
         this.state = {
             lang: 'ru',
             activeCategory,
             categoryHidden,
             errorText: '',
-            filters: [...filtersCategory, ...filtersSubCategory]
+            filters
         };
-    }
-
-    getFiltersArray = (values, filtersObj) => {
-        const filters = reduceObj((filters, filterValue, filterName) => {
-            if (FILTER_NAME_REGEX.test(filterName)) {
-                const id = filterName.replace(FILTER_NAME_REGEX, '');
-                const filterIndex = findIndex(filter => filter.id === id, this.state.filters);
-                console.log('filterIndex', filterIndex);
-                if (filterIndex === -1) {
-                    return filters;
-                }
-                const filterType = this.state.filters[filterIndex].type;
-                let value;
-
-                if (filterType === 'range') {
-                    value = {
-                        ua: +filterValue,
-                        ru: +filterValue
-                    };
-                } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.filters[filterIndex].options);
-                    console.log('filterName', filterName);
-
-                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
-
-                        return resultFilterValue;
-                    }, {}, filtersObj);
-                }
-
-                return [
-                    ...filters,
-                    {
-                        id: filterName.replace(FILTER_NAME_REGEX, ''),
-                        value
-                    }
-                ];
-            }
-
-            return filters;
-        }, [], values);
-
-        return filters;
     }
 
     getProductPayload = (values) => {
@@ -211,20 +165,7 @@ class ProductForm extends Component {
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
-        const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
-        
-        console.log('activeCategory.filters -----', activeCategory.filters);
-        console.log('activeSubCategory.filters -----', activeSubCategory.filters);        
 
-        const allCategoriesFiltersUA = [...activeCategory.filters.ua, ...activeSubCategory.filters.ua];
-        const allCategoriesFiltersRU = [...activeCategory.filters.ru, ...activeSubCategory.filters.ru];
-        const allCategoriesFiltersAll = {
-            ua: allCategoriesFiltersUA,
-            ru: allCategoriesFiltersRU
-        }
-        
-        console.log('allCategoriesFiltersAll', allCategoriesFiltersAll); 
-        console.log('values -----', values);
         const filters = reduceObj((filters, filterValue, filterName) => {
             if (FILTER_NAME_REGEX.test(filterName)) {
                 const id = filterName.replace(FILTER_NAME_REGEX, '');
@@ -247,7 +188,7 @@ class ProductForm extends Component {
                         resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
 
                         return resultFilterValue;
-                    }, {}, allCategoriesFiltersAll);
+                    }, {}, activeCategory.filters);
                 }
 
                 return [
@@ -261,12 +202,6 @@ class ProductForm extends Component {
 
             return filters;
         }, [], values);
-        
-
-        // const filtersCategory = this.getFiltersArray(values, activeCategory.filters);
-        // const filtersSubCategory = this.getFiltersArray(values, activeSubCategory.filters);
-
-        console.log('filters +++++++', filters);
 
         return {
             texts: {
@@ -313,7 +248,6 @@ class ProductForm extends Component {
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
             .then(product => {
-                console.log('product', product);
                 const { files } = values.avatar;
                 if (files[0].content) {
                     const formData = new FormData();
@@ -377,9 +311,6 @@ class ProductForm extends Component {
                 filters: pathOr(['filters', 'ru'], [], activeCategory)
             });
 
-            console.log('activeCategory', activeCategory);
-            console.log('activeCategory.texts[lang]', activeCategory.texts[lang]);
-
             this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
                 value: category.id,
                 name: category.name
@@ -399,9 +330,6 @@ class ProductForm extends Component {
     render () {
         const { classes } = this.props;
         const { categoryHidden, errorText, filters } = this.state;
-
-        console.log('filters', filters);
-        console.log('subCategoriesOptions', this.subCategoriesOptions);
 
         return <div>
             <Form
