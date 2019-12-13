@@ -15,7 +15,8 @@ const VALUES = [
     'discount',
     'categoryId',
     'subCategoryId',
-    'alias'
+    'alias',
+    'filters'
 ];
 
 export default function prepareProduct (body) {
