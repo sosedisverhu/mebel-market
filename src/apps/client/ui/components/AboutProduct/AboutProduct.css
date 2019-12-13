@@ -47,26 +47,26 @@
 }
 
 .details {
+    margin-top: 10px;
+    display: block;
     font: 14px/16px RoundedElegance;
     color: blackLighter;
     text-decoration: underline;
-    margin-top: 10px;
-    display: block;
 }
 
 .priceOld {
+    padding-right: 25px;
+    display: inline-block;
     font: 25px/41px RoundedElegance;
     color: gray;
     text-decoration: line-through;
-    display: inline-block;
-    padding-right: 25px;
 }
 
 .price {
+    margin: 10px 0;
+    display: inline-block;
     font: 36px/41px RoundedElegance;
     color: red;
-    display: inline-block;
-    margin: 10px 0;
 }
 
 .sizesTitle {

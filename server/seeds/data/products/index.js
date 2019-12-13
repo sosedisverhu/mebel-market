@@ -321,7 +321,7 @@ module.exports = [
         hidden: false,
         discount: 0,
         discountPrice: 1799,
-        price: 0,
+        price: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Glory.png'],
         sizes: [
