@@ -241,7 +241,7 @@ module.exports = [
         alias: 'eko-42',
         categoryId: 'category1',
         id: '4',
-        subCategoryId: 'subCategory5',
+        subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
                 characteristics: [{
