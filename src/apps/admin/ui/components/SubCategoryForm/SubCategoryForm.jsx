@@ -86,7 +86,10 @@ class SubCategoryForm extends Component {
             hidden: (categoryHidden ? false : subCategory.hidden) || false,
             alias: subCategory.alias,
             lang: 'ru',
-            ...pick(SUB_CATEGORIES_VALUES, subCategory)
+            ...pick(SUB_CATEGORIES_VALUES, subCategory),
+            filters: [],
+            ua_filters: pathOr(['filters', 'ua'], [], subCategory),
+            ru_filters: pathOr(['filters', 'ru'], [], subCategory)
         };
         this.id = prop('id', subCategory);
         this.state = {
@@ -111,7 +114,9 @@ class SubCategoryForm extends Component {
             categoryId,
             positionIndex,
             id,
-            alias
+            alias,
+            ua_filters: uaFilters,
+            ru_filters: ruFilters
         }) => {
         return {
             texts: {
@@ -127,6 +132,10 @@ class SubCategoryForm extends Component {
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
+            },
+            filters: {
+                ua: uaFilters,
+                ru: ruFilters
             },
             hidden,
             categoryId,

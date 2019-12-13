@@ -1,5 +1,5 @@
 export default function getSubCategory (body) {
-    const { id, texts, categoryId, alias, hidden, positionIndex } = body;
+    const { id, texts, categoryId, alias, hidden, positionIndex, filters } = body;
 
     return {
         id,
@@ -7,6 +7,7 @@ export default function getSubCategory (body) {
         hidden,
         categoryId,
         alias,
-        positionIndex
+        positionIndex,
+        filters
     };
 }

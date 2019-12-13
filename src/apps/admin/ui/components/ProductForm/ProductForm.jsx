@@ -5,6 +5,9 @@ import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
+import reduceObj from '@tinkoff/utils/object/reduce';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import isObject from '@tinkoff/utils/is/plainObject';
 
 import classNames from 'classnames';
 
@@ -21,6 +24,7 @@ import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
 
 const PRODUCTS_VALUES = ['name', 'hidden'];
+const FILTER_NAME_REGEX = /filter-/g;
 
 const mapDispatchToProps = (dispatch) => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
@@ -116,19 +120,26 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
             lang: 'ru',
-            ...pick(PRODUCTS_VALUES, product)
+            filters: [],
+            ...pick(PRODUCTS_VALUES, product),
+            ...(product.filters || [])
+                .reduce((filters, filter) => ({ ...filters, [`filter-${filter.id}`]: isObject(filter.value.ru) ? filter.value.ru.name : filter.value.ru }), {})
         };
         this.id = prop('id', product);
+
+        const filters = pathOr(['filters', 'ru'], [], activeCategory);
+
         this.state = {
             lang: 'ru',
             activeCategory,
             categoryHidden,
-            errorText: ''
+            errorText: '',
+            filters
         };
     }
 
-    getProductPayload = (
-        {
+    getProductPayload = (values) => {
+        const {
             ru_name: ruName,
             ua_name: uaName,
             ru_description: ruDescription,
@@ -151,7 +162,47 @@ class ProductForm extends Component {
             subCategoryId,
             id,
             alias
-        }) => {
+        } = values;
+
+        const activeCategory = this.props.categories.find(category => category.id === categoryId);
+
+        const filters = reduceObj((filters, filterValue, filterName) => {
+            if (FILTER_NAME_REGEX.test(filterName)) {
+                const id = filterName.replace(FILTER_NAME_REGEX, '');
+                const filterIndex = findIndex(filter => filter.id === id, this.state.filters);
+                if (filterIndex === -1) {
+                    return filters;
+                }
+                const filterType = this.state.filters[filterIndex].type;
+                let value;
+
+                if (filterType === 'range') {
+                    value = {
+                        ua: +filterValue,
+                        ru: +filterValue
+                    };
+                } else {
+                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.filters[filterIndex].options);
+
+                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+
+                        return resultFilterValue;
+                    }, {}, activeCategory.filters);
+                }
+
+                return [
+                    ...filters,
+                    {
+                        id: filterName.replace(FILTER_NAME_REGEX, ''),
+                        value
+                    }
+                ];
+            }
+
+            return filters;
+        }, [], values);
+
         return {
             texts: {
                 ru: {
@@ -186,7 +237,8 @@ class ProductForm extends Component {
             categoryId,
             subCategoryId,
             id,
-            alias
+            alias,
+            filters
         };
     };
 
@@ -255,7 +307,8 @@ class ProductForm extends Component {
             const { lang } = this.state;
 
             this.setState({
-                categoryHidden: activeCategory.hidden
+                categoryHidden: activeCategory.hidden,
+                filters: pathOr(['filters', 'ru'], [], activeCategory)
             });
 
             this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
@@ -276,7 +329,7 @@ class ProductForm extends Component {
 
     render () {
         const { classes } = this.props;
-        const { categoryHidden, errorText } = this.state;
+        const { categoryHidden, errorText, filters } = this.state;
 
         return <div>
             <Form
@@ -287,7 +340,8 @@ class ProductForm extends Component {
                         title: this.id ? 'Редактирование товара' : 'Добавление товара',
                         categoriesOptions: this.categoriesOptions,
                         subCategoriesOptions: this.subCategoriesOptions,
-                        categoryHidden
+                        categoryHidden,
+                        filters
                     }
                 })}
                 onChange={this.handleChange}
@@ -306,7 +360,7 @@ class ProductForm extends Component {
                     className={classNames(classes.error, classes.margin)}
                     message={
                         <span id='client-snackbar' className={classes.message}>
-                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)}/>
+                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
                             {errorText}
                         </span>
                     }
