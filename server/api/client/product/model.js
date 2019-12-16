@@ -7,7 +7,10 @@ const Product = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
-            description: { type: String, required: true }
+            description: { type: String, required: true },
+            seoTitle: { type: String },
+            seoDescription: { type: String },
+            seoKeywords: { type: String }
         }
     },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
@@ -17,8 +20,9 @@ const Product = new Schema({
     files: [{ type: String, required: true }],
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
-    price: { type: Number, required: true },
     discount: { type: Number },
+    discountPrice: { type: Number },
+    price: { type: Number, required: true },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true }

@@ -76,7 +76,6 @@ class PartnerForm extends Component {
             ru_description: ru.description || '',
             ua_description: ua.description || '',
             hidden: partner.hidden || false,
-            alias: partner.alias,
             logo: {
                 files: partner.logo ? [partner.logo] : [],
                 removedFiles: []
@@ -94,8 +93,7 @@ class PartnerForm extends Component {
             ru_description: ruDescription,
             ua_description: uaDescription,
             hidden,
-            id,
-            alias
+            id
         }) => {
         return {
             texts: {
@@ -109,8 +107,7 @@ class PartnerForm extends Component {
                 }
             },
             hidden,
-            id,
-            alias
+            id
         };
     };
 
@@ -134,15 +131,9 @@ class PartnerForm extends Component {
                 onDone();
             })
             .catch(error => {
-                if (error.code === 'duplication') {
-                    this.setState({
-                        errorText: 'Введите уникальные алиас'
-                    });
-                } else {
-                    this.setState({
-                        errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
-                    });
-                }
+                this.setState({
+                    errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
+                });
             });
     };
 

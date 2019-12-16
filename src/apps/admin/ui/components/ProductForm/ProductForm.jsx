@@ -59,6 +59,7 @@ class ProductForm extends Component {
         onDone: PropTypes.func,
         product: PropTypes.object,
         categories: PropTypes.array,
+        subCategories: PropTypes.array,
         activeCategory: PropTypes.object
     };
 
@@ -66,6 +67,7 @@ class ProductForm extends Component {
         onDone: noop,
         product: {},
         categories: [],
+        subCategories: [],
         activeCategory: {}
     };
 
@@ -73,7 +75,7 @@ class ProductForm extends Component {
         super(...args);
 
         const defaultLang = this.state ? this.state.lang : 'ru';
-        const { product, categories, activeCategory } = this.props;
+        const { product, categories, activeCategory, subCategories } = this.props;
         const ru = pathOr(['texts', 'ru'], '', product);
         const ua = pathOr(['texts', 'ua'], '', product);
         const categoryHidden = activeCategory.hidden;
@@ -83,9 +85,9 @@ class ProductForm extends Component {
             name: category.texts[defaultLang].name
         }));
 
-        this.subCategoriesOptions = activeCategory.texts[defaultLang].subCategory.map(category => ({
-            value: category.id,
-            name: category.name
+        this.subCategoriesOptions = subCategories.map(subCategory => ({
+            value: subCategory.id,
+            name: subCategory.texts[defaultLang].name
         }));
 
         this.initialValues = {
@@ -93,6 +95,12 @@ class ProductForm extends Component {
             ua_name: ua.name || '',
             ru_description: ru.description || '',
             ua_description: ua.description || '',
+            ru_seoTitle: ru.seoTitle || '',
+            ua_seoTitle: ua.seoTitle || '',
+            ru_seoDescription: ru.seoDescription || '',
+            ua_seoDescription: ua.seoDescription || '',
+            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
+            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
             warranty: product.warranty || '',
@@ -101,11 +109,11 @@ class ProductForm extends Component {
             files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
             date: product.date,
-            price: product.price,
             discountPrice: product.discountPrice,
-            discountPercent: product.discountPercent,
+            price: product.price,
+            discount: product.discount,
             categoryId: activeCategory.id,
-            subCategoryId: product.subCategoryId ? product.subCategoryId : activeCategory.texts.ru.subCategory[0].id,
+            subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
             lang: 'ru',
             ...pick(PRODUCTS_VALUES, product)
@@ -113,7 +121,7 @@ class ProductForm extends Component {
         this.id = prop('id', product);
         this.state = {
             lang: 'ru',
-            activeCategory: activeCategory,
+            activeCategory,
             categoryHidden,
             errorText: ''
         };
@@ -125,15 +133,20 @@ class ProductForm extends Component {
             ua_name: uaName,
             ru_description: ruDescription,
             ua_description: uaDescription,
+            ua_seoTitle: uaSeoTitle,
+            ru_seoTitle: ruSeoTitle,
+            ua_seoDescription: uaSeoDescription,
+            ru_seoDescription: ruSeoDescription,
+            ua_seoKeywords: uaSeoKeywords,
+            ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
-            maxWeight,
             warranty,
             sizes,
             hidden,
-            price,
             discountPrice,
-            discountPercent,
+            price,
+            discount,
             categoryId,
             subCategoryId,
             id,
@@ -143,11 +156,17 @@ class ProductForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    description: ruDescription
+                    description: ruDescription,
+                    seoTitle: ruSeoTitle,
+                    seoDescription: ruSeoDescription,
+                    seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
-                    description: uaDescription
+                    description: uaDescription,
+                    seoTitle: uaSeoTitle,
+                    seoDescription: uaSeoDescription,
+                    seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
             characteristics: {
@@ -161,9 +180,9 @@ class ProductForm extends Component {
             warranty,
             sizes,
             hidden,
-            price,
             discountPrice,
-            discountPercent,
+            discount,
+            price,
             categoryId,
             subCategoryId,
             id,

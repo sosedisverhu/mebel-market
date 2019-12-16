@@ -9,7 +9,7 @@ import prepareCategory from '../utils/prepareCategory';
 import getCategory from '../../../client/category/queries/getCategoryById';
 
 import editCategoryQuery from '../../../client/category/queries/editCategory';
-import toggleHiddenNewsByCategory from '../../../client/product/queries/toggleHiddenProductsByCategory';
+import toggleHiddenProductsByCategory from '../../../client/product/queries/toggleHiddenProductsByCategory';
 
 export default function editCategory (req, res) {
     const category = prepareCategory(req.body);
@@ -22,7 +22,7 @@ export default function editCategory (req, res) {
                         return category;
                     }
 
-                    return toggleHiddenNewsByCategory(category.id, category.hidden)
+                    return toggleHiddenProductsByCategory(category.id, category.hidden)
                         .then(() => category);
                 })
                 .then(category => {

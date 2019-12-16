@@ -1,5 +1,5 @@
 export default (value, options = {}, values) => {
-    if (!value && values.discountPrice) {
+    if (!value && values.discount) {
         return options.text || 'Введите процент скидки';
     }
 };

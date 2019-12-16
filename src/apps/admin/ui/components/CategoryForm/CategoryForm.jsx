@@ -13,9 +13,9 @@ import ErrorIcon from '@material-ui/icons/Error';
 import { withStyles } from '@material-ui/core/styles';
 
 import Form from '../Form/Form';
-import getSchema from './productsCategoryFormSchema';
-import saveProductsCategory from '../../../services/saveProductsCategory';
-import editProductsCategory from '../../../services/editProductsCategory';
+import getSchema from './CategoryFormSchema';
+import saveProductsCategory from '../../../services/saveCategory';
+import editProductsCategory from '../../../services/editCategory';
 import classNames from 'classnames';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
@@ -45,7 +45,7 @@ const materialStyles = theme => ({
     }
 });
 
-class ProductsCategoryForm extends Component {
+class CategoryForm extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         saveProductsCategory: PropTypes.func.isRequired,
@@ -65,12 +65,18 @@ class ProductsCategoryForm extends Component {
         super(...args);
 
         const { category } = this.props;
+        const ru = pathOr(['texts', 'ru'], {}, category);
+        const ua = pathOr(['texts', 'ua'], {}, category);
 
         this.initialValues = {
-            ru_name: pathOr(['texts', 'ru', 'name'], '', category),
-            ua_name: pathOr(['texts', 'ua', 'name'], '', category),
-            ru_subCategory: pathOr(['texts', 'ru', 'subCategory'], [], category),
-            ua_subCategory: pathOr(['texts', 'ua', 'subCategory'], [], category),
+            ru_name: ru.name || '',
+            ua_name: ua.name || '',
+            ru_seoTitle: ru.seoTitle || '',
+            ua_seoTitle: ua.seoTitle || '',
+            ru_seoDescription: ru.seoDescription || '',
+            ua_seoDescription: ua.seoDescription || '',
+            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
+            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             alias: category.alias || '',
             hidden: category.hidden || false,
             ...pick(CATEGORIES_VALUES, category)
@@ -87,8 +93,12 @@ class ProductsCategoryForm extends Component {
         {
             ru_name: ruName,
             ua_name: uaName,
-            ru_subCategory: ruSubCategory,
-            ua_subCategory: uaSubCategory,
+            ua_seoTitle: uaSeoTitle,
+            ru_seoTitle: ruSeoTitle,
+            ua_seoDescription: uaSeoDescription,
+            ru_seoDescription: ruSeoDescription,
+            ua_seoKeywords: uaSeoKeywords,
+            ru_seoKeywords: ruSeoKeywords,
             hidden,
             positionIndex,
             id,
@@ -100,11 +110,15 @@ class ProductsCategoryForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
-                    subCategory: ruSubCategory
+                    seoTitle: ruSeoTitle,
+                    seoDescription: ruSeoDescription,
+                    seoKeywords: ruSeoKeywords.words.join(', ')
                 },
                 ua: {
                     name: uaName,
-                    subCategory: uaSubCategory
+                    seoTitle: uaSeoTitle,
+                    seoDescription: uaSeoDescription,
+                    seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
             id,
@@ -141,7 +155,7 @@ class ProductsCategoryForm extends Component {
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас'
+                        errorText: 'Введите уникальные алиас для категории'
                     });
                 } else {
                     this.setState({
@@ -194,4 +208,4 @@ class ProductsCategoryForm extends Component {
     }
 }
 
-export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(ProductsCategoryForm));
+export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(CategoryForm));

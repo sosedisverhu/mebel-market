@@ -3,14 +3,15 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
+import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
+import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 
-export default function ({ data: { title } = {} } = {}) {
+export default function ({ data: { title, categoryHidden } = {} } = {}) {
     return {
         fields: [
             {
                 component: FormFieldTitle,
-                name: 'title',
+                name: 'form-title',
                 schema: {
                     label: title,
                     variant: 'h5'
@@ -31,7 +32,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Название'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните название категории' } }
+                    { name: 'required', options: { text: 'Заполните название подкатегории' } }
                 ]
             },
             {
@@ -45,34 +46,61 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
                 component: FormFieldTitle,
-                name: 'subCategories-title',
+                name: 'seoTitle',
                 schema: {
-                    label: 'Подкатегории',
+                    label: 'Сео',
                     variant: 'h6'
                 }
             },
             {
-                component: FormFieldFeaturesDouble,
-                name: 'subCategory',
-                valueLangStructure: [{
-                    name: 'depend',
-                    value: 'notDepend',
-                    id: 'notDepend'
-                }],
+                component: FormFieldInput,
+                name: 'seoTitle',
+                valueLangStructure: 'depend',
                 schema: {
-                    name: 'Название подкатегории',
-                    value: 'Alias'
+                    label: 'Тайтл',
+                    multiline: true
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните подкатегории' } }
+                    { name: 'required', options: { text: 'Заполните сео тайтл' } }
                 ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео описание' } }
+                ]
+            },
+            {
+                component: FormFieldKeywords,
+                name: 'seoKeywords',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Ключевые слова',
+                    multiline: false
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
             },
             {
                 component: FormFieldCheckbox,
                 name: 'hidden',
+                hint: categoryHidden && 'Подкатегория будет скрыта, т.к. она находится в скрытой категории',
                 schema: {
-                    label: 'Скрыть категорию и все товары в ней'
+                    label: 'Скрыть подкатегорию',
+                    disabled: categoryHidden
                 }
             },
             {

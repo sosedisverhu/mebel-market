@@ -8,6 +8,7 @@ import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
 import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
+import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 
 export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden } = {} } = {}) {
@@ -104,7 +105,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: `price`,
+                name: 'price',
                 schema: {
                     label: 'Цена',
                     type: 'number'
@@ -126,13 +127,13 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: 'discountPercent',
+                name: 'discount',
                 schema: {
                     label: 'Размер скидки (%)',
                     type: 'number'
                 },
                 validators: [
-                    { name: 'discountPercent', options: { text: 'Введите процент скидки' } },
+                    { name: 'discount', options: { text: 'Введите процент скидки' } },
                     { name: 'min', options: { minValue: 0 } },
                     { name: 'max', options: { maxValue: 100 } }
                 ]
@@ -226,6 +227,55 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'seoTitle',
+                schema: {
+                    label: 'Сео',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoTitle',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Тайтл',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео тайтл' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео описание' } }
+                ]
+            },
+            {
+                component: FormFieldKeywords,
+                name: 'seoKeywords',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Ключевые слова',
+                    multiline: false
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
             },
             {
                 component: FormFieldCheckbox,

@@ -1,15 +1,11 @@
 import { combineReducers } from 'redux';
 
 import application from './application';
-import products from './products';
-import articles from './articles';
-import partners from './partners';
+import data from './data';
 
 const reducers = combineReducers({
     application,
-    products,
-    articles,
-    partners
+    data
 });
 
 export default reducers;

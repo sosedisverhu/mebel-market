@@ -6,7 +6,7 @@ import min from './min';
 import featuresSingular from './featuresSingular';
 import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
-import discountPercent from './discountPercent';
+import discount from './discount';
 
 export default {
     required,
@@ -17,5 +17,5 @@ export default {
     min,
     requiredFiles,
     discountPrice,
-    discountPercent
+    discount
 };
