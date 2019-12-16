@@ -2,7 +2,9 @@ import {
     SET_ARTICLES,
     SET_PRODUCTS,
     SET_CATEGORIES,
-    SET_SUB_CATEGORIES
+    SET_SUB_CATEGORIES,
+    SET_BASKET,
+    SET_WISHLIST
 } from '../types/types';
 
 const initialState = {
@@ -96,7 +98,9 @@ const initialState = {
     articles: [],
     products: [],
     categories: [],
-    subCategories: []
+    subCategories: [],
+    basket: [],
+    wishlist: []
 };
 
 export default function (state = initialState, action) {
@@ -109,6 +113,10 @@ export default function (state = initialState, action) {
         return { ...state, categories: action.payload };
     case SET_SUB_CATEGORIES:
         return { ...state, subCategories: action.payload };
+    case SET_BASKET:
+        return { ...state, basket: action.payload };
+    case SET_WISHLIST:
+        return { ...state, wishlist: action.payload };
     default:
         return state;
     }

@@ -9,22 +9,65 @@ import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import styles from './AboutProduct.css';
 
-const mapStateToProps = ({ application }) => {
+import setWishlist from '../../../actions/setWishlist';
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import remove from '@tinkoff/utils/array/remove';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        wishlist: data.wishlist
     };
 };
+
+const mapDispatchToProps = dispatch => ({
+    setWishlist: payload => dispatch(setWishlist(payload)),
+    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+});
 
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        product: PropTypes.object.isRequired
+        product: PropTypes.object.isRequired,
+        wishlist: PropTypes.array.isRequired,
+        setWishlist: PropTypes.func.isRequired,
+        saveProductsToWishlist: PropTypes.func.isRequired
+    };
+
+    handleToWishlist = () => {
+        const { setWishlist, product, wishlist, saveProductsToWishlist } = this.props;
+        const { isInWishlist } = this.state;
+        let newWishlist;
+
+        if (!isInWishlist) {
+            newWishlist = !this.isInWishlist() ? [
+                product,
+                ...wishlist
+            ] : [...wishlist];
+            this.setState({ isInWishlist: true });
+        } else {
+            const index = findIndex(wishlistItem => wishlistItem.id === product.id, wishlist);
+            newWishlist = [
+                ...remove(index, 1, wishlist)
+            ];
+            this.setState({ isInWishlist: false });
+        }
+
+        setWishlist(newWishlist);
+        saveProductsToWishlist(newWishlist.map((product) => product.id));
+    };
+
+    isInWishlist = () => {
+        const { wishlist, product } = this.props;
+        return !!find(wishlistProduct => product.id === wishlistProduct.id, wishlist);
     };
 
     state = {
         sizes: [],
         activeSize: {},
-        sizeListIsOpen: true
+        sizeListIsOpen: true,
+        isInWishlist: false
     };
 
     componentDidMount () {
@@ -91,10 +134,10 @@ class AboutProduct extends Component {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.btnBuy}>{text.buy}</button>
-                <button className={styles.btnWishList}/>
+                <button className={styles.btnWishList} onClick={this.handleToWishlist}/>
             </div>
         </div>;
     }
 }
 
-export default connect(mapStateToProps)(AboutProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AboutProduct);

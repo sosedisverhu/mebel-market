@@ -73,7 +73,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, files: [logo], discount, discountPrice, price, alias },
+            product: { texts, avatar, discount, discountPrice, price, alias },
             newClass,
             labelClass,
             langRoute,
@@ -94,7 +94,7 @@ class Card extends Component {
                     {this.getLabels(['top'], discount)}
                 </div>
                 <div>
-                    <img className={styles.img} src={logo} alt=''/>
+                    <img className={styles.img} src={avatar} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <div className={styles.title}>

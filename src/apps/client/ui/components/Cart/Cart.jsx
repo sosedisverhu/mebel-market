@@ -73,10 +73,10 @@ class Cart extends Component {
                                             <p className={styles.productName}>Кровать «Анталия»</p>
                                             <p className={styles.productNumber}>(48092)</p>
                                             <button className={styles.wishBtn}>
-                                                <img className={styles.wishBtnImg} src="src/apps/client/ui/components/Cart/img/wish-black.png" alt="Wish List"/>
+                                                <img className={styles.wishBtnImg} src="/src/apps/client/ui/components/Cart/img/wish-black.png" alt="Wish List"/>
                                             </button>
                                             <button className={styles.removeBtn}>
-                                                <img className={styles.removeBtnImg} src="src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
                                             </button>
                                         </div>
                                         <p className={styles.productSize}>{text.size} 190 х 200</p>

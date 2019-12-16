@@ -4,21 +4,42 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import includes from '@tinkoff/utils/array/includes';
 
 import styles from './WishList.css';
 
-const mapStateToProps = ({ application }) => {
+import setWishlist from '../../../actions/setWishlist';
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import remove from '@tinkoff/utils/array/remove';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        lang: application.lang,
+        wishlist: data.wishlist
     };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+    setWishlist: payload => dispatch(setWishlist(payload)),
+    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+});
+
+const EXCEPTION_NUMBERS_MIN = 11;
+const EXCEPTION_NUMBERS_MAX = 14;
+const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
 
 @outsideClick
 class WishList extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        wishlist: PropTypes.array.isRequired,
+        setWishlist: PropTypes.func.isRequired,
+        saveProductsToWishlist: PropTypes.func.isRequired
     };
 
     state = {
@@ -44,43 +65,78 @@ class WishList extends Component {
         }
     }
 
+    getWordCaseByNumber (number, cases) {
+        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
+            return cases[0];
+        }
+
+        const lastNumber = number % 10;
+        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
+
+        return cases[resultIndex];
+    }
+
+    removeProduct = (index) => () => {
+        const { wishlist, setWishlist, saveProductsToWishlist } = this.props;
+
+        const newWishlist = [
+            ...remove(index, 1, wishlist)
+        ];
+
+        setWishlist(newWishlist);
+        saveProductsToWishlist(newWishlist.map((product) => product.id));
+    };
+
     render () {
-        const { langMap } = this.props;
+        const { langMap, lang, wishlist } = this.props;
         const { active } = this.state;
         const text = propOr('wishList', {}, langMap);
 
         return (
             <div className={styles.wishList}>
                 <div className={styles.wishListWrapper} onClick={this.handleClick}>
-                    <img src="/src/apps/client/ui/components/WishList/img/wish.svg" alt="wish list icon"/>
-                    <span className={styles.quantityAll}>2</span>
+                    <img src="/src/apps/client/ui/components/WishList/img/wish.svg" alt="wishlist icon"/>
+                    <span className={styles.quantityAll}>{wishlist.length}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
                     <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
-                        <p className={styles.title}>{text.title}</p>
-                        <div className={styles.productsContainer}>
-                            <div className={styles.wishItemWrapper}>
-                                <div className={styles.wishItem}>
-                                    <img className={styles.productImg} src="" alt=""/>
-                                    <div>
-                                        <p className={styles.productName}>Кровать «Анталия»</p>
-                                        <p className={styles.productNumber}>Артикул: 48092</p>
-                                        <p className={styles.productSize}>{text.size} 190 х 200</p>
-                                        <div className={styles.productPrices}>
-                                            <p className={styles.productOldPrice}>2 798&#8372;</p>
-                                            <p className={styles.productPrice}>1 399&#8372;</p>
+                        <p className={styles.title}>
+                            {text.title}
+                            {wishlist.length > 0 &&
+                                <span>
+                                    {wishlist.length}&nbsp;
+                                    {this.getWordCaseByNumber(wishlist.length,
+                                        lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                                </span>
+                            }
+                        </p>
+                        {wishlist.length > 0
+                            ? <div className={styles.productsContainer}>
+                                {wishlist.map((wishlistItem, i) =>
+                                    <div className={styles.wishItemWrapper} key={i}>
+                                        <div className={styles.wishItem}>
+                                            <img className={styles.productImg} src={wishlistItem.avatar} alt=""/>
+                                            <div className={styles.productInfo}>
+                                                <p className={styles.productName}>{wishlistItem.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
+                                                <p className={styles.productNumber}>Артикул: 48092</p>
+                                                <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                                <div className={styles.productPrices}>
+                                                    <p className={styles.productOldPrice}>{wishlistItem.price}&#8372;</p>
+                                                    <p className={styles.productPrice}>{wishlistItem.discountPrice}&#8372;</p>
+                                                </div>
+                                            </div>
+                                            <div className={styles.productButtons}>
+                                                <button className={styles.removeBtn} onClick={this.removeProduct(i)}>
+                                                    <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                </button>
+                                                <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={styles.productButtons}>
-                                        <button className={styles.removeBtn}>
-                                            <img className={styles.removeBtnImg} src="src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                        </button>
-                                        <button className={styles.cartBtn}>{text.cartBtn}</button>
-                                    </div>
-                                </div>
+                                    </div>)}
                             </div>
-                        </div>
+                            : <p>{text.noProduct}</p>
+                        }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>
                 </div>
@@ -89,4 +145,4 @@ class WishList extends Component {
     }
 }
 
-export default connect(mapStateToProps)(WishList);
+export default connect(mapStateToProps, mapDispatchToProps)(WishList);
