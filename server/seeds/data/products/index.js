@@ -28,7 +28,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1999,
         avatar: '/server/seeds/data/products/images/Prague.png',
-        files: ['/server/seeds/data/products/images/Prague.png', '/server/seeds/data/products/images/Prague.png', '/server/seeds/data/products/images/Prague.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -87,7 +87,7 @@ module.exports = [
         discountPrice: 2799,
         price: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
-        files: ['/server/seeds/data/products/images/Classic.png', '/server/seeds/data/products/images/Classic.png', '/server/seeds/data/products/images/Classic.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -146,7 +146,7 @@ module.exports = [
         discountPrice: 3799,
         price: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -205,7 +205,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -264,7 +264,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -323,7 +323,7 @@ module.exports = [
         discountPrice: 1799,
         price: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -382,7 +382,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -441,7 +441,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -500,7 +500,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -559,7 +559,7 @@ module.exports = [
         discountPrice: 2000,
         price: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
-        files: ['/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png', '/server/seeds/data/products/images/Glory.png'],
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
