@@ -1,0 +1,114 @@
+@value blackBasic from '../../../../../css/colors.css';
+@value whiteBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+
+.root {
+    height: 100%;
+    padding-bottom: 40px;
+    background: gray3;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
+}
+
+.contentWrap {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: whiteBasic;
+}
+
+.content {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 16px 30px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: content-box;
+
+    @media (max-width: 1060px) {
+        margin: 0 16px;
+        padding-left: 0;
+        padding-right: 0;
+        overflow: hidden;
+    }
+
+    @media (max-width: 710px) {
+        padding-bottom: 20px;
+    }
+}
+
+.title {
+    margin-top: 17px;
+    padding: 0 60px;
+    position: relative;
+    font: 144px/166px RoundedElegance;
+    letter-spacing: 0.17em;
+    color: blackBasic;
+    text-align: center;
+
+    &:before {
+        content: "";
+        width: 287px;
+        height: 2px;
+        margin-top: -1px;
+        position: absolute;
+        right: 100%;
+        top: 50%;
+        background: blackBasic;
+    }
+
+    @media (max-width: 710px) {
+        align-self: flex-end;
+        padding-right: 0;
+        right: -20px;
+    }
+
+    @media (max-width: 600px) {
+        width: 100%;
+        font-size: 96px;
+        line-height: 110px;
+        text-align: right;
+
+        &:before {
+            right: auto;
+            left: -20px;
+            width: 38%;
+        }
+    }
+
+    @media (max-width: 360px) {
+        &:before {
+            width: 31%;
+        }
+    }
+
+    @media (max-width: 340px) {
+        &:before {
+            width: 24%;
+        }
+    }
+}
+
+.text {
+    margin-top: 20px;
+    max-width: 315px;
+    font: 24px/28px RoundedElegance;
+    color: blackBasic;
+}
+
+.link {
+    margin-top: 70px;
+    padding: 10px 20px;
+    font: 18px/21px RoundedElegance;
+    color: whiteBasic;
+    background: blackBasic;
+    text-decoration: none;
+
+    @media (max-width: 710px) {
+        margin-top: 60px;
+    }
+}

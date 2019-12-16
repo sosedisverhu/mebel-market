@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import styles from './ProductsGrid.css';
 import Card from '../Card/Card';
+import styles from './ProductsGrid.css';
 
 class ProductsGrid extends Component {
     static propTypes = {
@@ -16,10 +15,9 @@ class ProductsGrid extends Component {
         return (
             <div className={styles.products}>
                 {products.map(product => <Card key={product.id} product={product} />)}
-                {products.map(product => <Card key={product.id} product={product} />)}
             </div>
         );
     }
 }
 
-export default connect()(ProductsGrid);
+export default (ProductsGrid);

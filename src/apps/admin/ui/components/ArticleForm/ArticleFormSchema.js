@@ -3,8 +3,8 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
+import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -86,8 +86,45 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldDivider,
-                name: 'divider'
+                component: FormFieldTitle,
+                name: 'seoTitle',
+                schema: {
+                    label: 'Сео',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoTitle',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Тайтл',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео тайтл' } }
+                ]
+            },
+            {
+                component: FormFieldInput,
+                name: 'seoDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните сео описание' } }
+                ]
+            },
+            {
+                component: FormFieldKeywords,
+                name: 'seoKeywords',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Ключевые слова',
+                    multiline: false
+                }
             },
             {
                 component: FormFieldCheckbox,

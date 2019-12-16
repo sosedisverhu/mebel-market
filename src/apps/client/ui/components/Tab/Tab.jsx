@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
+import StyleRenderer from '../StyleRenderer/StyleRenderer';
 
 import styles from './Tab.css';
 
-const mapStateToProps = ({ data }) => {
+const mapStateToProps = ({ data, application }) => {
     return {
+        lang: application.lang,
         tabs: [
             {
                 id: 'description',
@@ -30,7 +32,9 @@ const mapDispatchToProps = dispatch => {
 
 class Tab extends Component {
     static propTypes = {
+        lang: PropTypes.string.isRequired,
         tabs: PropTypes.array.isRequired,
+        product: PropTypes.object.isRequired,
         scroll: PropTypes.bool.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired
     };
@@ -63,63 +67,24 @@ class Tab extends Component {
 
     getContent () {
         const { activeId } = this.state;
+        const { product, lang } = this.props;
 
         if (activeId === 'description') {
             return (
-                <div className={styles.descr}>
-                    <h3 className={styles.descrTitle}>Особенности конструкции</h3>
-                    <p className={styles.descrText}>В ногах кровати отсутствует спинка, ...</p>
-                    <h3 className={styles.descrTitle}>Цена на кровать АНТАЛИЯ</h3>
-                    <p className={styles.descrText}>Цена на металлическую кровать АНТАЛИЯ ...</p>
-                    <h3 className={styles.descrTitle}>Плюсы материала</h3>
-                    <p className={styles.descrText}>Каркас кровати выполнен из бесшовных металлических ...</p>
-                    <h3 className={styles.descrTitle}>Использование</h3>
-                    <p className={styles.descrText}>Как небольшая уютная спальня, ...</p>
+                <div className={styles.description}>
+                    <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
         }
 
         return (
-            <div className={styles.caracter}>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Цвет</h3>
-                    <p className={styles.caracterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Гарантия</h3>
-                    <p className={styles.caracterText}>12 месяцев</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Материал</h3>
-                    <p className={styles.caracterText}>Металл</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.caracterTitle}>Максимальная нагрузка <span className={styles.caracterSpan}>(на одно спальное место)</span></h3>
-                    <p className={styles.caracterText}>200 кг</p>
-                </div>
+            <div>
+                {product.characteristics[lang].characteristics.map((characteristic, i) => {
+                    return (
+                        <div className={styles.row} key={i}>
+                            <h3 className={styles.characterTitle}>{characteristic.name}</h3>
+                            <p className={styles.characterText}>{characteristic.value}</p>
+                        </div>);
+                })}
             </div>);
     }
 

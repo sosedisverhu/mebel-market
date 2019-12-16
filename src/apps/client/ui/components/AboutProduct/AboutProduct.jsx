@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import propOr from '@tinkoff/utils/object/propOr';
@@ -11,25 +10,6 @@ import styles from './AboutProduct.css';
 
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
-
-const SIZES = [
-    {
-        id: 1,
-        value: '190 см * 200 см'
-    },
-    {
-        id: 2,
-        value: '10 см * 10 см'
-    },
-    {
-        id: 3,
-        value: '1500 см * 1500 см'
-    },
-    {
-        id: 4,
-        value: '200 см * 200 см'
-    }
-];
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -53,46 +33,48 @@ class AboutProduct extends Component {
         outsideClickEnabled: PropTypes.bool
     };
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            active: false,
-            activeOption: SIZES[0]
-        };
-        this.select = React.createRef();
+    state = {
+        sizes: [],
+        activeSize: {},
+        sizeListIsOpen: true
+    };
+
+    componentDidMount () {
+        const { product } = this.props;
+
+        this.setState({
+            sizes: product.sizes,
+            activeSize: product.sizes[0]
+        });
     }
 
     scrollToTitles = () => {
         this.props.setScrollToCharacteristic(true);
-    }
-
-    handleOptionClick = activeOption => {
-        this.setState({ activeOption });
     };
 
-    handleSelectClose = () => {
-        this.setState({ active: false });
+    onChangeActiveSize = size => {
+        this.setState({
+            activeSize: size,
+            sizeListIsOpen: false
+        });
     };
 
-    handleSelectClick = () => {
-        const { outsideClickEnabled } = this.props;
-        const { active } = this.state;
-        this.setState(state => ({ active: !state.active }));
-
-        if (!active && !outsideClickEnabled) {
-            this.props.turnOnClickOutside(this.select.current, this.handleSelectClose);
-        }
+    sizeListIsOpen = () => {
+        this.setState({
+            sizeListIsOpen: true
+        });
     };
 
     render () {
-        const { active, activeOption } = this.state;
         const { product, langMap } = this.props;
+        const { sizes, activeSize, sizeListIsOpen } = this.state;
         const text = propOr('product', {}, langMap);
+        let sizeCounter = 0;
 
         return <div className={styles.root}>
-            <AboutProductTop product={product} />
+            <AboutProductTop product={product}/>
             <div className={styles.advantagesTitle}>{text.advantages}</div>
-            <ul className={styles.advantages}>
+            <ul>
                 <li className={styles.advantage}>просторность</li>
                 <li className={styles.advantage}>универсальность</li>
                 <li className={styles.advantage}>функциональность</li>
@@ -102,32 +84,35 @@ class AboutProduct extends Component {
                 <li className={styles.advantage}>простота в уходе</li>
             </ul>
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
-            <div className={styles.priceOld}>{formatMoney(2798)}</div>
-            <div className={styles.price}>{formatMoney(1399)}</div>
-            <div className={styles.sizes}>
-                <div className={styles.sizesTitle}>Выберите размер:</div>
-                <div className={classNames(styles.select, { [styles.active]: active })} ref={this.select} onClick={this.handleSelectClick}>
-                    <div className={styles.activeOption}>{activeOption.value}</div>
-                    <div className={styles.listOptions}>
-                        {SIZES.map((option, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className={
-                                        classNames(styles.option, {
-                                            [styles.active]: option.id === activeOption.id
-                                        })}
-                                    onClick={() => this.handleOptionClick(option)}>
-                                    {option.value}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+            {product.discountPrice !== product.price &&
+            <span className={styles.priceOld}>
+                {formatMoney(product.price)}
+            </span>}
+            <span className={styles.price}>
+                {formatMoney(product.discountPrice || product.discountPrice)}
+            </span>
+            <div>
+                <span className={styles.sizesTitle}>{text.size}</span>
+                <ul className={styles.select}
+                    onMouseEnter={() => this.sizeListIsOpen()}
+                >
+                    <li className={styles.activeOption}>{activeSize.name}</li>
+                    {sizes.map(size => {
+                        if (size.id !== activeSize.id && sizeListIsOpen) {
+                            sizeCounter++;
+                            return <li className={styles.option}
+                                onClick={() => this.onChangeActiveSize(size)}
+                                style={{ top: `${30 * sizeCounter}px` }}
+                                key={size.id}>
+                                {size.name}
+                            </li>;
+                        }
+                    })}
+                </ul>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.btnBuy}>{text.buy}</button>
-                <button className={styles.btnWishList}></button>
+                <button className={styles.btnWishList}/>
             </div>
         </div>;
     }

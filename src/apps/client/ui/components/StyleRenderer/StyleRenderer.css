@@ -1,12 +1,12 @@
 @value gray6 from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
 
 .style strong {
     font-family: RoundedElegance;
+    font-weight: 600;
 }
 
-.style em {
-    font-style: italic;
+.style i {
     font-family: RoundedElegance;
     font-style: italic;
 }
@@ -40,7 +40,7 @@
         left: -20px;
         top: 50%;
         margin-top: -5px;
-        background: black;
+        background: blackBasic;
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -59,14 +59,32 @@
     h5,
     h6 {
         font-family: RoundedElegance;
-        color: black;
+        color: blackBasic;
         margin: 30px 0 15px 0;
     }
+}
+
+.style h2 {
+    font-size: 22px;
+    line-height: 25px;
+}
+
+.style h3 {
+    font-size: 20px;
+    line-height: 23px;
 }
 
 .style h4 {
     font-size: 18px;
     line-height: 21px;
+}
+
+.style.description h4 {
+    @media (max-width: 600px) {
+        font-size: 16px;
+        line-height: 18px;
+        margin-bottom: 10px;
+    }
 }
 
 .style blockquote {
@@ -143,6 +161,14 @@
     @media (max-width: 780px) {
         font-size: 14px;
         line-height: 17px;
+    }
+}
+
+.style.description p {
+    @media (max-width: 600px) {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 16px;
     }
 }
 

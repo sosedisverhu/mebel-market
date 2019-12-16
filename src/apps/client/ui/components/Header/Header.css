@@ -1,9 +1,10 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 
 .header {
     display: flex;
+    background-color: blackBasic;
     flex-direction: column;
     font-family: RoundedElegance;
 }
@@ -11,7 +12,6 @@
 .headerTop {
     display: flex;
     height: 50px;
-    background-color: black;
 }
 
 .content {
@@ -85,7 +85,7 @@
     color: whiteBasic;
     margin-right: 25px;
 
-    @media (max-width: 1279px) {
+    @media (max-width: 1280px) {
         margin-right: 15px;
     }
 }
@@ -139,16 +139,16 @@
 }
 
 .searchInput {
-    font-family: RoundedElegance;
-    font-size: 16px;
-    line-height: 18px;
     width: 202px;
     height: 17px;
-    background-color: black;
-    border: none;
-    outline: 0;
-    color: whiteBasic;
     padding-left: 40%;
+    border: none;
+    background-color: blackBasic;
+    font-family: RoundedElegance;
+    font-size: 16px;
+    color: whiteBasic;
+    line-height: 18px;
+    outline: 0;
     visibility: hidden;
     opacity: 0;
     transition: .5s ease-in-out;
@@ -178,14 +178,14 @@
 
 .searchBtn {
     @mixin removeDefaultButton;
-    padding: 0;
     width: 16px;
     height: 100%;
+    margin-left: 15px;
+    padding: 0;
     position: absolute;
     top: 0;
     background: center no-repeat url('./img/search.png');
     cursor: pointer;
-    margin-left: 15px;
 
     &:hover {
         background-image: url('./img/search-hover.png');
@@ -193,11 +193,11 @@
 }
 
 .headerBottom {
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: whiteBasic;
-    height: 50px;
 }
 
 .menuBottom {
@@ -207,14 +207,14 @@
 }
 
 .menuItemBottom {
+    margin-right: 50px;
+    position: relative;
     font-size: 16px;
     line-height: 18px;
     letter-spacing: 0.05em;
     text-decoration: none;
-    color: black;
-    position: relative;
-    margin-right: 50px;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackBasic;
+    text-shadow: -0.2px 0 blackBasic, 0 0.2px blackBasic, 0.2px 0 blackBasic, 0 -0.2px blackBasic;
 
     &:last-child {
         margin-right: 0;
@@ -228,8 +228,8 @@
 }
 
 .menuItemBottomPromotions {
-    color: red;
-    text-shadow: -0.2px 0 red, 0 0.2px red, 0.2px 0 red, 0 -0.2px red;
+    color: redBasic;
+    text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
 }
 
 .searchBottom {
@@ -249,7 +249,7 @@
         position: absolute;
         content: '';
         width: 100%;
-        background-color: black;
+        background-color: blackBasic;
         right: 0;
         bottom: -2px;
         height: 1px;
@@ -266,7 +266,7 @@
     background-color: whiteBasic;
     border: none;
     outline: 0;
-    color: black;
+    color: blackBasic;
 
     &::placeholder {
         color: rgba(35, 35, 35, 0.7);
@@ -355,8 +355,8 @@
     top: 100px;
     left: 0;
     backdrop-filter: blur(0px);
-    width: 100vw;
-    height: calc(100vh - 99px);
+    width: 100%;
+    height: calc(100% - 99px);
     max-height: 0;
     overflow-y: auto;
     z-index: 2;
@@ -398,10 +398,10 @@
     font-size: 18px;
     line-height: 21px;
     letter-spacing: 0.05em;
-    color: black;
+    color: blackBasic;
     padding: 15px 16px;
     position: relative;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    text-shadow: -0.2px 0 blackBasic, 0 0.2px blackBasic, 0.2px 0 blackBasic, 0 -0.2px blackBasic;
     border-bottom: 1px solid rgba(216, 216, 216, 0.5);
 
     &:first-child {
@@ -420,8 +420,8 @@
 }
 
 .menuItemTopPromotions {
-    color: red;
-    text-shadow: -0.2px 0 red, 0 0.2px red, 0.2px 0 red, 0 -0.2px red;
+    color: redBasic;
+    text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
 }
 
 .mobileSocials {
@@ -431,19 +431,21 @@
     padding: 23px 16px;
 }
 
-.googlePlus,
-.facebook {
+.instagram,
+.facebook,
+.youtube {
     display: block;
 }
 
-.googlePlus {
+.instagram,
+.facebook {
     margin-right: 30px;
 }
 
 .mobileMenuBottom {
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: blackBasic;
 }
 
 .mobileMenuItemBottom {

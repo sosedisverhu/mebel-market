@@ -57,9 +57,9 @@ const materialStyles = theme => ({
     }
 });
 
-const mapStateToProps = ({ articles }) => {
+const mapStateToProps = ({ data }) => {
     return {
-        articles: articles.articles
+        articles: data.articles
     };
 };
 
@@ -147,7 +147,7 @@ class ArticlePage extends Component {
                 onProductClone={this.handleArticleClone}
                 onFormOpen={this.handleFormOpen}
             />
-            <Modal open={formShowed} onClose={this.handleCloseArticleForm} className={classes.modal}>
+            <Modal open={formShowed} onClose={this.handleCloseArticleForm} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
                     <ArticleForm article={editableArticle} onDone={this.handleFormDone}/>
                 </Paper>

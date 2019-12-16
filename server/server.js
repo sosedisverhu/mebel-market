@@ -15,9 +15,13 @@ import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
 import adminArticleApi from './api/admin/article';
 import clientArticleApi from './api/client/article';
+import adminPartnerApi from './api/admin/partner';
+import clientPartnerApi from './api/client/partner';
 import adminFilesApi from './api/admin/files';
-import adminProductsCategoryApi from './api/admin/category';
-import clientProductsCategoryApi from './api/client/category';
+import adminCategoryApi from './api/admin/category';
+import clientCategoryApi from './api/client/category';
+import adminSubCategoryApi from './api/admin/subCategory';
+import clientSubCategoryApi from './api/client/subCategory';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -53,10 +57,14 @@ app.use(cookieParser());
 app.use('/api/admin/authentication', adminAuthenticationApi);
 app.use('/api/admin/product', adminProductApi);
 app.use('/api/client/product', clientProductApi);
-app.use('/api/admin/category', adminProductsCategoryApi);
-app.use('/api/client/category', clientProductsCategoryApi);
+app.use('/api/admin/category', adminCategoryApi);
+app.use('/api/client/category', clientCategoryApi);
+app.use('/api/admin/subCategory', adminSubCategoryApi);
+app.use('/api/client/subCategory', clientSubCategoryApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
+app.use('/api/admin/partner', adminPartnerApi);
+app.use('/api/client/partner', clientPartnerApi);
 app.use('/api/admin/files', adminFilesApi);
 
 // admin

@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
@@ -10,10 +10,10 @@
 }
 
 .titles {
+    padding: 0 16px;
     display: flex;
     justify-content: center;
     background: gray5;
-    padding: 0 16px;
 
     @media (max-width: 600px) {
         justify-content: space-around;
@@ -44,7 +44,7 @@
     }
 
     &.active {
-        color: black;
+        color: blackBasic;
 
         &:before {
             display: block;
@@ -84,22 +84,25 @@
     }
 }
 
-.descrTitle {
+.description {
+    margin-top: -30px;
+
+    @media (max-width: 600px) {
+        margin-top: -15px;
+    }
+}
+
+.descriptionTitle {
     font: 18px/21px RoundedElegance;
-    color: black;
+    color: blackBasic;
     margin-top: 30px;
 
     &:first-child {
         margin-top: 0;
     }
-
-    @media (max-width: 600px) {
-        font-size: 16px;
-        line-height: 18px;
-    }
 }
 
-.descrText {
+.descriptionText {
     font: 16px/18px RoundedElegance;
     color: rgba(35, 35, 35, 0.7);
     margin-top: 10px;
@@ -125,10 +128,10 @@
     }
 }
 
-.caracterTitle {
+.characterTitle {
     width: 50%;
     font: 18px/21px RoundedElegance;
-    color: black;
+    color: blackBasic;
     padding-right: 10px;
 
     @media (max-width: 600px) {
@@ -137,7 +140,7 @@
     }
 }
 
-.caracterText {
+.characterText {
     width: 50%;
     font: 16px/18px RoundedElegance;
     color: rgba(35, 35, 35, 0.7);
@@ -150,7 +153,7 @@
     }
 }
 
-.caracterSpan {
+.characterSpan {
     color: gray;
     font-size: 12px;
 

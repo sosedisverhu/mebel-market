@@ -1,5 +1,5 @@
-import News from '../model';
+import Product from '../model';
 
 export default function toggleHiddenProductsByCategory (categoryId, hidden) {
-    return News.updateMany({ categoryId: categoryId }, { hidden });
+    return Product.updateMany({ categoryId: categoryId }, { hidden });
 }

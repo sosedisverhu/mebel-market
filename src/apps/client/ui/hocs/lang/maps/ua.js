@@ -23,7 +23,9 @@ export default {
         details: 'Детальні характеристики',
         advantages: 'Основні плюси:',
         buy: 'Купити',
-        labelTop: 'Хіт'
+        labelTop: 'Хіт',
+        size: 'Оберіть розмір',
+        tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }]
     },
     breadcrumbs: {
         main: 'Головна'
@@ -54,7 +56,12 @@ export default {
         continueShopping: 'Продовжити покупки'
     },
     productsPage: {
-        filterBtn: 'Фільтри'
+        filterBtn: 'Фільтри',
+        results: 'Результатів',
+        popular: 'Популярні'
+    },
+    aboutProductTop: {
+        warranty: 'Гарантія'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',
@@ -100,5 +107,23 @@ export default {
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
         link: 'Зв\'яжіться з нами'
+    },
+    checkoutPage: {
+        checkout: 'Оформлення замовлення',
+        details: 'Подробиці замовлення',
+        delivery: 'Доставка',
+        payment: 'Оплата',
+        productPrice: 'Вартість товару:',
+        deliveryPrice: 'Доставка:',
+        allPrice: 'Всього:',
+        btnConfirm: 'Підтвердити замовлення',
+        popupTitle: 'Ваше замовлення',
+        addressTitle: 'Чекаємо Вас за адресою:',
+        addressText: 'Велика Кільцева вул., 4б, Київ, 08130',
+        sms: 'Вам на телефон прийде код з відстеженням',
+        cardTitle: 'Сплатіть на картку:',
+        cardDescr: '(вкажіть номер замовлення в описі платежу)',
+        price: 'Вартість замовлення:',
+        toMain: 'На головну'
     }
 };
