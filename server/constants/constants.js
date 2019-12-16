@@ -11,3 +11,4 @@ export const PRODUCT_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
 export const EDITOR_FILE_NAME_REGEX = /editor-file/g;
 export const ARTICLES_ITEM_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
 export const ARTICLES_ITEM_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
+export const PARTNERS_ITEM_LOGO_FIELD_NAME_REGEX = /partner-.*-logo/g;
