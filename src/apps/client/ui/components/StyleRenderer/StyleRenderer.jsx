@@ -36,7 +36,7 @@ export default class StyleRenderer extends Component {
         const { newClass, html } = this.props;
 
         return <div className={classNames(styles.style, { [styles[newClass]]: newClass })}>
-            <div dangerouslySetInnerHTML={{ __html: `<p>${html}</p>`.replace(/\\/g, '') }}/>
+            <div dangerouslySetInnerHTML={{ __html: html.replace(/\\/g, '') }}/>
         </div>;
     }
 }
