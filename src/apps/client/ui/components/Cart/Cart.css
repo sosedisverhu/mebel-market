@@ -1,6 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 
 .cart {
@@ -83,7 +84,7 @@
     line-height: 28px;
     margin: 20px 0;
     text-align: center;
-    color: black;
+    color: blackLightLight;
 }
 
 .productsContainer {
@@ -125,7 +126,7 @@
 .productName {
     font-size: 18px;
     line-height: 21px;
-    color: black;
+    color: blackLightLight;
     margin-right: 5px;
 }
 
@@ -155,7 +156,7 @@
 .productSize {
     font-size: 14px;
     line-height: 16px;
-    color: black;
+    color: blackLightLight;
     margin-bottom: 6px;
 }
 
@@ -192,7 +193,7 @@
     font-family: RoundedElegance;
     font-size: 18px;
     line-height: 21px;
-    color: black;
+    color: blackLightLight;
     text-align: center;
     border: 1px solid gray;
     box-sizing: border-box;
@@ -216,7 +217,7 @@
 .productPrice {
     font-size: 24px;
     line-height: 28px;
-    color: red;
+    color: redBasic;
 }
 
 .totalPriceContainer {
@@ -237,14 +238,14 @@
 .totalPrice {
     font-size: 24px;
     line-height: 28px;
-    color: black;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 }
 
 .checkoutBtn {
     @mixin removeDefaultButton;
     margin-top: 20px;
-    background-color: black;
+    background-color: blackLight;
     cursor: pointer;
     font-family: RoundedElegance;
     font-size: 18px;
@@ -260,7 +261,7 @@
     font-size: 18px;
     line-height: 21px;
     margin: 20px 0;
-    color: black;
+    color: blackLight;
     cursor: pointer;
     position: relative;
 
@@ -269,7 +270,7 @@
         position: absolute;
         width: 100%;
         height: 1px;
-        background-color: black;
+        background-color: blackLight;
         bottom: 1px;
         left: 0;
     }

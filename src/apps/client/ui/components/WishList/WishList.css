@@ -1,7 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -147,7 +147,7 @@
 .productPrice {
     font-size: 24px;
     line-height: 28px;
-    color: red;
+    color: redBasic;
 }
 
 .productButtons {
