@@ -1,19 +1,19 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
 .categorySection {
     background: gray5;
 
     &:nth-child(odd) {
-        background: whiteBasic; 
+        background: whiteBasic;
 
         .title {
             &:before {
                 left: auto;
                 right: 0;
             }
-        }       
+        }
     }
 
     &.top {
@@ -21,14 +21,14 @@
             @media (max-width: 600px) {
                 padding-top: 30px;
             }
-        }    
+        }
     }
 }
 
 .title {
     font: 36px/41px RoundedElegance;
     text-align: center;
-    color: black;
+    color: blackLight;
     margin: 0 auto;
     padding-top: 8px;
     max-width: 1244px;
@@ -41,7 +41,7 @@
         bottom: 24px;
         width: 25%;
         height: 2px;
-        background: black;
+        background: blackLight;
     }
 
     @media (max-width: 600px) {

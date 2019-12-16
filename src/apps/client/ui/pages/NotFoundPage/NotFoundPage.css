@@ -1,4 +1,5 @@
 @value blackBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value whiteBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
@@ -58,7 +59,7 @@
         position: absolute;
         right: 100%;
         top: 50%;
-        background: blackBasic;
+        background: blackLight;
     }
 
     @media (max-width: 710px) {
@@ -105,7 +106,7 @@
     padding: 10px 20px;
     font: 18px/21px RoundedElegance;
     color: whiteBasic;
-    background: blackBasic;
+    background: blackLight;
     text-decoration: none;
 
     @media (max-width: 710px) {

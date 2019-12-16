@@ -84,7 +84,7 @@
     line-height: 28px;
     margin: 20px 0;
     text-align: center;
-    color: blackLightLight;
+    color: blackLight;
 }
 
 .productsContainer {
@@ -126,7 +126,7 @@
 .productName {
     font-size: 18px;
     line-height: 21px;
-    color: blackLightLight;
+    color: blackLight;
     margin-right: 5px;
 }
 
@@ -156,7 +156,7 @@
 .productSize {
     font-size: 14px;
     line-height: 16px;
-    color: blackLightLight;
+    color: blackLight;
     margin-bottom: 6px;
 }
 
@@ -193,7 +193,7 @@
     font-family: RoundedElegance;
     font-size: 18px;
     line-height: 21px;
-    color: blackLightLight;
+    color: blackLight;
     text-align: center;
     border: 1px solid gray;
     box-sizing: border-box;
