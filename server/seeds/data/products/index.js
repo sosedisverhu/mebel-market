@@ -28,7 +28,7 @@ module.exports = [
         discountPrice: 1799,
         price: 1999,
         avatar: '/server/seeds/data/products/images/Prague.png',
-        files: ['/server/seeds/data/products/images/Prague.png'],
+        files: ['/server/seeds/data/products/images/Prague.png', '/server/seeds/data/products/images/Prague.png', '/server/seeds/data/products/images/Prague.png'],
         sizes: [
             { name: 'M', id: 'sizeM' },
             { name: 'L', id: 'sizeL' },
@@ -36,11 +36,11 @@ module.exports = [
         ],
         texts: {
             ru: {
-                description: 'В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                description: '<p> В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
                     'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
-                    ' красивой мебели.',
+                    ' красивой мебели. </p>',
                 name: ' Кровать « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
