@@ -10,10 +10,10 @@
 }
 
 .titles {
+    padding: 0 16px;
     display: flex;
     justify-content: center;
     background: gray5;
-    padding: 0 16px;
 
     @media (max-width: 600px) {
         justify-content: space-around;

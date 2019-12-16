@@ -22,7 +22,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 200px;
         min-width: 100vw;
         overflow: hidden;
     }
@@ -35,7 +34,6 @@
 
     @media (max-width: 400px) {
         min-width: auto;
-        width: auto;
     }
 }
 
@@ -66,7 +64,7 @@
             top: 2px;
         }
     }
-    
+
     @media (max-width: 600px) {
         opacity: 0;
         width: 30%;
@@ -148,7 +146,7 @@
 
     @media (max-width: 600px) {
         margin: 5px 0;
-    } 
+    }
 }
 
 .ellipse {

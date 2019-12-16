@@ -15,7 +15,7 @@ import CheckoutPage from './ui/pages/CheckoutPage/CheckoutPage.jsx';
 import ProductPage from './ui/pages/ProductPage/ProductPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import Footer from './ui/components/Footer/Footer.jsx';
-import NotFoundPage from './ui/components/NotFoundPage/NotFoundPage.jsx';
+import NotFoundPage from './ui/pages/NotFoundPage/NotFoundPage.jsx';
 import DeliveryAndPayment from './ui/pages/DeliveryAndPayment/DeliveryAndPayment.jsx';
 import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';

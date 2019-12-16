@@ -111,8 +111,13 @@ class AboutProduct extends Component {
                 <li className={styles.advantage}>простота в уходе</li>
             </ul>
             <span className={styles.details}>{text.datails}</span>
-            <span className={styles.priceOld}>{formatMoney(product.price)}</span>
-            <span className={styles.price}>{formatMoney(product.discountPrice)}</span>
+            {product.discountPrice !== product.price &&
+            <span className={styles.priceOld}>
+                {formatMoney(product.price)}
+            </span>}
+            <span className={styles.price}>
+                {formatMoney(product.discountPrice || product.discountPrice)}
+            </span>
             <div>
                 <span className={styles.sizesTitle}>{text.size}</span>
                 <ul className={styles.select}

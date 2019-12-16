@@ -1,4 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value red from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
@@ -9,15 +10,16 @@
     width: 288px;
     min-width: 288px;
     height: 365px;
+    max-height: 365px;
+    margin: 30px 30px 0 0;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 365px;
     overflow: hidden;
-    margin: 30px 30px 0 0;
     background: whiteBasic;
     text-decoration: none;
+    color: blackBasic;
 
     @media (max-width: 640px) {
         width: calc(50% - 10px);
@@ -136,7 +138,7 @@
 
 .title {
     font: 18px/21px RoundedElegance;
-    color: blackLight;
+    color: blackBasic;
     padding: 5px 10px;
     text-align: center;
 

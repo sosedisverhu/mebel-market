@@ -27,10 +27,16 @@ class AboutProductTop extends Component {
         const text = propOr('aboutProductTop', {}, langMap);
 
         return <div className={classNames(styles.root, { [styles[newClass]]: newClass })}>
-            <h1 className={styles.name}>{product.texts[lang].name}</h1>
+            <h1 className={styles.name}>
+                {product.texts[lang].name}
+            </h1>
             <div className={styles.warrantyArticleWrap}>
-                <div className={styles.warranty}>{`${text.warranty} ${product.warranty} м.`}</div>
-                <div className={styles.article}>артикул 48092</div>
+                <div className={styles.warranty}>
+                    {`${text.warranty} ${product.warranty} м.`}
+                </div>
+                <div className={styles.article}>
+                    артикул 48092
+                </div>
             </div>
         </div>;
     }
