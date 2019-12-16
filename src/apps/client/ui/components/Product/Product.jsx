@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import styles from './Product.css';
@@ -13,21 +12,15 @@ class Product extends Component {
         product: PropTypes.object.isRequired
     };
 
-    getDiscount = (basePrice, price) => {
-        const discount = Math.round((basePrice - price) / basePrice * 100);
-        return `-${discount}%`;
-    }
-
     render () {
         const { product } = this.props;
-        const discount = this.getDiscount(product.basePrice, product.price);
 
         return <div className={styles.product}>
             <AboutProductTop newClass='mobile' product={product} />
-            <Gallery discount={discount} photos={product.photos} />
+            <Gallery discount={product.discount} photos={product.files} />
             <AboutProduct product={product} />
         </div>;
     }
 }
 
-export default connect()(Product);
+export default (Product);

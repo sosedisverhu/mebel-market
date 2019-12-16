@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
-@value black1 from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value blackLighter from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value red from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
@@ -22,20 +22,17 @@
 .advantagesTitle {
     margin: 15px 0 10px 0;
     font: 16px/18px RoundedElegance;
-    color: black1;
-
-    /* @media (max-width: 1000px) {
-        margin-top: 10px;
-    } */
+    cursor: pointer;
+    color: blackLighter;
 }
 
 
 .advantage {
-    font: 14px/16px RoundedElegance;
-    color: black1;
-    padding-left: 20px;
-    margin-top: 6px;
     position: relative;
+    margin-top: 6px;
+    padding-left: 20px;
+    font: 14px/16px RoundedElegance;
+    color: blackLighter;
 
     &:before {
         content: '';
@@ -50,50 +47,65 @@
 }
 
 .details {
-    font: 14px/16px RoundedElegance;
-    color: black1;
-    text-decoration: underline;
     margin-top: 10px;
     display: block;
+    font: 14px/16px RoundedElegance;
+    color: blackLighter;
+    text-decoration: underline;
 }
 
 .priceOld {
+    padding-right: 25px;
+    display: inline-block;
     font: 25px/41px RoundedElegance;
     color: gray;
     text-decoration: line-through;
-    display: inline-block;
-    padding-right: 25px;
 }
 
 .price {
+    margin: 10px 0;
+    display: inline-block;
     font: 36px/41px RoundedElegance;
     color: red;
-    display: inline-block;
-    margin: 10px 0;
 }
 
 .sizesTitle {
     font: 16px/18px RoundedElegance;
-    color: black1;
+    color: blackLighter;
 }
 
 .select {
     margin-top: 6px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    &:hover .option{
+        display: block;
+     }
+
+    &:hover .activeOption:before{
+         transform: rotate(180deg);
+         border-color: blackLight transparent transparent transparent;
+     }
 }
 
-.activeOption {
-    background: whiteBasic;
-    border: 1px solid gray;
-    font: 18px/21px RoundedElegance;
-    color: black;
+.activeOption, .option{
+    height: 30px;
+    min-width: 202px;
     padding: 5px 30px 4px 9px;
     position: relative;
     display: inline-block;
+    border: 1px solid gray;
+    background: whiteBasic;
+    font: 18px/21px RoundedElegance;
+    overflow: hidden;
+    color: blackLight;
     cursor: pointer;
     white-space: nowrap;
-    overflow: hidden;
-    min-width: 202px;
+}
 
+.activeOption {
     &:before {
         content: "";
         width: 0;
@@ -105,24 +117,16 @@
         top: 50%;
         right: 10px;
         margin-top: -5px;
-        transition: 0.25s ease-in;
+        transition: 0.25s ease-out;
         transition-property: transform, border-color;
     }
+}
 
-    &:hover {
-        &:before {
-            transform: rotate(180deg);
-            transition: 0.25s ease-out;
-            border-color: black transparent transparent transparent;
-        }
-    }
-
-    /* @media (max-width: 600px) {
-        line-height: 16px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        width: 100%;
-    } */
+.option{
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 }
 
 .buttons {
@@ -136,7 +140,7 @@
     padding: 6px 10px;
     min-width: 202px;
     border: none;
-    background: black;
+    background: blackLight;
     cursor: pointer;
 }
 
@@ -145,8 +149,7 @@
     position: relative;
     width: 56px;
     height: 40px;
-    background: center no-repeat url('./img/wishList.png');
-    background-color: gray3;
+    background: gray3 center no-repeat url('./img/wishList.png');
     border: none;
     cursor: pointer;
 }

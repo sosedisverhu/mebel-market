@@ -23,7 +23,9 @@ export default {
         datails: 'Подробные характеристики',
         advantages: 'Основные плюсы:',
         buy: 'Купить',
-        labelTop: 'Хит'
+        labelTop: 'Хит',
+        size: 'Выберите размер:',
+        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }]
     },
     breadcrumbs: {
         main: 'Главная'
@@ -57,6 +59,9 @@ export default {
         filterBtn: 'Фильтры',
         results: 'Результатов',
         popular: 'Популярные'
+    },
+    aboutProductTop: {
+        warranty: 'Гарантия'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',

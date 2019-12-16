@@ -8,7 +8,7 @@ import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
-import NotFoundPage from '../../components/NotFoundPage/NotFoundPage';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import StyleRenderer from '../../components/StyleRenderer/StyleRenderer';
 
 const mapStateToProps = ({ application, data }) => {

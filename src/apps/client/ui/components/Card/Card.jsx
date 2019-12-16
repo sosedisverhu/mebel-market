@@ -1,28 +1,57 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 
 import classNames from 'classnames';
+
 import propOr from '@tinkoff/utils/object/propOr';
+import find from '@tinkoff/utils/array/find';
 
 import styles from './Card.css';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         lang: application.lang,
-        langRoute: application.langRoute
+        langRoute: application.langRoute,
+        categories: data.categories,
+        subCategories: data.subCategories
     };
 };
 
 class Card extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        langRoute: PropTypes.string.isRequired,
         lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         newClass: PropTypes.string,
-        labelClass: PropTypes.string
+        labelClass: PropTypes.string,
+        categories: PropTypes.array,
+        subCategories: PropTypes.array
     };
+
+    static defaultProps = {
+        newClass: '',
+        labelClass: '',
+        categories: [],
+        subCategories: []
+    };
+
+    state = {
+        category: {},
+        subCategory: {}
+    };
+
+    componentDidMount () {
+        const { product, categories, subCategories } = this.props;
+
+        this.setState({
+            categoryAlias: find(category => category.id === product.categoryId, categories).alias,
+            subCategoryAlias: find(subCategory => subCategory.id === product.subCategoryId, subCategories).alias
+        });
+    }
 
     getLabels = (labels, discount) => {
         if (discount) {
@@ -44,23 +73,28 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, files: [logo], discount, discountPrice, price },
+            product: { texts, avatar, discount, discountPrice, price, alias },
             newClass,
             labelClass,
+            langRoute,
             lang
         } = this.props;
+        const { categoryAlias, subCategoryAlias } = this.state;
 
         return (
-            <a className={classNames(
-                styles.product,
-                { [styles[newClass]]: newClass },
-                { [styles[labelClass]]: labelClass }
-            )}>
+            <Link
+                className={classNames(
+                    styles.product,
+                    { [styles[newClass]]: newClass },
+                    { [styles[labelClass]]: labelClass }
+                )}
+                to={`${langRoute}/${categoryAlias}/${subCategoryAlias}/${alias}`}
+            >
                 <div className={styles.labels}>
                     {this.getLabels(['top'], discount)}
                 </div>
                 <div>
-                    <img className={styles.img} src={logo} alt=''/>
+                    <img className={styles.img} src={avatar} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <div className={styles.title}>
@@ -73,8 +107,8 @@ class Card extends Component {
                         {discountPrice} &#8372;
                     </div>
                 </div>
-            </a>);
+            </Link>);
     }
 }
 
-export default connect(mapStateToProps)(Card);
+export default withRouter(connect(mapStateToProps)(Card));
