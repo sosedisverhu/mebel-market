@@ -4,7 +4,6 @@
 @value gray2 from '../../../../../css/colors.css';
 
 .cart {
-    cursor: pointer;
     position: relative;
     width: 18px;
     height: 16px;
@@ -13,6 +12,10 @@
     @media (max-width: 1120px) {
         margin-right: 15px;
     }
+}
+
+.iconCartWrapper {
+    cursor: pointer;
 }
 
 .iconCartImg {
@@ -60,6 +63,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(35, 35, 35, 0.5);
+    cursor: default;
 }
 
 .popup {
