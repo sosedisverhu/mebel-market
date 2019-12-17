@@ -2,11 +2,11 @@
 @value blackBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
 
 .search {
     height: 100%;
+    background-color: gray3;
 }
 
 .panelTop {
@@ -82,7 +82,7 @@
 .searchSection {
     padding-bottom: 40px;
     height: 100%;
-    background: gray5;
+    background: gray3;
 
     @media (max-width: 600px) {
         padding-bottom: 30px;
@@ -219,9 +219,7 @@
 }
 
 .articlesSection {
-    padding-bottom: 40px;
-    background: gray3;
-    height: 100%;
+    padding-bottom: 15px;
 
     @media (max-width: 600px) {
         padding-bottom: 30px;
