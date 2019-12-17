@@ -10,10 +10,10 @@
 }
 
 .titles {
+    padding: 0 16px;
     display: flex;
     justify-content: center;
     background: gray5;
-    padding: 0 16px;
 
     @media (max-width: 600px) {
         justify-content: space-around;
@@ -84,7 +84,7 @@
     }
 }
 
-.descr {
+.description {
     margin-top: -30px;
 
     @media (max-width: 600px) {
@@ -92,7 +92,7 @@
     }
 }
 
-.descrTitle {
+.descriptionTitle {
     font: 18px/21px RoundedElegance;
     color: black;
     margin-top: 30px;
@@ -102,7 +102,7 @@
     }
 }
 
-.descrText {
+.descriptionText {
     font: 16px/18px RoundedElegance;
     color: rgba(35, 35, 35, 0.7);
     margin-top: 10px;

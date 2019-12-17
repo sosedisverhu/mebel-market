@@ -1,90 +1,81 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { connect } from 'react-redux';
 
-import styles from './Tab.css';
+import classNames from 'classnames';
+import propOr from '@tinkoff/utils/object/propOr';
+import find from '@tinkoff/utils/array/find';
+
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
+import styles from './Tab.css';
 
 const mapStateToProps = ({ application }) => {
     return {
-        tabs: [
-            {
-                id: 'description',
-                title: 'Описание'
-            },
-            {
-                id: 'characteristic',
-                title: 'Характеристики'
-            }
-        ],
-        lang: application.lang
+        lang: application.lang,
+        langMap: application.langMap
     };
 };
 
 class Tab extends Component {
     static propTypes = {
-        tabs: PropTypes.array.isRequired,
         lang: PropTypes.string.isRequired,
+        langMap: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired
     };
 
-    static defaultProps = {
-        tabs: []
+    state = {
+        activeTab: {}
     };
 
-    state = {
-        activeId: this.props.tabs[0] && this.props.tabs[0].id
-    }
-
-    handleChange (id) {
-        this.setState({ activeId: id });
+    componentDidMount () {
+        this.setState({
+            activeTab: propOr('product', {}, this.props.langMap).tabs[0]
+        });
     }
 
     getContent () {
-        const { activeId } = this.state;
+        const { activeTab } = this.state;
         const { product, lang } = this.props;
 
-        if (activeId === 'description') {
+        if (activeTab.id === '1') {
             return (
-                <div className={styles.descr}>
-                    <StyleRenderer newClass='description' html={product.texts[lang].description} />
+                <div className={styles.description}>
+                    <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
         }
 
         return (
-            <div className={styles.character}>
-                <div className={styles.row}>
-                    <h3 className={styles.characterTitle}>Цвет</h3>
-                    <p className={styles.characterText}>Бежевый, Белый, Шоколад, Черный бархат</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.characterTitle}>Гарантия</h3>
-                    <p className={styles.characterText}>12 месяцев</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.characterTitle}>Материал</h3>
-                    <p className={styles.characterText}>Металл</p>
-                </div>
-                <div className={styles.row}>
-                    <h3 className={styles.characterTitle}>Максимальная нагрузка <span className={styles.characterSpan}>(на одно спальное место)</span></h3>
-                    <p className={styles.characterText}>200 кг</p>
-                </div>
+            <div>
+                {product.characteristics[lang].characteristics.map(characteristic => {
+                    return (
+                        <div className={styles.row} key={characteristic.id}>
+                            <h3 className={styles.characterTitle}>{characteristic.name}</h3>
+                            <p className={styles.characterText}>{characteristic.value}</p>
+                        </div>);
+                })}
             </div>);
     }
 
+    handleChange = id => {
+        this.setState({
+            activeTab: find(tab => tab.id === id, propOr('product', {}, this.props.langMap).tabs)
+        });
+    };
+
     render () {
-        const { tabs } = this.props;
-        const { activeId } = this.state;
+        const { langMap } = this.props;
+        const { activeTab } = this.state;
+        const text = propOr('product', {}, langMap);
 
         return <div className={styles.root}>
             <div className={styles.titles}>
-                {tabs.map(({ id, title }) => {
+                {text.tabs.map(tab => {
                     return <h2
-                        key={id}
-                        className={classNames(styles.title, { [styles.active]: activeId === id })}
-                        onClick={() => this.handleChange(id)}>
-                        {title}
+                        key={tab.id}
+                        className={classNames(styles.title, { [styles.active]: activeTab.id === tab.id })}
+                        onClick={() => this.handleChange(tab.id)}
+                    >
+                        {tab.name}
                     </h2>;
                 })}
             </div>

@@ -3,10 +3,10 @@
 
 .style strong {
     font-family: RoundedElegance;
+    font-weight: 600;
 }
 
-.style em {
-    font-style: italic;
+.style i {
     font-family: RoundedElegance;
     font-style: italic;
 }
@@ -62,6 +62,16 @@
         color: black;
         margin: 30px 0 15px 0;
     }
+}
+
+.style h2 {
+    font-size: 22px;
+    line-height: 25px;
+}
+
+.style h3 {
+    font-size: 20px;
+    line-height: 23px;
 }
 
 .style h4 {
