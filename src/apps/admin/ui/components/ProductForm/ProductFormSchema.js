@@ -11,7 +11,7 @@ import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/Form
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 
-export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, filters } = {} } = {}) {
+export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, categoryFilters, subCategoryFilters } = {} } = {}) {
     return {
         fields: [
             {
@@ -188,22 +188,22 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 component: FormFieldDivider,
                 name: 'divider'
             },
-            ...(filters.length ? [{
+            ...(categoryFilters.length ? [{
                 component: FormFieldTitle,
-                name: 'filtersTitle',
+                name: 'categoryFiltersTitle',
                 schema: {
-                    label: 'Фильтры для продукта',
+                    label: 'Фильтры категории для продукта',
                     variant: 'h6'
                 }
             }] : []),
-            ...(filters.map(filter => {
-                if (filter.type === 'checkbox') {
+            ...(categoryFilters.map(categoryFilter => {
+                if (categoryFilter.type === 'checkbox') {
                     return ({
                         component: FormFieldSelect,
-                        name: `filter-${filter.id}`,
+                        name: `categoryFilter-${categoryFilter.id}`,
                         schema: {
-                            label: filter.name,
-                            options: filter.options.map(option => ({
+                            label: categoryFilter.name,
+                            options: categoryFilter.options.map(option => ({
                                 value: option.name,
                                 name: option.name
                             }))
@@ -216,9 +216,51 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
 
                 return ({
                     component: FormFieldInput,
-                    name: `filter-${filter.id}`,
+                    name: `categoryFilter-${categoryFilter.id}`,
                     schema: {
-                        label: filter.name,
+                        label: categoryFilter.name,
+                        type: 'number'
+                    },
+                    validators: [
+                        { name: 'required', options: { text: 'Заполните значение фильтра' } }
+                    ]
+                });
+            })),
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            ...(subCategoryFilters.length ? [{
+                component: FormFieldTitle,
+                name: 'subCategoryFiltersTitle',
+                schema: {
+                    label: 'Фильтры подкатегории для продукта',
+                    variant: 'h6'
+                }
+            }] : []),
+            ...(subCategoryFilters.map(subCategoryFilter => {
+                if (subCategoryFilter.type === 'checkbox') {
+                    return ({
+                        component: FormFieldSelect,
+                        name: `subCategoryFilter-${subCategoryFilter.id}`,
+                        schema: {
+                            label: subCategoryFilter.name,
+                            options: subCategoryFilter.options.map(option => ({
+                                value: option.name,
+                                name: option.name
+                            }))
+                        },
+                        validators: [
+                            { name: 'required', options: { text: 'Выберите значение фильтра' } }
+                        ]
+                    });
+                }
+
+                return ({
+                    component: FormFieldInput,
+                    name: `subCategoryFilter-${subCategoryFilter.id}`,
+                    schema: {
+                        label: subCategoryFilter.name,
                         type: 'number'
                     },
                     validators: [

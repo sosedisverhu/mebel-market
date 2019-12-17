@@ -24,14 +24,8 @@ import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
 
 const PRODUCTS_VALUES = ['name', 'hidden'];
-const FILTER_NAME_REGEX = /filter-/g;
-
-const mapDispatchToProps = (dispatch) => ({
-    saveProduct: payload => dispatch(saveProduct(payload)),
-    editProduct: payload => dispatch(editProduct(payload)),
-    updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
-    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
-});
+const CATEGORY_FILTER_NAME_REGEX = /categoryFilter-/g;
+const SUB_CATEGORY_FILTER_NAME_REGEX = /subCategoryFilter-/g;
 
 const materialStyles = theme => ({
     error: {
@@ -120,25 +114,38 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
             lang: 'ru',
-            filters: [],
-            ...pick(PRODUCTS_VALUES, product),
-            ...(product.filters || [])
-                .reduce((filters, filter) => ({ ...filters, [`filter-${filter.id}`]: isObject(filter.value.ru) ? filter.value.ru.name : filter.value.ru }), {})
+            categoryFilters: [],
+            ...(product.categoryFilters || [])
+                .reduce((categoryFilters, categoryFilter) => ({
+                    ...categoryFilters,
+                    [`categoryFilter-${categoryFilter.id}`]: isObject(categoryFilter.value.ru)
+                        ? categoryFilter.value.ru.name : categoryFilter.value.ru
+                }), {}),
+            subCategoryFilters: [],
+            ...(product.subCategoryFilters || [])
+                .reduce((subCategoryFilters, subCategoryFilter) => ({
+                    ...subCategoryFilters,
+                    [`subCategoryFilter-${subCategoryFilter.id}`]: isObject(subCategoryFilter.value.ru)
+                        ? subCategoryFilter.value.ru.name : subCategoryFilter.value.ru
+                }), {}),
+            ...pick(PRODUCTS_VALUES, product)
         };
         this.id = prop('id', product);
 
-        const filters = pathOr(['filters', 'ru'], [], activeCategory);
+        const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
+        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories[0]);
 
         this.state = {
             lang: 'ru',
             activeCategory,
             categoryHidden,
             errorText: '',
-            filters
+            categoryFilters,
+            subCategoryFilters
         };
     }
 
-    getProductPayload = (values) => {
+    getProductPayload = values => {
         const {
             ru_name: ruName,
             ua_name: uaName,
@@ -165,15 +172,16 @@ class ProductForm extends Component {
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
+        const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
 
-        const filters = reduceObj((filters, filterValue, filterName) => {
-            if (FILTER_NAME_REGEX.test(filterName)) {
-                const id = filterName.replace(FILTER_NAME_REGEX, '');
-                const filterIndex = findIndex(filter => filter.id === id, this.state.filters);
+        const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
+            if (CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
+                const id = filterName.replace(CATEGORY_FILTER_NAME_REGEX, '');
+                const filterIndex = findIndex(filter => filter.id === id, this.state.categoryFilters);
                 if (filterIndex === -1) {
-                    return filters;
+                    return categoryFilters;
                 }
-                const filterType = this.state.filters[filterIndex].type;
+                const filterType = this.state.categoryFilters[filterIndex].type;
                 let value;
 
                 if (filterType === 'range') {
@@ -182,7 +190,7 @@ class ProductForm extends Component {
                         ru: +filterValue
                     };
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.filters[filterIndex].options);
+                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.categoryFilters[filterIndex].options);
 
                     value = reduceObj((resultFilterValue, filtersArr, lang) => {
                         resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
@@ -192,15 +200,52 @@ class ProductForm extends Component {
                 }
 
                 return [
-                    ...filters,
+                    ...categoryFilters,
                     {
-                        id: filterName.replace(FILTER_NAME_REGEX, ''),
+                        id: filterName.replace(CATEGORY_FILTER_NAME_REGEX, ''),
                         value
                     }
                 ];
             }
 
-            return filters;
+            return categoryFilters;
+        }, [], values);
+
+        const subCategoryFilters = reduceObj((subCategoryFilters, filterValue, filterName) => {
+            if (SUB_CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
+                const id = filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, '');
+                const filterIndex = findIndex(filter => filter.id === id, this.state.subCategoryFilters);
+                if (filterIndex === -1) {
+                    return subCategoryFilters;
+                }
+                const filterType = this.state.subCategoryFilters[filterIndex].type;
+                let value;
+
+                if (filterType === 'range') {
+                    value = {
+                        ua: +filterValue,
+                        ru: +filterValue
+                    };
+                } else {
+                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+
+                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+
+                        return resultFilterValue;
+                    }, {}, activeSubCategory.filters);
+                }
+
+                return [
+                    ...subCategoryFilters,
+                    {
+                        id: filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, ''),
+                        value
+                    }
+                ];
+            }
+
+            return subCategoryFilters;
         }, [], values);
 
         return {
@@ -238,7 +283,8 @@ class ProductForm extends Component {
             subCategoryId,
             id,
             alias,
-            filters
+            categoryFilters,
+            subCategoryFilters
         };
     };
 
@@ -329,7 +375,7 @@ class ProductForm extends Component {
 
     render () {
         const { classes } = this.props;
-        const { categoryHidden, errorText, filters } = this.state;
+        const { categoryHidden, errorText, categoryFilters, subCategoryFilters } = this.state;
 
         return <div>
             <Form
@@ -341,7 +387,8 @@ class ProductForm extends Component {
                         categoriesOptions: this.categoriesOptions,
                         subCategoriesOptions: this.subCategoriesOptions,
                         categoryHidden,
-                        filters
+                        categoryFilters,
+                        subCategoryFilters
                     }
                 })}
                 onChange={this.handleChange}
@@ -360,7 +407,7 @@ class ProductForm extends Component {
                     className={classNames(classes.error, classes.margin)}
                     message={
                         <span id='client-snackbar' className={classes.message}>
-                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
+                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)}/>
                             {errorText}
                         </span>
                     }
@@ -369,5 +416,12 @@ class ProductForm extends Component {
         </div>;
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    saveProduct: payload => dispatch(saveProduct(payload)),
+    editProduct: payload => dispatch(editProduct(payload)),
+    updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
+    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
+});
 
 export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(ProductForm));

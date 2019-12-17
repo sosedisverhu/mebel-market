@@ -26,7 +26,11 @@ const Product = new Schema({
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },
-    filters: [{
+    categoryFilters: [{
+        id: { type: String, required: true },
+        value: { type: Object, required: true }
+    }],
+    subCategoryFilters: [{
         id: { type: String, required: true },
         value: { type: Object, required: true }
     }]

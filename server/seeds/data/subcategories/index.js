@@ -26,108 +26,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -157,108 +113,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -288,108 +200,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -419,108 +287,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -550,108 +374,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -681,108 +461,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -812,108 +548,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -943,108 +635,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -1074,108 +722,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -1205,108 +809,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
@@ -1336,108 +896,64 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантія',
+                    name: 'Фільтр подкатегорії 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 місяців'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 місяців'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 місяці'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальне навантаження',
+                    name: 'Фільтр подкатегорії 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Бренд',
-                    options: [{
-                        id: 'fwess65rfw',
-                        name: 'Fusion Metal'
-                    }]
-                },
-                {
-                    id: 'gew3wg43f34',
-                    type: 'checkbox',
-                    name: 'Гарантия',
+                    name: 'Фильтр подкатегории 1',
                     options: [
                         {
-                            id: 'fwe7ewsf5rfw',
-                            name: '12 месяцев'
+                            id: 'fwess65rfw1',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre9965rfw',
-                            name: '18 месяцев'
-                        },
-                        {
-                            id: 'frfr65rfy',
-                            name: '24 месяца'
+                            id: 'fwess65rfw2',
+                            name: 'Option 2'
                         }
                     ]
                 },
                 {
-                    id: 'za4jh4w34',
+                    id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Максимальная нагрузка',
+                    name: 'Фильтр подкатегории 2',
                     options: [
                         {
-                            id: 'f8re765rfw',
-                            name: '100 кг'
+                            id: 'fwess65rfw3',
+                            name: 'Option 1'
                         },
                         {
-                            id: 'fre5005rfw',
-                            name: '150 кг'
-                        },
-                        {
-                            id: 'fre7w3dw',
-                            name: '200 кг'
+                            id: 'fwess65rfw4',
+                            name: 'Option 2'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         }
