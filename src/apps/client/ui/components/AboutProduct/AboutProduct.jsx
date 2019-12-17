@@ -1,18 +1,36 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import propOr from '@tinkoff/utils/object/propOr';
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
+import outsideClick from '../../hocs/outsideClick';
 
-import formatMoney from '../../../utils/formatMoney';
-
-import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import styles from './AboutProduct.css';
 
+import formatMoney from '../../../utils/formatMoney';
+import AboutProductTop from '../AboutProductTop/AboutProductTop';
+
+const mapStateToProps = ({ application }) => {
+    return {
+        langMap: application.langMap
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
+    };
+};
+
+@outsideClick
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        product: PropTypes.object.isRequired
+        product: PropTypes.object.isRequired,
+        setScrollToCharacteristic: PropTypes.func.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool
     };
 
     state = {
@@ -29,6 +47,10 @@ class AboutProduct extends Component {
             activeSize: product.sizes[0]
         });
     }
+
+    scrollToTitles = () => {
+        this.props.setScrollToCharacteristic(true);
+    };
 
     onChangeActiveSize = size => {
         this.setState({
@@ -61,7 +83,7 @@ class AboutProduct extends Component {
                 <li className={styles.advantage}>удобное основание</li>
                 <li className={styles.advantage}>простота в уходе</li>
             </ul>
-            <span className={styles.details}>{text.datails}</span>
+            <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {product.discountPrice !== product.price &&
             <span className={styles.priceOld}>
                 {formatMoney(product.price)}
@@ -96,10 +118,4 @@ class AboutProduct extends Component {
     }
 }
 
-const mapStateToProps = ({ application }) => {
-    return {
-        langMap: application.langMap
-    };
-};
-
-export default connect(mapStateToProps)(AboutProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(AboutProduct);
