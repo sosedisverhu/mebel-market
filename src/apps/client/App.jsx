@@ -21,6 +21,7 @@ import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';
 import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
+import QuizesPage from './ui/pages/QuizesPage/QuizesPage.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
@@ -81,6 +82,7 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route exact path={`/:lang(${langs})?/quizes`} render={this.renderComponent(QuizesPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)}/>

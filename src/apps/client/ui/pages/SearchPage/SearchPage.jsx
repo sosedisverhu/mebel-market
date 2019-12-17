@@ -71,7 +71,6 @@ class SearchPage extends Component {
                                 <Link className={styles.link} to="#" >{text.link}</Link>
                             </div>
                         </div>)}
-
             </section>
         );
     }
