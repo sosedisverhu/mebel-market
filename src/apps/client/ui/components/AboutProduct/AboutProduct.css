@@ -8,15 +8,15 @@
 .root {
     margin-top: 30px;
 
-    @media (max-width: 1000px) {
-        margin-top: 5px;
-        width: 100%;
-        max-width: 680px;
-    }
+@media (max-width: 1000px) {
+    margin-top: 5px;
+    width: 100%;
+    max-width: 680px;
+}
 
-    @media (max-width: 600px) {
-        margin-top: 0;
-    }
+@media (max-width: 600px) {
+    margin-top: 0;
+}
 }
 
 .advantagesTitle {
@@ -34,16 +34,16 @@
     font: 14px/16px RoundedElegance;
     color: blackLighter;
 
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 5px;
-        width: 6px;
-        height: 6px;
-        background: green;
-        border-radius: 50%;
-    }
+&:before {
+     content: '';
+     position: absolute;
+     left: 0;
+     top: 5px;
+     width: 6px;
+     height: 6px;
+     background: green;
+     border-radius: 50%;
+ }
 }
 
 .details {
@@ -52,6 +52,7 @@
     font: 14px/16px RoundedElegance;
     color: blackLighter;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .priceOld {
@@ -80,14 +81,14 @@
     display: flex;
     flex-direction: column;
 
-    &:hover .option{
-        display: block;
-     }
+&:hover .option{
+     display: block;
+ }
 
-    &:hover .activeOption:before{
-         transform: rotate(180deg);
-         border-color: blackLight transparent transparent transparent;
-     }
+&:hover .activeOption:before{
+     transform: rotate(180deg);
+     border-color: blackLight transparent transparent transparent;
+ }
 }
 
 .activeOption, .option{
@@ -106,20 +107,20 @@
 }
 
 .activeOption {
-    &:before {
-        content: "";
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 8px 5px 0 5px;
-        border-color: green transparent transparent  transparent;
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        margin-top: -5px;
-        transition: 0.25s ease-out;
-        transition-property: transform, border-color;
-    }
+&:before {
+     content: "";
+     width: 0;
+     height: 0;
+     border-style: solid;
+     border-width: 8px 5px 0 5px;
+     border-color: green transparent transparent  transparent;
+     position: absolute;
+     top: 50%;
+     right: 10px;
+     margin-top: -5px;
+     transition: 0.25s ease-out;
+     transition-property: transform, border-color;
+ }
 }
 
 .option{

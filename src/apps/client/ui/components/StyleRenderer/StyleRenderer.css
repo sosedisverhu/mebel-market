@@ -1,5 +1,5 @@
 @value gray6 from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
 
 .style strong {
     font-family: RoundedElegance;
@@ -40,7 +40,7 @@
         left: -20px;
         top: 50%;
         margin-top: -5px;
-        background: black;
+        background: blackBasic;
         width: 10px;
         height: 10px;
         border-radius: 50%;
@@ -59,7 +59,7 @@
     h5,
     h6 {
         font-family: RoundedElegance;
-        color: black;
+        color: blackBasic;
         margin: 30px 0 15px 0;
     }
 }
