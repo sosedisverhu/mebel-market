@@ -179,6 +179,65 @@ module.exports = [
         warranty: 12
     },
     {
+        alias: 'glory',
+        categoryId: 'category0',
+        id: '2',
+        subCategoryId: 'subCategory2',
+        characteristics: {
+            ru: {
+                characteristics: [{
+                    name: 'Цвет',
+                    id: 'characteristic0',
+                    value: 'Бежевый, Белый, Шоколад, Черный бархат'
+                }]
+            },
+            ua: {
+                characteristics: [{
+                    name: 'Колір',
+                    id: 'characteristic1',
+                    value: 'Бежевый, Білий, Шоколад, Чорний оксамит'
+                }]
+            }
+
+        },
+        hidden: false,
+        discount: 0,
+        discountPrice: 3799,
+        price: 3799,
+        avatar: '/server/seeds/data/products/images/Glory.png',
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
+        sizes: [
+            { name: 'M', id: 'sizeM' },
+            { name: 'L', id: 'sizeL' },
+            { name: 'XL', id: 'sizeXL' }
+        ],
+        texts: {
+            ru: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                name: ' Кровать « Глория »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            },
+            ua: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                name: 'Ліжко « Глорія »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            }
+        },
+        warranty: 12
+    },
+    {
         alias: 'standart',
         categoryId: 'category1',
         id: '3',

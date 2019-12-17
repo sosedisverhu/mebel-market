@@ -35,7 +35,8 @@ class ProductsPage extends Component {
         subCategory: {},
         subCategories: [],
         isCategory: true,
-        isSubCategoryFilters: false
+        isSubCategoryFilters: false,
+        minAndMaxPrices: {}
     };
 
     componentDidMount () {
@@ -97,13 +98,14 @@ class ProductsPage extends Component {
 
     getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
         const { products } = props;
-
         const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
-        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id) : filteredProductsByCategory;
+
+        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
+            : filteredProductsByCategory;
     };
 
     getMinAndMaxPrices = products => {
-        const defaultPrice = products[0].discountPrice || products[0].price;
+        const defaultPrice = products.length ? (products[0].discountPrice || products[0].price) : 0;
 
         return products.reduce((previousValue, product) => {
             const price = product.discountPrice || product.price;
