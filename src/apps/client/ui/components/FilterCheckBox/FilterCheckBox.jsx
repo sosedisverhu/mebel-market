@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import classNames from 'classnames';
 
+import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick';
 
 import styles from './FilterCheckBox.css';
@@ -17,7 +16,7 @@ class FilterCheckBox extends Component {
 
     state = {
         active: false
-    }
+    };
 
     handleTitleClick = () => {
         const { outsideClickEnabled } = this.props;
@@ -35,12 +34,16 @@ class FilterCheckBox extends Component {
     };
 
     render () {
-        const { filter: { title, options } } = this.props;
+        const { filter: { name, options } } = this.props;
         const { active } = this.state;
 
         return (
-            <div onClick={this.handleTitleClick} className={classNames(styles.filter, { [styles.active]: active })}>
-                <div className={styles.title}>{title}</div>
+            <div onClick={this.handleTitleClick}
+                className={classNames(styles.filter, { [styles.active]: active })}
+            >
+                <div className={styles.title}>
+                    {name}
+                </div>
                 <div className={styles.options}>
                     {options.map((option, index) => {
                         return (
@@ -49,8 +52,8 @@ class FilterCheckBox extends Component {
                                     className={styles.input}
                                     type="checkbox"
                                 />
-                                <div className={styles.circle} />
-                                {option}
+                                <div className={styles.circle}/>
+                                {option.name}
                             </label>
                         );
                     })}
@@ -60,4 +63,4 @@ class FilterCheckBox extends Component {
     }
 }
 
-export default connect()(FilterCheckBox);
+export default FilterCheckBox;

@@ -1,28 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick';
 
 import InputRange from 'react-input-range';
 
-import pick from '@tinkoff/utils/object/pick';
-
 import styles from './FilterSlider.css';
-
-const mapStateToProps = ({ data }) => {
-    return {
-        filters: data.filters
-    };
-};
 
 @outsideClick
 class FilterSlider extends Component {
     static propTypes = {
         filter: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired
         }),
+        minAndMaxPrices: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
@@ -35,34 +28,35 @@ class FilterSlider extends Component {
     constructor (...args) {
         super(...args);
 
-        // const value = this.getDefaultValue();
-        const value = { 'min': 1349, 'max': 4100 };
-
         this.state = {
-            defaultValue: value,
-            step: this.getStep(value),
-            value,
-            active: false
+            defaultValue: {},
+            step: 0,
+            value: {},
+            active: false,
+            loaded: false
         };
     }
 
-    // componentWillReceiveProps (nextProps) {
-    //     if (nextProps.filter !== this.props.filter) {
-    //         const value = this.getDefaultValue(nextProps);
+    componentDidMount () {
+        this.setNewState();
+    }
 
-    //         this.setState({
-    //             defaultValue: value,
-    //             step: this.getStep(value),
-    //             value
-    //         });
-    //     }
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.minAndMaxPrices !== this.props.minAndMaxPrices) {
+            this.setNewState(nextProps);
+        }
+    }
 
-    //     if (!nextProps.filtersMap[nextProps.filter.id] && this.props.filtersMap[nextProps.filter.id]) {
-    //         this.setState({
-    //             value: this.state.defaultValue
-    //         });
-    //     }
-    // }
+    setNewState = (props = this.props) => {
+        const { minAndMaxPrices } = props;
+
+        this.setState({
+            defaultValue: minAndMaxPrices,
+            step: this.getStep(minAndMaxPrices),
+            value: minAndMaxPrices,
+            loaded: true
+        });
+    };
 
     getStep = ({ min, max }) => {
         switch (true) {
@@ -89,12 +83,6 @@ class FilterSlider extends Component {
         }
     };
 
-    getDefaultValue = (props = this.props) => {
-        return {
-            ...pick(['min', 'max'], props.filter)
-        };
-    };
-
     handleInputChange = value => {
         const { defaultValue: { min, max } } = this.state;
 
@@ -107,16 +95,23 @@ class FilterSlider extends Component {
     };
 
     render () {
-        const { filter: { title } } = this.props;
-        const { defaultValue: { min, max }, value, step, active } = this.state;
+        const { filter: { name } } = this.props;
+        const { defaultValue: { min, max }, value, step, active, loaded } = this.state;
 
         return (
             <div className={classNames(styles.filter, { [styles.active]: active })}>
-                <div className={styles.title} onClick={this.handleTitleClick}>{title}</div>
+                <div className={styles.title} onClick={this.handleTitleClick}>
+                    {name}
+                </div>
+                {loaded &&
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
-                        <div className={styles.customLabel}>{value.min.toFixed(0)}  &#8372;</div>
-                        <div className={styles.customLabel}>{value.max.toFixed(0)}  &#x20b4;</div>
+                        <div className={styles.customLabel}>
+                            {value.min.toFixed(0)}  &#8372;
+                        </div>
+                        <div className={styles.customLabel}>
+                            {value.max.toFixed(0)}  &#x20b4;
+                        </div>
                     </div>
                     <InputRange
                         maxValue={+max}
@@ -135,12 +130,12 @@ class FilterSlider extends Component {
                         step={step}
                         value={value}
                         onChange={this.handleInputChange}
-                        onChangeComplete={this.props.onFilter}
+                        onChangeComplete={() => this.props.onFilter(value)}
                     />
-                </div>
+                </div>}
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps)(FilterSlider);
+export default FilterSlider;

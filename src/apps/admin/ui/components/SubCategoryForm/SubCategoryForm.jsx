@@ -87,7 +87,6 @@ class SubCategoryForm extends Component {
             alias: subCategory.alias,
             lang: 'ru',
             ...pick(SUB_CATEGORIES_VALUES, subCategory),
-            filters: [],
             ua_filters: pathOr(['filters', 'ua'], [], subCategory),
             ru_filters: pathOr(['filters', 'ru'], [], subCategory)
         };
@@ -145,9 +144,20 @@ class SubCategoryForm extends Component {
         };
     };
 
+    checkOptions = filters => {
+        return filters.map(filter => {
+            const filteredOptions = filter.options.filter(option => option.name);
+            return { ...filter, options: filteredOptions };
+        });
+    };
+
     handleSubmit = values => {
-        const subCategoryPayload = this.getSubCategoryPayload(values);
         const { editSubCategory, saveSubCategory, onDone, subCategories } = this.props;
+        const subCategoryPayload = this.getSubCategoryPayload(values);
+        const { filters } = subCategoryPayload;
+
+        filters.ua = this.checkOptions(filters.ua);
+        filters.ru = this.checkOptions(filters.ua);
 
         (this.id
             ? editSubCategory({ ...subCategoryPayload, id: this.id })

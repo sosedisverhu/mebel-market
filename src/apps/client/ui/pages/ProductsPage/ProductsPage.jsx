@@ -32,8 +32,10 @@ class ProductsPage extends Component {
     state = {
         products: [],
         category: {},
+        subCategory: {},
         subCategories: [],
-        isCategory: true
+        isCategory: true,
+        isSubCategoryFilters: false
     };
 
     componentDidMount () {
@@ -58,18 +60,21 @@ class ProductsPage extends Component {
             return;
         }
 
-        const { products, subCategories } = props;
-        const filteredProducts = products.filter(product => product.categoryId === category.id);
+        const { subCategories } = props;
+        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
 
         this.setState({
-            products: subCategoryAlias ? filteredProducts.filter(product => product.subCategoryId === subCategory.id) : filteredProducts,
+            products,
             category,
+            subCategory,
             subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
-            isCategory: true
+            isCategory: true,
+            isSubCategoryFilters: !!subCategoryAlias,
+            minAndMaxPrices: this.getMinAndMaxPrices(products)
         });
     };
 
-    getMatch = props => {
+    getMatch = (props = this.props) => {
         const { location: { pathname }, langRoute } = props;
         const subCategoryAlias = pathname.split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
         const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
@@ -90,14 +95,49 @@ class ProductsPage extends Component {
         return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
-    render () {
-        const { langMap, langRoute, lang } = this.props;
-        const { products, category, subCategories, isCategory } = this.state;
-        const text = propOr('productsPage', {}, langMap);
+    getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
+        const { products } = props;
 
-        if (!isCategory) {
+        const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
+        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id) : filteredProductsByCategory;
+    };
+
+    getMinAndMaxPrices = products => {
+        const defaultPrice = products[0].discountPrice || products[0].price;
+
+        return products.reduce((previousValue, product) => {
+            const price = product.discountPrice || product.price;
+            return {
+                min: price < previousValue.min ? price : previousValue.min,
+                max: price > previousValue.max ? price : previousValue.max
+            };
+        }, { min: defaultPrice, max: defaultPrice });
+    };
+
+    onFilterByPrice = minAndMaxPrices => {
+        const { subCategoryAlias } = this.getMatch();
+        const category = this.getCategory();
+        const subCategory = subCategoryAlias && this.getSubCategory();
+        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
+
+        this.setState({
+            products: products.filter(product => {
+                const price = product.discountPrice || product.price;
+
+                return price >= minAndMaxPrices.min && price <= minAndMaxPrices.max;
+            })
+        });
+    };
+
+    render () {
+        if (!this.state.isCategory) {
             return <NotFoundPage/>;
         }
+
+        const { langMap, langRoute, lang } = this.props;
+        const { products, category, subCategory, subCategories, isSubCategoryFilters, minAndMaxPrices } = this.state;
+        const text = propOr('productsPage', {}, langMap);
+        const filters = propOr(lang, [], !isSubCategoryFilters ? category.filters : subCategory.filters);
 
         return (
             <div className={styles.productPage}>
@@ -124,7 +164,11 @@ class ProductsPage extends Component {
                             <div className={styles.results}>
                                 {`${products.length} ${text.results}`}
                             </div>
-                            <Filters/>
+                            <Filters
+                                filters={filters}
+                                minAndMaxPrices={minAndMaxPrices}
+                                onFilterByPrice={this.onFilterByPrice}
+                            />
                             <div className={styles.sort}>
                                 <div className={styles.activeOption}>
                                     {text.popular}
