@@ -9,6 +9,10 @@
     background-color: gray3;
 }
 
+.panelTopWrapper {
+    background-color: whiteBasic;
+}
+
 .panelTop {
     max-width: 1240px;
     padding: 0 16px;
@@ -33,12 +37,9 @@
 }
 
 .productsSectionWrap {
-    background: gray3;
-    padding: 30px 0;
-
-    @media (max-width: 600px) {
-        padding: 20px 0 30px 0;
-    }
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .quantity {
@@ -52,8 +53,16 @@
     align-items: center;
     box-sizing: content-box;
 
+    &.quantityProduct {
+        padding-top: 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 20px;
+        }
+    }
+
     &.quantityArticle {
-        padding-top: 60px;
+        padding-top: 30px;
 
         @media (max-width: 600px) {
             padding-top: 20px;
@@ -227,10 +236,9 @@
 }
 
 .articlesContainer {
-    max-width: 1360px;
+    max-width: 1270px;
     margin: 0 auto;
     padding-top: 15px;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
 }
