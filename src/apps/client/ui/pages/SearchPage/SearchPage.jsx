@@ -126,8 +126,7 @@ class SearchPage extends Component {
                         </div>
                         <div className={styles.productsSectionWrap}>
                             <h1 className={styles.quantity}>{text.products} {products.length}</h1>
-                            <div>Test Products</div>
-                            {/* <ProductsGrid products={products} /> */}
+                            <ProductsGrid products={products} />
                         </div>
                     </div>)
                     : null}
