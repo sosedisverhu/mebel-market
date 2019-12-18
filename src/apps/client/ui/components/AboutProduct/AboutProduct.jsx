@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import propOr from '@tinkoff/utils/object/propOr';
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
+import outsideClick from '../../hocs/outsideClick';
+
+import styles from './AboutProduct.css';
 
 import formatMoney from '../../../utils/formatMoney';
-
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
-import styles from './AboutProduct.css';
 
 import setWishlist from '../../../actions/setWishlist';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
@@ -21,15 +23,22 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = dispatch => ({
-    setWishlist: payload => dispatch(setWishlist(payload)),
-    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
-});
+const mapDispatchToProps = dispatch => {
+    return {
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
+        setWishlist: payload => dispatch(setWishlist(payload)),
+        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+    };
+};
 
+@outsideClick
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         product: PropTypes.object.isRequired,
+        setScrollToCharacteristic: PropTypes.func.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array.isRequired,
         setWishlist: PropTypes.func.isRequired,
         saveProductsToWishlist: PropTypes.func.isRequired
@@ -79,6 +88,10 @@ class AboutProduct extends Component {
         });
     }
 
+    scrollToTitles = () => {
+        this.props.setScrollToCharacteristic(true);
+    };
+
     onChangeActiveSize = size => {
         this.setState({
             activeSize: size,
@@ -110,7 +123,7 @@ class AboutProduct extends Component {
                 <li className={styles.advantage}>удобное основание</li>
                 <li className={styles.advantage}>простота в уходе</li>
             </ul>
-            <span className={styles.details}>{text.datails}</span>
+            <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {product.discountPrice !== product.price &&
             <span className={styles.priceOld}>
                 {formatMoney(product.price)}
