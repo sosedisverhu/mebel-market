@@ -1,6 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .header {
     display: flex;
@@ -84,9 +85,19 @@
     text-decoration: none;
     color: whiteBasic;
     margin-right: 25px;
+    position: relative;
 
     @media (max-width: 1280px) {
         margin-right: 15px;
+    }
+
+    &.active:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: whiteBasic;
+        bottom: -5px;
     }
 }
 
@@ -215,6 +226,16 @@
     text-decoration: none;
     color: blackBasic;
     text-shadow: -0.2px 0 blackBasic, 0 0.2px blackBasic, 0.2px 0 blackBasic, 0 -0.2px blackBasic;
+    position: relative;
+
+    &.active:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: green;
+        bottom: -5px;
+    }
 
     &:last-child {
         margin-right: 0;
