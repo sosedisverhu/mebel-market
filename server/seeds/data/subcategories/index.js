@@ -26,30 +26,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -58,30 +58,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -113,30 +113,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -145,30 +145,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -200,30 +200,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -232,30 +232,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -287,30 +287,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -319,30 +319,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -374,30 +374,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -406,30 +406,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -461,30 +461,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -493,30 +493,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -548,30 +548,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -580,30 +580,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -635,30 +635,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -667,30 +667,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -722,30 +722,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -754,30 +754,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -809,30 +809,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Чорний'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Білий'
                         }
                     ]
                 }
@@ -841,30 +841,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Черный'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Белый'
                         }
                     ]
                 }
@@ -896,30 +896,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фільтр подкатегорії 2',
+                    name: 'Колір',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 }
@@ -928,30 +928,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 1',
+                    name: 'Стиль',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Фильтр подкатегории 2',
+                    name: 'Цвет',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Option 1'
+                            name: 'Модерн'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Option 2'
+                            name: 'Хай-Тек'
                         }
                     ]
                 }

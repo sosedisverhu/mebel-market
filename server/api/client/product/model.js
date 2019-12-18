@@ -14,7 +14,6 @@ const Product = new Schema({
         }
     },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
-    warranty: { type: Number, required: true },
     sizes: { type: Array, required: true },
     avatar: { type: String },
     files: [{ type: String, required: true }],

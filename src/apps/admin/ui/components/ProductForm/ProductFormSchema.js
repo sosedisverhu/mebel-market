@@ -62,17 +62,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldInput,
-                name: 'warranty',
-                schema: {
-                    label: 'Гарантия',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Укажите гарантию' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
                 name: 'alias',
                 schema: {
                     label: 'Alias'

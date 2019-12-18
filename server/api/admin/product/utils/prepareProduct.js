@@ -4,7 +4,6 @@ const VALUES = [
     'id',
     'texts',
     'characteristics',
-    'warranty',
     'sizes',
     'avatar',
     'files',

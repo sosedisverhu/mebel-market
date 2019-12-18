@@ -58,7 +58,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'classic',
@@ -117,7 +127,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'glory',
@@ -176,7 +196,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'glory',
@@ -235,7 +265,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'standart',
@@ -294,7 +334,17 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'eko-42',
@@ -353,7 +403,17 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
@@ -412,7 +472,17 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
@@ -471,7 +541,17 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
@@ -530,7 +610,17 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
@@ -589,7 +679,17 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
@@ -648,6 +748,16 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     }
 ];

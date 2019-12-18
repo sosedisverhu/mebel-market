@@ -101,7 +101,6 @@ class ProductForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
-            warranty: product.warranty || '',
             sizes: product.sizes || [],
             avatar: { files: product.avatar ? [product.avatar] : [] },
             files: { files: product.files ? product.files : [] },
@@ -159,7 +158,6 @@ class ProductForm extends Component {
             ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
-            warranty,
             sizes,
             hidden,
             discountPrice,
@@ -171,7 +169,7 @@ class ProductForm extends Component {
             alias
         } = values;
 
-        const activeCategory = this.props.categories.find(category => category.id === categoryId);
+        const activeCategory = this.state.categories.find(category => category.id === categoryId);
         const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -207,7 +205,6 @@ class ProductForm extends Component {
                     }
                 ];
             }
-
             return categoryFilters;
         }, [], values);
 
@@ -273,7 +270,6 @@ class ProductForm extends Component {
                     characteristics: uaCharacteristics
                 }
             },
-            warranty,
             sizes,
             hidden,
             discountPrice,

@@ -15,17 +15,30 @@ class FilterCheckBox extends Component {
     };
 
     state = {
-        active: false
+        active: false,
+        name: '',
+        options: []
     };
 
+    componentDidMount () {
+        const { filter } = this.props;
+
+        this.setState({
+            name: filter.name,
+            options: filter.options.map(option => {
+                return { ...option, checked: true };
+            })
+        });
+    }
+
     handleTitleClick = () => {
-        const { outsideClickEnabled } = this.props;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
         const { active } = this.state;
 
         this.setState({ active: !active });
 
         if (!active && !outsideClickEnabled) {
-            this.props.turnOnClickOutside(this, this.handleFilterClose);
+            turnOnClickOutside(this, this.handleFilterClose);
         }
     };
 
@@ -34,8 +47,7 @@ class FilterCheckBox extends Component {
     };
 
     render () {
-        const { filter: { name, options } } = this.props;
-        const { active } = this.state;
+        const { active, name, options } = this.state;
 
         return (
             <div onClick={this.handleTitleClick}
@@ -45,15 +57,15 @@ class FilterCheckBox extends Component {
                     {name}
                 </div>
                 <div className={styles.options}>
-                    {options.map((option, index) => {
+                    {options.map((option, i) => {
                         return (
-                            <label key={index} className={styles.option}>
+                            <label key={i} className={styles.option}>
                                 <input
                                     className={styles.input}
                                     type="checkbox"
                                 />
                                 <div className={styles.circle}/>
-                                {option.name}
+                                <span>{option.name}</span>
                             </label>
                         );
                     })}
