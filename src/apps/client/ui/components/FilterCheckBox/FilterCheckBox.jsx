@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
@@ -9,6 +10,7 @@ import styles from './FilterCheckBox.css';
 @outsideClick
 class FilterCheckBox extends Component {
     static propTypes = {
+        location: PropTypes.object.isRequired,
         filter: PropTypes.object.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
@@ -21,7 +23,17 @@ class FilterCheckBox extends Component {
     };
 
     componentDidMount () {
-        const { filter } = this.props;
+        this.setNewState();
+    }
+
+    componentWillReceiveProps (nextProps, nextContext) {
+        if (this.props.location.pathname !== nextProps.location.pathname) {
+            this.setNewState();
+        }
+    }
+
+    setNewState = (props = this.props) => {
+        const { filter } = props;
 
         this.setState({
             name: filter.name,
@@ -29,7 +41,7 @@ class FilterCheckBox extends Component {
                 return { ...option, checked: true };
             })
         });
-    }
+    };
 
     handleTitleClick = () => {
         const { outsideClickEnabled, turnOnClickOutside } = this.props;
@@ -75,4 +87,4 @@ class FilterCheckBox extends Component {
     }
 }
 
-export default FilterCheckBox;
+export default withRouter(FilterCheckBox);

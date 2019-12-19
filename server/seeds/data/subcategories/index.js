@@ -113,30 +113,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Стиль',
+                    name: 'Дизайн',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Модерн'
+                            name: 'Новий'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Хай-Тек'
+                            name: 'Старий'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Колір',
+                    name: 'Год випуска',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Чорний'
+                            name: '2018'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Білий'
+                            name: '2019'
                         }
                     ]
                 }
@@ -145,30 +145,30 @@ module.exports = [
                 {
                     id: 'gewgw34',
                     type: 'checkbox',
-                    name: 'Стиль',
+                    name: 'Дизайн',
                     options: [
                         {
                             id: 'fwess65rfw1',
-                            name: 'Модерн'
+                            name: 'Новый'
                         },
                         {
                             id: 'fwess65rfw2',
-                            name: 'Хай-Тек'
+                            name: 'Старый'
                         }
                     ]
                 },
                 {
                     id: 'gewgw35',
                     type: 'checkbox',
-                    name: 'Цвет',
+                    name: 'Год выпуска',
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Черный'
+                            name: '2018'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Белый'
+                            name: '2019'
                         }
                     ]
                 }

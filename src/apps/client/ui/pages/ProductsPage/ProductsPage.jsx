@@ -36,6 +36,7 @@ class ProductsPage extends Component {
         subCategories: [],
         isCategory: true,
         isSubCategoryFilters: false,
+        filters: [],
         minAndMaxPrices: {}
     };
 
@@ -61,8 +62,11 @@ class ProductsPage extends Component {
             return;
         }
 
-        const { subCategories } = props;
+        const { subCategories, lang } = props;
         const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
+        const isSubCategoryFilters = !!subCategoryAlias;
+
+        const filters = propOr(lang, [], !isSubCategoryFilters ? category.filters : subCategory.filters);
 
         this.setState({
             products,
@@ -70,8 +74,9 @@ class ProductsPage extends Component {
             subCategory,
             subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
             isCategory: true,
-            isSubCategoryFilters: !!subCategoryAlias,
-            minAndMaxPrices: this.getMinAndMaxPrices(products)
+            isSubCategoryFilters,
+            minAndMaxPrices: this.getMinAndMaxPrices(products),
+            filters
         });
     };
 
@@ -137,9 +142,8 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, category, subCategory, subCategories, isSubCategoryFilters, minAndMaxPrices } = this.state;
+        const { products, category, subCategories, minAndMaxPrices, filters } = this.state;
         const text = propOr('productsPage', {}, langMap);
-        const filters = propOr(lang, [], !isSubCategoryFilters ? category.filters : subCategory.filters);
 
         return (
             <div className={styles.productPage}>

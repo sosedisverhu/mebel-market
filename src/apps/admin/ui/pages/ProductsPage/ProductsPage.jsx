@@ -149,7 +149,7 @@ class ProductsPage extends Component {
     };
 
     componentDidMount () {
-        const { getProducts, getCategories, getSubCategories } = this.props;
+        const { getProducts, getCategories, getSubCategories } = props;
 
         Promise.all([
             getProducts(),
@@ -229,54 +229,59 @@ class ProductsPage extends Component {
             products
         } = this.state;
 
-        if (loading) {
+        switch (true) {
+        case loading:
             return <div className={classes.loader}>
                 <CircularProgress/>
             </div>;
-        }
 
-        if (!categories.length) {
+        case !categories.length:
             return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>Создайте сначала категорию</Typography>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Создайте сначала категорию
+                </Typography>
+            </div>;
+
+        case !subCategories.length:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    В категории нет подкатегорий
+                </Typography>
+            </div>;
+
+        case !activeCategory:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Выберите категорию
+                </Typography>
+            </div>;
+
+        default:
+            return <div>
+                <AdminTable
+                    headerRows={headerRows}
+                    tableCells={tableCells}
+                    values={products}
+                    headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
+                    onDelete={this.handleProductDelete}
+                    deleteValueWarningTitle='Вы точно хотите удалить товар?'
+                    deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
+                    filters={false}
+                    onFormOpen={this.handleProductFormOpen}
+                    isSmall
+                />
+                <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
+                    <Paper className={classes.modalContent}>
+                        <ProductForm
+                            categories={categories}
+                            subCategories={subCategories}
+                            activeCategory={activeCategory}
+                            product={editableProduct}
+                            onDone={this.handleProductFormDone}/>
+                    </Paper>
+                </Modal>
             </div>;
         }
-
-        if (!subCategories.length) {
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>В категории нет подкатегорий</Typography>
-            </div>;
-        }
-
-        if (!activeCategory) {
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>Выберите категорию</Typography>
-            </div>;
-        }
-
-        return <div>
-            <AdminTable
-                headerRows={headerRows}
-                tableCells={tableCells}
-                values={products}
-                headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
-                onDelete={this.handleProductDelete}
-                deleteValueWarningTitle='Вы точно хотите удалить товар?'
-                deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
-                filters={false}
-                onFormOpen={this.handleProductFormOpen}
-                isSmall
-            />
-            <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
-                <Paper className={classes.modalContent}>
-                    <ProductForm
-                        categories={categories}
-                        subCategories={subCategories}
-                        activeCategory={activeCategory}
-                        product={editableProduct}
-                        onDone={this.handleProductFormDone}/>
-                </Paper>
-            </Modal>
-        </div>;
     };
 
     render () {

@@ -113,14 +113,12 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
             lang: 'ru',
-            categoryFilters: [],
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
                     ...categoryFilters,
                     [`categoryFilter-${categoryFilter.id}`]: isObject(categoryFilter.value.ru)
                         ? categoryFilter.value.ru.name : categoryFilter.value.ru
                 }), {}),
-            subCategoryFilters: [],
             ...(product.subCategoryFilters || [])
                 .reduce((subCategoryFilters, subCategoryFilter) => ({
                     ...subCategoryFilters,
@@ -169,7 +167,7 @@ class ProductForm extends Component {
             alias
         } = values;
 
-        const activeCategory = this.state.categories.find(category => category.id === categoryId);
+        const activeCategory = this.props.categories.find(category => category.id === categoryId);
         const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
