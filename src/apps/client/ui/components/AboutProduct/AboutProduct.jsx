@@ -16,6 +16,8 @@ import saveProductsToWishlist from '../../../services/client/saveProductsToWishl
 import findIndex from '@tinkoff/utils/array/findIndex';
 import remove from '@tinkoff/utils/array/remove';
 
+import classNames from 'classnames';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -76,7 +78,8 @@ class AboutProduct extends Component {
         sizes: [],
         activeSize: {},
         sizeListIsOpen: true,
-        isInWishlist: false
+        isInWishlist: false,
+        selectIsOpen: false
     };
 
     componentDidMount () {
@@ -105,9 +108,15 @@ class AboutProduct extends Component {
         });
     };
 
+    selectIsOpen = () => {
+        this.setState(state => ({
+            selectIsOpen: !state.selectIsOpen
+        }));
+    };
+
     render () {
         const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen } = this.state;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
 
@@ -133,8 +142,9 @@ class AboutProduct extends Component {
             </span>
             <div>
                 <span className={styles.sizesTitle}>{text.size}</span>
-                <ul className={styles.select}
+                <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
+                    onClick={this.selectIsOpen}
                 >
                     <li className={styles.activeOption}>{activeSize.name}</li>
                     {sizes.map(size => {
