@@ -95,7 +95,7 @@ const initialState = {
                 },
                 {
                     id: '33',
-                    value: 'two-tier3',
+                    value: 'two-tie3',
                     img: '/src/apps/client/ui/pages/QuizesPage/img/bed1.jpg',
                     text: 'Двухъярусная 3'
                 }
