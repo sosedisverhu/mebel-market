@@ -99,7 +99,7 @@ class QuizesPage extends Component {
                             <div className={styles.quizesWrap}>
                                 <div className={styles.topPanel}>
                                     {quizes.map((quiz, index) => {
-                                        return <div className={classNames(
+                                        return <div key={index} className={classNames(
                                             styles.quizTitle,
                                             { [styles.completed]: index < activeQuizIndex },
                                             { [styles.active]: index === activeQuizIndex }
