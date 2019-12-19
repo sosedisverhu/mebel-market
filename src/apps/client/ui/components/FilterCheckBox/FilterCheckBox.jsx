@@ -12,6 +12,7 @@ class FilterCheckBox extends Component {
     static propTypes = {
         location: PropTypes.object.isRequired,
         filter: PropTypes.object.isRequired,
+        onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
     };
@@ -36,9 +37,10 @@ class FilterCheckBox extends Component {
         const { filter } = props;
 
         this.setState({
+            id: filter.id,
             name: filter.name,
             options: filter.options.map(option => {
-                return { ...option, checked: true };
+                return { ...option, checked: false };
             })
         });
     };
@@ -58,6 +60,22 @@ class FilterCheckBox extends Component {
         this.setState({ active: false });
     };
 
+    handleOptionClick = i => {
+        event.stopPropagation();
+
+        const { onFilter } = this.props;
+        const { id, options } = this.state;
+
+        const newOptions = [...options];
+        newOptions[i].checked = !newOptions[i].checked;
+
+        this.setState({
+            options: newOptions
+        });
+
+        onFilter(id, newOptions);
+    };
+
     render () {
         const { active, name, options } = this.state;
 
@@ -71,12 +89,17 @@ class FilterCheckBox extends Component {
                 <div className={styles.options}>
                     {options.map((option, i) => {
                         return (
-                            <label key={i} className={styles.option}>
+                            <label
+                                className={styles.option}
+                                key={i}
+                            >
                                 <input
+                                    onClick={() => this.handleOptionClick(i)}
                                     className={styles.input}
                                     type="checkbox"
                                 />
-                                <div className={styles.circle}/>
+                                <div
+                                    className={styles.circle}/>
                                 <span>{option.name}</span>
                             </label>
                         );

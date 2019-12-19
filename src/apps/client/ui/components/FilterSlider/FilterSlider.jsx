@@ -15,8 +15,6 @@ class FilterSlider extends Component {
             name: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired
         }),
-        minAndMaxPrices: PropTypes.object.isRequired,
-        onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
     };
@@ -41,19 +39,13 @@ class FilterSlider extends Component {
         this.setNewState();
     }
 
-    componentWillReceiveProps (nextProps) {
-        if (nextProps.minAndMaxPrices !== this.props.minAndMaxPrices) {
-            this.setNewState(nextProps);
-        }
-    }
-
     setNewState = (props = this.props) => {
-        const { minAndMaxPrices } = props;
+        const value = { min: 1000, max: 10000 };
 
         this.setState({
-            defaultValue: minAndMaxPrices,
-            step: this.getStep(minAndMaxPrices),
-            value: minAndMaxPrices,
+            defaultValue: value,
+            step: this.getStep(value),
+            value: value,
             loaded: true
         });
     };
@@ -130,7 +122,6 @@ class FilterSlider extends Component {
                         step={step}
                         value={value}
                         onChange={this.handleInputChange}
-                        onChangeComplete={() => this.props.onFilter(value)}
                     />
                 </div>}
             </div>

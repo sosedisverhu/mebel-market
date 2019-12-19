@@ -8,21 +8,20 @@ import FilterSlider from '../FilterSlider/FilterSlider';
 import styles from './Filters.css';
 
 const Filters = props => {
-    const { filters, minAndMaxPrices, onFilterByPrice } = props;
+    const { filters, onFilter } = props;
 
     return (
         <div className={styles.filters}>
-            {(!isEmpty(filters) && minAndMaxPrices) &&
+            {!isEmpty(filters) &&
             filters.map(filter => {
                 return (filter.type === 'checkbox')
                     ? <FilterCheckBox
                         filter={filter}
+                        onFilter={onFilter}
                         key={filter.id}
                     />
                     : <FilterSlider
                         filter={filter}
-                        minAndMaxPrices={minAndMaxPrices}
-                        onFilter={onFilterByPrice}
                         key={filter.id}
                     />;
             })}
@@ -31,8 +30,7 @@ const Filters = props => {
 
 Filters.propTypes = {
     filters: PropTypes.array.isRequired,
-    minAndMaxPrices: PropTypes.object.isRequired,
-    onFilterByPrice: PropTypes.func.isRequired
+    onFilter: PropTypes.func.isRequired
 };
 
 export default Filters;

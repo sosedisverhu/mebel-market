@@ -149,7 +149,7 @@ class ProductsPage extends Component {
     };
 
     componentDidMount () {
-        const { getProducts, getCategories, getSubCategories } = props;
+        const { getProducts, getCategories, getSubCategories } = this.props;
 
         Promise.all([
             getProducts(),

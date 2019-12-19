@@ -4,7 +4,7 @@ module.exports = [
     {
         alias: 'prague',
         categoryId: 'category0',
-        id: '0',
+        id: 'vefvwe',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -73,7 +73,7 @@ module.exports = [
     {
         alias: 'classic',
         categoryId: 'category0',
-        id: '1',
+        id: 'fwer3f',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -142,7 +142,7 @@ module.exports = [
     {
         alias: 'glory',
         categoryId: 'category0',
-        id: '2',
+        id: 'asehu5442',
         subCategoryId: 'subCategory1',
         characteristics: {
             ru: {
@@ -211,7 +211,7 @@ module.exports = [
     {
         alias: 'glory',
         categoryId: 'category0',
-        id: '2',
+        id: 'awwrg452',
         subCategoryId: 'subCategory2',
         characteristics: {
             ru: {
@@ -280,7 +280,7 @@ module.exports = [
     {
         alias: 'standart',
         categoryId: 'category1',
-        id: '3',
+        id: 'wwvwety3563',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -349,7 +349,7 @@ module.exports = [
     {
         alias: 'eko-42',
         categoryId: 'category1',
-        id: '4',
+        id: 'fgy57i8o4',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -418,7 +418,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '5',
+        id: 'aaarfg46dd5',
         subCategoryId: 'subCategory5',
         characteristics: {
             ru: {
@@ -487,7 +487,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '6',
+        id: 'wbeb4uh',
         subCategoryId: 'subCategory6',
         characteristics: {
             ru: {
@@ -556,7 +556,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '7',
+        id: '3t23r',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -625,7 +625,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '8',
+        id: 'dddojej9w99jjxhxh8',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -694,7 +694,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category3',
-        id: '9',
+        id: 'amakk4art4kekek9',
         subCategoryId: 'subCategory8',
         characteristics: {
             ru: {

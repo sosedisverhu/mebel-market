@@ -37,6 +37,7 @@ class ProductsPage extends Component {
         isCategory: true,
         isSubCategoryFilters: false,
         filters: [],
+        filtersState: [],
         minAndMaxPrices: {}
     };
 
@@ -63,10 +64,20 @@ class ProductsPage extends Component {
         }
 
         const { subCategories, lang } = props;
-        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
+        const products = this.getFilteredProducts(props);
         const isSubCategoryFilters = !!subCategoryAlias;
 
         const filters = propOr(lang, [], !isSubCategoryFilters ? category.filters : subCategory.filters);
+        const filtersState = filters.map(filter => {
+            if (filter.type === 'checkbox') {
+                return {
+                    ...filter,
+                    options: filter.options.map(option => {
+                        return { ...option, checked: true };
+                    })
+                };
+            }
+        }).filter(filter => filter);
 
         this.setState({
             products,
@@ -76,7 +87,8 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             minAndMaxPrices: this.getMinAndMaxPrices(products),
-            filters
+            filters,
+            filtersState
         });
     };
 
@@ -101,7 +113,11 @@ class ProductsPage extends Component {
         return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
-    getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
+    getFilteredProducts = (props = this.props) => {
+        const { subCategoryAlias } = this.getMatch(props);
+        const category = this.getCategory(props);
+        const subCategory = subCategoryAlias && this.getSubCategory(props);
+
         const { products } = props;
         const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
@@ -121,18 +137,37 @@ class ProductsPage extends Component {
         }, { min: defaultPrice, max: defaultPrice });
     };
 
-    onFilterByPrice = minAndMaxPrices => {
-        const { subCategoryAlias } = this.getMatch();
-        const category = this.getCategory();
-        const subCategory = subCategoryAlias && this.getSubCategory();
-        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
+    onFilter = (id, options) => {
+        const { filtersState, isSubCategoryFilters } = this.state;
+        const { lang } = this.props;
+        const products = this.getFilteredProducts();
+        const newFiltersState = filtersState.map(filter => {
+            if (filter.id === id) {
+                return { ...filter, options };
+            }
+            return filter;
+        });
+        const filterType = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+
+        const filteredProducts = products.filter(product => {
+            return product[filterType].every(productFilter => {
+                const currentFilter = newFiltersState.filter(filter => filter.id === productFilter.id)[0];
+                if (!currentFilter) {
+                    return true;
+                }
+                if (currentFilter.options.every(option => !option.checked)) {
+                    return true;
+                }
+
+                return currentFilter.options.filter(option => {
+                    return option.name === productFilter.value[lang];
+                })[0].checked;
+            });
+        });
 
         this.setState({
-            products: products.filter(product => {
-                const price = product.discountPrice || product.price;
-
-                return price >= minAndMaxPrices.min && price <= minAndMaxPrices.max;
-            })
+            filtersState: newFiltersState,
+            products: filteredProducts
         });
     };
 
@@ -142,7 +177,7 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, category, subCategories, minAndMaxPrices, filters } = this.state;
+        const { products, category, subCategories, filters } = this.state;
         const text = propOr('productsPage', {}, langMap);
 
         return (
@@ -172,8 +207,7 @@ class ProductsPage extends Component {
                             </div>
                             <Filters
                                 filters={filters}
-                                minAndMaxPrices={minAndMaxPrices}
-                                onFilterByPrice={this.onFilterByPrice}
+                                onFilter={this.onFilter}
                             />
                             <div className={styles.sort}>
                                 <div className={styles.activeOption}>
