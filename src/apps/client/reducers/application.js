@@ -2,7 +2,8 @@ import {
     SET_LANG,
     SET_LANG_MAP,
     SET_LANG_ROUTE,
-    SET_MEDIA_INFO
+    SET_MEDIA_INFO,
+    SET_SEO
 } from '../types/types';
 import { DEFAULT_LANG, DEFAULT_LANG_ROUTE } from '../constants/constants';
 
@@ -26,6 +27,8 @@ export default function (state = initialState, action) {
         return { ...state, langMap: action.payload };
     case SET_LANG_ROUTE:
         return { ...state, langRoute: action.payload };
+    case SET_SEO:
+        return { ...state, staticSeo: action.payload };
     default:
         return state;
     }

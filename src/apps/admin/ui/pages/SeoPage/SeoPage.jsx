@@ -299,7 +299,7 @@ class SeoPage extends Component {
                                     <Card className={classNames(classes.card, { [classes.selectedProductItem]: check(tip.id) })}>
                                         <CardMedia
                                             className={classes.media}
-                                            image={tip.photos[0]}
+                                            image={tip.avatar}
                                             title={tip.texts.ru.name}
                                         />
                                         <CardHeader
