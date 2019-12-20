@@ -17,7 +17,8 @@ import classNames from 'classnames';
 
 const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        wishlist: data.wishlist
     };
 };
 
@@ -36,7 +37,7 @@ class AboutProduct extends Component {
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
-        setWishlist: PropTypes.func.isRequired,
+        wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired
     };
 
@@ -55,6 +56,14 @@ class AboutProduct extends Component {
             sizes: product.sizes,
             activeSize: product.sizes[0]
         });
+    }
+
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product } = props;
+
+        return (wishlist.find(item => item.product.id === product.id))
+            ? { isInWishlist: true }
+            : { isInWishlist: false };
     }
 
     scrollToTitles = () => {
@@ -86,9 +95,7 @@ class AboutProduct extends Component {
             productId: product.id
         });
 
-        this.setState(state => ({
-            isInWishlist: true
-        }));
+        this.setState({ isInWishlist: true });
     }
 
     render () {
