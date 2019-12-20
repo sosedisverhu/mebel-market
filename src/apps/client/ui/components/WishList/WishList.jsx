@@ -34,7 +34,8 @@ class WishList extends Component {
         lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
-        wishlist: PropTypes.array.isRequired
+        wishlist: PropTypes.array.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired
     };
 
     state = {
