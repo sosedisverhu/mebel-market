@@ -10,7 +10,10 @@ const UserProducts = new Schema({
         properties: { type: Object, required: true },
         productId: { type: String, required: true }
     }],
-    wishlist: [{ type: String, required: true }]
+    wishlist: [{
+        id: { type: String, required: true },
+        productId: { type: String, required: true }
+    }]
 });
 
 export default mongoose.model('UserProducts', UserProducts);

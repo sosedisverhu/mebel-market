@@ -141,6 +141,7 @@
     padding: 6px 10px;
     min-width: 202px;
     border: none;
+    outline: none;
     background: blackLight;
     cursor: pointer;
 }
@@ -152,5 +153,10 @@
     height: 40px;
     background: gray3 center no-repeat url('./img/wishList.png');
     border: none;
+    outline: none;
     cursor: pointer;
+
+    &.active {
+        background-image: url('./img/wishlist-active.png');
+    }
 }

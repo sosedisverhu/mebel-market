@@ -9,9 +9,7 @@ import includes from '@tinkoff/utils/array/includes';
 
 import styles from './WishList.css';
 
-import setWishlist from '../../../actions/setWishlist';
-import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
-import remove from '@tinkoff/utils/array/remove';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -22,8 +20,7 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    setWishlist: payload => dispatch(setWishlist(payload)),
-    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+    deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload))
 });
 
 const EXCEPTION_NUMBERS_MIN = 11;
@@ -37,9 +34,7 @@ class WishList extends Component {
         lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
-        wishlist: PropTypes.array.isRequired,
-        setWishlist: PropTypes.func.isRequired,
-        saveProductsToWishlist: PropTypes.func.isRequired
+        wishlist: PropTypes.array.isRequired
     };
 
     state = {
@@ -76,15 +71,8 @@ class WishList extends Component {
         return cases[resultIndex];
     }
 
-    removeProduct = (index) => () => {
-        const { wishlist, setWishlist, saveProductsToWishlist } = this.props;
-
-        const newWishlist = [
-            ...remove(index, 1, wishlist)
-        ];
-
-        setWishlist(newWishlist);
-        saveProductsToWishlist(newWishlist.map((product) => product.id));
+    removeProduct = wishlistItemId => () => {
+        this.props.deleteFromWishlist(wishlistItemId);
     };
 
     render () {
@@ -113,21 +101,21 @@ class WishList extends Component {
                         </p>
                         {wishlist.length > 0
                             ? <div className={styles.productsContainer}>
-                                {wishlist.map((wishlistItem, i) =>
+                                {wishlist.map(({ product, id: wishlistItemId }, i) =>
                                     <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
-                                            <img className={styles.productImg} src={wishlistItem.avatar} alt=""/>
+                                            <img className={styles.productImg} src={product.avatar} alt=""/>
                                             <div className={styles.productInfo}>
-                                                <p className={styles.productName}>{wishlistItem.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
+                                                <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
                                                 <p className={styles.productNumber}>Артикул: 48092</p>
                                                 <p className={styles.productSize}>{text.size} 190 х 200</p>
                                                 <div className={styles.productPrices}>
-                                                    <p className={styles.productOldPrice}>{wishlistItem.price}&#8372;</p>
-                                                    <p className={styles.productPrice}>{wishlistItem.discountPrice}&#8372;</p>
+                                                    <p className={styles.productOldPrice}>{product.price}&#8372;</p>
+                                                    <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
                                                 </div>
                                             </div>
                                             <div className={styles.productButtons}>
-                                                <button className={styles.removeBtn} onClick={this.removeProduct(i)}>
+                                                <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
                                                     <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
                                                 </button>
                                                 <button className={styles.cartBtn}>{text.cartBtn}</button>

@@ -11,10 +11,7 @@ import styles from './AboutProduct.css';
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
-import setWishlist from '../../../actions/setWishlist';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import remove from '@tinkoff/utils/array/remove';
 
 import classNames from 'classnames';
 
@@ -28,7 +25,6 @@ const mapStateToProps = ({ application, data }) => {
 const mapDispatchToProps = dispatch => {
     return {
         setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
-        setWishlist: payload => dispatch(setWishlist(payload)),
         saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
     };
 };
@@ -44,34 +40,6 @@ class AboutProduct extends Component {
         wishlist: PropTypes.array.isRequired,
         setWishlist: PropTypes.func.isRequired,
         saveProductsToWishlist: PropTypes.func.isRequired
-    };
-
-    handleToWishlist = () => {
-        const { setWishlist, product, wishlist, saveProductsToWishlist } = this.props;
-        const { isInWishlist } = this.state;
-        let newWishlist;
-
-        if (!isInWishlist) {
-            newWishlist = !this.isInWishlist() ? [
-                product,
-                ...wishlist
-            ] : [...wishlist];
-            this.setState({ isInWishlist: true });
-        } else {
-            const index = findIndex(wishlistItem => wishlistItem.id === product.id, wishlist);
-            newWishlist = [
-                ...remove(index, 1, wishlist)
-            ];
-            this.setState({ isInWishlist: false });
-        }
-
-        setWishlist(newWishlist);
-        saveProductsToWishlist(newWishlist.map((product) => product.id));
-    };
-
-    isInWishlist = () => {
-        const { wishlist, product } = this.props;
-        return !!find(wishlistProduct => product.id === wishlistProduct.id, wishlist);
     };
 
     state = {
@@ -114,9 +82,20 @@ class AboutProduct extends Component {
         }));
     };
 
+    handleAddToWishlist = () => {
+        const { product } = this.props;
+        this.props.saveProductsToWishlist({
+            productId: product.id
+        });
+
+        this.setState(state => ({
+            isInWishlist: true
+        }))
+    }
+
     render () {
         const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen, selectIsOpen } = this.state;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
 
@@ -162,7 +141,7 @@ class AboutProduct extends Component {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.btnBuy}>{text.buy}</button>
-                <button className={styles.btnWishList} onClick={this.handleToWishlist}/>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }

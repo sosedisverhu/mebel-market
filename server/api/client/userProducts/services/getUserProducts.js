@@ -8,6 +8,7 @@ import find from '@tinkoff/utils/array/find';
 
 import getUserProductsQuery from '../queries/getUserProducts';
 import saveUserProduct from '../queries/saveUserProduct';
+import editUserProduct from '../queries/editUserProduct';
 import getProductsByIds from '../../product/queries/getProductsByIds';
 
 export default function getUserProducts (req, res) {
@@ -26,42 +27,51 @@ export default function getUserProducts (req, res) {
                 res.status(SERVER_ERROR_STATUS_CODE).end();
             });
     }
+    Promise.all([
+        getUserProductsQuery(id)
+    ])
+        .then(([result]) => {
+                if (!result) {
+                    return res.status(NOT_FOUND_STATUS_CODE).end();
+                }
 
-    getUserProductsQuery(id)
-        .then(([userProducts]) => {
-            if (!userProducts) {
-                return res.status(NOT_FOUND_STATUS_CODE).end();
-            }
+                const { wishlist, id } = result[0];
 
-            const { basket, wishlist, id } = userProducts;
+                getProductsByIds(wishlist.map(wishlist => wishlist.productId))
+                    .then((wishlistProducts) => {
+                        return reduce(({ products, remainingWishlist }, wishlist) => {
+                            const { productId, id } = wishlist;
+                            const product = find(product => product.id === productId, wishlistProducts);
 
-            Promise.all([
-                getProductsByIds(basket.map(basket => basket.id)),
-                getProductsByIds(wishlist)
-            ])
-                .then(([basketProducts, wishlistProducts]) => {
-                    return [
-                        reduce((products, { id, quantity }) => {
-                            const product = find(product => product.id === id, basketProducts);
-
-                            return !product || product.hidden ? products : append({ product, quantity }, products);
-                        }, [], basket),
-                        reduce((products, id) => {
-                            const product = find(product => product.id === id, wishlistProducts);
-
-                            return !product || product.hidden ? products : append(product, products);
-                        }, [], wishlist)
-                    ];
-                })
-                .then(([basketProducts, wishlistProducts]) => {
-                    res.status(OKEY_STATUS_CODE).send({
-                        basket: basketProducts,
-                        wishlist: wishlistProducts,
-                        id
+                            return !product ||
+                            product.hidden
+                            ? { products, remainingWishlist }
+                            : {
+                                products: [...products, { product, id }],
+                                remainingWishlist: [...remainingWishlist, wishlist]
+                            };
+                        }, { products: [], remainingWishlist: [] }, wishlist);
+                    })
+                    .then(({ products, remainingWishlist }) => {
+                        return editUserProduct({
+                            wishlist: remainingWishlist,
+                            id: id
+                        })
+                            .then(() => {
+                                res.status(OKEY_STATUS_CODE).send({
+                                    wishlist: products,
+                                    id
+                                });
+                            })
+                            .catch(() => {
+                                res.status(SERVER_ERROR_STATUS_CODE).end();
+                            });
+                    })
+                    .catch(() => {
+                        res.status(SERVER_ERROR_STATUS_CODE).end();
                     });
-                });
-        })
-        .catch(() => {
-            res.status(SERVER_ERROR_STATUS_CODE).end();
-        });
-}
+            })
+            .catch(() => {
+                res.status(SERVER_ERROR_STATUS_CODE).end();
+            });
+    }

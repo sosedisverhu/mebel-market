@@ -3,12 +3,12 @@ import base from '../base';
 
 import setWishlist from '../../actions/setWishlist';
 
-export default function saveProductsToWishlist (payload) {
+export default function deleteFromWishlist (wishlistItemId) {
     return dispatch => {
         return base(
             request
-                .post('/api/client/user-products/wishlist')
-                .send(payload)
+                .delete('/api/client/user-products/wishlist')
+                .query({ wishlistItemId })
         )
             .then(({ wishlist }) => {
                 dispatch(setWishlist(wishlist));
