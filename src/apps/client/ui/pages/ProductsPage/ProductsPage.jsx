@@ -3,14 +3,39 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, matchPath, Link } from 'react-router-dom';
 
-import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
+import propOr from '@tinkoff/utils/object/propOr';
+import flatten from '@tinkoff/utils/array/flatten';
+import compose from '@tinkoff/utils/function/compose';
+import uniq from '@tinkoff/utils/array/uniq';
+import map from '@tinkoff/utils/array/map';
+import filterUtil from '@tinkoff/utils/array/filter';
+import any from '@tinkoff/utils/array/any';
+import prop from '@tinkoff/utils/object/prop';
+import reduceObj from '@tinkoff/utils/object/reduce';
+import includes from '@tinkoff/utils/array/includes';
+
+import getMinOfArray from '../../../utils/getMinOfArray';
+import getMaxOfArray from '../../../utils/getMaxOfArray';
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Filters from '../../components/Filters/Filters';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
+
+const DEFAULT_FILTERS = name => {
+    return [
+        {
+            name: name,
+            type: 'range',
+            min: 0,
+            max: 0,
+            id: 'price',
+            prop: 'price'
+        }
+    ];
+};
 
 class ProductsPage extends Component {
     static propTypes = {
@@ -37,8 +62,9 @@ class ProductsPage extends Component {
         isCategory: true,
         isSubCategoryFilters: false,
         filters: [],
-        filtersState: [],
-        minAndMaxPrices: {}
+        filteredProducts: null,
+        filtersMap: {},
+        currentCategoryFiltersName: 'categoryFilters'
     };
 
     componentDidMount () {
@@ -63,21 +89,15 @@ class ProductsPage extends Component {
             return;
         }
 
-        const { subCategories, lang } = props;
-        const products = this.getFilteredProducts(props);
+        const { subCategories, langMap } = props;
+        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
         const isSubCategoryFilters = !!subCategoryAlias;
+        const currentCategory = isSubCategoryFilters ? subCategory : category;
 
-        const filters = propOr(lang, [], !isSubCategoryFilters ? category.filters : subCategory.filters);
-        const filtersState = filters.map(filter => {
-            if (filter.type === 'checkbox') {
-                return {
-                    ...filter,
-                    options: filter.options.map(option => {
-                        return { ...option, checked: true };
-                    })
-                };
-            }
-        }).filter(filter => filter);
+        const filters = currentCategory ? flatten([
+            this.getDefaultFilters(products, langMap),
+            this.getFilters(currentCategory, products, isSubCategoryFilters)
+        ]) : [];
 
         this.setState({
             products,
@@ -86,9 +106,8 @@ class ProductsPage extends Component {
             subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
             isCategory: true,
             isSubCategoryFilters,
-            minAndMaxPrices: this.getMinAndMaxPrices(products),
             filters,
-            filtersState
+            filteredProducts: null
         });
     };
 
@@ -113,11 +132,7 @@ class ProductsPage extends Component {
         return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
-    getFilteredProducts = (props = this.props) => {
-        const { subCategoryAlias } = this.getMatch(props);
-        const category = this.getCategory(props);
-        const subCategory = subCategoryAlias && this.getSubCategory(props);
-
+    getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
         const { products } = props;
         const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
@@ -125,49 +140,133 @@ class ProductsPage extends Component {
             : filteredProductsByCategory;
     };
 
-    getMinAndMaxPrices = products => {
-        const defaultPrice = products.length ? (products[0].discountPrice || products[0].price) : 0;
+    getDefaultFilters = (products, langMap) => {
+        const text = propOr('productsPage', {}, langMap);
+        return DEFAULT_FILTERS(text.price).reduce((filters, filter) => {
+            switch (filter.type) {
+            case 'range':
+                const prices = compose(
+                    uniq,
+                    map(product => product.price)
+                )(products);
+                const min = getMinOfArray(prices);
+                const max = getMaxOfArray(prices);
 
-        return products.reduce((previousValue, product) => {
-            const price = product.discountPrice || product.price;
-            return {
-                min: price < previousValue.min ? price : previousValue.min,
-                max: price > previousValue.max ? price : previousValue.max
-            };
-        }, { min: defaultPrice, max: defaultPrice });
+                return min !== max ? [
+                    ...filters,
+                    {
+                        ...filter,
+                        min,
+                        max
+                    }
+                ] : filters;
+            default:
+                return [];
+            }
+        }, []);
     };
 
-    onFilter = (id, options) => {
-        const { filtersState, isSubCategoryFilters } = this.state;
+    getFilters = (category, products, isSubCategoryFilters) => {
         const { lang } = this.props;
-        const products = this.getFilteredProducts();
-        const newFiltersState = filtersState.map(filter => {
-            if (filter.id === id) {
-                return { ...filter, options };
+        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+
+        return (category.filters[lang] || []).reduce((filters, filter) => {
+            switch (filter.type) {
+            case 'checkbox':
+                const optionsInProduct = compose(
+                    uniq,
+                    filterUtil(elem => !!elem),
+                    flatten,
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
+                )(products);
+                const options = filterUtil(option => any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+
+                return options.length > 1 ? [
+                    ...filters,
+                    {
+                        ...filter,
+                        options
+                    }
+                ] : filters;
+            case 'range':
+                const propsArr = compose(
+                    uniq,
+                    filterUtil(elem => !!elem),
+                    flatten,
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
+                    )
+                )(products);
+                if (propsArr.length < 2) {
+                    return filters;
+                }
+
+                const min = getMinOfArray(propsArr);
+                const max = getMaxOfArray(propsArr);
+
+                return min !== max ? [
+                    ...filters,
+                    {
+                        ...filter,
+                        min,
+                        max
+                    }
+                ] : filters;
+            default:
+                return filters;
             }
-            return filter;
-        });
-        const filterType = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+        }, []);
+    };
 
-        const filteredProducts = products.filter(product => {
-            return product[filterType].every(productFilter => {
-                const currentFilter = newFiltersState.filter(filter => filter.id === productFilter.id)[0];
-                if (!currentFilter) {
-                    return true;
+    handleFilter = (filter, values) => {
+        this.setState({
+            filtersMap: {
+                ...this.state.filtersMap,
+                [filter.id]: {
+                    filter,
+                    values
                 }
-                if (currentFilter.options.every(option => !option.checked)) {
-                    return true;
-                }
+            }
+        }, this.filter);
+    };
 
-                return currentFilter.options.filter(option => {
-                    return option.name === productFilter.value[lang];
-                })[0].checked;
-            });
-        });
+    getFilterValue = (product, filter) => {
+        const { isSubCategoryFilters } = this.state;
+        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+        const { lang } = this.props;
+        const productFilterValue = compose(
+            prop(lang),
+            prop('value'),
+            find(productFilter => productFilter.id === filter.id)
+        )(product[currentCategoryName]);
+
+        return filter.prop ? product[filter.prop] : productFilterValue;
+    };
+
+    filter = () => {
+        const { products } = this.state;
+        const newFilteredProducts = reduceObj((filteredProducts, { filter, values }) => {
+            switch (filter.type) {
+            case 'checkbox':
+                return !values.length
+                    ? filteredProducts
+                    : filterUtil(product => {
+                        const value = this.getFilterValue(product, filter);
+
+                        return includes(value, values);
+                    }, filteredProducts);
+            case 'range':
+                return filterUtil(product => {
+                    const value = this.getFilterValue(product, filter);
+
+                    return values.min <= value && value <= values.max;
+                }, filteredProducts);
+            default:
+                return filteredProducts;
+            }
+        }, products, this.state.filtersMap);
 
         this.setState({
-            filtersState: newFiltersState,
-            products: filteredProducts
+            filteredProducts: newFilteredProducts
         });
     };
 
@@ -177,7 +276,7 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, category, subCategories, filters } = this.state;
+        const { products, filteredProducts, category, subCategories, filters, filtersMap } = this.state;
         const text = propOr('productsPage', {}, langMap);
 
         return (
@@ -203,11 +302,12 @@ class ProductsPage extends Component {
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${products.length} ${text.results}`}
+                                {`${propOr('length', 0, filteredProducts) || products.length} ${text.results}`}
                             </div>
                             <Filters
+                                filtersMap={filtersMap}
                                 filters={filters}
-                                onFilter={this.onFilter}
+                                onFilter={this.handleFilter}
                             />
                             <div className={styles.sort}>
                                 <div className={styles.activeOption}>
@@ -218,7 +318,7 @@ class ProductsPage extends Component {
                     </div>
                 </div>
                 <div className={styles.productsSection}>
-                    <ProductsGrid products={products}/>
+                    <ProductsGrid products={filteredProducts || products}/>
                 </div>
             </div>);
     }

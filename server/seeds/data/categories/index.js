@@ -84,11 +84,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
@@ -157,11 +152,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         },
@@ -252,11 +242,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
@@ -325,11 +310,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         },
@@ -420,11 +400,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
@@ -493,11 +468,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         },
@@ -588,11 +558,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Ціна'
                 }
             ],
             ru: [
@@ -661,11 +626,6 @@ module.exports = [
                             name: '200 кг'
                         }
                     ]
-                },
-                {
-                    id: 'zj4p4w34',
-                    type: 'range',
-                    name: 'Цена'
                 }
             ]
         },

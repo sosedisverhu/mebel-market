@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import classNames from 'classnames';
+
+import propOr from '@tinkoff/utils/object/propOr';
+import includes from '@tinkoff/utils/array/includes';
+import findIndex from '@tinkoff/utils/array/findIndex';
 import outsideClick from '../../hocs/outsideClick';
 
 import styles from './FilterCheckBox.css';
@@ -10,48 +12,43 @@ import styles from './FilterCheckBox.css';
 @outsideClick
 class FilterCheckBox extends Component {
     static propTypes = {
-        location: PropTypes.object.isRequired,
-        filter: PropTypes.object.isRequired,
+        filter: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            options: PropTypes.array.isRequired,
+            id: PropTypes.string.isRequired
+        }),
+        filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool
     };
 
     state = {
-        active: false,
-        name: '',
-        options: []
+        active: false
     };
 
-    componentDidMount () {
-        this.setNewState();
-    }
+    handleLabelChecked = option => (event) => {
+        const { filter: { id }, filtersMap } = this.props;
+        const value = propOr('values', [], filtersMap[id]);
+        const newValue = [...value];
 
-    componentWillReceiveProps (nextProps, nextContext) {
-        if (this.props.location.pathname !== nextProps.location.pathname) {
-            this.setNewState();
+        if (event.target.checked) {
+            newValue.push(option);
+        } else {
+            const currentIdIndex = findIndex(valueOption => valueOption === option, value);
+
+            newValue.splice(currentIdIndex, 1);
         }
-    }
 
-    setNewState = (props = this.props) => {
-        const { filter } = props;
-
-        this.setState({
-            id: filter.id,
-            name: filter.name,
-            options: filter.options.map(option => {
-                return { ...option, checked: false };
-            })
-        });
+        this.props.onFilter(newValue);
     };
 
     handleTitleClick = () => {
         const { outsideClickEnabled, turnOnClickOutside } = this.props;
-        const { active } = this.state;
 
-        this.setState({ active: !active });
+        this.setState((state) => ({ active: !state.active }));
 
-        if (!active && !outsideClickEnabled) {
+        if (!this.state.active && !outsideClickEnabled) {
             turnOnClickOutside(this, this.handleFilterClose);
         }
     };
@@ -60,47 +57,32 @@ class FilterCheckBox extends Component {
         this.setState({ active: false });
     };
 
-    handleOptionClick = i => {
-        event.stopPropagation();
-
-        const { onFilter } = this.props;
-        const { id, options } = this.state;
-
-        const newOptions = [...options];
-        newOptions[i].checked = !newOptions[i].checked;
-
-        this.setState({
-            options: newOptions
-        });
-
-        onFilter(id, newOptions);
-    };
-
     render () {
-        const { active, name, options } = this.state;
+        const { filter: { name, options, id }, filtersMap } = this.props;
+        const { active } = this.state;
 
         return (
-            <div onClick={this.handleTitleClick}
-                className={classNames(styles.filter, { [styles.active]: active })}
-            >
-                <div className={styles.title}>
-                    {name}
-                </div>
+            <div className={classNames(
+                styles.filter,
+                { [styles.active]: active }
+            )}>
+                <h2 className={styles.title}
+                    onClick={this.handleTitleClick}
+                >{name}</h2>
                 <div className={styles.options}>
-                    {options.map((option, i) => {
+                    {options.map((option, index) => {
+                        const value = filtersMap[id] ? includes(option, filtersMap[id].values) : false;
+
                         return (
-                            <label
-                                className={styles.option}
-                                key={i}
-                            >
+                            <label key={index} className={styles.option}>
                                 <input
-                                    onClick={() => this.handleOptionClick(i)}
                                     className={styles.input}
                                     type="checkbox"
+                                    onChange={this.handleLabelChecked(option)}
+                                    checked={value}
                                 />
-                                <div
-                                    className={styles.circle}/>
-                                <span>{option.name}</span>
+                                <div className={styles.circle} />
+                                {option}
                             </label>
                         );
                     })}
@@ -110,4 +92,4 @@ class FilterCheckBox extends Component {
     }
 }
 
-export default withRouter(FilterCheckBox);
+export default FilterCheckBox;

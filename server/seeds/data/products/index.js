@@ -4,7 +4,7 @@ module.exports = [
     {
         alias: 'prague',
         categoryId: 'category0',
-        id: 'vefvwe',
+        id: '0',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -73,7 +73,7 @@ module.exports = [
     {
         alias: 'classic',
         categoryId: 'category0',
-        id: 'fwer3f',
+        id: '1',
         subCategoryId: 'subCategory0',
         characteristics: {
             ru: {
@@ -129,10 +129,10 @@ module.exports = [
         },
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Метал', ru: 'Метал' } },
+            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
+            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
         ],
         subCategoryFilters: [
             { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
@@ -142,7 +142,7 @@ module.exports = [
     {
         alias: 'glory',
         categoryId: 'category0',
-        id: 'asehu5442',
+        id: '2',
         subCategoryId: 'subCategory1',
         characteristics: {
             ru: {
@@ -198,10 +198,10 @@ module.exports = [
         },
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gew3wg43f34', value: { ua: '24 місяців', ru: '24 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
+            { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
+            { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }
         ],
         subCategoryFilters: [
             { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
@@ -211,7 +211,7 @@ module.exports = [
     {
         alias: 'glory',
         categoryId: 'category0',
-        id: 'awwrg452',
+        id: '3',
         subCategoryId: 'subCategory2',
         characteristics: {
             ru: {
@@ -280,7 +280,7 @@ module.exports = [
     {
         alias: 'standart',
         categoryId: 'category1',
-        id: 'wwvwety3563',
+        id: '4',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -349,7 +349,7 @@ module.exports = [
     {
         alias: 'eko-42',
         categoryId: 'category1',
-        id: 'fgy57i8o4',
+        id: '5',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -418,7 +418,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: 'aaarfg46dd5',
+        id: '6',
         subCategoryId: 'subCategory5',
         characteristics: {
             ru: {
@@ -487,7 +487,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: 'wbeb4uh',
+        id: '7',
         subCategoryId: 'subCategory6',
         characteristics: {
             ru: {
@@ -556,7 +556,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '3t23r',
+        id: '8',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -625,7 +625,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: 'dddojej9w99jjxhxh8',
+        id: '9',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -694,7 +694,7 @@ module.exports = [
     {
         alias: 'ultra-lux-P',
         categoryId: 'category3',
-        id: 'amakk4art4kekek9',
+        id: '10',
         subCategoryId: 'subCategory8',
         characteristics: {
             ru: {
