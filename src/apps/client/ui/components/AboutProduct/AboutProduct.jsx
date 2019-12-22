@@ -93,8 +93,8 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { product } = this.props;
-        this.props.saveProductsToWishlist({
+        const { saveProductsToWishlist, product } = this.props;
+        saveProductsToWishlist({
             productId: product.id
         });
 
@@ -102,9 +102,10 @@ class AboutProduct extends Component {
     }
 
     handleBuyClick = () => {
-        const { product } = this.props;
-        this.props.saveProductsToBasket({
-            productId: product.id
+        const { saveProductsToBasket, product, quantity } = this.props;
+        saveProductsToBasket({
+            productId: product.id,
+            quantity
         });
     }
 
@@ -113,8 +114,6 @@ class AboutProduct extends Component {
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
-
-console.log(this.props.basket);
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>

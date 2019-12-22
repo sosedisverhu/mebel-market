@@ -10,6 +10,7 @@ import includes from '@tinkoff/utils/array/includes';
 import styles from './WishList.css';
 
 import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
+import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -20,7 +21,8 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload))
+    deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
+    saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
 });
 
 const EXCEPTION_NUMBERS_MIN = 11;
@@ -76,6 +78,12 @@ class WishList extends Component {
         this.props.deleteFromWishlist(wishlistItemId);
     };
 
+    handleAddToBasket = product => () => {
+        this.props.saveProductsToBasket({
+            productId: product.id
+        });
+    }
+
     render () {
         const { langMap, lang, wishlist } = this.props;
         const { active } = this.state;
@@ -120,7 +128,7 @@ class WishList extends Component {
                                                     <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
                                                         <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
                                                     </button>
-                                                    <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
                                                 </div>
                                             </div>
                                         </div>

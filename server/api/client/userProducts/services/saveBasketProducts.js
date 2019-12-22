@@ -17,7 +17,7 @@ import append from '@tinkoff/utils/array/append';
 
 export default function saveBasketProducts (req, res) {
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
-    const { productId } = req.body;
+    const { productId, quantity, properties } = req.body;
 
     if (!id) {
         return saveUserProduct({
@@ -109,7 +109,7 @@ export default function saveBasketProducts (req, res) {
                 }
 
                 return newBasket;
-            }, [...basket, { productId, id: uniqid() }]) || [...basket, { productId, id: uniqid() }];
+            }, [...basket, { productId, quantity, properties, id: uniqid() }]) || [...basket, { productId, quantity, properties, id: uniqid() }];
 
             return editUserProduct({
                 basket: newBasket,

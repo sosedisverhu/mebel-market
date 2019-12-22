@@ -8,6 +8,7 @@ import { MAX_QUANTITY } from '../../../constants/constants';
 import styles from './Cart.css';
 
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -18,7 +19,8 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteFromBasket: payload => dispatch(deleteFromBasket(payload))
+    deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
+    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
 });
 
 @outsideClick
@@ -61,6 +63,12 @@ class Cart extends Component {
     removeProduct = basketItemId => () => {
         this.props.deleteFromBasket(basketItemId);
     };
+
+    handleAddToWishlist = product => () => {
+        this.props.saveProductsToWishlist({
+            productId: product.id
+        });
+    }
 
     render () {
         const { langMap, lang, basket } = this.props;
@@ -113,7 +121,7 @@ class Cart extends Component {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button className={styles.wishBtn}>
+                                                        <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)}>
                                                             <img className={styles.wishBtnImg} src="/src/apps/client/ui/components/Cart/img/wish-black.png" alt="wishlist"/>
                                                         </button>
                                                         <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)}>
