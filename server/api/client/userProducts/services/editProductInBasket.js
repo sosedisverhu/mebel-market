@@ -6,7 +6,7 @@ import {
 
 import uniqid from 'uniqid';
 
-import getUserProductsQuery from '../queries/getUserProducts';
+import getUserProducts from '../queries/getUserProducts';
 import saveUserProduct from '../queries/saveUserProduct';
 import editUserProduct from '../queries/editUserProduct';
 import getProductsByIds from '../../product/queries/getProductsByIds';
@@ -15,9 +15,9 @@ import reduce from '@tinkoff/utils/array/reduce';
 import find from '@tinkoff/utils/array/find';
 import append from '@tinkoff/utils/array/append';
 
-export default function saveBasketProducts (req, res) {
+export default function editProductInBasket (req, res) {
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
-    const { productId } = req.body;
+    const { productId, quantity, properties } = req.body;
 
     if (!id) {
         return saveUserProduct({
@@ -53,7 +53,7 @@ export default function saveBasketProducts (req, res) {
             });
     }
 
-    getUserProductsQuery(id)
+    getUserProducts(id)
         .then(([result]) => {
             if (!result) {
                 return saveUserProduct({
@@ -104,12 +104,13 @@ export default function saveBasketProducts (req, res) {
             const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
                 const basketNotUniq = basket[basketIndex];
 
-                if (basketNotUniq.productId === productId) {
+                if (basketNotUniq.properties.size === properties.size) {
+                    basket[basketIndex].quantity = basket[basketIndex].quantity + quantity;
                     return [...basket];
                 }
 
                 return newBasket;
-            }, [...basket, { productId, id: uniqid() }]) || [...basket, { productId, id: uniqid() }];
+            }, [...basket, { productId, quantity, properties, id: uniqid() }]) || [...basket, { productId, quantity, properties, id: uniqid() }];
 
             return editUserProduct({
                 basket: newBasket,

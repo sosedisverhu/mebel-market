@@ -68,7 +68,7 @@
 }
 
 .popup {
-    width: 481px;
+    min-width: 481px;
     background: whiteBasic;
     position: absolute;
     top: 0;
@@ -88,7 +88,7 @@
 }
 
 .productsContainer {
-    max-height: 324px;
+    max-height: 362px;
     overflow-y: auto;
 }
 
@@ -115,6 +115,13 @@
     width: 120px;
     height: 120px;
     margin-right: 30px;
+}
+
+.productInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
 }
 
 .productOption {

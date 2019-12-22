@@ -12,20 +12,23 @@ import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
 
 import classNames from 'classnames';
 
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
-        wishlist: data.wishlist
+        wishlist: data.wishlist,
+        basket: data.basket
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
-        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
+        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
     };
 };
 
@@ -98,11 +101,20 @@ class AboutProduct extends Component {
         this.setState({ isInWishlist: true });
     }
 
+    handleBuyClick = () => {
+        const { product } = this.props;
+        this.props.saveProductsToBasket({
+            productId: product.id
+        });
+    }
+
     render () {
         const { product, langMap } = this.props;
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
+
+console.log(this.props.basket);
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
@@ -145,7 +157,7 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.btnBuy}>{text.buy}</button>
+                <button className={styles.btnBuy} onClick={this.handleBuyClick}>{text.buy}</button>
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
             </div>
         </div>;

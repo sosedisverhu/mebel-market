@@ -96,7 +96,6 @@
 
 .wishItem {
     display: flex;
-    justify-content: space-between;
     padding: 20px 25px 20px 30px;
 }
 
@@ -107,7 +106,9 @@
 }
 
 .productInfo {
-    margin-right: 23px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .productName {

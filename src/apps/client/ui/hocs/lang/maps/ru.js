@@ -54,7 +54,8 @@ export default {
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
-        continueShopping: 'Продолжить покупки'
+        continueShopping: 'Продолжить покупки',
+        noProduct: 'Вы не добавили в корзину ни одного товара'
     },
     productsPage: {
         filterBtn: 'Фильтры',

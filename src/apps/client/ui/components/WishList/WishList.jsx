@@ -107,19 +107,21 @@ class WishList extends Component {
                                         <div className={styles.wishItem}>
                                             <img className={styles.productImg} src={product.avatar} alt=""/>
                                             <div className={styles.productInfo}>
-                                                <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
-                                                <p className={styles.productNumber}>Артикул: 48092</p>
-                                                <p className={styles.productSize}>{text.size} 190 х 200</p>
-                                                <div className={styles.productPrices}>
-                                                    <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                    <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                <div>
+                                                    <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
+                                                    <p className={styles.productNumber}>Артикул: 48092</p>
+                                                    <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                                    <div className={styles.productPrices}>
+                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
+                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className={styles.productButtons}>
-                                                <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
-                                                    <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                                </button>
-                                                <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                                <div className={styles.productButtons}>
+                                                    <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
+                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                    </button>
+                                                    <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>)}
