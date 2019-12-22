@@ -29,7 +29,10 @@ class Cart extends Component {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        basket: PropTypes.array.isRequired,
+        deleteFromBasket: PropTypes.func.isRequired,
+        saveProductsToWishlist: PropTypes.func.isRequired
     };
 
     state = {
@@ -85,62 +88,62 @@ class Cart extends Component {
                     <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>{text.title}</p>
-                            {basket.length > 0
-                                ? <div className={styles.productsContainer}>
-                                    {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
-                                        <div className={styles.cartItemWrapper} key={i}>
-                                            <div className={styles.cartItem}>
-                                                <img className={styles.productImg} src={product.avatar} alt=""/>
-                                                <div className={styles.productInfo}>
-                                                    <div>
-                                                        <div className={styles.productOption}>
-                                                            <p className={styles.productName}>{product.texts[lang].name}</p>
-                                                            <p className={styles.productNumber}>(48092)</p>
-                                                        </div>
-                                                        <p className={styles.productSize}>{text.size} {product.sizes[0].name}</p>
-                                                        <div className={styles.productQuantity}>
-                                                            <button
-                                                                className={styles.quantitySub}
-                                                                onClick={() => this.quantityChange(+quantityValue - 1)}
-                                                                disabled={quantityValue <= 1}>-</button>
-                                                            <input
-                                                                className={styles.quantityInput}
-                                                                type="text"
-                                                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
-                                                                value={quantityValue}
-                                                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
-                                                            />
-                                                            <button
-                                                                className={styles.quantityAdd}
-                                                                onClick={() => this.quantityChange(+quantityValue + 1)}
-                                                                disabled={quantityValue >= MAX_QUANTITY}>+</button>
-                                                        </div>
-                                                        <div className={styles.productPrices}>
-                                                            <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                            <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
-                                                        </div>
+                        {basket.length > 0
+                            ? <div className={styles.productsContainer}>
+                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
+                                    <div className={styles.cartItemWrapper} key={i}>
+                                        <div className={styles.cartItem}>
+                                            <img className={styles.productImg} src={product.avatar} alt=""/>
+                                            <div className={styles.productInfo}>
+                                                <div>
+                                                    <div className={styles.productOption}>
+                                                        <p className={styles.productName}>{product.texts[lang].name}</p>
+                                                        <p className={styles.productNumber}>(48092)</p>
                                                     </div>
-                                                    <div>
-                                                        <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)}>
-                                                            <img className={styles.wishBtnImg} src="/src/apps/client/ui/components/Cart/img/wish-black.png" alt="wishlist"/>
-                                                        </button>
-                                                        <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)}>
-                                                            <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                                        </button>
+                                                    <p className={styles.productSize}>{text.size} {product.sizes[0].name}</p>
+                                                    <div className={styles.productQuantity}>
+                                                        <button
+                                                            className={styles.quantitySub}
+                                                            onClick={() => this.quantityChange(+quantityValue - 1)}
+                                                            disabled={quantityValue <= 1}>-</button>
+                                                        <input
+                                                            className={styles.quantityInput}
+                                                            type="text"
+                                                            onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                                            value={quantityValue}
+                                                            onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                                        />
+                                                        <button
+                                                            className={styles.quantityAdd}
+                                                            onClick={() => this.quantityChange(+quantityValue + 1)}
+                                                            disabled={quantityValue >= MAX_QUANTITY}>+</button>
                                                     </div>
+                                                    <div className={styles.productPrices}>
+                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
+                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)}>
+                                                        <img className={styles.wishBtnImg} src="/src/apps/client/ui/components/Cart/img/wish-black.png" alt="wishlist"/>
+                                                    </button>
+                                                    <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)}>
+                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
-                                    )}
-                                    <div className={styles.totalPriceContainer}>
-                                        <div className={styles.totalPriceWrapper}>
-                                            <p className={styles.totalPrice}>{text.totalPrice}</p>
-                                            <p className={styles.totalPrice}>0&#8372;</p>
-                                        </div>
+                                    </div>
+                                )}
+                                <div className={styles.totalPriceContainer}>
+                                    <div className={styles.totalPriceWrapper}>
+                                        <p className={styles.totalPrice}>{text.totalPrice}</p>
+                                        <p className={styles.totalPrice}>0&#8372;</p>
                                     </div>
                                 </div>
-                                : <p>{text.noProduct}</p>
-                            }
+                            </div>
+                            : <p>{text.noProduct}</p>
+                        }
                         {basket.length > 0 &&
                             <button className={styles.checkoutBtn}>{text.checkout}</button>
                         }

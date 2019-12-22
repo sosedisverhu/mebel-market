@@ -61,8 +61,8 @@ export default function getUserProducts (req, res) {
                         id
                     });
                 });
-            })
-            .catch(() => {
-                res.status(SERVER_ERROR_STATUS_CODE).end();
-            });
+        })
+        .catch(() => {
+            res.status(SERVER_ERROR_STATUS_CODE).end();
+        });
 }

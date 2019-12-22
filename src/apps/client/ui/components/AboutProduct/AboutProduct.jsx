@@ -41,7 +41,9 @@ class AboutProduct extends Component {
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array,
-        saveProductsToWishlist: PropTypes.func.isRequired
+        saveProductsToWishlist: PropTypes.func.isRequired,
+        saveProductsToBasket: PropTypes.func.isRequired,
+        quantity: PropTypes.number.isRequired
     };
 
     state = {
