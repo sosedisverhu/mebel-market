@@ -98,7 +98,7 @@
 }
 
 .results {
-    margin-top: 16px;
+    margin: 16px 0 10px 0;
     font: 16px/18px RoundedElegance;
     color: blackLight;
     white-space: nowrap;
