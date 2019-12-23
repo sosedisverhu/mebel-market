@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import includes from '@tinkoff/utils/array/includes';
 import { MAX_QUANTITY } from '../../../constants/constants';
 import styles from './Cart.css';
 
@@ -12,6 +15,7 @@ import saveProductsToWishlist from '../../../services/client/saveProductsToWishl
 
 const mapStateToProps = ({ application, data }) => {
     return {
+        langRoute: application.langRoute,
         langMap: application.langMap,
         lang: application.lang,
         basket: data.basket
@@ -23,9 +27,14 @@ const mapDispatchToProps = (dispatch) => ({
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
 });
 
+const EXCEPTION_NUMBERS_MIN = 11;
+const EXCEPTION_NUMBERS_MAX = 14;
+const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
+
 @outsideClick
 class Cart extends Component {
     static propTypes = {
+        langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
@@ -38,6 +47,17 @@ class Cart extends Component {
     state = {
         active: false,
         quantityValue: 1
+    }
+
+    getWordCaseByNumber (number, cases) {
+        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
+            return cases[0];
+        }
+
+        const lastNumber = number % 10;
+        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
+
+        return cases[resultIndex];
     }
 
     handlePopupClose = () => {
@@ -73,8 +93,12 @@ class Cart extends Component {
         });
     }
 
+    handleCheckout = () => {
+        this.setState(state => ({ ...state, active: !state.active }));
+    }
+
     render () {
-        const { langMap, lang, basket } = this.props;
+        const { langRoute, langMap, lang, basket } = this.props;
         const { active, quantityValue } = this.state;
         const text = propOr('cart', {}, langMap);
 
@@ -87,7 +111,14 @@ class Cart extends Component {
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
                     <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
-                        <p className={styles.title}>{text.title}</p>
+                        <p className={styles.title}>
+                            {text.title} {basket.length > 0 &&
+                            <span>
+                                {basket.length}&nbsp;
+                                {this.getWordCaseByNumber(basket.length,
+                                    lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                            </span>
+                            }</p>
                         {basket.length > 0
                             ? <div className={styles.productsContainer}>
                                 {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
@@ -145,7 +176,9 @@ class Cart extends Component {
                             : <p>{text.noProduct}</p>
                         }
                         {basket.length > 0 &&
-                            <button className={styles.checkoutBtn}>{text.checkout}</button>
+                            <Link to={`${langRoute}/order/`} >
+                                <button className={styles.checkoutBtn} onClick={this.handleCheckout}>{text.checkout}</button>
+                            </Link>
                         }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>

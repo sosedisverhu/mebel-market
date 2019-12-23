@@ -43,7 +43,7 @@ export default {
         promotions: 'Акції'
     },
     wishList: {
-        title: 'Обране: ',
+        title: 'Обране:',
         size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
         cartBtn: 'У кошик',

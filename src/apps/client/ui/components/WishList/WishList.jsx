@@ -100,8 +100,7 @@ class WishList extends Component {
                     <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>
-                            {text.title}
-                            {wishlist.length > 0 &&
+                            {text.title} {wishlist.length > 0 &&
                                 <span>
                                     {wishlist.length}&nbsp;
                                     {this.getWordCaseByNumber(wishlist.length,

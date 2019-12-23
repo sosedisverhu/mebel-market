@@ -43,7 +43,7 @@ export default {
         promotions: 'Акции'
     },
     wishList: {
-        title: 'Избранное: ',
+        title: 'Избранное:',
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
         cartBtn: 'В корзину',
