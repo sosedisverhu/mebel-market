@@ -3,12 +3,12 @@ import base from '../base';
 
 import setBasket from '../../actions/setBasket';
 
-export default function saveProductsToBasket (payload) {
+export default function deleteFromBasket (basketItemId) {
     return dispatch => {
         return base(
             request
-                .post('/api/client/user-products/basket')
-                .send(payload)
+                .delete('/api/client/user-products/basket')
+                .query({ basketItemId })
         )
             .then(({ basket }) => {
                 dispatch(setBasket(basket));

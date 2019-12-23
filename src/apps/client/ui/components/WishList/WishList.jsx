@@ -10,6 +10,7 @@ import includes from '@tinkoff/utils/array/includes';
 import styles from './WishList.css';
 
 import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
+import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -20,7 +21,8 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload))
+    deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
+    saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
 });
 
 const EXCEPTION_NUMBERS_MIN = 11;
@@ -35,7 +37,8 @@ class WishList extends Component {
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array.isRequired,
-        deleteFromWishlist: PropTypes.func.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired,
+        saveProductsToBasket: PropTypes.func.isRequired
     };
 
     state = {
@@ -76,6 +79,12 @@ class WishList extends Component {
         this.props.deleteFromWishlist(wishlistItemId);
     };
 
+    handleAddToBasket = product => () => {
+        this.props.saveProductsToBasket({
+            productId: product.id
+        });
+    }
+
     render () {
         const { langMap, lang, wishlist } = this.props;
         const { active } = this.state;
@@ -91,8 +100,7 @@ class WishList extends Component {
                     <div className={styles.cover} onClick={this.handleClick}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>
-                            {text.title}
-                            {wishlist.length > 0 &&
+                            {text.title} {wishlist.length > 0 &&
                                 <span>
                                     {wishlist.length}&nbsp;
                                     {this.getWordCaseByNumber(wishlist.length,
@@ -107,19 +115,21 @@ class WishList extends Component {
                                         <div className={styles.wishItem}>
                                             <img className={styles.productImg} src={product.avatar} alt=""/>
                                             <div className={styles.productInfo}>
-                                                <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
-                                                <p className={styles.productNumber}>Артикул: 48092</p>
-                                                <p className={styles.productSize}>{text.size} 190 х 200</p>
-                                                <div className={styles.productPrices}>
-                                                    <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                    <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                <div>
+                                                    <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
+                                                    <p className={styles.productNumber}>Артикул: 48092</p>
+                                                    <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                                    <div className={styles.productPrices}>
+                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
+                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className={styles.productButtons}>
-                                                <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
-                                                    <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                                </button>
-                                                <button className={styles.cartBtn}>{text.cartBtn}</button>
+                                                <div className={styles.productButtons}>
+                                                    <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
+                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                    </button>
+                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>)}

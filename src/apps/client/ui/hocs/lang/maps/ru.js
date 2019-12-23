@@ -43,7 +43,7 @@ export default {
         promotions: 'Акции'
     },
     wishList: {
-        title: 'Избранное: ',
+        title: 'Избранное:',
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
         cartBtn: 'В корзину',
@@ -54,7 +54,8 @@ export default {
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
-        continueShopping: 'Продолжить покупки'
+        continueShopping: 'Продолжить покупки',
+        noProduct: 'Вы не добавили в корзину ни одного товара'
     },
     productsPage: {
         filterBtn: 'Фильтры',
