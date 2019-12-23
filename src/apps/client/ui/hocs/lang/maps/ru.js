@@ -58,7 +58,8 @@ export default {
     productsPage: {
         filterBtn: 'Фильтры',
         results: 'Результатов',
-        popular: 'Популярные'
+        popular: 'Популярные',
+        price: 'Цена'
     },
     aboutProductTop: {
         warranty: 'Гарантия'

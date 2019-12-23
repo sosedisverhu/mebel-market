@@ -15,7 +15,8 @@ const SubCategory = new Schema({
     hidden: { type: Boolean, required: true },
     categoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },
-    positionIndex: { type: Number, required: true, unique: true }
+    positionIndex: { type: Number, required: true, unique: true },
+    filters: { type: Object, required: true }
 });
 
 export default mongoose.model('SubCategory', SubCategory);

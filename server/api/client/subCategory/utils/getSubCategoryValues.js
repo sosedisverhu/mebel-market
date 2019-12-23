@@ -6,7 +6,8 @@ const VALUES = [
     'hidden',
     'categoryId',
     'alias',
-    'positionIndex'
+    'positionIndex',
+    'filters'
 ];
 
 export default function getSubCategoryValues (product) {
