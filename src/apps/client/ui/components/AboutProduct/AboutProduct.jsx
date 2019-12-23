@@ -11,15 +11,21 @@ import styles from './AboutProduct.css';
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
-const mapStateToProps = ({ application }) => {
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+
+import classNames from 'classnames';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        wishlist: data.wishlist
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
+        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
     };
 };
 
@@ -30,13 +36,17 @@ class AboutProduct extends Component {
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        wishlist: PropTypes.array,
+        saveProductsToWishlist: PropTypes.func.isRequired
     };
 
     state = {
         sizes: [],
         activeSize: {},
-        sizeListIsOpen: true
+        sizeListIsOpen: true,
+        isInWishlist: false,
+        selectIsOpen: false
     };
 
     componentDidMount () {
@@ -46,6 +56,14 @@ class AboutProduct extends Component {
             sizes: product.sizes,
             activeSize: product.sizes[0]
         });
+    }
+
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product } = props;
+
+        return (wishlist.find(item => item.product.id === product.id))
+            ? { isInWishlist: true }
+            : { isInWishlist: false };
     }
 
     scrollToTitles = () => {
@@ -65,9 +83,24 @@ class AboutProduct extends Component {
         });
     };
 
+    selectIsOpen = () => {
+        this.setState(state => ({
+            selectIsOpen: !state.selectIsOpen
+        }));
+    };
+
+    handleAddToWishlist = () => {
+        const { product } = this.props;
+        this.props.saveProductsToWishlist({
+            productId: product.id
+        });
+
+        this.setState({ isInWishlist: true });
+    }
+
     render () {
         const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen } = this.state;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
 
@@ -93,8 +126,9 @@ class AboutProduct extends Component {
             </span>
             <div>
                 <span className={styles.sizesTitle}>{text.size}</span>
-                <ul className={styles.select}
+                <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
+                    onClick={this.selectIsOpen}
                 >
                     <li className={styles.activeOption}>{activeSize.name}</li>
                     {sizes.map(size => {
@@ -112,7 +146,7 @@ class AboutProduct extends Component {
             </div>
             <div className={styles.buttons}>
                 <button className={styles.btnBuy}>{text.buy}</button>
-                <button className={styles.btnWishList}/>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }

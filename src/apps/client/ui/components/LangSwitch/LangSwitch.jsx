@@ -66,7 +66,10 @@ class LangSwitch extends Component {
             )}>
 
                 <div onClick={this.handleLangClick(lang)} className={classNames(styles.lang, styles.activeLang)}>
-                    {lang}
+                    {lang === 'ru'
+                        ? 'РУС'
+                        : 'УКР'
+                    }
                 </div>
 
                 <div className={styles.additionalLangs}>
@@ -77,7 +80,10 @@ class LangSwitch extends Component {
                                 onClick={this.handleLangClick(langItem)}
                                 className={styles.lang}
                             >
-                                {langItem}
+                                {langItem === 'ru'
+                                    ? 'РУС'
+                                    : 'УКР'
+                                }
                             </div>
                         );
                     })}

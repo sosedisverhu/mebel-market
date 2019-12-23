@@ -43,10 +43,11 @@ export default {
         promotions: 'Акції'
     },
     wishList: {
-        title: 'Обране:',
+        title: 'Обране: ',
         size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
-        cartBtn: 'У кошик'
+        cartBtn: 'У кошик',
+        noProduct: 'Ви не додали в обране жодного товару'
     },
     cart: {
         title: 'Кошик:',

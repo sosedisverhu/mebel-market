@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value blackBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
@@ -28,7 +28,7 @@
 .title {
     box-sizing: border-box;
     font: 300 14px/16px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     padding: 17px 45px 17px 25px;
     position: relative;
     display: inline-block;
@@ -83,7 +83,7 @@
     &:checked {
         + .circle {
             &:before {
-                background: blackBasic;
+                background: blackLight;
             }
         }
     }
