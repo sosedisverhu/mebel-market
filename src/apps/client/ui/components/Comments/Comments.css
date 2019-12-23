@@ -1,0 +1,228 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value gray from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
+
+.commentsContainer {
+    font-family: RoundedElegance;
+    display: flex;
+
+    @media (max-width: 850px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.comments {
+    max-width: 620px;
+    margin-right: 50px;
+}
+
+.comment {
+    position: relative;
+    padding-bottom: 30px;
+
+    &:after {
+        position: absolute;
+        content: '';
+        background-color: rgba(216, 216, 216, 0.5);
+        max-width: 580px;
+        width: 100%;
+        height: 1px;
+    }
+}
+
+.commentInfo {
+    display: flex;
+    margin-bottom: 15px;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+}
+
+.name {
+    font-size: 18px;
+    line-height: 21px;
+    color: blackLight;
+
+    @media (max-width: 600px) {
+        margin-bottom: 10px;
+    }
+}
+
+.stars {
+    display: flex;
+    margin-left: auto;
+
+    @media (max-width: 600px) {
+        margin-left: 0;
+    }
+}
+
+.star {
+    width: 14px;
+    height: 14px;
+    background: url('./img/rating-yellow.png') no-repeat center;
+    background-size: cover;
+    margin-right: 5px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.date {
+    font-size: 12px;
+    line-height: 14px;
+    color: gray;
+    margin-left: 50px;
+
+    @media (max-width: 600px) {
+        position: absolute;
+        right: 0;
+    }
+}
+
+.commentText {
+    font-size: 16px;
+    line-height: 18px;
+    color: rgba(35, 35, 35, 0.7);
+    margin-bottom: 15px;
+}
+
+.commentsForm {
+    max-width: 403px;
+}
+
+.feedbackTitle {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 21px;
+    color: blackLight;
+    text-decoration-line: underline;
+    cursor: pointer;
+    position: relative;
+    transition: 0.5s ease-out;
+
+    &:after {
+        position: absolute;
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: green transparent transparent transparent;
+        top: 50%;
+        right: -30px;
+        margin-top: -5px;
+        transition: 0.5s ease-out;
+        transition-property: transform, border-color;
+    }
+
+    &.active {
+        text-decoration-color: transparent;
+    }
+
+    &.active:after {
+        transform: rotate(180deg);
+    }
+}
+
+.form {
+    margin-top: 30px;
+    /* visibility: hidden; */
+    /* opacity: 0; */
+    display: none;
+    transition: 0.5s ease-out;
+
+    &.active {
+        /* visibility: visible; */
+        /* opacity: 1; */
+        display: block;
+    }
+}
+
+.userRatingWrapper {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.userRatingText {
+    font-size: 16px;
+    line-height: 18px;
+    color: blackLight;
+}
+
+.userRating {
+    display: flex;
+}
+
+.rating {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    cursor: pointer;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &.starYellow {
+        background-image: url('./img/rating-yellow.png');
+    }
+
+    &.starGray {
+        background-image: url('./img/rating-gray.png');
+    }
+}
+
+.commentInput {
+    font-family: RoundedElegance;
+    font-size: 16px;
+    line-height: 18px;
+    color: blackLight;
+    width: 100%;
+    background-color: whiteBasic;
+    border: 1px solid gray;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+        margin-bottom: 15px;
+    }
+
+    &::placeholder {
+        color: gray;
+    }
+}
+
+.inputText {
+    height: 130px;
+    resize: none;
+}
+
+.feedbackBtn,
+.cancelBtn {
+    @mixin removeDefaultButton;
+    padding: 10px 20px;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    cursor: pointer;
+}
+
+.feedbackBtn {
+    margin-right: 20px;
+    background-color: blackLight;
+    color: whiteBasic;
+}
+
+.cancelBtn {
+    background-color: gray3;
+    color: gray;
+}

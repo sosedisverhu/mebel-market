@@ -125,5 +125,13 @@ export default {
         cardDescr: '(вкажіть номер замовлення в описі платежу)',
         price: 'Вартість замовлення:',
         toMain: 'На головну'
+    },
+    comments: {
+        feedbackBtn: 'Залишити відгук',
+        userRating: 'Ваша оцінка товару',
+        inputName: 'Ваше ім\'я та прізвище *',
+        inputEmailPhone: 'Ел. пошта або телефон *',
+        inputText: 'Текст відгуку',
+        cancelBtn: 'Скасувати'
     }
 };

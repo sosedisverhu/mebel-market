@@ -125,5 +125,13 @@ export default {
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
         toMain: 'На главную'
+    },
+    comments: {
+        feedbackBtn: 'Оставить отзыв',
+        userRating: 'Ваша оценка товара',
+        inputName: 'Ваше имя и фамилия *',
+        inputEmailPhone: 'Эл. почта или телефон *',
+        inputText: 'Текст отзыва',
+        cancelBtn: 'Отмена'
     }
 };
