@@ -130,7 +130,7 @@ module.exports = [
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Метал', ru: 'Метал' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
             { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
             { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
         ],
@@ -198,7 +198,7 @@ module.exports = [
         },
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '24 місяців', ru: '24 месяцев' } },
+            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
             { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
             { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
             { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }

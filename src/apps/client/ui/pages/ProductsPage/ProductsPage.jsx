@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter, matchPath, Link } from 'react-router-dom';
@@ -304,16 +304,19 @@ class ProductsPage extends Component {
                             <div className={styles.results}>
                                 {`${propOr('length', 0, filteredProducts) || products.length} ${text.results}`}
                             </div>
-                            <Filters
-                                filtersMap={filtersMap}
-                                filters={filters}
-                                onFilter={this.handleFilter}
-                            />
-                            <div className={styles.sort}>
-                                <div className={styles.activeOption}>
-                                    {text.popular}
+                            {products.length > 1 &&
+                            <Fragment>
+                                <Filters
+                                    filtersMap={filtersMap}
+                                    filters={filters}
+                                    onFilter={this.handleFilter}
+                                />
+                                <div className={styles.sort}>
+                                    <div className={styles.activeOption}>
+                                        {text.popular}
+                                    </div>
                                 </div>
-                            </div>
+                            </Fragment>}
                         </div>
                     </div>
                 </div>
