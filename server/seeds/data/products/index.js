@@ -23,6 +23,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957770,
         hidden: false,
         discount: 10,
         discountPrice: 1799,
@@ -92,6 +93,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957741,
         hidden: false,
         discount: 0,
         discountPrice: 2799,
@@ -161,6 +163,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957742,
         hidden: false,
         discount: 0,
         discountPrice: 3799,
@@ -230,6 +233,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957744,
         hidden: false,
         discount: 0,
         discountPrice: 3799,
@@ -299,6 +303,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957746,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -368,6 +373,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957747,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -437,6 +443,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957748,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -506,6 +513,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957749,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -575,6 +583,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957750,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -644,6 +653,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957751,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
@@ -713,6 +723,7 @@ module.exports = [
             }
 
         },
+        date: 1577182957752,
         hidden: false,
         discount: 0,
         discountPrice: 2000,

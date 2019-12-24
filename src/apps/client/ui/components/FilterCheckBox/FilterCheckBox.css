@@ -54,7 +54,7 @@
 
 .options {
     z-index: -1;
-    max-height: 0px;
+    max-height: 0;
     overflow: hidden;
     position: absolute;
     padding: 8px 25px;
