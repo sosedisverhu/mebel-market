@@ -5,6 +5,7 @@ import getProducts from '../src/apps/client/services/server/getProducts';
 import getCategories from '../src/apps/client/services/server/getCategories';
 import getSubCategories from '../src/apps/client/services/server/getSubCategories';
 import getPartners from '../src/apps/client/services/server/getPartners';
+import getQuizzes from '../src/apps/client/services/server/getQuizzes';
 
 export default [
     getMobileDetect,
@@ -13,6 +14,7 @@ export default [
     getCategories,
     getSubCategories,
     getProducts,
-    getPartners
+    getPartners,
+    getQuizzes
     // getProductsCategories
 ];

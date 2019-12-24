@@ -3,7 +3,8 @@ import {
     SET_ARTICLES,
     SET_CATEGORIES,
     SET_SUB_CATEGORIES,
-    SET_PARTNERS
+    SET_PARTNERS,
+    SET_QUIZZES
 } from '../types/types';
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
     articles: [],
     categories: [],
     subCategories: [],
-    partners: []
+    partners: [],
+    quizzes: []
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +28,8 @@ export default function (state = initialState, action) {
         return { ...state, subCategories: action.payload };
     case SET_PARTNERS:
         return { ...state, partners: action.payload };
+        case SET_QUIZZES:
+        return { ...state, quizzes: action.payload };
     default:
         return state;
     }

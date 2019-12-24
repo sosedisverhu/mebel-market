@@ -17,6 +17,8 @@ import adminArticleApi from './api/admin/article';
 import clientArticleApi from './api/client/article';
 import adminPartnerApi from './api/admin/partner';
 import clientPartnerApi from './api/client/partner';
+import adminQuizApi from './api/admin/quiz';
+import clientQuizApi from './api/client/quiz';
 import adminFilesApi from './api/admin/files';
 import adminCategoryApi from './api/admin/category';
 import clientCategoryApi from './api/client/category';
@@ -65,6 +67,8 @@ app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/partner', adminPartnerApi);
 app.use('/api/client/partner', clientPartnerApi);
+app.use('/api/admin/quiz', adminQuizApi);
+app.use('/api/client/quiz', clientQuizApi);
 app.use('/api/admin/files', adminFilesApi);
 
 // admin
@@ -92,7 +96,7 @@ app.get('*', function (req, res) {
                         location={req.originalUrl}
                         context={context}
                     >
-                        <App />
+                        <div />
                     </StaticRouter>
                 </Provider>
             );
