@@ -149,7 +149,7 @@ class Comments extends Component {
                             value={inputText}
                             onChange={this.handleChange('inputText')}
                         />
-                        <button className={styles.feedbackBtn}>{text.feedbackBtn}</button>
+                        <button className={styles.feedbackBtn} type="submit">{text.feedbackBtn}</button>
                         <button className={styles.cancelBtn} onClick={this.handleCancel}>{text.cancelBtn}</button>
                      </form>
                 </div>
