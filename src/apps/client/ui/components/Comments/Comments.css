@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
+@value blackLighter from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
@@ -93,8 +94,34 @@
     margin-bottom: 15px;
 }
 
+.showAll {
+    font-size: 18px;
+    line-height: 21px;
+    text-decoration-line: underline;
+    color: blackLighter;
+    cursor: pointer;
+
+    @media (max-width: 850px) {
+        display: none;
+    }
+}
+
+.showAllMobile {
+    display: none;
+
+    @media (max-width: 850px) {
+        display: inline-block;
+        margin-right: 45px;
+
+        @media (max-width: 350px) {
+            margin-right: 15px;
+        }
+    }
+}
+
 .commentsForm {
     max-width: 403px;
+    width: 100%;
 }
 
 .feedbackTitle {
@@ -120,6 +147,10 @@
         margin-top: -5px;
         transition: 0.5s ease-out;
         transition-property: transform, border-color;
+
+        @media (max-width: 350px) {
+            right: -25px;
+        }
     }
 
     &.active {
@@ -133,14 +164,10 @@
 
 .form {
     margin-top: 30px;
-    /* visibility: hidden; */
-    /* opacity: 0; */
     display: none;
     transition: 0.5s ease-out;
 
     &.active {
-        /* visibility: visible; */
-        /* opacity: 1; */
         display: block;
     }
 }

@@ -127,6 +127,7 @@ export default {
         toMain: 'На главную'
     },
     comments: {
+        showAll: 'Показать все',
         feedbackBtn: 'Оставить отзыв',
         userRating: 'Ваша оценка товара',
         inputName: 'Ваше имя и фамилия *',

@@ -35,7 +35,7 @@ class Comments extends Component {
     };
 
     state = {
-        formIsOpen: true,
+        formIsOpen: false,
         inputName: '',
         inputEmailPhone: '',
         inputText: '',
@@ -110,11 +110,15 @@ class Comments extends Component {
                             <p className={styles.commentText}>{comment.comment}</p>
                         </div>
                     )}
+                    <a className={styles.showAll}>{text.showAll}</a>
                 </div>
                 <div className={styles.commentsForm}>
-                     <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen })} onClick={this.toggleForm}>
-                         {text.feedbackBtn}
-                     </p>
+                    <div>
+                        <a className={classNames(styles.showAll, styles.showAllMobile)}>{text.showAll}</a>
+                        <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen })} onClick={this.toggleForm}>
+                            {text.feedbackBtn}
+                        </p>
+                     </div>
                      <form onSubmit={this.handleSubmit} className={classNames(styles.form, { [styles.active]: formIsOpen })}>
                         <div className={styles.userRatingWrapper}>
                             <p className={styles.userRatingText}>{text.userRating}</p>
