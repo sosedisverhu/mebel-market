@@ -130,6 +130,10 @@
     margin-bottom: 21px;
 }
 
+.productLink {
+    text-decoration: none;
+}
+
 .productName {
     font-size: 18px;
     line-height: 21px;

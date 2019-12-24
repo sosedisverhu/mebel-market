@@ -7,6 +7,7 @@ import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
 import findIndex from '@tinkoff/utils/array/findIndex';
 import includes from '@tinkoff/utils/array/includes';
+import find from '@tinkoff/utils/array/find';
 import { MAX_QUANTITY } from '../../../constants/constants';
 import styles from './Cart.css';
 
@@ -18,7 +19,9 @@ const mapStateToProps = ({ application, data }) => {
         langRoute: application.langRoute,
         langMap: application.langMap,
         lang: application.lang,
-        basket: data.basket
+        basket: data.basket,
+        categories: data.categories,
+        subCategories: data.subCategories
     };
 };
 
@@ -97,6 +100,14 @@ class Cart extends Component {
         this.setState(state => ({ ...state, active: !state.active }));
     }
 
+    getCategoriesAlias = (categoryId, subCategoryId) => {
+        const { categories, subCategories } = this.props;
+        const category = find(category => category.id === categoryId, categories).alias;
+        const subCategory = find(subCategory => subCategory.id === subCategoryId, subCategories).alias;
+
+        return `${category}/${subCategory}`;
+    }
+
     render () {
         const { langRoute, langMap, lang, basket } = this.props;
         const { active, quantityValue } = this.state;
@@ -124,14 +135,18 @@ class Cart extends Component {
                                 {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
                                     <div className={styles.cartItemWrapper} key={i}>
                                         <div className={styles.cartItem}>
-                                            <img className={styles.productImg} src={product.avatar} alt=""/>
+                                            <Link to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}>
+                                                <img className={styles.productImg} src={product.avatar} alt=""/>
+                                            </Link>
                                             <div className={styles.productInfo}>
                                                 <div>
                                                     <div className={styles.productOption}>
-                                                        <p className={styles.productName}>{product.texts[lang].name}</p>
+                                                        <Link className={styles.productLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}>
+                                                            <p className={styles.productName}>{product.texts[lang].name}</p>
+                                                        </Link>
                                                         <p className={styles.productNumber}>(48092)</p>
                                                     </div>
-                                                    <p className={styles.productSize}>{text.size} {product.sizes[0].name}</p>
+                                                    <p className={styles.productSize}>{text.size} {properties.size.name}</p>
                                                     <div className={styles.productQuantity}>
                                                         <button
                                                             className={styles.quantitySub}

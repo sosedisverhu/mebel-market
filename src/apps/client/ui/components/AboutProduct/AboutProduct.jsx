@@ -105,9 +105,13 @@ class AboutProduct extends Component {
 
     handleBuyClick = () => {
         const { saveProductsToBasket, product, quantity } = this.props;
+        const { activeSize } = this.state;
         saveProductsToBasket({
             productId: product.id,
-            quantity
+            quantity,
+            properties: {
+                size: activeSize
+            }
         });
     }
 
