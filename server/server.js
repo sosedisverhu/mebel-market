@@ -22,6 +22,8 @@ import adminCategoryApi from './api/admin/category';
 import clientCategoryApi from './api/client/category';
 import adminSubCategoryApi from './api/admin/subCategory';
 import clientSubCategoryApi from './api/client/subCategory';
+import adminReviewApi from './api/admin/review';
+import clientReviewApi from './api/client/review';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -65,6 +67,8 @@ app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/partner', adminPartnerApi);
 app.use('/api/client/partner', clientPartnerApi);
+app.use('/api/admin/review', adminReviewApi);
+app.use('/api/client/review', clientReviewApi);
 app.use('/api/admin/files', adminFilesApi);
 
 // admin

@@ -14,5 +14,4 @@ export default [
     getSubCategories,
     getProducts,
     getPartners
-    // getProductsCategories
 ];

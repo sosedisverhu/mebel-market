@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
-import StyleRenderer from '../StyleRenderer/StyleRenderer';
 
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
+import saveReview from '../../../services/client/saveReview';
+import StyleRenderer from '../StyleRenderer/StyleRenderer';
 import styles from './Tab.css';
 
 const mapStateToProps = ({ data, application }) => {
@@ -18,6 +19,10 @@ const mapStateToProps = ({ data, application }) => {
             {
                 id: 'characteristic',
                 title: 'Характеристики'
+            },
+            {
+                id: 'reviews',
+                title: 'Отзывы'
             }
         ],
         scroll: data.scrollToCharacteristic
@@ -26,7 +31,8 @@ const mapStateToProps = ({ data, application }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
+        saveReview: (...payload) => dispatch(saveReview(...payload))
     };
 };
 
@@ -36,7 +42,8 @@ class Tab extends Component {
         tabs: PropTypes.array.isRequired,
         product: PropTypes.object.isRequired,
         scroll: PropTypes.bool.isRequired,
-        setScrollToCharacteristic: PropTypes.func.isRequired
+        setScrollToCharacteristic: PropTypes.func.isRequired,
+        saveReview: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -47,7 +54,11 @@ class Tab extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            activeId: this.props.tabs[0] && this.props.tabs[0].id
+            activeId: this.props.tabs[0] && this.props.tabs[0].id,
+            userName: '',
+            userPhone: '',
+            userComment: '',
+            userMark: ''
         };
         this.tabTitles = React.createRef();
     }
@@ -66,27 +77,109 @@ class Tab extends Component {
     }
 
     getContent () {
-        const { activeId } = this.state;
+        const { activeId, userName, userPhone, userComment, userMark } = this.state;
         const { product, lang } = this.props;
 
-        if (activeId === 'description') {
+        switch (activeId) {
+        case 'description': {
             return (
                 <div className={styles.description}>
                     <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
         }
+        case 'characteristic': {
+            return (
+                <div>
+                    {product.characteristics[lang].characteristics.map((characteristic, i) => {
+                        return (
+                            <div className={styles.row} key={i}>
+                                <h3 className={styles.characterTitle}>{characteristic.name}</h3>
+                                <p className={styles.characterText}>{characteristic.value}</p>
+                            </div>);
+                    })}
+                </div>);
+        }
+        case 'reviews': {
+            return (
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <p><label>
+                            <input
+                                type="text"
+                                name='userName'
+                                value={userName}
+                                onChange={this.onChangeName}
+                            />
+                        </label></p>
+                        <p><label>
+                            <input
+                                type="text"
+                                name='usePhone'
+                                value={userPhone}
+                                onChange={this.onChangePhone}
+                            />
 
-        return (
-            <div>
-                {product.characteristics[lang].characteristics.map((characteristic, i) => {
-                    return (
-                        <div className={styles.row} key={i}>
-                            <h3 className={styles.characterTitle}>{characteristic.name}</h3>
-                            <p className={styles.characterText}>{characteristic.value}</p>
-                        </div>);
-                })}
-            </div>);
+                        </label></p>
+                        <p><label>
+                            <input
+                                type="text"
+                                name='userComment'
+                                value={userComment}
+                                onChange={this.onChangeComment}
+                            />
+                        </label></p>
+                        <p><label>
+                            <input
+                                type="text"
+                                name='mark'
+                                value={userMark}
+                                onChange={this.onChangeUserMark}
+                            />
+                        </label></p>
+                        <button>Submit</button>
+                    </form>
+                </div>);
+        }
+        }
     }
+
+    handleSubmit = () => {
+        event.preventDefault();
+        const { userName, userPhone, userComment, userMark } = this.state;
+
+        this.props.saveReview({
+            user: {
+                name: userName,
+                emailOrPhone: userPhone,
+                comment: userComment,
+                mark: userMark
+            }
+        });
+    };
+
+    onChangeName = event => {
+        this.setState({
+            userName: event.target.value
+        });
+    };
+
+    onChangePhone = event => {
+        this.setState({
+            userPhone: event.target.value
+        });
+    };
+
+    onChangeComment = event => {
+        this.setState({
+            userComment: event.target.value
+        });
+    };
+
+    onChangeUserMark = event => {
+        this.setState({
+            userMark: event.target.value
+        });
+    };
 
     render () {
         const { tabs } = this.props;
