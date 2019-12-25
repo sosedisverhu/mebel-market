@@ -111,10 +111,14 @@
     padding: 20px 25px 20px 30px;
 }
 
+.productImgLink {
+    margin-right: 30px;
+}
+
 .productImg {
     width: 120px;
     height: 120px;
-    margin-right: 30px;
+    display: block;
 }
 
 .productInfo {
@@ -130,7 +134,7 @@
     margin-bottom: 21px;
 }
 
-.productLink {
+.productNameLink {
     text-decoration: none;
 }
 

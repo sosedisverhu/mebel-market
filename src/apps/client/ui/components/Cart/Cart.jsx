@@ -44,7 +44,9 @@ class Cart extends Component {
         outsideClickEnabled: PropTypes.bool,
         basket: PropTypes.array.isRequired,
         deleteFromBasket: PropTypes.func.isRequired,
-        saveProductsToWishlist: PropTypes.func.isRequired
+        saveProductsToWishlist: PropTypes.func.isRequired,
+        categories: PropTypes.array,
+        subCategories: PropTypes.array
     };
 
     state = {
@@ -135,13 +137,13 @@ class Cart extends Component {
                                 {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
                                     <div className={styles.cartItemWrapper} key={i}>
                                         <div className={styles.cartItem}>
-                                            <Link to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}>
+                                            <Link className={styles.productImgLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`} onClick={this.handlePopupClose}>
                                                 <img className={styles.productImg} src={product.avatar} alt=""/>
                                             </Link>
                                             <div className={styles.productInfo}>
                                                 <div>
                                                     <div className={styles.productOption}>
-                                                        <Link className={styles.productLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}>
+                                                        <Link className={styles.productNameLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`} onClick={this.handlePopupClose}>
                                                             <p className={styles.productName}>{product.texts[lang].name}</p>
                                                         </Link>
                                                         <p className={styles.productNumber}>(48092)</p>
