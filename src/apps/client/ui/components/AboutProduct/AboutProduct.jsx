@@ -13,6 +13,7 @@ import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import classNames from 'classnames';
 
@@ -28,7 +29,8 @@ const mapDispatchToProps = dispatch => {
     return {
         setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
         saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
-        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
+        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload)),
+        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload))
     };
 };
 
@@ -43,7 +45,7 @@ class AboutProduct extends Component {
         wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
-        quantity: PropTypes.number.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired
     };
 
     state = {
@@ -95,12 +97,14 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, product } = this.props;
-        saveProductsToWishlist({
-            productId: product.id
-        });
+        const { saveProductsToWishlist, deleteFromWishlist, product } = this.props;
 
-        this.setState({ isInWishlist: true });
+        if (this.state.isInWishlist) {
+            const wishlistItemId = Object.values(this.props.wishlist.find(e => e.product.id === product.id))[1];
+            deleteFromWishlist(wishlistItemId);
+        } else {
+            saveProductsToWishlist({productId: product.id});
+        }
     }
 
     handleBuyClick = () => {

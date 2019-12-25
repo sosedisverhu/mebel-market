@@ -134,8 +134,8 @@ class Cart extends Component {
                             }</p>
                         {basket.length > 0
                             ? <div className={styles.productsContainer}>
-                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
-                                    <div className={styles.cartItemWrapper} key={i}>
+                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) => {
+                                    return <div className={styles.cartItemWrapper} key={i}>
                                         <div className={styles.cartItem}>
                                             <Link className={styles.productImgLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`} onClick={this.handlePopupClose}>
                                                 <img className={styles.productImg} src={product.avatar} alt=""/>
@@ -182,7 +182,7 @@ class Cart extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                )}
+                                })}
                                 <div className={styles.totalPriceContainer}>
                                     <div className={styles.totalPriceWrapper}>
                                         <p className={styles.totalPrice}>{text.totalPrice}</p>

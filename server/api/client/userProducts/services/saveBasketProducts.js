@@ -104,7 +104,7 @@ export default function saveBasketProducts (req, res) {
             const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
                 const basketNotUniq = basket[basketIndex];
 
-                if (basketNotUniq.productId === productId) {
+                if (basketNotUniq.properties.size.name === properties.size.name) {
                     return [...basket];
                 }
 
