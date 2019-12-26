@@ -53,27 +53,29 @@
 }
 
 .subCategory {
-    margin: 0 25px;
+    padding: 0 30px;
     font: 16px/38px RoundedElegance;
     color: blackLight;
     text-decoration: none;
+    position: relative;
 
-    @media (max-width: 960px) {
-        margin-left: 0;
-
-        &:last-child {
-            margin-right: 0;
-        }
+    &.active {
+        background-color: green;
+        color: whiteBasic;
     }
 
     @media (max-width: 750px) {
-        margin-right: 15px;
+        padding: 0 15px;
+    }
+
+    @media (max-width: 660px) {
+        padding: 0 5px;
     }
 
     @media (max-width: 600px) {
         font-size: 14px;
         line-height: 26px;
-        margin: 0;
+        padding: 0 10px;
     }
 
 }
