@@ -138,5 +138,8 @@ export default {
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
         cancelBtn: 'Отмена'
+    },
+    articles: {
+        searchResult: 'Статьи:'
     }
 };

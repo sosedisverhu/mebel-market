@@ -138,5 +138,8 @@ export default {
         inputEmailPhone: 'Ел. пошта або телефон *',
         inputText: 'Текст відгуку',
         cancelBtn: 'Скасувати'
+    },
+    articles: {
+        searchResult: 'Статті:'
     }
 };

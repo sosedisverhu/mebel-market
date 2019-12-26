@@ -7,6 +7,8 @@ import styles from './Articles.css';
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
+import Sort from '../../components/Sort/Sort';
+import propOr from '@tinkoff/utils/object/propOr';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -79,14 +81,23 @@ class Articles extends Component {
     };
 
     render () {
-        const { articles } = this.props;
+        const { articles, langMap } = this.props;
         const { currentPage, postsPerPage } = this.state;
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
+        const text = propOr('articles', {}, langMap);
 
         return (
             <section className={styles.articles}>
                 <Breadcrumbs />
+                {articles.length
+                    ? (<div className={styles.panelTopWrapper}>
+                        <div className={styles.panelTop}>
+                            <h3 className={styles.panelTopTitle}>{text.searchResult} {articles.length}</h3>
+                            <Sort />
+                        </div>
+                    </div>)
+                    : null}
                 <div className={styles.articlesContainer}>
                     {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
                         <ArticlePreview key={article.id} article={article} />
