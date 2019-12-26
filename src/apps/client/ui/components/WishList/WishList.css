@@ -21,7 +21,7 @@
     background-image: url('./img/wishlist.svg');
     width: 18px;
     height: 16px;
-    transition: .3s;
+    transition: .3s ease-out;
 
     &:hover {
         background-image: url('./img/wishlist-hover.svg');

@@ -206,6 +206,7 @@
     top: 0;
     background: center no-repeat url('./img/search.png');
     cursor: pointer;
+    transition: .3s ease-out;
 
     &:hover {
         background-image: url('./img/search-hover.png');
