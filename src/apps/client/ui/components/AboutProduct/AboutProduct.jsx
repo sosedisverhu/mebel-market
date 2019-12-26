@@ -97,13 +97,14 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, deleteFromWishlist, product } = this.props;
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
+        const { isInWishlist } = this.state;
 
-        if (this.state.isInWishlist) {
-            const wishlistItemId = Object.values(this.props.wishlist.find(e => e.product.id === product.id))[1];
-            deleteFromWishlist(wishlistItemId);
-        } else {
+        if (!isInWishlist) {
             saveProductsToWishlist({productId: product.id});
+        } else {
+            const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
+            deleteFromWishlist(wishlistItemId);
         }
     }
 
