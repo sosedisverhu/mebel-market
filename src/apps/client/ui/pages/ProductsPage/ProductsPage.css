@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
@@ -54,7 +55,7 @@
 .subCategory {
     padding: 0 30px;
     font: 16px/38px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     text-decoration: none;
     position: relative;
 
@@ -99,9 +100,9 @@
 }
 
 .results {
-    margin-top: 16px;
+    margin: 16px 0 10px 0;
     font: 16px/18px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     white-space: nowrap;
 
     @media (max-width: 960px) {
@@ -151,7 +152,7 @@
     background: gray4;
     box-sizing: border-box;
     font: 300 14px/17px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;

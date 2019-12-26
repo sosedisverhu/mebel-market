@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .root {
@@ -27,7 +27,7 @@
 
 .title {
     font: 24px/28px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding-right: 440px;
     position: relative;
     display: inline-block;
@@ -36,7 +36,7 @@
         content: '';
         width: 190px;
         height: 2px;
-        background: black;
+        background: blackLight;
         position: absolute;
         top: 13px;
         right: 200px;
@@ -81,7 +81,7 @@
             content: '';
             width: 190px;
             height: 2px;
-            background: black;
+            background: blackLight;
             position: absolute;
             top: 50%;
             margin-top: -1px;

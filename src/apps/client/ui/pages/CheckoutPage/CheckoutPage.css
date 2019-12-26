@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
@@ -69,9 +69,9 @@ textarea {
 
 .h2 {
     font: 24px/28px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding-bottom: 5px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid blackLight;
     display: inline-block;
 
     @media (max-width: 450px) {
@@ -82,7 +82,7 @@ textarea {
 .infoInput,
 .infoTextArea {
     font: 16px/18px RoundedElegance;
-    color: black;
+    color: blackLight;
     background: whiteBasic;
     border: 1px solid gray;
     width: 100%;
@@ -137,7 +137,7 @@ textarea {
 
 .h3 {
     font: 18px/21px RoundedElegance;
-    color: black;
+    color: blackLight;
     margin-top: 20px;
     padding-bottom: 5px;
 
@@ -175,7 +175,7 @@ textarea {
 
             .radioCheckmark {
                 &:before {
-                    background: black;
+                    background: blackLight;
                 }
             }
         }
@@ -218,7 +218,7 @@ textarea {
 
     @media (max-width: 730px) {
         width: auto;
-        min-width: auto;        
+        min-width: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -258,7 +258,7 @@ textarea {
 
 .priceRow {
     font: 18px/21px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding: 20px 15px 0 15px;
     display: flex;
     justify-content: space-between;
@@ -266,7 +266,7 @@ textarea {
 
 .priceTotal {
     font: 24px/28px RoundedElegance;
-    color: black;
+    color: blackLight;
     margin-top: 23px;
     border-top: 1px solid gray;
     padding: 23px 15px 0 15px;
@@ -280,7 +280,7 @@ textarea {
     border: none;
     margin: 30px auto 0 auto;
     color: whiteBasic;
-    background: black;
+    background: blackLight;
     min-width: 200px;
     display: block;
     cursor: pointer;

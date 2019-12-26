@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value blackBasic from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
@@ -18,7 +18,6 @@
     overflow: hidden;
     background: whiteBasic;
     text-decoration: none;
-    color: blackBasic;
 
     @media (max-width: 640px) {
         width: calc(50% - 10px);
@@ -119,7 +118,7 @@
     }
 }
 .discount {
-    color: red;
+    color: redBasic;
     background: whiteBasic;
 }
 
@@ -137,7 +136,7 @@
 
 .title {
     font: 18px/21px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     padding: 5px 10px;
     text-align: center;
 
@@ -150,7 +149,7 @@
 
 .price {
     font: 18px/21px RoundedElegance;
-    color: red;
+    color: redBasic;
     margin-bottom: 15px;
     text-align: center;
 
