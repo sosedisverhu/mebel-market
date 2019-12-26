@@ -172,12 +172,8 @@ class Cart extends Component {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)}>
-                                                        <img className={styles.wishBtnImg} src="/src/apps/client/ui/components/Cart/img/wish-black.png" alt="wishlist"/>
-                                                    </button>
-                                                    <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)}>
-                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                                    </button>
+                                                    <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)} />
+                                                    <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)} />
                                                 </div>
                                             </div>
                                         </div>

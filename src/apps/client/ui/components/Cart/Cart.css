@@ -161,11 +161,15 @@
 
 .wishBtn {
     margin-right: 20px;
+    background-image: url('./img/wishlist.png');
+    width: 16px;
+    height: 14px;
 }
 
-.wishBtnImg,
-.removeBtnImg {
-    display: block;
+.removeBtn {
+    background-image: url('/src/apps/client/ui/components/Header/img/remove.png');
+    width: 14px;
+    height: 14px;
 }
 
 .productSize {
