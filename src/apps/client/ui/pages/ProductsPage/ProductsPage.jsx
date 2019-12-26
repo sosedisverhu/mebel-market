@@ -6,22 +6,11 @@ import { withRouter, matchPath, Link } from 'react-router-dom';
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
 
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Filters from '../../components/Filters/Filters';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
-
-const mapStateToProps = ({ application, data }) => {
-    return {
-        langMap: application.langMap,
-        langRoute: application.langRoute,
-        lang: application.lang,
-        products: data.products,
-        categories: data.categories,
-        subCategories: data.subCategories,
-        labels: data.labels
-    };
-};
 
 class ProductsPage extends Component {
     static propTypes = {
@@ -43,47 +32,72 @@ class ProductsPage extends Component {
     state = {
         products: [],
         category: {},
-        subCategories: []
+        subCategories: [],
+        isCategory: true
     };
 
     componentDidMount () {
-        const category = this.getCategory();
-
-        this.setNewState(category);
+        this.setNewState();
     }
 
     componentWillReceiveProps (nextProps) {
         if (this.props.location.pathname !== nextProps.location.pathname) {
-            const category = this.getCategory(nextProps);
-
-            this.setNewState(category);
+            this.setNewState(nextProps);
         }
     }
 
-    setNewState = (category) => {
-        const { products, subCategories } = this.props;
+    setNewState = (props = this.props) => {
+        const { subCategoryAlias } = this.getMatch(props);
+        const category = this.getCategory(props);
+        const subCategory = subCategoryAlias && this.getSubCategory(props);
+
+        if ((!category) || (subCategoryAlias && !subCategory)) {
+            this.setState({
+                isCategory: false
+            });
+            return;
+        }
+
+        const { products, subCategories } = props;
+        const filteredProducts = products.filter(product => product.categoryId === category.id);
 
         this.setState({
-            products: products.filter(product => product.categoryId === category.id),
+            products: subCategoryAlias ? filteredProducts.filter(product => product.subCategoryId === subCategory.id) : filteredProducts,
             category,
-            subCategories: subCategories.filter((subCategory) => {
-                return subCategory.categoryId === category.id;
-            })
+            subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
+            isCategory: true
         });
     };
 
-    getCategory = (props = this.props) => {
-        const { location: { pathname }, langRoute, categories } = props;
-        const CATEGORY_PATH = `${langRoute}/:categoryAlias`;
-        const match = matchPath(pathname, { path: CATEGORY_PATH, exact: true });
+    getMatch = props => {
+        const { location: { pathname }, langRoute } = props;
+        const subCategoryAlias = pathname.split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
+        const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
 
-        return find(category => category.alias === match.params.categoryAlias, categories);
+        return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;
+    };
+
+    getCategory = (props = this.props) => {
+        const { categoryAlias } = this.getMatch(props);
+
+        return find(category => category.alias === categoryAlias, props.categories);
+    };
+
+    getSubCategory = (props = this.props) => {
+        const { subCategoryAlias } = this.getMatch(props);
+        const category = this.getCategory(props);
+
+        return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
     render () {
         const { langMap, langRoute, lang } = this.props;
-        const { products, category, subCategories } = this.state;
+        const { products, category, subCategories, isCategory } = this.state;
         const text = propOr('productsPage', {}, langMap);
+
+        if (!isCategory) {
+            return <NotFoundPage/>;
+        }
 
         return (
             <div className={styles.productPage}>
@@ -125,5 +139,17 @@ class ProductsPage extends Component {
             </div>);
     }
 }
+
+const mapStateToProps = ({ application, data }) => {
+    return {
+        langMap: application.langMap,
+        langRoute: application.langRoute,
+        lang: application.lang,
+        products: data.products,
+        categories: data.categories,
+        subCategories: data.subCategories,
+        labels: data.labels
+    };
+};
 
 export default withRouter(connect(mapStateToProps)(ProductsPage));

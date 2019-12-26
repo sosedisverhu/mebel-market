@@ -1,12 +1,16 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
 
 .search {
     height: 100%;
+    background-color: gray3;
+}
+
+.panelTopWrapper {
+    background-color: whiteBasic;
 }
 
 .panelTop {
@@ -24,7 +28,7 @@
 
 .panelTopTitle {
     font: 16px/18px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding: 16px 0;
 
     @media (max-width: 600px) {
@@ -33,12 +37,9 @@
 }
 
 .productsSectionWrap {
-    background: gray3;
-    padding: 30px 0;
-
-    @media (max-width: 600px) {
-        padding: 20px 0 30px 0;
-    }
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .quantity {
@@ -52,8 +53,16 @@
     align-items: center;
     box-sizing: content-box;
 
+    &.quantityProduct {
+        padding-top: 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 20px;
+        }
+    }
+
     &.quantityArticle {
-        padding-top: 60px;
+        padding-top: 30px;
 
         @media (max-width: 600px) {
             padding-top: 20px;
@@ -64,7 +73,7 @@
         content: "";
         width: 287px;
         height: 2px;
-        background: black;
+        background: blackLight;
         margin-left: 67px;
     }
 
@@ -82,7 +91,7 @@
 .searchSection {
     padding-bottom: 40px;
     height: 100%;
-    background: gray5;
+    background: gray3;
 
     @media (max-width: 600px) {
         padding-bottom: 30px;
@@ -152,14 +161,14 @@
         left: 0;
         width: 100%;
         height: 1px;
-        background: black;
+        background: blackLight;
         border-radius: 4px;
     }
 }
 
 .searchInput {
     font: 16px/18px RoundedElegance;
-    color: black;
+    color: blackLight;
     margin-top: 30px;
     width: 100%;
     border: none;
@@ -202,7 +211,7 @@
     color: whiteBasic;
     padding: 10px 20px;
     margin-top: 20px;
-    background: black;
+    background: blackLight;
     text-decoration: none;
 
     @media (max-width: 600px) {
@@ -219,9 +228,7 @@
 }
 
 .articlesSection {
-    padding-bottom: 40px;
-    background: gray3;
-    height: 100%;
+    padding-bottom: 15px;
 
     @media (max-width: 600px) {
         padding-bottom: 30px;
@@ -229,7 +236,7 @@
 }
 
 .articlesContainer {
-    max-width: 1360px;
+    max-width: 1270px;
     margin: 0 auto;
     padding-top: 15px;
     display: flex;

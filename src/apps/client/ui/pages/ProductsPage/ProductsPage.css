@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
@@ -52,10 +52,10 @@
 }
 
 .subCategory {
-    font: 16px/38px RoundedElegance;
-    color: black;
-    text-decoration: none;
     margin: 0 25px;
+    font: 16px/38px RoundedElegance;
+    color: blackBasic;
+    text-decoration: none;
 
     @media (max-width: 960px) {
         margin-left: 0;
@@ -78,9 +78,9 @@
 }
 
 .filterPanelWrap {
+    width: 100%;
     padding: 0 16px;
     background: whiteBasic;
-    width: 100%;
 
     @media (max-width: 600px) {
         background: gray3;
@@ -89,17 +89,17 @@
 }
 
 .filterPanel {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     max-width: 1240px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
 }
 
 .results {
-    font: 16px/18px RoundedElegance;
-    color: black;
     margin-top: 16px;
+    font: 16px/18px RoundedElegance;
+    color: blackBasic;
     white-space: nowrap;
 
     @media (max-width: 960px) {
@@ -111,21 +111,21 @@
 }
 
 .btnFilter {
-    font: 14px/16px RoundedElegance;
-    color: black;
+    height: 32px;
+    width: calc(50% - 10px);
     padding: 8px 38px 8px 10px;
     position: relative;
-    background: whiteBasic;
-    width: calc(50% - 10px);
     display: none;
-    height: 32px;
+    background: whiteBasic;
+    font: 14px/16px RoundedElegance;
+    color: blackBasic;
 
     &:before {
         content: url('./img/filter.jpg');
+        margin-top: -6px;
         position: absolute;
         top: 50%;
         right: 10px;
-        margin-top: -6px;
     }
 
     @media (max-width: 600px) {
@@ -143,13 +143,13 @@
 }
 
 .activeOption {
+    position: relative;
+    padding: 6px 41px 6px 16px;
+    display: inline-block;
     background: gray4;
     box-sizing: border-box;
     font: 300 14px/17px RoundedElegance;
-    color: black;
-    padding: 6px 41px 6px 16px;
-    position: relative;
-    display: inline-block;
+    color: blackBasic;
     cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
@@ -158,13 +158,13 @@
         content: "";
         width: 0;
         height: 0;
+        margin-top: -5px;
         border-style: solid;
         border-width: 8px 5px 0 5px;
         border-color: green transparent transparent  transparent;
         position: absolute;
         top: 50%;
         right: 16px;
-        margin-top: -5px;
         transition: 0.25s ease-in;
         transition-property: transform, border-color;
     }
@@ -173,7 +173,7 @@
         &:before {
             transform: rotate(180deg);
             transition: 0.25s ease-out;
-            border-color: black transparent transparent transparent;
+            border-color: blackBasic transparent transparent transparent;
         }
     }
 
@@ -186,9 +186,9 @@
 }
 
 .productsSection {
-    background: gray3;
     display: flex;
     justify-content: center;
     padding-bottom: 30px;
+    background: gray3;
     overflow: hidden;
 }

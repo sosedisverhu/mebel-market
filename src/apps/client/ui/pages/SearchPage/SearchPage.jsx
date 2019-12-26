@@ -118,16 +118,19 @@ class SearchPage extends Component {
         return (
             <section className={styles.search}>
                 <Breadcrumbs />
-                {products.length
-                    ? (<div>
+                {(products.length || articles.length)
+                    ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>
                             <h3 className={styles.panelTopTitle}>{`${products.length + articles.length} ${text.results} “${searchText}”`}</h3>
                             <Sort />
                         </div>
+                    </div>)
+                    : null}
+                {products.length
+                    ? (<div>
+                        <h1 className={classNames(styles.quantity, styles.quantityProduct)}>{text.products} {products.length}</h1>
                         <div className={styles.productsSectionWrap}>
-                            <h1 className={styles.quantity}>{text.products} {products.length}</h1>
-                            <div>Test Products</div>
-                            {/* <ProductsGrid products={products} /> */}
+                            <ProductsGrid products={products} />
                         </div>
                     </div>)
                     : null}
