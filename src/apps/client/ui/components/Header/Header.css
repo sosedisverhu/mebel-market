@@ -91,13 +91,17 @@
         margin-right: 15px;
     }
 
-    &.active:before {
+    &:before {
         content: '';
         position: absolute;
         width: 100%;
         height: 2px;
-        background-color: whiteBasic;
+        background-color: transparent;
         bottom: -5px;
+    }
+
+    &.active:before {
+        background-color: whiteBasic;
     }
 }
 
