@@ -86,7 +86,9 @@ class SubCategoryForm extends Component {
             hidden: (categoryHidden ? false : subCategory.hidden) || false,
             alias: subCategory.alias,
             lang: 'ru',
-            ...pick(SUB_CATEGORIES_VALUES, subCategory)
+            ...pick(SUB_CATEGORIES_VALUES, subCategory),
+            ua_filters: pathOr(['filters', 'ua'], [], subCategory),
+            ru_filters: pathOr(['filters', 'ru'], [], subCategory)
         };
         this.id = prop('id', subCategory);
         this.state = {
@@ -111,7 +113,9 @@ class SubCategoryForm extends Component {
             categoryId,
             positionIndex,
             id,
-            alias
+            alias,
+            ua_filters: uaFilters,
+            ru_filters: ruFilters
         }) => {
         return {
             texts: {
@@ -128,6 +132,10 @@ class SubCategoryForm extends Component {
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
+            filters: {
+                ua: uaFilters,
+                ru: ruFilters
+            },
             hidden,
             categoryId,
             positionIndex,
@@ -136,9 +144,20 @@ class SubCategoryForm extends Component {
         };
     };
 
+    checkOptions = filters => {
+        return filters.map(filter => {
+            const filteredOptions = filter.options.filter(option => option.name);
+            return { ...filter, options: filteredOptions };
+        });
+    };
+
     handleSubmit = values => {
-        const subCategoryPayload = this.getSubCategoryPayload(values);
         const { editSubCategory, saveSubCategory, onDone, subCategories } = this.props;
+        const subCategoryPayload = this.getSubCategoryPayload(values);
+        const { filters } = subCategoryPayload;
+
+        filters.ua = this.checkOptions(filters.ua);
+        filters.ru = this.checkOptions(filters.ua);
 
         (this.id
             ? editSubCategory({ ...subCategoryPayload, id: this.id })

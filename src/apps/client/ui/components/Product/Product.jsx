@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from './Product.css';
-
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import Gallery from '../Gallery/Gallery';
 import AboutProduct from '../AboutProduct/AboutProduct';
+
+import styles from './Product.css';
 
 class Product extends Component {
     static propTypes = {
@@ -23,4 +23,4 @@ class Product extends Component {
     }
 }
 
-export default (Product);
+export default Product;

@@ -2,21 +2,21 @@
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .root {
     margin-top: 30px;
 
-@media (max-width: 1000px) {
-    margin-top: 5px;
-    width: 100%;
-    max-width: 680px;
-}
+    @media (max-width: 1000px) {
+        margin-top: 5px;
+        width: 100%;
+        max-width: 680px;
+    }
 
-@media (max-width: 600px) {
-    margin-top: 0;
-}
+    @media (max-width: 600px) {
+        margin-top: 0;
+    }
 }
 
 .advantagesTitle {
@@ -34,16 +34,16 @@
     font: 14px/16px RoundedElegance;
     color: blackLighter;
 
-&:before {
-     content: '';
-     position: absolute;
-     left: 0;
-     top: 5px;
-     width: 6px;
-     height: 6px;
-     background: green;
-     border-radius: 50%;
- }
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 6px;
+        height: 6px;
+        background: green;
+        border-radius: 50%;
+    }
 }
 
 .details {
@@ -67,7 +67,7 @@
     margin: 10px 0;
     display: inline-block;
     font: 36px/41px RoundedElegance;
-    color: red;
+    color: redBasic;
 }
 
 .sizesTitle {
@@ -81,14 +81,14 @@
     display: flex;
     flex-direction: column;
 
-&:hover .option{
-     display: block;
- }
+    &.active .option {
+        display: block;
+    }
 
-&:hover .activeOption:before{
-     transform: rotate(180deg);
-     border-color: blackLight transparent transparent transparent;
- }
+    &.active .activeOption:before{
+        transform: rotate(180deg);
+        border-color: blackLight transparent transparent transparent;
+    }
 }
 
 .activeOption, .option{
@@ -107,20 +107,20 @@
 }
 
 .activeOption {
-&:before {
-     content: "";
-     width: 0;
-     height: 0;
-     border-style: solid;
-     border-width: 8px 5px 0 5px;
-     border-color: green transparent transparent  transparent;
-     position: absolute;
-     top: 50%;
-     right: 10px;
-     margin-top: -5px;
-     transition: 0.25s ease-out;
-     transition-property: transform, border-color;
- }
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: green transparent transparent  transparent;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        margin-top: -5px;
+        transition: 0.25s ease-out;
+        transition-property: transform, border-color;
+    }
 }
 
 .option{
@@ -141,6 +141,7 @@
     padding: 6px 10px;
     min-width: 202px;
     border: none;
+    outline: none;
     background: blackLight;
     cursor: pointer;
 }
@@ -152,5 +153,10 @@
     height: 40px;
     background: gray3 center no-repeat url('./img/wishList.png');
     border: none;
+    outline: none;
     cursor: pointer;
+
+    &.active {
+        background-image: url('./img/wishlist-active.png');
+    }
 }

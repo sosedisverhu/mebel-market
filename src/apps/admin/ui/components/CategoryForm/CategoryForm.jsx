@@ -79,7 +79,10 @@ class CategoryForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             alias: category.alias || '',
             hidden: category.hidden || false,
-            ...pick(CATEGORIES_VALUES, category)
+            ...pick(CATEGORIES_VALUES, category),
+            filters: [],
+            ua_filters: pathOr(['filters', 'ua'], [], category),
+            ru_filters: pathOr(['filters', 'ru'], [], category)
         };
 
         this.state = {
@@ -102,7 +105,9 @@ class CategoryForm extends Component {
             hidden,
             positionIndex,
             id,
-            alias
+            alias,
+            ua_filters: uaFilters,
+            ru_filters: ruFilters
         }) => {
         return {
             hidden,
@@ -120,6 +125,10 @@ class CategoryForm extends Component {
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
+            },
+            filters: {
+                ua: uaFilters,
+                ru: ruFilters
             },
             id,
             alias
