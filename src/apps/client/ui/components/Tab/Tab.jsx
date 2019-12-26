@@ -143,7 +143,7 @@ class Tab extends Component {
         }
     }
 
-    handleSubmit = () => {
+    handleSubmit = event => {
         event.preventDefault();
         const { userName, userPhone, userComment, userMark } = this.state;
 
@@ -153,7 +153,8 @@ class Tab extends Component {
                 emailOrPhone: userPhone,
                 comment: userComment,
                 mark: userMark
-            }
+            },
+            productId: this.props.product.id
         });
     };
 

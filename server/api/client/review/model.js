@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const Review = new Schema({
     id: { type: String, required: true },
+    productId: { type: String, required: true },
     user: {
         name: { type: String, required: true },
         emailOrPhone: { type: String, required: true },

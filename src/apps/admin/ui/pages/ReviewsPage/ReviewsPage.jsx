@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 import format from 'date-fns/format';
 
+import getProducts from '../../../services/getProducts';
 import getReviews from '../../../services/getReviews';
-import ReviewsPageInfo from '../../components/ReviewsPageInfo/ReviewsPageInfo';
+import Reviews from '../../components/Reviews/Reviews';
+import Typography from '@material-ui/core/Typography';
 
 const headerRows = [
     { id: 'name', label: 'Имя' },
@@ -72,24 +76,32 @@ const materialStyles = theme => ({
     },
     tableTitle: {
         width: '100%'
+    },
+    products: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    productCard: {
+        width: '23%',
+        margin: '0 1% 1%',
+        padding: '10px',
+        cursor: 'pointer'
+    },
+    productAvatar: {
+        width: '100%'
+    },
+    productName: {
+        align: 'center'
     }
-});
-
-const mapStateToProps = ({ data }) => {
-    return {
-        reviews: data.reviews
-    };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    getReviews: payload => dispatch(getReviews(payload))
 });
 
 class ReviewsPage extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         getReviews: PropTypes.func.isRequired,
-        reviews: PropTypes.array
+        getProducts: PropTypes.func.isRequired,
+        reviews: PropTypes.array,
+        products: PropTypes.array
     };
 
     static defaultProps = {
@@ -100,7 +112,12 @@ class ReviewsPage extends Component {
         super(...args);
 
         this.state = {
-            loading: true
+            loading: true,
+            searchValue: '',
+            products: [],
+            productName: '',
+            productReviews: null,
+            productReviewsIsRendered: false
         };
 
         this.tableCells = [
@@ -112,7 +129,10 @@ class ReviewsPage extends Component {
     }
 
     componentDidMount () {
-        this.props.getReviews()
+        Promise.all([
+            this.props.getReviews(),
+            this.props.getProducts()
+        ])
             .then(() => {
                 this.setState({
                     loading: false
@@ -120,33 +140,110 @@ class ReviewsPage extends Component {
             });
     }
 
+    onChangeSearch = event => {
+        const searchValue = event.key === 'Enter' ? this.state.searchValue : event.target.value;
+        const { products, reviews } = this.props;
+        const searchValueFiltered = searchValue.replace(/ /g, '').toUpperCase();
+        const productsWithReviews = products.filter(product => {
+            return reviews.filter(review => review.checked)
+                .some(review => review.productId === product.id);
+        });
+
+        const filteredProducts = searchValueFiltered
+            ? productsWithReviews.filter(product => {
+                const names = product.texts.ru.name + product.texts.ua.name;
+                return names.toUpperCase().includes(searchValueFiltered);
+            }) : [];
+
+        this.setState({
+            searchValue,
+            products: filteredProducts,
+            productReviewsIsRendered: false
+        });
+    };
+
+    onProductReviewsOpen = productId => {
+        const { products, reviews } = this.props;
+        const product = products.filter(product => {
+            return product.id === productId;
+        })[0];
+        const productReviews = reviews.filter(review => {
+            return (review.checked && review.productId === productId);
+        });
+
+        this.setState({
+            productName: product.texts.ru.name,
+            productReviews,
+            productReviewsIsRendered: true
+        });
+    };
+
     render () {
-        const { classes, reviews } = this.props;
-        const { loading } = this.state;
+        const { classes, reviews, getReviews } = this.props;
+        const { loading, searchValue, products, productReviewsIsRendered, productName, productReviews } = this.state;
+        const newReviews = reviews.filter(review => !review.checked);
 
         if (loading) {
             return <div className={classes.loader}>
                 <CircularProgress/>
             </div>;
         }
-        const checkedReviews = reviews.filter(review => review.checked);
-        const newReviews = reviews.filter(review => !review.checked);
 
         return <div className={classes.root}>
-            <ReviewsPageInfo
+            <Reviews
                 classes={classes}
                 reviews={newReviews}
                 headerRows={headerRows}
                 name='Новые отзывы'
             />
-            <ReviewsPageInfo
-                classes={classes}
-                reviews={checkedReviews}
-                headerRows={headerRows}
-                name='Проверенные отзывы'
+            <TextField
+                label='Поиск комментариев по названию товара'
+                margin='normal'
+                variant='outlined'
+                value={searchValue}
+                onChange={this.onChangeSearch}
+                onKeyPress={this.onChangeSearch}
+                className={classes.tableTitle}
             />
+            {productReviewsIsRendered
+                ? <Reviews
+                    classes={classes}
+                    reviews={productReviews}
+                    headerRows={headerRows}
+                    name={`Отзывы к товару ${productName}`}
+                />
+                : <div className={classes.products}>
+                    {products.map(product => {
+                        return (
+                            <Card
+                                className={classes.productCard}
+                                onClick={() => this.onProductReviewsOpen(product.id)}
+                                key={product.id}
+                            >
+                                <img className={classes.productAvatar}
+                                    src={product.avatar}
+                                    alt=''/>
+                                <Typography variant='h6' id='tableTitle' className={classes.tableTitle}>
+                                    {product.texts.ru.name}
+                                </Typography>
+                            </Card>
+                        );
+                    })}
+                </div>}
         </div>;
     }
 }
+
+const mapStateToProps = ({ data }) => {
+    return {
+        reviews: data.reviews,
+        products: data.products
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    getReviews: payload => dispatch(getReviews(payload)),
+    getProducts: payload => dispatch(getProducts(payload))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(materialStyles)(ReviewsPage));

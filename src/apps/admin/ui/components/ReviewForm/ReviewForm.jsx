@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import editReview from '../../../services/editReview';
 
@@ -85,14 +85,8 @@ class ReviewForm extends Component {
     }
 }
 
-const mapStateToProps = ({ application }) => {
-    return {
-        categories: application.categories
-    };
-};
-
 const mapDispatchToProps = (dispatch) => ({
     editReview: payload => dispatch(editReview(payload))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewForm);
+export default connect(null, mapDispatchToProps)(ReviewForm);

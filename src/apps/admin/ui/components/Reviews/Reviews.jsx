@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
@@ -17,12 +18,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import format from 'date-fns/format';
 
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
+import getReviews from '../../../services/getReviews';
 
 const ROWS_PER_PAGE = 10;
 
-class ReviewsPageInfo extends Component {
+class Reviews extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
+        getReviews: PropTypes.func.isRequired,
         reviews: PropTypes.array,
         headerRows: PropTypes.array.isRequired,
         name: PropTypes.string
@@ -57,14 +60,14 @@ class ReviewsPageInfo extends Component {
     componentWillReceiveProps (nextProps) {
         if (nextProps.reviews !== this.props.reviews) {
             this.setState({
-                rowsPerPage: nextProps.reviews.length > ROWS_PER_PAGE ? ROWS_PER_PAGE : nextProps.reviews.length,
-                selected: []
+                rowsPerPage: nextProps.reviews.length > ROWS_PER_PAGE ? ROWS_PER_PAGE : nextProps.reviews.length
             });
         }
     }
 
     handleFormDone = () => {
-        this.handleCloseReviewForm();
+        this.props.getReviews()
+            .then(() => this.handleCloseReviewForm());
     };
 
     handleFormOpen = review => () => {
@@ -178,4 +181,8 @@ class ReviewsPageInfo extends Component {
     }
 }
 
-export default ReviewsPageInfo;
+const mapDispatchToProps = (dispatch) => ({
+    getReviews: payload => dispatch(getReviews(payload))
+});
+
+export default connect(null, mapDispatchToProps)(Reviews);
