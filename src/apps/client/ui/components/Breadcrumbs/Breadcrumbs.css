@@ -1,4 +1,4 @@
-@value blackBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
@@ -16,7 +16,7 @@
 
 .breadcrumb {
   font: 14px/20px RoundedElegance;
-  color: blackBasic;
+  color: blackLight;
   text-decoration: none;
   white-space: nowrap;
 

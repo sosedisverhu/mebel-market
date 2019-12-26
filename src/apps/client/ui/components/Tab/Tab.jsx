@@ -1,54 +1,99 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import propOr from '@tinkoff/utils/object/propOr';
-import find from '@tinkoff/utils/array/find';
-
+import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
+import Comments from '../Comments/Comments';
+
 import styles from './Tab.css';
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ data, application }) => {
     return {
         lang: application.lang,
-        langMap: application.langMap
+        tabs: [
+            {
+                id: 'description',
+                title: 'Описание'
+            },
+            {
+                id: 'characteristic',
+                title: 'Характеристики'
+            },
+            {
+                id: 'comments',
+                title: 'Отзывы'
+            }
+        ],
+        scroll: data.scrollToCharacteristic
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
     };
 };
 
 class Tab extends Component {
     static propTypes = {
         lang: PropTypes.string.isRequired,
-        langMap: PropTypes.object.isRequired,
-        product: PropTypes.object.isRequired
+        tabs: PropTypes.array.isRequired,
+        product: PropTypes.object.isRequired,
+        scroll: PropTypes.bool.isRequired,
+        setScrollToCharacteristic: PropTypes.func.isRequired
     };
 
-    state = {
-        activeTab: {}
+    static defaultProps = {
+        tabs: [],
+        scroll: false
     };
 
-    componentDidMount () {
-        this.setState({
-            activeTab: propOr('product', {}, this.props.langMap).tabs[0]
-        });
+    constructor (props) {
+        super(props);
+        this.state = {
+            activeId: this.props.tabs[0] && this.props.tabs[0].id
+        };
+        this.tabTitles = React.createRef();
+    }
+
+    handleChange (id) {
+        this.setState({ activeId: id });
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.scroll !== this.props.scroll && nextProps.scroll) {
+            this.setState({ activeId: 'characteristic' }, () => {
+                this.tabTitles.current.scrollIntoView({ behavior: 'smooth' });
+                this.props.setScrollToCharacteristic(false);
+            });
+        }
     }
 
     getContent () {
-        const { activeTab } = this.state;
+        const { activeId } = this.state;
         const { product, lang } = this.props;
 
-        if (activeTab.id === '1') {
+        if (activeId === 'description') {
             return (
                 <div className={styles.description}>
                     <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
         }
 
+        if (activeId === 'comments') {
+            return (
+                <div>
+                    <Comments />
+                </div>
+            )
+        }
+
         return (
             <div>
-                {product.characteristics[lang].characteristics.map(characteristic => {
+                {product.characteristics[lang].characteristics.map((characteristic, i) => {
                     return (
-                        <div className={styles.row} key={characteristic.id}>
+                        <div className={styles.row} key={i}>
                             <h3 className={styles.characterTitle}>{characteristic.name}</h3>
                             <p className={styles.characterText}>{characteristic.value}</p>
                         </div>);
@@ -56,26 +101,18 @@ class Tab extends Component {
             </div>);
     }
 
-    handleChange = id => {
-        this.setState({
-            activeTab: find(tab => tab.id === id, propOr('product', {}, this.props.langMap).tabs)
-        });
-    };
-
     render () {
-        const { langMap } = this.props;
-        const { activeTab } = this.state;
-        const text = propOr('product', {}, langMap);
+        const { tabs } = this.props;
+        const { activeId } = this.state;
 
         return <div className={styles.root}>
-            <div className={styles.titles}>
-                {text.tabs.map(tab => {
+            <div ref={this.tabTitles} className={styles.titles}>
+                {tabs.map(({ id, title }) => {
                     return <h2
-                        key={tab.id}
-                        className={classNames(styles.title, { [styles.active]: activeTab.id === tab.id })}
-                        onClick={() => this.handleChange(tab.id)}
-                    >
-                        {tab.name}
+                        key={id}
+                        className={classNames(styles.title, { [styles.active]: activeId === id })}
+                        onClick={() => this.handleChange(id)}>
+                        {title}
                     </h2>;
                 })}
             </div>
@@ -88,4 +125,4 @@ class Tab extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Tab);
+export default connect(mapStateToProps, mapDispatchToProps)(Tab);

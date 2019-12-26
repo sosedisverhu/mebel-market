@@ -22,8 +22,7 @@ import adminCategoryApi from './api/admin/category';
 import clientCategoryApi from './api/client/category';
 import adminSubCategoryApi from './api/admin/subCategory';
 import clientSubCategoryApi from './api/client/subCategory';
-import adminProductsCategoryApi from './api/admin/category';
-import clientProductsCategoryApi from './api/client/category';
+import clientUserProductsApi from './api/client/userProducts';
 import clientSearchApi from './api/client/search';
 
 import { DATABASE_URL } from './constants/constants';
@@ -70,6 +69,7 @@ app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/partner', adminPartnerApi);
 app.use('/api/client/partner', clientPartnerApi);
 app.use('/api/admin/files', adminFilesApi);
+app.use('/api/client/user-products', clientUserProductsApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

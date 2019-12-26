@@ -2,7 +2,7 @@
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .root {
@@ -52,6 +52,7 @@
     font: 14px/16px RoundedElegance;
     color: blackLighter;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .priceOld {
@@ -66,7 +67,7 @@
     margin: 10px 0;
     display: inline-block;
     font: 36px/41px RoundedElegance;
-    color: red;
+    color: redBasic;
 }
 
 .sizesTitle {
@@ -80,14 +81,14 @@
     display: flex;
     flex-direction: column;
 
-    &:hover .option{
+    &.active .option {
         display: block;
-     }
+    }
 
-    &:hover .activeOption:before{
-         transform: rotate(180deg);
-         border-color: blackLight transparent transparent transparent;
-     }
+    &.active .activeOption:before{
+        transform: rotate(180deg);
+        border-color: blackLight transparent transparent transparent;
+    }
 }
 
 .activeOption, .option{
@@ -140,6 +141,7 @@
     padding: 6px 10px;
     min-width: 202px;
     border: none;
+    outline: none;
     background: blackLight;
     cursor: pointer;
 }
@@ -151,5 +153,10 @@
     height: 40px;
     background: gray3 center no-repeat url('./img/wishList.png');
     border: none;
+    outline: none;
     cursor: pointer;
+
+    &.active {
+        background-image: url('./img/wishlist-active.png');
+    }
 }

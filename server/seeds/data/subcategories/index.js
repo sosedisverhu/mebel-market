@@ -20,6 +20,72 @@ module.exports = [
                 seoTitle: 'metal beds',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -41,6 +107,72 @@ module.exports = [
                 seoTitle: 'wooden beds',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Дизайн',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Новий'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Старий'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Год випуска',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: '2018'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: '2019'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Дизайн',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Новый'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Старый'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Год выпуска',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: '2018'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: '2019'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -62,6 +194,72 @@ module.exports = [
                 seoTitle: 'two-tier beds',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -83,6 +281,72 @@ module.exports = [
                 seoTitle: 'spring mattresses',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -104,6 +368,72 @@ module.exports = [
                 seoTitle: 'springless mattresses',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -125,6 +455,72 @@ module.exports = [
                 seoTitle: 'sofas',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -146,6 +542,72 @@ module.exports = [
                 seoTitle: 'corner sofas',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -167,6 +629,72 @@ module.exports = [
                 seoTitle: 'children sofas',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -188,6 +716,72 @@ module.exports = [
                 seoTitle: 'pillows',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -209,6 +803,72 @@ module.exports = [
                 seoTitle: 'blankets',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Чорний'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Білий'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Черный'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Белый'
+                        }
+                    ]
+                }
+            ]
         }
     },
     {
@@ -230,6 +890,72 @@ module.exports = [
                 seoTitle: 'mattress pad',
                 seoKeywords: ''
             }
+        },
+        filters: {
+            ua: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Колір',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    id: 'gewgw34',
+                    type: 'checkbox',
+                    name: 'Стиль',
+                    options: [
+                        {
+                            id: 'fwess65rfw1',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw2',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                },
+                {
+                    id: 'gewgw35',
+                    type: 'checkbox',
+                    name: 'Цвет',
+                    options: [
+                        {
+                            id: 'fwess65rfw3',
+                            name: 'Модерн'
+                        },
+                        {
+                            id: 'fwess65rfw4',
+                            name: 'Хай-Тек'
+                        }
+                    ]
+                }
+            ]
         }
     }
 ];

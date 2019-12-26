@@ -18,11 +18,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '@material-ui/core/Chip';
-import trim from '@tinkoff/utils/string/trim';
 import { withStyles } from '@material-ui/core/styles';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import arrayMove from '../../../../../utils/arrayMove';
+import trim from '@tinkoff/utils/string/trim';
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
 import uniqid from 'uniqid';
@@ -89,40 +89,37 @@ const Filter = SortableElement((
                                 margin='normal'
                                 variant='outlined'
                             />
-                            {
-                                !isEditable
-                                    ? <Fab
+                            {!isEditable
+                                ? <Fab
+                                    size="small"
+                                    color='primary'
+                                    className={classes.actionOptionButton}
+                                    onClick={onFilterOptionAdd(filterIndex)} aria-label="Add"
+                                >
+                                    <AddIcon/>
+                                </Fab>
+                                : <Fragment>
+                                    <Fab
                                         size="small"
                                         color='primary'
                                         className={classes.actionOptionButton}
-                                        onClick={onFilterOptionAdd(filterIndex)} aria-label="Add"
+                                        onClick={onFilterOptionEditDone} aria-label="Edit"
                                     >
-                                        <AddIcon/>
+                                        <CheckIcon/>
                                     </Fab>
-                                    : <Fragment>
-                                        <Fab
-                                            size="small"
-                                            color='primary'
-                                            className={classes.actionOptionButton}
-                                            onClick={onFilterOptionEditDone} aria-label="Edit"
-                                        >
-                                            <CheckIcon/>
-                                        </Fab>
-                                        <Fab
-                                            size="small"
-                                            color='primary'
-                                            className={classes.actionOptionButton}
-                                            onClick={onFilterOptionEditCancel} aria-label="Cancel"
-                                        >
-                                            <CloseIcon/>
-                                        </Fab>
-                                    </Fragment>
-                            }
-
-                            <div className={classes.optionsWrapp}>
-                                {
-                                    filter.options &&
-                                    filter.options.map((option, i) => <Chip
+                                    <Fab
+                                        size="small"
+                                        color='primary'
+                                        className={classes.actionOptionButton}
+                                        onClick={onFilterOptionEditCancel} aria-label="Cancel"
+                                    >
+                                        <CloseIcon/>
+                                    </Fab>
+                                </Fragment>}
+                            <div>
+                                {filter.options &&
+                                filter.options.map((option, i) => {
+                                    return option.name && <Chip
                                         key={i}
                                         label={option.name}
                                         variant={(!isEditable || editableOptionIndex !== i) && 'outlined'}
@@ -131,8 +128,8 @@ const Filter = SortableElement((
                                         className={classes.chip}
                                         onClick={onFilterOptionEditStart(filterIndex, i)}
                                         clickable
-                                    />)
-                                }
+                                    />;
+                                })}
                             </div>
                         </div>
                     }
@@ -146,10 +143,8 @@ const Filter = SortableElement((
 });
 
 const Filters = SortableContainer(({ filters, classes, ...rest }) =>
-    <div className={classes.filtersWrapp}>
-        {
-            filters.map((filter, i) => <Filter key={i} index={i} filterIndex={i} filter={filter} {...rest} classes={classes}/>)
-        }
+    <div>
+        {filters.map((filter, i) => <Filter key={i} index={i} filterIndex={i} filter={filter} {...rest} classes={classes}/>)}
     </div>
 );
 

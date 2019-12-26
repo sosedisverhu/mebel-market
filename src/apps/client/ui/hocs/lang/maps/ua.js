@@ -20,7 +20,7 @@ export default {
         deliveryText: 'Разнообразный и богатый опыт сложившаяся структура организации представляет собой интересный эксперимент проверки позиций, занимаемых участниками в отношении поставленных задач. '
     },
     product: {
-        datails: 'Детальні характеристики',
+        details: 'Детальні характеристики',
         advantages: 'Основні плюси:',
         buy: 'Купити',
         labelTop: 'Хіт',
@@ -46,19 +46,22 @@ export default {
         title: 'Обране:',
         size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
-        cartBtn: 'У кошик'
+        cartBtn: 'У кошик',
+        noProduct: 'Ви не додали в обране жодного товару'
     },
     cart: {
         title: 'Кошик:',
         totalPrice: 'Всього:',
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
-        continueShopping: 'Продовжити покупки'
+        continueShopping: 'Продовжити покупки',
+        noProduct: 'Ви не додали в кошик жодного товару'
     },
     productsPage: {
         filterBtn: 'Фільтри',
         results: 'Результатів',
-        popular: 'Популярні'
+        popular: 'Популярні',
+        price: 'Ціна'
     },
     aboutProductTop: {
         warranty: 'Гарантія'
@@ -126,5 +129,14 @@ export default {
         cardDescr: '(вкажіть номер замовлення в описі платежу)',
         price: 'Вартість замовлення:',
         toMain: 'На головну'
+    },
+    comments: {
+        showAll: 'Показати усі',
+        feedbackBtn: 'Залишити відгук',
+        userRating: 'Ваша оцінка товару',
+        inputName: 'Ваше ім\'я та прізвище *',
+        inputEmailPhone: 'Ел. пошта або телефон *',
+        inputText: 'Текст відгуку',
+        cancelBtn: 'Скасувати'
     }
 };
