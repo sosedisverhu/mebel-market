@@ -37,14 +37,17 @@
     transition: .5s ease-out;
 }
 
+.instagramLink,
+.facebookLink {
+    margin-right: 30px;
+}
+
 .instagram {
     background-image: url("./img/instagram.svg");
-    margin-right: 30px;
 }
 
 .facebook {
     background-image: url("./img/facebook.svg");
-    margin-right: 30px;
 
     &:hover {
         background-image: url("./img/facebook-hover.svg");
