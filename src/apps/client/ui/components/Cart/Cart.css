@@ -257,6 +257,13 @@
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 }
 
+.cartBottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 .checkoutBtn {
     @mixin removeDefaultButton;
     margin-top: 20px;

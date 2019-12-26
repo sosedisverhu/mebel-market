@@ -183,19 +183,21 @@ class Cart extends Component {
                                         </div>
                                     </div>
                                 })}
+                            </div>
+                            : <p>{text.noProduct}</p>
+                        }
+                        {basket.length > 0 &&
+                            <div className={styles.cartBottomInfo}>
                                 <div className={styles.totalPriceContainer}>
                                     <div className={styles.totalPriceWrapper}>
                                         <p className={styles.totalPrice}>{text.totalPrice}</p>
                                         <p className={styles.totalPrice}>0&#8372;</p>
                                     </div>
                                 </div>
+                                <Link to={`${langRoute}/order/`} >
+                                    <button className={styles.checkoutBtn} onClick={this.handleCheckout}>{text.checkout}</button>
+                                </Link>
                             </div>
-                            : <p>{text.noProduct}</p>
-                        }
-                        {basket.length > 0 &&
-                            <Link to={`${langRoute}/order/`} >
-                                <button className={styles.checkoutBtn} onClick={this.handleCheckout}>{text.checkout}</button>
-                            </Link>
                         }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>
