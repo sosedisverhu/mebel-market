@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter, matchPath, Link } from 'react-router-dom';
+import { withRouter, matchPath, NavLink } from 'react-router-dom';
 
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -287,12 +287,14 @@ class ProductsPage extends Component {
                         <div className={styles.subCategories}>
                             {subCategories.map((subCategory) => {
                                 return (
-                                    <Link className={styles.subCategory}
+                                    <NavLink
+                                        className={styles.subCategory}
+                                        activeClassName={styles.active}
                                         to={`${langRoute}/${category.alias}/${subCategory.alias}`}
                                         key={subCategory.id}
                                     >
                                         {subCategory.texts[lang].name}
-                                    </Link>);
+                                    </NavLink>);
                             })}
                         </div>
                     </div>
