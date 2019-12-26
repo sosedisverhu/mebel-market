@@ -48,8 +48,7 @@ export default function getUserProducts (req, res) {
                             return !product ||
                             product.hidden ||
                             !find(size => properties.size.name === size.name, product.sizes)
-                            ? products : append({ product, quantity, properties, id }, products);
-
+                                ? products : append({ product, quantity, properties, id }, products);
                         }, [], basket),
                         reduce((products, { productId, id }) => {
                             const product = find(product => product.id === productId, wishlistProducts);

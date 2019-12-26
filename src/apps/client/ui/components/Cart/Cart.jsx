@@ -177,7 +177,7 @@ class Cart extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>;
                                 })}
                             </div>
                             : <p>{text.noProduct}</p>

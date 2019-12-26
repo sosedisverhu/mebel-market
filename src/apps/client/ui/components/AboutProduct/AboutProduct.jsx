@@ -101,7 +101,7 @@ class AboutProduct extends Component {
         const { isInWishlist } = this.state;
 
         if (!isInWishlist) {
-            saveProductsToWishlist({productId: product.id});
+            saveProductsToWishlist({ productId: product.id });
         } else {
             const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
             deleteFromWishlist(wishlistItemId);
