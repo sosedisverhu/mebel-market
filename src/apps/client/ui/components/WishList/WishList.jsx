@@ -93,7 +93,6 @@ class WishList extends Component {
         return (
             <div className={styles.wishList}>
                 <div className={styles.wishListWrapper} onClick={this.handleClick}>
-                    <img src="/src/apps/client/ui/components/WishList/img/wish.svg" alt="wishlist icon"/>
                     <span className={styles.quantityAll}>{wishlist.length}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>

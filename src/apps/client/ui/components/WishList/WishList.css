@@ -17,6 +17,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background-image: url('./img/wishlist.svg');
+    width: 18px;
+    height: 16px;
+    transition: .3s;
+
+    &:hover {
+        background-image: url('./img/wishlist-hover.svg');
+    }
 }
 
 .quantityAll {

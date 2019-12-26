@@ -100,6 +100,10 @@
         bottom: -5px;
     }
 
+    &:hover:before {
+        background-color: whiteBasic;
+    }
+
     &.active:before {
         background-color: whiteBasic;
     }
@@ -232,13 +236,17 @@
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     position: relative;
 
-    &.active:before {
+    &:before {
         content: '';
         position: absolute;
         width: 100%;
         height: 2px;
-        background-color: green;
+        background-color: transparent;
         bottom: -5px;
+    }
+
+    &.active:before {
+        background-color: green;
     }
 
     &:hover {
