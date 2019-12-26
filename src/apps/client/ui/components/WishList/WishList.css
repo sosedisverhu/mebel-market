@@ -2,6 +2,7 @@
 @value blackLight from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -184,6 +185,11 @@
     color: whiteBasic;
     padding: 10px 15px;
     background-color: blackLight;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 }
 
 .continueShopping {

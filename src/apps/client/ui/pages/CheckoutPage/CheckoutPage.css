@@ -5,6 +5,7 @@
 @value gray3 from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 input,
 textarea {
@@ -284,6 +285,11 @@ textarea {
     min-width: 200px;
     display: block;
     cursor: pointer;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 
     @media (max-width: 450px) {
         margin-top: 20px;

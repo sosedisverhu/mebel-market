@@ -98,6 +98,7 @@
         height: 2px;
         background-color: transparent;
         bottom: -5px;
+        pointer-events: none;
     }
 
     &:hover:before {
