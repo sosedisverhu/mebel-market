@@ -77,7 +77,7 @@ class Header extends Component {
                                             </Link>;
                                         })}
                                         <Link
-                                            className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
+                                            className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
                                             to={`${langRoute}/`}
                                         >
                                             {text.promotions}
@@ -156,7 +156,7 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </Link>;
                         })}
-                        <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`}
+                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
                             to={`${langRoute}/`}>
                             {text.promotions}
                         </Link>

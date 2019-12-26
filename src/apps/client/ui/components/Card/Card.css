@@ -18,6 +18,12 @@
     overflow: hidden;
     background: whiteBasic;
     text-decoration: none;
+    border: 2px solid transparent;
+    transition: .3s ease-out;
+
+    &:hover {
+        border-color: green;
+    }
 
     @media (max-width: 640px) {
         width: calc(50% - 10px);
@@ -139,6 +145,13 @@
     color: blackLight;
     padding: 5px 10px;
     text-align: center;
+    text-decoration: underline transparent;
+    transition: .3s ease-out;
+
+    .product:hover & {
+        color: green;
+        text-decoration-color: green;
+    }
 
     @media (max-width: 640px) {
         font-size: 13px;
