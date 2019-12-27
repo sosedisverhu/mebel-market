@@ -14,6 +14,9 @@ import styles from './Cart.css';
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 
+import openBasket from '../../../actions/openBasket';
+import closeBasket from '../../../actions/closeBasket';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
@@ -21,13 +24,16 @@ const mapStateToProps = ({ application, data }) => {
         lang: application.lang,
         basket: data.basket,
         categories: data.categories,
-        subCategories: data.subCategories
+        subCategories: data.subCategories,
+        basketIsOpen: data.basketIsOpen
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
-    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload))
+    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
+    openBasket: (payload) => dispatch(openBasket(payload)),
+    closeBasket: (payload) => dispatch(closeBasket(payload))
 });
 
 const EXCEPTION_NUMBERS_MIN = 11;
@@ -46,11 +52,13 @@ class Cart extends Component {
         deleteFromBasket: PropTypes.func.isRequired,
         saveProductsToWishlist: PropTypes.func.isRequired,
         categories: PropTypes.array,
-        subCategories: PropTypes.array
+        subCategories: PropTypes.array,
+        basketIsOpen: PropTypes.bool.isRequired,
+        openBasket: PropTypes.func.isRequired,
+        closeBasket: PropTypes.func.isRequired
     };
 
     state = {
-        active: false,
         quantityValue: 1
     }
 
@@ -67,19 +75,22 @@ class Cart extends Component {
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
-        this.setState({ active: false });
+        this.props.closeBasket();
     }
 
-    handleClick = (test) => {
-        const { outsideClickEnabled } = this.props;
-        const { active } = this.state;
+    handleClick = () => {
+        const { outsideClickEnabled, turnOnClickOutside, basketIsOpen, openBasket } = this.props;
 
-        document.body.style.overflowY = (!active) ? 'hidden' : 'visible';
-        this.setState(state => ({ active: !state.active }));
+        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
 
-        if (!active && !outsideClickEnabled) {
-            this.props.turnOnClickOutside(this, this.handlePopupClose);
+        if (!basketIsOpen && !outsideClickEnabled) {
+            turnOnClickOutside(this, this.handlePopupClose);
         }
+        openBasket();
+    }
+
+    handleCloseBasket = () => {
+        this.props.closeBasket();
     }
 
     quantityChange = (value) => {
@@ -99,7 +110,7 @@ class Cart extends Component {
     }
 
     handleCheckout = () => {
-        this.setState(state => ({ ...state, active: !state.active }));
+        this.props.closeBasket();
     }
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
@@ -111,18 +122,18 @@ class Cart extends Component {
     }
 
     render () {
-        const { langRoute, langMap, lang, basket } = this.props;
-        const { active, quantityValue } = this.state;
+        const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;
+        const { quantityValue } = this.state;
         const text = propOr('cart', {}, langMap);
 
         return (
             <div className={styles.cart}>
-                <div className={styles.iconCartWrapper} onClick={this.handleClick}>
+                <div className={styles.iconCartWrapper} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}>
                     <img className={styles.iconCartImg} src="/src/apps/client/ui/components/Cart/img/cart.svg" alt="cart icon"/>
                     <span className={styles.quantityAll}>{basket.length}</span>
                 </div>
-                <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
-                    <div className={styles.cover} onClick={this.handleClick}/>
+                <div className={classNames(styles.popupContainer, { [styles.active]: basketIsOpen })}>
+                    <div className={styles.cover} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}/>
                     <div className={styles.popup}>
                         <p className={styles.title}>
                             {text.title} {basket.length > 0 &&

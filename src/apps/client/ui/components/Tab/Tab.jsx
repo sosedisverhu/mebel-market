@@ -86,7 +86,7 @@ class Tab extends Component {
                 <div>
                     <Comments />
                 </div>
-            )
+            );
         }
 
         return (

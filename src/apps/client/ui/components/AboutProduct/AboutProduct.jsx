@@ -17,11 +17,14 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import classNames from 'classnames';
 
+import openBasket from '../../../actions/openBasket';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         wishlist: data.wishlist,
-        basket: data.basket
+        basket: data.basket,
+        basketIsOpen: data.basketIsOpen
     };
 };
 
@@ -30,7 +33,8 @@ const mapDispatchToProps = dispatch => {
         setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
         saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
         saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload)),
-        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload))
+        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
+        openBasket: (payload) => dispatch(openBasket(payload))
     };
 };
 
@@ -45,7 +49,10 @@ class AboutProduct extends Component {
         wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
-        deleteFromWishlist: PropTypes.func.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired,
+        basket: PropTypes.array,
+        openBasket: PropTypes.func.isRequired,
+        basketIsOpen: PropTypes.bool.isRequired
     };
 
     state = {
@@ -121,15 +128,21 @@ class AboutProduct extends Component {
     }
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product, quantity } = this.props;
+        const { saveProductsToBasket, product } = this.props;
         const { activeSize } = this.state;
         saveProductsToBasket({
             productId: product.id,
-            quantity,
             properties: {
                 size: activeSize
             }
         });
+    }
+
+    handleOpenBasket = () => {
+        const { basketIsOpen, openBasket } = this.props;
+
+        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
+        openBasket();
     }
 
     render () {
@@ -179,7 +192,7 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={classNames(styles.btnBuy, { [styles.active]: isInBasket })} onClick={this.handleBuyClick}>
+                <button className={classNames(styles.btnBuy, { [styles.active]: isInBasket })} onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
                     {!isInBasket
                         ? text.buy
                         : text.inBasket

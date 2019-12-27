@@ -8,7 +8,7 @@ class Footer extends Component {
             <div className={styles.footer}>
                 <div className={styles.footerContainer}>
                     <div className={styles.iconsWrapper}>
-                        <a href="#" target="_blank"  className={styles.instagramLink}>
+                        <a href="#" target="_blank" className={styles.instagramLink}>
                             <div className={styles.instagram}/>
                         </a>
                         <a href="#" target="_blank" className={styles.facebookLink}>
