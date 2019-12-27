@@ -52,8 +52,9 @@ class AboutProduct extends Component {
         sizes: [],
         activeSize: {},
         sizeListIsOpen: true,
+        selectIsOpen: false,
         isInWishlist: false,
-        selectIsOpen: false
+        isInBasket: false
     };
 
     componentDidMount () {
@@ -65,12 +66,23 @@ class AboutProduct extends Component {
         });
     }
 
-    static getDerivedStateFromProps (props) {
-        const { wishlist, product } = props;
+    static getDerivedStateFromProps (props, state) {
+        const { basket, wishlist, product } = props;
+        let values = {};
 
-        return (wishlist.find(item => item.product.id === product.id))
-            ? { isInWishlist: true }
-            : { isInWishlist: false };
+        if (basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name)) {
+            values.isInBasket = true;
+        } else {
+            values.isInBasket = false;
+        }
+
+        if (wishlist.find(item => item.product.id === product.id)) {
+            values.isInWishlist = true;
+        } else {
+            values.isInWishlist = false;
+        }
+
+        return values;
     }
 
     scrollToTitles = () => {
@@ -122,7 +134,7 @@ class AboutProduct extends Component {
 
     render () {
         const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
 
@@ -167,7 +179,12 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.btnBuy} onClick={this.handleBuyClick}>{text.buy}</button>
+                <button className={classNames(styles.btnBuy, { [styles.active]: isInBasket })} onClick={this.handleBuyClick}>
+                    {!isInBasket
+                        ? text.buy
+                        : text.inBasket
+                    }
+                </button>
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
             </div>
         </div>;

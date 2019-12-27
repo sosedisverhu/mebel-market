@@ -25,7 +25,8 @@ export default {
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
-        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }]
+        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
+        inBasket: 'В корзине'
     },
     breadcrumbs: {
         main: 'Главная'
