@@ -5,14 +5,15 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
-
-import format from 'date-fns/format';
 
 import getProducts from '../../../services/getProducts';
 import getReviews from '../../../services/getReviews';
+import DeleteReviewForm from '../../components/DeleteReviewForm/DeleteReviewForm';
 import Reviews from '../../components/Reviews/Reviews';
-import Typography from '@material-ui/core/Typography';
 
 const headerRows = [
     { id: 'name', label: 'Имя' },
@@ -89,9 +90,6 @@ const materialStyles = theme => ({
     },
     productAvatar: {
         width: '100%'
-    },
-    productName: {
-        align: 'center'
     }
 });
 
@@ -108,25 +106,17 @@ class ReviewsPage extends Component {
         reviews: []
     };
 
-    constructor (...args) {
-        super(...args);
-
-        this.state = {
-            loading: true,
-            searchValue: '',
-            products: [],
-            productName: '',
-            productReviews: null,
-            productReviewsIsRendered: false
-        };
-
-        this.tableCells = [
-            { prop: review => review.user.name },
-            { prop: review => review.user.emailOrPhone },
-            { prop: review => format(review.date, 'HH:mm - dd.MM.yyyy') },
-            { prop: review => review.user.mark }
-        ];
-    }
+    state = {
+        loading: true,
+        searchValue: '',
+        products: [],
+        openedProduct: null,
+        productReviews: [],
+        productReviewsIsRendered: false,
+        reviewsFormIsRendered: true,
+        deleteFormIsOpen: false,
+        deleteReview: null
+    };
 
     componentDidMount () {
         Promise.all([
@@ -135,7 +125,8 @@ class ReviewsPage extends Component {
         ])
             .then(() => {
                 this.setState({
-                    loading: false
+                    loading: false,
+                    newReviews: this.props.reviews.filter(review => !review.checked)
                 });
             });
     }
@@ -143,7 +134,7 @@ class ReviewsPage extends Component {
     onChangeSearch = event => {
         const searchValue = event.key === 'Enter' ? this.state.searchValue : event.target.value;
         const { products, reviews } = this.props;
-        const searchValueFiltered = searchValue.replace(/ /g, '').toUpperCase();
+        const searchValueFiltered = searchValue.trim().toUpperCase();
         const productsWithReviews = products.filter(product => {
             return reviews.filter(review => review.checked)
                 .some(review => review.productId === product.id);
@@ -172,16 +163,60 @@ class ReviewsPage extends Component {
         });
 
         this.setState({
-            productName: product.texts.ru.name,
+            openedProduct: product,
             productReviews,
             productReviewsIsRendered: true
         });
     };
 
+    handleDeleteFormOpen = value => {
+        this.setState({
+            deleteFormIsOpen: true,
+            deleteReview: value
+        });
+    };
+
+    handleDeleteFormClose = () => {
+        this.props.getReviews().then(() => {
+            this.setState({
+                deleteFormIsOpen: false,
+                deleteReview: null
+            });
+        });
+    };
+
+    onOpenReviewForms = () => {
+        this.setState({
+            reviewsFormIsRendered: true
+        });
+    };
+
+    onCloseReviewForms = () => {
+        this.setState({
+            reviewsFormIsRendered: false
+        });
+    };
+
+    upDateReviews = () => {
+        Promise.all([
+            this.props.getReviews(),
+            this.props.getProducts()
+        ])
+            .then(() => {
+                const { reviews } = this.props;
+                const { productReviewsIsRendered, openedProduct } = this.state;
+
+                const productReviews = productReviewsIsRendered ? reviews.filter(review => review.checked && review.productId === openedProduct.id) : [];
+                this.setState({
+                    newReviews: reviews.filter(review => !review.checked),
+                    productReviews
+                });
+            });
+    };
+
     render () {
-        const { classes, reviews, getReviews } = this.props;
-        const { loading, searchValue, products, productReviewsIsRendered, productName, productReviews } = this.state;
-        const newReviews = reviews.filter(review => !review.checked);
+        const { classes } = this.props;
+        const { loading, searchValue, newReviews, products, productReviewsIsRendered, openedProduct, productReviews, deleteFormIsOpen, deleteReview, reviewsFormIsRendered } = this.state;
 
         if (loading) {
             return <div className={classes.loader}>
@@ -193,7 +228,11 @@ class ReviewsPage extends Component {
             <Reviews
                 classes={classes}
                 reviews={newReviews}
+                reviewsIsShow={reviewsFormIsRendered}
                 headerRows={headerRows}
+                onDelete={this.handleDeleteFormOpen}
+                onAllowForms={this.onOpenReviewForms}
+                updateReviews={this.upDateReviews}
                 name='Новые отзывы'
             />
             <TextField
@@ -209,11 +248,16 @@ class ReviewsPage extends Component {
                 ? <Reviews
                     classes={classes}
                     reviews={productReviews}
+                    reviewsIsShow={reviewsFormIsRendered}
                     headerRows={headerRows}
-                    name={`Отзывы к товару ${productName}`}
+                    name={`Отзывы к товару ${openedProduct.texts.ru.name}`}
+                    onDelete={this.handleDeleteFormOpen}
+                    onAllowForms={this.onOpenReviewForms}
+                    updateReviews={this.upDateReviews}
+                    isDeleteButton
                 />
                 : <div className={classes.products}>
-                    {products.map(product => {
+                    {products.length ? products.map(product => {
                         return (
                             <Card
                                 className={classes.productCard}
@@ -223,13 +267,25 @@ class ReviewsPage extends Component {
                                 <img className={classes.productAvatar}
                                     src={product.avatar}
                                     alt=''/>
-                                <Typography variant='h6' id='tableTitle' className={classes.tableTitle}>
+                                <Typography variant='h6' className={classes.tableTitle}>
                                     {product.texts.ru.name}
                                 </Typography>
                             </Card>
                         );
-                    })}
+                    }) : searchValue.length ? <Typography variant='h6'>
+                        {`По запросу «${searchValue}» не найдено товаров с отзывами`}
+                    </Typography> : null}
                 </div>}
+            <Modal open={deleteFormIsOpen} onClose={this.handleDeleteFormOpen} className={classes.modal}>
+                <Paper className={classes.modalContent}>
+                    <DeleteReviewForm
+                        review={deleteReview}
+                        onClose={this.handleDeleteFormClose}
+                        onCloseReviewForm={this.onCloseReviewForms}
+                        updateReviews={this.upDateReviews}
+                    />
+                </Paper>
+            </Modal>
         </div>;
     }
 }
@@ -241,7 +297,7 @@ const mapStateToProps = ({ data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     getReviews: payload => dispatch(getReviews(payload)),
     getProducts: payload => dispatch(getProducts(payload))
 });

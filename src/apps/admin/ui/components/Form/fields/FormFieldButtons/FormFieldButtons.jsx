@@ -8,7 +8,7 @@ import noop from '@tinkoff/utils/function/noop';
 
 const materialStyles = {
     button: {
-        margin: '5px 10px 0 0'
+        margin: '15px 10px 0 0'
     }
 };
 

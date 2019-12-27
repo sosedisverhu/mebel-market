@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
@@ -11,6 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 import TablePagination from '@material-ui/core/TablePagination';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,22 +18,26 @@ import Toolbar from '@material-ui/core/Toolbar';
 import format from 'date-fns/format';
 
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
-import getReviews from '../../../services/getReviews';
 
 const ROWS_PER_PAGE = 10;
 
 class Reviews extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        getReviews: PropTypes.func.isRequired,
+        onDelete: PropTypes.func.isRequired,
+        onAllowForms: PropTypes.func.isRequired,
+        updateReviews: PropTypes.func.isRequired,
         reviews: PropTypes.array,
         headerRows: PropTypes.array.isRequired,
-        name: PropTypes.string
+        name: PropTypes.string,
+        isDeleteButton: PropTypes.bool,
+        reviewsIsShow: PropTypes.bool
     };
 
     static defaultProps = {
         reviews: [],
-        name: 'Отзывы'
+        name: 'Отзывы',
+        isDeleteIcon: false
     };
 
     constructor (...args) {
@@ -65,12 +69,8 @@ class Reviews extends Component {
         }
     }
 
-    handleFormDone = () => {
-        this.props.getReviews()
-            .then(() => this.handleCloseReviewForm());
-    };
-
     handleFormOpen = review => () => {
+        this.props.onAllowForms();
         this.setState({
             formShowed: true,
             editableReview: review
@@ -96,7 +96,7 @@ class Reviews extends Component {
     };
 
     render () {
-        const { classes, reviews, headerRows, name } = this.props;
+        const { classes, reviews, headerRows, name, isDeleteButton, onDelete, reviewsIsShow, updateReviews } = this.props;
         const { editableReview, formShowed, rowsPerPage, page } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, reviews.length - page * rowsPerPage);
 
@@ -146,6 +146,11 @@ class Reviews extends Component {
                                                         className={classes.rowLabel}>
                                                         <EditIcon/>
                                                     </IconButton>
+                                                    {isDeleteButton &&
+                                                    <IconButton onClick={() => onDelete(value)}>
+                                                        <DeleteIcon/>
+                                                    </IconButton>
+                                                    }
                                                 </div>
                                             </TableCell>
                                         </TableRow>
@@ -169,11 +174,15 @@ class Reviews extends Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                 />
             </Paper>
-            <Modal open={formShowed} onClose={this.handleCloseReviewForm} className={classes.modal}>
+            <Modal open={reviewsIsShow && formShowed} onClose={this.handleCloseReviewForm} className={classes.modal}>
                 <Paper className={classes.modalContent}>
                     <ReviewForm
                         review={editableReview}
-                        onDone={this.handleFormDone}
+                        onDone={this.handleCloseReviewForm}
+                        onDelete={onDelete}
+                        handleCloseForm={this.handleCloseReviewForm}
+                        isDeleteButton={isDeleteButton}
+                        updateReviews={updateReviews}
                     />
                 </Paper>
             </Modal>
@@ -181,8 +190,4 @@ class Reviews extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    getReviews: payload => dispatch(getReviews(payload))
-});
-
-export default connect(null, mapDispatchToProps)(Reviews);
+export default Reviews;

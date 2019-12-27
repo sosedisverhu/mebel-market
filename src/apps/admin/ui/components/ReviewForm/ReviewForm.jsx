@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import editReview from '../../../services/editReview';
+import deleteReview from '../../../services/deleteReviewByIds';
 
 import noop from '@tinkoff/utils/function/noop';
 import format from 'date-fns/format';
@@ -13,12 +14,17 @@ import getSchema from './ReviewFormSchema';
 class ReviewForm extends Component {
     static propTypes = {
         review: PropTypes.object.isRequired,
-        editReview: PropTypes.func,
-        onDone: PropTypes.func
+        editReview: PropTypes.func.isRequired,
+        updateReviews: PropTypes.func.isRequired,
+        onDone: PropTypes.func,
+        onDelete: PropTypes.func,
+        isDeleteButton: PropTypes.bool
     };
 
     static defaultProps = {
-        onDone: noop
+        onDone: noop,
+        onDelete: noop,
+        isDeleteButton: false
     };
 
     constructor (props) {
@@ -63,30 +69,33 @@ class ReviewForm extends Component {
         const reviewPayload = this.getReviewPayload(values);
 
         this.props.editReview({ ...reviewPayload, checked: true })
-            .then(this.props.onDone);
+            .then(this.props.onDone)
+            .then(this.props.updateReviews);
     };
 
     render () {
-        const formatOrderDate = this.formatReviewDate(this.props.review);
+        const { isDeleteButton, review, onDelete } = this.props;
+        const formatOrderDate = this.formatReviewDate(review);
         const { emailOrPhone } = this.initialValues;
 
-        return <div>
-            <Form
-                initialValues={this.initialValues}
-                onSubmit={this.handleSubmit}
-                schema={getSchema({
-                    data: {
-                        date: formatOrderDate,
-                        contact: emailOrPhone
-                    }
-                })}
-            />
-        </div>;
+        return <Form
+            initialValues={this.initialValues}
+            onSubmit={this.handleSubmit}
+            schema={getSchema({
+                data: {
+                    date: formatOrderDate,
+                    contact: emailOrPhone,
+                    isDeleteButton,
+                    onDelete: () => onDelete(review)
+                }
+            })}
+        />;
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    editReview: payload => dispatch(editReview(payload))
+const mapDispatchToProps = dispatch => ({
+    editReview: payload => dispatch(editReview(payload)),
+    deleteReview: payload => dispatch(deleteReview(payload))
 });
 
 export default connect(null, mapDispatchToProps)(ReviewForm);
