@@ -16,7 +16,7 @@ router.route('/all')
 router.route('/by-ids')
     .post(getAvailableProductsByIds);
 
-router.route('/search')
+router.route('/find')
     .get(availableProductsSearch);
 
 export default router;
