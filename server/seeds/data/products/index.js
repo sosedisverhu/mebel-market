@@ -59,6 +59,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -129,6 +130,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -199,6 +201,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -269,6 +272,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -339,6 +343,7 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -409,6 +414,7 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -479,6 +485,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -549,6 +556,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -619,6 +627,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -689,6 +698,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -759,6 +769,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },

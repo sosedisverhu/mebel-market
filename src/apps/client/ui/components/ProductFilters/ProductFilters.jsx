@@ -38,17 +38,16 @@ const SORTING_OPTIONS = [
         },
         id: 'priceMax',
         sort: (product, nextProduct) => nextProduct.price - product.price
+    },
+    {
+        texts: {
+            ru: 'По популярности',
+            ua: 'За популярністю'
+        },
+        text: 'По популярности',
+        id: 'view',
+        sort: (product, nextProduct) => nextProduct.views - product.views
     }
-    // ,
-    // {
-    //     texts: {
-    //         ru: 'По популярности',
-    //         ua: 'За популярністю'
-    //     },
-    //     text: 'По популярности',
-    //     id: 'view',
-    //     sort: (product, nextProduct) => nextProduct.views - product.views
-    // }
 ];
 
 class ProductFilters extends Component {

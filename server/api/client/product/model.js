@@ -13,6 +13,7 @@ const Product = new Schema({
             seoKeywords: { type: String }
         }
     },
+    views: { type: Number, required: true },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
     sizes: { type: Array, required: true },
     avatar: { type: String },
