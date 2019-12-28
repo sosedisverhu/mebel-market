@@ -4,6 +4,8 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
+import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
+import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -42,6 +44,35 @@ export default function ({ data: { title } = {} } = {}) {
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните alias' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'filtersTitle',
+                schema: {
+                    label: 'Фильтры для категории',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldFilters,
+                name: 'filters',
+                id: 'testId',
+                valueLangStructure: [{
+                    id: 'notDepend',
+                    type: 'notDepend',
+                    name: 'depend',
+                    options: [{
+                        id: 'notDepend',
+                        name: 'depend'
+                    }]
+                }],
+                validators: [
+                    { name: 'filters' }
                 ]
             },
             {

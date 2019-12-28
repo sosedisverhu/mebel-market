@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
-import saveReview from '../../../services/client/saveReview';
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
+import Comments from '../Comments/Comments';
+
 import styles from './Tab.css';
 
 const mapStateToProps = ({ data, application }) => {
@@ -21,7 +22,7 @@ const mapStateToProps = ({ data, application }) => {
                 title: 'Характеристики'
             },
             {
-                id: 'reviews',
+                id: 'comments',
                 title: 'Отзывы'
             }
         ],
@@ -31,8 +32,7 @@ const mapStateToProps = ({ data, application }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
-        saveReview: (...payload) => dispatch(saveReview(...payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
     };
 };
 
@@ -42,8 +42,7 @@ class Tab extends Component {
         tabs: PropTypes.array.isRequired,
         product: PropTypes.object.isRequired,
         scroll: PropTypes.bool.isRequired,
-        setScrollToCharacteristic: PropTypes.func.isRequired,
-        saveReview: PropTypes.func.isRequired
+        setScrollToCharacteristic: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -63,10 +62,6 @@ class Tab extends Component {
         this.tabTitles = React.createRef();
     }
 
-    handleChange (id) {
-        this.setState({ activeId: id });
-    }
-
     componentWillReceiveProps (nextProps) {
         if (nextProps.scroll !== this.props.scroll && nextProps.scroll) {
             this.setState({ activeId: 'characteristic' }, () => {
@@ -76,11 +71,14 @@ class Tab extends Component {
         }
     }
 
+    handleChange (id) {
+        this.setState({ activeId: id });
+    }
+
     getContent () {
-        const { activeId, userName, userPhone, userComment, userMark } = this.state;
         const { product, lang } = this.props;
 
-        switch (activeId) {
+        switch (this.state.activeId) {
         case 'description': {
             return (
                 <div className={styles.description}>
@@ -99,88 +97,11 @@ class Tab extends Component {
                     })}
                 </div>);
         }
-        case 'reviews': {
-            return (
-                <div>
-                    <form onSubmit={this.handleSubmit}>
-                        <p><label>
-                            <input
-                                type="text"
-                                name='userName'
-                                value={userName}
-                                onChange={this.onChangeName}
-                            />
-                        </label></p>
-                        <p><label>
-                            <input
-                                type="text"
-                                name='usePhone'
-                                value={userPhone}
-                                onChange={this.onChangePhone}
-                            />
-
-                        </label></p>
-                        <p><label>
-                            <input
-                                type="text"
-                                name='userComment'
-                                value={userComment}
-                                onChange={this.onChangeComment}
-                            />
-                        </label></p>
-                        <p><label>
-                            <input
-                                type="text"
-                                name='mark'
-                                value={userMark}
-                                onChange={this.onChangeUserMark}
-                            />
-                        </label></p>
-                        <button>Submit</button>
-                    </form>
-                </div>);
+        case 'comments': {
+            return <Comments productId={product.id}/>;
         }
         }
     }
-
-    handleSubmit = event => {
-        event.preventDefault();
-        const { userName, userPhone, userComment, userMark } = this.state;
-
-        this.props.saveReview({
-            user: {
-                name: userName,
-                emailOrPhone: userPhone,
-                comment: userComment,
-                mark: userMark
-            },
-            productId: this.props.product.id
-        });
-    };
-
-    onChangeName = event => {
-        this.setState({
-            userName: event.target.value
-        });
-    };
-
-    onChangePhone = event => {
-        this.setState({
-            userPhone: event.target.value
-        });
-    };
-
-    onChangeComment = event => {
-        this.setState({
-            userComment: event.target.value
-        });
-    };
-
-    onChangeUserMark = event => {
-        this.setState({
-            userMark: event.target.value
-        });
-    };
 
     render () {
         const { tabs } = this.props;

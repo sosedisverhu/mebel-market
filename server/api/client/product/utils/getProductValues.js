@@ -4,7 +4,6 @@ const VALUES = [
     'id',
     'texts',
     'characteristics',
-    'warranty',
     'sizes',
     'avatar',
     'files',
@@ -15,7 +14,9 @@ const VALUES = [
     'discount',
     'categoryId',
     'subCategoryId',
-    'alias'
+    'alias',
+    'categoryFilters',
+    'subCategoryFilters'
 ];
 
 export default function getProductValues (product) {

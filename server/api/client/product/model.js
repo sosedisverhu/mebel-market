@@ -14,7 +14,6 @@ const Product = new Schema({
         }
     },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
-    warranty: { type: Number, required: true },
     sizes: { type: Array, required: true },
     avatar: { type: String },
     files: [{ type: String, required: true }],
@@ -25,7 +24,15 @@ const Product = new Schema({
     price: { type: Number, required: true },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
-    alias: { type: String, required: true, unique: true }
+    alias: { type: String, required: true, unique: true },
+    categoryFilters: [{
+        id: { type: String, required: true },
+        value: { type: Object, required: true }
+    }],
+    subCategoryFilters: [{
+        id: { type: String, required: true },
+        value: { type: Object, required: true }
+    }]
 });
 
 export default mongoose.model('Product', Product);

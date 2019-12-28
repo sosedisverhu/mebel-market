@@ -58,7 +58,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'classic',
@@ -117,7 +127,17 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
+            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'glory',
@@ -176,12 +196,91 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
+            { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
+            { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
+    },
+    {
+        alias: 'glory',
+        categoryId: 'category0',
+        id: '3',
+        subCategoryId: 'subCategory2',
+        characteristics: {
+            ru: {
+                characteristics: [{
+                    name: 'Цвет',
+                    id: 'characteristic0',
+                    value: 'Бежевый, Белый, Шоколад, Черный бархат'
+                }]
+            },
+            ua: {
+                characteristics: [{
+                    name: 'Колір',
+                    id: 'characteristic1',
+                    value: 'Бежевый, Білий, Шоколад, Чорний оксамит'
+                }]
+            }
+
+        },
+        hidden: false,
+        discount: 0,
+        discountPrice: 3799,
+        price: 3799,
+        avatar: '/server/seeds/data/products/images/Glory.png',
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
+        sizes: [
+            { name: 'M', id: 'sizeM' },
+            { name: 'L', id: 'sizeL' },
+            { name: 'XL', id: 'sizeXL' }
+        ],
+        texts: {
+            ru: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                name: ' Кровать « Глория »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            },
+            ua: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                name: 'Ліжко « Глорія »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            }
+        },
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'standart',
         categoryId: 'category1',
-        id: '3',
+        id: '4',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -235,12 +334,22 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'eko-42',
         categoryId: 'category1',
-        id: '4',
+        id: '5',
         subCategoryId: 'subCategory4',
         characteristics: {
             ru: {
@@ -294,12 +403,22 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '5',
+        id: '6',
         subCategoryId: 'subCategory5',
         characteristics: {
             ru: {
@@ -353,12 +472,22 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '6',
+        id: '7',
         subCategoryId: 'subCategory6',
         characteristics: {
             ru: {
@@ -412,12 +541,22 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '7',
+        id: '8',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -471,12 +610,22 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
         categoryId: 'category2',
-        id: '8',
+        id: '9',
         subCategoryId: 'subCategory7',
         characteristics: {
             ru: {
@@ -530,12 +679,22 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     },
     {
         alias: 'ultra-lux-P',
         categoryId: 'category3',
-        id: '9',
+        id: '10',
         subCategoryId: 'subCategory8',
         characteristics: {
             ru: {
@@ -589,6 +748,16 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
-        warranty: 12
+        categoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
+            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
+            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
+            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+        ]
     }
 ];

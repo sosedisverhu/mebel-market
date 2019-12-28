@@ -5,6 +5,9 @@ import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
+import reduceObj from '@tinkoff/utils/object/reduce';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import isObject from '@tinkoff/utils/is/plainObject';
 
 import classNames from 'classnames';
 
@@ -21,13 +24,8 @@ import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
 
 const PRODUCTS_VALUES = ['name', 'hidden'];
-
-const mapDispatchToProps = (dispatch) => ({
-    saveProduct: payload => dispatch(saveProduct(payload)),
-    editProduct: payload => dispatch(editProduct(payload)),
-    updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
-    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
-});
+const CATEGORY_FILTER_NAME_REGEX = /categoryFilter-/g;
+const SUB_CATEGORY_FILTER_NAME_REGEX = /subCategoryFilter-/g;
 
 const materialStyles = theme => ({
     error: {
@@ -103,7 +101,6 @@ class ProductForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
-            warranty: product.warranty || '',
             sizes: product.sizes || [],
             avatar: { files: product.avatar ? [product.avatar] : [] },
             files: { files: product.files ? product.files : [] },
@@ -116,19 +113,37 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
             lang: 'ru',
+            ...(product.categoryFilters || [])
+                .reduce((categoryFilters, categoryFilter) => ({
+                    ...categoryFilters,
+                    [`categoryFilter-${categoryFilter.id}`]: isObject(categoryFilter.value.ru)
+                        ? categoryFilter.value.ru.name : categoryFilter.value.ru
+                }), {}),
+            ...(product.subCategoryFilters || [])
+                .reduce((subCategoryFilters, subCategoryFilter) => ({
+                    ...subCategoryFilters,
+                    [`subCategoryFilter-${subCategoryFilter.id}`]: isObject(subCategoryFilter.value.ru)
+                        ? subCategoryFilter.value.ru.name : subCategoryFilter.value.ru
+                }), {}),
             ...pick(PRODUCTS_VALUES, product)
         };
         this.id = prop('id', product);
+
+        const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
+        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories[0]);
+
         this.state = {
             lang: 'ru',
             activeCategory,
             categoryHidden,
-            errorText: ''
+            errorText: '',
+            categoryFilters,
+            subCategoryFilters
         };
     }
 
-    getProductPayload = (
-        {
+    getProductPayload = values => {
+        const {
             ru_name: ruName,
             ua_name: uaName,
             ru_description: ruDescription,
@@ -141,7 +156,6 @@ class ProductForm extends Component {
             ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
-            warranty,
             sizes,
             hidden,
             discountPrice,
@@ -151,7 +165,84 @@ class ProductForm extends Component {
             subCategoryId,
             id,
             alias
-        }) => {
+        } = values;
+
+        const activeCategory = this.props.categories.find(category => category.id === categoryId);
+        const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
+
+        const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
+            if (CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
+                const id = filterName.replace(CATEGORY_FILTER_NAME_REGEX, '');
+                const filterIndex = findIndex(filter => filter.id === id, this.state.categoryFilters);
+                if (filterIndex === -1) {
+                    return categoryFilters;
+                }
+                const filterType = this.state.categoryFilters[filterIndex].type;
+                let value;
+
+                if (filterType === 'range') {
+                    value = {
+                        ua: +filterValue,
+                        ru: +filterValue
+                    };
+                } else {
+                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.categoryFilters[filterIndex].options);
+
+                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+
+                        return resultFilterValue;
+                    }, {}, activeCategory.filters);
+                }
+
+                return [
+                    ...categoryFilters,
+                    {
+                        id: filterName.replace(CATEGORY_FILTER_NAME_REGEX, ''),
+                        value
+                    }
+                ];
+            }
+            return categoryFilters;
+        }, [], values);
+
+        const subCategoryFilters = reduceObj((subCategoryFilters, filterValue, filterName) => {
+            if (SUB_CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
+                const id = filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, '');
+                const filterIndex = findIndex(filter => filter.id === id, this.state.subCategoryFilters);
+                if (filterIndex === -1) {
+                    return subCategoryFilters;
+                }
+                const filterType = this.state.subCategoryFilters[filterIndex].type;
+                let value;
+
+                if (filterType === 'range') {
+                    value = {
+                        ua: +filterValue,
+                        ru: +filterValue
+                    };
+                } else {
+                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+
+                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+
+                        return resultFilterValue;
+                    }, {}, activeSubCategory.filters);
+                }
+
+                return [
+                    ...subCategoryFilters,
+                    {
+                        id: filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, ''),
+                        value
+                    }
+                ];
+            }
+
+            return subCategoryFilters;
+        }, [], values);
+
         return {
             texts: {
                 ru: {
@@ -177,7 +268,6 @@ class ProductForm extends Component {
                     characteristics: uaCharacteristics
                 }
             },
-            warranty,
             sizes,
             hidden,
             discountPrice,
@@ -186,7 +276,9 @@ class ProductForm extends Component {
             categoryId,
             subCategoryId,
             id,
-            alias
+            alias,
+            categoryFilters,
+            subCategoryFilters
         };
     };
 
@@ -255,7 +347,8 @@ class ProductForm extends Component {
             const { lang } = this.state;
 
             this.setState({
-                categoryHidden: activeCategory.hidden
+                categoryHidden: activeCategory.hidden,
+                filters: pathOr(['filters', 'ru'], [], activeCategory)
             });
 
             this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
@@ -276,7 +369,7 @@ class ProductForm extends Component {
 
     render () {
         const { classes } = this.props;
-        const { categoryHidden, errorText } = this.state;
+        const { categoryHidden, errorText, categoryFilters, subCategoryFilters } = this.state;
 
         return <div>
             <Form
@@ -287,7 +380,9 @@ class ProductForm extends Component {
                         title: this.id ? 'Редактирование товара' : 'Добавление товара',
                         categoriesOptions: this.categoriesOptions,
                         subCategoriesOptions: this.subCategoriesOptions,
-                        categoryHidden
+                        categoryHidden,
+                        categoryFilters,
+                        subCategoryFilters
                     }
                 })}
                 onChange={this.handleChange}
@@ -315,5 +410,12 @@ class ProductForm extends Component {
         </div>;
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    saveProduct: payload => dispatch(saveProduct(payload)),
+    editProduct: payload => dispatch(editProduct(payload)),
+    updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
+    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
+});
 
 export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(ProductForm));
