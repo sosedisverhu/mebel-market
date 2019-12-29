@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import getSchema from './QuizFormSchema';
 import saveQuiz from '../../../services/saveQuiz';
 import editQuiz from '../../../services/editQuiz';
-import updateQuizLogo from '../../../services/updateQuizLogo';
+import updateQuizFiles from '../../../services/updateQuizFiles';
 
 import Form from '../Form/Form';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -25,7 +25,7 @@ const QUIZZES_VALUES = ['name', 'hidden', 'texts'];
 const mapDispatchToProps = (dispatch) => ({
     saveQuiz: payload => dispatch(saveQuiz(payload)),
     editQuiz: payload => dispatch(editQuiz(payload)),
-    updateQuizLogo: (...payload) => dispatch(updateQuizLogo(...payload))
+    updateQuizFiles: (...payload) => dispatch(updateQuizFiles(...payload))
 });
 
 const materialStyles = theme => ({
@@ -55,7 +55,7 @@ class QuizForm extends Component {
         classes: PropTypes.object.isRequired,
         onDone: PropTypes.func,
         quiz: PropTypes.object,
-        updateQuizLogo: PropTypes.func.isRequired
+        updateQuizFiles: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -74,10 +74,6 @@ class QuizForm extends Component {
             ru_name: ru.name || '',
             ua_name: ua.name || '',
             hidden: quiz.hidden || false,
-            logo: {
-                files: quiz.logo ? [quiz.logo] : [],
-                removedFiles: []
-            },
             ru_steps: pathOr(['steps', 'ru'], '', quiz) || [],
             ua_steps: pathOr(['steps', 'ua'], '', quiz) || [],
             ...pick(QUIZZES_VALUES, quiz)
@@ -98,10 +94,10 @@ class QuizForm extends Component {
         return {
             texts: {
                 ru: {
-                    name: ruName,
+                    name: ruName
                 },
                 ua: {
-                    name: uaName,
+                    name: uaName
                 }
             },
             hidden,
@@ -109,36 +105,51 @@ class QuizForm extends Component {
             steps: {
                 ua: uaSteps,
                 ru: ruSteps
-            },
+            }
         };
     };
 
     handleSubmit = values => {
         const quizPayload = this.getQuizPayload(values);
-        const { editQuiz, saveQuiz, onDone } = this.props;
-        console.log('values', values);
-        console.log('quizPayload', quizPayload);
-
+        const { editQuiz, saveQuiz, onDone, updateQuizFiles } = this.props;
         (this.id ? editQuiz({ ...quizPayload, id: this.id }) : saveQuiz(quizPayload))
-            // .then(quiz => {
-            //     const { files } = values.logo;
+            .then(quiz => {
+                const formData = new FormData();
+                const removedFiles = [];
+                const oldFiles = [];
+                const id = pathOr(['id'], this.id, quiz);
 
-            //     if (files[0].content) {
-            //         const formData = new FormData();
+                values.ru_steps.forEach((step, i) => {
+                    step.options.forEach((option) => {
+                        if (option.file.files.length) {
+                            const file = option.file.files[0];
+                            if (typeof (file) === 'object') {
+                                if (file.content) {
+                                    formData.append(`quiz-option-${option.id}-file-${i}`, file.content);
+                                } else {
+                                    oldFiles.push({
+                                        path: file.path,
+                                        index: i
+                                    });
+                                }
+                            }
+                        }
+                    });
+                });
 
-            //         formData.append(`quiz-${quiz.id}-logo`, files[0].content);
-
-            //         return this.props.updateQuizLogo(formData, quiz.id);
-            //     }
-            // })
+                formData.append('removedFiles', JSON.stringify(removedFiles));
+                formData.append('oldFiles', JSON.stringify(oldFiles));
+                formData.append('quiz', JSON.stringify(quiz));
+                return updateQuizFiles(formData, id);
+            })
             .then(() => {
                 onDone();
+            })
+            .catch(() => {
+                this.setState({
+                    errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
+                });
             });
-            // .catch(error => {
-            //     this.setState({
-            //         errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
-            //     });
-            // });
     };
 
     handleHideFailMessage = () => {
@@ -150,8 +161,6 @@ class QuizForm extends Component {
     render () {
         const { classes } = this.props;
         const { errorText } = this.state;
-
-        console.log('this.initialValues 2', this.initialValues);
 
         return <div>
             <Form
@@ -178,7 +187,7 @@ class QuizForm extends Component {
                     message={
                         <span id='client-snackbar' className={classes.message}>
                             <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
-                            { errorText }
+                            {errorText}
                         </span>
                     }
                 />

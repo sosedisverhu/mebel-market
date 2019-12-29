@@ -7,4 +7,3 @@ export const // eslint-disable-line one-var
     SET_FILTERED_ARTICLES = 'SET_FILTERED_ARTICLES',
     SET_PARTNERS = 'SET_PARTNERS',
     SET_QUIZZES = 'SET_QUIZZES';
-

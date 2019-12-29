@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
         return { ...state, subCategories: action.payload };
     case SET_PARTNERS:
         return { ...state, partners: action.payload };
-        case SET_QUIZZES:
+    case SET_QUIZZES:
         return { ...state, quizzes: action.payload };
     default:
         return state;

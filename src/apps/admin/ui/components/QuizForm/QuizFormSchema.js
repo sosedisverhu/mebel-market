@@ -4,9 +4,7 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
-import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 import FormFieldQuizSteps from '../Form/fields/FormFieldQuizSteps/FormFieldQuizSteps';
-import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -40,7 +38,7 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'name',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Название'
+                    label: 'Название опроса'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните название опроса' } }
@@ -55,7 +53,7 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'steps-title',
                 schema: {
                     label: 'Шаги опроса',
-                    variant: 'h5'
+                    variant: 'h6'
                 }
             },
             {
@@ -66,18 +64,28 @@ export default function ({ data: { title } = {} } = {}) {
                     id: 'notDepend',
                     options: [{
                         id: 'notDepend',
-                        name: 'depend'
-                    }]                    
+                        name: 'depend',
+                        file: 'notDepend'
+                    }]
                 }],
                 schema: {
                     name: 'Название шага',
-                    value: 'Значения',                    
-                    name2: 'Опции',                    
+                    value: 'Значения',
+                    name2: 'Опции',
                     variant2: 'h5',
                     labelInput: 'Название опции'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Добавьте шаги опроса' } }
+                    { name: 'required', options: { text: 'Добавьте шаги опроса' } },
+                    {
+                        name: 'quizSteps',
+                        options: {
+                            errorName: 'Заполните название шага',
+                            errorOptions: 'Добавьте опции',
+                            errorOptionName: 'Добавьте название опции',
+                            errorOptionFile: 'Добавьте картинку опции'
+                        }
+                    }
                 ]
             },
             {

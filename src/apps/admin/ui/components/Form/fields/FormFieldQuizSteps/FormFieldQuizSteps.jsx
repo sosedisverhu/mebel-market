@@ -20,6 +20,8 @@ import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../../../utils/arrayMove';
 
+import FormFieldFiles from '../FormFieldFiles/FormFieldFiles';
+
 const materialStyles = {
     step: {
         flexWrap: 'nowrap',
@@ -31,13 +33,6 @@ const materialStyles = {
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '210px'
-    },
-    stepGroup: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        flexDirection: 'column'
     },
     stepField: {
         width: '100%'
@@ -119,37 +114,51 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-// Options Start
-const Option =
-    SortableElement(({ stepIndex, optionIndex, option, validationMessage, handleOptionDelete, handleOptionChange, classes, schema  }) => (
-        <FormGroup className={classes.step} row>
+class Option extends Component {
+    static propTypes = {
+        classes: PropTypes.object.isRequired,
+        value: PropTypes.array,
+        schema: PropTypes.object,
+        stepIndex: PropTypes.number,
+        optionIndex: PropTypes.number,
+        handleOptionDelete: PropTypes.func,
+        handleOptionChange: PropTypes.func,
+        option: PropTypes.object
+    };
+
+    render () {
+        const { stepIndex, optionIndex, option, handleOptionDelete, handleOptionChange, classes, schema } = this.props;
+        return <FormGroup className={classes.step} row>
             <div className={classes.stepGroup}>
-                <ButtonSortable imageClassName={classes.buttonSortable} />
                 <div className={classes.optionField}>
                     <TextField
                         className={classes.stepField}
                         label={schema.labelInput || ''}
-                        value={option.labelInput || ''}
+                        value={option.name || ''}
                         onChange={handleOptionChange(stepIndex, optionIndex, 'name')}
                         margin='normal'
                         variant='outlined'
-                        error={!!validationMessage}
                     />
-                    <div>Filed Add Img</div>
+                    <FormFieldFiles
+                        schema={{ max: 1 }}
+                        onChange={handleOptionChange(stepIndex, optionIndex, 'file')}
+                        value={option.file}
+                    />
                 </div>
                 <IconButton aria-label='Delete' onClick={handleOptionDelete(stepIndex, optionIndex)}>
                     <DeleteIcon />
                 </IconButton>
             </div>
-        </FormGroup>
-    ));
+        </FormGroup>;
+    }
+}
 
 const Options = SortableContainer(({ options, classes, ...rest }) =>
     <div>
         {options.map((option, i) => {
             return <Option key={i}
                 index={i}
-                optionIndex={i}                
+                optionIndex={i}
                 option={option}
                 {...rest}
                 classes={classes}
@@ -157,10 +166,18 @@ const Options = SortableContainer(({ options, classes, ...rest }) =>
         })}
     </div>
 );
-// Options End
 
 const Step =
-    SortableElement(({ stepIndex, step, validationMessage, handleStepDelete, handleStepChange, handleOptionAdd, onDragEnd, handleOptionChange, handleOptionDelete, classes, schema }) => (
+    SortableElement(({
+        stepIndex,
+        step,
+        handleStepDelete,
+        handleStepChange,
+        handleOptionAdd,
+        handleOptionChange,
+        handleOptionDelete,
+        classes,
+        schema }) => (
         <FormGroup className={classes.step} row>
             <div className={classes.stepGroup}>
                 <ButtonSortable imageClassName={classes.buttonSortable} />
@@ -172,7 +189,6 @@ const Step =
                         onChange={handleStepChange('name', stepIndex)}
                         margin='normal'
                         variant='outlined'
-                        error={!!validationMessage}
                     />
                     <div className={classes.optionsWrap}>
                         <Typography variant={schema.variant2}>{schema.name2}</Typography>
@@ -181,10 +197,8 @@ const Step =
                             options={step.options}
                             handleOptionDelete={handleOptionDelete}
                             handleOptionChange={handleOptionChange}
-                            onSortEnd={onDragEnd}
                             classes={classes}
                             useDragHandle
-                            validationMessage={validationMessage}
                             schema={schema}
                             stepIndex={stepIndex}
                         />
@@ -271,7 +285,7 @@ class FormFieldQuizSteps extends Component {
             {
                 id: uniqid(),
                 name: '',
-                img: ''
+                file: {}
             }];
 
         this.props.onChange(value);
@@ -280,9 +294,15 @@ class FormFieldQuizSteps extends Component {
     handleOptionChange = (stepIndex, optionIndex, prop) => event => {
         const { value } = this.props;
 
-        value[stepIndex].options[optionIndex][prop] = event.target.value;
+        if (prop === 'name') {
+            value[stepIndex].options[optionIndex][prop] = event.target.value;
+            this.props.onChange(value);
+        }
 
-        this.props.onChange(value);
+        if (prop === 'file') {
+            value[stepIndex].options[optionIndex][prop] = event;
+            this.props.onChange(value);
+        }
     };
 
     handleOptionDelete = (stepIndex, optionIndex) => () => {
@@ -299,10 +319,8 @@ class FormFieldQuizSteps extends Component {
         this.props.onChange(arrayMove(value, oldIndex, newIndex));
     };
 
-    render() {
+    render () {
         const { classes, value, validationMessage, schema } = this.props;
-
-        console.log('this.props', this.props);
 
         return <div>
             <Steps

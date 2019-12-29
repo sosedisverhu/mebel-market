@@ -6,7 +6,7 @@ import getQuizzes from './services/getQuizzes';
 import saveQuiz from './services/saveQuiz';
 import editQuiz from './services/editQuiz';
 import deleteByIds from './services/deleteByIds';
-import updateLogo from './services/updateLogo';
+import updateFiles from './services/updateFiles';
 import findQuizzesByName from './services/findQuizzesByName';
 
 const router = express.Router();
@@ -25,8 +25,8 @@ router.route('/edit')
 router.route('/delete-few')
     .post(deleteByIds);
 
-router.route('/update-logo')
-    .post(updateLogo);
+router.route('/update-files')
+    .post(updateFiles);
 
 router.route('/find')
     .get(findQuizzesByName);
