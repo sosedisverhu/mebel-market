@@ -1,6 +1,6 @@
 
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
 .categoriesWrap {
@@ -33,7 +33,7 @@
     }
 }
 
-.imgWrap {    
+.imgWrap {
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -51,7 +51,7 @@
 
 .title {
     font: 24px/28px RoundedElegance;
-    color: black;
+    color: blackLight;
     position: absolute;
     left: 0;
     bottom: 30px;
@@ -67,7 +67,7 @@
         content: '';
         width: 30px;
         height: 3px;
-        background: black;
+        background: blackLight;
         padding-left: 18px;
     }
 

@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .deliveryAndPayment {
@@ -35,7 +35,8 @@
     margin-top: 30px;
     font-size: 24px;
     line-height: 28px;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     position: relative;
 
     @media (max-width: 768px) {
@@ -56,7 +57,7 @@
         right: calc(100% + 40px);
         width: 287px;
         height: 2px;
-        background-color: black;
+        background-color: blackLight;
 
         @media (max-width: 950px) {
             width: 200px;
@@ -86,6 +87,7 @@
     display: flex;
     font-size: 14px;
     line-height: 16px;
+    color: blackLight;
 
     @media (max-width: 600px) {
         flex-direction: column;
@@ -113,7 +115,8 @@
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 10px;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 
     @media (max-width: 768px) {
         font-size: 16px;
@@ -134,7 +137,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: black;
+        background-color: blackLight;
     }
 }
 

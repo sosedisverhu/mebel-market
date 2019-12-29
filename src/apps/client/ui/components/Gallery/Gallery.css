@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 
@@ -30,7 +30,7 @@
     right: 0;
     font: 18px/21px RoundedElegance;
     color: whiteBasic;
-    background: red;
+    background: redBasic;
 }
 
 .mainImg {

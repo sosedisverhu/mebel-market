@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import propOr from '@tinkoff/utils/object/propOr';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './Header.css';
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
@@ -121,11 +121,34 @@ class Header extends Component {
                             </Link>
                         </div>
                         <div className={styles.menuTop}>
-                            <Link className={styles.menuItemTop}
-                                to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/partners`}>{text.partners}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/articles`}>{text.articles}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/delivery-and-payment`}
+                            >
+                                {text.deliveryAndPayment}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/partners`}
+                            >
+                                {text.partners}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/articles`}
+                            >
+                                {text.articles}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/contacts`}
+                            >
+                                {text.contacts}
+                            </NavLink>
                         </div>
                         <div className={styles.headerTopRight}>
                             <form className={styles.search} onSubmit={this.handleSearchSubmit}>
@@ -148,13 +171,14 @@ class Header extends Component {
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
                         {categories.map((category) => {
-                            return <Link
+                            return <NavLink
                                 className={styles.menuItemBottom}
+                                activeClassName={styles.active}
                                 to={`${langRoute}/${category.alias}`}
                                 key={category.id}
                             >
                                 {category.texts[lang].name}
-                            </Link>;
+                            </NavLink>;
                         })}
                         <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`}
                             to={`${langRoute}/`}>

@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value blackBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 
 .footer {
@@ -54,7 +54,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: blackBasic;
+    color: blackLight;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,7 +73,7 @@
 .stubbsText {
     font-family: HelveticaNeueCyrBold;
     text-decoration: none;
-    color: blackBasic;
+    color: blackLight;
     margin-top: 2px;
     padding-bottom: 2px;
 
@@ -133,7 +133,7 @@
     font-size: 14px;
     line-height: 16px;
     margin-top: 10px;
-    color: blackBasic;
+    color: blackLight;
 
     @media (max-width: 992px) {
         margin-bottom: 10px;

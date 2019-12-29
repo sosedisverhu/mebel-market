@@ -24,6 +24,9 @@ import adminCategoryApi from './api/admin/category';
 import clientCategoryApi from './api/client/category';
 import adminSubCategoryApi from './api/admin/subCategory';
 import clientSubCategoryApi from './api/client/subCategory';
+import clientUserProductsApi from './api/client/userProducts';
+import adminSeoApi from './api/admin/seo';
+import clientSeoApi from './api/client/seo';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -70,6 +73,9 @@ app.use('/api/client/partner', clientPartnerApi);
 app.use('/api/admin/quiz', adminQuizApi);
 app.use('/api/client/quiz', clientQuizApi);
 app.use('/api/admin/files', adminFilesApi);
+app.use('/api/client/user-products', clientUserProductsApi);
+app.use('/api/admin/seo', adminSeoApi);
+app.use('/api/client/seo', clientSeoApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

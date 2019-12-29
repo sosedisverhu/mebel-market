@@ -46,19 +46,22 @@ export default {
         title: 'Избранное:',
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
-        cartBtn: 'В корзину'
+        cartBtn: 'В корзину',
+        noProduct: 'Вы не добавили в избранное ни одного товара'
     },
     cart: {
         title: 'Корзина:',
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
-        continueShopping: 'Продолжить покупки'
+        continueShopping: 'Продолжить покупки',
+        noProduct: 'Вы не добавили в корзину ни одного товара'
     },
     productsPage: {
         filterBtn: 'Фильтры',
         results: 'Результатов',
-        popular: 'Популярные'
+        popular: 'Популярные',
+        price: 'Цена'
     },
     aboutProductTop: {
         warranty: 'Гарантия'
@@ -125,5 +128,14 @@ export default {
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
         toMain: 'На главную'
+    },
+    comments: {
+        showAll: 'Показать все',
+        feedbackBtn: 'Оставить отзыв',
+        userRating: 'Ваша оценка товара',
+        inputName: 'Ваше имя и фамилия *',
+        inputEmailPhone: 'Эл. почта или телефон *',
+        inputText: 'Текст отзыва',
+        cancelBtn: 'Отмена'
     }
 };

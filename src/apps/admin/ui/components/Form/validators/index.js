@@ -8,6 +8,7 @@ import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
 import discount from './discount';
 import quizSteps from './quizSteps';
+import filters from './filters';
 
 export default {
     required,
@@ -19,5 +20,6 @@ export default {
     requiredFiles,
     discountPrice,
     discount,
-    quizSteps
+    quizSteps,
+    filters
 };

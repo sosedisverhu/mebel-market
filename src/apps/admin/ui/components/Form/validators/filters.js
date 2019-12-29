@@ -7,11 +7,14 @@ export default function filters (value) {
         return 'Выберите типы для всех фильтров';
     }
 
-    if (value.some((filter) => filter.type === 'range' ? false : !(filter.options || []).length)) {
+    if (value.some(filter => {
+        if (!filter.options) {
+            return true;
+        }
+        if (filter.type !== 'range') {
+            return filter.options.length ? !filter.options.some(option => option.name) : true;
+        }
+    })) {
         return 'Добавьте опции для всех checkbox фильтров';
-    }
-
-    if (value.some((filter) => filter.type === 'range' ? false : (filter.options || []).some(option => !option.name))) {
-        return 'Нельзя использовать пустые опции для checkbox фильтров';
     }
 }
