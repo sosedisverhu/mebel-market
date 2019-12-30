@@ -36,10 +36,10 @@ router.use(verification);
 router.route('/change')
     .post(changeCredentials);
 
-router.route('/admin')
-    .get(getAllAdmins)
-    .post(saveAdmin)
-    .put(editAdmin)
-    .delete(deleteAdmin);
+// router.route('/admin')
+//     .get(getAllAdmins)
+//     .post(saveAdmin)
+//     .put(editAdmin)
+//     .delete(deleteAdmin);
 
 export default router;

@@ -22,7 +22,7 @@ const headerRows = [
     { id: 'name', label: 'Название' }
 ];
 const tableCells = [
-    { prop: admin => pathOr(['texts', DEFAULT_LANG, 'name'], '', admin) }
+    { prop: admin => admin.name }
 ];
 
 const materialStyles = theme => ({
