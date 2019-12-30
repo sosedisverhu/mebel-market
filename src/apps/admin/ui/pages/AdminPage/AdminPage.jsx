@@ -19,8 +19,7 @@ import deleteAdminsByIds from '../../../services/deleteAdminsByIds';
 
 const DEFAULT_LANG = 'ru';
 const headerRows = [
-    { id: 'name', label: 'Название' },
-    { id: 'active', label: 'Active' }
+    { id: 'name', label: 'Название' }
 ];
 const tableCells = [
     { prop: admin => pathOr(['texts', DEFAULT_LANG, 'name'], '', admin) }
