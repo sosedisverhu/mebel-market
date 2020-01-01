@@ -1,7 +1,6 @@
 import FormFieldInput from '../Form/fields/FormFieldInput/FormFieldInput.jsx';
 import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
-import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
 
@@ -54,7 +53,7 @@ export default function ({ data: { title } = {} } = {}) {
                 component: FormFieldTitle,
                 name: 'titleSections',
                 schema: {
-                    label: 'Разделы',
+                    label: 'Права на разделы',
                     variant: 'h5'
                 }
             },
@@ -62,10 +61,11 @@ export default function ({ data: { title } = {} } = {}) {
                 component: FormFieldCheckboxes,
                 name: 'sections',
                 schema: {
-                    label: 'Разделы',
+                    label: 'Права на разделы',
                     options: [
                         { label: 'Заказы', value: 'orders' },
                         { label: 'Продукты', value: 'products' },
+                        { label: 'Партнёры', value: 'partners' },
                         { label: 'Статьи', value: 'articles' }
                     ]
                 }

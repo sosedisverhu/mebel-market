@@ -11,7 +11,7 @@ export default function getAdmins () {
 
         return base(
             request
-                .get('/api/admin/admin/all')
+                .get('/api/admin/authentication/admin')
                 .query({ token })
         )
             .then(admins => {

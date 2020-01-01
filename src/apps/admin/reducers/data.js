@@ -32,6 +32,8 @@ export default function (state = initialState, action) {
         return { ...state, partners: action.payload };
     case SET_SEO:
         return { ...state, allSeo: action.payload };
+    case SET_ADMINS:
+        return { ...state, admins: action.payload };
     default:
         return state;
     }

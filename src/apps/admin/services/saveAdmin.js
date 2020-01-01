@@ -9,7 +9,7 @@ export default function saveAdmin (admin) {
 
         return base(
             request
-                .post('/api/admin/admin/save')
+                .post('/api/admin/authentication/admin')
                 .send(admin)
                 .query({ token })
         );

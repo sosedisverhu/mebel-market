@@ -17,12 +17,13 @@ import { connect } from 'react-redux';
 import getAdmins from '../../../services/getAdmins';
 import deleteAdminsByIds from '../../../services/deleteAdminsByIds';
 
-const DEFAULT_LANG = 'ru';
 const headerRows = [
-    { id: 'name', label: 'Название' }
+    { id: 'login', label: 'Логин' },
+    { id: 'email', label: 'Почта' }
 ];
 const tableCells = [
-    { prop: admin => admin.name }
+    { prop: admin => admin.login },
+    { prop: admin => admin.email }
 ];
 
 const materialStyles = theme => ({
@@ -116,7 +117,7 @@ class AdminPage extends Component {
     render () {
         const { classes, admins } = this.props;
         const { loading, editableAdmin, formShowed } = this.state;
-
+        
         if (loading) {
             return <div className={classes.loader}>
                 <CircularProgress/>
@@ -136,7 +137,7 @@ class AdminPage extends Component {
             />
             <Modal open={formShowed} onClose={this.handleCloseAdminForm} className={classes.modal}>
                 <Paper className={classes.modalContent}>
-                    <AdminForm admins={editableAdmin} onDone={this.handleFormDone}/>
+                    <AdminForm admin={editableAdmin} onDone={this.handleFormDone}/>
                 </Paper>
             </Modal>
         </div>;

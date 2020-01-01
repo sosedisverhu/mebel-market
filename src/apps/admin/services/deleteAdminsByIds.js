@@ -11,7 +11,7 @@ export default function deleteAdmin (ids) {
 
         return base(
             request
-                .post('/api/admin/admin/delete-few')
+                .delete('/api/admin/authentication/admin')
                 .send({ ids })
                 .query({ token })
         )
