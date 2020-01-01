@@ -10,7 +10,7 @@ import { renderToString } from 'react-dom/server';
 
 import map from '@tinkoff/utils/array/map';
 
-import adminAuthenticationApi from './api/admin/authentication';
+import adminAuthenticationApi from './api/admin/admin';
 import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
 import adminArticleApi from './api/admin/article';
@@ -35,7 +35,7 @@ import renderAdminPage from '../src/apps/admin/html';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import App from '../src/apps/client/App.jsx';
+// import App from '../src/apps/client/App.jsx';
 
 const rootPath = path.resolve(__dirname, '..');
 const PORT = process.env.PORT || 3000;
@@ -98,7 +98,7 @@ app.get('*', function (req, res) {
                         location={req.originalUrl}
                         context={context}
                     >
-                        <App />
+                        <div />
                     </StaticRouter>
                 </Provider>
             );
