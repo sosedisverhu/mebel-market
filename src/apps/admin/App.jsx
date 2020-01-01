@@ -18,6 +18,7 @@ import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
+import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 
 import isNull from '@tinkoff/utils/is/nil';
 
@@ -82,6 +83,7 @@ class App extends Component {
             <Header />
             <Switch>
                 <Route exact path='/admin' component={MainPage} />
+                <Route exact path='/admin/mainSlider' component={MainSliderPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
                 <Route exact path='/admin/articles' component={ArticlesPage} />
                 <Route exact path='/admin/categories' component={CategoriesPage} />
