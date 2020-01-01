@@ -41,6 +41,7 @@ export default class FormFieldInput extends Component {
             variant='outlined'
             multiline={schema.multiline}
             type={schema.type || 'text'}
+            autoComplete={schema.autoComplete || 'new-password'}
         />;
     }
 }

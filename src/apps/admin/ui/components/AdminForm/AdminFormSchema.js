@@ -39,7 +39,8 @@ export default function ({ data: { title } = {} } = {}) {
                 component: FormFieldInput,
                 name: 'password',
                 schema: {
-                    label: 'Пароль'
+                    label: 'Пароль',
+                    type: 'password'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Добавьте пароль админа' } }
