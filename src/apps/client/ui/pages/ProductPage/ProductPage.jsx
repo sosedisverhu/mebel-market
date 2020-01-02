@@ -43,6 +43,20 @@ class ProductPage extends Component {
         });
     };
 
+    componentDidUpdate (prevProps) {
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            const { categoryAlias, subCategoryAlias, alias } = this.getMatch();
+            const category = this.getCategory(categoryAlias);
+            const subCategory = this.getSubCategory(subCategoryAlias, category);
+            const product = this.getProduct(alias, category, subCategory);
+            this.setState({
+                category,
+                subCategory,
+                product
+            });
+        }
+    }
+
     getMatch = () => {
         const { location: { pathname }, langRoute } = this.props;
         const CATEGORY_PATH = `${langRoute}/:categoryAlias/:subCategoryAlias/:alias`;

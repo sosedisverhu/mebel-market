@@ -29,21 +29,21 @@ class Advantages extends Component {
                     <div className={styles.advantages}>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="src/apps/client/ui/components/Advantages/img/quality.png" width='80' height='80' alt=""/>
+                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/quality.png" width='80' height='80' alt="quality"/>
                             </div>
                             <h3 className={styles.advantageTitle}>{text.qualityTitle}</h3>
                             <p className={styles.advantageText}>{text.qualityText}</p>
                         </div>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="src/apps/client/ui/components/Advantages/img/price.png" width='80' height='80' alt=""/>
+                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/price.png" width='80' height='80' alt="price"/>
                             </div>
                             <h3 className={styles.advantageTitle}>{text.priceTitle}</h3>
                             <p className={styles.advantageText}>{text.priceText}</p>
                         </div>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="src/apps/client/ui/components/Advantages/img/delivery.png" width='80' height='80' alt=""/>
+                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/delivery.png" width='80' height='80' alt="delivery"/>
                             </div>
                             <h3 className={styles.advantageTitle}>{text.deliveryTitle}</h3>
                             <p className={styles.advantageText}>{text.deliveryText}</p>

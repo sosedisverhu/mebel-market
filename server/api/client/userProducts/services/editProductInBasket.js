@@ -104,8 +104,7 @@ export default function editProductInBasket (req, res) {
             const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
                 const basketNotUniq = basket[basketIndex];
 
-                if (basketNotUniq.properties.size === properties.size) {
-                    basket[basketIndex].quantity = basket[basketIndex].quantity + quantity;
+                if (basketNotUniq.properties.size.name === properties.size.name) {
                     return [...basket];
                 }
 
