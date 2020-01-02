@@ -35,7 +35,7 @@ import renderAdminPage from '../src/apps/admin/html';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
-// import App from '../src/apps/client/App.jsx';
+import App from '../src/apps/client/App.jsx';
 
 const rootPath = path.resolve(__dirname, '..');
 const PORT = process.env.PORT || 3000;
@@ -98,7 +98,7 @@ app.get('*', function (req, res) {
                         location={req.originalUrl}
                         context={context}
                     >
-                        <div />
+                        <App />
                     </StaticRouter>
                 </Provider>
             );

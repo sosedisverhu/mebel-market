@@ -40,7 +40,8 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'password',
                 schema: {
                     label: 'Пароль',
-                    type: 'password'
+                    type: 'password',
+                    autoComplete: 'new-password'
                 },
                 validators: [
                     { name: 'required', options: { text: 'Добавьте пароль админа' } }
