@@ -104,12 +104,13 @@ export default {
     },
     searchPage: {
         results: 'результатов по запросу',
-        products: 'Товары',
+        products: 'Товары:',
         noResults: 'Мы не смогли найти результаты по запросу:',
         tryAgain: 'Попробуйте еще:',
         placeholder: 'Поиск',
         needHelp: 'Нужна помощь?',
-        link: 'Свяжитесь с нами'
+        link: 'Свяжитесь с нами',
+        articles: 'Статьи:'
     },
     checkoutPage: {
         checkout: 'Оформление заказа',
@@ -137,5 +138,8 @@ export default {
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
         cancelBtn: 'Отмена'
+    },
+    articles: {
+        searchResult: 'Статьи:'
     }
 };

@@ -41,7 +41,8 @@ class Card extends Component {
 
     state = {
         category: {},
-        subCategory: {}
+        subCategory: {},
+        lang: PropTypes.string.isRequired
     };
 
     componentDidMount () {

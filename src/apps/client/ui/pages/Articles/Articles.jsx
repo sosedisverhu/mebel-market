@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import propOr from '@tinkoff/utils/object/propOr';
-import getDateFormatted from '../../../../../../utils/getDateFormatted';
-import Pagination from '../../components/Pagination/Pagination.jsx';
+
 import styles from './Articles.css';
+
+import Pagination from '../../components/Pagination/Pagination.jsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
+import Sort from '../../components/Sort/Sort';
+import propOr from '@tinkoff/utils/object/propOr';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -22,7 +24,9 @@ class Articles extends Component {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         articles: PropTypes.array.isRequired,
-        mediaWidth: PropTypes.number.isRequired
+        mediaWidth: PropTypes.number.isRequired,
+        location: PropTypes.object,
+        history: PropTypes.object.isRequired
     };
 
     state = {
@@ -77,29 +81,26 @@ class Articles extends Component {
     };
 
     render () {
-        const { langMap, lang, articles } = this.props;
+        const { articles, langMap } = this.props;
         const { currentPage, postsPerPage } = this.state;
-        const text = propOr('article', {}, langMap);
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
+        const text = propOr('articles', {}, langMap);
 
         return (
             <section className={styles.articles}>
                 <Breadcrumbs />
+                {articles.length
+                    ? (<div className={styles.panelTopWrapper}>
+                        <div className={styles.panelTop}>
+                            <h3 className={styles.panelTopTitle}>{text.searchResult} {articles.length}</h3>
+                            <Sort />
+                        </div>
+                    </div>)
+                    : null}
                 <div className={styles.articlesContainer}>
                     {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
-                        <div className={styles.article} key={article.id}>
-                            <Link className={styles.titleLink} to={`/articles/${article.alias}`}>
-                                <h1 className={styles.title}><span className={styles.titleUnderline}>{article.texts[lang].name}</span></h1>
-                            </Link>
-                            <p>{article.texts[lang].preview}</p>
-                            <div className={styles.moreInfo}>
-                                <Link to={`/articles/${article.alias}`}>
-                                    <button className={styles.readMoreBtn}>{text.moreBtn}</button>
-                                </Link>
-                                <span className={styles.date}>{getDateFormatted(article.date, lang) + ' ' + text.year}</span>
-                            </div>
-                        </div>
+                        <ArticlePreview key={article.id} article={article} />
                     )}
                 </div>
                 {articles.length > postsPerPage &&
