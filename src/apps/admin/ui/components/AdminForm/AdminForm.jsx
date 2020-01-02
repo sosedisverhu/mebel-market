@@ -18,7 +18,7 @@ import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 
-const ADMIN_VALUES = ['login', 'email', 'password', 'sections'];
+const ADMIN_VALUES = ['login', 'email', 'sections'];
 
 const mapDispatchToProps = (dispatch) => ({
     saveAdmin: payload => dispatch(saveAdmin(payload)),
@@ -117,8 +117,8 @@ class AdminForm extends Component {
             <Form
                 initialValues={this.initialValues}
                 schema={getSchema({
-                    data: {
-                        title: this.id ? 'Редактирование админа' : 'Добавление админа'
+                    settings: {
+                        isEdit: !!this.id
                     }
                 })}
                 onSubmit={this.handleSubmit}
