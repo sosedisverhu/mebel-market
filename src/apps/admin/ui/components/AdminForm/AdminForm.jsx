@@ -17,7 +17,6 @@ import { withStyles } from '@material-ui/core/styles';
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
-import pathOr from '@tinkoff/utils/object/pathOr';
 
 const ADMIN_VALUES = ['login', 'email', 'password', 'sections'];
 

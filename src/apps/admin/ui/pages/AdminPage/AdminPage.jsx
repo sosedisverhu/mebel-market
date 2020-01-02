@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import pathOr from '@tinkoff/utils/object/pathOr';
-
 import CircularProgress from '@material-ui/core/CircularProgress';
-import CloseIcon from '@material-ui/icons/Close';
-import CheckIcon from '@material-ui/icons/Check';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
@@ -117,7 +113,7 @@ class AdminPage extends Component {
     render () {
         const { classes, admins } = this.props;
         const { loading, editableAdmin, formShowed } = this.state;
-        
+
         if (loading) {
             return <div className={classes.loader}>
                 <CircularProgress/>

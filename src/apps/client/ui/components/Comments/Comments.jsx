@@ -46,7 +46,7 @@ class Comments extends Component {
         const rating = [];
 
         for (let i = 0; i < 5; i++) {
-                rating.push(<div className={styles.star} key={i} />);
+            rating.push(<div className={styles.star} key={i} />);
         }
 
         return rating;
@@ -87,7 +87,7 @@ class Comments extends Component {
             inputEmailPhone: '',
             inputText: '',
             newRating: 0
-        })
+        });
     }
 
     render () {
@@ -118,8 +118,8 @@ class Comments extends Component {
                         <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen })} onClick={this.toggleForm}>
                             {text.feedbackBtn}
                         </p>
-                     </div>
-                     <form onSubmit={this.handleSubmit} className={classNames(styles.form, { [styles.active]: formIsOpen })}>
+                    </div>
+                    <form onSubmit={this.handleSubmit} className={classNames(styles.form, { [styles.active]: formIsOpen })}>
                         <div className={styles.userRatingWrapper}>
                             <p className={styles.userRatingText}>{text.userRating}</p>
                             <div className={styles.userRating}>
@@ -151,7 +151,7 @@ class Comments extends Component {
                         />
                         <button className={styles.feedbackBtn} type="submit">{text.feedbackBtn}</button>
                         <button className={styles.cancelBtn} onClick={this.handleCancel}>{text.cancelBtn}</button>
-                     </form>
+                    </form>
                 </div>
             </div>
         );

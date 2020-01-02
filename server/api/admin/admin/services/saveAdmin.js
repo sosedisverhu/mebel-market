@@ -9,7 +9,7 @@ export default function saveAdmin (req, res) {
     const admin = prepareAdmin(req.body);
     const id = uniqid();
 
-    addAdmin({...admin, id})
+    addAdmin({ ...admin, id })
         .then(admin => {
             res.status(OKEY_STATUS_CODE).send(admin);
         })
