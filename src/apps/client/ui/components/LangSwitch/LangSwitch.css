@@ -61,6 +61,10 @@
     position: absolute;
     top: 43px;
     width: 100%;
+
+    .lang:hover {
+        color: green;
+    }
 }
 
 .mobileLangs {

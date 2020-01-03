@@ -6,47 +6,36 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './MainCategories.css';
 
-const mapStateToProps = ({ application }) => {
+import { Link } from 'react-router-dom';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        lang: application.lang,
+        langRoute: application.langRoute,
+        categories: data.categories
     };
 };
 
 class MainCategories extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired
+        lang: PropTypes.string.isRequired,
+        langRoute: PropTypes.string.isRequired,
+        categories: PropTypes.array
     };
 
     render () {
-        const { langMap } = this.props;
-        const text = propOr('mainPage', {}, langMap);
+        const { lang, langRoute, categories } = this.props;
 
         return <div className={styles.categoriesWrap}>
             <div className={styles.categories}>
-                <a className={styles.category} href='#'>
-                    <div className={styles.imgWrap}>
-                        <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category1.jpg" alt={text.bedsTitle} />
-                    </div>
-                    <h3 className={styles.title}>{text.bedsTitle}</h3>
-                </a>
-                <a className={styles.category} href='#'>
-                    <div className={styles.imgWrap}>
-                        <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category2.jpg" alt={text.mattressesTitle} />
-                    </div>
-                    <h3 className={styles.title}>{text.mattressesTitle}</h3>
-                </a>
-                <a className={styles.category} href='#'>
-                    <div className={styles.imgWrap}>
-                        <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category3.jpg" alt={text.furnitureTitle} />
-                    </div>
-                    <h3 className={styles.title}>{text.furnitureTitle}</h3>
-                </a>
-                <a className={styles.category} href='#'>
-                    <div className={styles.imgWrap}>
-                        <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category4.jpg" alt={text.accessoriesTitle} />
-                    </div>
-                    <h3 className={styles.title}>{text.accessoriesTitle}</h3>
-                </a>
+                {categories.map((category, i) =>
+                    <Link className={styles.category} to={`${langRoute}/${category.alias}`} key={i}>
+                        <div className={styles.imgWrap}>
+                            <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category1.jpg" alt={category.texts[lang].name} />
+                        </div>
+                        <h3 className={styles.title}>{category.texts[lang].name}</h3>
+                    </Link>
+                )}
             </div>
         </div>;
     }
