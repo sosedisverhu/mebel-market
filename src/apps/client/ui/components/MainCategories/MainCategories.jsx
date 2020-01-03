@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import propOr from '@tinkoff/utils/object/propOr';
+import { Link } from 'react-router-dom';
 
 import styles from './MainCategories.css';
-
-import { Link } from 'react-router-dom';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -31,7 +28,7 @@ class MainCategories extends Component {
                 {categories.map((category, i) =>
                     <Link className={styles.category} to={`${langRoute}/${category.alias}`} key={i}>
                         <div className={styles.imgWrap}>
-                            <img className={styles.img} src="/src/apps/client/ui/components/MainCategories/img/category1.jpg" alt={category.texts[lang].name} />
+                            <img className={styles.img} src={category.image} alt={category.texts[lang].name} />
                         </div>
                         <h3 className={styles.title}>{category.texts[lang].name}</h3>
                     </Link>
