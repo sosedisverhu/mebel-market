@@ -31,7 +31,7 @@ const RECOVERY_URL = '/admin/recovery';
 
 const mapStateToProps = ({ application }) => {
     return {
-        authenticated: application.authenticated
+        admin: application.admin
     };
 };
 
@@ -42,8 +42,9 @@ const mapDispatchToProps = (dispatch) => ({
 class App extends Component {
     static propTypes = {
         checkAuthentication: PropTypes.func.isRequired,
-        authenticated: PropTypes.bool,
-        location: PropTypes.object
+        authenticated: PropTypes.object,
+        location: PropTypes.object,
+        admin: PropTypes.object
     };
 
     static defaultProps = {
@@ -63,32 +64,32 @@ class App extends Component {
     }
 
     render () {
-        const { authenticated } = this.props;
+        const { admin } = this.props;
 
         if (this.isRecovery) {
             return <Recovery />;
         }
 
-        if (isNull(authenticated)) {
+        if (isNull(admin)) {
             return <div className={styles.loader}>
                 <CircularProgress />
             </div>;
         }
 
-        if (!authenticated) {
+        if (!admin) {
             return <Authentication />;
         }
 
         return <main>
             <Header />
             <Switch>
-                <Route exact path='/admin' component={MainPage} />
-                <Route exact path='/admin/products' component={ProductsPage} />
-                <Route exact path='/admin/articles' component={ArticlesPage} />
-                <Route exact path='/admin/categories' component={CategoriesPage} />
-                <Route exact path='/admin/partners' component={PartnersPage} />
-                <Route exact path='/admin/seo' component={SeoPage} />
-                <Route exact path='/admin/admins' component={AdminPage} />
+                {admin.sections.includes('main') && <Route exact path='/admin' component={MainPage} />}
+                {admin.sections.includes('products') && <Route exact path='/admin/products' component={ProductsPage} />}
+                {admin.sections.includes('articles') && <Route exact path='/admin/articles' component={ArticlesPage} />}
+                {admin.sections.includes('products') && <Route exact path='/admin/categories' component={CategoriesPage} />}
+                {admin.sections.includes('partners') && <Route exact path='/admin/partners' component={PartnersPage} />}
+                {admin.sections.includes('seo') && <Route exact path='/admin/seo' component={SeoPage} />}
+                {admin.sections.includes('admins') && <Route exact path='/admin/admins' component={AdminPage} />}
             </Switch>
         </main>;
     }

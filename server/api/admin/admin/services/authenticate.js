@@ -33,7 +33,8 @@ export default function authenticate (req, res) {
                     token: token,
                     user: {
                         email: admin.email,
-                        login: admin.login
+                        login: admin.login,
+                        sections: admin.sections
                     }
                 });
             });

@@ -19,7 +19,7 @@ const router = express.Router();
 router.route('/authenticate')
     .post(authenticate);
 
-router.route('/check')
+router.route('/getAdmin')
     .get(checkAuthentication);
 
 router.route('/recover')

@@ -36,6 +36,12 @@ const materialStyles = {
     }
 };
 
+const mapStateToProps = ({ application }) => {
+    return {
+        admin: application.admin
+    };
+};
+
 const mapDispatchToProps = (dispatch) => ({
     logout: payload => dispatch(logout(payload))
 });
@@ -44,7 +50,8 @@ class Header extends Component {
     static propTypes = {
         location: PropTypes.object,
         classes: PropTypes.object.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        admin: PropTypes.object
     };
 
     static defaultProps = {
@@ -81,7 +88,7 @@ class Header extends Component {
     };
 
     render () {
-        const { classes } = this.props;
+        const { classes, admin } = this.props;
         const { menuShowed } = this.state;
 
         return <AppBar position='static'>
@@ -110,7 +117,7 @@ class Header extends Component {
                                             if (route.notMenu) {
                                                 return null;
                                             }
-                                            return <MenuItem key={i} component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
+                                            return admin.sections.includes(route.section) && <MenuItem key={i} component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
                                         })}
                                     </MenuList>
                                 </ClickAwayListener>
@@ -121,6 +128,7 @@ class Header extends Component {
                 <Typography variant='h6' color='inherit' className={classes.title}>
                     {this.getHeaderTitle()}
                 </Typography>
+                <Button color='inherit'>{admin.login}</Button>
                 <Button color='inherit' component={Link} to='/admin/credentials'>Сменить учетные данные</Button>
                 <Button color='inherit' onClick={this.handleLogout}>Выйти</Button>
             </Toolbar>
@@ -128,4 +136,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(withStyles(materialStyles)(Header)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(materialStyles)(Header)));

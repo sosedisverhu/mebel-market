@@ -3,14 +3,14 @@ import {
 } from '../types/types';
 
 const initialState = {
-    authenticated: null,
+    admin: null,
     productsCategories: []
 };
 
 export default function (state = initialState, action) {
     switch (action.type) {
     case SET_AUTHENTICATED:
-        return { ...state, authenticated: action.payload };
+        return { ...state, admin: action.payload };
     default:
         return state;
     }

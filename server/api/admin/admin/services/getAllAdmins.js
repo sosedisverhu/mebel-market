@@ -11,10 +11,9 @@ export default function getAllAdmins (req, res) {
                     email: admin.email,
                     sections: admin.sections,
                     id: admin.id
-                }
-            })
-
-            res.status(OKEY_STATUS_CODE).send(newAdmin)
+                };
+            });
+            res.status(OKEY_STATUS_CODE).send(newAdmin);
         })
         .catch(() => {
             res.status(SERVER_ERROR_STATUS_CODE).end();

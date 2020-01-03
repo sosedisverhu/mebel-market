@@ -15,11 +15,11 @@ export default function checkAuthentication (req, res) {
 
     jsonwebtoken.verify(token, publicKey, {
         algorithm: 'RS256'
-    }, err => {
+    }, (err, admin) => {
         if (err) {
             return res.status(FORBIDDEN_STATUS_CODE).end();
         }
 
-        res.status(OKEY_STATUS_CODE).end();
+        res.status(OKEY_STATUS_CODE).send(admin);
     });
 }
