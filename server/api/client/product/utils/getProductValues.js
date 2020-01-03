@@ -12,6 +12,7 @@ const VALUES = [
     'date',
     'basePrice',
     'price',
+    'actualPrice',
     'discount',
     'categoryId',
     'subCategoryId',

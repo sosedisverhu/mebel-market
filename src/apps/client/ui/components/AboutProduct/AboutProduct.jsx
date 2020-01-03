@@ -135,7 +135,7 @@ class AboutProduct extends Component {
                 {formatMoney(product.price)}
             </span>}
             <span className={styles.price}>
-                {formatMoney(product.discountPrice || product.discountPrice)}
+                {formatMoney(product.actualPrice)}
             </span>
             <div>
                 <span className={styles.sizesTitle}>{text.size}</span>

@@ -32,8 +32,8 @@ const DEFAULT_FILTERS = name => {
             type: 'range',
             min: 0,
             max: 0,
-            id: 'price',
-            prop: 'price'
+            id: 'actualPrice',
+            prop: 'actualPrice'
         }
     ];
 };
@@ -148,8 +148,9 @@ class ProductsPage extends Component {
             case 'range':
                 const prices = compose(
                     uniq,
-                    map(product => product.discountPrice || product.price)
+                    map(product => product.actualPrice)
                 )(products);
+
                 const min = getMinOfArray(prices);
                 const max = getMaxOfArray(prices);
 
@@ -197,6 +198,7 @@ class ProductsPage extends Component {
                     map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
                     )
                 )(products);
+
                 if (propsArr.length < 2) {
                     return filters;
                 }
@@ -272,11 +274,12 @@ class ProductsPage extends Component {
     };
 
     handleActiveSortClick = (valueOption, optionsArray) => {
-        const { products } = this.state;
+        const { products, filteredProducts } = this.state;
         const sortOption = find(sort => sort.id === valueOption, optionsArray);
 
         this.setState({
-            products: [...products.sort(sortOption.sort)]
+            products: [...products.sort(sortOption.sort)],
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
         });
     };
 

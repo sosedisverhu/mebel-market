@@ -23,11 +23,12 @@ module.exports = [
             }
 
         },
-        date: 1577182957770,
+        date: 1577182954770,
         hidden: false,
         discount: 10,
         discountPrice: 1799,
         price: 1999,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -94,11 +95,12 @@ module.exports = [
             }
 
         },
-        date: 1577182957741,
+        date: 1577182357741,
         hidden: false,
         discount: 0,
         discountPrice: 2799,
         price: 2799,
+        actualPrice: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -165,11 +167,12 @@ module.exports = [
             }
 
         },
-        date: 1577182957742,
+        date: 1577181957742,
         hidden: false,
         discount: 0,
         discountPrice: 3799,
         price: 3799,
+        actualPrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -241,6 +244,7 @@ module.exports = [
         discount: 0,
         discountPrice: 3799,
         price: 3799,
+        actualPrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -307,11 +311,12 @@ module.exports = [
             }
 
         },
-        date: 1577182957746,
+        date: 1577182957146,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -383,6 +388,7 @@ module.exports = [
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -454,6 +460,7 @@ module.exports = [
         discount: 0,
         discountPrice: 1799,
         price: 2000,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -525,6 +532,7 @@ module.exports = [
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -596,6 +604,7 @@ module.exports = [
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -667,6 +676,7 @@ module.exports = [
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -738,6 +748,7 @@ module.exports = [
         discount: 0,
         discountPrice: 2000,
         price: 2000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
