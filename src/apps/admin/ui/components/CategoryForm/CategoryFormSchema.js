@@ -6,6 +6,7 @@ import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
+import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -44,6 +45,28 @@ export default function ({ data: { title } = {} } = {}) {
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните alias' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'title',
+                schema: {
+                    label: 'Картинка для категории',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldFiles,
+                name: 'image',
+                schema: {
+                    max: 1
+                },
+                validators: [
+                    { name: 'requiredFiles', options: { text: 'Добавьте картинку' } }
                 ]
             },
             {

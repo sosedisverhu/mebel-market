@@ -172,7 +172,7 @@ class AdminTableHeader extends Component {
                     ) : (
                         <div className={classes.valuesActions}>
                             { filters && <Tooltip title='Фильтрация'>
-                                <IconButton aria-label='Filters' onClick={this.props.onFiltersOpen}>
+                                <IconButton aria-label='ProductFilters' onClick={this.props.onFiltersOpen}>
                                     <FilterListIcon />
                                 </IconButton>
                             </Tooltip> }

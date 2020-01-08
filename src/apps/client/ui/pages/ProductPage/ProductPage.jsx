@@ -10,6 +10,7 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
+import addProductViews from '../../../services/client/addProductViews';
 
 class ProductPage extends Component {
     static propTypes = {
@@ -41,6 +42,8 @@ class ProductPage extends Component {
             product,
             didMount: true
         });
+
+        product && addProductViews(product.id);
     };
 
     componentDidUpdate (prevProps) {
@@ -91,7 +94,7 @@ class ProductPage extends Component {
         } else if (!isEmpty(product)) {
             return (
                 <div>
-                    <Breadcrumbs category={category} product={product}/>
+                    <Breadcrumbs category={category}/>
                     <Product product={product}/>
                     <Tab product={product}/>
                 </div>);

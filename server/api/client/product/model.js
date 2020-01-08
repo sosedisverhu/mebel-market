@@ -13,6 +13,7 @@ const Product = new Schema({
             seoKeywords: { type: String }
         }
     },
+    views: { type: Number, required: true },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
     sizes: { type: Array, required: true },
     avatar: { type: String },
@@ -22,6 +23,7 @@ const Product = new Schema({
     discount: { type: Number },
     discountPrice: { type: Number },
     price: { type: Number, required: true },
+    actualPrice: { type: Number, required: true },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },

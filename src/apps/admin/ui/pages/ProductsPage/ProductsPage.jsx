@@ -31,13 +31,13 @@ import deleteProductsByIds from '../../../services/deleteProductsByIds';
 
 const headerRows = [
     { id: 'name', label: 'Название' },
-    { id: 'discountPrice', label: 'Цена' },
+    { id: 'actualPrice', label: 'Актуальная цена' },
     { id: 'active', label: 'Active' }
 ];
 
 const tableCells = [
     { prop: product => pathOr(['texts', DEFAULT_LANG, 'name'], '', product) },
-    { prop: product => product.discountPrice },
+    { prop: product => product.actualPrice },
     { prop: product => product.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 

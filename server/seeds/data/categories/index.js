@@ -157,7 +157,8 @@ module.exports = [
         },
         hidden: false,
         positionIndex: 0,
-        alias: 'beds'
+        alias: 'beds',
+        image: '/server/seeds/data/categories/images/beds.jpg'
     },
     {
         id: 'category1',
@@ -315,7 +316,8 @@ module.exports = [
         },
         hidden: false,
         positionIndex: 1,
-        alias: 'mattresses'
+        alias: 'mattresses',
+        image: '/server/seeds/data/categories/images/mattresses.jpg'
     },
     {
         id: 'category2',
@@ -473,7 +475,8 @@ module.exports = [
         },
         hidden: false,
         positionIndex: 2,
-        alias: 'soft-furniture'
+        alias: 'soft-furniture',
+        image: '/server/seeds/data/categories/images/soft-furniture.jpg'
     },
     {
         id: 'category3',
@@ -631,6 +634,7 @@ module.exports = [
         },
         hidden: false,
         positionIndex: 3,
-        alias: 'accessories'
+        alias: 'accessories',
+        image: '/server/seeds/data/categories/images/accessories.jpg'
     }
 ];

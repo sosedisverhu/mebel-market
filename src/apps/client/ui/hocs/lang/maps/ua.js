@@ -6,10 +6,6 @@ export default {
         top: 'Топ продажів',
         discount: 'Акції',
         new: 'Новинки',
-        bedsTitle: 'Ліжка',
-        mattressesTitle: 'Матраци',
-        furnitureTitle: 'М\'які меблі',
-        accessoriesTitle: 'Аксесуари для сну',
         slider: 'Допомогти з вибором',
         title: 'Наші переваги',
         qualityTitle: 'Якість',
@@ -61,7 +57,6 @@ export default {
     productsPage: {
         filterBtn: 'Фільтри',
         results: 'Результатів',
-        popular: 'Популярні',
         price: 'Ціна'
     },
     aboutProductTop: {
@@ -105,12 +100,13 @@ export default {
     },
     searchPage: {
         results: 'результатів за запитом',
-        products: 'Товари',
+        products: 'Товари:',
         noResults: 'Нам не вдалось знайти результати за запитом:',
         tryAgain: 'Спробуйте ще:',
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
-        link: 'Зв\'яжіться з нами'
+        link: 'Зв\'яжіться з нами',
+        articles: 'Статті:'
     },
     checkoutPage: {
         checkout: 'Оформлення замовлення',
@@ -139,5 +135,8 @@ export default {
         inputEmailPhone: 'Ел. пошта або телефон *',
         inputText: 'Текст відгуку',
         cancelBtn: 'Скасувати'
+    },
+    articles: {
+        searchResult: 'Статті:'
     }
 };
