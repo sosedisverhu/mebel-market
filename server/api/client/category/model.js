@@ -15,7 +15,8 @@ const Category = new Schema({
     alias: { type: String, required: true, unique: true },
     hidden: { type: Boolean, required: true },
     positionIndex: { type: Number, required: true },
-    filters: { type: Object, required: true }
+    filters: { type: Object, required: true },
+    image: { type: String }
 });
 
 export default mongoose.model('Category', Category);
