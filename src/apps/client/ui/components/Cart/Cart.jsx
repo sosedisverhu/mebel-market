@@ -8,14 +8,17 @@ import propOr from '@tinkoff/utils/object/propOr';
 import findIndex from '@tinkoff/utils/array/findIndex';
 import includes from '@tinkoff/utils/array/includes';
 import find from '@tinkoff/utils/array/find';
-import { MAX_QUANTITY } from '../../../constants/constants';
+
 import styles from './Cart.css';
+import CartProduct from '../CartProduct/CartProduct';
 
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 
 import openBasket from '../../../actions/openBasket';
 import closeBasket from '../../../actions/closeBasket';
+
+import formatMoney from '../../../utils/formatMoney';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -58,10 +61,6 @@ class Cart extends Component {
         closeBasket: PropTypes.func.isRequired
     };
 
-    state = {
-        quantityValue: 1
-    }
-
     getWordCaseByNumber (number, cases) {
         if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
             return cases[0];
@@ -89,30 +88,6 @@ class Cart extends Component {
         openBasket();
     }
 
-    handleCloseBasket = () => {
-        this.props.closeBasket();
-    }
-
-    quantityChange = (value) => {
-        if (value >= 0 && value <= MAX_QUANTITY) {
-            this.setState({ quantityValue: value });
-        }
-    };
-
-    removeProduct = basketItemId => () => {
-        this.props.deleteFromBasket(basketItemId);
-    };
-
-    handleAddToWishlist = product => () => {
-        this.props.saveProductsToWishlist({
-            productId: product.id
-        });
-    }
-
-    handleCheckout = () => {
-        this.props.closeBasket();
-    }
-
     getCategoriesAlias = (categoryId, subCategoryId) => {
         const { categories, subCategories } = this.props;
         const category = find(category => category.id === categoryId, categories).alias;
@@ -123,14 +98,15 @@ class Cart extends Component {
 
     render () {
         const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;
-        const { quantityValue } = this.state;
         const text = propOr('cart', {}, langMap);
+        const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
+        const totalPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
 
         return (
             <div className={styles.cart}>
                 <div className={styles.iconCartWrapper} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}>
                     <img className={styles.iconCartImg} src="/src/apps/client/ui/components/Cart/img/cart.svg" alt="cart icon"/>
-                    <span className={styles.quantityAll}>{basket.length}</span>
+                    <span className={styles.quantityAll}>{quantityAll}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: basketIsOpen })}>
                     <div className={styles.cover} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}/>
@@ -138,58 +114,16 @@ class Cart extends Component {
                         <p className={styles.title}>
                             {text.title} {basket.length > 0 &&
                             <span>
-                                {basket.length}&nbsp;
-                                {this.getWordCaseByNumber(basket.length,
+                                {quantityAll}&nbsp;
+                                {this.getWordCaseByNumber(quantityAll,
                                     lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
                             </span>
                             }</p>
                         {basket.length > 0
                             ? <div className={styles.productsContainer}>
-                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) => {
-                                    return <div className={styles.cartItemWrapper} key={i}>
-                                        <div className={styles.cartItem}>
-                                            <Link className={styles.productImgLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`} onClick={this.handlePopupClose}>
-                                                <img className={styles.productImg} src={product.avatar} alt=""/>
-                                            </Link>
-                                            <div className={styles.productInfo}>
-                                                <div>
-                                                    <div className={styles.productOption}>
-                                                        <Link className={styles.productNameLink} to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`} onClick={this.handlePopupClose}>
-                                                            <p className={styles.productName}>{product.texts[lang].name}</p>
-                                                        </Link>
-                                                        <p className={styles.productNumber}>(48092)</p>
-                                                    </div>
-                                                    <p className={styles.productSize}>{text.size} {properties.size.name}</p>
-                                                    <div className={styles.productQuantity}>
-                                                        <button
-                                                            className={styles.quantitySub}
-                                                            onClick={() => this.quantityChange(+quantityValue - 1)}
-                                                            disabled={quantityValue <= 1}>-</button>
-                                                        <input
-                                                            className={styles.quantityInput}
-                                                            type="text"
-                                                            onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
-                                                            value={quantityValue}
-                                                            onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
-                                                        />
-                                                        <button
-                                                            className={styles.quantityAdd}
-                                                            onClick={() => this.quantityChange(+quantityValue + 1)}
-                                                            disabled={quantityValue >= MAX_QUANTITY}>+</button>
-                                                    </div>
-                                                    <div className={styles.productPrices}>
-                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <button className={styles.wishBtn} onClick={this.handleAddToWishlist(product)} />
-                                                    <button className={styles.removeBtn} onClick={this.removeProduct(basketItemId)} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>;
-                                })}
+                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
+                                    <CartProduct product={product} quantity={quantity} properties={properties} basketItemId={basketItemId} key={i} />
+                                )}
                             </div>
                             : <p>{text.noProduct}</p>
                         }
@@ -198,11 +132,11 @@ class Cart extends Component {
                                 <div className={styles.totalPriceContainer}>
                                     <div className={styles.totalPriceWrapper}>
                                         <p className={styles.totalPrice}>{text.totalPrice}</p>
-                                        <p className={styles.totalPrice}>0&#8372;</p>
+                                        <p className={styles.totalPrice}>{formatMoney(totalPrice)}</p>
                                     </div>
                                 </div>
                                 <Link to={`${langRoute}/order/`} >
-                                    <button className={styles.checkoutBtn} onClick={this.handleCheckout}>{text.checkout}</button>
+                                    <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>{text.checkout}</button>
                                 </Link>
                             </div>
                         }
