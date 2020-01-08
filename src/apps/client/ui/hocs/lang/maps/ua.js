@@ -61,7 +61,6 @@ export default {
     productsPage: {
         filterBtn: 'Фільтри',
         results: 'Результатів',
-        popular: 'Популярні',
         price: 'Ціна'
     },
     aboutProductTop: {

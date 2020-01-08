@@ -285,6 +285,9 @@ class ProductForm extends Component {
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
+        const { discountPrice, price } = productPayload;
+
+        productPayload.actualPrice = discountPrice || price;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
             .then(product => {

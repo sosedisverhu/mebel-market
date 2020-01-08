@@ -74,7 +74,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, discount, discountPrice, price, alias },
+            product: { texts, avatar, discount, actualPrice, price, alias },
             newClass,
             labelClass,
             langRoute,
@@ -105,7 +105,7 @@ class Card extends Component {
                         {price} &#8372;
                     </div> : null}
                     <div className={styles.price}>
-                        {discountPrice} &#8372;
+                        {actualPrice} &#8372;
                     </div>
                 </div>
             </Link>);
