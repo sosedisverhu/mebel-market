@@ -6,21 +6,21 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Slider.css';
 
-const mapStateToProps = ({ application, data }) => {
+const mapStateToProps = ({ application }) => {
     return {
-        banners: data.mainSlides,
-        langMap: application.langMap
+        langMap: application.langMap,
+        banners: application.mainSlides
     };
 };
 
 class Slider extends Component {
     static propTypes = {
-        banners: PropTypes.array.isRequired,
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        banners: PropTypes.array
     };
 
     static defaultProps = {
-        mainSlides: []
+        banners: []
     };
 
     constructor (props) {
@@ -35,6 +35,7 @@ class Slider extends Component {
         const width = window.innerWidth;
         this.setState({ width });
     }
+
     setActiveIndex = (newIndex) => {
         const { banners } = this.props;
 
@@ -47,7 +48,7 @@ class Slider extends Component {
     handleArrowClick = (addValue) => {
         const { activeIndex } = this.state;
         this.setActiveIndex(activeIndex + addValue);
-    }
+    };
 
     render () {
         const { langMap, banners } = this.props;
@@ -60,16 +61,22 @@ class Slider extends Component {
                 <div className={styles.banners} style={{ left: left + 'px' }}>
                     {banners.map((banner, index) => {
                         return <div className={styles.bannerWrap} key={index}>
-                            <img className={styles.banner} src={banner.path} alt="банер" />
+                            <img className={styles.banner} src={banner.path} alt="банер"/>
                         </div>;
                     })}
                 </div>
                 <div>
-                    <div className={styles.arrowLeft} onClick={() => this.handleArrowClick(-1)} />
-                    <div className={styles.arrowRight} onClick={() => this.handleArrowClick(1)} />
+                    <div className={styles.arrowLeft} onClick={() => this.handleArrowClick(-1)}/>
+                    <div className={styles.arrowRight} onClick={() => this.handleArrowClick(1)}/>
                 </div>
                 <div className={styles.bottomBlock}>
-                    <h2 className={styles.text}>{text.slider}</h2>
+                    {banners[activeIndex].link &&
+                    <a className={styles.text}
+                        href={banners[activeIndex].link}>
+                        <h2 className={styles.text}>
+                            {text.slider}
+                        </h2>
+                    </a>}
                     <div className={styles.switch}>
                         {banners.map((banner, index) => {
                             return (
