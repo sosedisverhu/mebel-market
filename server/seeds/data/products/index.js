@@ -23,10 +23,12 @@ module.exports = [
             }
 
         },
+        date: 1577182954770,
         hidden: false,
         discount: 10,
         discountPrice: 1799,
         price: 1999,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -58,6 +60,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -92,10 +95,12 @@ module.exports = [
             }
 
         },
+        date: 1577182357741,
         hidden: false,
         discount: 0,
         discountPrice: 2799,
         price: 2799,
+        actualPrice: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -127,6 +132,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -161,10 +167,12 @@ module.exports = [
             }
 
         },
+        date: 1577181957742,
         hidden: false,
         discount: 0,
         discountPrice: 3799,
         price: 3799,
+        actualPrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -196,6 +204,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -230,10 +239,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957744,
         hidden: false,
         discount: 0,
         discountPrice: 3799,
         price: 3799,
+        actualPrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -265,6 +276,7 @@ module.exports = [
                 seoTitle: 'bed'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -299,10 +311,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957146,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -334,6 +348,7 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -368,10 +383,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957747,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -403,6 +420,7 @@ module.exports = [
                 seoTitle: 'matress'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -437,10 +455,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957748,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 2000,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -472,6 +492,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -506,10 +527,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957749,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -541,6 +564,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -575,10 +599,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957750,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -610,6 +636,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -644,10 +671,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957751,
         hidden: false,
         discount: 0,
         discountPrice: 1799,
         price: 1799,
+        actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
@@ -679,6 +708,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -713,10 +743,12 @@ module.exports = [
             }
 
         },
+        date: 1577182957752,
         hidden: false,
         discount: 0,
         discountPrice: 2000,
         price: 2000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
@@ -748,6 +780,7 @@ module.exports = [
                 seoTitle: 'sofa'
             }
         },
+        views: 0,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },

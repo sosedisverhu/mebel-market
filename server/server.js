@@ -27,6 +27,7 @@ import adminSeoApi from './api/admin/seo';
 import clientSeoApi from './api/client/seo';
 import adminMainSliderApi from './api/admin/mainSlider';
 import clientMainSliderApi from './api/client/mainSlider';
+import clientSearchApi from './api/client/search';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -66,6 +67,7 @@ app.use('/api/admin/category', adminCategoryApi);
 app.use('/api/client/category', clientCategoryApi);
 app.use('/api/admin/subCategory', adminSubCategoryApi);
 app.use('/api/client/subCategory', clientSubCategoryApi);
+app.use('/api/client/search', clientSearchApi);
 app.use('/api/admin/article', adminArticleApi);
 app.use('/api/client/article', clientArticleApi);
 app.use('/api/admin/partner', adminPartnerApi);

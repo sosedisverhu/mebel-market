@@ -6,10 +6,6 @@ export default {
         top: 'Топ продаж',
         discount: 'Акции',
         new: 'Новинки',
-        bedsTitle: 'Кровати',
-        mattressesTitle: 'Матрасы',
-        furnitureTitle: 'Мягкая мебель',
-        accessoriesTitle: 'Аксессуары для сна',
         slider: 'Помочь с выбором',
         title: 'Наши преимущества',
         qualityTitle: 'Качество',
@@ -25,7 +21,8 @@ export default {
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
-        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }]
+        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
+        inBasket: 'В корзине'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -60,7 +57,6 @@ export default {
     productsPage: {
         filterBtn: 'Фильтры',
         results: 'Результатов',
-        popular: 'Популярные',
         price: 'Цена'
     },
     aboutProductTop: {
@@ -104,12 +100,13 @@ export default {
     },
     searchPage: {
         results: 'результатов по запросу',
-        products: 'Товары',
+        products: 'Товары:',
         noResults: 'Мы не смогли найти результаты по запросу:',
         tryAgain: 'Попробуйте еще:',
         placeholder: 'Поиск',
         needHelp: 'Нужна помощь?',
-        link: 'Свяжитесь с нами'
+        link: 'Свяжитесь с нами',
+        articles: 'Статьи:'
     },
     checkoutPage: {
         checkout: 'Оформление заказа',
@@ -137,5 +134,8 @@ export default {
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
         cancelBtn: 'Отмена'
+    },
+    articles: {
+        searchResult: 'Статьи:'
     }
 };

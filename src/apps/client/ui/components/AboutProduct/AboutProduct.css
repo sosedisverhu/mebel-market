@@ -140,10 +140,21 @@
     color: whiteBasic;
     padding: 6px 10px;
     min-width: 202px;
-    border: none;
+    border: 1px solid transparent;
     outline: none;
     background: blackLight;
     cursor: pointer;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
+
+    &.active {
+        color: blackLight;
+        background-color: whiteBasic;
+        border-color: green;
+    }
 }
 
 .btnWishList {
@@ -151,12 +162,19 @@
     position: relative;
     width: 56px;
     height: 40px;
-    background: gray3 center no-repeat url('./img/wishList.png');
-    border: none;
+    background: gray3 center no-repeat url('./img/wishlist.png');
+    border: 1px solid transparent;
     outline: none;
     cursor: pointer;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-image: url('./img/wishlist-hover.png');
+    }
 
     &.active {
         background-image: url('./img/wishlist-active.png');
+        background-color: whiteBasic;
+        border-color: gray3;
     }
 }

@@ -1,6 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .contacts {
     height: 100%;
@@ -173,6 +174,11 @@
     line-height: 21px;
     color: whiteBasic;
     padding: 10px 20px;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 }
 
 .map {
