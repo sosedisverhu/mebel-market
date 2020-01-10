@@ -23,20 +23,17 @@ class Slider extends Component {
         banners: []
     };
 
-    constructor (props) {
-        super(props);
-        this.state = {
-            width: 0,
-            activeIndex: 0
-        };
-    }
+    state = {
+        width: 0,
+        activeIndex: 0
+    };
 
     componentDidMount () {
         const width = window.innerWidth;
         this.setState({ width });
     }
 
-    setActiveIndex = (newIndex) => {
+    setActiveIndex = newIndex => {
         const { banners } = this.props;
 
         if (newIndex > banners.length - 1) newIndex = 0;
@@ -45,7 +42,7 @@ class Slider extends Component {
         this.setState({ activeIndex: newIndex });
     };
 
-    handleArrowClick = (addValue) => {
+    handleArrowClick = addValue => {
         const { activeIndex } = this.state;
         this.setActiveIndex(activeIndex + addValue);
     };
@@ -72,8 +69,10 @@ class Slider extends Component {
                 <div className={styles.bottomBlock}>
                     {banners[activeIndex].link &&
                     <a className={styles.text}
-                        href={banners[activeIndex].link}>
-                        <h2 className={styles.text}>
+                        href={banners[activeIndex].link}
+                        target={banners[activeIndex].newTab ? '_blank' : '_self'}
+                    >
+                        < h2 className={styles.text}>
                             {text.slider}
                         </h2>
                     </a>}
