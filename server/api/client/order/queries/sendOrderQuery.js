@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 const LOGIN = process.env.LOGIN || 'stubbs.development@gmail.com';
 const PASS = process.env.PASS || 'fNDCNBtDKMBv';
 const SENDER = process.env.SENDER || 'mebel-market-bot';
-const RECEIVER = process.env.RECEIVER || 'maks.stahnyuk@gmail.com';
+const RECEIVER = process.env.RECEIVER || 'v.bilous14@gmail.com';
 
 export default function saveApplication (subject, content, successCallback, failureCallback) {
     const transporter = nodemailer.createTransport({
