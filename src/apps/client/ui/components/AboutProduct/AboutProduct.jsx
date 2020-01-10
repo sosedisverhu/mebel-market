@@ -134,13 +134,15 @@ class AboutProduct extends Component {
             productId: product.id,
             properties: {
                 size: activeSize
-            }
+            },
+            quantity: 1
         });
     }
 
     handleOpenBasket = () => {
         const { basketIsOpen, openBasket } = this.props;
 
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
         openBasket();
     }
@@ -192,7 +194,9 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={classNames(styles.btnBuy, { [styles.active]: isInBasket })} onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
+                <button
+                    className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                    onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
                     {!isInBasket
                         ? text.buy
                         : text.inBasket

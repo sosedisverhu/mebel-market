@@ -116,6 +116,7 @@
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.4",
     "date-fns": "^2.8.1",
+    "date-fns-tz": "^1.0.9",
     "device": "^0.3.9",
     "express": "^4.16.3",
     "express-http-to-https": "^1.1.4",

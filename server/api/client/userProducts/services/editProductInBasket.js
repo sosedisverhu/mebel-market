@@ -17,7 +17,7 @@ import append from '@tinkoff/utils/array/append';
 
 export default function editProductInBasket (req, res) {
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
-    const { productId, quantity, properties } = req.body;
+    const { productId, quantity, properties, basketItemId } = req.body;
 
     if (!id) {
         return saveUserProduct({
@@ -91,26 +91,14 @@ export default function editProductInBasket (req, res) {
             }
 
             const { id, basket } = result;
-            const basketRepeatIndexes = basket.reduce((result, basket, i) => {
-                if (basket.productId === productId) {
-                    return [
-                        ...result,
-                        i
-                    ];
+
+            const newBasket = basket.map(basketItem => {
+                if (basketItem.id === basketItemId) {
+                    basketItem.quantity = quantity || basketItem.quantity;
+                    basketItem.properties = properties || basketItem.properties;
                 }
-
-                return result;
-            }, []);
-            const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
-                const basketNotUniq = basket[basketIndex];
-
-                if (basketNotUniq.properties.size.name === properties.size.name) {
-                    return [...basket];
-                }
-
-                return newBasket;
-            }, [...basket, { productId, quantity, properties, id: uniqid() }]) || [...basket, { productId, quantity, properties, id: uniqid() }];
-
+                return basketItem;
+            });
             return editUserProduct({
                 basket: newBasket,
                 id
