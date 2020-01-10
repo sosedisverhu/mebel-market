@@ -27,6 +27,8 @@ import adminSeoApi from './api/admin/seo';
 import clientSeoApi from './api/client/seo';
 import adminMainSliderApi from './api/admin/mainSlider';
 import clientMainSliderApi from './api/client/mainSlider';
+import clientOrderApi from './api/client/order';
+import adminOrderApi from './api/admin/order';
 import clientSearchApi from './api/client/search';
 
 import { DATABASE_URL } from './constants/constants';
@@ -78,6 +80,8 @@ app.use('/api/admin/seo', adminSeoApi);
 app.use('/api/client/seo', clientSeoApi);
 app.use('/api/admin/main-slider', adminMainSliderApi);
 app.use('/api/client/main-slider', clientMainSliderApi);
+app.use('/api/client/order', clientOrderApi);
+app.use('/api/admin/order', adminOrderApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

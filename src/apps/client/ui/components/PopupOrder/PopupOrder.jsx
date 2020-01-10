@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
+import formatMoney from '../../../utils/formatMoney';
+import setBasket from '../../../actions/setBasket';
+
 import styles from './PopupOrder.css';
 
 const mapStateToProps = ({ application }) => {
@@ -14,12 +17,19 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => ({
+    setBasket: (...payload) => dispatch(setBasket(...payload))
+});
+
 class PopupOrder extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
-        delivery: PropTypes.string.isRequired,
-        payment: PropTypes.string.isRequired
+        delivery: PropTypes.object.isRequired,
+        payment: PropTypes.object.isRequired,
+        setBasket: PropTypes.func.isRequired,
+        price: PropTypes.number.isRequired,
+        orderId: PropTypes.string.isRequired
     };
 
     popup = React.createRef();
@@ -32,16 +42,20 @@ class PopupOrder extends Component {
         clearAllBodyScrollLocks();
     }
 
+    handleClose = () => {
+        this.props.setBasket([]);
+    };
+
     render () {
-        const { langMap, langRoute, delivery, payment } = this.props;
+        const { langMap, langRoute, delivery, payment, price, orderId } = this.props;
         const text = propOr('checkoutPage', {}, langMap);
 
         return <div className={styles.root}>
             <div className={styles.cover} />
             <div className={styles.popup} ref={this.popup} >
                 <div className={styles.message}>
-                    <h2 className={styles.title}>{text.popupTitle} №123456</h2>
-                    {(delivery === 'pickup')
+                    <h2 className={styles.title}>{`${text.popupTitle} № ${orderId}`}</h2>
+                    {(delivery.id === 'pickup')
                         ? (
                             <div>
                                 <div className={styles.address}>
@@ -54,10 +68,10 @@ class PopupOrder extends Component {
                                 </div>
                             </div>)
                         : null}
-                    {(delivery === 'post')
+                    {(delivery.id === 'post')
                         ? <p className={styles.sms}>{text.sms}</p>
                         : null}
-                    {(payment === 'card')
+                    {(payment.id === 'card')
                         ? (
                             <div className={styles.card}>
                                 <div className={styles.cardTitle}>{text.cardTitle}</div>
@@ -65,13 +79,13 @@ class PopupOrder extends Component {
                                 <div className={styles.cardDescr}>{text.cardDescr}</div>
                             </div>)
                         : null}
-                    <h3 className={styles.price}>{text.price} <span className={styles.priceValue}>3 723₴</span></h3>
-                    <Link to={`${langRoute}/`} className={styles.link}>{text.toMain}</Link>
+                    <h3 className={styles.price}>{text.price} <span className={styles.priceValue}>{formatMoney(price)}</span></h3>
+                    <Link to={`${langRoute}/`} onClick={this.handleClose} className={styles.link}>{text.toMain}</Link>
                 </div>
-                <Link to={`${langRoute}/`} className={styles.close} />
+                <Link to={`${langRoute}/`} onClick={this.handleClose} className={styles.close} />
             </div>
         </div>;
     }
 }
 
-export default connect(mapStateToProps)(PopupOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(PopupOrder);

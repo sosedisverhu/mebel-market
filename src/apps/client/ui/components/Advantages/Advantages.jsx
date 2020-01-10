@@ -29,7 +29,12 @@ class Advantages extends Component {
                     <div className={styles.advantages}>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/quality.png" width='80' height='80' alt="quality"/>
+                                <img
+                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/quality.png"
+                                    width='80'
+                                    height='80'
+                                    alt="quality"
+                                />
                             </div>
                             <h3 className={styles.advantageTitle}>{text.qualityTitle}</h3>
                             <p className={styles.advantageText}>{text.qualityText}</p>
@@ -43,7 +48,12 @@ class Advantages extends Component {
                         </div>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/delivery.png" width='80' height='80' alt="delivery"/>
+                                <img
+                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/delivery.png"
+                                    width='80'
+                                    height='80'
+                                    alt="delivery"
+                                />
                             </div>
                             <h3 className={styles.advantageTitle}>{text.deliveryTitle}</h3>
                             <p className={styles.advantageText}>{text.deliveryText}</p>

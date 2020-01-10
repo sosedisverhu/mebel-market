@@ -125,7 +125,10 @@ class WishList extends Component {
                                                 </div>
                                                 <div className={styles.productButtons}>
                                                     <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
-                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                        <img
+                                                            className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png"
+                                                            alt="remove"
+                                                        />
                                                     </button>
                                                     <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
                                                 </div>

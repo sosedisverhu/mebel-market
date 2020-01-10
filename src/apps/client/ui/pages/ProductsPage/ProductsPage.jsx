@@ -181,7 +181,8 @@ class ProductsPage extends Component {
                     flatten,
                     map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
                 )(products);
-                const options = filterUtil(option => any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                const options = filterUtil(option =>
+                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
 
                 return options.length > 1 ? [
                     ...filters,

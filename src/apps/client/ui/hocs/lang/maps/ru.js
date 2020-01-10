@@ -124,7 +124,8 @@ export default {
         cardTitle: 'Оплатите на карту:',
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
-        toMain: 'На главную'
+        toMain: 'На главную',
+        noItemsInBasket: 'В корзине еще нет товаров'
     },
     comments: {
         showAll: 'Показать все',
