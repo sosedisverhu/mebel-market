@@ -162,7 +162,7 @@
     position: relative;
     width: 56px;
     height: 40px;
-    background: gray3 center no-repeat url('./img/wishlist.png');
+    background: gray3 center no-repeat url('./img/wishList.png');
     border: 1px solid transparent;
     outline: none;
     cursor: pointer;
