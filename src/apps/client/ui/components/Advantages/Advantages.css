@@ -1,7 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
 .root {
@@ -10,7 +10,7 @@
 }
 
 .contentWrap {
-    background: white;
+    background: whiteBasic;
 }
 
 .content {
@@ -141,7 +141,7 @@
         width: 40px;
         height: 2px;
         margin-left: -20px;
-        background: green;
+        background: greenBasic;
     }
 
     @media (max-width: 600px) {

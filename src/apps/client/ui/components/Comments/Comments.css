@@ -1,9 +1,9 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .commentsContainer {
     font-family: RoundedElegance;
@@ -78,7 +78,7 @@
 .date {
     font-size: 12px;
     line-height: 14px;
-    color: gray;
+    color: gray0;
     margin-left: 50px;
 
     @media (max-width: 600px) {
@@ -141,7 +141,7 @@
         height: 0;
         border-style: solid;
         border-width: 8px 5px 0 5px;
-        border-color: green transparent transparent transparent;
+        border-color: greenBasic transparent transparent transparent;
         top: 50%;
         right: -30px;
         margin-top: -5px;
@@ -214,7 +214,7 @@
     color: blackLight;
     width: 100%;
     background-color: whiteBasic;
-    border: 1px solid gray;
+    border: 1px solid gray0;
     box-sizing: border-box;
     padding: 8px;
     margin-bottom: 20px;
@@ -224,7 +224,7 @@
     }
 
     &::placeholder {
-        color: gray;
+        color: gray0;
     }
 }
 
@@ -251,5 +251,5 @@
 
 .cancelBtn {
     background-color: gray3;
-    color: gray;
+    color: gray0;
 }

@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .footer {
     background-color: whiteBasic;
@@ -86,7 +86,7 @@
     padding-bottom: 2px;
 
     &:hover {
-        border-bottom: 2px solid green;
+        border-bottom: 2px solid greenBasic;
         padding-bottom: 0;
     }
 }
@@ -111,7 +111,7 @@
         height: 1px;
         right: 0;
         bottom: -10px;
-        background-color: green;
+        background-color: greenBasic;
 
         @media (max-width: 992px) {
             right: auto;

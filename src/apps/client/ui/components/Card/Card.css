@@ -1,9 +1,9 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .product {
     width: 288px;
@@ -22,7 +22,7 @@
     transition: .3s ease-out;
 
     &:hover {
-        outline-color: green;
+        outline-color: greenBasic;
     }
 
     @media (max-width: 640px) {
@@ -56,7 +56,7 @@
                 justify-content: center;
             }
 
-            .title {
+            .productName {
                 font-size: 13px;
                 line-height: 15px;
                 padding: 7px 0 5px 0;
@@ -113,7 +113,7 @@
 .label {
     font: 18px/21px RoundedElegance;
     padding: 0 18px;
-    background: green;
+    background: greenBasic;
     color: whiteBasic;
     margin-top: 8px;
 
@@ -140,7 +140,7 @@
     }
 }
 
-.title {
+.productName {
     font: 18px/21px RoundedElegance;
     color: blackLight;
     padding: 5px 10px;
@@ -149,8 +149,8 @@
     transition: .3s ease-out;
 
     .product:hover & {
-        color: green;
-        text-decoration-color: green;
+        color: greenBasic;
+        text-decoration-color: greenBasic;
     }
 
     @media (max-width: 640px) {
@@ -176,7 +176,7 @@
 .priceOld {
     font: 15px/17px RoundedElegance;
     text-decoration-line: line-through;
-    color: gray;
+    color: gray0;
     position: absolute;
     bottom: 17px;
     left: 50px;

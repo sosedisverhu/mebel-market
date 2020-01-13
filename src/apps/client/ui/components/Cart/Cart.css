@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value gray2 from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 
 .cart {
@@ -32,7 +33,7 @@
     justify-content: center;
     width: 12px;
     height: 13px;
-    background: green;
+    background: greenBasic;
     color: whiteBasic;
     border-radius: 50%;
 }
@@ -110,7 +111,7 @@
     transition: .5s ease-out;
 
     &:hover {
-        background-color: green;
+        background-color: greenBasic;
     }
 }
 
