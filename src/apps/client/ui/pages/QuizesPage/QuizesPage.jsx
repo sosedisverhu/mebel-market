@@ -53,22 +53,29 @@ class QuizesPage extends Component {
         });
         return filters;
     }
+    
+    scrollToTop = () => {
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    }
 
     handleClickNext = () => {
         this.setState(state => ({
             activeQuizIndex: state.activeQuizIndex + 1,
             filters: this.getFilters()
         }));
+        this.scrollToTop();
     }
 
     handleClickSkip = () => {
         this.setState(state => ({ activeQuizIndex: state.activeQuizIndex + 1 }));
+        this.scrollToTop();
     }
 
     handleClickResult = () => {
         const { products } = this.props;
         const filteredProducts = products;
         this.setState({ filteredProducts, viewProducts: true });
+        this.scrollToTop();
     }
 
     handleOptionChange = fieldName => e => {
