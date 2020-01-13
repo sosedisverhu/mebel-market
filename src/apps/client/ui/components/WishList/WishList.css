@@ -1,8 +1,8 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -130,7 +130,7 @@
 .productNumber {
     font-size: 12px;
     line-height: 14px;
-    color: gray;
+    color: gray0;
     margin-bottom: 18px;
 }
 
@@ -150,7 +150,7 @@
     font-size: 18px;
     line-height: 21px;
     text-decoration-line: line-through;
-    color: gray;
+    color: gray0;
     margin-right: 20px;
 }
 
@@ -188,7 +188,7 @@
     transition: .5s ease-out;
 
     &:hover {
-        background-color: green;
+        background-color: greenBasic;
     }
 }
 

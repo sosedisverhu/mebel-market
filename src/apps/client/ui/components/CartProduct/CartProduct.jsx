@@ -25,7 +25,7 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     editProductInBasket: payload => dispatch(editProductInBasket(payload)),
@@ -54,7 +54,7 @@ class Cart extends Component {
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
         this.props.closeBasket();
-    }
+    };
 
     quantityChange = value => {
         if (value >= 0 && value <= MAX_QUANTITY) {
@@ -74,7 +74,7 @@ class Cart extends Component {
         this.props.saveProductsToWishlist({
             productId: product.id
         });
-    }
+    };
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
         const { categories, subCategories } = this.props;
@@ -82,7 +82,7 @@ class Cart extends Component {
         const subCategory = find(subCategory => subCategory.id === subCategoryId, subCategories).alias;
 
         return `${category}/${subCategory}`;
-    }
+    };
 
     render () {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
@@ -97,7 +97,7 @@ class Cart extends Component {
                     <img className={styles.productImg} src={product.avatar} alt="" />
                 </Link>
                 <div className={styles.productInfo}>
-                    <div className={styles.productOptionWrap}>
+                    <div>
                         <div className={styles.productOption}>
                             <Link
                                 className={styles.productNameLink}
@@ -110,19 +110,19 @@ class Cart extends Component {
                         <p className={styles.productSize}>{text.size} {properties.size.name}</p>
                         <div className={styles.productQuantity}>
                             <button
-                                type="button"
+                                type='button'
                                 className={styles.quantitySub}
                                 onClick={() => this.quantityChange(+quantity - 1)}
                                 disabled={quantity <= 1}>-</button>
                             <input
                                 className={styles.quantityInput}
-                                type="text"
+                                type='text'
                                 onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
                                 value={quantity}
                                 onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
                             <button
-                                type="button"
+                                type='button'
                                 className={styles.quantityAdd}
                                 onClick={() => this.quantityChange(+quantity + 1)}
                                 disabled={quantity >= MAX_QUANTITY}>+</button>

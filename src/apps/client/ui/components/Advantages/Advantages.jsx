@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
-
-import { connect } from 'react-redux';
 
 import styles from './Advantages.css';
 

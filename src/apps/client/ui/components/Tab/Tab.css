@@ -1,7 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
 .root {
@@ -27,7 +27,7 @@
 
 .title {
     font: 18px/21px RoundedElegance;
-    color: gray;
+    color: gray0;
     position: relative;
     padding: 35px 25px;
     cursor: pointer;
@@ -39,7 +39,7 @@
         left: 25px;
         width: calc(100% - 50px);
         height: 2px;
-        background: green;
+        background: greenBasic;
         display: none;
     }
 
@@ -154,7 +154,7 @@
 }
 
 .characterSpan {
-    color: gray;
+    color: gray0;
     font-size: 12px;
 
     @media (max-width: 600px) {

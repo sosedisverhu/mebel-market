@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .root {
     position: fixed;
@@ -157,7 +157,7 @@
     transition: .5s ease-out;
 
     &:hover {
-        background-color: green;
+        background-color: greenBasic;
     }
 
     @media (max-width: 600px) {

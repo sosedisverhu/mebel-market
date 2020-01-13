@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
@@ -98,15 +98,17 @@ class Card extends Component {
                     <img className={styles.img} src={avatar} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
-                    <div className={styles.title}>
+                    <p className={styles.productName}>
                         {texts[lang].name}
-                    </div>
+                    </p>
+
                     {discount ? <div className={styles.priceOld}>
                         {price} &#8372;
                     </div> : null}
                     <div className={styles.price}>
                         {actualPrice} &#8372;
                     </div>
+
                 </div>
             </Link>);
     }

@@ -1,13 +1,13 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .filter {
     &.active {
         .title {
-            background: green;
+            background: greenBasic;
             color: whiteBasic;
             transition: 0.25s ease-out;
 
@@ -43,7 +43,7 @@
         height: 0;
         border-style: solid;
         border-width: 8px 5px 0 5px;
-        border-color: green transparent transparent  transparent;
+        border-color: greenBasic transparent transparent  transparent;
         position: absolute;
         top: 50%;
         right: 15px;
@@ -55,21 +55,14 @@
 
 .sliderWrapper {
     z-index: -1;
-    max-height: 0px;
+    max-height: 0;
     overflow: hidden;
     position: absolute;
     padding: 0 25px;
     transition: max-height 0.25s ease-out;
-    background: green;
+    background: greenBasic;
     min-width: 242px;
 }
-
-
-
-
-
-
-
 
 .slider {
     width: 100%;
@@ -88,7 +81,7 @@
     left: 0;
     min-width: 14px;
     border-radius: 7px;
-    background: green;
+    background: greenBasic;
 }
 
 .minCurrentValue,
@@ -99,7 +92,6 @@
     &:before {
         content: "";
         position: absolute;
-        top: -5px;
         width: 14px;
         height: 14px;
         background: whiteBasic;
@@ -174,7 +166,6 @@
 .track {
     left: 0;
     margin-top: -0.15rem;
-    position: absolute;
     right: 0;
     top: 50%;
     background: gray1;
@@ -202,7 +193,7 @@
 .slider {
     appearance: none;
     background: whiteBasic;
-    border: 2px solid green;
+    border: 2px solid greenBasic;
     border-radius: 100%;
     cursor: pointer;
     display: block;

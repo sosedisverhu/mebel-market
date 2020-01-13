@@ -1,7 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .header {
     display: flex;
@@ -248,12 +248,12 @@
     }
 
     &.active:before {
-        background-color: green;
+        background-color: greenBasic;
     }
 
     &:hover {
-        color: green;
-        text-shadow: -0.2px 0 green, 0 0.2px green, 0.2px 0 green, 0 -0.2px green;
+        color: greenBasic;
+        text-shadow: -0.2px 0 greenBasic, 0 0.2px greenBasic, 0.2px 0 greenBasic, 0 -0.2px greenBasic;
     }
 
     &:last-child {
