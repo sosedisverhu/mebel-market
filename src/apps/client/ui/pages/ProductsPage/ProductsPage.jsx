@@ -284,6 +284,25 @@ class ProductsPage extends Component {
         });
     };
 
+    getResultWord = (text, products) => {
+        const { length } = products;
+
+        if (length === 11 || length === 12 || length === 13 || length === 14) {
+            return text.much;
+        }
+
+        switch (length % 10) {
+        case 1:
+            return text.one;
+        case 2:
+        case 3:
+        case 4:
+            return text.several;
+        default:
+            return text.much;
+        }
+    };
+
     render () {
         if (!this.state.isCategory) {
             return <NotFoundPage/>;
@@ -318,7 +337,7 @@ class ProductsPage extends Component {
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${text.results}`}
+                                {`${propOr('length', 0, filteredProducts) || products.length} ${this.getResultWord(text.results, products)}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>
