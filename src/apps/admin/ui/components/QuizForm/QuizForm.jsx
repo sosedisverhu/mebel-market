@@ -76,6 +76,7 @@ class QuizForm extends Component {
             hidden: quiz.hidden || false,
             ru_steps: pathOr(['steps', 'ru'], '', quiz) || [],
             ua_steps: pathOr(['steps', 'ua'], '', quiz) || [],
+            alias: quiz.alias,
             ...pick(QUIZZES_VALUES, quiz)
         };
         this.id = prop('id', quiz);
@@ -89,7 +90,8 @@ class QuizForm extends Component {
             hidden,
             id,
             ua_steps: uaSteps,
-            ru_steps: ruSteps
+            ru_steps: ruSteps,
+            alias
         }) => {
         return {
             texts: {
@@ -102,6 +104,7 @@ class QuizForm extends Component {
             },
             hidden,
             id,
+            alias,
             steps: {
                 ua: uaSteps,
                 ru: ruSteps
@@ -145,10 +148,16 @@ class QuizForm extends Component {
             .then(() => {
                 onDone();
             })
-            .catch(() => {
-                this.setState({
-                    errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
-                });
+            .catch(error => {
+                if (error.code === 'duplication') {
+                    this.setState({
+                        errorText: 'Введите уникальные алиас для товара'
+                    });
+                } else {
+                    this.setState({
+                        errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
+                    });
+                }
             });
     };
 

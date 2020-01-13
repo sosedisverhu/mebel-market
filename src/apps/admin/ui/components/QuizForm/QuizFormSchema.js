@@ -49,6 +49,20 @@ export default function ({ data: { title } = {} } = {}) {
                 name: 'divider'
             },
             {
+                component: FormFieldInput,
+                name: 'alias',
+                schema: {
+                    label: 'Алиас'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните алиас' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
                 component: FormFieldTitle,
                 name: 'steps-title',
                 schema: {
