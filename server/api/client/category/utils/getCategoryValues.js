@@ -4,7 +4,9 @@ const VALUES = [
     'texts',
     'id',
     'hidden',
-    'alias'
+    'alias',
+    'filters',
+    'image'
 ];
 
 export default function getCategoryValues (category) {

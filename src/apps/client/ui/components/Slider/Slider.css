@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 
 .slider {
     width: 100%;
@@ -120,7 +120,7 @@
 
 .text {
     font: 36px/41px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
     text-align: center;
@@ -174,7 +174,7 @@
     &.active {
 
         &:before {
-            background: black;
+            background: blackLight;
             transition: background 0.25s ease-in;
         }
     }

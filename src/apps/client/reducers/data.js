@@ -4,7 +4,11 @@ import {
     SET_CATEGORIES,
     SET_SUB_CATEGORIES,
     SET_PARTNERS,
-    SET_SCROLL_TO_CHARACTERISTIC
+    SET_SCROLL_TO_CHARACTERISTIC,
+    SET_BASKET,
+    SET_WISHLIST,
+    OPEN_BASKET,
+    CLOSE_BASKET
 } from '../types/types';
 
 const initialState = {
@@ -126,7 +130,10 @@ const initialState = {
                 }
             ]
         }
-    ]
+    ],
+    basket: [],
+    wishlist: [],
+    basketIsOpen: false
 };
 
 export default function (state = initialState, action) {
@@ -143,6 +150,14 @@ export default function (state = initialState, action) {
         return { ...state, subCategories: action.payload };
     case SET_PARTNERS:
         return { ...state, partners: action.payload };
+    case SET_BASKET:
+        return { ...state, basket: action.payload };
+    case SET_WISHLIST:
+        return { ...state, wishlist: action.payload };
+    case OPEN_BASKET:
+        return { ...state, basketIsOpen: true };
+    case CLOSE_BASKET:
+        return { ...state, basketIsOpen: false };
     default:
         return state;
     }

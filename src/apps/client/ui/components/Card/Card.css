@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value blackBasic from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
@@ -10,7 +10,7 @@
     min-width: 288px;
     height: 365px;
     max-height: 365px;
-    margin: 30px 30px 0 0;
+    margin: 30px 26px 2px 2px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -18,7 +18,12 @@
     overflow: hidden;
     background: whiteBasic;
     text-decoration: none;
-    color: blackBasic;
+    outline: 2px solid transparent;
+    transition: .3s ease-out;
+
+    &:hover {
+        outline-color: green;
+    }
 
     @media (max-width: 640px) {
         width: calc(50% - 10px);
@@ -119,7 +124,7 @@
     }
 }
 .discount {
-    color: red;
+    color: redBasic;
     background: whiteBasic;
 }
 
@@ -137,9 +142,16 @@
 
 .title {
     font: 18px/21px RoundedElegance;
-    color: blackBasic;
+    color: blackLight;
     padding: 5px 10px;
     text-align: center;
+    text-decoration: underline transparent;
+    transition: .3s ease-out;
+
+    .product:hover & {
+        color: green;
+        text-decoration-color: green;
+    }
 
     @media (max-width: 640px) {
         font-size: 13px;
@@ -150,7 +162,7 @@
 
 .price {
     font: 18px/21px RoundedElegance;
-    color: red;
+    color: redBasic;
     margin-bottom: 15px;
     text-align: center;
 

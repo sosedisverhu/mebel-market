@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .root {
     position: fixed;
@@ -12,7 +13,7 @@
     align-items: center;
     z-index: 11;
     overflow-y: auto;
-    
+
     @media (max-width: 800px) {
         display: block;
     }
@@ -32,7 +33,7 @@
     position: relative;
     background: whiteBasic;
     padding: 30px 45px;
-    width: 600px;    
+    width: 600px;
     border-radius: 5px;
     z-index: 100;
 
@@ -55,7 +56,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: black;
+    color: blackLight;
 }
 
 .title {
@@ -137,7 +138,7 @@
     }
 }
 
-.priceValue {    
+.priceValue {
     white-space: nowrap;
 }
 
@@ -146,13 +147,18 @@
     padding: 10px 20px;
     border: none;
     color: whiteBasic;
-    background: black;
+    background: blackLight;
     min-width: 200px;
     display: block;
     cursor: pointer;
     margin-top: 30px;
     text-decoration: none;
     text-align: center;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 
     @media (max-width: 600px) {
         margin-top: 40px;

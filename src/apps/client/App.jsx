@@ -23,6 +23,7 @@ import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
 import QuizesPage from './ui/pages/QuizesPage/QuizesPage.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
+import Helmet from './ui/components/Helmet/Helmet.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -71,6 +72,7 @@ class App extends Component {
     render () {
         return <main>
             <div className={styles.page}>
+                <Helmet />
                 <Header/>
                 <div className={styles.pageContent}>
                     <Switch>

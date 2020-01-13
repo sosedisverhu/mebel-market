@@ -1,117 +1,145 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
-import { MAX_QUANTITY } from '../../../constants/constants';
-import styles from './Cart.css';
+import findIndex from '@tinkoff/utils/array/findIndex';
+import includes from '@tinkoff/utils/array/includes';
+import find from '@tinkoff/utils/array/find';
 
-const mapStateToProps = ({ application }) => {
+import styles from './Cart.css';
+import CartProduct from '../CartProduct/CartProduct';
+
+import deleteFromBasket from '../../../services/client/deleteFromBasket';
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+
+import openBasket from '../../../actions/openBasket';
+import closeBasket from '../../../actions/closeBasket';
+
+import formatMoney from '../../../utils/formatMoney';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langRoute: application.langRoute,
+        langMap: application.langMap,
+        lang: application.lang,
+        basket: data.basket,
+        categories: data.categories,
+        subCategories: data.subCategories,
+        basketIsOpen: data.basketIsOpen
     };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+    deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
+    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
+    openBasket: (payload) => dispatch(openBasket(payload)),
+    closeBasket: (payload) => dispatch(closeBasket(payload))
+});
+
+const EXCEPTION_NUMBERS_MIN = 11;
+const EXCEPTION_NUMBERS_MAX = 14;
+const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
 
 @outsideClick
 class Cart extends Component {
     static propTypes = {
+        langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        basket: PropTypes.array.isRequired,
+        deleteFromBasket: PropTypes.func.isRequired,
+        saveProductsToWishlist: PropTypes.func.isRequired,
+        categories: PropTypes.array,
+        subCategories: PropTypes.array,
+        basketIsOpen: PropTypes.bool.isRequired,
+        openBasket: PropTypes.func.isRequired,
+        closeBasket: PropTypes.func.isRequired
     };
 
-    state = {
-        active: false,
-        quantity: 1
+    getWordCaseByNumber (number, cases) {
+        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
+            return cases[0];
+        }
+
+        const lastNumber = number % 10;
+        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
+
+        return cases[resultIndex];
     }
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
-        this.setState({ active: false });
+        this.props.closeBasket();
     }
 
-    handleClick = (test) => {
-        const { outsideClickEnabled } = this.props;
-        const { active } = this.state;
+    handleClick = () => {
+        const { outsideClickEnabled, turnOnClickOutside, basketIsOpen, openBasket } = this.props;
 
-        document.body.style.overflowY = (!active) ? 'hidden' : 'visible';
-        this.setState(state => ({ active: !state.active }));
+        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
 
-        if (!active && !outsideClickEnabled) {
-            this.props.turnOnClickOutside(this, this.handlePopupClose);
+        if (!basketIsOpen && !outsideClickEnabled) {
+            turnOnClickOutside(this, this.handlePopupClose);
         }
+        openBasket();
     }
 
-    quantityChange = (value) => {
-        if (value >= 0 && value <= MAX_QUANTITY) {
-            this.setState({ quantity: value });
-        }
-    };
+    getCategoriesAlias = (categoryId, subCategoryId) => {
+        const { categories, subCategories } = this.props;
+        const category = find(category => category.id === categoryId, categories).alias;
+        const subCategory = find(subCategory => subCategory.id === subCategoryId, subCategories).alias;
+
+        return `${category}/${subCategory}`;
+    }
 
     render () {
-        const { langMap } = this.props;
-        const { active, quantity } = this.state;
+        const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;
         const text = propOr('cart', {}, langMap);
+        const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
+        const totalPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
 
         return (
             <div className={styles.cart}>
-                <div className={styles.iconCartWrapper} onClick={this.handleClick}>
+                <div className={styles.iconCartWrapper} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}>
                     <img className={styles.iconCartImg} src="/src/apps/client/ui/components/Cart/img/cart.svg" alt="cart icon"/>
-                    <span className={styles.quantityAll}>0</span>
+                    <span className={styles.quantityAll}>{quantityAll}</span>
                 </div>
-                <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
-                    <div className={styles.cover} onClick={this.handleClick}/>
+                <div className={classNames(styles.popupContainer, { [styles.active]: basketIsOpen })}>
+                    <div className={styles.cover} onClick={!basketIsOpen ? this.handleClick : this.handlePopupClose}/>
                     <div className={styles.popup}>
-                        <p className={styles.title}>{text.title}</p>
-                        <div className={styles.productsContainer}>
-                            <div className={styles.cartItemWrapper}>
-                                <div className={styles.cartItem}>
-                                    <img className={styles.productImg} src="" alt=""/>
-                                    <div>
-                                        <div className={styles.productOption}>
-                                            <p className={styles.productName}>Кровать «Анталия»</p>
-                                            <p className={styles.productNumber}>(48092)</p>
-                                            <button className={styles.wishBtn}>
-                                                <img className={styles.wishBtnImg} src="src/apps/client/ui/components/Cart/img/wish-black.png" alt="Wish List"/>
-                                            </button>
-                                            <button className={styles.removeBtn}>
-                                                <img className={styles.removeBtnImg} src="src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
-                                            </button>
-                                        </div>
-                                        <p className={styles.productSize}>{text.size} 190 х 200</p>
-                                        <div className={styles.productQuantity}>
-                                            <button
-                                                className={styles.quantitySub}
-                                                onClick={() => this.quantityChange(quantity - 1)}
-                                                disabled={quantity <= 1}>-</button>
-                                            <input
-                                                className={styles.quantityInput}
-                                                type="text"
-                                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
-                                                value={quantity}
-                                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
-                                            />
-                                            <button
-                                                className={styles.quantityAdd}
-                                                onClick={() => this.quantityChange(quantity + 1)}
-                                                disabled={quantity >= MAX_QUANTITY}>+</button>
-                                        </div>
-                                        <div className={styles.productPrices}>
-                                            <p className={styles.productOldPrice}>2 798&#8372;</p>
-                                            <p className={styles.productPrice}>1 399&#8372;</p>
-                                        </div>
+                        <p className={styles.title}>
+                            {text.title} {basket.length > 0 &&
+                            <span>
+                                {quantityAll}&nbsp;
+                                {this.getWordCaseByNumber(quantityAll,
+                                    lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                            </span>
+                            }</p>
+                        {basket.length > 0
+                            ? <div className={styles.productsContainer}>
+                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
+                                    <CartProduct product={product} quantity={quantity} properties={properties} basketItemId={basketItemId} key={i} />
+                                )}
+                            </div>
+                            : <p>{text.noProduct}</p>
+                        }
+                        {basket.length > 0 &&
+                            <div className={styles.cartBottomInfo}>
+                                <div className={styles.totalPriceContainer}>
+                                    <div className={styles.totalPriceWrapper}>
+                                        <p className={styles.totalPrice}>{text.totalPrice}</p>
+                                        <p className={styles.totalPrice}>{formatMoney(totalPrice)}</p>
                                     </div>
                                 </div>
+                                <Link to={`${langRoute}/order/`} >
+                                    <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>{text.checkout}</button>
+                                </Link>
                             </div>
-                        </div>
-                        <div className={styles.totalPriceContainer}>
-                            <div className={styles.totalPriceWrapper}>
-                                <p className={styles.totalPrice}>{text.totalPrice}</p>
-                                <p className={styles.totalPrice}>0&#8372;</p>
-                            </div>
-                        </div>
-                        <button className={styles.checkoutBtn}>{text.checkout}</button>
+                        }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>
                 </div>
@@ -120,4 +148,4 @@ class Cart extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

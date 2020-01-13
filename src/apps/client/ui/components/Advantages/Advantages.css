@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
@@ -39,7 +39,7 @@
         margin-top: -1px;
         height: 2px;
         width: 23%;
-        background: black;
+        background: blackLight;
     }
 
     @media (max-width: 900px) {
@@ -93,6 +93,10 @@
     flex-direction: column;
     align-items: center;
 
+    &:last-child .advantageTitle {
+        margin-top: 35px;
+    }
+
     @media (max-width: 1080px) {
         width: auto;
     }
@@ -124,7 +128,7 @@
     font: 24px/28px RoundedElegance;
     letter-spacing: 0.03em;
     font-feature-settings: "kern" off;
-    color: black;
+    color: blackLight;
     margin-top: 25px;
     padding-bottom: 12px;
     position: relative;
@@ -152,7 +156,7 @@
     letter-spacing: 0.03em;
     text-align: justify;
     font-feature-settings: "kern" off;
-    color: black;
+    color: blackLight;
     margin-top: 30px;
 
     @media (max-width: 600px) {

@@ -1,12 +1,8 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
 
 .langs {
-    /* position: absolute;
-    top: 50%;
-    margin-top: -19px;
-    right: 60px; */
     display: flex;
     flex-direction: column;
     z-index: 3;
@@ -35,7 +31,7 @@
     cursor: pointer;
     text-transform: uppercase;
     padding: 10px 0 10px 10px;
-    background: black;
+    background: blackLight;
     border-radius: 0 0 5px 5px;
 }
 
@@ -65,6 +61,10 @@
     position: absolute;
     top: 43px;
     width: 100%;
+
+    .lang:hover {
+        color: green;
+    }
 }
 
 .mobileLangs {

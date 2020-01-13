@@ -1,5 +1,5 @@
 
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value whiteBasic from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
@@ -14,7 +14,7 @@
             &:before {
                 transform: rotate(180deg);
                 transition: 0.25s ease-out;
-                border-color: black transparent transparent transparent;
+                border-color: blackLight transparent transparent transparent;
             }
         }
 
@@ -33,7 +33,7 @@
     background: gray4;
     box-sizing: border-box;
     font: 300 14px/17px RoundedElegance;
-    color: black;
+    color: blackLight;
     padding: 6px 41px 6px 16px;
     position: relative;
     display: inline-block;

@@ -16,13 +16,15 @@ import Form from '../Form/Form';
 import getSchema from './CategoryFormSchema';
 import saveProductsCategory from '../../../services/saveCategory';
 import editProductsCategory from '../../../services/editCategory';
+import updateCategoryImage from '../../../services/updateCategoryImage';
 import classNames from 'classnames';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
 
 const mapDispatchToProps = (dispatch) => ({
     saveProductsCategory: payload => dispatch(saveProductsCategory(payload)),
-    editProductsCategory: payload => dispatch(editProductsCategory(payload))
+    editProductsCategory: payload => dispatch(editProductsCategory(payload)),
+    updateCategoryImage: (...payload) => dispatch(updateCategoryImage(...payload))
 });
 
 const materialStyles = theme => ({
@@ -52,7 +54,8 @@ class CategoryForm extends Component {
         editProductsCategory: PropTypes.func.isRequired,
         onDone: PropTypes.func,
         category: PropTypes.object,
-        categories: PropTypes.array
+        categories: PropTypes.array,
+        updateCategoryImage: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -79,7 +82,14 @@ class CategoryForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             alias: category.alias || '',
             hidden: category.hidden || false,
-            ...pick(CATEGORIES_VALUES, category)
+            ...pick(CATEGORIES_VALUES, category),
+            filters: [],
+            ua_filters: pathOr(['filters', 'ua'], [], category),
+            ru_filters: pathOr(['filters', 'ru'], [], category),
+            image: {
+                files: category.image ? [category.image] : [],
+                removedFiles: []
+            }
         };
 
         this.state = {
@@ -102,7 +112,9 @@ class CategoryForm extends Component {
             hidden,
             positionIndex,
             id,
-            alias
+            alias,
+            ua_filters: uaFilters,
+            ru_filters: ruFilters
         }) => {
         return {
             hidden,
@@ -120,6 +132,10 @@ class CategoryForm extends Component {
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
+            },
+            filters: {
+                ua: uaFilters,
+                ru: ruFilters
             },
             id,
             alias
@@ -149,6 +165,17 @@ class CategoryForm extends Component {
                     positionIndex: categoryPayload.positionIndex || categories.length
                 })
         )
+            .then(category => {
+                const { files } = values.image;
+
+                if (files[0].content) {
+                    const formData = new FormData();
+
+                    formData.append(`category-${category.id}-image`, files[0].content);
+
+                    return this.props.updateCategoryImage(formData, category.id);
+                }
+            })
             .then(() => {
                 onDone();
             })

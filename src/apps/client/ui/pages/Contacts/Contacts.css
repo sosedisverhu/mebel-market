@@ -1,6 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .contacts {
     height: 100%;
@@ -25,7 +26,8 @@
     margin: 30px auto 0;
     font-size: 24px;
     line-height: 28px;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     position: relative;
 
     @media (max-width: 768px) {
@@ -46,7 +48,7 @@
         right: calc(100% + 99px);
         width: 287px;
         height: 2px;
-        background-color: black;
+        background-color: blackLight;
 
         @media (max-width: 950px) {
             width: 200px;
@@ -119,8 +121,8 @@
 .infoTitle {
     font-size: 18px;
     line-height: 21px;
-    color: black;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     margin-bottom: 10px;
 
     @media (max-width: 768px) {
@@ -140,7 +142,7 @@
 .infoText {
     font-size: 14px;
     line-height: 16px;
-    color: black;
+    color: blackLight;
     text-decoration: none;
     margin-bottom: 10px;
 
@@ -166,12 +168,17 @@
     @mixin removeDefaultButton;
     cursor: pointer;
     margin-bottom: 30px;
-    background-color: black;
+    background-color: blackLight;
     font-family: RoundedElegance;
     font-size: 18px;
     line-height: 21px;
     color: whiteBasic;
     padding: 10px 20px;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 }
 
 .map {

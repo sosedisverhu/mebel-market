@@ -1,7 +1,8 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 @value gray from '../../../../../css/colors.css';
-@value red from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
+@value green from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -17,6 +18,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background-image: url('./img/wishlist.svg');
+    width: 18px;
+    height: 16px;
+    transition: .3s ease-out;
+
+    &:hover {
+        background-image: url('./img/wishlist-hover.svg');
+    }
 }
 
 .quantityAll {
@@ -55,7 +64,7 @@
 }
 
 .popup {
-    width: 481px;
+    min-width: 481px;
     background: whiteBasic;
     position: absolute;
     top: 0;
@@ -71,12 +80,13 @@
     line-height: 28px;
     margin: 20px 0;
     text-align: center;
-    color: black;
+    color: blackLight;
 }
 
 .productsContainer {
-    max-height: 324px;
+    max-height: 320px;
     overflow-y: auto;
+    width: 100%;
 }
 
 .wishItemWrapper {
@@ -95,19 +105,25 @@
 
 .wishItem {
     display: flex;
-    justify-content: space-between;
     padding: 20px 25px 20px 30px;
 }
 
 .productImg {
     width: 120px;
     height: 120px;
+    margin-right: 30px;
+}
+
+.productInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .productName {
     font-size: 18px;
     line-height: 21px;
-    color: black;
+    color: blackLight;
     margin-bottom: 6px;
 }
 
@@ -121,7 +137,7 @@
 .productSize {
     font-size: 14px;
     line-height: 16px;
-    color: black;
+    color: blackLight;
     margin-bottom: 17px;
 }
 
@@ -141,7 +157,7 @@
 .productPrice {
     font-size: 24px;
     line-height: 28px;
-    color: red;
+    color: redBasic;
 }
 
 .productButtons {
@@ -168,7 +184,12 @@
     line-height: 18px;
     color: whiteBasic;
     padding: 10px 15px;
-    background-color: black;
+    background-color: blackLight;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
+    }
 }
 
 .continueShopping {
@@ -178,7 +199,7 @@
     font-size: 18px;
     line-height: 21px;
     margin: 20px 0;
-    color: black;
+    color: blackLight;
     cursor: pointer;
     position: relative;
 
@@ -187,7 +208,7 @@
         position: absolute;
         width: 100%;
         height: 1px;
-        background-color: black;
+        background-color: blackLight;
         bottom: 1px;
         left: 0;
     }

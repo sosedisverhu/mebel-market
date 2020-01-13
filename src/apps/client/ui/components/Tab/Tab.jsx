@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
+import Comments from '../Comments/Comments';
 
 import styles from './Tab.css';
 
@@ -18,6 +19,10 @@ const mapStateToProps = ({ data, application }) => {
             {
                 id: 'characteristic',
                 title: 'Характеристики'
+            },
+            {
+                id: 'comments',
+                title: 'Отзывы'
             }
         ],
         scroll: data.scrollToCharacteristic
@@ -74,6 +79,14 @@ class Tab extends Component {
                 <div className={styles.description}>
                     <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
+        }
+
+        if (activeId === 'comments') {
+            return (
+                <div>
+                    <Comments />
+                </div>
+            );
         }
 
         return (

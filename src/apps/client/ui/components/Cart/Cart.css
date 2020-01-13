@@ -1,7 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value green from '../../../../../css/colors.css';
-@value black from '../../../../../css/colors.css';
-@value gray2 from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 
 .cart {
     position: relative;
@@ -67,7 +66,7 @@
 }
 
 .popup {
-    width: 481px;
+    min-width: 481px;
     background: whiteBasic;
     position: absolute;
     top: 0;
@@ -83,141 +82,60 @@
     line-height: 28px;
     margin: 20px 0;
     text-align: center;
-    color: black;
+    color: blackLight;
 }
 
 .productsContainer {
-    max-height: 324px;
+    max-height: 362px;
     overflow-y: auto;
 }
 
-.cartItemWrapper {
-    position: relative;
+.cartBottomInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
+}
 
-    &:before {
-        position: absolute;
-        content: '';
-        top: 0;
-        background-color: rgba(216, 216, 216, 0.5);
-        width: 100%;
-        height: 1px;
+.checkoutBtn {
+    @mixin removeDefaultButton;
+    margin-top: 20px;
+    background-color: blackLight;
+    cursor: pointer;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    color: whiteBasic;
+    padding: 10px 20px;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: green;
     }
 }
 
-.cartItem {
-    display: flex;
-    padding: 20px 25px 20px 30px;
-}
-
-.productImg {
-    width: 120px;
-    height: 120px;
-    margin-right: 30px;
-}
-
-.productOption {
-    display: flex;
-    align-items: center;
-    margin-bottom: 21px;
-}
-
-.productName {
-    font-size: 18px;
-    line-height: 21px;
-    color: black;
-    margin-right: 5px;
-}
-
-.productNumber {
-    font-size: 12px;
-    line-height: 14px;
-    color: gray;
-    margin-right: 10px;
-}
-
-.wishBtn,
-.removeBtn{
+.continueShopping {
     @mixin removeDefaultButton;
     padding: 0;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 20px 0;
+    color: blackLight;
     cursor: pointer;
-}
-
-.wishBtn {
-    margin-right: 20px;
-}
-
-.wishBtnImg,
-.removeBtnImg {
-    display: block;
-}
-
-.productSize {
-    font-size: 14px;
-    line-height: 16px;
-    color: black;
-    margin-bottom: 6px;
-}
-
-.productQuantity {
     position: relative;
-    display: inline-block;
-    margin-bottom: 6px;
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: blackLight;
+        bottom: 1px;
+        left: 0;
+    }
 }
 
-.quantitySub,
-.quantityAdd {
-    @mixin removeDefaultButton;
-    padding: 0 5px;
-    position: absolute;
-    color: gray;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    height: 100%;
-    top: 1px;
-    cursor: pointer;
-}
-
-.quantitySub {
-    left: 0;
-}
-.quantityAdd {
-    right: 0;
-}
-
-.quantityInput {
-    width: 69px;
-    height: 22px;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    color: black;
-    text-align: center;
-    border: 1px solid gray;
-    box-sizing: border-box;
-    outline: none;
-    padding-top: 3px;
-}
-
-.productPrices {
-    display: flex;
-    align-items: center;
-}
-
-.productOldPrice {
-    font-size: 18px;
-    line-height: 21px;
-    text-decoration-line: line-through;
-    color: gray;
-    margin-right: 20px;
-}
-
-.productPrice {
-    font-size: 24px;
-    line-height: 28px;
-    color: red;
-}
 
 .totalPriceContainer {
     display: flex;
@@ -237,40 +155,6 @@
 .totalPrice {
     font-size: 24px;
     line-height: 28px;
-    color: black;
-    text-shadow: -0.2px 0 black, 0 0.2px black, 0.2px 0 black, 0 -0.2px black;
-}
-
-.checkoutBtn {
-    @mixin removeDefaultButton;
-    margin-top: 20px;
-    background-color: black;
-    cursor: pointer;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    color: whiteBasic;
-    padding: 10px 20px;
-}
-
-.continueShopping {
-    @mixin removeDefaultButton;
-    padding: 0;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    margin: 20px 0;
-    color: black;
-    cursor: pointer;
-    position: relative;
-
-    &:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 1px;
-        background-color: black;
-        bottom: 1px;
-        left: 0;
-    }
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 }

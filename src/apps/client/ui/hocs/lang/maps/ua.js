@@ -6,10 +6,6 @@ export default {
         top: 'Топ продажів',
         discount: 'Акції',
         new: 'Новинки',
-        bedsTitle: 'Ліжка',
-        mattressesTitle: 'Матраци',
-        furnitureTitle: 'М\'які меблі',
-        accessoriesTitle: 'Аксесуари для сну',
         slider: 'Допомогти з вибором',
         title: 'Наші переваги',
         qualityTitle: 'Якість',
@@ -25,7 +21,8 @@ export default {
         buy: 'Купити',
         labelTop: 'Хіт',
         size: 'Оберіть розмір',
-        tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }]
+        tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
+        inBasket: 'У кошику'
     },
     breadcrumbs: {
         main: 'Головна'
@@ -46,19 +43,21 @@ export default {
         title: 'Обране:',
         size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
-        cartBtn: 'У кошик'
+        cartBtn: 'У кошик',
+        noProduct: 'Ви не додали в обране жодного товару'
     },
     cart: {
         title: 'Кошик:',
         totalPrice: 'Всього:',
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
-        continueShopping: 'Продовжити покупки'
+        continueShopping: 'Продовжити покупки',
+        noProduct: 'Ви не додали в кошик жодного товару'
     },
     productsPage: {
         filterBtn: 'Фільтри',
         results: 'Результатів',
-        popular: 'Популярні'
+        price: 'Ціна'
     },
     aboutProductTop: {
         warranty: 'Гарантія'
@@ -101,12 +100,13 @@ export default {
     },
     searchPage: {
         results: 'результатів за запитом',
-        products: 'Товари',
+        products: 'Товари:',
         noResults: 'Нам не вдалось знайти результати за запитом:',
         tryAgain: 'Спробуйте ще:',
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
-        link: 'Зв\'яжіться з нами'
+        link: 'Зв\'яжіться з нами',
+        articles: 'Статті:'
     },
     checkoutPage: {
         checkout: 'Оформлення замовлення',
@@ -124,7 +124,8 @@ export default {
         cardTitle: 'Сплатіть на картку:',
         cardDescr: '(вкажіть номер замовлення в описі платежу)',
         price: 'Вартість замовлення:',
-        toMain: 'На головну'
+        toMain: 'На головну',
+        noItemsInBasket: 'В кошику ще немає товарів'
     },
     quizesPage: {
         title: 'Допомога у виборі',
@@ -134,5 +135,17 @@ export default {
         result: 'Результат',
         products: 'Товари:',
         noProducts: 'Товарів не знайдено('
+    },
+    comments: {
+        showAll: 'Показати усі',
+        feedbackBtn: 'Залишити відгук',
+        userRating: 'Ваша оцінка товару',
+        inputName: 'Ваше ім\'я та прізвище *',
+        inputEmailPhone: 'Ел. пошта або телефон *',
+        inputText: 'Текст відгуку',
+        cancelBtn: 'Скасувати'
+    },
+    articles: {
+        searchResult: 'Статті:'
     }
 };

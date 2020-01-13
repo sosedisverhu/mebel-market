@@ -11,15 +11,30 @@ import styles from './AboutProduct.css';
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
-const mapStateToProps = ({ application }) => {
+import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
+
+import classNames from 'classnames';
+
+import openBasket from '../../../actions/openBasket';
+
+const mapStateToProps = ({ application, data }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        wishlist: data.wishlist,
+        basket: data.basket,
+        basketIsOpen: data.basketIsOpen
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload))
+        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
+        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
+        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload)),
+        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
+        openBasket: (payload) => dispatch(openBasket(payload))
     };
 };
 
@@ -30,13 +45,23 @@ class AboutProduct extends Component {
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        wishlist: PropTypes.array,
+        saveProductsToWishlist: PropTypes.func.isRequired,
+        saveProductsToBasket: PropTypes.func.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired,
+        basket: PropTypes.array,
+        openBasket: PropTypes.func.isRequired,
+        basketIsOpen: PropTypes.bool.isRequired
     };
 
     state = {
         sizes: [],
         activeSize: {},
-        sizeListIsOpen: true
+        sizeListIsOpen: true,
+        selectIsOpen: false,
+        isInWishlist: false,
+        isInBasket: false
     };
 
     componentDidMount () {
@@ -46,6 +71,25 @@ class AboutProduct extends Component {
             sizes: product.sizes,
             activeSize: product.sizes[0]
         });
+    }
+
+    static getDerivedStateFromProps (props, state) {
+        const { basket, wishlist, product } = props;
+        let values = {};
+
+        if (basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name)) {
+            values.isInBasket = true;
+        } else {
+            values.isInBasket = false;
+        }
+
+        if (wishlist.find(item => item.product.id === product.id)) {
+            values.isInWishlist = true;
+        } else {
+            values.isInWishlist = false;
+        }
+
+        return values;
     }
 
     scrollToTitles = () => {
@@ -65,9 +109,47 @@ class AboutProduct extends Component {
         });
     };
 
+    selectIsOpen = () => {
+        this.setState(state => ({
+            selectIsOpen: !state.selectIsOpen
+        }));
+    };
+
+    handleAddToWishlist = () => {
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
+        const { isInWishlist } = this.state;
+
+        if (!isInWishlist) {
+            saveProductsToWishlist({ productId: product.id });
+        } else {
+            const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
+            deleteFromWishlist(wishlistItemId);
+        }
+    }
+
+    handleBuyClick = () => {
+        const { saveProductsToBasket, product } = this.props;
+        const { activeSize } = this.state;
+        saveProductsToBasket({
+            productId: product.id,
+            properties: {
+                size: activeSize
+            },
+            quantity: 1
+        });
+    }
+
+    handleOpenBasket = () => {
+        const { basketIsOpen, openBasket } = this.props;
+
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
+        openBasket();
+    }
+
     render () {
         const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen } = this.state;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         let sizeCounter = 0;
 
@@ -89,12 +171,13 @@ class AboutProduct extends Component {
                 {formatMoney(product.price)}
             </span>}
             <span className={styles.price}>
-                {formatMoney(product.discountPrice || product.discountPrice)}
+                {formatMoney(product.actualPrice)}
             </span>
             <div>
                 <span className={styles.sizesTitle}>{text.size}</span>
-                <ul className={styles.select}
+                <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
+                    onClick={this.selectIsOpen}
                 >
                     <li className={styles.activeOption}>{activeSize.name}</li>
                     {sizes.map(size => {
@@ -111,8 +194,15 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.btnBuy}>{text.buy}</button>
-                <button className={styles.btnWishList}/>
+                <button
+                    className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                    onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
+                    {!isInBasket
+                        ? text.buy
+                        : text.inBasket
+                    }
+                </button>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }

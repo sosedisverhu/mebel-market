@@ -6,10 +6,6 @@ export default {
         top: 'Топ продаж',
         discount: 'Акции',
         new: 'Новинки',
-        bedsTitle: 'Кровати',
-        mattressesTitle: 'Матрасы',
-        furnitureTitle: 'Мягкая мебель',
-        accessoriesTitle: 'Аксессуары для сна',
         slider: 'Помочь с выбором',
         title: 'Наши преимущества',
         qualityTitle: 'Качество',
@@ -25,7 +21,8 @@ export default {
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
-        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }]
+        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
+        inBasket: 'В корзине'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -46,19 +43,21 @@ export default {
         title: 'Избранное:',
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
-        cartBtn: 'В корзину'
+        cartBtn: 'В корзину',
+        noProduct: 'Вы не добавили в избранное ни одного товара'
     },
     cart: {
         title: 'Корзина:',
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
-        continueShopping: 'Продолжить покупки'
+        continueShopping: 'Продолжить покупки',
+        noProduct: 'Вы не добавили в корзину ни одного товара'
     },
     productsPage: {
         filterBtn: 'Фильтры',
         results: 'Результатов',
-        popular: 'Популярные'
+        price: 'Цена'
     },
     aboutProductTop: {
         warranty: 'Гарантия'
@@ -101,12 +100,13 @@ export default {
     },
     searchPage: {
         results: 'результатов по запросу',
-        products: 'Товары',
+        products: 'Товары:',
         noResults: 'Мы не смогли найти результаты по запросу:',
         tryAgain: 'Попробуйте еще:',
         placeholder: 'Поиск',
         needHelp: 'Нужна помощь?',
-        link: 'Свяжитесь с нами'
+        link: 'Свяжитесь с нами',
+        articles: 'Статьи:'
     },
     checkoutPage: {
         checkout: 'Оформление заказа',
@@ -124,7 +124,8 @@ export default {
         cardTitle: 'Оплатите на карту:',
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
-        toMain: 'На главную'
+        toMain: 'На главную',
+        noItemsInBasket: 'В корзине еще нет товаров'
     },
     quizesPage: {
         title: 'Помощь в выборе',
@@ -134,5 +135,17 @@ export default {
         result: 'Результат',
         products: 'Товары:',
         noProducts: 'Товары не найдены('
+    },
+    comments: {
+        showAll: 'Показать все',
+        feedbackBtn: 'Оставить отзыв',
+        userRating: 'Ваша оценка товара',
+        inputName: 'Ваше имя и фамилия *',
+        inputEmailPhone: 'Эл. почта или телефон *',
+        inputText: 'Текст отзыва',
+        cancelBtn: 'Отмена'
+    },
+    articles: {
+        searchResult: 'Статьи:'
     }
 };

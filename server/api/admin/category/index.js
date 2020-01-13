@@ -7,6 +7,7 @@ import saveCategory from './services/saveCategory';
 import editCategory from './services/editCategory';
 import deleteByIds from './services/deleteByIds';
 import findCategoriesByName from './services/findCategoriesByName';
+import updateImage from './services/updateImage';
 
 const router = express.Router();
 
@@ -26,5 +27,8 @@ router.route('/delete')
 
 router.route('/find')
     .get(findCategoriesByName);
+
+router.route('/update-image')
+    .post(updateImage);
 
 export default router;

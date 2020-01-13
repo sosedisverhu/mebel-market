@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import propOr from '@tinkoff/utils/object/propOr';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from './Header.css';
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
@@ -21,12 +21,14 @@ const mapStateToProps = ({ application, data }) => {
 class Header extends Component {
     state = {
         mobileMenuOpen: false,
-        searchBarOpen: false
+        searchBarOpen: false,
+        searchText: ''
     };
 
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         categories: PropTypes.array
     };
@@ -42,15 +44,31 @@ class Header extends Component {
 
     handleSearchSubmit = (e) => {
         e.preventDefault();
+        const { langRoute } = this.props;
+        const { searchText } = this.state;
+
+        if (searchText) {
+            this.props.history.push(`${langRoute}/search?text=${searchText}`);
+        }
     };
 
     handleSearchBar = () => {
-        this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
+        const { searchText } = this.state;
+
+        if (!searchText) {
+            this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
+        }
     };
+
+    handleInputChange = (e) => {
+        this.setState({
+            searchText: e.target.value
+        });
+    }
 
     render () {
         const { langRoute, langMap, lang, categories } = this.props;
-        const { mobileMenuOpen, searchBarOpen } = this.state;
+        const { mobileMenuOpen, searchBarOpen, searchText } = this.state;
         const text = propOr('header', {}, langMap);
 
         return (
@@ -77,7 +95,7 @@ class Header extends Component {
                                             </Link>;
                                         })}
                                         <Link
-                                            className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
+                                            className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
                                             to={`${langRoute}/`}
                                         >
                                             {text.promotions}
@@ -121,11 +139,34 @@ class Header extends Component {
                             </Link>
                         </div>
                         <div className={styles.menuTop}>
-                            <Link className={styles.menuItemTop}
-                                to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/partners`}>{text.partners}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/articles`}>{text.articles}</Link>
-                            <Link className={styles.menuItemTop} to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/delivery-and-payment`}
+                            >
+                                {text.deliveryAndPayment}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/partners`}
+                            >
+                                {text.partners}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/articles`}
+                            >
+                                {text.articles}
+                            </NavLink>
+                            <NavLink
+                                className={styles.menuItemTop}
+                                activeClassName={styles.active}
+                                to={`${langRoute}/contacts`}
+                            >
+                                {text.contacts}
+                            </NavLink>
                         </div>
                         <div className={styles.headerTopRight}>
                             <form className={styles.search} onSubmit={this.handleSearchSubmit}>
@@ -135,6 +176,8 @@ class Header extends Component {
                                         className={classNames(styles.searchInput, { [styles.active]: searchBarOpen })}
                                         placeholder={text.search}
                                         type="text"
+                                        value={searchText}
+                                        onChange={this.handleInputChange}
                                     />
                                 </label>
                                 <button onClick={this.handleSearchBar} className={styles.searchBtn} type="submit"/>
@@ -148,25 +191,29 @@ class Header extends Component {
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
                         {categories.map((category) => {
-                            return <Link
+                            return <NavLink
                                 className={styles.menuItemBottom}
+                                activeClassName={styles.active}
                                 to={`${langRoute}/${category.alias}`}
                                 key={category.id}
                             >
                                 {category.texts[lang].name}
-                            </Link>;
+                            </NavLink>;
                         })}
-                        <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`}
+                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
                             to={`${langRoute}/`}>
                             {text.promotions}
                         </Link>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
-                        <label
-                            className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}
-                        >
-                            <input className={classNames(styles.searchInputBottom, { [styles.active]: searchBarOpen })}
-                                placeholder={text.search} type="text"/>
+                        <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
+                            <input
+                                className={classNames(styles.searchInputBottom, { [styles.active]: searchBarOpen })}
+                                placeholder={text.search}
+                                type="text"
+                                value={searchText}
+                                onChange={this.handleInputChange}
+                            />
                         </label>
                         <button className={styles.searchBtnBottom} type="submit"/>
                     </form>
