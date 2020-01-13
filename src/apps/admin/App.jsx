@@ -13,6 +13,7 @@ import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './ui/pages/CategoriesPage/CategoriesPage';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
 import PartnersPage from './ui/pages/PartnersPage/PartnersPage.jsx';
+import QuizzesPage from './ui/pages/QuizzesPage/QuizzesPage.jsx';
 import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
@@ -87,6 +88,7 @@ class App extends Component {
                 <Route exact path='/admin/articles' component={ArticlesPage} />
                 <Route exact path='/admin/categories' component={CategoriesPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
+                <Route exact path='/admin/quizzes' component={QuizzesPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
                 <Route exact path='/admin/orders' component={OrdersPage} />
             </Switch>

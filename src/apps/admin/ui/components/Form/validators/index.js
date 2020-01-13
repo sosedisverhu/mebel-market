@@ -7,6 +7,7 @@ import featuresSingular from './featuresSingular';
 import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
 import discount from './discount';
+import quizSteps from './quizSteps';
 import filters from './filters';
 
 export default {
@@ -19,5 +20,6 @@ export default {
     requiredFiles,
     discountPrice,
     discount,
+    quizSteps,
     filters
 };
