@@ -123,6 +123,11 @@
         padding: 3px 10px;
     }
 }
+
+.percentage{
+    font: 18px/21px HelveticaNeueCyr;
+}
+
 .discount {
     color: redBasic;
     background: whiteBasic;
