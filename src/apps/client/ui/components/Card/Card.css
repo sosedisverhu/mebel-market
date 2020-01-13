@@ -162,7 +162,7 @@
 
 .price {
     font: 18px/21px RoundedElegance;
-    color: redBasic;
+    color: blackLight;
     margin-bottom: 15px;
     text-align: center;
 
@@ -171,6 +171,10 @@
         line-height: 15px;
         margin-bottom: 7px;
     }
+}
+
+.discountPrice{
+    color: redBasic;
 }
 
 .priceOld {
