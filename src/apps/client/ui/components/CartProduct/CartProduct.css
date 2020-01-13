@@ -1,6 +1,6 @@
 @value redBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value gray2 from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 
 .cartItemWrapper {
     position: relative;
@@ -58,12 +58,11 @@
 .productNumber {
     font-size: 12px;
     line-height: 14px;
-    color: gray;
+    color: gray0;
     margin-right: 10px;
 }
 
-.wishBtn,
-.removeBtn{
+.wishBtn, .removeBtn{
     @mixin removeDefaultButton;
     padding: 0;
     cursor: pointer;
@@ -95,12 +94,11 @@
     margin-bottom: 6px;
 }
 
-.quantitySub,
-.quantityAdd {
+.quantitySub, .quantityAdd {
     @mixin removeDefaultButton;
     padding: 0 5px;
     position: absolute;
-    color: gray;
+    color: gray0;
     font-family: RoundedElegance;
     font-size: 18px;
     line-height: 21px;
@@ -124,7 +122,7 @@
     line-height: 21px;
     color: blackLight;
     text-align: center;
-    border: 1px solid gray;
+    border: 1px solid gray0;
     box-sizing: border-box;
     outline: none;
     padding-top: 3px;
@@ -139,7 +137,7 @@
     font-size: 18px;
     line-height: 21px;
     text-decoration-line: line-through;
-    color: gray;
+    color: gray0;
     margin-right: 20px;
 }
 
@@ -157,7 +155,7 @@
             display: none;
         }
     }
-    
+
     .cartItem {
         padding: 20px 0;
     }

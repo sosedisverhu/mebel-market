@@ -1,11 +1,11 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
 
 input,
@@ -86,13 +86,13 @@ textarea {
     font: 16px/18px RoundedElegance;
     color: blackLight;
     background: whiteBasic;
-    border: 1px solid gray;
+    border: 1px solid gray0;
     width: 100%;
     padding: 7px 9px 5px 9px;
     margin-top: 20px;
 
     &:placeholder {
-        color: gray;
+        color: gray0;
     }
 
     @media (max-width: 450px) {
@@ -267,7 +267,7 @@ textarea {
     font: 24px/28px RoundedElegance;
     color: blackLight;
     margin-top: 23px;
-    border-top: 1px solid gray;
+    border-top: 1px solid gray0;
     padding: 23px 15px 0 15px;
     display: flex;
     justify-content: space-between;
@@ -286,7 +286,7 @@ textarea {
     transition: .5s ease-out;
 
     &:hover {
-        background-color: green;
+        background-color: greenBasic;
     }
 
     @media (max-width: 450px) {
@@ -332,6 +332,6 @@ textarea {
     transition: .5s ease-out;
 
     &:hover {
-        background-color: green;
+        background-color: greenBasic;
     }
 }
