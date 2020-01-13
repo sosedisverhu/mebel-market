@@ -21,12 +21,14 @@ const mapStateToProps = ({ application, data }) => {
 class Header extends Component {
     state = {
         mobileMenuOpen: false,
-        searchBarOpen: false
+        searchBarOpen: false,
+        searchText: ''
     };
 
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         categories: PropTypes.array
     };
@@ -42,15 +44,31 @@ class Header extends Component {
 
     handleSearchSubmit = (e) => {
         e.preventDefault();
+        const { langRoute } = this.props;
+        const { searchText } = this.state;
+
+        if (searchText) {
+            this.props.history.push(`${langRoute}/search?text=${searchText}`);
+        }
     };
 
     handleSearchBar = () => {
-        this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
+        const { searchText } = this.state;
+
+        if (!searchText) {
+            this.setState(state => ({ searchBarOpen: !state.searchBarOpen }));
+        }
     };
+
+    handleInputChange = (e) => {
+        this.setState({
+            searchText: e.target.value
+        });
+    }
 
     render () {
         const { langRoute, langMap, lang, categories } = this.props;
-        const { mobileMenuOpen, searchBarOpen } = this.state;
+        const { mobileMenuOpen, searchBarOpen, searchText } = this.state;
         const text = propOr('header', {}, langMap);
 
         return (
@@ -77,7 +95,7 @@ class Header extends Component {
                                             </Link>;
                                         })}
                                         <Link
-                                            className={`${styles.mobileMenuItemTop} ${styles.menuItemTopPromotions}`}
+                                            className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
                                             to={`${langRoute}/`}
                                         >
                                             {text.promotions}
@@ -158,6 +176,8 @@ class Header extends Component {
                                         className={classNames(styles.searchInput, { [styles.active]: searchBarOpen })}
                                         placeholder={text.search}
                                         type="text"
+                                        value={searchText}
+                                        onChange={this.handleInputChange}
                                     />
                                 </label>
                                 <button onClick={this.handleSearchBar} className={styles.searchBtn} type="submit"/>
@@ -180,17 +200,20 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </NavLink>;
                         })}
-                        <Link className={`${styles.menuItemBottom} ${styles.menuItemBottomPromotions}`}
+                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
                             to={`${langRoute}/`}>
                             {text.promotions}
                         </Link>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
-                        <label
-                            className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}
-                        >
-                            <input className={classNames(styles.searchInputBottom, { [styles.active]: searchBarOpen })}
-                                placeholder={text.search} type="text"/>
+                        <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
+                            <input
+                                className={classNames(styles.searchInputBottom, { [styles.active]: searchBarOpen })}
+                                placeholder={text.search}
+                                type="text"
+                                value={searchText}
+                                onChange={this.handleInputChange}
+                            />
                         </label>
                         <button className={styles.searchBtnBottom} type="submit"/>
                     </form>

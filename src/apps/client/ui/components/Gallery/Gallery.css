@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 
 .gallery {
@@ -73,7 +73,7 @@
         }
 
         &:before {
-            background: green;
+            background: greenBasic;
         }
     }
 

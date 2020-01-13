@@ -2,6 +2,7 @@ export default function getProduct (body) {
     const {
         id,
         texts,
+        views,
         characteristics,
         sizes,
         avatar,
@@ -10,6 +11,7 @@ export default function getProduct (body) {
         date,
         discountPrice,
         price,
+        actualPrice,
         discount,
         categoryId,
         subCategoryId,
@@ -21,6 +23,7 @@ export default function getProduct (body) {
     return {
         id,
         texts,
+        views,
         characteristics,
         sizes,
         avatar,
@@ -29,6 +32,7 @@ export default function getProduct (body) {
         date,
         discountPrice,
         price,
+        actualPrice,
         discount,
         categoryId,
         subCategoryId,

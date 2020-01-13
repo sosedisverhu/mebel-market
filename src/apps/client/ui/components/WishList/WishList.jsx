@@ -93,7 +93,6 @@ class WishList extends Component {
         return (
             <div className={styles.wishList}>
                 <div className={styles.wishListWrapper} onClick={this.handleClick}>
-                    <img src="/src/apps/client/ui/components/WishList/img/wish.svg" alt="wishlist icon"/>
                     <span className={styles.quantityAll}>{wishlist.length}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
@@ -126,7 +125,10 @@ class WishList extends Component {
                                                 </div>
                                                 <div className={styles.productButtons}>
                                                     <button className={styles.removeBtn} onClick={this.removeProduct(wishlistItemId)}>
-                                                        <img className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png" alt="remove"/>
+                                                        <img
+                                                            className={styles.removeBtnImg} src="/src/apps/client/ui/components/Header/img/remove.png"
+                                                            alt="remove"
+                                                        />
                                                     </button>
                                                     <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
                                                 </div>

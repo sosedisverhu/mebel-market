@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .footer {
     background-color: whiteBasic;
@@ -34,16 +34,24 @@
 .youtube {
     width: 36px;
     height: 36px;
+    transition: .3s ease-out;
+}
+
+.instagramLink,
+.facebookLink {
+    margin-right: 30px;
 }
 
 .instagram {
     background-image: url("./img/instagram.svg");
-    margin-right: 30px;
 }
 
 .facebook {
     background-image: url("./img/facebook.svg");
-    margin-right: 30px;
+
+    &:hover {
+        background-image: url("./img/facebook-hover.svg");
+    }
 }
 
 .youtube {
@@ -78,7 +86,7 @@
     padding-bottom: 2px;
 
     &:hover {
-        border-bottom: 2px solid green;
+        border-bottom: 2px solid greenBasic;
         padding-bottom: 0;
     }
 }
@@ -103,7 +111,7 @@
         height: 1px;
         right: 0;
         bottom: -10px;
-        background-color: green;
+        background-color: greenBasic;
 
         @media (max-width: 992px) {
             right: auto;

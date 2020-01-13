@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
@@ -41,7 +41,8 @@ class Card extends Component {
 
     state = {
         category: {},
-        subCategory: {}
+        subCategory: {},
+        lang: PropTypes.string.isRequired
     };
 
     componentDidMount () {
@@ -73,7 +74,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, discount, discountPrice, price, alias },
+            product: { texts, avatar, discount, actualPrice, price, alias },
             newClass,
             labelClass,
             langRoute,
@@ -97,15 +98,17 @@ class Card extends Component {
                     <img className={styles.img} src={avatar} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
-                    <div className={styles.title}>
+                    <p className={styles.productName}>
                         {texts[lang].name}
-                    </div>
+                    </p>
+
                     {discount ? <div className={styles.priceOld}>
                         {price} &#8372;
                     </div> : null}
                     <div className={styles.price}>
-                        {discountPrice} &#8372;
+                        {actualPrice} &#8372;
                     </div>
+
                 </div>
             </Link>);
     }

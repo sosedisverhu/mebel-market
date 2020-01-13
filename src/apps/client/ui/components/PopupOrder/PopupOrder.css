@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .root {
     position: fixed;
@@ -153,6 +154,11 @@
     margin-top: 30px;
     text-decoration: none;
     text-align: center;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: greenBasic;
+    }
 
     @media (max-width: 600px) {
         margin-top: 40px;

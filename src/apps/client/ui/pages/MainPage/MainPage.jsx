@@ -57,12 +57,16 @@ class MainPage extends Component {
         return (
             <div>
                 <Slider />
-                {labels.map(label => {
+                {labels.map((label, i) => {
                     return (
-                        <section key={label} className={classNames(styles.categorySection, styles[label])}>
-                            <h2 className={styles.title}>{text[label]}</h2>
-                            <ProductsSlider label={label} products={productsResult[label]} />
-                        </section>);
+                        <div key={i}>
+                            {productsResult[label] &&
+                                <section key={label} className={classNames(styles.categorySection, styles[label])}>
+                                    <h2 className={styles.title}>{text[label]}</h2>
+                                    <ProductsSlider label={label} products={productsResult[label]} />
+                                </section>
+                            }
+                        </div>);
                 })}
                 <MainCategories />
                 <Advantages />

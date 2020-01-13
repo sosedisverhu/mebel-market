@@ -21,6 +21,7 @@ import getMaxOfArray from '../../../utils/getMaxOfArray';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Filters from '../../components/Filters/Filters';
+import ProductFilters from '../../components/ProductFilters/ProductFilters';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
 
@@ -31,8 +32,8 @@ const DEFAULT_FILTERS = name => {
             type: 'range',
             min: 0,
             max: 0,
-            id: 'price',
-            prop: 'price'
+            id: 'actualPrice',
+            prop: 'actualPrice'
         }
     ];
 };
@@ -147,8 +148,9 @@ class ProductsPage extends Component {
             case 'range':
                 const prices = compose(
                     uniq,
-                    map(product => product.price)
+                    map(product => product.actualPrice)
                 )(products);
+
                 const min = getMinOfArray(prices);
                 const max = getMaxOfArray(prices);
 
@@ -179,7 +181,8 @@ class ProductsPage extends Component {
                     flatten,
                     map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
                 )(products);
-                const options = filterUtil(option => any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                const options = filterUtil(option =>
+                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
 
                 return options.length > 1 ? [
                     ...filters,
@@ -196,6 +199,7 @@ class ProductsPage extends Component {
                     map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
                     )
                 )(products);
+
                 if (propsArr.length < 2) {
                     return filters;
                 }
@@ -270,6 +274,16 @@ class ProductsPage extends Component {
         });
     };
 
+    handleActiveSortClick = (valueOption, optionsArray) => {
+        const { products, filteredProducts } = this.state;
+        const sortOption = find(sort => sort.id === valueOption, optionsArray);
+
+        this.setState({
+            products: [...products.sort(sortOption.sort)],
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
+        });
+    };
+
     render () {
         if (!this.state.isCategory) {
             return <NotFoundPage/>;
@@ -313,11 +327,7 @@ class ProductsPage extends Component {
                                     filters={filters}
                                     onFilter={this.handleFilter}
                                 />
-                                <div className={styles.sort}>
-                                    <div className={styles.activeOption}>
-                                        {text.popular}
-                                    </div>
-                                </div>
+                                <ProductFilters onFilter={this.handleActiveSortClick}/>
                             </Fragment>}
                         </div>
                     </div>

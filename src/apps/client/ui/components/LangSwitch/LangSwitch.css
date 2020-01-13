@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .langs {
     display: flex;
@@ -61,6 +61,10 @@
     position: absolute;
     top: 43px;
     width: 100%;
+
+    .lang:hover {
+        color: greenBasic;
+    }
 }
 
 .mobileLangs {
@@ -76,7 +80,7 @@
     }
 
     .activeLang {
-        color: green;
+        color: greenBasic;
 
         &:before {
             display: none;

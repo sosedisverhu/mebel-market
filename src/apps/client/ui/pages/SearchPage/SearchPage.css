@@ -2,17 +2,15 @@
 @value blackBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
 
 .search {
     height: 100%;
-    background: gray3;
-    padding-bottom: 40px;
+    background-color: gray3;
+}
 
-    @media (max-width: 600px) {
-        padding-bottom: 30px;
-    }
+.panelTopWrapper {
+    background-color: whiteBasic;
 }
 
 .panelTop {
@@ -39,12 +37,9 @@
 }
 
 .productsSectionWrap {
-    background: gray5;
-    padding: 30px 0;
-
-    @media (max-width: 600px) {
-        padding: 20px 0 15px 0;
-    }
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .quantity {
@@ -58,23 +53,48 @@
     align-items: center;
     box-sizing: content-box;
 
+    &.quantityProduct {
+        padding-top: 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 20px;
+        }
+    }
+
+    &.quantityArticle {
+        padding-top: 30px;
+
+        @media (max-width: 600px) {
+            padding-top: 20px;
+        }
+    }
+
     &:after {
         content: "";
         width: 287px;
         height: 2px;
         background: blackLight;
-        margin-left: 60px;
+        margin-left: 67px;
     }
 
     @media (max-width: 600px) {
         font-size: 24px;
         line-height: 28px;
         justify-content: space-between;
-        margin-left: 15px;
 
         &:after {
-            width: 30%;
+            width: 100px;
         }
+    }
+}
+
+.searchSection {
+    padding-bottom: 40px;
+    height: 100%;
+    background: gray3;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
     }
 }
 
@@ -197,4 +217,29 @@
     @media (max-width: 600px) {
         margin-top: 15px;
     }
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.articlesSection {
+    padding-bottom: 15px;
+
+    @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }
+}
+
+.articlesContainer {
+    max-width: 1270px;
+    margin: 0 auto;
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
