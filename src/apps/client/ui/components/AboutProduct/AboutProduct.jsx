@@ -125,7 +125,7 @@ class AboutProduct extends Component {
             const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
             deleteFromWishlist(wishlistItemId);
         }
-    }
+    };
 
     handleBuyClick = () => {
         const { saveProductsToBasket, product } = this.props;
@@ -137,7 +137,7 @@ class AboutProduct extends Component {
             },
             quantity: 1
         });
-    }
+    };
 
     handleOpenBasket = () => {
         const { basketIsOpen, openBasket } = this.props;
@@ -145,7 +145,7 @@ class AboutProduct extends Component {
         window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
         openBasket();
-    }
+    };
 
     render () {
         const { product, langMap } = this.props;

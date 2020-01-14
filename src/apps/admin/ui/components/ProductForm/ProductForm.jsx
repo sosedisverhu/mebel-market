@@ -285,8 +285,15 @@ class ProductForm extends Component {
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
+        const { categoryFilters } = this.state;
         const { discountPrice, price } = productPayload;
 
+        const warrantyFilter = categoryFilters.find(filter => {
+            const name = filter.name.toLowerCase();
+            return name === 'гарантия' || name === 'гарантія';
+        });
+
+        productPayload.warranty = productPayload.categoryFilters.find(filter => filter.id === warrantyFilter.id).value;
         productPayload.actualPrice = discountPrice || price;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))

@@ -21,6 +21,7 @@ const Product = new Schema({
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
     discount: { type: Number },
+    warranty: { type: Object, required: true },
     discountPrice: { type: Number },
     price: { type: Number, required: true },
     actualPrice: { type: Number, required: true },

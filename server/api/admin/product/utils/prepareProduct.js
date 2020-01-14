@@ -14,6 +14,7 @@ const VALUES = [
     'price',
     'actualPrice',
     'discount',
+    'warranty',
     'categoryId',
     'subCategoryId',
     'alias',
