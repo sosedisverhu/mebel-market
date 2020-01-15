@@ -150,13 +150,14 @@ class AboutProduct extends Component {
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = product.price !== product.actualPrice;
+        const shortDescription = product.texts[lang].shortDescription;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
             <div className={styles.advantagesTitle}>{text.advantages}</div>
-            <p className={styles.advantage}
-                dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(product.texts[lang].shortDescription) }}/>
+            {shortDescription &&
+            <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {isDiscount &&
             <span className={styles.priceOld}>
