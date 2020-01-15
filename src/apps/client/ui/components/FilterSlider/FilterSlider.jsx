@@ -95,6 +95,39 @@ class FilterSlider extends Component {
         });
     };
 
+    handleIntroduceValue = (e, valueName) => {
+        const { value, defaultValue } = this.state;
+
+        if (!isNaN(e.target.value) && e.target.value < defaultValue.max) {
+            const newValue = valueName === 'min' ? { ...value, min: +e.target.value } : { ...value, max: +e.target.value };
+
+            this.setState({
+                value: newValue
+            });
+
+            this.props.onFilter(newValue);
+        }
+    };
+
+    priceOnBlur = () => {
+        const { defaultValue, value } = this.state;
+
+        if (value.min > value.max) {
+            this.setState({
+                value: defaultValue
+            });
+            return this.props.onFilter(defaultValue);
+        }
+
+        if (defaultValue.min > value.min) {
+            this.setState({
+                value: { ...value, min: defaultValue.min }
+            });
+        }
+
+        this.props.onFilter(value);
+    };
+
     render () {
         const { filter: { name } } = this.props;
         const { defaultValue: { min, max }, value, step, active } = this.state;
@@ -106,12 +139,16 @@ class FilterSlider extends Component {
                 </div>
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
-                        <div className={styles.customLabel}>
-                            {value.min.toFixed(0)}  &#8372;
-                        </div>
-                        <div className={styles.customLabel}>
-                            {value.max.toFixed(0)}  &#x20b4;
-                        </div>
+                        <input className={styles.customLabel}
+                            value={value.min.toFixed(0)}
+                            onChange={e => this.handleIntroduceValue(e, 'min')}
+                            onBlur={() => this.priceOnBlur()}
+                        />
+                        <input className={styles.customLabel}
+                            value={value.max.toFixed(0)}
+                            onChange={e => this.handleIntroduceValue(e, 'max')}
+                            onBlur={() => this.priceOnBlur()}
+                        />
                     </div>
                     <InputRange
                         maxValue={+max}

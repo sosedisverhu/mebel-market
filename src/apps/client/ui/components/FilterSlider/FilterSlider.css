@@ -97,7 +97,7 @@
         background: whiteBasic;
         box-sizing: border-box;
         border-radius: 50%;
-        border: 2px solid green;
+        border: 2px solid greenBasic;
         top: 15px;
     }
 }
@@ -151,16 +151,17 @@
         margin-left: -8px;
         height: 1px;
         background: whiteBasic;
-
     }
 }
 
 .customLabel {
-    font: 14px/16px RoundedElegance;
+    width: 74px;
     padding: 4px 12px 3px 12px;
-    color: whiteBasic;
     border: 1px solid whiteBasic;
     border-radius: 2px;
+    background-color: greenBasic;
+    font: 14px/16px RoundedElegance;
+    color: whiteBasic;
 }
 
 .track {
