@@ -3,11 +3,11 @@
 @value gray3 from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 
-.quizesPage {
+.quizPage {
     background-color: gray3;
 }
 
-.quizesSectionWrap {
+.quizSectionWrap {
     background: whiteBasic;
     padding-top: 30px;
 
@@ -16,7 +16,7 @@
     }
 }
 
-.quizesSection {
+.quizSection {
     max-width: 674px;
     margin: 0 auto;
     box-sizing: content-box;
@@ -75,7 +75,7 @@
     }
 }
 
-.quizesWrap {
+.quizWrap {
     padding-bottom: 30px;
 
     @media (max-width: 600px) {
@@ -94,12 +94,12 @@
     }
 }
 
-.quizTitle {
+.stepTitle {
     position: relative;
     padding-bottom: 23px;
 
     &.completed {
-        .quizTitleNumber {
+        .stepTitleNumber {
             border-color: blackLight;
             background: blackLight;
             color: whiteBasic;
@@ -111,18 +111,18 @@
     }
 
     &.active {
-        .quizTitleNumber {
+        .stepTitleNumber {
             border-color: blackLight;
             color: blackLight;
         }
 
-        .quizTitleText {
+        .stepTitleText {
             display: block;
         }
     }
 
     &:first-child {
-        .quizTitleText {
+        .stepTitleText {
             left: 0;
             margin-left: 0;
             text-align: left;
@@ -130,14 +130,14 @@
     }
 
     &:last-child {
-        .quizTitleText {
+        .stepTitleText {
             right: 0;
             margin-left: 0;
             left: auto;
             text-align: right;
         }
 
-        .quizTitleNumber {
+        .stepTitleNumber {
             &:before {
                 background: whiteBasic;
             }
@@ -149,7 +149,7 @@
     }
 }
 
-.quizTitleNumber {
+.stepTitleNumber {
     font: 36px/41px RoundedElegance;
     width: 56px;
     height: 56px;
@@ -189,7 +189,7 @@
     }
 }
 
-.quizTitleText {
+.stepTitleText {
     font: 16px/18px RoundedElegance;
     color: blackLight;
     position: absolute;
@@ -282,6 +282,7 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    max-height: 162px;
 
     &:before {
         content: "";
@@ -292,9 +293,6 @@
         top: 0;
         background: rgba(255, 255, 255, 0.5);
     }
-}
-
-.imgRadio {
 }
 
 .checkmark {

@@ -127,7 +127,7 @@ export default {
         toMain: 'На головну',
         noItemsInBasket: 'В кошику ще немає товарів'
     },
-    quizesPage: {
+    quizPage: {
         title: 'Допомога у виборі',
         description: 'Виберіть необхідні параметри бажаного ліжка і матраца',
         next: 'Продовжити',

@@ -127,7 +127,7 @@ export default {
         toMain: 'На главную',
         noItemsInBasket: 'В корзине еще нет товаров'
     },
-    quizesPage: {
+    quizPage: {
         title: 'Помощь в выборе',
         description: 'Выберите необходимые параметры желаемой кровати и матраса',
         next: 'Дальше',

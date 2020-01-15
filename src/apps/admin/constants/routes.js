@@ -7,5 +7,5 @@ export default [
     { id: 'partners', path: '/admin/partners', exact: true, title: 'Партнёры' },
     { id: 'quizzes', path: '/admin/quizzes', exact: true, title: 'Опросы' },
     { id: 'seo', path: '/admin/seo', exact: true, title: 'SEO' },
-    { id: 'seo', path: '/admin/orders', exact: true, title: 'Заказы' }
+    { id: 'orders', path: '/admin/orders', exact: true, title: 'Заказы' }
 ];
