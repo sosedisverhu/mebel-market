@@ -43,14 +43,14 @@ class WishList extends Component {
 
     state = {
         active: false
-    }
+    };
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
         this.setState({
             active: false
         });
-    }
+    };
 
     handleClick = () => {
         const { outsideClickEnabled } = this.props;
@@ -62,7 +62,7 @@ class WishList extends Component {
         if (!active && !outsideClickEnabled) {
             this.props.turnOnClickOutside(this, this.handlePopupClose);
         }
-    }
+    };
 
     getWordCaseByNumber (number, cases) {
         if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
@@ -83,7 +83,7 @@ class WishList extends Component {
         this.props.saveProductsToBasket({
             productId: product.id
         });
-    }
+    };
 
     render () {
         const { langMap, lang, wishlist } = this.props;

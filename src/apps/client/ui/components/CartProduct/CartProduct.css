@@ -75,6 +75,11 @@
     height: 14px;
 }
 
+.activeWishBtn {
+    background-image: url('../AboutProduct/img/wishlist-active.png');
+    background-size: contain;
+}
+
 .removeBtn {
     background-image: url('/src/apps/client/ui/components/Header/img/remove.png');
     width: 14px;
