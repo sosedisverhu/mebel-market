@@ -60,7 +60,8 @@ export default {
         price: 'Ціна'
     },
     aboutProductTop: {
-        warranty: 'Гарантія'
+        warranty: 'Гарантія',
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

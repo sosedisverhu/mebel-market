@@ -6,6 +6,7 @@ module.exports = [
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
+        article: '000001',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -78,6 +79,7 @@ module.exports = [
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
+        article: '000002',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -150,6 +152,7 @@ module.exports = [
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
+        article: '000003',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -222,6 +225,7 @@ module.exports = [
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
+        article: '000004',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -294,6 +298,7 @@ module.exports = [
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
+        article: '000005',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -366,6 +371,7 @@ module.exports = [
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
+        article: '000006',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -438,6 +444,7 @@ module.exports = [
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
+        article: '000007',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -510,6 +517,7 @@ module.exports = [
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
+        article: '000008',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -582,6 +590,7 @@ module.exports = [
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
+        article: '000009',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -654,6 +663,7 @@ module.exports = [
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
+        article: '000010',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -726,6 +736,7 @@ module.exports = [
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
+        article: '000011',
         characteristics: {
             ru: {
                 characteristics: [{

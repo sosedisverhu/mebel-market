@@ -59,7 +59,7 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 ));
 
 const Feature =
-    SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
+    SortableElement(({ rowIndex, feature, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
         <FormGroup className={classes.feature} row>
             <ButtonSortable imageClassName={classes.buttonSortable}/>
             <div className={classes.featureGroup}>
@@ -70,7 +70,6 @@ const Feature =
                     onChange={handleFeatureChange('name', rowIndex)}
                     margin='normal'
                     variant='outlined'
-                    error={!!validationMessage}
                 />
                 <TextField
                     className={classes.featureField}
@@ -79,7 +78,6 @@ const Feature =
                     onChange={handleFeatureChange('value', rowIndex)}
                     margin='normal'
                     variant='outlined'
-                    error={!!validationMessage}
                 />
             </div>
             <IconButton aria-label='Delete' onClick={handleFeatureDelete(rowIndex)}>

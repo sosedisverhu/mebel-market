@@ -41,6 +41,16 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
+                component: FormFieldInput,
+                name: 'article',
+                schema: {
+                    label: 'Артикул'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните артикул' } }
+                ]
+            },
+            {
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {
@@ -170,7 +180,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     value: 'Значения'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните характеристики товара' } }
+                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
                 ]
             },
             {

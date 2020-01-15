@@ -34,9 +34,7 @@ class AboutProductTop extends Component {
                 <div className={styles.warranty}>
                     {`${text.warranty} ${product.warranty} м.`}
                 </div>
-                <div className={styles.article}>
-                    артикул 48092
-                </div>
+                <div className={styles.article}>{`${text.article} ${product.article}`}</div>
             </div>
         </div>;
     }
