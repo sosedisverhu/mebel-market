@@ -61,7 +61,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -134,7 +134,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '18 місяців', ru: '18 месяцев' },
+        warranty: 18,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -207,7 +207,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '18 місяців', ru: '18 месяцев' },
+        warranty: 18,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -280,7 +280,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -353,7 +353,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -426,7 +426,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -499,7 +499,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -572,7 +572,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -645,7 +645,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -718,7 +718,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -791,7 +791,7 @@ module.exports = [
             }
         },
         views: 0,
-        warranty: { ua: '12 місяців', ru: '12 месяцев' },
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },

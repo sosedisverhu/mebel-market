@@ -64,7 +64,12 @@ export default {
         price: 'Ціна'
     },
     aboutProductTop: {
-        warranty: 'Гарантія'
+        warranty: 'Гарантія',
+        months: {
+            one: 'місяць',
+            several: 'місяці',
+            much: 'місяців'
+        }
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

@@ -109,6 +109,7 @@ class ProductForm extends Component {
             discountPrice: product.discountPrice,
             price: product.price,
             discount: product.discount,
+            warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
@@ -161,6 +162,7 @@ class ProductForm extends Component {
             discountPrice,
             price,
             discount,
+            warranty,
             categoryId,
             subCategoryId,
             id,
@@ -272,6 +274,7 @@ class ProductForm extends Component {
             hidden,
             discountPrice,
             discount,
+            warranty,
             price,
             categoryId,
             subCategoryId,
@@ -285,15 +288,8 @@ class ProductForm extends Component {
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
-        const { categoryFilters } = this.state;
         const { discountPrice, price } = productPayload;
 
-        const warrantyFilter = categoryFilters.find(filter => {
-            const name = filter.name.toLowerCase();
-            return name === 'гарантия' || name === 'гарантія';
-        });
-
-        productPayload.warranty = productPayload.categoryFilters.find(filter => filter.id === warrantyFilter.id).value;
         productPayload.actualPrice = discountPrice || price;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
@@ -328,9 +324,7 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            .then(() => {
-                onDone();
-            })
+            .then(onDone())
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
@@ -421,7 +415,7 @@ class ProductForm extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
     editProduct: payload => dispatch(editProduct(payload)),
     updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
