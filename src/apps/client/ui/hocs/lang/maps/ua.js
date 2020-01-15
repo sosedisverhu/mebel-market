@@ -56,7 +56,11 @@ export default {
     },
     productsPage: {
         filterBtn: 'Фільтри',
-        results: 'Результатів',
+        results: {
+            one: 'Результатов',
+            several: 'Результата',
+            much: 'Результатів'
+        },
         price: 'Ціна'
     },
     aboutProductTop: {

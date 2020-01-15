@@ -59,7 +59,7 @@ class Card extends Component {
             return labels.map((label, index) => {
                 return (
                     <div key={index} className={`${styles.label} ${styles.discount}`}>
-                        -{discount} %
+                        -{discount}<span className={styles.percentage}>%</span>
                     </div>);
             });
         } else if (labels) {
@@ -81,6 +81,7 @@ class Card extends Component {
             lang
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
+        const isDiscount = price !== actualPrice;
 
         return (
             <Link
@@ -102,10 +103,10 @@ class Card extends Component {
                         {texts[lang].name}
                     </p>
 
-                    {discount ? <div className={styles.priceOld}>
+                    {isDiscount ? <div className={styles.priceOld}>
                         {price} &#8372;
                     </div> : null}
-                    <div className={styles.price}>
+                    <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
                         {actualPrice} &#8372;
                     </div>
 
