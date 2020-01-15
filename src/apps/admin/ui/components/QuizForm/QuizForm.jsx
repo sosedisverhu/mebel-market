@@ -151,7 +151,7 @@ class QuizForm extends Component {
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для товара'
+                        errorText: 'Введите уникальный алиас для опроса'
                     });
                 } else {
                     this.setState({
