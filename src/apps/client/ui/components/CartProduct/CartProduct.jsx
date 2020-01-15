@@ -12,6 +12,7 @@ import { MAX_QUANTITY } from '../../../constants/constants';
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import editProductInBasket from '../../../services/client/editProductInBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
@@ -32,7 +33,8 @@ const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     editProductInBasket: payload => dispatch(editProductInBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    closeBasket: (payload) => dispatch(closeBasket(payload)),
+    deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
 class Cart extends Component {
@@ -50,8 +52,9 @@ class Cart extends Component {
         basketItemId: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
         product: PropTypes.object.isRequired,
-        properties: PropTypes.array.isRequired,
-        wishlist: PropTypes.array.isRequired
+        properties: PropTypes.object.isRequired,
+        wishlist: PropTypes.array.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -70,6 +73,14 @@ class Cart extends Component {
                 return item.product.id === product.id;
             })
         });
+    }
+
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product } = props;
+
+        return wishlist.find(item => item.product.id === product.id)
+            ? { isInWishList: true }
+            : { isInWishList: false };
     }
 
     handlePopupClose = () => {
@@ -92,13 +103,17 @@ class Cart extends Component {
     };
 
     handleAddToWishlist = product => () => {
-        this.props.saveProductsToWishlist({
-            productId: product.id
-        }).then(() => {
-            this.setState({
-                isInWishList: true
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist } = this.props;
+        const { isInWishList } = this.state;
+
+        if (!isInWishList) {
+            saveProductsToWishlist({
+                productId: product.id
             });
-        });
+        } else {
+            const wishlistItemId = Object.values(wishlist.find(item => item.product.id === product.id))[1];
+            deleteFromWishlist(wishlistItemId);
+        }
     };
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
