@@ -27,24 +27,10 @@
     color: blackLighter;
 }
 
-
 .advantage {
-    position: relative;
     margin-top: 6px;
-    padding-left: 20px;
     font: 14px/16px RoundedElegance;
     color: blackLighter;
-
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 5px;
-        width: 6px;
-        height: 6px;
-        background: greenBasic;
-        border-radius: 50%;
-    }
 }
 
 .details {

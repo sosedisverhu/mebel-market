@@ -44,13 +44,33 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {
+                    label: 'Короткое описание',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'shortDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Короткое описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните короткое описание' } }
+                ]
+            },
+            {
+                component: FormFieldTitle,
+                name: 'content-title',
+                schema: {
                     label: 'Описание',
                     variant: 'h6'
                 }
             },
             {
                 component: FormFieldEditor,
-                name: `description`,
+                name: 'description',
                 valueLangStructure: 'depend',
                 schema: {
                     label: 'Описание',

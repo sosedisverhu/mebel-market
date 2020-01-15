@@ -17,7 +17,6 @@ export default {
     },
     product: {
         details: 'Подробные характеристики',
-        advantages: 'Основные плюсы:',
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
