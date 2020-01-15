@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import classNames from 'classnames';
-import outsideClick from '../../hocs/outsideClick.jsx';
+
 import propOr from '@tinkoff/utils/object/propOr';
 import findIndex from '@tinkoff/utils/array/findIndex';
 import includes from '@tinkoff/utils/array/includes';
-import find from '@tinkoff/utils/array/find';
 
-import styles from './Cart.css';
 import CartProduct from '../CartProduct/CartProduct';
 
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import outsideClick from '../../hocs/outsideClick.jsx';
 
 import openBasket from '../../../actions/openBasket';
 import closeBasket from '../../../actions/closeBasket';
 
 import formatMoney from '../../../utils/formatMoney';
+import styles from './Cart.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -32,11 +33,11 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
-    openBasket: (payload) => dispatch(openBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    openBasket: payload => dispatch(openBasket(payload)),
+    closeBasket: payload => dispatch(closeBasket(payload))
 });
 
 const EXCEPTION_NUMBERS_MIN = 11;
@@ -75,7 +76,7 @@ class Cart extends Component {
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
         this.props.closeBasket();
-    }
+    };
 
     handleClick = () => {
         const { outsideClickEnabled, turnOnClickOutside, basketIsOpen, openBasket } = this.props;
@@ -86,15 +87,7 @@ class Cart extends Component {
             turnOnClickOutside(this, this.handlePopupClose);
         }
         openBasket();
-    }
-
-    getCategoriesAlias = (categoryId, subCategoryId) => {
-        const { categories, subCategories } = this.props;
-        const category = find(category => category.id === categoryId, categories).alias;
-        const subCategory = find(subCategory => subCategory.id === subCategoryId, subCategories).alias;
-
-        return `${category}/${subCategory}`;
-    }
+    };
 
     render () {
         const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;

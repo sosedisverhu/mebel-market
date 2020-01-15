@@ -13,20 +13,6 @@ import {
 
 const initialState = {
     labels: ['top', 'discount'],
-    mainSlides: [
-        {
-            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
-        },
-        {
-            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
-        },
-        {
-            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
-        },
-        {
-            'path': '/src/apps/client/ui/components/Slider/img/slides/slide1.jpg'
-        }
-    ],
     articles: [],
     products: [],
     categories: [],

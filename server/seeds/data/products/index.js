@@ -463,7 +463,7 @@ module.exports = [
         },
         date: 1577182957748,
         hidden: false,
-        discount: 0,
+        discount: 15,
         discountPrice: 1799,
         price: 2000,
         actualPrice: 1799,
