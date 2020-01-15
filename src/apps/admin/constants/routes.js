@@ -1,5 +1,6 @@
 export default [
     { id: 'mainSlider', path: '/admin', exact: true, title: 'Главная' },
+    { id: 'mainSlider', path: '/admin/mainSlider', exact: true, title: 'Slider' },
     { id: 'categories', path: '/admin/categories', exact: true, title: 'Категории' },
     { id: 'products', path: '/admin/products', exact: true, title: 'Товары' },
     { id: 'articles', path: '/admin/articles', exact: true, title: 'Статьи' },
