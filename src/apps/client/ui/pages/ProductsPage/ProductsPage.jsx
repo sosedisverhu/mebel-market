@@ -299,7 +299,7 @@ class ProductsPage extends Component {
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
-                            {subCategories.map((subCategory) => {
+                            {subCategories.map(subCategory => {
                                 return (
                                     <NavLink
                                         className={styles.subCategory}
