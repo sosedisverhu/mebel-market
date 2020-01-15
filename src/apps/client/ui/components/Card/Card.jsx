@@ -59,7 +59,7 @@ class Card extends Component {
             return labels.map((label, index) => {
                 return (
                     <div key={index} className={`${styles.label} ${styles.discount}`}>
-                        -{discount} %
+                        -{discount}<span className={styles.percentage}>%</span>
                     </div>);
             });
         } else if (labels) {
