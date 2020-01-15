@@ -68,6 +68,10 @@
     margin: 10px 0;
     display: inline-block;
     font: 36px/41px RoundedElegance;
+    color: blackLight;
+}
+
+.discountPrice{
     color: redBasic;
 }
 
