@@ -44,7 +44,9 @@ export default {
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
         cartBtn: 'В корзину',
-        noProduct: 'Вы не добавили в избранное ни одного товара'
+        noProduct: 'Вы не добавили в избранное ни одного товара',
+        article: 'Артикул:',
+        inCartBtn: 'В корзине'
     },
     cart: {
         title: 'Корзина:',

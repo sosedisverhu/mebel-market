@@ -40,20 +40,23 @@ export default function getUserProducts (req, res) {
                 getProductsByIds(basket.map(basket => basket.productId)),
                 getProductsByIds(wishlist.map(wishlist => wishlist.productId))
             ])
-                .then(([ basketProducts, wishlistProducts ]) => {
+                .then(([basketProducts, wishlistProducts]) => {
                     return [
                         reduce((products, { productId, quantity, properties, id }) => {
                             const product = find(product => product.id === productId, basketProducts);
 
                             return !product ||
-                            product.hidden ||
-                            !find(size => properties.size.name === size.name, product.sizes)
+                                product.hidden ||
+                                !find(size => properties.size.name === size.name, product.sizes)
                                 ? products : append({ product, quantity, properties, id }, products);
                         }, [], basket),
-                        reduce((products, { productId, id }) => {
+                        reduce((products, { productId, properties, id }) => {
                             const product = find(product => product.id === productId, wishlistProducts);
 
-                            return !product || product.hidden ? products : append({ product, id }, products);
+                            return !product ||
+                                product.hidden ||
+                                !find(size => properties.size.name === size.name, product.sizes)
+                                ? products : append({ product, properties, id }, products);
                         }, [], wishlist)
                     ];
                 })

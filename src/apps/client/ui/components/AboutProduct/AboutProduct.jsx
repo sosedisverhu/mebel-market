@@ -64,11 +64,13 @@ class AboutProduct extends Component {
     };
 
     componentDidMount () {
-        const { product } = this.props;
+        const { wishlist, product } = this.props;
+        const { activeSize } = this.state;
 
         this.setState({
             sizes: product.sizes,
-            activeSize: product.sizes[0]
+            activeSize: product.sizes[0],
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.name === activeSize.name))
         });
     }
 
@@ -78,7 +80,7 @@ class AboutProduct extends Component {
 
         values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name));
 
-        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id);
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.name === state.activeSize.name);
 
         return values;
     }
@@ -108,13 +110,20 @@ class AboutProduct extends Component {
 
     handleAddToWishlist = () => {
         const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
-        const { isInWishlist } = this.state;
+        const { isInWishlist, activeSize } = this.state;
 
         if (!isInWishlist) {
-            saveProductsToWishlist({ productId: product.id });
+            saveProductsToWishlist({
+                productId: product.id,
+                properties: {
+                    size: activeSize
+                }
+            });
         } else {
-            const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
-            deleteFromWishlist(wishlistItemId);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === activeSize.name);
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
         }
     };
 
