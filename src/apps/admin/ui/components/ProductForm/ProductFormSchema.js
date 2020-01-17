@@ -170,7 +170,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     value: 'Значения'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните характеристики товара' } }
+                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
                 ]
             },
             {
