@@ -294,9 +294,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             {
                 component: FormFieldFiles,
                 name: 'files',
-                schema: {
-                    max: 6
-                },
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]
