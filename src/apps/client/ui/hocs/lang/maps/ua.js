@@ -57,7 +57,7 @@ export default {
     productsPage: {
         filterBtn: 'Фільтри',
         results: {
-            one: 'Результатов',
+            one: 'Результат',
             several: 'Результата',
             much: 'Результатів'
         },
