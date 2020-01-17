@@ -150,7 +150,6 @@ class MainSlideForm extends Component {
                     </Button>
                 </label>
             </FormControl>
-            {console.log(slide.link)}
             <TextField
                 label='Link'
                 value={slide.link}
@@ -161,7 +160,6 @@ class MainSlideForm extends Component {
             />
             <div>
                 <FormControlLabel
-                    disabled={!slide.link.length}
                     control={
                         <Checkbox
                             checked={slide.newTab}
