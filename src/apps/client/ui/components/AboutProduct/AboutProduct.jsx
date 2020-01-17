@@ -173,7 +173,9 @@ class AboutProduct extends Component {
                     onMouseEnter={() => this.sizeListIsOpen()}
                     onClick={this.selectIsOpen}
                 >
-                    <li className={styles.activeOption}>{activeSize.name}</li>
+                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: sizes.length === 1 })}>
+                        {activeSize.name}
+                    </li>
                     {sizes.map(size => {
                         if (size.id !== activeSize.id && sizeListIsOpen) {
                             sizeCounter++;
@@ -196,7 +198,9 @@ class AboutProduct extends Component {
                         : text.inBasket
                     }
                 </button>
-                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
+                    onClick={this.handleAddToWishlist}
+                />
             </div>
         </div>;
     }
