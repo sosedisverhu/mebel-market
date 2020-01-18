@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -21,6 +22,7 @@ import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';
 import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
+import QuizPage from './ui/pages/QuizPage/QuizPage.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import Helmet from './ui/components/Helmet/Helmet.jsx';
 
@@ -28,6 +30,7 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
 import getLangRouteParts from './utils/getLangRouteParts';
 import getLangFromRoute from './utils/getLangFromRoute';
+import isScrolledIntoView from './utils/isScrolledIntoView';
 
 import { LANGS } from './constants/constants';
 
@@ -49,11 +52,60 @@ const mapStateToProps = ({ application }) => {
 class App extends Component {
     static propTypes = {
         lang: PropTypes.string,
-        langRoute: PropTypes.string
+        langRoute: PropTypes.string,
+        location: PropTypes.object
     };
 
     static defaultProps = {
         langRoute: ''
+    };
+
+    pageRef = React.createRef();
+    pageContentRef = React.createRef();
+
+    state = {
+        onLoadAnimation: false,
+        pageContentAnimation: false
+    }
+
+    componentDidMount() {
+        if (document.readyState === 'complete') {
+            this.handleScroll();
+            document.addEventListener('scroll', this.handleScroll);
+        } else {
+            window.addEventListener('load', () => {
+                this.handleScroll();
+                document.addEventListener('scroll', this.handleScroll);
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.location !== nextProps.location) {
+            window.scrollTo(0, 0);
+            this.setState({ pageContentAnimation: false });
+        }
+    };
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.pageRef.current, 'onLoadAnimation');
+        this.isScrolledIntoView(this.pageContentRef.current, 'pageContentAnimation');
+    };
+
+    isScrolledIntoView = (elem, stateName) => {
+        if (this.state[stateName]) {
+            return;
+        }
+
+        const isVisible = isScrolledIntoView(elem);
+
+        if (isVisible) {
+            this.setState({ [stateName]: true });
+        }
     };
 
     renderComponent = Component => ({ location: { pathname } }) => {
@@ -68,25 +120,35 @@ class App extends Component {
         return lang === langUrl ? <Component /> : <Redirect to={`${langRoute}${routeWithoutLang}`} />;
     };
 
-    render () {
+    render() {
+        const { onLoadAnimation, pageContentAnimation } = this.state;
         return <main>
-            <div className={styles.page}>
+            <div ref={this.pageRef}
+                className={classNames(styles.page, {
+                    [styles.fadeIn]: onLoadAnimation,
+                    [styles.pageVisible]: onLoadAnimation
+                })}>
                 <Helmet />
-                <Header/>
-                <div className={styles.pageContent}>
+                <Header />
+                <div ref={this.pageContentRef}
+                    className={classNames(styles.pageContent, {
+                        [styles.fadeIn]: pageContentAnimation,
+                        [styles.pageContentVisible]: pageContentAnimation
+                    })}>
                     <Switch>
                         <Route exact path={`/:lang(${langs})?`} render={this.renderComponent(MainPage)} />
                         <Route exact path={`/:lang(${langs})?/order`} render={this.renderComponent(CheckoutPage)} />
-                        <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)}/>
+                        <Route exact path={`/:lang(${langs})?/delivery-and-payment`} render={this.renderComponent(DeliveryAndPayment)} />
                         <Route exact path={`/:lang(${langs})?/partners`} render={this.renderComponent(Partners)} />
                         <Route exact path={`/:lang(${langs})?/search`} render={this.renderComponent(SearchPage)} />
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route exact path={`/:lang(${langs})?/quiz/:alias`} render={this.renderComponent(QuizPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias`} render={this.renderComponent(ProductsPage)} />
-                        <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)}/>
-                        <Route render={this.renderComponent(NotFoundPage)}/>
+                        <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)} />
+                        <Route render={this.renderComponent(NotFoundPage)} />
                     </Switch>
                 </div>
                 <Footer />
