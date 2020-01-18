@@ -204,10 +204,11 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </NavLink>;
                         })}
-                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
+                        <NavLink className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
+                            activeClassName={styles.active}
                             to={`${langRoute}/promotions`}>
                             {text.promotions}
-                        </Link>
+                        </NavLink>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
