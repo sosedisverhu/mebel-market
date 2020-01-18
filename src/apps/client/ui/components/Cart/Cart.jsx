@@ -18,6 +18,7 @@ import outsideClick from '../../hocs/outsideClick.jsx';
 import openBasket from '../../../actions/openBasket';
 import closeBasket from '../../../actions/closeBasket';
 
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 import formatMoney from '../../../utils/formatMoney';
 import styles from './Cart.css';
 
@@ -40,10 +41,6 @@ const mapDispatchToProps = dispatch => ({
     closeBasket: payload => dispatch(closeBasket(payload))
 });
 
-const EXCEPTION_NUMBERS_MIN = 11;
-const EXCEPTION_NUMBERS_MAX = 14;
-const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
-
 @outsideClick
 class Cart extends Component {
     static propTypes = {
@@ -61,17 +58,6 @@ class Cart extends Component {
         openBasket: PropTypes.func.isRequired,
         closeBasket: PropTypes.func.isRequired
     };
-
-    getWordCaseByNumber (number, cases) {
-        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
-            return cases[0];
-        }
-
-        const lastNumber = number % 10;
-        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
-
-        return cases[resultIndex];
-    }
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
@@ -108,8 +94,7 @@ class Cart extends Component {
                             {text.title} {basket.length > 0 &&
                             <span>
                                 {quantityAll}&nbsp;
-                                {this.getWordCaseByNumber(quantityAll,
-                                    lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                                {formatWordDeclension(text.product, basket.length)}
                             </span>
                             }</p>
                         {basket.length > 0

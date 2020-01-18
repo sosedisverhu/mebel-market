@@ -48,6 +48,11 @@ export default {
     },
     cart: {
         title: 'Корзина:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товаров'
+        },
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',

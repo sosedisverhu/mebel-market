@@ -48,6 +48,11 @@ export default {
     },
     cart: {
         title: 'Кошик:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товарів'
+        },
         totalPrice: 'Всього:',
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
