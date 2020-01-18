@@ -22,7 +22,6 @@ import Partners from './ui/pages/Partners/Partners.jsx';
 import Articles from './ui/pages/Articles/Articles.jsx';
 import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
-import QuizPage from './ui/pages/QuizPage/QuizPage.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import Helmet from './ui/components/Helmet/Helmet.jsx';
 
@@ -68,7 +67,9 @@ class App extends Component {
         pageContentAnimation: false
     }
 
-    componentDidMount() {
+    componentDidMount () {
+        this.setState({ onLoadAnimation: true });
+
         if (document.readyState === 'complete') {
             this.handleScroll();
             document.addEventListener('scroll', this.handleScroll);
@@ -80,19 +81,11 @@ class App extends Component {
         }
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         document.removeEventListener('scroll', this.handleScroll);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.location !== nextProps.location) {
-            window.scrollTo(0, 0);
-            this.setState({ pageContentAnimation: false });
-        }
-    };
-
     handleScroll = () => {
-        this.isScrolledIntoView(this.pageRef.current, 'onLoadAnimation');
         this.isScrolledIntoView(this.pageContentRef.current, 'pageContentAnimation');
     };
 
@@ -108,6 +101,19 @@ class App extends Component {
         }
     };
 
+    runPageContentAnimation = () => {
+        this.setState({ pageContentAnimation: false }, () => {
+            setTimeout(() => this.setState({ pageContentAnimation: true }), 0);
+        });
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.location !== nextProps.location) {
+            window.scrollTo(0, 0);
+            this.runPageContentAnimation();
+        }
+    };
+
     renderComponent = Component => ({ location: { pathname } }) => {
         if (typeof window === 'undefined') {
             return <Component />;
@@ -120,7 +126,7 @@ class App extends Component {
         return lang === langUrl ? <Component /> : <Redirect to={`${langRoute}${routeWithoutLang}`} />;
     };
 
-    render() {
+    render () {
         const { onLoadAnimation, pageContentAnimation } = this.state;
         return <main>
             <div ref={this.pageRef}
@@ -144,7 +150,6 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
-                        <Route exact path={`/:lang(${langs})?/quiz/:alias`} render={this.renderComponent(QuizPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)} />

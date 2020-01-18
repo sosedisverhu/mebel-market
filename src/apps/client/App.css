@@ -17,11 +17,12 @@
     flex-shrink: 0;
     flex-basis: auto;
     opacity: 0;
-    transition-duration: .3s;
+    transition-duration: 0s;
 }
 
 .pageContentVisible {
     opacity: 1;
+    transition-duration: .3s;
 }
 
 @keyframes fadeIn {

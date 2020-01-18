@@ -29,14 +29,20 @@ class Card extends Component {
         newClass: PropTypes.string,
         labelClass: PropTypes.string,
         categories: PropTypes.array,
-        subCategories: PropTypes.array
+        subCategories: PropTypes.array,
+        sliderProductVisible: PropTypes.bool,
+        endAnimation: PropTypes.bool,
+        transitionDelay: PropTypes.number
     };
 
     static defaultProps = {
         newClass: '',
         labelClass: '',
         categories: [],
-        subCategories: []
+        subCategories: [],
+        sliderProductVisible: false,
+        endAnimation: false,
+        transitionDelay: 0
     };
 
     state = {
@@ -78,18 +84,27 @@ class Card extends Component {
             newClass,
             labelClass,
             langRoute,
-            lang
+            lang,
+            sliderProductVisible,
+            transitionDelay,
+            endAnimation
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const isDiscount = price !== actualPrice;
+        const style = {};
+
+        if (transitionDelay) style.transitionDelay = `${transitionDelay * 0.2}s`;
 
         return (
             <Link
                 className={classNames(
                     styles.product,
                     { [styles[newClass]]: newClass },
-                    { [styles[labelClass]]: labelClass }
+                    { [styles.sliderProductVisible]: sliderProductVisible },
+                    { [styles[labelClass]]: labelClass },
+                    { [styles.noDelay]: endAnimation }
                 )}
+                style={style}
                 to={`${langRoute}/${categoryAlias}/${subCategoryAlias}/${alias}`}
             >
                 <div className={styles.labels}>

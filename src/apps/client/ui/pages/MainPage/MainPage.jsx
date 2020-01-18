@@ -56,7 +56,7 @@ class MainPage extends Component {
 
         return (
             <div>
-                <Slider/>
+                 <Slider/>
                 {labels.map((label, i) => {
                     return (
                         <div key={i}>

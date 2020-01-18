@@ -5,6 +5,8 @@ import classNames from 'classnames';
 
 import splitEvery from '@tinkoff/utils/array/splitEvery';
 
+import isScrolledIntoView from './../../../utils/isScrolledIntoView';
+
 import styles from './ProductsSlider.css';
 import Card from '../Card/Card';
 
@@ -22,21 +24,20 @@ class ProductsSlider extends Component {
 
     constructor (props) {
         super(props);
+        this.products = React.createRef();
         this.state = {
             width: 0,
             activeIndex: 0,
             productsInPack: 4,
-            productsPacks: []
+            productsPacks: [],
+            productsAnimation: false,
+            endAnimation: false
         };
-    }
-
-    componentWillReceiveProps () {
-
     }
 
     componentDidMount () {
         const { products, widthWindow } = this.props;
-        const width = this.products.clientWidth;
+        const width = this.products.current.clientWidth;
 
         let productsNumber = 4;
         if (widthWindow < 1361) productsNumber = 3;
@@ -46,7 +47,39 @@ class ProductsSlider extends Component {
         const productsPacks = splitEvery(productsNumber, products);
 
         this.setState({ width, productsPacks });
+
+        if (document.readyState === 'complete') {
+            this.handleScroll();
+            document.addEventListener('scroll', this.handleScroll);
+        } else {
+            window.addEventListener('load', () => {
+                this.handleScroll();
+                document.addEventListener('scroll', this.handleScroll);
+            });
+        }
     }
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.products.current, 'productAnimation');
+    };
+
+    isScrolledIntoView = (elem, stateName) => {
+        if (this.state[stateName]) {
+            return;
+        }
+
+        const isVisible = isScrolledIntoView(elem);
+
+        if (isVisible) {
+            this.setState({ [stateName]: true }, () => {
+                setTimeout(() => stateName === 'productAnimation' ? this.setState({ endAnimation: true }) : null);
+            });
+        }
+    };
 
     setActiveIndex = (newIndex) => {
         const { productsPacks } = this.state;
@@ -65,7 +98,7 @@ class ProductsSlider extends Component {
 
     render () {
         const { label } = this.props;
-        const { width, activeIndex, productsPacks } = this.state;
+        const { width, activeIndex, productsPacks, productAnimation, endAnimation } = this.state;
         const left = -1 * (width * activeIndex);
         const hidden = productsPacks.length <= 1;
 
@@ -74,11 +107,20 @@ class ProductsSlider extends Component {
                 <div className={styles.content}>
                     <div
                         className={styles.products}
-                        ref={products => { this.products = products; }}
+                        ref={this.products}
                         style={{ left }}>
                         {productsPacks.map((products, index) => {
                             return <div key={index} className={styles.productsPack}>
-                                {products.map(product => <Card newClass='sliderProduct' labelClass={label} key={product.id} product={product} />)}
+                                {products.map((product, index) => {
+                                    return <Card
+                                        newClass='sliderProduct'
+                                        sliderProductVisible={productAnimation}
+                                        labelClass={label}
+                                        key={product.id}
+                                        transitionDelay={index}
+                                        endAnimation={endAnimation}
+                                        product={product} />;
+                                })}
                             </div>;
                         })}
                     </div>
