@@ -236,7 +236,6 @@
     text-decoration: none;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
-    position: relative;
 
     &:before {
         content: '';
