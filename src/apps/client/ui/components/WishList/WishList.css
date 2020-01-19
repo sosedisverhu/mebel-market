@@ -157,6 +157,9 @@
 .productPrice {
     font-size: 24px;
     line-height: 28px;
+    color: blackLight;
+}
+.productDiscountPrice {
     color: redBasic;
 }
 

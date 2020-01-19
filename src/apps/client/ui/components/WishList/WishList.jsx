@@ -20,7 +20,7 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
     saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
 });
@@ -100,11 +100,11 @@ class WishList extends Component {
                     <div className={styles.popup}>
                         <p className={styles.title}>
                             {text.title} {wishlist.length > 0 &&
-                                <span>
-                                    {wishlist.length}&nbsp;
-                                    {this.getWordCaseByNumber(wishlist.length,
-                                        lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
-                                </span>
+                        <span>
+                            {wishlist.length}&nbsp;
+                            {this.getWordCaseByNumber(wishlist.length,
+                                lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                        </span>
                             }
                         </p>
                         {wishlist.length > 0
@@ -119,8 +119,13 @@ class WishList extends Component {
                                                     <p className={styles.productNumber}>Артикул: 48092</p>
                                                     <p className={styles.productSize}>{text.size} 190 х 200</p>
                                                     <div className={styles.productPrices}>
-                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                        {product.discountPrice && (product.discountPrice !== product.price) &&
+                                                        <p className={styles.productOldPrice}>
+                                                            {product.price}&#8372;
+                                                        </p>}
+                                                        <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: product.discountPrice && (product.discountPrice !== product.price) })}>
+                                                            {product.discountPrice}&#8372;
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className={styles.productButtons}>
@@ -130,7 +135,9 @@ class WishList extends Component {
                                                             alt="remove"
                                                         />
                                                     </button>
-                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
+                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>
+                                                        {text.cartBtn}
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

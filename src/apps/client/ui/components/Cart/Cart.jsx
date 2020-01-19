@@ -68,7 +68,7 @@ class Cart extends Component {
         }
 
         const lastNumber = number % 10;
-        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
+        const resultIndex = findIndex(group => includes(lastNumber, group), CASES_GROUPS);
 
         return cases[resultIndex];
     }
