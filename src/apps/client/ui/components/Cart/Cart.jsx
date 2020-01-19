@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import propOr from '@tinkoff/utils/object/propOr';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import includes from '@tinkoff/utils/array/includes';
 
 import CartProduct from '../CartProduct/CartProduct';
 
@@ -76,7 +74,7 @@ class Cart extends Component {
     };
 
     render () {
-        const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;
+        const { langRoute, langMap, basket, basketIsOpen } = this.props;
         const text = propOr('cart', {}, langMap);
         const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
         const totalPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
