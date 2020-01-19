@@ -25,7 +25,7 @@ class DeliveryAndPayment extends Component {
 
         return (
             <section className={styles.deliveryAndPayment}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.title}/>
                 <div className={styles.deliveryAndPaymentContainer}>
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>

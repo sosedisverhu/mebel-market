@@ -317,10 +317,12 @@ class ProductsPage extends Component {
         const { langMap, langRoute, lang } = this.props;
         const { products, filteredProducts, category, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
+        const headerText = propOr('header', {}, langMap);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category} isPromotionsPage={isPromotionsPage}/>
+                <Breadcrumbs category={category}
+                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
