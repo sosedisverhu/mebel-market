@@ -109,9 +109,11 @@ class ProductForm extends Component {
             discountPrice: product.discountPrice,
             price: product.price,
             discount: product.discount,
+            warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
+            article: product.article,
             lang: 'ru',
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -161,10 +163,12 @@ class ProductForm extends Component {
             discountPrice,
             price,
             discount,
+            warranty,
             categoryId,
             subCategoryId,
             id,
-            alias
+            alias,
+            article
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
@@ -272,13 +276,15 @@ class ProductForm extends Component {
             hidden,
             discountPrice,
             discount,
+            warranty,
             price,
             categoryId,
             subCategoryId,
             id,
             alias,
             categoryFilters,
-            subCategoryFilters
+            subCategoryFilters,
+            article
         };
     };
 
@@ -321,13 +327,11 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            .then(() => {
-                onDone();
-            })
+            .then(onDone())
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для товара'
+                        errorText: 'Введите уникальные алиас и артикул для товара'
                     });
                 } else {
                     this.setState({
@@ -414,7 +418,7 @@ class ProductForm extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
     editProduct: payload => dispatch(editProduct(payload)),
     updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),

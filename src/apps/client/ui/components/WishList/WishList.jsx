@@ -9,6 +9,7 @@ import includes from '@tinkoff/utils/array/includes';
 
 import styles from './WishList.css';
 
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
 
@@ -21,14 +22,10 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
     saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
 });
-
-const EXCEPTION_NUMBERS_MIN = 11;
-const EXCEPTION_NUMBERS_MAX = 14;
-const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
 
 @outsideClick
 class WishList extends Component {
@@ -66,17 +63,6 @@ class WishList extends Component {
         }
     };
 
-    getWordCaseByNumber (number, cases) {
-        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
-            return cases[0];
-        }
-
-        const lastNumber = number % 10;
-        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
-
-        return cases[resultIndex];
-    }
-
     removeProduct = wishlistItemId => () => {
         this.props.deleteFromWishlist(wishlistItemId);
     };
@@ -93,6 +79,7 @@ class WishList extends Component {
         const { langMap, lang, wishlist, basket } = this.props;
         const { active } = this.state;
         const text = propOr('wishList', {}, langMap);
+        const cartText = propOr('cart', {}, langMap);
 
         return (
             <div className={styles.wishList}>
@@ -106,8 +93,7 @@ class WishList extends Component {
                             {text.title} {wishlist.length > 0 &&
                                 <span>
                                     {wishlist.length}&nbsp;
-                                    {this.getWordCaseByNumber(wishlist.length,
-                                        lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                                    {formatWordDeclension(cartText.product, wishlist.length)}
                                 </span>
                             }
                         </p>

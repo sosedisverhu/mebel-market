@@ -50,6 +50,11 @@ export default {
     },
     cart: {
         title: 'Корзина:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товаров'
+        },
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
@@ -59,14 +64,20 @@ export default {
     productsPage: {
         filterBtn: 'Фильтры',
         results: {
-            one: 'Результатов',
+            one: 'Результат',
             several: 'Результата',
             much: 'Результатов'
         },
         price: 'Цена'
     },
     aboutProductTop: {
-        warranty: 'Гарантия'
+        warranty: 'Гарантия',
+        months: {
+            one: 'месяц',
+            several: 'месяца',
+            much: 'месяцев'
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',

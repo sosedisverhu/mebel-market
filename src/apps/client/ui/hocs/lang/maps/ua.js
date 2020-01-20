@@ -50,6 +50,11 @@ export default {
     },
     cart: {
         title: 'Кошик:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товарів'
+        },
         totalPrice: 'Всього:',
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
@@ -59,14 +64,20 @@ export default {
     productsPage: {
         filterBtn: 'Фільтри',
         results: {
-            one: 'Результатов',
+            one: 'Результат',
             several: 'Результата',
             much: 'Результатів'
         },
         price: 'Ціна'
     },
     aboutProductTop: {
-        warranty: 'Гарантія'
+        warranty: 'Гарантія',
+        months: {
+            one: 'місяць',
+            several: 'місяці',
+            much: 'місяців'
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',
