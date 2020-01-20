@@ -9,7 +9,12 @@ export default function editAdmin (req, res) {
 
     editAdminQuery(admin)
         .then(admin => {
-            res.status(OKEY_STATUS_CODE).send(admin);
+            const editedAdmin = {
+                email: admin.email,
+                login: admin.login,
+                sections: admin.sections
+            }
+            res.status(OKEY_STATUS_CODE).send(editedAdmin);
         })
         .catch(() => {
             res.status(SERVER_ERROR_STATUS_CODE).end();

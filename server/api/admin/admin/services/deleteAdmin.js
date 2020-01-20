@@ -10,7 +10,15 @@ export default function deleteAdmin (req, res) {
         .then(() => {
             getAllAdmins()
                 .then(admins => {
-                    res.status(OKEY_STATUS_CODE).send(admins);
+                    const editedAdmin = admins.map(admin => {
+                        return {
+                            login: admin.login,
+                            email: admin.email,
+                            id: admin.id,
+                            sections: admin.sections
+                        };
+                    });
+                    res.status(OKEY_STATUS_CODE).send(editedAdmin);
                 });
         })
         .catch(() => {

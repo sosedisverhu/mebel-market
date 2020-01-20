@@ -20,6 +20,12 @@ export default function checkAuthentication (req, res) {
             return res.status(FORBIDDEN_STATUS_CODE).end();
         }
 
-        res.status(OKEY_STATUS_CODE).send(admin);
+        const editedAdmin = {
+            email: admin.email,
+            login: admin.login,
+            sections: admin.sections
+        }
+
+        res.status(OKEY_STATUS_CODE).send(editedAdmin);
     });
 }

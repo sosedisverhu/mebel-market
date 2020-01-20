@@ -5,7 +5,7 @@ import getAllAdminsQuery from '../queries/getAllAdmins';
 export default function getAllAdmins (req, res) {
     getAllAdminsQuery()
         .then(admin => {
-            const newAdmin = admin.map(admin => {
+            const editedAdmin = admin.map(admin => {
                 return {
                     login: admin.login,
                     email: admin.email,
@@ -13,7 +13,7 @@ export default function getAllAdmins (req, res) {
                     id: admin.id
                 };
             });
-            res.status(OKEY_STATUS_CODE).send(newAdmin);
+            res.status(OKEY_STATUS_CODE).send(editedAdmin);
         })
         .catch(() => {
             res.status(SERVER_ERROR_STATUS_CODE).end();
