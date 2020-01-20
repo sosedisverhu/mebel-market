@@ -49,11 +49,18 @@ const mapStateToProps = ({ application }) => {
 class App extends Component {
     static propTypes = {
         lang: PropTypes.string,
-        langRoute: PropTypes.string
+        langRoute: PropTypes.string,
+        location: PropTypes.object
     };
 
     static defaultProps = {
         langRoute: ''
+    };
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.location !== nextProps.location) {
+            window.scrollTo(0, 0);
+        }
     };
 
     renderComponent = Component => ({ location: { pathname } }) => {
