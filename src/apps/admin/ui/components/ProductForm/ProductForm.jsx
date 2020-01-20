@@ -93,6 +93,8 @@ class ProductForm extends Component {
             ua_name: ua.name || '',
             ru_description: ru.description || '',
             ua_description: ua.description || '',
+            ru_shortDescription: ru.shortDescription || '',
+            ua_shortDescription: ua.shortDescription || '',
             ru_seoTitle: ru.seoTitle || '',
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
@@ -150,6 +152,8 @@ class ProductForm extends Component {
             ua_name: uaName,
             ru_description: ruDescription,
             ua_description: uaDescription,
+            ru_shortDescription: ruShortDescription,
+            ua_shortDescription: uaShortDescription,
             ua_seoTitle: uaSeoTitle,
             ru_seoTitle: ruSeoTitle,
             ua_seoDescription: uaSeoDescription,
@@ -252,6 +256,7 @@ class ProductForm extends Component {
                 ru: {
                     name: ruName,
                     description: ruDescription,
+                    shortDescription: ruShortDescription,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
                     seoKeywords: ruSeoKeywords.words.join(', ')
@@ -259,6 +264,7 @@ class ProductForm extends Component {
                 ua: {
                     name: uaName,
                     description: uaDescription,
+                    shortDescription: uaShortDescription,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')

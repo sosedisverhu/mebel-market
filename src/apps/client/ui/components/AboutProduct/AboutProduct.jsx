@@ -21,6 +21,7 @@ import styles from './AboutProduct.css';
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
+        lang: application.lang,
         wishlist: data.wishlist,
         basket: data.basket,
         basketIsOpen: data.basketIsOpen
@@ -41,6 +42,7 @@ const mapDispatchToProps = dispatch => {
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
@@ -147,26 +149,24 @@ class AboutProduct extends Component {
         openBasket();
     };
 
+    convertNewLinesToBr = str => {
+        return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    };
+
     render () {
-        const { product, langMap } = this.props;
+        const { product, langMap, lang } = this.props;
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = product.price !== product.actualPrice;
+        const shortDescription = product.texts[lang].shortDescription;
         const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
             <div className={styles.advantagesTitle}>{text.advantages}</div>
-            <ul>
-                <li className={styles.advantage}>просторность</li>
-                <li className={styles.advantage}>универсальность</li>
-                <li className={styles.advantage}>функциональность</li>
-                <li className={styles.advantage}>простой и стильный дизайн</li>
-                <li className={styles.advantage}>высокое ложе</li>
-                <li className={styles.advantage}>удобное основание</li>
-                <li className={styles.advantage}>простота в уходе</li>
-            </ul>
+            {shortDescription &&
+            <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {isDiscount &&
             <span className={styles.priceOld}>
@@ -209,8 +209,7 @@ class AboutProduct extends Component {
                     }
                 </button>
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
-                    onClick={this.handleAddToWishlist}
-                />
+                    onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }

@@ -8,6 +8,7 @@ const Product = new Schema({
         type: {
             name: { type: String, required: true },
             description: { type: String, required: true },
+            shortDescription: { type: String, required: true },
             seoTitle: { type: String },
             seoDescription: { type: String },
             seoKeywords: { type: String }

@@ -44,6 +44,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели. </p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -55,6 +58,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -118,6 +124,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Классика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -129,6 +138,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Класика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -192,6 +204,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -203,6 +218,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -266,6 +284,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -277,6 +298,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -340,6 +364,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матраc « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -351,6 +378,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матрац « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -414,6 +444,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матраc « ЭКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -425,6 +458,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матрац « ЕКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -488,6 +524,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -499,6 +538,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -562,6 +604,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -573,6 +618,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -636,6 +684,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -647,6 +698,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -710,6 +764,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -721,6 +778,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -784,6 +844,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
@@ -795,6 +858,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
