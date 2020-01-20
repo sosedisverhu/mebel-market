@@ -192,6 +192,16 @@
     }
 }
 
+.inCartBtn {
+    color: blackLight;
+    background-color: whiteBasic;
+    border: 1px solid greenBasic;
+
+    &:hover {
+        background-color: whiteBasic;
+    }
+}
+
 .continueShopping {
     @mixin removeDefaultButton;
     padding: 0;

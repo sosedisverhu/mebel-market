@@ -17,7 +17,8 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         lang: application.lang,
-        wishlist: data.wishlist
+        wishlist: data.wishlist,
+        basket: data.basket
     };
 };
 
@@ -35,7 +36,8 @@ class WishList extends Component {
         outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
-        saveProductsToBasket: PropTypes.func.isRequired
+        saveProductsToBasket: PropTypes.func.isRequired,
+        basket: PropTypes.array.isRequired
     };
 
     state = {
@@ -65,14 +67,16 @@ class WishList extends Component {
         this.props.deleteFromWishlist(wishlistItemId);
     };
 
-    handleAddToBasket = product => () => {
+    handleAddToBasket = (product, properties) => () => {
         this.props.saveProductsToBasket({
-            productId: product.id
+            productId: product.id,
+            properties,
+            quantity: 1
         });
     };
 
     render () {
-        const { langMap, lang, wishlist } = this.props;
+        const { langMap, lang, wishlist, basket } = this.props;
         const { active } = this.state;
         const text = propOr('wishList', {}, langMap);
         const cartText = propOr('cart', {}, langMap);
@@ -83,7 +87,7 @@ class WishList extends Component {
                     <span className={styles.quantityAll}>{wishlist.length}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
-                    <div className={styles.cover} onClick={this.handleClick}/>
+                    <div className={styles.cover} onClick={this.handleClick} />
                     <div className={styles.popup}>
                         <p className={styles.title}>
                             {text.title} {wishlist.length > 0 &&
@@ -95,17 +99,16 @@ class WishList extends Component {
                         </p>
                         {wishlist.length > 0
                             ? <div className={styles.productsContainer}>
-                                {wishlist.map(({ product, id: wishlistItemId }, i) =>
+                                {wishlist.map(({ product, properties, id: wishlistItemId }, i) =>
                                     <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
-                                            <img className={styles.productImg} src={product.avatar} alt=""/>
+                                            <img className={styles.productImg} src={product.avatar} alt="" />
                                             <div className={styles.productInfo}>
                                                 <div>
-                                                    <p className={styles.productName}>
-                                                        {product.texts[lang].name.split('« ').join('«').split(' »').join('»')}
-                                                    </p>
-                                                    <p className={styles.productNumber}>Артикул: 48092</p>
-                                                    <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                                    <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
+                                                    <p className={styles.productNumber}>{`${text.article} ${product.article}`}</p>
+                                                    {properties && properties.size &&
+                                                        <p className={styles.productSize}>{`${text.size} ${properties.size.name}`}</p>}
                                                     <div className={styles.productPrices}>
                                                         <p className={styles.productOldPrice}>{product.price}&#8372;</p>
                                                         <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
@@ -118,9 +121,13 @@ class WishList extends Component {
                                                             alt="remove"
                                                         />
                                                     </button>
-                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>
-                                                        {text.cartBtn}
-                                                    </button>
+                                                    {basket.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+                                                        ? <button className={classNames(styles.cartBtn, styles.inCartBtn)}>
+                                                            {text.inCartBtn}
+                                                        </button>
+                                                        : <button className={styles.cartBtn} onClick={this.handleAddToBasket(product, properties)}>
+                                                            {text.cartBtn}
+                                                        </button>}
                                                 </div>
                                             </div>
                                         </div>
