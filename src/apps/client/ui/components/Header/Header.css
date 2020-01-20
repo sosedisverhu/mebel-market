@@ -274,6 +274,11 @@
 .menuItemBottomPromotions {
     color: redBasic;
     text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+
+    &:hover {
+         color: redBasic;
+         text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+     }
 }
 
 .searchBottom {
