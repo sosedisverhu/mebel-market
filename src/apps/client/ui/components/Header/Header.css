@@ -4,7 +4,7 @@
 @value greenBasic from '../../../../../css/colors.css';
 
 .header {
-    display: flex;
+    display: block;
     background-color: blackLight;
     flex-direction: column;
     font-family: RoundedElegance;
