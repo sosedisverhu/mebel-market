@@ -113,6 +113,7 @@ class ProductForm extends Component {
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
+            article: product.article,
             lang: 'ru',
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -166,7 +167,8 @@ class ProductForm extends Component {
             categoryId,
             subCategoryId,
             id,
-            alias
+            alias,
+            article
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
@@ -281,7 +283,8 @@ class ProductForm extends Component {
             id,
             alias,
             categoryFilters,
-            subCategoryFilters
+            subCategoryFilters,
+            article
         };
     };
 
@@ -328,7 +331,7 @@ class ProductForm extends Component {
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для товара'
+                        errorText: 'Введите уникальные алиас и артикул для товара'
                     });
                 } else {
                     this.setState({

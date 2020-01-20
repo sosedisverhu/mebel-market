@@ -4,6 +4,7 @@ import phone from './phone';
 import max from './max';
 import min from './min';
 import featuresSingular from './featuresSingular';
+import featuresDouble from './featuresDouble';
 import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
 import discount from './discount';
@@ -14,6 +15,7 @@ export default {
     email,
     phone,
     featuresSingular,
+    featuresDouble,
     max,
     min,
     requiredFiles,

@@ -74,7 +74,8 @@ export default {
             one: 'місяць',
             several: 'місяці',
             much: 'місяців'
-        }
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',
