@@ -141,8 +141,7 @@ class AboutProduct extends Component {
     };
 
     convertNewLinesToBr = str => {
-        str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
-        return str;
+        return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
     render () {
