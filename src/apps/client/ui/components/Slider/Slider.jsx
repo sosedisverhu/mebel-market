@@ -72,7 +72,7 @@ class Slider extends Component {
                         href={banners[activeIndex].link}
                         target={banners[activeIndex].newTab ? '_blank' : '_self'}
                     >
-                        < h2 className={styles.text}>
+                        <h2 className={styles.text}>
                             {text.slider}
                         </h2>
                     </a>}
