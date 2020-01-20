@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import outsideClick from '../../hocs/outsideClick';
-
-import styles from './AboutProduct.css';
 
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import classNames from 'classnames';
+
+import openBasket from '../../../actions/openBasket';
+import styles from './AboutProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
+        lang: application.lang,
         wishlist: data.wishlist,
-        basket: data.basket
+        basket: data.basket,
+        basketIsOpen: data.basketIsOpen
     };
 };
 
@@ -28,7 +32,9 @@ const mapDispatchToProps = dispatch => {
     return {
         setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
         saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
-        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
+        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload)),
+        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
+        openBasket: (payload) => dispatch(openBasket(payload))
     };
 };
 
@@ -36,6 +42,7 @@ const mapDispatchToProps = dispatch => {
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
@@ -43,32 +50,41 @@ class AboutProduct extends Component {
         wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
-        quantity: PropTypes.number.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired,
+        basket: PropTypes.array,
+        openBasket: PropTypes.func.isRequired,
+        basketIsOpen: PropTypes.bool.isRequired
     };
 
     state = {
         sizes: [],
         activeSize: {},
         sizeListIsOpen: true,
+        selectIsOpen: false,
         isInWishlist: false,
-        selectIsOpen: false
+        isInBasket: false
     };
 
     componentDidMount () {
-        const { product } = this.props;
+        const { wishlist, product } = this.props;
+        const { activeSize } = this.state;
 
         this.setState({
             sizes: product.sizes,
-            activeSize: product.sizes[0]
+            activeSize: product.sizes[0],
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.name === activeSize.name))
         });
     }
 
-    static getDerivedStateFromProps (props) {
-        const { wishlist, product } = props;
+    static getDerivedStateFromProps (props, state) {
+        const { basket, wishlist, product } = props;
+        let values = {};
 
-        return (wishlist.find(item => item.product.id === product.id))
-            ? { isInWishlist: true }
-            : { isInWishlist: false };
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name));
+
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.name === state.activeSize.name);
+
+        return values;
     }
 
     scrollToTitles = () => {
@@ -95,55 +111,81 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, product } = this.props;
-        saveProductsToWishlist({
-            productId: product.id
-        });
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
+        const { isInWishlist, activeSize } = this.state;
 
-        this.setState({ isInWishlist: true });
-    }
+        if (!isInWishlist) {
+            saveProductsToWishlist({
+                productId: product.id,
+                properties: {
+                    size: activeSize
+                }
+            });
+        } else {
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === activeSize.name);
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
+        }
+    };
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product, quantity } = this.props;
+        const { saveProductsToBasket, product } = this.props;
+        const { activeSize } = this.state;
         saveProductsToBasket({
             productId: product.id,
-            quantity
+            properties: {
+                size: activeSize
+            },
+            quantity: 1
         });
-    }
+    };
+
+    handleOpenBasket = () => {
+        const { basketIsOpen, openBasket } = this.props;
+
+        window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
+        openBasket();
+    };
+
+    convertNewLinesToBr = str => {
+        return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    };
 
     render () {
-        const { product, langMap } = this.props;
-        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist } = this.state;
+        const { product, langMap, lang } = this.props;
+        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
+        const isDiscount = product.price !== product.actualPrice;
+        const shortDescription = product.texts[lang].shortDescription;
+        const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
             <div className={styles.advantagesTitle}>{text.advantages}</div>
-            <ul>
-                <li className={styles.advantage}>просторность</li>
-                <li className={styles.advantage}>универсальность</li>
-                <li className={styles.advantage}>функциональность</li>
-                <li className={styles.advantage}>простой и стильный дизайн</li>
-                <li className={styles.advantage}>высокое ложе</li>
-                <li className={styles.advantage}>удобное основание</li>
-                <li className={styles.advantage}>простота в уходе</li>
-            </ul>
+            {shortDescription &&
+            <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
-            {product.discountPrice !== product.price &&
+            {isDiscount &&
             <span className={styles.priceOld}>
                 {formatMoney(product.price)}
             </span>}
-            <span className={styles.price}>
-                {formatMoney(product.discountPrice || product.discountPrice)}
+            <span className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
+                {formatMoney(product.actualPrice)}
             </span>
             <div>
-                <span className={styles.sizesTitle}>{text.size}</span>
+                <span className={styles.sizesTitle}>
+                    {!isOneSize ? text.size : text.oneSize}
+                </span>
                 <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
                     onClick={this.selectIsOpen}
                 >
-                    <li className={styles.activeOption}>{activeSize.name}</li>
+                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
+                        {activeSize.name}
+                    </li>
                     {sizes.map(size => {
                         if (size.id !== activeSize.id && sizeListIsOpen) {
                             sizeCounter++;
@@ -158,8 +200,16 @@ class AboutProduct extends Component {
                 </ul>
             </div>
             <div className={styles.buttons}>
-                <button className={styles.btnBuy} onClick={this.handleBuyClick}>{text.buy}</button>
-                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
+                <button
+                    className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                    onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
+                    {!isInBasket
+                        ? text.buy
+                        : text.inBasket
+                    }
+                </button>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
+                    onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }

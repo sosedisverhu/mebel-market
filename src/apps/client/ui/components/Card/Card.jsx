@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
@@ -41,7 +41,8 @@ class Card extends Component {
 
     state = {
         category: {},
-        subCategory: {}
+        subCategory: {},
+        lang: PropTypes.string.isRequired
     };
 
     componentDidMount () {
@@ -58,7 +59,7 @@ class Card extends Component {
             return labels.map((label, index) => {
                 return (
                     <div key={index} className={`${styles.label} ${styles.discount}`}>
-                        -{discount} %
+                        -{discount}<span className={styles.percentage}>%</span>
                     </div>);
             });
         } else if (labels) {
@@ -73,13 +74,14 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, discount, discountPrice, price, alias },
+            product: { texts, avatar, discount, actualPrice, price, alias },
             newClass,
             labelClass,
             langRoute,
             lang
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
+        const isDiscount = price !== actualPrice;
 
         return (
             <Link
@@ -97,15 +99,17 @@ class Card extends Component {
                     <img className={styles.img} src={avatar} alt=''/>
                 </div>
                 <div className={styles.bottomPanel}>
-                    <div className={styles.title}>
+                    <p className={styles.productName}>
                         {texts[lang].name}
-                    </div>
-                    {discount ? <div className={styles.priceOld}>
+                    </p>
+
+                    {isDiscount ? <div className={styles.priceOld}>
                         {price} &#8372;
                     </div> : null}
-                    <div className={styles.price}>
-                        {discountPrice} &#8372;
+                    <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
+                        {actualPrice} &#8372;
                     </div>
+
                 </div>
             </Link>);
     }

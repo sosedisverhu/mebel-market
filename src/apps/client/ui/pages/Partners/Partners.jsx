@@ -29,7 +29,7 @@ class Partners extends Component {
 
         return (
             <section className={styles.partners}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.title}/>
                 <div className={styles.partnersContainer}>
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>

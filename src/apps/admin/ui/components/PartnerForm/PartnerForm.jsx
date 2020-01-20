@@ -130,7 +130,7 @@ class PartnerForm extends Component {
             .then(() => {
                 onDone();
             })
-            .catch(error => {
+            .catch(() => {
                 this.setState({
                     errorText: 'Что-то пошло не так. Перезагрузите страницы и попробуйте снова'
                 });

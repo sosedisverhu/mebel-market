@@ -6,10 +6,6 @@ export default {
         top: 'Топ продаж',
         discount: 'Акции',
         new: 'Новинки',
-        bedsTitle: 'Кровати',
-        mattressesTitle: 'Матрасы',
-        furnitureTitle: 'Мягкая мебель',
-        accessoriesTitle: 'Аксессуары для сна',
         slider: 'Помочь с выбором',
         title: 'Наши преимущества',
         qualityTitle: 'Качество',
@@ -21,11 +17,12 @@ export default {
     },
     product: {
         details: 'Подробные характеристики',
-        advantages: 'Основные плюсы:',
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
-        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }]
+        oneSize: 'Размер:',
+        tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
+        inBasket: 'В корзине'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -47,10 +44,17 @@ export default {
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
         cartBtn: 'В корзину',
-        noProduct: 'Вы не добавили в избранное ни одного товара'
+        noProduct: 'Вы не добавили в избранное ни одного товара',
+        article: 'Артикул:',
+        inCartBtn: 'В корзине'
     },
     cart: {
         title: 'Корзина:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товаров'
+        },
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
@@ -59,12 +63,21 @@ export default {
     },
     productsPage: {
         filterBtn: 'Фильтры',
-        results: 'Результатов',
-        popular: 'Популярные',
+        results: {
+            one: 'Результат',
+            several: 'Результата',
+            much: 'Результатов'
+        },
         price: 'Цена'
     },
     aboutProductTop: {
-        warranty: 'Гарантия'
+        warranty: 'Гарантия',
+        months: {
+            one: 'месяц',
+            several: 'месяца',
+            much: 'месяцев'
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',
@@ -104,12 +117,13 @@ export default {
     },
     searchPage: {
         results: 'результатов по запросу',
-        products: 'Товары',
+        products: 'Товары:',
         noResults: 'Мы не смогли найти результаты по запросу:',
         tryAgain: 'Попробуйте еще:',
         placeholder: 'Поиск',
         needHelp: 'Нужна помощь?',
-        link: 'Свяжитесь с нами'
+        link: 'Свяжитесь с нами',
+        articles: 'Статьи:'
     },
     checkoutPage: {
         checkout: 'Оформление заказа',
@@ -127,7 +141,8 @@ export default {
         cardTitle: 'Оплатите на карту:',
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
-        toMain: 'На главную'
+        toMain: 'На главную',
+        noItemsInBasket: 'В корзине еще нет товаров'
     },
     comments: {
         showAll: 'Показать все',
@@ -137,5 +152,8 @@ export default {
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
         cancelBtn: 'Отмена'
+    },
+    articles: {
+        searchResult: 'Статьи:'
     }
 };

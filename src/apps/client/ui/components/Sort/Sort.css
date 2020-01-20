@@ -1,8 +1,8 @@
-
 @value blackLight from '../../../../../css/colors.css';
 @value whiteBasic from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .sort {
     margin: 11px 0 0 10px;
@@ -48,7 +48,7 @@
         height: 0;
         border-style: solid;
         border-width: 8px 5px 0 5px;
-        border-color: green transparent transparent  transparent;
+        border-color: greenBasic transparent transparent  transparent;
         position: absolute;
         top: 50%;
         right: 16px;

@@ -5,7 +5,8 @@ import {
     SET_SUB_CATEGORIES,
     SET_PARTNERS,
     SET_SEO,
-    SET_ADMINS
+    SET_ADMINS,
+    SET_ORDERS
 } from '../types/types';
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     subCategories: [],
     partners: [],
     allSeo: [],
-    admins: []
+    admins: [],
+    orders: []
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +36,8 @@ export default function (state = initialState, action) {
         return { ...state, allSeo: action.payload };
     case SET_ADMINS:
         return { ...state, admins: action.payload };
+    case SET_ORDERS:
+        return { ...state, orders: action.payload };
     default:
         return state;
     }

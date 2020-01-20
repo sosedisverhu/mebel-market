@@ -3,6 +3,7 @@ import pick from '@tinkoff/utils/object/pick';
 const VALUES = [
     'id',
     'texts',
+    'views',
     'characteristics',
     'sizes',
     'avatar',
@@ -11,12 +12,15 @@ const VALUES = [
     'date',
     'discountPrice',
     'price',
+    'actualPrice',
     'discount',
+    'warranty',
     'categoryId',
     'subCategoryId',
     'alias',
     'categoryFilters',
-    'subCategoryFilters'
+    'subCategoryFilters',
+    'article'
 ];
 
 export default function prepareProduct (body) {

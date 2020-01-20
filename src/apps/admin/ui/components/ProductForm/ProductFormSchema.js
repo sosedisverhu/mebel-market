@@ -41,6 +41,36 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
+                component: FormFieldInput,
+                name: 'article',
+                schema: {
+                    label: 'Артикул'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните артикул' } }
+                ]
+            },
+            {
+                component: FormFieldTitle,
+                name: 'content-title',
+                schema: {
+                    label: 'Короткое описание',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'shortDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Короткое описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните короткое описание' } }
+                ]
+            },
+            {
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {
@@ -50,7 +80,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldEditor,
-                name: `description`,
+                name: 'description',
                 valueLangStructure: 'depend',
                 schema: {
                     label: 'Описание',
@@ -170,7 +200,30 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     value: 'Значения'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните характеристики товара' } }
+                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'form-title',
+                schema: {
+                    label: 'Гарантия на товар',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'warranty',
+                schema: {
+                    label: 'Гарантия (в месяцах)',
+                    type: 'number'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните гарантию товара' } }
                 ]
             },
             {

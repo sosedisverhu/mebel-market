@@ -1,7 +1,8 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .wishList {
     margin-right: 20px;
@@ -17,6 +18,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background-image: url('./img/wishlist.svg');
+    width: 18px;
+    height: 16px;
+    transition: .3s ease-out;
+
+    &:hover {
+        background-image: url('./img/wishlist-hover.svg');
+    }
 }
 
 .quantityAll {
@@ -121,7 +130,7 @@
 .productNumber {
     font-size: 12px;
     line-height: 14px;
-    color: gray;
+    color: gray0;
     margin-bottom: 18px;
 }
 
@@ -141,13 +150,16 @@
     font-size: 18px;
     line-height: 21px;
     text-decoration-line: line-through;
-    color: gray;
+    color: gray0;
     margin-right: 20px;
 }
 
 .productPrice {
     font-size: 24px;
     line-height: 28px;
+    color: blackLight;
+}
+.productDiscountPrice {
     color: redBasic;
 }
 
@@ -176,6 +188,21 @@
     color: whiteBasic;
     padding: 10px 15px;
     background-color: blackLight;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: greenBasic;
+    }
+}
+
+.inCartBtn {
+    color: blackLight;
+    background-color: whiteBasic;
+    border: 1px solid greenBasic;
+
+    &:hover {
+        background-color: whiteBasic;
+    }
 }
 
 .continueShopping {

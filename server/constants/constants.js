@@ -12,6 +12,8 @@ export const EDITOR_FILE_NAME_REGEX = /editor-file/g;
 export const ARTICLES_ITEM_FILE_FIELD_NAME_REGEX = /product-.*-file-/g;
 export const ARTICLES_ITEM_AVATAR_FIELD_NAME_REGEX = /product-.*-avatar/g;
 export const PARTNERS_ITEM_LOGO_FIELD_NAME_REGEX = /partner-.*-logo/g;
+export const SLIDE_FILE_FIELD_NAME_REGEX = /slide-file-/g;
+export const CATEGORIES_ITEM_IMAGE_FIELD_NAME_REGEX = /category-.*-image/g;
 
 export const COOKIE_USER_PRODUCT_ID = 'mebel-market-user-product-id';
 export const COOKIE_YEARS = 100;

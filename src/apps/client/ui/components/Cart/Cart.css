@@ -1,8 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
-@value redBasic from '../../../../../css/colors.css';
-@value blackLight from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
 
 .cart {
     position: relative;
@@ -34,7 +33,7 @@
     justify-content: center;
     width: 12px;
     height: 13px;
-    background: green;
+    background: greenBasic;
     color: whiteBasic;
     border-radius: 50%;
 }
@@ -92,161 +91,11 @@
     overflow-y: auto;
 }
 
-.cartItemWrapper {
-    position: relative;
-    width: 100%;
-
-    &:before {
-        position: absolute;
-        content: '';
-        top: 0;
-        background-color: rgba(216, 216, 216, 0.5);
-        width: 100%;
-        height: 1px;
-    }
-}
-
-.cartItem {
+.cartBottomInfo {
     display: flex;
-    padding: 20px 25px 20px 30px;
-}
-
-.productImg {
-    width: 120px;
-    height: 120px;
-    margin-right: 30px;
-}
-
-.productInfo {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-}
-
-.productOption {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 21px;
-}
-
-.productName {
-    font-size: 18px;
-    line-height: 21px;
-    color: blackLight;
-    margin-right: 5px;
-}
-
-.productNumber {
-    font-size: 12px;
-    line-height: 14px;
-    color: gray;
-    margin-right: 10px;
-}
-
-.wishBtn,
-.removeBtn{
-    @mixin removeDefaultButton;
-    padding: 0;
-    cursor: pointer;
-}
-
-.wishBtn {
-    margin-right: 20px;
-}
-
-.wishBtnImg,
-.removeBtnImg {
-    display: block;
-}
-
-.productSize {
-    font-size: 14px;
-    line-height: 16px;
-    color: blackLight;
-    margin-bottom: 6px;
-}
-
-.productQuantity {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 6px;
-}
-
-.quantitySub,
-.quantityAdd {
-    @mixin removeDefaultButton;
-    padding: 0 5px;
-    position: absolute;
-    color: gray;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    height: 100%;
-    top: 1px;
-    cursor: pointer;
-}
-
-.quantitySub {
-    left: 0;
-}
-.quantityAdd {
-    right: 0;
-}
-
-.quantityInput {
-    width: 69px;
-    height: 22px;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    color: blackLight;
-    text-align: center;
-    border: 1px solid gray;
-    box-sizing: border-box;
-    outline: none;
-    padding-top: 3px;
-}
-
-.productPrices {
-    display: flex;
-    align-items: center;
-}
-
-.productOldPrice {
-    font-size: 18px;
-    line-height: 21px;
-    text-decoration-line: line-through;
-    color: gray;
-    margin-right: 20px;
-}
-
-.productPrice {
-    font-size: 24px;
-    line-height: 28px;
-    color: redBasic;
-}
-
-.totalPriceContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 68px;
-    background-color: gray2;
-}
-
-.totalPriceWrapper {
-    display: flex;
-    width: 330px;
-    justify-content: space-between;
-}
-
-.totalPrice {
-    font-size: 24px;
-    line-height: 28px;
-    color: blackLight;
-    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 }
 
 .checkoutBtn {
@@ -259,6 +108,11 @@
     line-height: 21px;
     color: whiteBasic;
     padding: 10px 20px;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: greenBasic;
+    }
 }
 
 .continueShopping {
@@ -281,4 +135,27 @@
         bottom: 1px;
         left: 0;
     }
+}
+
+
+.totalPriceContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 68px;
+    background-color: gray2;
+}
+
+.totalPriceWrapper {
+    display: flex;
+    width: 330px;
+    justify-content: space-between;
+}
+
+.totalPrice {
+    font-size: 24px;
+    line-height: 28px;
+    color: blackLight;
+    text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 }
