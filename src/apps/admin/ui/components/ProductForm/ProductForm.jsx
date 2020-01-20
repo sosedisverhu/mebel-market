@@ -109,6 +109,7 @@ class ProductForm extends Component {
             discountPrice: product.discountPrice,
             price: product.price,
             discount: product.discount,
+            warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
@@ -162,6 +163,7 @@ class ProductForm extends Component {
             discountPrice,
             price,
             discount,
+            warranty,
             categoryId,
             subCategoryId,
             id,
@@ -274,6 +276,7 @@ class ProductForm extends Component {
             hidden,
             discountPrice,
             discount,
+            warranty,
             price,
             categoryId,
             subCategoryId,
@@ -324,9 +327,7 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            .then(() => {
-                onDone();
-            })
+            .then(onDone())
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
@@ -417,7 +418,7 @@ class ProductForm extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
     editProduct: payload => dispatch(editProduct(payload)),
     updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),

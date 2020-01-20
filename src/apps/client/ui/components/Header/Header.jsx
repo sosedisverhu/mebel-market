@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import propOr from '@tinkoff/utils/object/propOr';
-import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import propOr from '@tinkoff/utils/object/propOr';
+
 import classNames from 'classnames';
-import styles from './Header.css';
+
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
+
+import styles from './Header.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -42,7 +46,7 @@ class Header extends Component {
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
-    handleSearchSubmit = (e) => {
+    handleSearchSubmit = e => {
         e.preventDefault();
         const { langRoute } = this.props;
         const { searchText } = this.state;
@@ -60,11 +64,11 @@ class Header extends Component {
         }
     };
 
-    handleInputChange = (e) => {
+    handleInputChange = e => {
         this.setState({
             searchText: e.target.value
         });
-    }
+    };
 
     render () {
         const { langRoute, langMap, lang, categories } = this.props;

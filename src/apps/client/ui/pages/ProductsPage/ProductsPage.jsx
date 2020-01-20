@@ -17,6 +17,7 @@ import includes from '@tinkoff/utils/array/includes';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
@@ -299,7 +300,7 @@ class ProductsPage extends Component {
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
-                            {subCategories.map((subCategory) => {
+                            {subCategories.map(subCategory => {
                                 return (
                                     <NavLink
                                         className={styles.subCategory}
@@ -318,7 +319,7 @@ class ProductsPage extends Component {
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${text.results}`}
+                                {`${propOr('length', 0, filteredProducts) || products.length} ${formatWordDeclension(text.results, products.length)}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>
