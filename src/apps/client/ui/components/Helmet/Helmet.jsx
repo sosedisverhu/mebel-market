@@ -122,8 +122,7 @@ class Helmet extends Component {
             const subCategory = find(subCategory => subCategory.alias === productPage.params.subCategoryAlias, subCategories);
 
             if (subCategory) {
-                const products = productsMap[subCategory.alias];
-                const product = find(product => product.alias === productPage.params.alias, products);
+                const product = find(product => product.subCategoryId === subCategory.id && product.alias === productPage.params.alias, productsMap);
 
                 if (product) {
                     return {

@@ -21,7 +21,7 @@ import classNames from 'classnames';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProductsCategory: payload => dispatch(saveProductsCategory(payload)),
     editProductsCategory: payload => dispatch(editProductsCategory(payload)),
     updateCategoryImage: (...payload) => dispatch(updateCategoryImage(...payload))
@@ -151,20 +151,16 @@ class CategoryForm extends Component {
     };
 
     handleSubmit = values => {
-        event.preventDefault();
-
         const { id } = this.state;
         const { editProductsCategory, saveProductsCategory, categories, onDone } = this.props;
         const categoryPayload = this.getCategoryPayload(values);
 
-        (
-            id
-                ? editProductsCategory({ ...categoryPayload, id })
-                : saveProductsCategory({
-                    ...categoryPayload,
-                    positionIndex: categoryPayload.positionIndex || categories.length
-                })
-        )
+        (id
+            ? editProductsCategory({ ...categoryPayload, id })
+            : saveProductsCategory({
+                ...categoryPayload,
+                positionIndex: categoryPayload.positionIndex || categories.length
+            }))
             .then(category => {
                 const { files } = values.image;
 
@@ -225,8 +221,8 @@ class CategoryForm extends Component {
                     className={classNames(classes.error, classes.margin)}
                     message={
                         <span id='client-snackbar' className={classes.message}>
-                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
-                            { errorText }
+                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)}/>
+                            {errorText}
                         </span>
                     }
                 />
