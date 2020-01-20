@@ -373,7 +373,7 @@
     &.active span:nth-child(1) {
         top: 6px;
         left: 50%;
-        width: 0%;
+        width: 0;
     }
 
     &.active span:nth-child(2) {
@@ -396,6 +396,7 @@
     top: 100px;
     left: 0;
     backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0x);
     width: 100%;
     height: calc(100% - 99px);
     max-height: 0;
@@ -405,6 +406,7 @@
 
     &.active {
         background: rgba(255, 255, 255, 0.01);
+        -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         max-height: 10000px;
     }
@@ -469,7 +471,7 @@
     display: flex;
     align-items: center;
     background-color: whiteBasic;
-    padding: 23px 16px;
+    padding: 23px 68px;
 }
 
 .instagram,

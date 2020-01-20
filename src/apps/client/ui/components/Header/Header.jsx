@@ -43,6 +43,8 @@ class Header extends Component {
 
     handleMobileMenu = () => {
         document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
+        document.documentElement.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible'; // для Safari
+
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
@@ -89,7 +91,7 @@ class Header extends Component {
                             <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
-                                        {categories.map((category) => {
+                                        {categories.map(category => {
                                             return <Link
                                                 className={styles.mobileMenuItemTop}
                                                 to={`${langRoute}/${category.alias}`}
@@ -127,11 +129,17 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemBottom}
                                             to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/partners`}>{text.partners}</Link>
+                                            to={`${langRoute}/partners`}>
+                                            {text.partners}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/articles`}>{text.articles}</Link>
+                                            to={`${langRoute}/articles`}>
+                                            {text.articles}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                                            to={`${langRoute}/contacts`}>
+                                            {text.contacts}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
