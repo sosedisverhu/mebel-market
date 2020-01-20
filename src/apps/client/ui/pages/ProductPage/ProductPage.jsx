@@ -94,7 +94,7 @@ class ProductPage extends Component {
         } else if (!isEmpty(product)) {
             return (
                 <div>
-                    <Breadcrumbs category={category}/>
+                    <Breadcrumbs category={category} product={product}/>
                     <Product product={product}/>
                     <Tab product={product}/>
                 </div>);
