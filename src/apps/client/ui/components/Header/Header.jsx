@@ -89,7 +89,7 @@ class Header extends Component {
                             <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
-                                        {categories.map((category) => {
+                                        {categories.map(category => {
                                             return <Link
                                                 className={styles.mobileMenuItemTop}
                                                 to={`${langRoute}/${category.alias}`}
@@ -100,7 +100,7 @@ class Header extends Component {
                                         })}
                                         <Link
                                             className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
-                                            to={`${langRoute}/`}
+                                            to={`${langRoute}/promotions`}
                                         >
                                             {text.promotions}
                                         </Link>
@@ -194,7 +194,7 @@ class Header extends Component {
                 </div>
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
-                        {categories.map((category) => {
+                        {categories.map(category => {
                             return <NavLink
                                 className={styles.menuItemBottom}
                                 activeClassName={styles.active}
@@ -204,10 +204,11 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </NavLink>;
                         })}
-                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
-                            to={`${langRoute}/`}>
+                        <NavLink className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
+                            activeClassName={classNames(styles.active, styles.activePromotions)}
+                            to={`${langRoute}/promotions`}>
                             {text.promotions}
-                        </Link>
+                        </NavLink>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>

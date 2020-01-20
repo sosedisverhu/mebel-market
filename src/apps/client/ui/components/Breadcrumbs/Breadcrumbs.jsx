@@ -13,16 +13,18 @@ class Breadcrumbs extends Component {
         langRoute: PropTypes.string.isRequired,
         lang: PropTypes.string.isRequired,
         category: PropTypes.object,
-        product: PropTypes.object
+        product: PropTypes.object,
+        noCategoryPage: ''
     };
 
     static defaultProps = {
         category: {},
-        product: {}
+        product: {},
+        isPromotionsPage: false
     };
 
     render () {
-        const { langMap, langRoute, category, product, lang } = this.props;
+        const { langMap, langRoute, category, product, lang, noCategoryPage } = this.props;
         const text = propOr('breadcrumbs', {}, langMap);
 
         return (
@@ -30,6 +32,10 @@ class Breadcrumbs extends Component {
                 <Link className={styles.breadcrumb} to={langRoute}>
                     {text.main}
                 </Link>
+                {noCategoryPage &&
+                <Link className={styles.breadcrumb} to={`${langRoute}/promotions`}>
+                    {noCategoryPage}
+                </Link>}
                 {category.texts &&
                 <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
                     {category.texts[lang].name}

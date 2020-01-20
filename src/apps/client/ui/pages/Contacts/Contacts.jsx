@@ -74,7 +74,7 @@ class Contacts extends Component {
             const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
             win.focus();
         }
-    }
+    };
 
     calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
         const { latitude, longitude } = this.state;
@@ -98,7 +98,7 @@ class Contacts extends Component {
 
         return (
             <section className={styles.contacts}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.title}/>
                 <div className={styles.contactsContainer}>
                     <h1 className={styles.title}>{text.title}</h1>
                     <div className={styles.info}>

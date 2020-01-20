@@ -51,7 +51,7 @@ class Articles extends Component {
         }, 0);
     });
 
-    previousPage = (pageNumber) => {
+    previousPage = pageNumber => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
             this.setState({ currentPage: Number(pageNumber.target.id) - 1 }, () => {
@@ -65,7 +65,7 @@ class Articles extends Component {
         }
     };
 
-    nextPage = (pageNumber) => {
+    nextPage = pageNumber => {
         const { articles } = this.props;
         const { currentPage, postsPerPage } = this.state;
         if (currentPage < articles.length / postsPerPage) {
@@ -89,7 +89,7 @@ class Articles extends Component {
 
         return (
             <section className={styles.articles}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.searchResult.substring(0, text.searchResult.length - 1)}/>
                 {articles.length
                     ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>

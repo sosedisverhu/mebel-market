@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter, matchPath, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -14,6 +14,7 @@ import any from '@tinkoff/utils/array/any';
 import prop from '@tinkoff/utils/object/prop';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import includes from '@tinkoff/utils/array/includes';
+import isEmpty from '@tinkoff/utils/is/empty';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
@@ -80,11 +81,12 @@ class ProductsPage extends Component {
     }
 
     setNewState = (props = this.props) => {
-        const { subCategoryAlias } = this.getMatch(props);
+        const { subCategoryAlias, categoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
         const subCategory = subCategoryAlias && this.getSubCategory(props);
+        const isPromotionsPage = categoryAlias === 'promotions';
 
-        if ((!category) || (subCategoryAlias && !subCategory)) {
+        if (((!category) || (subCategoryAlias && !subCategory)) && (!isPromotionsPage)) {
             this.setState({
                 isCategory: false
             });
@@ -92,24 +94,25 @@ class ProductsPage extends Component {
         }
 
         const { subCategories, langMap } = props;
-        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
+        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory, isPromotionsPage);
         const isSubCategoryFilters = !!subCategoryAlias;
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
         const filters = currentCategory ? flatten([
             this.getDefaultFilters(products, langMap),
             this.getFilters(currentCategory, products, isSubCategoryFilters)
-        ]) : [];
+        ]) : this.getDefaultFilters(products, langMap);
 
         this.setState({
             products,
             category,
             subCategory,
-            subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
+            subCategories: !isPromotionsPage ? subCategories.filter(subCategory => subCategory.categoryId === category.id) : [],
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: null
+            filteredProducts: null,
+            isPromotionsPage
         });
     };
 
@@ -134,12 +137,16 @@ class ProductsPage extends Component {
         return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
-    getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
+    getFilteredProducts = (subCategoryAlias, category, subCategory, isPromotionsPage, props = this.props) => {
         const { products } = props;
-        const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
-        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
-            : filteredProductsByCategory;
+        if (!isPromotionsPage) {
+            const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
+
+            return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
+                : filteredProductsByCategory;
+        }
+        return products.filter(product => !isEmpty(product.discountPrice) && product.discountPrice !== product.price);
     };
 
     getDefaultFilters = (products, langMap) => {
@@ -291,12 +298,14 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategories, filters, filtersMap } = this.state;
+        const { products, filteredProducts, category, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
+        const headerText = propOr('header', {}, langMap);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category}/>
+                <Breadcrumbs category={category}
+                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
