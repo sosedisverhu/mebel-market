@@ -21,6 +21,7 @@ import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
 import AdminPage from './ui/pages/AdminPage/AdminPage.jsx';
 
 import isNull from '@tinkoff/utils/is/nil';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -65,6 +66,7 @@ class App extends Component {
 
     render () {
         const { admin } = this.props;
+        const sections = propOr('sections', [], admin);
 
         if (this.isRecovery) {
             return <Recovery />;
@@ -80,16 +82,17 @@ class App extends Component {
             return <Authentication />;
         }
 
+
         return <main>
             <Header />
             <Switch>
-                {admin.sections.includes('main') && <Route exact path='/admin' component={MainPage} />}
-                {admin.sections.includes('products') && <Route exact path='/admin/products' component={ProductsPage} />}
-                {admin.sections.includes('articles') && <Route exact path='/admin/articles' component={ArticlesPage} />}
-                {admin.sections.includes('products') && <Route exact path='/admin/categories' component={CategoriesPage} />}
-                {admin.sections.includes('partners') && <Route exact path='/admin/partners' component={PartnersPage} />}
-                {admin.sections.includes('seo') && <Route exact path='/admin/seo' component={SeoPage} />}
-                {admin.sections.includes('admins') && <Route exact path='/admin/admins' component={AdminPage} />}
+                {sections.includes('main') && <Route exact path='/admin' component={MainPage} />}
+                {sections.includes('products') && <Route exact path='/admin/products' component={ProductsPage} />}
+                {sections.includes('articles') && <Route exact path='/admin/articles' component={ArticlesPage} />}
+                {sections.includes('products') && <Route exact path='/admin/categories' component={CategoriesPage} />}
+                {sections.includes('partners') && <Route exact path='/admin/partners' component={PartnersPage} />}
+                {sections.includes('seo') && <Route exact path='/admin/seo' component={SeoPage} />}
+                {sections.includes('admins') && <Route exact path='/admin/admins' component={AdminPage} />}
             </Switch>
         </main>;
     }
