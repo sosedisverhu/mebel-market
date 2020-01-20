@@ -20,7 +20,8 @@ export default {
         advantages: 'Основні плюси:',
         buy: 'Купити',
         labelTop: 'Хіт',
-        size: 'Оберіть розмір',
+        size: 'Оберіть розмір:',
+        oneSize: 'Розмір:',
         tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'У кошику'
     },
