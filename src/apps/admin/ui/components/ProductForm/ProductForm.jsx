@@ -333,7 +333,7 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            .then(onDone())
+            .then(onDone)
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
