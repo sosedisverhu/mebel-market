@@ -146,6 +146,8 @@
 }
 
 .oneActiveOption {
+    cursor: default;
+
     &:before {
          display: none;
      }
