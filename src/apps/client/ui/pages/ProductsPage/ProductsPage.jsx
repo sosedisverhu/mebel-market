@@ -14,6 +14,7 @@ import any from '@tinkoff/utils/array/any';
 import prop from '@tinkoff/utils/object/prop';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import includes from '@tinkoff/utils/array/includes';
+import isEmpty from '@tinkoff/utils/is/empty';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
@@ -144,7 +145,7 @@ class ProductsPage extends Component {
             return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
                 : filteredProductsByCategory;
         }
-        return products.filter(product => product.discountPrice !== product.price);
+        return products.filter(product => !isEmpty(product.discountPrice) && product.discountPrice !== product.price);
     };
 
     getDefaultFilters = (products, langMap) => {

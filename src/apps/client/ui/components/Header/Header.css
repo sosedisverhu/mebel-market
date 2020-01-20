@@ -250,6 +250,10 @@
         background-color: greenBasic;
     }
 
+    &.activePromotions:before {
+         background-color: redBasic;
+     }
+
     &:hover {
         color: greenBasic;
         text-shadow: -0.2px 0 greenBasic, 0 0.2px greenBasic, 0.2px 0 greenBasic, 0 -0.2px greenBasic;

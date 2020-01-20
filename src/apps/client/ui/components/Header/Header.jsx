@@ -205,7 +205,7 @@ class Header extends Component {
                             </NavLink>;
                         })}
                         <NavLink className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
-                            activeClassName={styles.active}
+                            activeClassName={classNames(styles.active, styles.activePromotions)}
                             to={`${langRoute}/promotions`}>
                             {text.promotions}
                         </NavLink>
