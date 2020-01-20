@@ -21,6 +21,7 @@ export default {
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
+        oneSize: 'Размер:',
         tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'В корзине'
     },

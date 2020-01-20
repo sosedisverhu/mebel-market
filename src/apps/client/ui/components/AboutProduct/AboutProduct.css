@@ -145,8 +145,10 @@
      }
 }
 
-.oneActiveOption :before{
-    display: none;
+.oneActiveOption {
+    &:before {
+         display: none;
+     }
 }
 
 .option{

@@ -143,6 +143,7 @@ class AboutProduct extends Component {
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = product.price !== product.actualPrice;
+        const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
@@ -167,13 +168,13 @@ class AboutProduct extends Component {
             </span>
             <div>
                 <span className={styles.sizesTitle}>
-                    {text.size}
+                    {!isOneSize ? text.size : text.oneSize}
                 </span>
                 <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
                     onClick={this.selectIsOpen}
                 >
-                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: sizes.length === 1 })}>
+                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
                         {activeSize.name}
                     </li>
                     {sizes.map(size => {
