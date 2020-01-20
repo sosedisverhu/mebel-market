@@ -115,7 +115,7 @@ class ProductsPage extends Component {
 
     getMatch = (props = this.props) => {
         const { location: { pathname }, langRoute } = props;
-        const subCategoryAlias = pathname.split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
+        const subCategoryAlias = pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
         const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
 
         return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;
