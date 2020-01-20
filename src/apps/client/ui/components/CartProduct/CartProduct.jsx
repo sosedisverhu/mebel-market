@@ -128,6 +128,7 @@ class Cart extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
+        const isDiscount = product.discountPrice && (product.discountPrice !== product.price);
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -159,9 +160,9 @@ class Cart extends Component {
                             <input
                                 className={styles.quantityInput}
                                 type='text'
-                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                onChange={e => this.quantityChange(e.target.value.replace(/\D/, ''))}
                                 value={quantity}
-                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
                             <button
                                 type='button'
@@ -171,9 +172,11 @@ class Cart extends Component {
                             </button>
                         </div>
                         <div className={styles.productPrices}>
-                            {product.discountPrice &&
+                            {isDiscount &&
                             <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={styles.productPrice}>{formatMoney(product.discountPrice ? product.discountPrice : product.price)}</p>
+                            <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: isDiscount })}>
+                                {formatMoney(product.actualPrice)}
+                            </p>
                         </div>
                     </div>
                     <div>

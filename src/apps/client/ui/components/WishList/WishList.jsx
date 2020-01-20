@@ -110,8 +110,13 @@ class WishList extends Component {
                                                     {properties && properties.size &&
                                                         <p className={styles.productSize}>{`${text.size} ${properties.size.name}`}</p>}
                                                     <div className={styles.productPrices}>
-                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                        {product.discountPrice && (product.discountPrice !== product.price) &&
+                                                        <p className={styles.productOldPrice}>
+                                                            {product.price}&#8372;
+                                                        </p>}
+                                                        <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: product.discountPrice && (product.discountPrice !== product.price) })}>
+                                                            {product.discountPrice}&#8372;
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className={styles.productButtons}>
