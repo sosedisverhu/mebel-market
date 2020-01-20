@@ -131,6 +131,8 @@ class CheckoutPage extends Component {
         basket: PropTypes.object.isRequired
     };
 
+    requiredFieldsStart = React.createRef();
+
     state = {
         deliveryChecked: deliveryOptions[0],
         paymentChecked: paymentOptions[0],
@@ -199,6 +201,7 @@ class CheckoutPage extends Component {
         this.setState(errors);
 
         if (!isFormValid) {
+            this.requiredFieldsStart.current.scrollIntoView({ behavior: 'smooth' });
             return;
         }
 
@@ -260,7 +263,7 @@ class CheckoutPage extends Component {
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                         </div>
                     </div>
-                    <div className={styles.checkout}>
+                    <div className={styles.checkout} ref={this.requiredFieldsStart}>
                         <h2 className={styles.h2}>{text.checkout}</h2>
                         {customerInfo.map((item, i) => {
                             if (item.name !== 'customerComment') {

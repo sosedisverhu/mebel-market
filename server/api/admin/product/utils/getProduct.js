@@ -13,11 +13,13 @@ export default function getProduct (body) {
         price,
         actualPrice,
         discount,
+        warranty,
         categoryId,
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters
+        subCategoryFilters,
+        article
     } = body;
 
     return {
@@ -34,10 +36,12 @@ export default function getProduct (body) {
         price,
         actualPrice,
         discount,
+        warranty,
         categoryId,
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters
+        subCategoryFilters,
+        article
     };
 }

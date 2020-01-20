@@ -12,6 +12,7 @@ import { MAX_QUANTITY } from '../../../constants/constants';
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import editProductInBasket from '../../../services/client/editProductInBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
@@ -32,7 +33,8 @@ const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     editProductInBasket: payload => dispatch(editProductInBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    closeBasket: (payload) => dispatch(closeBasket(payload)),
+    deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
 class Cart extends Component {
@@ -50,17 +52,22 @@ class Cart extends Component {
         basketItemId: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
         product: PropTypes.object.isRequired,
-        properties: PropTypes.array.isRequired,
-        wishlist: PropTypes.array.isRequired
+        properties: PropTypes.object.isRequired,
+        wishlist: PropTypes.array.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         wishlist: []
     };
 
-    state = {
-        isInWishList: false
-    };
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product, properties } = props;
+
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+            ? { isInWishList: true }
+            : { isInWishList: false };
+    }
 
     componentDidMount () {
         const { product, wishlist } = this.props;
@@ -91,14 +98,22 @@ class Cart extends Component {
         this.props.deleteFromBasket(basketItemId);
     };
 
-    handleAddToWishlist = product => () => {
-        this.props.saveProductsToWishlist({
-            productId: product.id
-        }).then(() => {
-            this.setState({
-                isInWishList: true
+    handleAddToWishlist = () => {
+        const { product, properties, saveProductsToWishlist, deleteFromWishlist, wishlist } = this.props;
+        const { isInWishList } = this.state;
+
+        if (!isInWishList) {
+            saveProductsToWishlist({
+                productId: product.id,
+                properties
             });
-        });
+        } else {
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === properties.size.name);
+
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
+        }
     };
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
@@ -113,6 +128,7 @@ class Cart extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
+        const isDiscount = product.discountPrice && (product.discountPrice !== product.price);
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -144,9 +160,9 @@ class Cart extends Component {
                             <input
                                 className={styles.quantityInput}
                                 type='text'
-                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                onChange={e => this.quantityChange(e.target.value.replace(/\D/, ''))}
                                 value={quantity}
-                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
                             <button
                                 type='button'
@@ -156,15 +172,17 @@ class Cart extends Component {
                             </button>
                         </div>
                         <div className={styles.productPrices}>
-                            {product.discountPrice &&
+                            {isDiscount &&
                             <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={styles.productPrice}>{formatMoney(product.discountPrice ? product.discountPrice : product.price)}</p>
+                            <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: isDiscount })}>
+                                {formatMoney(product.actualPrice)}
+                            </p>
                         </div>
                     </div>
                     <div>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
                             type="button"
-                            onClick={this.handleAddToWishlist(product)}/>
+                            onClick={this.handleAddToWishlist}/>
                         <button className={styles.removeBtn}
                             type="button"
                             onClick={this.removeProduct(basketItemId)}/>

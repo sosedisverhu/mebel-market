@@ -10,6 +10,7 @@
 
 input,
 textarea {
+    @mixin removeDefaultButton;
     outline: none;
 }
 
@@ -62,7 +63,8 @@ textarea {
     @media (max-width: 750px) {
         padding-right: 0px;
         max-width: 100%;
-        margin-top: 40px;
+        margin-top: 20px;
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;

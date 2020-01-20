@@ -22,6 +22,7 @@ const Product = new Schema({
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
     discount: { type: Number },
+    warranty: { type: Number, required: true },
     discountPrice: { type: Number },
     price: { type: Number, required: true },
     actualPrice: { type: Number, required: true },
@@ -35,7 +36,8 @@ const Product = new Schema({
     subCategoryFilters: [{
         id: { type: String, required: true },
         value: { type: Object, required: true }
-    }]
+    }],
+    article: { type: String, required: true, unique: true }
 });
 
 export default mongoose.model('Product', Product);

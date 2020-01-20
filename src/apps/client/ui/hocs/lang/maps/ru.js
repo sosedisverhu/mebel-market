@@ -20,6 +20,7 @@ export default {
         buy: 'Купить',
         labelTop: 'Хит',
         size: 'Выберите размер:',
+        oneSize: 'Размер:',
         tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'В корзине'
     },
@@ -43,10 +44,17 @@ export default {
         size: 'Размер:',
         continueShopping: 'Продолжить покупки',
         cartBtn: 'В корзину',
-        noProduct: 'Вы не добавили в избранное ни одного товара'
+        noProduct: 'Вы не добавили в избранное ни одного товара',
+        article: 'Артикул:',
+        inCartBtn: 'В корзине'
     },
     cart: {
         title: 'Корзина:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товаров'
+        },
         size: 'Размер:',
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
@@ -56,14 +64,20 @@ export default {
     productsPage: {
         filterBtn: 'Фильтры',
         results: {
-            one: 'Результатов',
+            one: 'Результат',
             several: 'Результата',
             much: 'Результатов'
         },
         price: 'Цена'
     },
     aboutProductTop: {
-        warranty: 'Гарантия'
+        warranty: 'Гарантия',
+        months: {
+            one: 'месяц',
+            several: 'месяца',
+            much: 'месяцев'
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка и оплата',

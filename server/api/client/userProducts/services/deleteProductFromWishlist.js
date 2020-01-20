@@ -62,10 +62,10 @@ export default function deleteProductFromWishlist (req, res) {
 
                     getProductsByIds(wishlist.map(wishlist => wishlist.productId))
                         .then((wishlistProducts) => {
-                            return reduce((products, { productId, id }) => {
+                            return reduce((products, { productId, properties, id }) => {
                                 const product = find(product => product.id === productId, wishlistProducts);
 
-                                return !product || product.hidden ? products : append({ product, id }, products);
+                                return !product || product.hidden ? products : append({ product, properties, id }, products);
                             }, [], wishlist);
                         })
                         .then((wishlistProducts) => {

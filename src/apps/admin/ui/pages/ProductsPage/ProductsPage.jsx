@@ -106,7 +106,7 @@ const mapStateToProps = ({ data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     getCategories: payload => dispatch(getCategories(payload)),
     getSubCategories: payload => dispatch(getSubCategories(payload)),
     editCategory: payload => dispatch(editCategory(payload)),
@@ -305,7 +305,7 @@ class ProductsPage extends Component {
                 </div>
                 <Divider/>
                 <List>
-                    {categories.map((category) => {
+                    {categories.map(category => {
                         return <ListItem
                             onClick={this.handleCategoryClick(category)}
                             className={classes.row}
