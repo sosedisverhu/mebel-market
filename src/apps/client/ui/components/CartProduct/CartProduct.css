@@ -120,6 +120,7 @@
 }
 
 .quantityInput {
+    @mixin removeDefaultButton;
     width: 69px;
     height: 22px;
     font-family: RoundedElegance;
