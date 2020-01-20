@@ -10,6 +10,7 @@
 
 input,
 textarea {
+    @mixin removeDefaultButton;
     outline: none;
 }
 
