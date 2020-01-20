@@ -2,7 +2,7 @@
 
 module.exports = [
     {
-        alias: 'prague',
+        alias: 'prague1',
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
@@ -76,7 +76,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'classic',
+        alias: 'classic1',
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
@@ -150,7 +150,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory1',
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
@@ -224,7 +224,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory2',
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
@@ -298,7 +298,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'standart',
+        alias: 'standart3',
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
@@ -372,7 +372,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'eko-42',
+        alias: 'eko-424',
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
@@ -446,7 +446,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P5',
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
@@ -488,7 +488,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -499,7 +499,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -520,7 +520,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P6',
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
@@ -562,7 +562,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -573,7 +573,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -594,7 +594,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P7',
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
@@ -636,7 +636,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -647,7 +647,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -668,7 +668,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P8',
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
@@ -710,7 +710,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -721,7 +721,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -742,7 +742,7 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P9',
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
@@ -784,7 +784,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -795,7 +795,7 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
