@@ -29,7 +29,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дешевих до дорогих'
         },
         id: 'priceMin',
-        sort: (product, nextProduct) => product.price - nextProduct.price
+        sort: (product, nextProduct) => product.actualPrice - nextProduct.actualPrice
     },
     {
         texts: {
@@ -37,7 +37,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дорогих до дешевих'
         },
         id: 'priceMax',
-        sort: (product, nextProduct) => nextProduct.price - product.price
+        sort: (product, nextProduct) => nextProduct.actualPrice - product.actualPrice
     },
     {
         texts: {
@@ -55,8 +55,6 @@ class ProductFilters extends Component {
         lang: PropTypes.string.isRequired,
         onFilter: PropTypes.func.isRequired
     };
-
-    static defaultProps = {};
 
     state = {
         activeFilter: 0,

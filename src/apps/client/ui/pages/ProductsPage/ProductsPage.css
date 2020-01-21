@@ -100,20 +100,6 @@
     justify-content: space-between;
 }
 
-.results {
-    margin: 16px 0 10px 0;
-    font: 16px/18px RoundedElegance;
-    color: blackLight;
-    white-space: nowrap;
-
-    @media (max-width: 960px) {
-        position: absolute;
-        right: 16px;
-        top: 12px;
-        margin-top: 0;
-    }
-}
-
 .btnFilter {
     height: 32px;
     width: calc(50% - 10px);
@@ -125,15 +111,29 @@
     color: blackBasic;
 
     &:before {
-        content: url('./img/filter.jpg');
-        margin-top: -6px;
-        position: absolute;
-        top: 50%;
-        right: 10px;
-    }
+         content: url('./img/filter.jpg');
+         margin-top: -6px;
+         position: absolute;
+         top: 50%;
+         right: 10px;
+     }
 
     @media (max-width: 600px) {
         display: block;
+    }
+}
+
+.results {
+    margin: 16px 0 10px 0;
+    font: 16px/18px RoundedElegance;
+    color: blackLight;
+    white-space: nowrap;
+
+    @media (max-width: 960px) {
+        position: absolute;
+        right: 16px;
+        top: 12px;
+        margin-top: 0;
     }
 }
 
