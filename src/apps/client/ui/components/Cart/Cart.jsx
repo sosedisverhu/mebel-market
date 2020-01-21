@@ -98,7 +98,11 @@ class Cart extends Component {
                         {basket.length > 0
                             ? <div className={styles.productsContainer}>
                                 {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
-                                    <CartProduct product={product} quantity={quantity} properties={properties} basketItemId={basketItemId} key={i} />
+                                    <CartProduct product={product}
+                                        quantity={quantity}
+                                        properties={properties}
+                                        basketItemId={basketItemId}
+                                        key={i} />
                                 )}
                             </div>
                             : <p>{text.noProduct}</p>
@@ -107,16 +111,24 @@ class Cart extends Component {
                             <div className={styles.cartBottomInfo}>
                                 <div className={styles.totalPriceContainer}>
                                     <div className={styles.totalPriceWrapper}>
-                                        <p className={styles.totalPrice}>{text.totalPrice}</p>
-                                        <p className={styles.totalPrice}>{formatMoney(totalPrice)}</p>
+                                        <p className={styles.totalPrice}>
+                                            {text.totalPrice}
+                                        </p>
+                                        <p className={styles.totalPrice}>
+                                            {formatMoney(totalPrice)}
+                                        </p>
                                     </div>
                                 </div>
                                 <Link to={`${langRoute}/order/`} >
-                                    <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>{text.checkout}</button>
+                                    <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>
+                                        {text.checkout}
+                                    </button>
                                 </Link>
                             </div>
                         }
-                        <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
+                        <button className={styles.continueShopping} onClick={this.handlePopupClose}>
+                            {text.continueShopping}
+                        </button>
                     </div>
                 </div>
             </div>

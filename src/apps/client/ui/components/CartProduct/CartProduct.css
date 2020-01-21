@@ -115,6 +115,7 @@
 .quantitySub {
     left: 0;
 }
+
 .quantityAdd {
     right: 0;
 }
@@ -152,60 +153,7 @@
     line-height: 28px;
     color: blackLight;
 }
+
 .productDiscountPrice {
     color: redBasic;
-}
-
-.orderItem {
-    min-width: 410px;
-
-    &:first-child {
-        &:before {
-            display: none;
-        }
-    }
-
-    .cartItem {
-        padding: 20px 0;
-    }
-
-    .wishBtn {
-        display: none;
-    }
-
-    @media (max-width: 750px) {
-        min-width: auto;
-
-        &:before {
-            left: -16px;
-            width: calc(100% + 32px);
-        }
-    }
-
-    @media (max-width: 500px) {
-        .productOption {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .productImgLink {
-            margin-right: 10px;
-        }
-
-        .productName {
-            margin-right: 10px;
-        }
-    }
-
-    @media (max-width: 340px) {
-        .productPrices {
-            display: block;
-        }
-
-        .productPrice {
-            font-size: 22px;
-            line-height: 22px;
-            margin-top: 3px;
-        }
-    }
 }
