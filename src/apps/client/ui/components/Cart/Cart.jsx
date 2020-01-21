@@ -75,13 +75,15 @@ class Cart extends Component {
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
+        document.documentElement.style.overflowY = 'visible'; // для Safari на iPhone/iPad
         this.props.closeBasket();
     };
 
     handleClick = () => {
         const { outsideClickEnabled, turnOnClickOutside, basketIsOpen, openBasket } = this.props;
 
-        document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
+        document.body.style.overflowY = !basketIsOpen ? 'hidden' : 'visible';
+        document.documentElement.style.overflowY = !basketIsOpen ? 'hidden' : 'visible'; // для Safari на iPhone/iPad
 
         if (!basketIsOpen && !outsideClickEnabled) {
             turnOnClickOutside(this, this.handlePopupClose);

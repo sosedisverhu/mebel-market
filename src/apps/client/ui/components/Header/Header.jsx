@@ -43,7 +43,7 @@ class Header extends Component {
 
     handleMobileMenu = () => {
         document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
-        document.documentElement.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible'; // для Safari
+        document.documentElement.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible'; // для Safari на iPhone/iPad
 
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
