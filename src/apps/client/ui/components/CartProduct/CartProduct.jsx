@@ -147,7 +147,7 @@ class Cart extends Component {
                                 onClick={this.handlePopupClose}>
                                 <p className={styles.productName}>{product.texts[lang].name}</p>
                             </Link>
-                            <p className={styles.productNumber}>(48092)</p>
+                            <p className={styles.productNumber}>({product.article})</p>
                         </div>
                         <p className={styles.productSize}>{text.size} {properties.size.name}</p>
                         <div className={styles.productQuantity}>
@@ -179,7 +179,7 @@ class Cart extends Component {
                             </p>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.buttons}>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
                             type="button"
                             onClick={this.handleAddToWishlist}/>
