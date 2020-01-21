@@ -75,6 +75,11 @@
     height: 14px;
 }
 
+.activeWishBtn {
+    background-image: url('../AboutProduct/img/wishlist-active.png');
+    background-size: contain;
+}
+
 .removeBtn {
     background-image: url('/src/apps/client/ui/components/Header/img/remove.png');
     width: 14px;
@@ -115,6 +120,7 @@
 }
 
 .quantityInput {
+    @mixin removeDefaultButton;
     width: 69px;
     height: 22px;
     font-family: RoundedElegance;
@@ -144,6 +150,9 @@
 .productPrice {
     font-size: 24px;
     line-height: 28px;
+    color: blackLight;
+}
+.productDiscountPrice {
     color: redBasic;
 }
 

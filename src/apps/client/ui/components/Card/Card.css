@@ -123,6 +123,11 @@
         padding: 3px 10px;
     }
 }
+
+.percentage{
+    font: 18px/21px HelveticaNeueCyr;
+}
+
 .discount {
     color: redBasic;
     background: whiteBasic;
@@ -162,7 +167,7 @@
 
 .price {
     font: 18px/21px RoundedElegance;
-    color: redBasic;
+    color: blackLight;
     margin-bottom: 15px;
     text-align: center;
 
@@ -171,6 +176,10 @@
         line-height: 15px;
         margin-bottom: 7px;
     }
+}
+
+.discountPrice{
+    color: redBasic;
 }
 
 .priceOld {

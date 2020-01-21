@@ -7,6 +7,7 @@ import getSubCategories from '../src/apps/client/services/server/getSubCategorie
 import getPartners from '../src/apps/client/services/server/getPartners';
 import getSeo from '../src/apps/client/services/server/getSeo';
 import getUserProducts from '../src/apps/client/services/server/getUserProducts';
+import getMainSlides from '../src/apps/client/services/server/getMainSlides';
 
 export default [
     getMobileDetect,
@@ -17,5 +18,6 @@ export default [
     getProducts,
     getPartners,
     getUserProducts,
-    getSeo
+    getSeo,
+    getMainSlides
 ];

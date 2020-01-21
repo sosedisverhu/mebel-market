@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import classNames from 'classnames';
-
-import styles from './AboutProductTop.css';
 import propOr from '@tinkoff/utils/object/propOr';
+
+import formatWordDeclension from '../../../utils/formatWordDeclension';
+import styles from './AboutProductTop.css';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -32,11 +33,9 @@ class AboutProductTop extends Component {
             </h1>
             <div className={styles.warrantyArticleWrap}>
                 <div className={styles.warranty}>
-                    {`${text.warranty} ${product.warranty} м.`}
+                    {`${text.warranty} ${product.warranty} ${formatWordDeclension(text.months, product.warranty)}`}
                 </div>
-                <div className={styles.article}>
-                    артикул 48092
-                </div>
+                <div className={styles.article}>{`${text.article} ${product.article}`}</div>
             </div>
         </div>;
     }

@@ -236,7 +236,6 @@
     text-decoration: none;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
-    position: relative;
 
     &:before {
         content: '';
@@ -250,6 +249,10 @@
     &.active:before {
         background-color: greenBasic;
     }
+
+    &.activePromotions:before {
+         background-color: redBasic;
+     }
 
     &:hover {
         color: greenBasic;
@@ -271,6 +274,11 @@
 .menuItemBottomPromotions {
     color: redBasic;
     text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+
+    &:hover {
+         color: redBasic;
+         text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+     }
 }
 
 .searchBottom {
@@ -358,7 +366,7 @@
     }
 
     span:nth-child(1) {
-        top: 0px;
+        top: 0;
     }
 
     span:nth-child(2),
@@ -387,7 +395,7 @@
     &.active span:nth-child(4) {
         top: 6px;
         left: 50%;
-        width: 0%;
+        width: 0;
     }
 }
 

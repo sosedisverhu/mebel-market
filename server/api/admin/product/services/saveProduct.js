@@ -21,7 +21,7 @@ export default function saveProduct (req, res) {
         .then(product => {
             res.status(OKEY_STATUS_CODE).send(product);
         })
-        .catch((err) => {
+        .catch(err => {
             if (err.code === MONGODB_DUPLICATE_CODE) {
                 return res.status(NOT_FOUND_STATUS_CODE).send({ code: 'duplication' });
             }

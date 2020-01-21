@@ -27,24 +27,10 @@
     color: blackLighter;
 }
 
-
 .advantage {
-    position: relative;
     margin-top: 6px;
-    padding-left: 20px;
     font: 14px/16px RoundedElegance;
     color: blackLighter;
-
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 5px;
-        width: 6px;
-        height: 6px;
-        background: greenBasic;
-        border-radius: 50%;
-    }
 }
 
 .details {
@@ -68,6 +54,10 @@
     margin: 10px 0;
     display: inline-block;
     font: 36px/41px RoundedElegance;
+    color: blackLight;
+}
+
+.discountPrice{
     color: redBasic;
 }
 
@@ -122,6 +112,31 @@
         transition: 0.25s ease-out;
         transition-property: transform, border-color;
     }
+}
+
+.activeOption {
+    &:before {
+         content: "";
+         width: 0;
+         height: 0;
+         border-style: solid;
+         border-width: 8px 5px 0 5px;
+         border-color: greenBasic transparent transparent transparent;
+         position: absolute;
+         top: 50%;
+         right: 10px;
+         margin-top: -5px;
+         transition: 0.25s ease-out;
+         transition-property: transform, border-color;
+     }
+}
+
+.oneActiveOption {
+    cursor: default;
+
+    &:before {
+         display: none;
+     }
 }
 
 .option{

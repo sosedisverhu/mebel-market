@@ -20,7 +20,8 @@ export default {
         advantages: 'Основні плюси:',
         buy: 'Купити',
         labelTop: 'Хіт',
-        size: 'Оберіть розмір',
+        size: 'Оберіть розмір:',
+        oneSize: 'Розмір:',
         tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'У кошику'
     },
@@ -44,10 +45,17 @@ export default {
         size: 'Розмір:',
         continueShopping: 'Продовжити покупки',
         cartBtn: 'У кошик',
-        noProduct: 'Ви не додали в обране жодного товару'
+        noProduct: 'Ви не додали в обране жодного товару',
+        article: 'Артикул:',
+        inCartBtn: 'В корзині'
     },
     cart: {
         title: 'Кошик:',
+        product: {
+            one: 'товар',
+            several: 'товара',
+            much: 'товарів'
+        },
         totalPrice: 'Всього:',
         size: 'Розмір:',
         checkout: 'Оформити замовлення',
@@ -56,11 +64,21 @@ export default {
     },
     productsPage: {
         filterBtn: 'Фільтри',
-        results: 'Результатів',
+        results: {
+            one: 'Результат',
+            several: 'Результата',
+            much: 'Результатів'
+        },
         price: 'Ціна'
     },
     aboutProductTop: {
-        warranty: 'Гарантія'
+        warranty: 'Гарантія',
+        months: {
+            one: 'місяць',
+            several: 'місяці',
+            much: 'місяців'
+        },
+        article: 'Артикул'
     },
     deliveryAndPayment: {
         title: 'Доставка та оплата',

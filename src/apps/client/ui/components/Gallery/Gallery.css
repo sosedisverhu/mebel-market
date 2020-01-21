@@ -33,6 +33,10 @@
     background: redBasic;
 }
 
+.percentage{
+    font: 18px/21px HelveticaNeueCyr;
+}
+
 .mainImg {
     width: 100%;
     height: auto;

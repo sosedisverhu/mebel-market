@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import classNames from 'classnames';
+
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
 import { MAX_QUANTITY } from '../../../constants/constants';
-import styles from './CartProduct.css';
 
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import editProductInBasket from '../../../services/client/editProductInBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
+import styles from './CartProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -21,7 +24,8 @@ const mapStateToProps = ({ application, data }) => {
         langMap: application.langMap,
         lang: application.lang,
         categories: data.categories,
-        subCategories: data.subCategories
+        subCategories: data.subCategories,
+        wishlist: data.wishlist
     };
 };
 
@@ -29,7 +33,8 @@ const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     editProductInBasket: payload => dispatch(editProductInBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    closeBasket: (payload) => dispatch(closeBasket(payload)),
+    deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
 class Cart extends Component {
@@ -47,9 +52,32 @@ class Cart extends Component {
         basketItemId: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
         product: PropTypes.object.isRequired,
-        properties: PropTypes.array.isRequired
-
+        properties: PropTypes.object.isRequired,
+        wishlist: PropTypes.array.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired
     };
+
+    static defaultProps = {
+        wishlist: []
+    };
+
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product, properties } = props;
+
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+            ? { isInWishList: true }
+            : { isInWishList: false };
+    }
+
+    componentDidMount () {
+        const { product, wishlist } = this.props;
+
+        this.setState({
+            isInWishList: wishlist.some(item => {
+                return item.product.id === product.id;
+            })
+        });
+    }
 
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
@@ -70,10 +98,22 @@ class Cart extends Component {
         this.props.deleteFromBasket(basketItemId);
     };
 
-    handleAddToWishlist = product => () => {
-        this.props.saveProductsToWishlist({
-            productId: product.id
-        });
+    handleAddToWishlist = () => {
+        const { product, properties, saveProductsToWishlist, deleteFromWishlist, wishlist } = this.props;
+        const { isInWishList } = this.state;
+
+        if (!isInWishList) {
+            saveProductsToWishlist({
+                productId: product.id,
+                properties
+            });
+        } else {
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === properties.size.name);
+
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
+        }
     };
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
@@ -86,7 +126,9 @@ class Cart extends Component {
 
     render () {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
+        const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
+        const isDiscount = product.discountPrice && (product.discountPrice !== product.price);
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -94,7 +136,7 @@ class Cart extends Component {
                     className={styles.productImgLink}
                     to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
                     onClick={this.handlePopupClose}>
-                    <img className={styles.productImg} src={product.avatar} alt="" />
+                    <img className={styles.productImg} src={product.avatar} alt=''/>
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
@@ -113,28 +155,37 @@ class Cart extends Component {
                                 type='button'
                                 className={styles.quantitySub}
                                 onClick={() => this.quantityChange(+quantity - 1)}
-                                disabled={quantity <= 1}>-</button>
+                                disabled={quantity <= 1}>-
+                            </button>
                             <input
                                 className={styles.quantityInput}
                                 type='text'
-                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                onChange={e => this.quantityChange(e.target.value.replace(/\D/, ''))}
                                 value={quantity}
-                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
                             <button
                                 type='button'
                                 className={styles.quantityAdd}
                                 onClick={() => this.quantityChange(+quantity + 1)}
-                                disabled={quantity >= MAX_QUANTITY}>+</button>
+                                disabled={quantity >= MAX_QUANTITY}>+
+                            </button>
                         </div>
                         <div className={styles.productPrices}>
-                            {product.discountPrice && <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={styles.productPrice}>{formatMoney(product.discountPrice ? product.discountPrice : product.price)}</p>
+                            {isDiscount &&
+                            <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
+                            <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: isDiscount })}>
+                                {formatMoney(product.actualPrice)}
+                            </p>
                         </div>
                     </div>
                     <div>
-                        <button type="button" className={styles.wishBtn} onClick={this.handleAddToWishlist(product)} />
-                        <button type="button" className={styles.removeBtn} onClick={this.removeProduct(basketItemId)} />
+                        <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
+                            type="button"
+                            onClick={this.handleAddToWishlist}/>
+                        <button className={styles.removeBtn}
+                            type="button"
+                            onClick={this.removeProduct(basketItemId)}/>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ class Gallery extends Component {
         const { activeImg } = this.state;
         return (
             <div className={styles.gallery}>
-                {discount ? <div className={styles.discount}>{discount}%</div> : null}
+                {discount ? <div className={styles.discount}>{discount}<span className={styles.percentage}>%</span></div> : null}
                 <div>
                     <img className={styles.mainImg} src={photos[activeImg]} width="681" height="400" alt="main image" />
                 </div>

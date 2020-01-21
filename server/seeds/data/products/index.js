@@ -2,10 +2,11 @@
 
 module.exports = [
     {
-        alias: 'prague',
+        alias: 'prague1',
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
+        article: '000001',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -43,6 +44,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели. </p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -54,6 +58,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -61,6 +68,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -74,10 +82,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'classic',
+        alias: 'classic1',
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
+        article: '000002',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -115,6 +124,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Классика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -126,6 +138,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Класика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -133,6 +148,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 18,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -146,10 +162,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory1',
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
+        article: '000003',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -187,6 +204,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -198,6 +218,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -205,6 +228,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 18,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
@@ -218,10 +242,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory2',
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
+        article: '000004',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -259,6 +284,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -270,6 +298,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -277,6 +308,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -290,10 +322,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'standart',
+        alias: 'standart3',
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
+        article: '000005',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -331,6 +364,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матраc « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -342,6 +378,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матрац « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -349,6 +388,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -362,10 +402,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'eko-42',
+        alias: 'eko-424',
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
+        article: '000006',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -403,6 +444,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матраc « ЭКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -414,6 +458,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матрац « ЕКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -421,6 +468,7 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -434,10 +482,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P5',
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
+        article: '000007',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -457,7 +506,7 @@ module.exports = [
         },
         date: 1577182957748,
         hidden: false,
-        discount: 0,
+        discount: 15,
         discountPrice: 1799,
         price: 2000,
         actualPrice: 1799,
@@ -475,7 +524,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -486,13 +538,17 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -506,10 +562,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P6',
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
+        article: '000008',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -547,7 +604,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -558,13 +618,17 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -578,10 +642,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P7',
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
+        article: '000009',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -619,7 +684,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -630,13 +698,17 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -650,10 +722,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P8',
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
+        article: '000010',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -691,7 +764,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -702,13 +778,17 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
@@ -722,10 +802,11 @@ module.exports = [
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P9',
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
+        article: '000011',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -763,7 +844,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -774,13 +858,17 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
             { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },

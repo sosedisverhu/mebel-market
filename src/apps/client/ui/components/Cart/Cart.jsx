@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import outsideClick from '../../hocs/outsideClick.jsx';
-import propOr from '@tinkoff/utils/object/propOr';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import includes from '@tinkoff/utils/array/includes';
-import find from '@tinkoff/utils/array/find';
+import { connect } from 'react-redux';
 
-import styles from './Cart.css';
+import classNames from 'classnames';
+
+import propOr from '@tinkoff/utils/object/propOr';
+
 import CartProduct from '../CartProduct/CartProduct';
 
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
+import outsideClick from '../../hocs/outsideClick.jsx';
 
 import openBasket from '../../../actions/openBasket';
 import closeBasket from '../../../actions/closeBasket';
 
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 import formatMoney from '../../../utils/formatMoney';
+import styles from './Cart.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -32,16 +32,12 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
-    openBasket: (payload) => dispatch(openBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    openBasket: payload => dispatch(openBasket(payload)),
+    closeBasket: payload => dispatch(closeBasket(payload))
 });
-
-const EXCEPTION_NUMBERS_MIN = 11;
-const EXCEPTION_NUMBERS_MAX = 14;
-const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
 
 @outsideClick
 class Cart extends Component {
@@ -61,21 +57,10 @@ class Cart extends Component {
         closeBasket: PropTypes.func.isRequired
     };
 
-    getWordCaseByNumber (number, cases) {
-        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
-            return cases[0];
-        }
-
-        const lastNumber = number % 10;
-        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
-
-        return cases[resultIndex];
-    }
-
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
         this.props.closeBasket();
-    }
+    };
 
     handleClick = () => {
         const { outsideClickEnabled, turnOnClickOutside, basketIsOpen, openBasket } = this.props;
@@ -86,18 +71,10 @@ class Cart extends Component {
             turnOnClickOutside(this, this.handlePopupClose);
         }
         openBasket();
-    }
-
-    getCategoriesAlias = (categoryId, subCategoryId) => {
-        const { categories, subCategories } = this.props;
-        const category = find(category => category.id === categoryId, categories).alias;
-        const subCategory = find(subCategory => subCategory.id === subCategoryId, subCategories).alias;
-
-        return `${category}/${subCategory}`;
-    }
+    };
 
     render () {
-        const { langRoute, langMap, lang, basket, basketIsOpen } = this.props;
+        const { langRoute, langMap, basket, basketIsOpen } = this.props;
         const text = propOr('cart', {}, langMap);
         const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
         const totalPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
@@ -115,8 +92,7 @@ class Cart extends Component {
                             {text.title} {basket.length > 0 &&
                             <span>
                                 {quantityAll}&nbsp;
-                                {this.getWordCaseByNumber(quantityAll,
-                                    lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
+                                {formatWordDeclension(text.product, basket.length)}
                             </span>
                             }</p>
                         {basket.length > 0

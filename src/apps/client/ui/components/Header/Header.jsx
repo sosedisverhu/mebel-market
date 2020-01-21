@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import propOr from '@tinkoff/utils/object/propOr';
-import { connect } from 'react-redux';
 import { Link, NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import propOr from '@tinkoff/utils/object/propOr';
+
 import classNames from 'classnames';
-import styles from './Header.css';
+
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
+
+import styles from './Header.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -42,7 +46,7 @@ class Header extends Component {
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
-    handleSearchSubmit = (e) => {
+    handleSearchSubmit = e => {
         e.preventDefault();
         const { langRoute } = this.props;
         const { searchText } = this.state;
@@ -60,11 +64,11 @@ class Header extends Component {
         }
     };
 
-    handleInputChange = (e) => {
+    handleInputChange = e => {
         this.setState({
             searchText: e.target.value
         });
-    }
+    };
 
     render () {
         const { langRoute, langMap, lang, categories } = this.props;
@@ -85,7 +89,7 @@ class Header extends Component {
                             <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
-                                        {categories.map((category) => {
+                                        {categories.map(category => {
                                             return <Link
                                                 className={styles.mobileMenuItemTop}
                                                 to={`${langRoute}/${category.alias}`}
@@ -96,7 +100,7 @@ class Header extends Component {
                                         })}
                                         <Link
                                             className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
-                                            to={`${langRoute}/`}
+                                            to={`${langRoute}/promotions`}
                                         >
                                             {text.promotions}
                                         </Link>
@@ -190,7 +194,7 @@ class Header extends Component {
                 </div>
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
-                        {categories.map((category) => {
+                        {categories.map(category => {
                             return <NavLink
                                 className={styles.menuItemBottom}
                                 activeClassName={styles.active}
@@ -200,10 +204,11 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </NavLink>;
                         })}
-                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
-                            to={`${langRoute}/`}>
+                        <NavLink className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
+                            activeClassName={classNames(styles.active, styles.activePromotions)}
+                            to={`${langRoute}/promotions`}>
                             {text.promotions}
-                        </Link>
+                        </NavLink>
                     </div>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>

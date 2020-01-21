@@ -37,8 +37,7 @@
     }
 }
 
-.arrowLeft,
-.arrowRight {
+.arrowLeft, .arrowRight {
     position: absolute;
     top: 0;
     width: 56px;
@@ -124,6 +123,8 @@
     padding: 10px;
     background: rgba(255, 255, 255, 0.8);
     text-align: center;
+    text-decoration: none;
+    cursor: pointer;
 
     @media (max-width: 800px) {
         font-size: 26px;
@@ -141,7 +142,6 @@
     display: flex;
     margin: 10px 0;
     width: 100%;
-    display: flex;
     justify-content: center;
 
     @media (max-width: 600px) {

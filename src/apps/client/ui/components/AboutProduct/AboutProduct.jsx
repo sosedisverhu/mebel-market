@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import outsideClick from '../../hocs/outsideClick';
-
-import styles from './AboutProduct.css';
 
 import formatMoney from '../../../utils/formatMoney';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
@@ -18,10 +16,12 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import classNames from 'classnames';
 
 import openBasket from '../../../actions/openBasket';
+import styles from './AboutProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
+        lang: application.lang,
         wishlist: data.wishlist,
         basket: data.basket,
         basketIsOpen: data.basketIsOpen
@@ -42,6 +42,7 @@ const mapDispatchToProps = dispatch => {
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
@@ -65,11 +66,13 @@ class AboutProduct extends Component {
     };
 
     componentDidMount () {
-        const { product } = this.props;
+        const { wishlist, product } = this.props;
+        const { activeSize } = this.state;
 
         this.setState({
             sizes: product.sizes,
-            activeSize: product.sizes[0]
+            activeSize: product.sizes[0],
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.name === activeSize.name))
         });
     }
 
@@ -77,17 +80,9 @@ class AboutProduct extends Component {
         const { basket, wishlist, product } = props;
         let values = {};
 
-        if (basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name)) {
-            values.isInBasket = true;
-        } else {
-            values.isInBasket = false;
-        }
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name));
 
-        if (wishlist.find(item => item.product.id === product.id)) {
-            values.isInWishlist = true;
-        } else {
-            values.isInWishlist = false;
-        }
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.name === state.activeSize.name);
 
         return values;
     }
@@ -117,15 +112,22 @@ class AboutProduct extends Component {
 
     handleAddToWishlist = () => {
         const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
-        const { isInWishlist } = this.state;
+        const { isInWishlist, activeSize } = this.state;
 
         if (!isInWishlist) {
-            saveProductsToWishlist({ productId: product.id });
+            saveProductsToWishlist({
+                productId: product.id,
+                properties: {
+                    size: activeSize
+                }
+            });
         } else {
-            const wishlistItemId = Object.values(wishlist.find(el => el.product.id === product.id))[1];
-            deleteFromWishlist(wishlistItemId);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === activeSize.name);
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
         }
-    }
+    };
 
     handleBuyClick = () => {
         const { saveProductsToBasket, product } = this.props;
@@ -137,7 +139,7 @@ class AboutProduct extends Component {
             },
             quantity: 1
         });
-    }
+    };
 
     handleOpenBasket = () => {
         const { basketIsOpen, openBasket } = this.props;
@@ -145,41 +147,45 @@ class AboutProduct extends Component {
         window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         document.body.style.overflowY = (!basketIsOpen) ? 'hidden' : 'visible';
         openBasket();
-    }
+    };
+
+    convertNewLinesToBr = str => {
+        return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+    };
 
     render () {
-        const { product, langMap } = this.props;
+        const { product, langMap, lang } = this.props;
         const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
+        const isDiscount = product.price !== product.actualPrice;
+        const shortDescription = product.texts[lang].shortDescription;
+        const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
             <div className={styles.advantagesTitle}>{text.advantages}</div>
-            <ul>
-                <li className={styles.advantage}>просторность</li>
-                <li className={styles.advantage}>универсальность</li>
-                <li className={styles.advantage}>функциональность</li>
-                <li className={styles.advantage}>простой и стильный дизайн</li>
-                <li className={styles.advantage}>высокое ложе</li>
-                <li className={styles.advantage}>удобное основание</li>
-                <li className={styles.advantage}>простота в уходе</li>
-            </ul>
+            {shortDescription &&
+            <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
-            {product.discountPrice !== product.price &&
+            {isDiscount &&
             <span className={styles.priceOld}>
                 {formatMoney(product.price)}
             </span>}
-            <span className={styles.price}>
+            <span className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
                 {formatMoney(product.actualPrice)}
             </span>
             <div>
-                <span className={styles.sizesTitle}>{text.size}</span>
+                <span className={styles.sizesTitle}>
+                    {!isOneSize ? text.size : text.oneSize}
+                </span>
                 <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
                     onMouseEnter={() => this.sizeListIsOpen()}
                     onClick={this.selectIsOpen}
                 >
-                    <li className={styles.activeOption}>{activeSize.name}</li>
+                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
+                        {activeSize.name}
+                    </li>
                     {sizes.map(size => {
                         if (size.id !== activeSize.id && sizeListIsOpen) {
                             sizeCounter++;
@@ -202,7 +208,8 @@ class AboutProduct extends Component {
                         : text.inBasket
                     }
                 </button>
-                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })} onClick={this.handleAddToWishlist}/>
+                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
+                    onClick={this.handleAddToWishlist}/>
             </div>
         </div>;
     }
