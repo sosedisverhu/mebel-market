@@ -54,14 +54,10 @@
 
 .logoImg {
     display: block;
-    max-width: 100%;
+    max-width: 288px;
 
     @media (max-width: 1160px) {
         width: 200px;
-    }
-
-    @media (max-width: 1135px) {
-        width: 180px;
     }
 
     @media (max-width: 600px) {
