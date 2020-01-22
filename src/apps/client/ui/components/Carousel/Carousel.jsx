@@ -39,6 +39,7 @@ class Carousel extends Component {
 
         this.animation = false;
         this.maxSlideIndex = this.props.slides.length - 1;
+        this.sliderTrack = React.createRef();
         this.state = {
             activeSlideIndex: 0,
             sliderLeft: 0
@@ -77,8 +78,8 @@ class Carousel extends Component {
         });
         clearTimeout(this.sliderTimoutId);
         this.animation = true;
-        this.sliderTrack.style.transition = `none`;
-        this.sliderTrack.style.left = `-${this.startLeft - deltaX}px`;
+        this.sliderTrack.current.style.transition = `none`;
+        this.sliderTrack.current.style.left = `-${this.startLeft - deltaX}px`;
     };
 
     handleDragEnd = ({ delta: { client: { x: deltaX } } }) => {
@@ -103,8 +104,8 @@ class Carousel extends Component {
 
         clearTimeout(this.sliderTimoutId);
         this.animation = true;
-        this.sliderTrack.style.transition = `left ${SWITCHING_DURATION}ms`;
-        this.sliderTrack.style.left = `-${(document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex}px`;
+        this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
+        this.sliderTrack.current.style.left = `-${(document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex}px`;
 
         this.sliderTimoutId = setTimeout(() => {
             this.animation = false;
@@ -150,8 +151,8 @@ class Carousel extends Component {
         const scrollbarWidth = calcScrollbarWidth();
 
         this.animation = true;
-        this.sliderTrack.style.transition = `left ${SWITCHING_DURATION}ms`;
-        this.sliderTrack.style.left = `-${(document.documentElement.clientWidth * activeSlideIndex) + scrollbarWidth * activeSlideIndex}px`;
+        this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
+        this.sliderTrack.current.style.left = `-${(document.documentElement.clientWidth * activeSlideIndex) + scrollbarWidth * activeSlideIndex}px`;
 
         this.sliderTimoutId = setTimeout(() => {
             this.animation = false;
@@ -177,25 +178,27 @@ class Carousel extends Component {
             const hidedSlides = nextActiveSlideIndex - activeSlideIndex - 1;
 
             for (let i = activeSlideIndex + 1; i < nextActiveSlideIndex; i++) {
-                this.sliderTrack.children[i].style.display = 'none';
+                this.sliderTrack.current.children[i].style.display = 'none';
             }
 
-            this.sliderTrack.style.transition = `left ${SWITCHING_DURATION}ms`;
-            this.sliderTrack.style.left = (nextActiveSlideIndex > this.maxSlideIndex)
+            this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
+            this.sliderTrack.current.style.left = (nextActiveSlideIndex > this.maxSlideIndex)
                 ? `0px`
                 : `-${document.documentElement.clientWidth * (nextActiveSlideIndex - hidedSlides) + scrollbarWidth * (nextActiveSlideIndex - hidedSlides)}px`;
         } else {
-            this.sliderTrack.style.transition = 'none';
+            this.sliderTrack.current.style.transition = 'none';
 
             for (let i = nextActiveSlideIndex + 1; i < activeSlideIndex; i++) {
-                this.sliderTrack.style.left =
+                this.sliderTrack.current.style.left =
                     `-${(document.documentElement.clientWidth * (nextActiveSlideIndex + 1)) + scrollbarWidth * (nextActiveSlideIndex + 1)}px`;
-                this.sliderTrack.children[i].style.display = 'none';
+                this.sliderTrack.current.children[i].style.display = 'none';
             }
 
             setTimeout(() => {
-                this.sliderTrack.style.transition = `left ${SWITCHING_DURATION}ms`;
-                this.sliderTrack.style.left = `-${(document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex}px`;
+                this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
+                this.sliderTrack.current.style.left = `-${
+                    (document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex
+                }px`;
             }, 0);
         }
 
@@ -210,11 +213,11 @@ class Carousel extends Component {
         });
 
         setTimeout(() => {
-            for (let i = 0; i < this.sliderTrack.children.length; i++) {
-                this.sliderTrack.children[i].style.display = 'inline-block';
+            for (let i = 0; i < this.sliderTrack.current.children.length; i++) {
+                this.sliderTrack.current.children[i].style.display = 'inline-block';
             }
-            this.sliderTrack.style.transition = 'none';
-            this.sliderTrack.style.left = `-${(document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex}px`;
+            this.sliderTrack.current.style.transition = 'none';
+            this.sliderTrack.current.style.left = `-${(document.documentElement.clientWidth * nextActiveSlideIndex) + scrollbarWidth * nextActiveSlideIndex}px`;
 
             this.animation = false;
             this.setTimeoutToNextSlide();
@@ -256,7 +259,7 @@ class Carousel extends Component {
                 allowDefaultAction
                 touchable
             >
-                <div className={styles.sliderTrack} ref={ref => { this.sliderTrack = ref; }}>
+                <div className={styles.sliderTrack} ref={this.sliderTrack}>
                     { slides.map((slide, i) => this.renderSlide(slide, i, slides)) }
                 </div>
                 <div>
