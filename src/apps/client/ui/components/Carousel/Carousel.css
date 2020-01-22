@@ -12,7 +12,6 @@
     position: relative;
     width: 9999px;
     left: 0;
-    z-index: 3;
 
     &:active {
         cursor: grabbing;
@@ -77,23 +76,6 @@
 
     @media (max-width: 425px){
         padding: 30px 15px 30px 16px;
-    }
-}
-
-.goldLine{
-    position: absolute;
-    z-index: 3;
-    left: 0;
-    width: calc(100% - 120px);
-    height: 2px;
-    background-color: greenBasic;
-
-    @media (max-width: 768px){
-        width: calc(100% - 60px);
-    }
-
-    @media (max-width: 425px){
-        width: calc(100% - 30px);
     }
 }
 

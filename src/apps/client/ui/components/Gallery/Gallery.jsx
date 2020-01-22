@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import styles from './GalleryPhotos.css';
+import styles from './Gallery.css';
 import Draggable from '../Draggable/Draggable';
 
 const IGNORE_SWIPE_DISTANCE = 50;
@@ -15,7 +15,7 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
-class GalleryPhotos extends Component {
+class Gallery extends Component {
     static propTypes = {
         photos: PropTypes.array.isRequired,
         mediaWidth: PropTypes.number.isRequired,
@@ -185,4 +185,4 @@ class GalleryPhotos extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(GalleryPhotos));
+export default withRouter(connect(mapStateToProps)(Gallery));

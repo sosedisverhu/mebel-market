@@ -9,6 +9,7 @@
     min-width: 680px;
     background: whiteBasic;
     position: relative;
+    z-index: 1;
 
     @media (max-width: 1060px) {
         margin-right: 30px;
@@ -48,12 +49,17 @@
     align-items: center;
     flex-shrink: 0;
     overflow: hidden;
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .mainImg {
     width: 100%;
     height: auto;
     flex-shrink: 0;
+    z-index: -1;
 }
 
 .slider{
@@ -62,10 +68,6 @@
     transition: left .5s ease-in-out;
     display: flex;
     width: 100%;
-
-    &:active {
-        cursor: grabbing;
-    }
 }
 
 .additionalImgs {
