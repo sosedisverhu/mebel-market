@@ -1,0 +1,249 @@
+@value redBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
+
+.cartItemWrapper {
+    position: relative;
+    width: 100%;
+
+    &:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        background-color: rgba(216, 216, 216, 0.5);
+        width: 100%;
+        height: 1px;
+    }
+}
+
+.cartItem {
+    display: flex;
+    padding: 20px 25px 20px 30px;
+
+    @media (max-width: 500px) {
+        padding: 20px 16px;
+    }
+}
+
+.productImgLink {
+    margin-right: 30px;
+
+    @media (max-width: 500px) {
+        margin-right: 10px;
+    }
+}
+
+.productImg {
+    width: 120px;
+    height: 120px;
+    display: block;
+}
+
+.productInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.productOption {
+    display: flex;
+    align-items: center;
+    margin-bottom: 21px;
+
+    @media (max-width: 500px) {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+
+.productNameLink {
+    text-decoration: none;
+}
+
+.productName {
+    font-size: 18px;
+    line-height: 21px;
+    color: blackLight;
+    margin-right: 5px;
+
+    @media (max-width: 500px) {
+        margin-right: 20px;
+        font-size: 16px;
+        line-height: 18px;
+
+    }
+}
+
+.productNumber {
+    font-size: 12px;
+    line-height: 14px;
+    color: gray0;
+    margin-right: 10px;
+}
+
+.buttons {
+    position: relative;
+
+    @media (max-width: 500px) {
+        position: absolute;
+        top: 20px;
+        right: 16px;
+    }
+}
+
+.wishBtn, .removeBtn{
+    @mixin removeDefaultButton;
+    padding: 0;
+    cursor: pointer;
+}
+
+.wishBtn {
+    margin-right: 20px;
+    background-image: url('./img/wishlist.png');
+    width: 16px;
+    height: 14px;
+    background-repeat: no-repeat;
+
+    @media (max-width: 500px) {
+        position: absolute;
+        left: 0;
+        bottom: -36px;
+    }
+}
+
+.activeWishBtn {
+    background-image: url('../AboutProduct/img/wishlist-active.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.removeBtn {
+    background-image: url('/src/apps/client/ui/components/Header/img/remove.png');
+    width: 14px;
+    height: 14px;
+    background-repeat: no-repeat;
+}
+
+.productSize {
+    font-size: 14px;
+    line-height: 16px;
+    color: blackLight;
+    margin-bottom: 6px;
+
+    @media (max-width: 500px) {
+        font-size: 13px;
+        line-height: 15px;
+    }
+}
+
+.productQuantity {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 6px;
+}
+
+.quantitySub, .quantityAdd {
+    @mixin removeDefaultButton;
+    padding: 0 5px;
+    position: absolute;
+    color: gray0;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    height: 100%;
+    top: 1px;
+    cursor: pointer;
+}
+
+.quantitySub {
+    left: 0;
+}
+.quantityAdd {
+    right: 0;
+}
+
+.quantityInput {
+    @mixin removeDefaultButton;
+    width: 69px;
+    height: 22px;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    line-height: 21px;
+    color: blackLight;
+    text-align: center;
+    border: 1px solid gray0;
+    box-sizing: border-box;
+    outline: none;
+    padding-top: 3px;
+
+    @media (max-width: 500px) {
+        width: 84px;
+    }
+}
+
+.productPrices {
+    display: flex;
+    align-items: center;
+}
+
+.productOldPrice {
+    font-size: 18px;
+    line-height: 21px;
+    text-decoration-line: line-through;
+    color: gray0;
+    margin-right: 20px;
+
+    @media (max-width: 420px) {
+        font-size: 16px;
+        line-height: 18px;
+        margin-right: 15px;
+    }
+}
+
+.productPrice {
+    font-size: 24px;
+    line-height: 28px;
+    color: blackLight;
+
+    @media (max-width: 420px) {
+        font-size: 20px;
+        line-height: 23px;
+    }
+}
+.productDiscountPrice {
+    color: redBasic;
+}
+
+.orderItem {
+    min-width: 410px;
+
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+
+    .cartItem {
+        padding: 20px 0;
+    }
+
+    .wishBtn {
+        display: none;
+    }
+
+    @media (max-width: 750px) {
+        min-width: auto;
+
+        &:before {
+            left: -16px;
+            width: calc(100% + 32px);
+        }
+    }
+
+    @media (max-width: 500px) {
+        .buttons {
+            right: 0;
+        }
+    }
+}

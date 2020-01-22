@@ -5,7 +5,6 @@ import { matchPath } from 'react-router';
 import { connect } from 'react-redux';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
-import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
 
 import isNull from '@tinkoff/utils/is/nil';
 
@@ -20,6 +19,9 @@ import ReviewsPage from './ui/pages/ReviewsPage/ReviewsPage';
 import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
+import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
+import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
+import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -82,12 +84,14 @@ class App extends Component {
             <Header />
             <Switch>
                 <Route exact path='/admin' component={MainPage} />
+                <Route exact path='/admin/mainSlider' component={MainSliderPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
                 <Route exact path='/admin/articles' component={ArticlesPage} />
                 <Route exact path='/admin/categories' component={CategoriesPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
                 <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
+                <Route exact path='/admin/orders' component={OrdersPage} />
             </Switch>
         </main>;
     }

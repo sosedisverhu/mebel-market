@@ -93,6 +93,8 @@ class ProductForm extends Component {
             ua_name: ua.name || '',
             ru_description: ru.description || '',
             ua_description: ua.description || '',
+            ru_shortDescription: ru.shortDescription || '',
+            ua_shortDescription: ua.shortDescription || '',
             ru_seoTitle: ru.seoTitle || '',
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
@@ -109,9 +111,11 @@ class ProductForm extends Component {
             discountPrice: product.discountPrice,
             price: product.price,
             discount: product.discount,
+            warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
+            article: product.article,
             lang: 'ru',
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -148,6 +152,8 @@ class ProductForm extends Component {
             ua_name: uaName,
             ru_description: ruDescription,
             ua_description: uaDescription,
+            ru_shortDescription: ruShortDescription,
+            ua_shortDescription: uaShortDescription,
             ua_seoTitle: uaSeoTitle,
             ru_seoTitle: ruSeoTitle,
             ua_seoDescription: uaSeoDescription,
@@ -161,10 +167,12 @@ class ProductForm extends Component {
             discountPrice,
             price,
             discount,
+            warranty,
             categoryId,
             subCategoryId,
             id,
-            alias
+            alias,
+            article
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
@@ -248,6 +256,7 @@ class ProductForm extends Component {
                 ru: {
                     name: ruName,
                     description: ruDescription,
+                    shortDescription: ruShortDescription,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
                     seoKeywords: ruSeoKeywords.words.join(', ')
@@ -255,6 +264,7 @@ class ProductForm extends Component {
                 ua: {
                     name: uaName,
                     description: uaDescription,
+                    shortDescription: uaShortDescription,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
                     seoKeywords: uaSeoKeywords.words.join(', ')
@@ -272,21 +282,47 @@ class ProductForm extends Component {
             hidden,
             discountPrice,
             discount,
+            warranty,
             price,
             categoryId,
             subCategoryId,
             id,
             alias,
             categoryFilters,
-            subCategoryFilters
+            subCategoryFilters,
+            article
         };
     };
 
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
+        const { discountPrice, price } = productPayload;
+
+        productPayload.actualPrice = discountPrice || price;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
+            .then(product => {
+                const { files } = values.files;
+                const formData = new FormData();
+                const removedFiles = [];
+                const oldFiles = [];
+
+                files.forEach((file, i) => {
+                    if (file.content) {
+                        formData.append(`product-${product.id}-file-${i}`, file.content);
+                    } else {
+                        oldFiles.push({
+                            path: file,
+                            index: i
+                        });
+                    }
+                });
+
+                formData.append('removedFiles', JSON.stringify(removedFiles));
+                formData.append('oldFiles', JSON.stringify(oldFiles));
+                return updateProductFiles(formData, product.id);
+            })
             .then(product => {
                 const { files } = values.avatar;
                 if (files[0].content) {
@@ -297,34 +333,11 @@ class ProductForm extends Component {
                     return updateProductAvatar(formData, product.id);
                 }
             })
-            .then(product => {
-                const { files } = values.files;
-                const formData = new FormData();
-                const removedFiles = [];
-                const oldFiles = [];
-                const id = pathOr(['id'], this.id, product);
-
-                files.forEach((file, i) => {
-                    if (file.content) {
-                        formData.append(`product-${id}-file-${i}`, file.content);
-                    } else {
-                        oldFiles.push({
-                            path: file.path,
-                            index: i
-                        });
-                    }
-                });
-                formData.append('removedFiles', JSON.stringify(removedFiles));
-                formData.append('oldFiles', JSON.stringify(oldFiles));
-                return updateProductFiles(formData, id);
-            })
-            .then(() => {
-                onDone();
-            })
+            .then(onDone)
             .catch(error => {
                 if (error.code === 'duplication') {
                     this.setState({
-                        errorText: 'Введите уникальные алиас для товара'
+                        errorText: 'Введите уникальные алиас и артикул для товара'
                     });
                 } else {
                     this.setState({
@@ -411,7 +424,7 @@ class ProductForm extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
     editProduct: payload => dispatch(editProduct(payload)),
     updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),

@@ -61,7 +61,7 @@ class Comments extends Component {
         const rating = [];
 
         for (let i = 0; i < 5; i++) {
-            rating.push(<div className={styles.star} key={i}/>);
+            rating.push(<div className={styles.star} key={i} />);
         }
 
         return rating;

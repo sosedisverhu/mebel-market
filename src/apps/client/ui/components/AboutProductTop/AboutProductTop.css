@@ -1,6 +1,6 @@
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 
 .root {
     &.mobile {
@@ -57,7 +57,7 @@
 .article {
     font: 14px/16px RoundedElegance;
     text-transform: capitalize;
-    color: gray;
+    color: gray0;
 
     @media (max-width: 600px) {
         font-size: 12px;

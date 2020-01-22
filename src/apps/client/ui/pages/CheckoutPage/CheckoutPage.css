@@ -1,13 +1,16 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value gray from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
 
 input,
 textarea {
+    @mixin removeDefaultButton;
     outline: none;
 }
 
@@ -38,7 +41,7 @@ textarea {
     padding: 0 16px;
     box-sizing: content-box;
 
-    @media (max-width: 730px) {
+    @media (max-width: 750px) {
         flex-direction: column;
     }
 
@@ -53,14 +56,15 @@ textarea {
     padding-right: 16px;
     box-sizing: content-box;
 
-    @media (max-width: 825px) {
+    @media (max-width: 870px) {
         padding-right: 40px;
     }
 
-    @media (max-width: 730px) {
+    @media (max-width: 750px) {
         padding-right: 0px;
         max-width: 100%;
-        margin-top: 60px;
+        margin-top: 20px;
+        padding-top: 20px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -84,13 +88,13 @@ textarea {
     font: 16px/18px RoundedElegance;
     color: blackLight;
     background: whiteBasic;
-    border: 1px solid gray;
+    border: 1px solid gray0;
     width: 100%;
     padding: 7px 9px 5px 9px;
     margin-top: 20px;
 
     &:placeholder {
-        color: gray;
+        color: gray0;
     }
 
     @media (max-width: 450px) {
@@ -103,15 +107,19 @@ textarea {
     resize: none;
 }
 
+.checkoutInfoInputError {
+    border-color: redBasic;
+}
+
 .deliveryAndPayment {
     display: flex;
     justify-content: space-between;
 
-    @media (max-width: 825px) and (min-width: 731px) {
+    @media (max-width: 870px) and (min-width: 751px) {
         flex-direction: column;
     }
 
-    @media (max-width: 730px) {
+    @media (max-width: 750px) {
         width: 100%;
     }
 
@@ -125,7 +133,7 @@ textarea {
     max-width: 218px;
     padding-right: 10px;
 
-    @media (max-width: 825px) and (min-width: 731px) {
+    @media (max-width: 870px) and (min-width: 751px) {
         max-width: 100%;
         padding-right: 0;
     }
@@ -141,7 +149,7 @@ textarea {
     margin-top: 20px;
     padding-bottom: 5px;
 
-    @media (max-width: 825px) and (min-width: 731px) {
+    @media (max-width: 870px) and (min-width: 751px) {
         text-align: center;
     }
 
@@ -213,12 +221,7 @@ textarea {
 }
 
 .details {
-    width: 367px;
-    min-width: 367px;
-
-    @media (max-width: 730px) {
-        width: auto;
-        min-width: auto;
+    @media (max-width: 750px) {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -227,9 +230,7 @@ textarea {
 
 .products {
     width: 100%;
-    height: 100px;
-    margin-top: 20px;
-    background: rgba(35, 35, 35, 0.7);
+    font-family: RoundedElegance;
 }
 
 .priceWrap {
@@ -241,7 +242,7 @@ textarea {
         display: none;
     }
 
-    @media (max-width: 730px) {
+    @media (max-width: 750px) {
         display: none;
 
         &.mobile {
@@ -268,7 +269,7 @@ textarea {
     font: 24px/28px RoundedElegance;
     color: blackLight;
     margin-top: 23px;
-    border-top: 1px solid gray;
+    border-top: 1px solid gray0;
     padding: 23px 15px 0 15px;
     display: flex;
     justify-content: space-between;
@@ -284,8 +285,55 @@ textarea {
     min-width: 200px;
     display: block;
     cursor: pointer;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: greenBasic;
+    }
 
     @media (max-width: 450px) {
         margin-top: 20px;
+    }
+}
+
+.noItemsContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 5%;
+    align-items: center;
+}
+
+.noItemsText {
+    font-family: RoundedElegance;
+    font-size: 32px;
+    line-height: 39px;
+    text-align: center;
+}
+
+.noItemsTextLink {
+    text-decoration: none;
+    color: blackLight;
+
+    @media (max-width: 600px) {
+        font-size: 26px;
+    }
+}
+
+.noItemsTextButton {
+    font: 18px/21px RoundedElegance;
+    padding: 10px 20px;
+    border: none;
+    margin: 30px auto 0 auto;
+    color: whiteBasic;
+    background: blackLight;
+    min-width: 200px;
+    display: block;
+    cursor: pointer;
+    transition: .5s ease-out;
+
+    &:hover {
+        background-color: greenBasic;
     }
 }

@@ -1,6 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray1 from '../../../../../css/colors.css';
 
 .gallery {
@@ -31,6 +31,10 @@
     font: 18px/21px RoundedElegance;
     color: whiteBasic;
     background: redBasic;
+}
+
+.percentage{
+    font: 18px/21px HelveticaNeueCyr;
 }
 
 .mainImg {
@@ -73,7 +77,7 @@
         }
 
         &:before {
-            background: green;
+            background: greenBasic;
         }
     }
 

@@ -1,7 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
 
@@ -27,15 +27,17 @@
 }
 
 .subCategories {
-    padding: 2px 225px 0px;
+    padding: 2px 225px 0;
     max-width: 1240px;
+    min-height: 40px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
 
     @media (max-width: 1210px) {
-        padding: 2px 0 0 0;
+        padding: 0;
+        min-height: inherit;
     }
 
     @media (max-width: 960px) {
@@ -60,7 +62,7 @@
     position: relative;
 
     &.active {
-        background-color: green;
+        background-color: greenBasic;
         color: whiteBasic;
     }
 
@@ -92,11 +94,17 @@
 }
 
 .filterPanel {
+    padding-right: 262px;
     width: 100%;
     max-width: 1240px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 600px) {
+        justify-content: left;
+        padding-right: 32px;
+    }
 }
 
 .results {
@@ -115,7 +123,7 @@
 
 .btnFilter {
     height: 32px;
-    width: calc(50% - 10px);
+    width: calc(50% + 5px);
     padding: 8px 38px 8px 10px;
     position: relative;
     display: none;
@@ -133,58 +141,6 @@
 
     @media (max-width: 600px) {
         display: block;
-    }
-}
-
-.sort {
-    margin: 11px 0 0 10px;
-
-    @media (max-width: 600px) {
-        margin-top: 0;
-        width: calc(50% - 10px);
-    }
-}
-
-.activeOption {
-    position: relative;
-    padding: 6px 41px 6px 16px;
-    display: inline-block;
-    background: gray4;
-    box-sizing: border-box;
-    font: 300 14px/17px RoundedElegance;
-    color: blackLight;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-
-    &:before {
-        content: "";
-        width: 0;
-        height: 0;
-        margin-top: -5px;
-        border-style: solid;
-        border-width: 8px 5px 0 5px;
-        border-color: green transparent transparent  transparent;
-        position: absolute;
-        top: 50%;
-        right: 16px;
-        transition: 0.25s ease-in;
-        transition-property: transform, border-color;
-    }
-
-    &:hover {
-        &:before {
-            transform: rotate(180deg);
-            transition: 0.25s ease-out;
-            border-color: blackBasic transparent transparent transparent;
-        }
-    }
-
-    @media (max-width: 600px) {
-        line-height: 16px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        width: 100%;
     }
 }
 

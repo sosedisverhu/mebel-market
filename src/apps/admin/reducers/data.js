@@ -5,7 +5,8 @@ import {
     SET_SUB_CATEGORIES,
     SET_PARTNERS,
     SET_REVIEWS,
-    SET_SEO
+    SET_SEO,
+    SET_ORDERS
 } from '../types/types';
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
     subCategories: [],
     partners: [],
     reviews: [],
-    allSeo: []
+    allSeo: [],
+    orders: []
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +36,8 @@ export default function (state = initialState, action) {
         return { ...state, reviews: action.payload };
     case SET_SEO:
         return { ...state, allSeo: action.payload };
+    case SET_ORDERS:
+        return { ...state, orders: action.payload };
     default:
         return state;
     }

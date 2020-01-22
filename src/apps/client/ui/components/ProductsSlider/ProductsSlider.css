@@ -1,5 +1,5 @@
 @value whiteBasic from '../../../../../css/colors.css';
-@value green from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
 .slider {
@@ -155,7 +155,7 @@
 
     &.active {
         &:before {
-            background: green;
+            background: greenBasic;
             transition: background 0.25s ease-in;
         }
     }
@@ -173,7 +173,7 @@
 
         &.active {
             &:before {
-                background: green;
+                background: greenBasic;
             }
         }
     }

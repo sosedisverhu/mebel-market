@@ -12,7 +12,8 @@ const UserProducts = new Schema({
     }],
     wishlist: [{
         id: { type: String, required: true },
-        productId: { type: String, required: true }
+        productId: { type: String, required: true },
+        properties: { type: Object, required: true }
     }]
 });
 

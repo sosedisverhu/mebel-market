@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import '../../../client/vendor';
 import '../../css/main.css';
 
 import media from './ui/hocs/media/media.jsx';
 import lang from './ui/hocs/lang/lang.jsx';
-
-import { connect } from 'react-redux';
 
 import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
@@ -49,11 +48,18 @@ const mapStateToProps = ({ application }) => {
 class App extends Component {
     static propTypes = {
         lang: PropTypes.string,
-        langRoute: PropTypes.string
+        langRoute: PropTypes.string,
+        location: PropTypes.object
     };
 
     static defaultProps = {
         langRoute: ''
+    };
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.location !== nextProps.location) {
+            window.scrollTo(0, 0);
+        }
     };
 
     renderComponent = Component => ({ location: { pathname } }) => {

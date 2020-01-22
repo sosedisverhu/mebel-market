@@ -10,6 +10,7 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
+import addProductViews from '../../../services/client/addProductViews';
 
 class ProductPage extends Component {
     static propTypes = {
@@ -25,23 +26,40 @@ class ProductPage extends Component {
     state = {
         category: {},
         subCategory: {},
-        product: {},
-        didMount: false
+        product: {}
     };
 
     componentDidMount () {
         const { categoryAlias, subCategoryAlias, alias } = this.getMatch();
         const category = this.getCategory(categoryAlias);
+        if (!category) return;
         const subCategory = this.getSubCategory(subCategoryAlias, category);
+        if (!subCategory) return;
         const product = this.getProduct(alias, category, subCategory);
+        if (!product) return;
 
         this.setState({
             category,
             subCategory,
-            product,
-            didMount: true
+            product
         });
+
+        product && addProductViews(product.id);
     };
+
+    componentDidUpdate (prevProps) {
+        if (this.props.location.pathname !== prevProps.location.pathname) {
+            const { categoryAlias, subCategoryAlias, alias } = this.getMatch();
+            const category = this.getCategory(categoryAlias);
+            const subCategory = this.getSubCategory(subCategoryAlias, category);
+            const product = this.getProduct(alias, category, subCategory);
+            this.setState({
+                category,
+                subCategory,
+                product
+            });
+        }
+    }
 
     getMatch = () => {
         const { location: { pathname }, langRoute } = this.props;
@@ -70,20 +88,16 @@ class ProductPage extends Component {
     };
 
     render () {
-        const { category, product, didMount } = this.state;
+        const { category, product } = this.state;
 
-        if (isEmpty(product) && didMount) {
-            return <NotFoundPage/>;
-        } else if (!isEmpty(product)) {
-            return (
-                <div>
-                    <Breadcrumbs category={category} product={product}/>
-                    <Product product={product}/>
-                    <Tab product={product}/>
-                </div>);
-        } else {
-            return <div/>;
-        }
+        if (isEmpty(product)) return <NotFoundPage/>;
+
+        return (
+            <div>
+                <Breadcrumbs category={category} product={product}/>
+                <Product product={product}/>
+                <Tab product={product}/>
+            </div>);
     }
 }
 
