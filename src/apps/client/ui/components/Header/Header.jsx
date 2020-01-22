@@ -43,6 +43,8 @@ class Header extends Component {
 
     handleMobileMenu = () => {
         document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
+        document.documentElement.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible'; // для Safari на iPhone/iPad
+
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
@@ -127,11 +129,17 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemBottom}
                                             to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/partners`}>{text.partners}</Link>
+                                            to={`${langRoute}/partners`}>
+                                            {text.partners}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/articles`}>{text.articles}</Link>
+                                            to={`${langRoute}/articles`}>
+                                            {text.articles}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                                            to={`${langRoute}/contacts`}>
+                                            {text.contacts}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

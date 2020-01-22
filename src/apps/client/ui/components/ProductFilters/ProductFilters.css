@@ -6,9 +6,10 @@
 .sort {
     position: absolute;
     margin: 11px 0 0 10px;
+
     @media (max-width: 600px) {
-        margin-top: 0;
-        width: calc(50% - 10px);
+        width: calc(50% - 25px);
+        margin: 0 0 0 20px;
     }
 }
 
@@ -20,8 +21,11 @@
     font: 300 14px/17px RoundedElegance;
     color: blackLight;
     cursor: pointer;
-    white-space: nowrap;
     overflow: hidden;
+
+    @media (max-width: 600px) {
+        padding: 6px 41px 6px 13px;
+    }
 }
 
 .option {
@@ -37,6 +41,7 @@
 
 .activeOption {
     position: relative;
+    white-space: nowrap;
 
     &:before {
          content: "";
