@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 
@@ -76,6 +77,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        right: 0;
+        min-width: auto;
+    }
 }
 
 .title {
@@ -87,8 +94,12 @@
 }
 
 .productsContainer {
-    max-height: 362px;
+    max-height: 320px;
     overflow-y: auto;
+
+    @media (max-width: 600px) {
+            width: 100%;
+    }
 }
 
 .cartBottomInfo {
@@ -151,6 +162,11 @@
     display: flex;
     width: 330px;
     justify-content: space-between;
+
+    @media (max-width: 500px) {
+        padding: 0 16px;
+        width: 100%;
+    }
 }
 
 .totalPrice {
@@ -158,4 +174,9 @@
     line-height: 28px;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
+}
+
+.noProducts {
+    text-align: center;
+    padding: 0 16px;
 }

@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import includes from '@tinkoff/utils/array/includes';
 
 import styles from './WishList.css';
 
@@ -17,6 +15,7 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         lang: application.lang,
+        windowWidth: application.media.width,
         wishlist: data.wishlist,
         basket: data.basket
     };
@@ -37,7 +36,8 @@ class WishList extends Component {
         wishlist: PropTypes.array.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
-        basket: PropTypes.array.isRequired
+        basket: PropTypes.array.isRequired,
+        windowWidth: PropTypes.number.isRequired
     };
 
     state = {
@@ -76,7 +76,7 @@ class WishList extends Component {
     };
 
     render () {
-        const { langMap, lang, wishlist, basket } = this.props;
+        const { langMap, lang, wishlist, basket, windowWidth } = this.props;
         const { active } = this.state;
         const text = propOr('wishList', {}, langMap);
         const cartText = propOr('cart', {}, langMap);
@@ -106,7 +106,9 @@ class WishList extends Component {
                                             <div className={styles.productInfo}>
                                                 <div>
                                                     <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
-                                                    <p className={styles.productNumber}>{`${text.article} ${product.article}`}</p>
+                                                    <p className={styles.productNumber}>
+                                                        <span className={styles.productNumberTitle}>{text.article} </span>{product.article}
+                                                    </p>
                                                     {properties && properties.size &&
                                                         <p className={styles.productSize}>{`${text.size} ${properties.size.name}`}</p>}
                                                     <div className={styles.productPrices}>
@@ -114,7 +116,11 @@ class WishList extends Component {
                                                         <p className={styles.productOldPrice}>
                                                             {product.price}&#8372;
                                                         </p>}
-                                                        <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: product.discountPrice && (product.discountPrice !== product.price) })}>
+                                                        <p className={classNames(
+                                                            styles.productPrice,
+                                                            { [styles.productDiscountPrice]:
+                                                                product.discountPrice && (product.discountPrice !== product.price) }
+                                                        )}>
                                                             {product.discountPrice}&#8372;
                                                         </p>
                                                     </div>
@@ -128,17 +134,23 @@ class WishList extends Component {
                                                     </button>
                                                     {basket.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
                                                         ? <button className={classNames(styles.cartBtn, styles.inCartBtn)}>
-                                                            {text.inCartBtn}
+                                                            { windowWidth > 500 ? text.inCartBtn : <img
+                                                                className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"
+                                                                alt="cart"
+                                                            />}
                                                         </button>
                                                         : <button className={styles.cartBtn} onClick={this.handleAddToBasket(product, properties)}>
-                                                            {text.cartBtn}
+                                                            { windowWidth > 500 ? text.cartBtn : <img
+                                                                className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"
+                                                                alt="cart"
+                                                            />}
                                                         </button>}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>)}
                             </div>
-                            : <p>{text.noProduct}</p>
+                            : <p className={styles.noProducts}>{text.noProduct}</p>
                         }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>

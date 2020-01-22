@@ -9,8 +9,6 @@ import propOr from '@tinkoff/utils/object/propOr';
 
 import CartProduct from '../CartProduct/CartProduct';
 
-import deleteFromBasket from '../../../services/client/deleteFromBasket';
-import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import outsideClick from '../../hocs/outsideClick.jsx';
 
 import openBasket from '../../../actions/openBasket';
@@ -24,17 +22,12 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
         langMap: application.langMap,
-        lang: application.lang,
         basket: data.basket,
-        categories: data.categories,
-        subCategories: data.subCategories,
         basketIsOpen: data.basketIsOpen
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
-    saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     openBasket: payload => dispatch(openBasket(payload)),
     closeBasket: payload => dispatch(closeBasket(payload))
 });
@@ -44,14 +37,9 @@ class Cart extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
         basket: PropTypes.array.isRequired,
-        deleteFromBasket: PropTypes.func.isRequired,
-        saveProductsToWishlist: PropTypes.func.isRequired,
-        categories: PropTypes.array,
-        subCategories: PropTypes.array,
         basketIsOpen: PropTypes.bool.isRequired,
         openBasket: PropTypes.func.isRequired,
         closeBasket: PropTypes.func.isRequired
@@ -103,7 +91,7 @@ class Cart extends Component {
                                     <CartProduct product={product} quantity={quantity} properties={properties} basketItemId={basketItemId} key={i} />
                                 )}
                             </div>
-                            : <p>{text.noProduct}</p>
+                            : <p className={styles.noProducts}>{text.noProduct}</p>
                         }
                         {basket.length > 0 &&
                             <div className={styles.cartBottomInfo}>
