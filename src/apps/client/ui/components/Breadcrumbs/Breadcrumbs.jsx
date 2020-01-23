@@ -14,13 +14,14 @@ class Breadcrumbs extends Component {
         lang: PropTypes.string.isRequired,
         category: PropTypes.object,
         product: PropTypes.object,
-        noCategoryPage: ''
+        noCategoryPage: PropTypes.bool
     };
 
     static defaultProps = {
         category: {},
         product: {},
-        isPromotionsPage: false
+        isPromotionsPage: false,
+        noCategoryPage: true
     };
 
     render () {
