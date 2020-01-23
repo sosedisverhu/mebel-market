@@ -13,18 +13,20 @@ class Breadcrumbs extends Component {
         langRoute: PropTypes.string.isRequired,
         lang: PropTypes.string.isRequired,
         category: PropTypes.object,
+        subCategory: PropTypes.object,
         product: PropTypes.object,
         noCategoryPage: ''
     };
 
     static defaultProps = {
         category: {},
+        subCategory: {},
         product: {},
         isPromotionsPage: false
     };
 
     render () {
-        const { langMap, langRoute, category, product, lang, noCategoryPage } = this.props;
+        const { langMap, langRoute, category, subCategory, product, lang, noCategoryPage } = this.props;
         const text = propOr('breadcrumbs', {}, langMap);
 
         return (
@@ -36,12 +38,16 @@ class Breadcrumbs extends Component {
                 <Link className={styles.breadcrumb} to={`${langRoute}/promotions`}>
                     {noCategoryPage}
                 </Link>}
-                {category.texts &&
+                {category.texts && !subCategory.texts &&
                 <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
                     {category.texts[lang].name}
                 </Link>}
+                {subCategory.texts &&
+                <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}`}>
+                    {subCategory.texts[lang].name}
+                </Link>}
                 {product.texts &&
-                <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${product.id}`}>
+                <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}/${product.alias}`}>
                     {product.texts[lang].name}
                 </Link>}
             </div>);

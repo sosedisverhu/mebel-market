@@ -312,14 +312,16 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const headerText = propOr('header', {}, langMap);
+        console.log('category', category);
+        console.log('subCategory', subCategory);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category}
-                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
+                <Breadcrumbs category={category} subCategory={subCategory}
+                             noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
