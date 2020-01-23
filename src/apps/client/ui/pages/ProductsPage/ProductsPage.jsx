@@ -83,10 +83,16 @@ class ProductsPage extends Component {
     setNewState = (props = this.props) => {
         const { subCategoryAlias, categoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
+        if (!category) {
+            this.setState({
+                isCategory: false
+            });
+            return;
+        }
         const subCategory = subCategoryAlias && this.getSubCategory(props);
         const isPromotionsPage = categoryAlias === 'promotions';
 
-        if (((!category) || (subCategoryAlias && !subCategory)) && (!isPromotionsPage)) {
+        if (subCategoryAlias && !subCategory && !isPromotionsPage) {
             this.setState({
                 isCategory: false
             });
@@ -118,7 +124,15 @@ class ProductsPage extends Component {
 
     getMatch = (props = this.props) => {
         const { location: { pathname }, langRoute } = props;
-        const subCategoryAlias = pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
+        let subCategoryAlias = '';
+
+        if (pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length >= 2) {
+            subCategoryAlias = '/:subCategoryAlias';
+        }
+        if (pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length === 2 && pathname[pathname.length - 1] === '/') {
+            subCategoryAlias = '';
+        }
+
         const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
 
         return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;

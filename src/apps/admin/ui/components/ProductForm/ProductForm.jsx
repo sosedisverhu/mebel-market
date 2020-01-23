@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import classNames from 'classnames';
+
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
@@ -8,8 +11,6 @@ import pathOr from '@tinkoff/utils/object/pathOr';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import findIndex from '@tinkoff/utils/array/findIndex';
 import isObject from '@tinkoff/utils/is/plainObject';
-
-import classNames from 'classnames';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -313,7 +314,7 @@ class ProductForm extends Component {
                         formData.append(`product-${product.id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
-                            path: file,
+                            path: file.path,
                             index: i
                         });
                     }
@@ -321,6 +322,7 @@ class ProductForm extends Component {
 
                 formData.append('removedFiles', JSON.stringify(removedFiles));
                 formData.append('oldFiles', JSON.stringify(oldFiles));
+
                 return updateProductFiles(formData, product.id);
             })
             .then(product => {

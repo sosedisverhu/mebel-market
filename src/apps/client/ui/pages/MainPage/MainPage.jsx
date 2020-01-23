@@ -61,10 +61,10 @@ class MainPage extends Component {
                     return (
                         <div key={i}>
                             {productsResult[label] &&
-                                <section key={label} className={classNames(styles.categorySection, styles[label])}>
-                                    <h2 className={styles.title}>{text[label]}</h2>
-                                    <ProductsSlider label={label} products={productsResult[label]} />
-                                </section>
+                            <section key={label} className={classNames(styles.categorySection, styles[label])}>
+                                <h2 className={styles.title}>{text[label]}</h2>
+                                <ProductsSlider label={label} products={productsResult[label]}/>
+                            </section>
                             }
                         </div>);
                 })}

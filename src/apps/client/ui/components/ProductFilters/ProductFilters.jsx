@@ -53,12 +53,33 @@ const SORTING_OPTIONS = [
 class ProductFilters extends Component {
     static propTypes = {
         lang: PropTypes.string.isRequired,
+        media: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired
     };
 
     state = {
         activeFilter: 0,
-        filtersIsOpen: false
+        filtersIsOpen: false,
+        activeOptionText: ''
+    };
+
+    componentDidMount () {
+        this.setActiveOptionText();
+    }
+
+    componentWillReceiveProps (nextProps, nextContext) {
+        const { media, lang } = nextProps;
+        const { activeFilter } = this.state;
+
+        if (media.width !== this.props.media.width) {
+            this.setActiveOptionText(activeFilter, media, lang);
+        }
+    }
+
+    setActiveOptionText = (activeFilter = 0, media = this.props.media, lang = this.props.lang) => {
+        this.setState({
+            activeOptionText: media.width > 450 ? SORTING_OPTIONS[activeFilter].texts[lang] : SORTING_OPTIONS[activeFilter].texts[lang].slice(0, 12) + '...'
+        });
     };
 
     onFiltersClick = () => {
@@ -71,13 +92,14 @@ class ProductFilters extends Component {
         this.setState({
             activeFilter: i
         });
+        this.setActiveOptionText(i);
 
         this.props.onFilter(filter.id, arr);
     };
 
     render () {
         const { lang } = this.props;
-        const { activeFilter, filtersIsOpen } = this.state;
+        const { activeFilter, filtersIsOpen, activeOptionText } = this.state;
 
         return (
             <div>
@@ -85,7 +107,7 @@ class ProductFilters extends Component {
                     onClick={this.onFiltersClick}
                 >
                     <li className={classNames(styles.activeOption, { [styles.activeOptionClicked]: filtersIsOpen })}>
-                        {SORTING_OPTIONS[activeFilter].texts[lang]}
+                        {activeOptionText}
                     </li>
                     {SORTING_OPTIONS.map((filter, i, arr) => {
                         if (i === activeFilter) {
@@ -107,7 +129,8 @@ class ProductFilters extends Component {
 
 const mapStateToProps = ({ application }) => {
     return {
-        lang: application.lang
+        lang: application.lang,
+        media: application.media
     };
 };
 
