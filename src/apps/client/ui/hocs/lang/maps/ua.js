@@ -108,8 +108,7 @@ export default {
         getDirectionsBtn: 'Прокласти маршрут'
     },
     notFoundPage: {
-        text1: 'На жаль, сторінка, яку ви шукаєте ',
-        text2: 'не існує :(',
+        text1: 'На жаль, сторінка, яку ви шукаєте не існує :(',
         link: 'На главную'
     },
     article: {
