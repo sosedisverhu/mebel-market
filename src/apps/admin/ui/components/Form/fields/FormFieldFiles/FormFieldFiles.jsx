@@ -15,8 +15,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import map from '@tinkoff/utils/array/map';
 import remove from '@tinkoff/utils/array/remove';
-import arrayMove from '../../../../../utils/arrayMove';
 import find from '@tinkoff/utils/array/find';
+import arrayMove from '../../../../../utils/arrayMove';
 
 const checkWrongDimensions = slides => {
     const wrongFile = find(file => file.wrongDimensions, slides);

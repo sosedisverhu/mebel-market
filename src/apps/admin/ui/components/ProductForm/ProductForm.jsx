@@ -136,7 +136,7 @@ class ProductForm extends Component {
         this.id = prop('id', product);
 
         const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
-        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories[0]);
+        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories.find(subCategory => subCategory.id === this.initialValues.subCategoryId));
 
         this.state = {
             lang: 'ru',
@@ -390,6 +390,7 @@ class ProductForm extends Component {
         const { categoryHidden, errorText, categoryFilters, subCategoryFilters } = this.state;
 
         return <div>
+            {console.log(this.initialValues)}
             <Form
                 initialValues={this.initialValues}
                 langs={['ru', 'ua']}
