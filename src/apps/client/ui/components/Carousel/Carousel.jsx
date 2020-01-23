@@ -10,6 +10,7 @@ import Draggable from '../Draggable/Draggable.jsx';
 
 import styles from './Carousel.css';
 import propOr from '@tinkoff/utils/object/propOr';
+import noop from '@tinkoff/utils/function/noop';
 
 const TIME_TO_NEXT_SWITCHING = 8000;
 const SWITCHING_DURATION = 800;
@@ -54,10 +55,13 @@ class Carousel extends Component {
 
         if (nextProps.mediaWidth !== this.props.mediaWidth) {
             const { activeSlideIndex } = this.state;
+            const sliderLeft = (nextProps.mediaWidth * activeSlideIndex) + scrollbarWidth * activeSlideIndex;
 
+            this.sliderTrack.current.style.left = `-${sliderLeft}px`;
+            this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
             this.maxLeft = (nextProps.mediaWidth * this.maxSlide) + scrollbarWidth * this.maxSlide;
             this.setState({
-                sliderLeft: (nextProps.mediaWidth * activeSlideIndex) + scrollbarWidth * activeSlideIndex
+                sliderLeft: sliderLeft
             });
         }
     }
@@ -89,6 +93,9 @@ class Carousel extends Component {
         const nextActiveSlideIndex = deltaX > 0 ? activeSlideIndex - 1 : activeSlideIndex + 1;
 
         if (Math.abs(deltaX) < IGNORE_SWIPE_DISTANCE || nextActiveSlideIndex === -1 || nextActiveSlideIndex === slides.length) {
+            this.sliderTrack.current.style.left = `-${this.startLeft}px`;
+            this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION / 3}ms`;
+
             return this.setState({
                 sliderLeft: (document.documentElement.clientWidth * activeSlideIndex) + scrollbarWidth * activeSlideIndex
             });
@@ -243,7 +250,7 @@ class Carousel extends Component {
     </div>;
 
     render () {
-        const { slides, langMap } = this.props;
+        const { slides, langMap, mediaWidth } = this.props;
         const { activeSlideIndex } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
@@ -253,9 +260,9 @@ class Carousel extends Component {
 
         return <div className={styles.carousel}>
             <Draggable
-                onDragStart={this.handleDragStart}
-                onDrag={this.handleDragProcess}
-                onDragEnd={this.handleDragEnd}
+                onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
+                onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
+                onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
                 allowDefaultAction
                 touchable
             >

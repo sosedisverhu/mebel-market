@@ -13,8 +13,10 @@
     width: 9999px;
     left: 0;
 
-    &:active {
-        cursor: grabbing;
+    @media (max-width: 1024px) {
+        &:active {
+            cursor: grabbing;
+        }
     }
 }
 

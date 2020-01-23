@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+import noop from '@tinkoff/utils/function/noop';
+
 import styles from './Gallery.css';
 import Draggable from '../Draggable/Draggable';
 
@@ -51,7 +53,8 @@ class Gallery extends Component {
         const nextSliderLeft = this.startLeft - deltaX;
         const { activeSlideIndex } = this.state;
 
-        if (nextSliderLeft < 0 || nextSliderLeft > this.maxLeft || activeSlideIndex === this.maxSlideIndex) return;
+        if (nextSliderLeft < 0 || nextSliderLeft > this.maxLeft) return;
+        if (activeSlideIndex === this.maxSlideIndex && deltaX < 0) return;
 
         this.setState({
             sliderLeft: this.startLeft - deltaX
@@ -67,6 +70,9 @@ class Gallery extends Component {
         const nextActiveSlideIndex = deltaX > 0 ? activeSlideIndex - 1 : activeSlideIndex + 1;
 
         if (Math.abs(deltaX) < IGNORE_SWIPE_DISTANCE || nextActiveSlideIndex === -1 || nextActiveSlideIndex === photos.length) {
+            this.photoSliderTrack.current.style.left = `-${this.startLeft}px`;
+            this.photoSliderTrack.current.style.transition = `left .2s ease-in-out`;
+
             return this.setState({
                 sliderLeft: sliderWidth * activeSlideIndex,
                 activeImg: activeSlideIndex
@@ -106,13 +112,14 @@ class Gallery extends Component {
 
     componentWillReceiveProps (nextProps) {
         if (nextProps.mediaWidth !== this.props.mediaWidth) {
-            const { activeSlideIndex, sliderWidth } = this.state;
+            const { activeSlideIndex } = this.state;
+            const sliderWidth = this.photoSliderTrack.current.clientWidth;
 
-            this.setSliderWidth();
             this.maxLeft = sliderWidth * this.maxSlide;
             this.setState({
                 sliderLeft: sliderWidth * activeSlideIndex,
-                activeImg: activeSlideIndex
+                activeImg: activeSlideIndex,
+                sliderWidth
             });
 
             this.photoSliderTrack.current.style.left = `-${activeSlideIndex * sliderWidth}px`;
@@ -132,16 +139,16 @@ class Gallery extends Component {
     }
 
     render () {
-        const { photos, discount } = this.props;
+        const { photos, discount, mediaWidth } = this.props;
         const { activeImg } = this.state;
 
         return (
             <div className={styles.gallery}>
                 {discount ? <div className={styles.discount}>{discount}<span className={styles.percentage}>%</span></div> : null}
                 <Draggable
-                    onDragStart={this.handleDragStart}
-                    onDrag={this.handleDragProcess}
-                    onDragEnd={this.handleDragEnd}
+                    onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
+                    onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
+                    onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
                     allowDefaultAction
                     touchable
                 >
