@@ -55,7 +55,6 @@ class Header extends Component {
         } else {
             enablePageScroll(document.documentElement); // для iOS/macOS
             enablePageScroll(document.body);
-            disablePageScroll(this.mobilePopUp.current);
         }
 
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
@@ -94,7 +93,7 @@ class Header extends Component {
             <div className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
-                        <div className={classNames(styles.mobileMenu, { [styles.scroll]: mobileMenuOpen })} onClick={this.handleMobileMenu}>
+                        <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
                             <button className={classNames(styles.mobileMenuBtn, { [styles.active]: mobileMenuOpen })}>
                                 <span/>
                                 <span/>
