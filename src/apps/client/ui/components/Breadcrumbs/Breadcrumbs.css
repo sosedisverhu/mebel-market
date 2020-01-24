@@ -35,5 +35,6 @@
 
   &:last-child {
     color: gray1;
+    cursor: default;
   }
 }

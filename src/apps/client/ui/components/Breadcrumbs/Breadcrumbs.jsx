@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link, withRouter, matchPath } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import propOr from '@tinkoff/utils/object/propOr';
 
@@ -16,8 +16,7 @@ class Breadcrumbs extends Component {
         subCategory: PropTypes.object,
         product: PropTypes.object,
         article: PropTypes.object,
-        noCategoryPage: '',
-        location: PropTypes.object.isRequired
+        noCategoryPage: ''
     };
 
     static defaultProps = {
@@ -29,10 +28,8 @@ class Breadcrumbs extends Component {
     };
 
     render () {
-        const { location: { pathname }, langMap, langRoute, category, subCategory, product, article, lang, noCategoryPage } = this.props;
+        const { langMap, langRoute, category, subCategory, product, article, lang, noCategoryPage } = this.props;
         const text = propOr('breadcrumbs', {}, langMap);
-        const firstLevelPath = `${langRoute}/:alias`;
-        const firstLevelMatch = matchPath(pathname, { path: firstLevelPath });
 
         return (
             <div className={styles.breadcrumbsWrap}>
@@ -41,25 +38,33 @@ class Breadcrumbs extends Component {
                         {text.main}
                     </Link>
                     {noCategoryPage &&
-                    <Link className={styles.breadcrumb} to={`${langRoute}/${firstLevelMatch.params.alias}`}>
+                    <span className={styles.breadcrumb}>
                         {noCategoryPage}
-                    </Link>}
+                    </span>}
                     {category.texts &&
-                    <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
-                        {category.texts[lang].name}
-                    </Link>}
+                        (subCategory.texts
+                            ? <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
+                                {category.texts[lang].name}
+                            </Link>
+                            : <span className={styles.breadcrumb}>
+                                {category.texts[lang].name}
+                            </span>)}
                     {subCategory.texts &&
-                    <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}`}>
-                        {subCategory.texts[lang].name}
-                    </Link>}
+                        (product.texts
+                            ? <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}`}>
+                                {subCategory.texts[lang].name}
+                            </Link>
+                            : <span className={styles.breadcrumb}>
+                                {subCategory.texts[lang].name}
+                            </span>)}
                     {product.texts &&
-                    <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}/${product.alias}`}>
+                    <span className={styles.breadcrumb}>
                         {product.texts[lang].name}
-                    </Link>}
+                    </span>}
                     {article.texts &&
-                    <Link className={styles.breadcrumb} to={`${langRoute}/${firstLevelMatch.params.alias}/${article.alias}`}>
+                    <span className={styles.breadcrumb}>
                         {article.texts[lang].name}
-                    </Link>}
+                    </span>}
                 </div>
             </div>);
     }
@@ -73,4 +78,4 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(Breadcrumbs));
+export default connect(mapStateToProps)(Breadcrumbs);
