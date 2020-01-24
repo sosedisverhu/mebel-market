@@ -141,17 +141,17 @@ class FilterSlider extends Component {
                     <div className={styles.customLabels}>
                         <div className={styles.customLabelWrap}>
                             <input className={styles.customLabel}
-                                   value={value.min}
-                                   onChange={e => this.handleIntroduceValue(e, 'min')}
-                                   onBlur={() => this.priceOnBlur()}
+                                value={value.min}
+                                onChange={e => this.handleIntroduceValue(e, 'min')}
+                                onBlur={() => this.priceOnBlur()}
                             />
                             <span className={styles.dimension}>{dimension}</span>
                         </div>
                         <div className={styles.customLabelWrap}>
                             <input className={styles.customLabel}
-                                   value={value.max}
-                                   onChange={e => this.handleIntroduceValue(e, 'max')}
-                                   onBlur={() => this.priceOnBlur()}
+                                value={value.max}
+                                onChange={e => this.handleIntroduceValue(e, 'max')}
+                                onBlur={() => this.priceOnBlur()}
                             />
                             <span className={styles.dimension}>{dimension}</span>
                         </div>

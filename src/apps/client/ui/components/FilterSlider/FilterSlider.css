@@ -155,23 +155,25 @@
 }
 
 .customLabelWrap {
-    width: 74px;
-    padding: 4px 12px 3px 12px;
     border: 1px solid whiteBasic;
     border-radius: 2px;
     background-color: greenBasic;
     font: 14px/16px RoundedElegance;
     color: whiteBasic;
+    position: relative;
+    z-index: 1;
 }
 
 .customLabel {
-    /*width: 74px;*/
-    /*padding: 4px 12px 3px 12px;*/
-    /*border: 1px solid whiteBasic;*/
-    /*border-radius: 2px;*/
-    /*background-color: greenBasic;*/
-    /*font: 14px/16px RoundedElegance;*/
-    /*color: whiteBasic;*/
+    width: 74px;
+    padding: 4px 6px 3px 6px;
+}
+
+.dimension {
+    position: absolute;
+    right: 6px;
+    top: 4px;
+    z-index: -1;
 }
 
 .track {
