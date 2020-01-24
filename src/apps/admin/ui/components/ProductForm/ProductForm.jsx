@@ -392,7 +392,6 @@ class ProductForm extends Component {
         const { categoryHidden, errorText, categoryFilters, subCategoryFilters } = this.state;
 
         return <div>
-            {console.log(this.initialValues)}
             <Form
                 initialValues={this.initialValues}
                 langs={['ru', 'ua']}
