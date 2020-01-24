@@ -14,7 +14,8 @@ class FilterSlider extends Component {
     static propTypes = {
         filter: PropTypes.shape({
             name: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired
+            id: PropTypes.string.isRequired,
+            dimension: PropTypes.string
         }),
         filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired
@@ -128,8 +129,10 @@ class FilterSlider extends Component {
     };
 
     render () {
-        const { filter: { name } } = this.props;
+        const { filter: { name, dimension } } = this.props;
         const { defaultValue: { min, max }, value, step, active } = this.state;
+        console.log('dimension', dimension);
+        console.log('this.props.filter', this.props.filter);
 
         return (
             <div className={classNames(styles.filter, { [styles.active]: active })}>
@@ -139,12 +142,12 @@ class FilterSlider extends Component {
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
                         <input className={styles.customLabel}
-                            value={value.min}
+                            value={`value.min`}
                             onChange={e => this.handleIntroduceValue(e, 'min')}
                             onBlur={() => this.priceOnBlur()}
                         />
                         <input className={styles.customLabel}
-                            value={value.max}
+                            value={`value.max`}
                             onChange={e => this.handleIntroduceValue(e, 'max')}
                             onBlur={() => this.priceOnBlur()}
                         />

@@ -68,7 +68,8 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
                     options: [{
                         id: 'notDepend',
                         name: 'depend'
-                    }]
+                    }],
+                    dimension: 'notDepend'
                 }],
                 validators: [
                     { name: 'filters' }
