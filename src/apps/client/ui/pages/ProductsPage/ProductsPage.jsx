@@ -83,16 +83,10 @@ class ProductsPage extends Component {
     setNewState = (props = this.props) => {
         const { subCategoryAlias, categoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
-        if (!category) {
-            this.setState({
-                isCategory: false
-            });
-            return;
-        }
-        const subCategory = subCategoryAlias && this.getSubCategory(props);
         const isPromotionsPage = categoryAlias === 'promotions';
+        const subCategory = subCategoryAlias && this.getSubCategory(props);
 
-        if (subCategoryAlias && !subCategory && !isPromotionsPage) {
+        if (((!category) || subCategoryAlias && !subCategory) && !isPromotionsPage) {
             this.setState({
                 isCategory: false
             });
@@ -319,7 +313,7 @@ class ProductsPage extends Component {
         return (
             <div className={styles.productPage}>
                 <Breadcrumbs category={category}
-                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
+                    noCategoryPage={!!(isPromotionsPage ? headerText.promotions : '')}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
