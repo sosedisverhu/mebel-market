@@ -3,7 +3,6 @@
 @value gray0 from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
-@value gray5 from '../../../../../css/colors.css';
 @value gray6 from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
@@ -15,7 +14,7 @@ textarea {
 }
 
 .checkoutPage {
-    background: gray5;
+    background: gray3;
     padding-bottom: 30px;
 
     @media (max-width: 450px) {
@@ -34,11 +33,11 @@ textarea {
 
 .contentTop {
     max-width: 978px;
-    margin: 30px auto 0 auto;
+    margin: 0 auto;
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
-    padding: 0 16px;
+    padding: 30px 16px 0 16px;
     box-sizing: content-box;
 
     @media (max-width: 750px) {
@@ -46,7 +45,7 @@ textarea {
     }
 
     @media (max-width: 450px) {
-        margin-top: 20px;
+        padding-top: 20px;
     }
 }
 
@@ -294,6 +293,10 @@ textarea {
     @media (max-width: 450px) {
         margin-top: 20px;
     }
+}
+
+.noItemsContainerWrap {
+    height: 100%;
 }
 
 .noItemsContainer {

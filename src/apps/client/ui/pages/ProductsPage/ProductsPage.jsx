@@ -315,13 +315,9 @@ class ProductsPage extends Component {
         const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const headerText = propOr('header', {}, langMap);
-        console.log('category', category);
-        console.log('subCategory', subCategory);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category} subCategory={subCategory}
-                             noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
@@ -338,6 +334,10 @@ class ProductsPage extends Component {
                             })}
                         </div>
                     </div>
+                    <Breadcrumbs
+                        category={category}
+                        subCategory={subCategory}
+                        noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter}>

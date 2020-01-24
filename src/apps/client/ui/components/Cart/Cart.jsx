@@ -101,7 +101,7 @@ class Cart extends Component {
                                         <p className={styles.totalPrice}>{formatMoney(totalPrice)}</p>
                                     </div>
                                 </div>
-                                <Link to={`${langRoute}/order/`} >
+                                <Link to={`${langRoute}/order`} >
                                     <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>{text.checkout}</button>
                                 </Link>
                             </div>
