@@ -65,7 +65,7 @@ class ProductsPage extends Component {
         isCategory: true,
         isSubCategoryFilters: false,
         filters: [],
-        filteredProducts: null,
+        filteredProducts: [],
         filtersMap: {},
         currentCategoryFiltersName: 'categoryFilters'
     };
@@ -117,7 +117,7 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: null,
+            filteredProducts: products,
             isPromotionsPage
         });
     };
@@ -302,7 +302,7 @@ class ProductsPage extends Component {
 
         this.setState({
             products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : products
         });
     };
 
@@ -342,7 +342,7 @@ class ProductsPage extends Component {
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${formatWordDeclension(text.results, products.length)}`}
+                                {`${propOr('length', 0, filteredProducts)} ${text.results}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>
