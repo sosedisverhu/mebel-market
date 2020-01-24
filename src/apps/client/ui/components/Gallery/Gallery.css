@@ -5,9 +5,12 @@
 
 .gallery {
     margin: 30px 55px 0 0;
-    max-width: 680px;
+    width: 680px;
+    min-width: 680px;
     background: whiteBasic;
     position: relative;
+    z-index: 1;
+    user-select: none;
 
     @media (max-width: 1060px) {
         margin-right: 30px;
@@ -15,6 +18,8 @@
 
     @media (max-width: 1000px) {
         margin: 15px 0 0 0;
+        width: auto;
+        min-width: auto;
     }
 
     @media (max-width: 600px) {
@@ -31,15 +36,41 @@
     font: 18px/21px RoundedElegance;
     color: whiteBasic;
     background: redBasic;
+    z-index: 1;
 }
 
 .percentage{
     font: 18px/21px HelveticaNeueCyr;
 }
 
+.mainImgWrap {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}
+
 .mainImg {
     width: 100%;
     height: auto;
+    flex-shrink: 0;
+    z-index: -1;
+}
+
+.slider{
+    position: relative;
+    left: 0;
+    transition: left .5s ease-in-out;
+    display: flex;
+    width: 100%;
 }
 
 .additionalImgs {
@@ -57,18 +88,18 @@
     cursor: pointer;
 
     &:before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        border-radius: 50%;
-        width: 10px;
-        height: 10px;
-        margin-left: -5px;
-        margin-top: -5px;
-        display: none;
-        background: gray1;
-    }
+         content: '';
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         border-radius: 50%;
+         width: 10px;
+         height: 10px;
+         margin-left: -5px;
+         margin-top: -5px;
+         display: none;
+         background: gray1;
+     }
 
     &.active {
         .additionalImg {
@@ -77,8 +108,8 @@
         }
 
         &:before {
-            background: greenBasic;
-        }
+             background: greenBasic;
+         }
     }
 
     @media (max-width: 600px) {
@@ -96,9 +127,11 @@
 .additionalImg {
     width: 100%;
     opacity: 0.6;
+    display: flex;
     transition: opacity 0.2s ease-in;
 
     @media (max-width: 600px) {
         display: none;
     }
 }
+

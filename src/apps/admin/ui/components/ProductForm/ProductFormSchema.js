@@ -108,7 +108,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: categoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите категорию новости' } }
+                    { name: 'required', options: { text: 'Выберите категорию товара' } }
                 ]
             },
             {
@@ -119,7 +119,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: subCategoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите подкатегорию новости' } }
+                    { name: 'required', options: { text: 'Выберите подкатегорию товара' } }
                 ]
             },
             {

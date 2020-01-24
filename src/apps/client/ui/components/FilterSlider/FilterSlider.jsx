@@ -18,7 +18,9 @@ class FilterSlider extends Component {
             dimension: PropTypes.string
         }),
         filtersMap: PropTypes.object.isRequired,
-        onFilter: PropTypes.func.isRequired
+        onFilter: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.func.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired
     };
 
     constructor (...args) {

@@ -63,7 +63,7 @@ class ArticlePage extends Component {
         }
 
         return <section className={styles.root}>
-            <Breadcrumbs />
+            <Breadcrumbs noCategoryPage={text.breadcrumbArticles} article={article} />
             <div className={styles.articleWrap}>
                 <div className={styles.article}>
                     <h1 className={styles.title}>{article.texts[lang].name}</h1>

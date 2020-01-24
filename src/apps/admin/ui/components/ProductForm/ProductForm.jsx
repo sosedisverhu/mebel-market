@@ -59,6 +59,7 @@ class ProductForm extends Component {
         product: PropTypes.object,
         categories: PropTypes.array,
         subCategories: PropTypes.array,
+        allSubCategories: PropTypes.array,
         activeCategory: PropTypes.object
     };
 
@@ -67,6 +68,7 @@ class ProductForm extends Component {
         product: {},
         categories: [],
         subCategories: [],
+        allSubCategories: [],
         activeCategory: {}
     };
 
@@ -135,11 +137,10 @@ class ProductForm extends Component {
         this.id = prop('id', product);
 
         const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
-        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories[0]);
+        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories.find(subCategory => subCategory.id === this.initialValues.subCategoryId));
 
         this.state = {
             lang: 'ru',
-            activeCategory,
             categoryHidden,
             errorText: '',
             categoryFilters,
@@ -177,7 +178,7 @@ class ProductForm extends Component {
         } = values;
 
         const activeCategory = this.props.categories.find(category => category.id === categoryId);
-        const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
+        const activeSubCategory = this.props.allSubCategories.find(subCategory => subCategory.id === subCategoryId);
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
             if (CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
@@ -359,19 +360,23 @@ class ProductForm extends Component {
 
         case 'categoryId':
             const activeCategory = this.props.categories.find(category => category.id === changes.categoryId);
-            const { lang } = this.state;
+            const activeSubCategories = this.props.allSubCategories.filter(subCategory => subCategory.categoryId === activeCategory.id);
+
+            this.subCategoriesOptions = activeSubCategories.map(subCategory => ({ value: subCategory.id, name: subCategory.texts.ru.name }));
 
             this.setState({
                 categoryHidden: activeCategory.hidden,
-                filters: pathOr(['filters', 'ru'], [], activeCategory)
+                categoryFilters: pathOr(['filters', 'ru'], [], activeCategory),
+                subCategoryFilters: activeSubCategories[0].filters.ru
             });
 
-            this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
-                value: category.id,
-                name: category.name
-            }));
+            values.subCategoryId = this.subCategoriesOptions[0].value;
+            break;
 
-            values.subCategoryId = activeCategory.texts[lang].subCategory[0].id;
+        case 'subCategoryId':
+            this.setState({
+                subCategoryFilters: this.props.allSubCategories.find(subCategory => subCategory.id === changes.subCategoryId).filters.ru
+            });
             break;
         }
     };
