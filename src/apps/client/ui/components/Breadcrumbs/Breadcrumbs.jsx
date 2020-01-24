@@ -16,7 +16,7 @@ class Breadcrumbs extends Component {
         subCategory: PropTypes.object,
         product: PropTypes.object,
         article: PropTypes.object,
-        noCategoryPage: ''
+        noCategoryPage: PropTypes.string
     };
 
     static defaultProps = {
@@ -24,7 +24,7 @@ class Breadcrumbs extends Component {
         subCategory: {},
         product: {},
         article: {},
-        isPromotionsPage: false
+        noCategoryPage: ''
     };
 
     render () {

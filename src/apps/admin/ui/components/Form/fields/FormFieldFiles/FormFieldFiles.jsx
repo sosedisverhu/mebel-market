@@ -15,8 +15,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import map from '@tinkoff/utils/array/map';
 import remove from '@tinkoff/utils/array/remove';
-import arrayMove from '../../../../../utils/arrayMove';
 import find from '@tinkoff/utils/array/find';
+import arrayMove from '../../../../../utils/arrayMove';
 
 const checkWrongDimensions = slides => {
     const wrongFile = find(file => file.wrongDimensions, slides);
@@ -89,7 +89,7 @@ const materialStyles = theme => ({
 });
 
 const Image = SortableHandle(({ imageClassName, src, onLoad }) => (
-    <img className={imageClassName} src={src} onLoad={onLoad} />
+    <img className={imageClassName} src={src} onLoad={onLoad}/>
 ));
 
 const FilePreview = SortableElement(({ file, index, classes, onFileDelete, isSorting, onFileLoad }) =>
@@ -101,12 +101,13 @@ const FilePreview = SortableElement(({ file, index, classes, onFileDelete, isSor
                 aria-label='Delete'
                 onClick={onFileDelete(index)}
             >
-                <DeleteIcon />
+                <DeleteIcon/>
             </IconButton>
         </div>
-        <Image src={file.path} imageClassName={classNames(classes.fileImage, {
-            [classes.fileImageError]: file.wrongDimensions
-        })} onLoad={onFileLoad(index)} />
+        <Image src={typeof file.path === 'string' ? file.path : file.path.path}
+            imageClassName={classNames(classes.fileImage, {
+                [classes.fileImageError]: file.wrongDimensions
+            })} onLoad={onFileLoad(index)}/>
     </div>);
 
 const FilesPreviews = SortableContainer(({ files, classes, ...rest }) => {
@@ -240,8 +241,9 @@ class FormFieldFiles extends Component {
                 <WarningIcon className={classNames(classes.warningIcon, {
                     [classes.errorIcon]: isWrongDimensions
                 })} color={isWrongDimensions ? 'error' : 'inherit'} fontSize='small'/>
-                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'} variant='h6'>
-                    Ширина фото дожна быть {this.requredFileWidth}px, а высота {this.requredFileHeight}px
+                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'}
+                    variant='h6'>
+                        Ширина фото дожна быть {this.requredFileWidth}px, а высота {this.requredFileHeight}px
                 </Typography>
             </div>;
         case !!this.requredFileHeight:
@@ -249,8 +251,9 @@ class FormFieldFiles extends Component {
                 <WarningIcon className={classNames(classes.warningIcon, {
                     [classes.errorIcon]: isWrongDimensions
                 })} color={isWrongDimensions ? 'error' : 'inherit'} fontSize='small'/>
-                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'} variant='h6'>
-                    Высота фото дожна быть {this.requredFileHeight}px
+                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'}
+                    variant='h6'>
+                        Высота фото дожна быть {this.requredFileHeight}px
                 </Typography>
             </div>;
         case !!this.requredFileWidth:
@@ -258,8 +261,9 @@ class FormFieldFiles extends Component {
                 <WarningIcon className={classNames(classes.warningIcon, {
                     [classes.errorIcon]: isWrongDimensions
                 })} color={isWrongDimensions ? 'error' : 'inherit'} fontSize='small'/>
-                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'} variant='h6'>
-                    Ширина фото дожна быть {this.requredFileWidth}px
+                <Typography className={classes.warningText} color={isWrongDimensions ? 'error' : 'inherit'}
+                    variant='h6'>
+                        Ширина фото дожна быть {this.requredFileWidth}px
                 </Typography>
             </div>;
         default:
@@ -285,7 +289,7 @@ class FormFieldFiles extends Component {
                 <label htmlFor={inputId}>
                     <Button variant='contained' component='span' color='default'>
                         Загрузить
-                        <CloudUploadIcon className={classes.uploadIcon} />
+                        <CloudUploadIcon className={classes.uploadIcon}/>
                     </Button>
                 </label>
                 {this.renderDimensionsRequires()}

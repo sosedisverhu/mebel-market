@@ -11,6 +11,7 @@ input,
 textarea {
     @mixin removeDefaultButton;
     outline: none;
+    user-select: auto;
 }
 
 .checkoutPage {

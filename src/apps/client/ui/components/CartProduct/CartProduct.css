@@ -159,6 +159,7 @@
 .quantitySub {
     left: 0;
 }
+
 .quantityAdd {
     right: 0;
 }
@@ -211,6 +212,7 @@
         line-height: 23px;
     }
 }
+
 .productDiscountPrice {
     color: redBasic;
 }

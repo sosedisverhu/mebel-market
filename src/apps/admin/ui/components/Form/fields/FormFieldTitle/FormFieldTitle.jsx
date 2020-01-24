@@ -15,9 +15,7 @@ export default class FormFieldTitle extends Component {
     render () {
         const { schema } = this.props;
 
-        return <Typography
-            variant={schema.variant}
-        >
+        return <Typography variant={schema.variant}>
             {schema.label}
         </Typography>;
     }

@@ -17,9 +17,7 @@ class FilterSlider extends Component {
             id: PropTypes.string.isRequired
         }),
         filtersMap: PropTypes.object.isRequired,
-        onFilter: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        onFilter: PropTypes.func.isRequired
     };
 
     constructor (...args) {
@@ -95,6 +93,40 @@ class FilterSlider extends Component {
         });
     };
 
+    handleIntroduceValue = (e, valueName) => {
+        const { value, defaultValue } = this.state;
+
+        if (!isNaN(e.target.value) && +e.target.value <= defaultValue.max) {
+            const eTarget = e.target.value !== '' ? +e.target.value : '';
+            const newValue = valueName === 'min' ? { ...value, min: eTarget } : { ...value, max: eTarget };
+
+            this.setState({
+                value: newValue
+            });
+
+            this.props.onFilter(newValue);
+        }
+    };
+
+    priceOnBlur = () => {
+        const { defaultValue, value } = this.state;
+
+        if (value.min > value.max) {
+            this.setState({
+                value: defaultValue
+            });
+            return this.props.onFilter(defaultValue);
+        }
+
+        if (defaultValue.min > value.min) {
+            this.setState({
+                value: { ...value, min: defaultValue.min }
+            });
+        }
+
+        this.props.onFilter(value);
+    };
+
     render () {
         const { filter: { name } } = this.props;
         const { defaultValue: { min, max }, value, step, active } = this.state;
@@ -106,12 +138,16 @@ class FilterSlider extends Component {
                 </div>
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
-                        <div className={styles.customLabel}>
-                            {value.min.toFixed(0)}  &#8372;
-                        </div>
-                        <div className={styles.customLabel}>
-                            {value.max.toFixed(0)}  &#x20b4;
-                        </div>
+                        <input className={styles.customLabel}
+                            value={value.min}
+                            onChange={e => this.handleIntroduceValue(e, 'min')}
+                            onBlur={() => this.priceOnBlur()}
+                        />
+                        <input className={styles.customLabel}
+                            value={value.max}
+                            onChange={e => this.handleIntroduceValue(e, 'max')}
+                            onBlur={() => this.priceOnBlur()}
+                        />
                     </div>
                     <InputRange
                         maxValue={+max}
@@ -126,7 +162,7 @@ class FilterSlider extends Component {
                             sliderContainer: styles.sliderContainer,
                             slider: styles.slider
                         }}
-                        formatLabel={value => `${Number((value).toFixed(1))}`}
+                        formatLabel={value => `${Number((value))}`}
                         step={step}
                         value={value}
                         onChange={this.handleInputChange}
