@@ -13,6 +13,7 @@ import each from '@tinkoff/utils/array/each';
 import filter from '@tinkoff/utils/array/filter';
 
 import styles from './CheckoutPage.css';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
 import formatMoney from '../../../utils/formatMoney';
@@ -231,17 +232,21 @@ class CheckoutPage extends Component {
         const totalPrice = productsPrice + (deliveryChecked.price || 0);
 
         if (!basket.length) {
-            return <section className={styles.noItemsContainer}>
-                <div className={styles.noItemsText}>
-                    {text.noItemsInBasket}
+            return <section className={styles.noItemsContainerWrap}>
+                <Breadcrumbs noCategoryPage={text.checkout} />
+                <div className={styles.noItemsContainer}>
+                    <div className={styles.noItemsText}>
+                        {text.noItemsInBasket}
+                    </div>
+                    <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
+                        <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
+                    </Link>
                 </div>
-                <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
-                    <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
-                </Link>
             </section>;
         }
 
         return (<section className={styles.checkoutPage}>
+            <Breadcrumbs noCategoryPage={text.checkout} />
             <form className={styles.content} onSubmit={this.handleSubmit}>
                 <div className={styles.contentTop}>
                     <div className={styles.details}>

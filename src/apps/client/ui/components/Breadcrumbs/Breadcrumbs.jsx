@@ -13,38 +13,59 @@ class Breadcrumbs extends Component {
         langRoute: PropTypes.string.isRequired,
         lang: PropTypes.string.isRequired,
         category: PropTypes.object,
+        subCategory: PropTypes.object,
         product: PropTypes.object,
-        noCategoryPage: PropTypes.bool
+        article: PropTypes.object,
+        noCategoryPage: PropTypes.string
     };
 
     static defaultProps = {
         category: {},
+        subCategory: {},
         product: {},
-        isPromotionsPage: false,
-        noCategoryPage: true
+        article: {},
+        noCategoryPage: ''
     };
 
     render () {
-        const { langMap, langRoute, category, product, lang, noCategoryPage } = this.props;
+        const { langMap, langRoute, category, subCategory, product, article, lang, noCategoryPage } = this.props;
         const text = propOr('breadcrumbs', {}, langMap);
 
         return (
-            <div className={styles.breadcrumbs}>
-                <Link className={styles.breadcrumb} to={langRoute}>
-                    {text.main}
-                </Link>
-                {noCategoryPage &&
-                <Link className={styles.breadcrumb} to={`${langRoute}/promotions`}>
-                    {noCategoryPage}
-                </Link>}
-                {category.texts &&
-                <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
-                    {category.texts[lang].name}
-                </Link>}
-                {product.texts &&
-                <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${product.id}`}>
-                    {product.texts[lang].name}
-                </Link>}
+            <div className={styles.breadcrumbsWrap}>
+                <div className={styles.breadcrumbs}>
+                    <Link className={styles.breadcrumb} to={langRoute}>
+                        {text.main}
+                    </Link>
+                    {noCategoryPage &&
+                    <span className={styles.breadcrumb}>
+                        {noCategoryPage}
+                    </span>}
+                    {category.texts &&
+                        (subCategory.texts
+                            ? <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}`}>
+                                {category.texts[lang].name}
+                            </Link>
+                            : <span className={styles.breadcrumb}>
+                                {category.texts[lang].name}
+                            </span>)}
+                    {subCategory.texts &&
+                        (product.texts
+                            ? <Link className={styles.breadcrumb} to={`${langRoute}/${category.alias}/${subCategory.alias}`}>
+                                {subCategory.texts[lang].name}
+                            </Link>
+                            : <span className={styles.breadcrumb}>
+                                {subCategory.texts[lang].name}
+                            </span>)}
+                    {product.texts &&
+                    <span className={styles.breadcrumb}>
+                        {product.texts[lang].name}
+                    </span>}
+                    {article.texts &&
+                    <span className={styles.breadcrumb}>
+                        {article.texts[lang].name}
+                    </span>}
+                </div>
             </div>);
     }
 }
