@@ -213,7 +213,7 @@ class ProductsPage extends Component {
         this.setState({
             activeCategory: category,
             products: this.getCategoryProducts(category),
-            subCategories: this.props.subCategories.filter((subCategory) => category.id === subCategory.categoryId)
+            subCategories: this.props.subCategories.filter(subCategory => category.id === subCategory.categoryId)
         });
     };
 
@@ -257,6 +257,9 @@ class ProductsPage extends Component {
             </div>;
 
         default:
+            const categoriesWithSubCategories = categories.filter(category => {
+                return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
+            });
             return <div>
                 <AdminTable
                     headerRows={headerRows}
@@ -273,8 +276,9 @@ class ProductsPage extends Component {
                 <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
                         <ProductForm
-                            categories={categories}
+                            categories={categoriesWithSubCategories}
                             subCategories={subCategories}
+                            allSubCategories={this.props.subCategories}
                             activeCategory={activeCategory}
                             product={editableProduct}
                             onDone={this.handleProductFormDone}/>
