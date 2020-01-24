@@ -306,14 +306,12 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const headerText = propOr('header', {}, langMap);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category}
-                    noCategoryPage={!!(isPromotionsPage ? headerText.promotions : '')}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
@@ -330,13 +328,17 @@ class ProductsPage extends Component {
                             })}
                         </div>
                     </div>
+                    <Breadcrumbs
+                        category={category}
+                        subCategory={subCategory}
+                        noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter}>
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts)} ${text.results}`}
+                                {`${propOr('length', 0, filteredProducts)} ${formatWordDeclension(text.results, products.length)}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>

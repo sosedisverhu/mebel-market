@@ -13,7 +13,6 @@ import propOr from '@tinkoff/utils/object/propOr';
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
-        lang: application.lang,
         articles: data.articles,
         mediaWidth: application.media.width
     };
@@ -22,11 +21,8 @@ const mapStateToProps = ({ application, data }) => {
 class Articles extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired,
         articles: PropTypes.array.isRequired,
-        mediaWidth: PropTypes.number.isRequired,
-        location: PropTypes.object,
-        history: PropTypes.object.isRequired
+        mediaWidth: PropTypes.number.isRequired
     };
 
     state = {
