@@ -88,8 +88,8 @@ class FilterSlider extends Component {
 
         this.setState({
             value: {
-                min: value.min < min ? min : value.min,
-                max: value.max > max ? max : value.max
+                min: value.min < min ? min : parseFloat(value.min.toFixed(1)),
+                max: value.max > max ? max : parseFloat(value.max.toFixed(1))
             }
         });
     };
@@ -131,8 +131,6 @@ class FilterSlider extends Component {
     render () {
         const { filter: { name, dimension } } = this.props;
         const { defaultValue: { min, max }, value, step, active } = this.state;
-        console.log('dimension', dimension);
-        console.log('this.props.filter', this.props.filter);
 
         return (
             <div className={classNames(styles.filter, { [styles.active]: active })}>
@@ -141,16 +139,22 @@ class FilterSlider extends Component {
                 </div>
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
-                        <input className={styles.customLabel}
-                            value={`value.min`}
-                            onChange={e => this.handleIntroduceValue(e, 'min')}
-                            onBlur={() => this.priceOnBlur()}
-                        />
-                        <input className={styles.customLabel}
-                            value={`value.max`}
-                            onChange={e => this.handleIntroduceValue(e, 'max')}
-                            onBlur={() => this.priceOnBlur()}
-                        />
+                        <div className={styles.customLabelWrap}>
+                            <input className={styles.customLabel}
+                                   value={value.min}
+                                   onChange={e => this.handleIntroduceValue(e, 'min')}
+                                   onBlur={() => this.priceOnBlur()}
+                            />
+                            <span className={styles.dimension}>{dimension}</span>
+                        </div>
+                        <div className={styles.customLabelWrap}>
+                            <input className={styles.customLabel}
+                                   value={value.max}
+                                   onChange={e => this.handleIntroduceValue(e, 'max')}
+                                   onBlur={() => this.priceOnBlur()}
+                            />
+                            <span className={styles.dimension}>{dimension}</span>
+                        </div>
                     </div>
                     <InputRange
                         maxValue={+max}

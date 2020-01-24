@@ -154,7 +154,7 @@
     }
 }
 
-.customLabel {
+.customLabelWrap {
     width: 74px;
     padding: 4px 12px 3px 12px;
     border: 1px solid whiteBasic;
@@ -162,6 +162,16 @@
     background-color: greenBasic;
     font: 14px/16px RoundedElegance;
     color: whiteBasic;
+}
+
+.customLabel {
+    /*width: 74px;*/
+    /*padding: 4px 12px 3px 12px;*/
+    /*border: 1px solid whiteBasic;*/
+    /*border-radius: 2px;*/
+    /*background-color: greenBasic;*/
+    /*font: 14px/16px RoundedElegance;*/
+    /*color: whiteBasic;*/
 }
 
 .track {
