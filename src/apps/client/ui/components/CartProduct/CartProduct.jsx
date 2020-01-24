@@ -149,7 +149,9 @@ class Cart extends Component {
                             </Link>
                             <p className={styles.productNumber}>({product.article})</p>
                         </div>
-                        <p className={styles.productSize}>{text.size} {properties.size.name}</p>
+                        <p className={styles.productSize}>
+                            {text.size} {properties.size.name}
+                        </p>
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -164,6 +166,9 @@ class Cart extends Component {
                                 value={quantity}
                                 onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
+                            <span className={styles.quantityValue}>
+                                {quantity}
+                            </span>
                             <button
                                 type='button'
                                 className={styles.quantityAdd}

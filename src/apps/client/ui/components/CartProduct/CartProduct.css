@@ -159,6 +159,7 @@
 .quantitySub {
     left: 0;
 }
+
 .quantityAdd {
     right: 0;
 }
@@ -167,18 +168,27 @@
     @mixin removeDefaultButton;
     width: 69px;
     height: 22px;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    color: blackLight;
-    text-align: center;
+    font-size: 0;
     border: 1px solid gray0;
     box-sizing: border-box;
     outline: none;
-    padding-top: 3px;
 
     @media (max-width: 500px) {
         width: 84px;
+    }
+}
+
+.quantityValue{
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    color: blackLight;
+
+    @media (max-width: 500px) {
+        left: 37px;
+        top: 4px;
     }
 }
 
