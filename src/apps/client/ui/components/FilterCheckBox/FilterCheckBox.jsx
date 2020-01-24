@@ -18,21 +18,19 @@ class FilterCheckBox extends Component {
             id: PropTypes.string.isRequired
         }),
         filtersMap: PropTypes.object.isRequired,
-        onFilter: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        onFilter: PropTypes.func.isRequired
     };
 
     state = {
         active: false
     };
 
-    handleLabelChecked = option => (event) => {
+    handleLabelChecked = option => e => {
         const { filter: { id }, filtersMap } = this.props;
         const value = propOr('values', [], filtersMap[id]);
         const newValue = [...value];
 
-        if (event.target.checked) {
+        if (e.target.checked) {
             newValue.push(option);
         } else {
             const currentIdIndex = findIndex(valueOption => valueOption === option, value);
@@ -81,7 +79,7 @@ class FilterCheckBox extends Component {
                                     onChange={this.handleLabelChecked(option)}
                                     checked={value}
                                 />
-                                <div className={styles.circle} />
+                                <div className={styles.circle}/>
                                 {option}
                             </label>
                         );

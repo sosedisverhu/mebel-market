@@ -65,7 +65,7 @@ class ProductsPage extends Component {
         isCategory: true,
         isSubCategoryFilters: false,
         filters: [],
-        filteredProducts: null,
+        filteredProducts: [],
         filtersMap: {},
         currentCategoryFiltersName: 'categoryFilters'
     };
@@ -83,16 +83,10 @@ class ProductsPage extends Component {
     setNewState = (props = this.props) => {
         const { subCategoryAlias, categoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
-        if (!category) {
-            this.setState({
-                isCategory: false
-            });
-            return;
-        }
-        const subCategory = subCategoryAlias && this.getSubCategory(props);
         const isPromotionsPage = categoryAlias === 'promotions';
+        const subCategory = subCategoryAlias && this.getSubCategory(props);
 
-        if (subCategoryAlias && !subCategory && !isPromotionsPage) {
+        if (((!category) || subCategoryAlias && !subCategory) && !isPromotionsPage) {
             this.setState({
                 isCategory: false
             });
@@ -117,7 +111,7 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: null,
+            filteredProducts: products,
             isPromotionsPage
         });
     };
@@ -302,7 +296,7 @@ class ProductsPage extends Component {
 
         this.setState({
             products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : products
         });
     };
 
@@ -319,7 +313,7 @@ class ProductsPage extends Component {
         return (
             <div className={styles.productPage}>
                 <Breadcrumbs category={category}
-                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
+                    noCategoryPage={!!(isPromotionsPage ? headerText.promotions : '')}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
@@ -342,7 +336,7 @@ class ProductsPage extends Component {
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${formatWordDeclension(text.results, products.length)}`}
+                                {`${propOr('length', 0, filteredProducts)} ${text.results}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>

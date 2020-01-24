@@ -85,7 +85,7 @@ class Cart extends Component {
     };
 
     quantityChange = value => {
-        if (value >= 0 && value <= MAX_QUANTITY) {
+        if ((value >= 0 && value <= MAX_QUANTITY) || value === '') {
             const { basketItemId, editProductInBasket } = this.props;
             editProductInBasket({
                 quantity: value,
@@ -135,7 +135,8 @@ class Cart extends Component {
                 <Link
                     className={styles.productImgLink}
                     to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
-                    onClick={this.handlePopupClose}>
+                    onClick={this.handlePopupClose}
+                >
                     <img className={styles.productImg} src={product.avatar} alt=''/>
                 </Link>
                 <div className={styles.productInfo}>
@@ -145,7 +146,9 @@ class Cart extends Component {
                                 className={styles.productNameLink}
                                 to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
                                 onClick={this.handlePopupClose}>
-                                <p className={styles.productName}>{product.texts[lang].name}</p>
+                                <p className={styles.productName}>
+                                    {product.texts[lang].name}
+                                </p>
                             </Link>
                             <p className={styles.productNumber}>({product.article})</p>
                         </div>
@@ -163,7 +166,7 @@ class Cart extends Component {
                                 className={styles.quantityInput}
                                 type='text'
                                 onChange={e => this.quantityChange(e.target.value.replace(/\D/, ''))}
-                                value={quantity}
+                                value={quantity !== null ? quantity : ''}
                                 onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
                             <span className={styles.quantityValue}>
