@@ -119,7 +119,7 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveOrder: (...payload) => dispatch(saveOrder(...payload))
 });
 
@@ -143,7 +143,7 @@ class CheckoutPage extends Component {
         customerComment: '',
         customerAddress: '',
         orderId: null
-    }
+    };
 
     handleChange = fieldName => e => {
         this.setState({ [fieldName]: e.target.value, [`${fieldName}Error`]: false });
@@ -152,12 +152,12 @@ class CheckoutPage extends Component {
     handleDeliveryChange = e => {
         const newDelivery = deliveryOptions.find(delivery => delivery.id === e.target.value);
         this.setState({ deliveryChecked: newDelivery, 'deliveryCheckedError': false });
-    }
+    };
 
     handlePaymentChange = e => {
         const newPayment = paymentOptions.find(payment => payment.id === e.target.value);
         this.setState({ paymentChecked: newPayment, 'paymentCheckedError': false });
-    }
+    };
 
     handleBlur = fieldName => () => {
         const { deliveryChecked } = this.state;
@@ -220,7 +220,7 @@ class CheckoutPage extends Component {
             .then(({ shortId }) => {
                 this.setState({ orderId: shortId });
             });
-    }
+    };
 
     render () {
         const { langMap, lang, basket, langRoute } = this.props;
