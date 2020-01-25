@@ -11,9 +11,6 @@
     display: flex;
     justify-content: space-between;
 
-    @media  (--media-desktop-s){
-        padding: 0 58px;
-    }
     @media  (--media-desktop-m){
         padding: 0 128px;
     }
@@ -22,6 +19,9 @@
     }
     @media (max-width: 850px) {
         flex-direction: column;
+        padding: 0 24px;
+    }
+    @media (max-width: 600px) {
         padding: 0;
     }
 }
@@ -50,6 +50,7 @@
 .comment {
     position: relative;
     padding-bottom: 30px;
+    width: 620px;
 
     &:after {
         position: absolute;
@@ -62,39 +63,36 @@
 
     @media  (--media-tablet-l){
         width: 325px;
-
         &:after {
              max-width: 305px;
          }
     }
-    @media  (--media-desktop-s){
-        width: 400px;
-
+    @media (max-width: 850px) {
+        width: 100%;
         &:after {
-             max-width: 350px;
+             max-width: 100%;
+         }
+    }
+    @media  (--media-desktop-s){
+        width: 450px;
+        &:after {
+             max-width: 390px;
          }
     }
     @media  (--media-desktop-m){
         width: 520px;
-
         &:after {
              max-width: 470px;
         }
     }
     @media  (--media-desktop-l){
         width: 620px;
-
         &:after {
              max-width: 580px;
          }
     }
-    @media (max-width: 850px) {
-        width: 100%;
 
-        &:after {
-             max-width: 100%;
-         }
-    }
+
 }
 
 .commentInfo {
