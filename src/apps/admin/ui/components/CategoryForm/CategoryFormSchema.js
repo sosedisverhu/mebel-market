@@ -93,7 +93,7 @@ export default function ({ data: { title } = {} } = {}) {
                         id: 'notDepend',
                         name: 'depend'
                     }],
-                    dimension: 'notDepend'
+                    dimension: 'depend'
                 }],
                 validators: [
                     { name: 'filters' }
