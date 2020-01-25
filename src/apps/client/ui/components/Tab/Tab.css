@@ -7,6 +7,10 @@
 .root {
     padding-bottom: 30px;
     background: gray5;
+
+    @media (max-width: 600px) {
+        padding-bottom: 15px;
+    }
 }
 
 .titles {
@@ -67,6 +71,10 @@
             bottom: 5px;
         }
     }
+    @media (max-width: 340px) {
+        font-size: 15px;
+        line-height: 17px;
+    }
 }
 
 .contentWrap {
@@ -75,12 +83,12 @@
 
 .content {
     margin: 0 auto;
-    max-width: 904px;
     box-sizing: content-box;
     padding: 35px 16px;
+    transition: 0.2s ease-in;
 
     @media (max-width: 600px) {
-        padding: 20px 16px;
+        padding: 20px 16px 15px;
     }
 }
 

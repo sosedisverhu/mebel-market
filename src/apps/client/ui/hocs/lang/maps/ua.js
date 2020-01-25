@@ -148,6 +148,7 @@ export default {
     comments: {
         showAll: 'Показати усі',
         feedbackBtn: 'Залишити відгук',
+        firstFeedbackBtn: 'Будьте першим, хто залишить відгук',
         userRating: 'Ваша оцінка товару',
         inputName: 'Ваше ім\'я та прізвище *',
         inputEmailPhone: 'Ел. пошта або телефон *',

@@ -29,6 +29,9 @@ const materialStyles = theme => ({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    searchWrapper: {
+        padding: '0 20px'
+    },
     modal: {
         display: 'flex',
         justifyContent: 'center',
@@ -235,47 +238,49 @@ class ReviewsPage extends Component {
                 updateReviews={this.upDateReviews}
                 name='Новые отзывы'
             />
-            <TextField
-                label='Поиск комментариев по названию товара'
-                margin='normal'
-                variant='outlined'
-                value={searchValue}
-                onChange={this.onChangeSearch}
-                onKeyPress={this.onChangeSearch}
-                className={classes.tableTitle}
-            />
-            {productReviewsIsRendered
-                ? <Reviews
-                    classes={classes}
-                    reviews={productReviews}
-                    reviewsIsShow={reviewsFormIsRendered}
-                    headerRows={headerRows}
-                    name={`Отзывы к товару ${openedProduct.texts.ru.name}`}
-                    onDelete={this.handleDeleteFormOpen}
-                    onAllowForms={this.onOpenReviewForms}
-                    updateReviews={this.upDateReviews}
-                    isDeleteButton
+            <div className={classes.searchWrapper}>
+                <TextField
+                    label='Поиск комментариев по названию товара'
+                    margin='normal'
+                    variant='outlined'
+                    value={searchValue}
+                    onChange={this.onChangeSearch}
+                    onKeyPress={this.onChangeSearch}
+                    className={classes.tableTitle}
                 />
-                : <div className={classes.products}>
-                    {products.length ? products.map(product => {
-                        return (
-                            <Card
-                                className={classes.productCard}
-                                onClick={() => this.onProductReviewsOpen(product.id)}
-                                key={product.id}
-                            >
-                                <img className={classes.productAvatar}
-                                    src={product.avatar}
-                                    alt=''/>
-                                <Typography variant='h6' className={classes.tableTitle}>
-                                    {product.texts.ru.name}
-                                </Typography>
-                            </Card>
-                        );
-                    }) : searchValue.length ? <Typography variant='h6'>
-                        {`По запросу «${searchValue}» не найдено товаров с отзывами`}
-                    </Typography> : null}
-                </div>}
+                {productReviewsIsRendered
+                    ? <Reviews
+                        classes={classes}
+                        reviews={productReviews}
+                        reviewsIsShow={reviewsFormIsRendered}
+                        headerRows={headerRows}
+                        name={`Отзывы к товару ${openedProduct.texts.ru.name}`}
+                        onDelete={this.handleDeleteFormOpen}
+                        onAllowForms={this.onOpenReviewForms}
+                        updateReviews={this.upDateReviews}
+                        isDeleteButton
+                    />
+                    : <div className={classes.products}>
+                        {products.length ? products.map(product => {
+                            return (
+                                <Card
+                                    className={classes.productCard}
+                                    onClick={() => this.onProductReviewsOpen(product.id)}
+                                    key={product.id}
+                                >
+                                    <img className={classes.productAvatar}
+                                        src={product.avatar}
+                                        alt=''/>
+                                    <Typography variant='h6' className={classes.tableTitle}>
+                                        {product.texts.ru.name}
+                                    </Typography>
+                                </Card>
+                            );
+                        }) : searchValue.length ? <Typography variant='h6'>
+                            {`По запросу «${searchValue}» не найдено товаров с отзывами`}
+                        </Typography> : null}
+                    </div>}
+            </div>
             <Modal open={deleteFormIsOpen} onClose={this.handleDeleteFormOpen} className={classes.modal}>
                 <Paper className={classes.modalContent}>
                     <DeleteReviewForm

@@ -147,6 +147,7 @@ export default {
     comments: {
         showAll: 'Показать все',
         feedbackBtn: 'Оставить отзыв',
+        firstFeedbackBtn: 'Будьте первым, кто оставит отзыв',
         userRating: 'Ваша оценка товара',
         inputName: 'Ваше имя и фамилия *',
         inputEmailPhone: 'Эл. почта или телефон *',

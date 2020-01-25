@@ -6,7 +6,7 @@ export default function getAvailableReviews (req, res) {
     getAllReviews()
         .then(reviews => {
             const availableReviews = reviews
-                .filter(review => !review.checked)
+                .filter(review => review.checked)
                 .sort((prev, next) => next.date - prev.date);
 
             res.status(OKEY_STATUS_CODE).send(availableReviews);

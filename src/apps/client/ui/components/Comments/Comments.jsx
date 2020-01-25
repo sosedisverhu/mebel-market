@@ -43,25 +43,30 @@ class Comments extends Component {
         inputEmailPhone: '',
         inputText: '',
         newRating: 0,
-        reviews: []
+        reviews: [],
+        isNotReviews: true,
+        showAll: false
     };
 
     componentDidMount () {
         this.props.getReviews()
             .then(() => {
                 const { reviews, productId } = this.props;
+                const filteredReviews = reviews.filter(review => review.productId === productId);
 
                 this.setState({
-                    reviews: reviews.filter(review => review.productId === productId)
+                    reviews: filteredReviews,
+                    reviewsLength: filteredReviews.length,
+                    formIsOpen: filteredReviews.length < 1
                 });
             });
     }
 
-    commentRating = () => {
+    commentRating = value => {
         const rating = [];
 
         for (let i = 0; i < 5; i++) {
-            rating.push(<div className={styles.star} key={i} />);
+            rating.push(<div className={classNames(styles.star, { [styles.emptyStar]: i >= value })} key={i}/>);
         }
 
         return rating;
@@ -73,7 +78,10 @@ class Comments extends Component {
 
         for (let i = 0; i < 5; i++) {
             const ratingVariant = (i < newRating) ? 'starYellow' : 'starGray';
-            rating.push(<div key={i} onClick={() => this.handleClickStar(i + 1)} className={classNames(styles.rating, styles[ratingVariant])}/>);
+            rating.push(<div onClick={() => this.handleClickStar(i + 1)}
+                className={classNames(styles.rating, styles[ratingVariant])}
+                key={i}
+            />);
         }
 
         return rating;
@@ -87,8 +95,8 @@ class Comments extends Component {
         this.setState(state => ({ formIsOpen: !state.formIsOpen }));
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleSubmit = e => {
+        e.preventDefault();
         const { inputName, inputEmailPhone, inputText, newRating } = this.state;
 
         this.props.saveReview({
@@ -116,67 +124,116 @@ class Comments extends Component {
         });
     };
 
+    handleShowAll = () => {
+        this.setState({
+            showAll: true
+        });
+    };
+
+    renderComment = comment => {
+        return <div className={styles.comment}>
+            <div className={styles.commentInfo}>
+                <p className={styles.name}>
+                    {comment.user.name}
+                </p>
+                <div className={styles.stars}>
+                    {this.commentRating(comment.user.mark)}
+                </div>
+                <p className={styles.date}>
+                    {format(comment.date, 'HH:mm - dd.MM.yyyy')}
+                </p>
+            </div>
+            <p className={styles.commentText}>
+                {comment.user.comment}
+            </p>
+        </div>;
+    };
+
     render () {
         const { langMap } = this.props;
-        const { formIsOpen, inputName, inputEmailPhone, inputText, reviews } = this.state;
+        const { formIsOpen, inputName, inputEmailPhone, inputText, reviews, reviewsLength, showAll } = this.state;
         const text = propOr('comments', {}, langMap);
 
         return (
             <div className={styles.commentsContainer}>
                 <div className={styles.comments}>
-                    {reviews.map((comment, i) =>
-                        <div className={styles.comment} key={i}>
-                            <div className={styles.commentInfo}>
-                                <p className={styles.name}>{comment.user.name}</p>
-                                <div className={styles.stars}>
-                                    {this.commentRating()}
-                                </div>
-                                <p className={styles.date}>{format(comment.date, 'HH:mm - dd.MM.yyyy')}</p>
-                            </div>
-                            <p className={styles.commentText}>{comment.user.comment}</p>
-                        </div>
-                    )}
-                    <a className={styles.showAll}>{text.showAll}</a>
-                </div>
-                <div className={styles.commentsForm}>
                     <div>
-                        <a className={classNames(styles.showAll, styles.showAllMobile)}>{text.showAll}</a>
-                        <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen })} onClick={this.toggleForm}>
-                            {text.feedbackBtn}
+                        {reviews.map((comment, i) => {
+                            if (i <= 4) {
+                                return <div key={i}>
+                                    {this.renderComment(comment)}
+                                </div>;
+                            }
+                        }
+                        )}
+                    </div>
+                    <div className={classNames(styles.hiddenComments, { [styles.active]: showAll })}>
+                        {reviews.map((comment, i) => {
+                            if (i >= 4) {
+                                return <div key={i}>
+                                    {this.renderComment(comment)}
+                                </div>;
+                            }
+                        }
+                        )}
+                    </div>
+                    {(reviewsLength >= 4 && !showAll) &&
+                    <span className={styles.showAll} onClick={this.handleShowAll}>
+                        {text.showAll}
+                    </span>}
+                </div>
+                <div>
+                    <div>
+                        {(reviewsLength >= 4 && !showAll) &&
+                        <span className={classNames(styles.showAll, styles.showAllMobile)}
+                            onClick={this.handleShowAll}
+                        >
+                            {text.showAll}
+                        </span>}
+                        <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen }, { [styles.firstFeedbackTitle]: reviewsLength < 1 })}
+                            onClick={this.toggleForm}>
+                            {reviewsLength < 1 ? text.firstFeedbackBtn : text.feedbackBtn}
                         </p>
                     </div>
-                    <form onSubmit={this.handleSubmit} className={classNames(styles.form, { [styles.active]: formIsOpen })}>
+                    <form onSubmit={this.handleSubmit}
+                        className={classNames(styles.form, { [styles.active]: formIsOpen })}
+                    >
                         <div className={styles.userRatingWrapper}>
-                            <p className={styles.userRatingText}>{text.userRating}</p>
+                            <p className={styles.userRatingText}>
+                                {text.userRating}
+                            </p>
                             <div className={styles.userRating}>
                                 {this.changeRating()}
                             </div>
                         </div>
-                        <input
-                            className={styles.commentInput}
+                        <input className={styles.commentInput}
                             type="text"
                             name='inputName'
                             placeholder={text.inputName}
                             value={inputName}
                             onChange={this.handleChange('inputName')}
                         />
-                        <input
-                            className={styles.commentInput}
+                        <input className={styles.commentInput}
                             type="text"
                             name='inputEmailPhone'
                             placeholder={text.inputEmailPhone}
                             value={inputEmailPhone}
                             onChange={this.handleChange('inputEmailPhone')}
                         />
-                        <textarea
-                            className={classNames(styles.commentInput, styles.inputText)}
+                        <textarea className={classNames(styles.commentInput, styles.inputText)}
                             name="inputText"
                             placeholder={text.inputText}
                             value={inputText}
                             onChange={this.handleChange('inputText')}
                         />
-                        <button className={styles.feedbackBtn} type="submit">{text.feedbackBtn}</button>
-                        <button className={styles.cancelBtn} onClick={this.handleCancel}>{text.cancelBtn}</button>
+                        <div className={styles.formButtonsWrapper}>
+                            <button className={styles.feedbackBtn} type='submit'>
+                                {text.feedbackBtn}
+                            </button>
+                            <button className={styles.cancelBtn} onClick={this.handleCancel}>
+                                {text.cancelBtn}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
