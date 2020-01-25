@@ -142,6 +142,7 @@
     "react-swipeable-views": "^0.13.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "scroll-lock": "^2.1.2",
     "scrollbar-width": "^3.1.1",
     "smoothscroll-polyfill": "^0.4.4",
     "style-loader": "^1.0.0",

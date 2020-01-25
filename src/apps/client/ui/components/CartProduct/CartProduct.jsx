@@ -169,6 +169,9 @@ class Cart extends Component {
                                 value={quantity !== null ? quantity : ''}
                                 onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
+                            <span className={styles.quantityValue}>
+                                {quantity}
+                            </span>
                             <button
                                 type='button'
                                 className={styles.quantityAdd}

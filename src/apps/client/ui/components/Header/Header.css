@@ -304,8 +304,8 @@
 
 .searchInputBottom {
     font-family: RoundedElegance;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 16px;
     width: 213px;
     height: 19px;
     background-color: whiteBasic;
@@ -405,7 +405,7 @@
     height: calc(100% - 99px);
     max-height: 0;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 40;
     transition: max-height 0.25s ease-out;
 
     &.active {
