@@ -168,7 +168,21 @@ class SearchPage extends Component {
                                 </div>
                             </div>
                         </div>)
-                    : null}
+                    : (
+                        <div className={styles.searchNotFoundWrap}>
+                            <div className={styles.searchNotFound}>
+                                <h2 className={styles.searchNotFoundText}>{`${text.noResults} “${searchText}”`}</h2>
+                                <h3 className={styles.tryAgain}>{text.tryAgain}</h3>
+                                <form className={styles.form} action="">
+                                    <div className={styles.searchInputWrap}>
+                                        <input className={styles.searchInput} type="text" placeholder={text.placeholder} />
+                                    </div>
+                                    <button className={styles.searchButton} type="submit"></button>
+                                </form>
+                                <p className={styles.needHelp}>{text.needHelp}</p>
+                                <Link className={styles.link} to="#" >{text.link}</Link>
+                            </div>
+                        </div>)}
             </section>
         );
     }

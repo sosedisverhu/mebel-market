@@ -146,6 +146,15 @@ export default {
         toMain: 'На головну',
         noItemsInBasket: 'В кошику ще немає товарів'
     },
+    quizPage: {
+        title: 'Допомога у виборі',
+        description: 'Виберіть необхідні параметри бажаного ліжка і матраца',
+        next: 'Продовжити',
+        skip: 'Пропустити',
+        result: 'Результат',
+        products: 'Товари:',
+        noProducts: 'Товарів не знайдено('
+    },
     comments: {
         showAll: 'Показати усі',
         feedbackBtn: 'Залишити відгук',

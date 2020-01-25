@@ -5,6 +5,7 @@ import getProducts from '../src/apps/client/services/server/getProducts';
 import getCategories from '../src/apps/client/services/server/getCategories';
 import getSubCategories from '../src/apps/client/services/server/getSubCategories';
 import getPartners from '../src/apps/client/services/server/getPartners';
+import getQuizzes from '../src/apps/client/services/server/getQuizzes';
 import getSeo from '../src/apps/client/services/server/getSeo';
 import getUserProducts from '../src/apps/client/services/server/getUserProducts';
 import getMainSlides from '../src/apps/client/services/server/getMainSlides';
@@ -17,6 +18,7 @@ export default [
     getSubCategories,
     getProducts,
     getPartners,
+    getQuizzes,
     getUserProducts,
     getSeo,
     getMainSlides

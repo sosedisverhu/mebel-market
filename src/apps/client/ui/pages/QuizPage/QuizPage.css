@@ -1,0 +1,420 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value gray5 from '../../../../../css/colors.css';
+
+.quizPage {
+    background-color: gray3;
+}
+
+.quizSectionWrap {
+    background: whiteBasic;
+    padding-top: 30px;
+
+    @media (max-width: 720px) {
+        padding-top: 20px;
+    }
+}
+
+.quizSection {
+    max-width: 674px;
+    margin: 0 auto;
+    box-sizing: content-box;
+    padding: 0 16px;
+}
+
+.content {
+}
+
+.title {
+    font: 24px/28px RoundedElegance;
+    color: blackLight;
+    margin-top: 30px;
+    text-align: center;
+    max-width: 307px;
+    margin: 0 auto;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -1px;
+        width: 287px;
+        height: 2px;
+        background: blackLight;
+    }
+
+    @media (max-width: 720px) {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    @media (max-width: 600px) {
+        max-width: none;
+        text-align: left;
+
+        &:before {
+            right: 0;
+            width: 30%;
+        }
+    }
+}
+
+.description {
+    margin: 15px 0;
+    text-align: center;
+    font: 18px/21px RoundedElegance;
+    color: blackLight;
+
+    @media (max-width: 720px) {
+        margin: 20px 0 30px 0;
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+.quizWrap {
+    padding-bottom: 30px;
+
+    @media (max-width: 600px) {
+        padding-bottom: 20px;
+    }
+}
+
+.topPanel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    overflow: hidden;
+
+    @media (max-width: 720px) {
+        margin-bottom: 0;
+    }
+}
+
+.stepTitle {
+    position: relative;
+    padding-bottom: 23px;
+
+    &.completed {
+        .stepTitleNumber {
+            border-color: blackLight;
+            background: blackLight;
+            color: whiteBasic;
+
+            &:before {
+                background: blackLight;
+            }
+        }
+    }
+
+    &.active {
+        .stepTitleNumber {
+            border-color: blackLight;
+            color: blackLight;
+        }
+
+        .stepTitleText {
+            display: block;
+        }
+    }
+
+    &:first-child {
+        .stepTitleText {
+            left: 0;
+            margin-left: 0;
+            text-align: left;
+        }
+    }
+
+    &:last-child {
+        .stepTitleText {
+            right: 0;
+            margin-left: 0;
+            left: auto;
+            text-align: right;
+        }
+
+        .stepTitleNumber {
+            &:before {
+                background: whiteBasic;
+            }
+        }
+    }
+
+    @media (max-width: 720px) {
+        padding-bottom: 33px;
+    }
+}
+
+.stepTitleNumber {
+    font: 36px/41px RoundedElegance;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: whiteBasic;
+    color: rgba(35, 35, 35, 0.25);
+    border: 2px solid rgba(35, 35, 35, 0.25);
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+
+    &:before {
+        content: "";
+        left: calc(100% + 2px);
+        top: 50%;
+        margin-top: -1px;
+        position: absolute;
+        width: 1000px;
+        height: 2px;
+        background: #c8c8c8;
+        z-index: -1;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 24px;
+        line-height: 28px;
+        width: 46px;
+        height: 46px;
+
+        &:before {
+            height: 1px;
+            margin-top: 0;
+            border-width: 1px;
+        }
+    }
+}
+
+.stepTitleText {
+    font: 16px/18px RoundedElegance;
+    color: blackLight;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    left: 50%;
+    width: 200px;
+    margin-left: -100px;
+    text-align: center;
+    display: none;
+}
+
+.options {
+    justify-content: space-between;
+    display: none;
+    flex-wrap: wrap;
+    margin-bottom: 42px;
+
+    &.active {
+        display: flex;
+    }
+
+    @media (max-width: 720px) {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 0;
+    }
+}
+
+.radio {
+    margin-top: 20px;
+    width: 208px;
+
+    @media (max-width: 720px) {
+        width: 100%;
+        margin-top: 40px;
+        max-width: 328px;
+    }    
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    color: blackLight;
+    /* margin-bottom: 15px; */
+    /* padding-left: 40px; */
+    cursor: pointer;
+    user-select: none;
+}
+
+.inputRadio {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    z-index: -1;
+
+    &:checked ~ {
+        .textRadio {
+            background: gray3;
+
+            .checkmark {
+                background: whiteBasic;
+                &:after {
+                    display: block;
+                }
+            }
+        }
+
+        .imgRadioWrap {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+.textRadio {
+    position: relative;
+    font: 16px/18px RoundedElegance;
+    border: 2px solid gray3;
+    background: whiteBasic;
+    margin-top: 20px;
+    text-align: center;
+    padding: 15px;
+}
+
+.imgRadioWrap {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    max-height: 162px;
+
+    &:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(255, 255, 255, 0.5);
+    }
+}
+
+.checkmark {
+    position: relative;
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    background-color: gray3;
+    border-radius: 50%;
+    margin-right: 15px;
+
+    &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 2px;
+        left: 2px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: black;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.btnNext,
+.btnResult,
+.btnSkip {
+    font: 18px/21px RoundedElegance;
+    color: whiteBasic;
+    padding: 10px 20px;
+    min-width: 142px;
+    text-align: center;
+    background: blackLight;
+    margin: 0 12px;
+    border: none;
+    cursor: pointer;
+
+    @media (max-width: 720px) {
+        margin-top: 30px;
+    }
+}
+
+.btnSkip {
+    color: gray;
+    background: none;
+
+    @media (max-width: 720px) {
+        margin-top: 20px;
+    }
+}
+
+.btnResult {
+    margin: 0 auto;
+    display: block;
+
+    @media (max-width: 600px) {
+        margin: 30px auto 10px auto;
+    }
+}
+
+.productsSectionWrap {
+    background: gray3;
+    padding-top: 20px;
+    border-top: 20px solid whiteBasic;
+}
+
+.productsSection {
+    display: flex;
+    justify-content: center;
+    background: gray3;
+    overflow: hidden;
+}
+
+.decor {
+    width: 100%;
+    height: 30px;
+    background: gray3;
+}
+
+.quantity {
+    font: 36px/41px RoundedElegance;
+    color: blackBasic;
+    position: relative;
+    max-width: 1240px;
+    padding: 0 16px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+    white-space: nowrap;
+
+    &:after {
+        content: "";
+        width: 287px;
+        height: 2px;
+        background: black;
+        margin-left: 60px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 24px;
+        line-height: 28px;
+        justify-content: space-between;
+
+        &:after {
+            width: 30%;
+        }
+    }
+}
+
+.noProducts {
+    font: 16px/18px RoundedElegance;
+    color: blackLight;
+    margin: 50px 0 40px 0;
+}

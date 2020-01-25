@@ -8,7 +8,8 @@ import {
     SET_BASKET,
     SET_WISHLIST,
     OPEN_BASKET,
-    CLOSE_BASKET
+    CLOSE_BASKET,
+    SET_QUIZZES
 } from '../types/types';
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
     categories: [],
     subCategories: [],
     partners: [],
+    quizzes: [],
     basket: [],
     wishlist: [],
     basketIsOpen: false
@@ -45,6 +47,8 @@ export default function (state = initialState, action) {
         return { ...state, basketIsOpen: true };
     case CLOSE_BASKET:
         return { ...state, basketIsOpen: false };
+    case SET_QUIZZES:
+        return { ...state, quizzes: action.payload };
     default:
         return state;
     }

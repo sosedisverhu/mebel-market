@@ -146,6 +146,15 @@ export default {
         toMain: 'На главную',
         noItemsInBasket: 'В корзине еще нет товаров'
     },
+    quizPage: {
+        title: 'Помощь в выборе',
+        description: 'Выберите необходимые параметры желаемой кровати и матраса',
+        next: 'Дальше',
+        skip: 'Пропустить',
+        result: 'Результат',
+        products: 'Товары:',
+        noProducts: 'Товары не найдены('
+    },
     comments: {
         showAll: 'Показать все',
         feedbackBtn: 'Оставить отзыв',
