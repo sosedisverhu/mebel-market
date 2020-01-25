@@ -34,6 +34,7 @@ const DEFAULT_FILTERS = name => {
             type: 'range',
             min: 0,
             max: 0,
+            dimension: '\u20B4',
             id: 'actualPrice',
             prop: 'actualPrice'
         }
