@@ -246,7 +246,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: categoryFilter.name,
                             options: categoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -288,7 +288,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: subCategoryFilter.name,
                             options: subCategoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },

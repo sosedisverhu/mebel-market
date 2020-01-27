@@ -196,10 +196,10 @@ class ProductsPage extends Component {
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value))
                 )(products);
                 const options = filterUtil(option =>
-                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                    any(optionInProduct => option.id === optionInProduct, optionsInProduct), filter.options.map(filter => filter));
 
                 return options.length > 1 ? [
                     ...filters,
@@ -213,7 +213,7 @@ class ProductsPage extends Component {
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value)
                     )
                 )(products);
 
@@ -253,9 +253,7 @@ class ProductsPage extends Component {
     getFilterValue = (product, filter) => {
         const { isSubCategoryFilters } = this.state;
         const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
-        const { lang } = this.props;
         const productFilterValue = compose(
-            prop(lang),
             prop('value'),
             find(productFilter => productFilter.id === filter.id)
         )(product[currentCategoryName]);

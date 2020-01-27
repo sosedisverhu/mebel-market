@@ -70,15 +70,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -150,15 +150,95 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
-            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'f8re765rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
+        ]
+    },
+    {
+        alias: 'glory1',
+        categoryId: 'category0',
+        id: '2',
+        subCategoryId: 'subCategory1',
+        article: '000003',
+        characteristics: {
+            ru: {
+                characteristics: [{
+                    name: 'Цвет',
+                    id: 'characteristic0',
+                    value: 'Бежевый, Белый, Шоколад, Черный бархат'
+                }]
+            },
+            ua: {
+                characteristics: [{
+                    name: 'Колір',
+                    id: 'characteristic1',
+                    value: 'Бежевый, Білий, Шоколад, Чорний оксамит'
+                }]
+            }
+
+        },
+        date: 1577181957742,
+        hidden: false,
+        discount: 0,
+        discountPrice: 3799,
+        price: 3799,
+        actualPrice: 3799,
+        avatar: '/server/seeds/data/products/images/Glory.png',
+        files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
+        sizes: [
+            { name: 'M', id: 'sizeM' },
+            { name: 'L', id: 'sizeL' },
+            { name: 'XL', id: 'sizeXL' }
+        ],
+        texts: {
+            ru: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: ' Кровать « Глория »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            },
+            ua: {
+                description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
+                    'Кровать стоит на четырёх ножках, с довольно высоким ложем, так что на неё удобно ложиться и' +
+                    ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
+                    ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
+                    ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Ліжко « Глорія »',
+                seoDescription: 'bed',
+                seoKeywords: '',
+                seoTitle: 'bed'
+            }
+        },
+        views: 0,
+        warranty: 18,
+        categoryFilters: [
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fqwre765rfw' },
+            { id: 'za4jh4w34', value: 'fre7w3dw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
+        ],
+        subCategoryFilters: [
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -230,15 +310,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -310,15 +390,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -390,15 +470,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -470,15 +550,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -550,15 +630,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -630,15 +710,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -710,15 +790,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -790,15 +870,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     }
 ];
