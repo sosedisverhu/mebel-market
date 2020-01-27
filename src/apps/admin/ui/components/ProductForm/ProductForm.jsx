@@ -316,7 +316,7 @@ class ProductForm extends Component {
                         formData.append(`product-${product.id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
-                            path: file.path,
+                            path: file.path || file,
                             index: i
                         });
                     }
