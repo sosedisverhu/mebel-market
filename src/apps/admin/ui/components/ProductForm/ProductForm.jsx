@@ -10,7 +10,6 @@ import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import findIndex from '@tinkoff/utils/array/findIndex';
-import isObject from '@tinkoff/utils/is/plainObject';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -123,14 +122,12 @@ class ProductForm extends Component {
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
                     ...categoryFilters,
-                    [`categoryFilter-${categoryFilter.id}`]: isObject(categoryFilter.value.ru)
-                        ? categoryFilter.value.ru.name : categoryFilter.value.ru
+                    [`categoryFilter-${categoryFilter.id}`]: categoryFilter.value
                 }), {}),
             ...(product.subCategoryFilters || [])
                 .reduce((subCategoryFilters, subCategoryFilter) => ({
                     ...subCategoryFilters,
-                    [`subCategoryFilter-${subCategoryFilter.id}`]: isObject(subCategoryFilter.value.ru)
-                        ? subCategoryFilter.value.ru.name : subCategoryFilter.value.ru
+                    [`subCategoryFilter-${subCategoryFilter.id}`]: subCategoryFilter.value
                 }), {}),
             ...pick(PRODUCTS_VALUES, product)
         };
@@ -177,9 +174,6 @@ class ProductForm extends Component {
             article
         } = values;
 
-        const activeCategory = this.props.categories.find(category => category.id === categoryId);
-        const activeSubCategory = this.props.allSubCategories.find(subCategory => subCategory.id === subCategoryId);
-
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
             if (CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
                 const id = filterName.replace(CATEGORY_FILTER_NAME_REGEX, '');
@@ -191,21 +185,13 @@ class ProductForm extends Component {
                 let value;
 
                 if (filterType === 'range') {
-                    value = {
-                        ua: +filterValue,
-                        ru: +filterValue
-                    };
+                    value = filterValue;
                 } else {
                     const filterValueIndex = findIndex((option) => option.id === filterValue, this.state.categoryFilters[filterIndex].options);
-                    if (filterValueIndex === -1) {
-                        return categoryFilters;
-                    }
 
-                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].id;
+                    if (filterValueIndex === -1) return categoryFilters;
 
-                        return resultFilterValue;
-                    }, {}, activeCategory.filters);
+                    value = this.state.categoryFilters[filterIndex].options[filterValueIndex].id;
                 }
 
                 return [
@@ -230,10 +216,7 @@ class ProductForm extends Component {
                 let value;
 
                 if (filterType === 'range') {
-                    value = {
-                        ua: +filterValue,
-                        ru: +filterValue
-                    };
+                    value = filterValue;
                 } else {
                     const filterValueIndex = findIndex((option) => option.id === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
@@ -241,11 +224,7 @@ class ProductForm extends Component {
                         return subCategoryFilters;
                     }
 
-                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].id;
-
-                        return resultFilterValue;
-                    }, {}, activeSubCategory.filters);
+                    value = this.state.subCategoryFilters[filterIndex].options[filterValueIndex].id;
                 }
 
                 return [

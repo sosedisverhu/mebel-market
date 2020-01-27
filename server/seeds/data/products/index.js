@@ -70,15 +70,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre5005rfw', ru: 'fre5005rfw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -150,15 +150,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre5005rfw', ru: 'fre5005rfw' } },
-            { id: 'zj4p4w34', value: { ua: '1000', ru: '1000' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'f8re765rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -230,15 +230,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fqwre765rfw', ru: 'fqwre765rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '4000', ru: '4400' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fqwre765rfw' },
+            { id: 'za4jh4w34', value: 'fre7w3dw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -310,15 +310,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -390,15 +390,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -470,15 +470,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -550,15 +550,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -630,15 +630,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -710,15 +710,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -790,15 +790,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -870,15 +870,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
-            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
-            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
-            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     }
 ];
