@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
 
 import styles from './MainPage.css';
-import Slider from '../../components/Slider/Slider';
+import Carousel from '../../components/Carousel/Carousel';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 import MainCategories from '../../components/MainCategories/MainCategories';
 import Advantages from '../../components/Advantages/Advantages';
@@ -56,15 +56,15 @@ class MainPage extends Component {
 
         return (
             <div>
-                <Slider/>
+                <Carousel/>
                 {labels.map((label, i) => {
                     return (
                         <div key={i}>
                             {productsResult[label] &&
-                                <section key={label} className={classNames(styles.categorySection, styles[label])}>
-                                    <h2 className={styles.title}>{text[label]}</h2>
-                                    <ProductsSlider label={label} products={productsResult[label]} />
-                                </section>
+                            <section key={label} className={classNames(styles.categorySection, styles[label])}>
+                                <h2 className={styles.title}>{text[label]}</h2>
+                                <ProductsSlider label={label} products={productsResult[label]}/>
+                            </section>
                             }
                         </div>);
                 })}

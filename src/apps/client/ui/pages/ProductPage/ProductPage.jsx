@@ -26,21 +26,22 @@ class ProductPage extends Component {
     state = {
         category: {},
         subCategory: {},
-        product: {},
-        didMount: false
+        product: {}
     };
 
     componentDidMount () {
         const { categoryAlias, subCategoryAlias, alias } = this.getMatch();
         const category = this.getCategory(categoryAlias);
+        if (!category) return;
         const subCategory = this.getSubCategory(subCategoryAlias, category);
+        if (!subCategory) return;
         const product = this.getProduct(alias, category, subCategory);
+        if (!product) return;
 
         this.setState({
             category,
             subCategory,
-            product,
-            didMount: true
+            product
         });
 
         product && addProductViews(product.id);
@@ -87,20 +88,16 @@ class ProductPage extends Component {
     };
 
     render () {
-        const { category, product, didMount } = this.state;
+        const { category, subCategory, product } = this.state;
 
-        if (isEmpty(product) && didMount) {
-            return <NotFoundPage/>;
-        } else if (!isEmpty(product)) {
-            return (
-                <div>
-                    <Breadcrumbs category={category} product={product}/>
-                    <Product product={product}/>
-                    <Tab product={product}/>
-                </div>);
-        } else {
-            return <div/>;
-        }
+        if (isEmpty(product)) return <NotFoundPage/>;
+
+        return (
+            <div>
+                <Breadcrumbs category={category} subCategory={subCategory} product={product}/>
+                <Product product={product}/>
+                <Tab product={product}/>
+            </div>);
     }
 }
 

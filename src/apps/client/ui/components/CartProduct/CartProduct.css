@@ -19,10 +19,18 @@
 .cartItem {
     display: flex;
     padding: 20px 25px 20px 30px;
+
+    @media (max-width: 500px) {
+        padding: 20px 16px;
+    }
 }
 
 .productImgLink {
     margin-right: 30px;
+
+    @media (max-width: 500px) {
+        margin-right: 10px;
+    }
 }
 
 .productImg {
@@ -42,6 +50,11 @@
     display: flex;
     align-items: center;
     margin-bottom: 21px;
+
+    @media (max-width: 500px) {
+        display: block;
+        margin-bottom: 10px;
+    }
 }
 
 .productNameLink {
@@ -53,6 +66,13 @@
     line-height: 21px;
     color: blackLight;
     margin-right: 5px;
+
+    @media (max-width: 500px) {
+        margin-right: 20px;
+        font-size: 16px;
+        line-height: 18px;
+
+    }
 }
 
 .productNumber {
@@ -60,6 +80,16 @@
     line-height: 14px;
     color: gray0;
     margin-right: 10px;
+}
+
+.buttons {
+    position: relative;
+
+    @media (max-width: 500px) {
+        position: absolute;
+        top: 20px;
+        right: 16px;
+    }
 }
 
 .wishBtn, .removeBtn{
@@ -73,17 +103,26 @@
     background-image: url('./img/wishlist.png');
     width: 16px;
     height: 14px;
+    background-repeat: no-repeat;
+
+    @media (max-width: 500px) {
+        position: absolute;
+        left: 0;
+        bottom: -36px;
+    }
 }
 
 .activeWishBtn {
     background-image: url('../AboutProduct/img/wishlist-active.png');
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .removeBtn {
     background-image: url('/src/apps/client/ui/components/Header/img/remove.png');
     width: 14px;
     height: 14px;
+    background-repeat: no-repeat;
 }
 
 .productSize {
@@ -91,6 +130,11 @@
     line-height: 16px;
     color: blackLight;
     margin-bottom: 6px;
+
+    @media (max-width: 500px) {
+        font-size: 13px;
+        line-height: 15px;
+    }
 }
 
 .productQuantity {
@@ -115,6 +159,7 @@
 .quantitySub {
     left: 0;
 }
+
 .quantityAdd {
     right: 0;
 }
@@ -123,15 +168,28 @@
     @mixin removeDefaultButton;
     width: 69px;
     height: 22px;
-    font-family: RoundedElegance;
-    font-size: 18px;
-    line-height: 21px;
-    color: blackLight;
-    text-align: center;
+    font-size: 0;
     border: 1px solid gray0;
     box-sizing: border-box;
     outline: none;
-    padding-top: 3px;
+
+    @media (max-width: 500px) {
+        width: 84px;
+    }
+}
+
+.quantityValue{
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    font-family: RoundedElegance;
+    font-size: 18px;
+    color: blackLight;
+
+    @media (max-width: 500px) {
+        left: 37px;
+        top: 4px;
+    }
 }
 
 .productPrices {
@@ -145,13 +203,25 @@
     text-decoration-line: line-through;
     color: gray0;
     margin-right: 20px;
+
+    @media (max-width: 420px) {
+        font-size: 16px;
+        line-height: 18px;
+        margin-right: 15px;
+    }
 }
 
 .productPrice {
     font-size: 24px;
     line-height: 28px;
     color: blackLight;
+
+    @media (max-width: 420px) {
+        font-size: 20px;
+        line-height: 23px;
+    }
 }
+
 .productDiscountPrice {
     color: redBasic;
 }
@@ -183,29 +253,8 @@
     }
 
     @media (max-width: 500px) {
-        .productOption {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .productImgLink {
-            margin-right: 10px;
-        }
-
-        .productName {
-            margin-right: 10px;
-        }
-    }
-
-    @media (max-width: 340px) {
-        .productPrices {
-            display: block;
-        }
-
-        .productPrice {
-            font-size: 22px;
-            line-height: 22px;
-            margin-top: 3px;
+        .buttons {
+            right: 0;
         }
     }
 }

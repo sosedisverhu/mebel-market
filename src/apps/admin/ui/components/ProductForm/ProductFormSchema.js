@@ -108,7 +108,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: categoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите категорию новости' } }
+                    { name: 'required', options: { text: 'Выберите категорию товара' } }
                 ]
             },
             {
@@ -119,7 +119,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: subCategoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите подкатегорию новости' } }
+                    { name: 'required', options: { text: 'Выберите подкатегорию товара' } }
                 ]
             },
             {
@@ -246,7 +246,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: categoryFilter.name,
                             options: categoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -288,7 +288,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: subCategoryFilter.name,
                             options: subCategoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -347,9 +347,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             {
                 component: FormFieldFiles,
                 name: 'files',
-                schema: {
-                    max: 6
-                },
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]

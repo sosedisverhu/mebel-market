@@ -31,11 +31,11 @@ const Product = new Schema({
     alias: { type: String, required: true, unique: true },
     categoryFilters: [{
         id: { type: String, required: true },
-        value: { type: Object, required: true }
+        value: { type: String, required: true }
     }],
     subCategoryFilters: [{
         id: { type: String, required: true },
-        value: { type: Object, required: true }
+        value: { type: String, required: true }
     }],
     article: { type: String, required: true, unique: true }
 });

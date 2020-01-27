@@ -136,6 +136,16 @@ const Filter = SortableElement((
                             </div>
                         </div>
                     }
+                    {
+                        filter.type === 'range' && <TextField
+                            className={classes.filterField}
+                            label='Размерность'
+                            value={filter.dimension || ''}
+                            onChange={onFilterChange('dimension', filterIndex)}
+                            margin='normal'
+                            variant='outlined'
+                        />
+                    }
                 </div>
                 <IconButton aria-label='Delete' className={classes.deleteFilterButton} onClick={onFilterDelete(filterIndex)}>
                     <DeleteIcon/>

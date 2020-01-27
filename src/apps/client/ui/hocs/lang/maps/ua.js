@@ -108,13 +108,13 @@ export default {
         getDirectionsBtn: 'Прокласти маршрут'
     },
     notFoundPage: {
-        text1: 'На жаль, сторінка, яку ви шукаєте ',
-        text2: 'не існує :(',
+        text1: 'На жаль, сторінка, яку ви шукаєте не існує :(',
         link: 'На главную'
     },
     article: {
         moreBtn: 'Докладніше',
-        year: 'року'
+        year: 'року',
+        breadcrumbArticles: 'Статті'
     },
     searchPage: {
         results: 'результатів за запитом',
@@ -124,7 +124,8 @@ export default {
         placeholder: 'Пошук',
         needHelp: 'Потрібна допомога?',
         link: 'Зв\'яжіться з нами',
-        articles: 'Статті:'
+        articles: 'Статті:',
+        search: 'Поиск'
     },
     checkoutPage: {
         checkout: 'Оформлення замовлення',

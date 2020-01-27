@@ -24,7 +24,7 @@ export default function updateFiles (req, res) {
         files.forEach(file => {
             filesPaths[file.fieldname.replace(PRODUCT_FILE_FIELD_NAME_REGEX, '')] = `/${file.path.replace(/\\/g, '/')}`;
         });
-        oldFiles.forEach((file) => {
+        oldFiles.forEach(file => {
             filesPaths[file.index] = file.path;
         });
         removedFiles.forEach(function (file) {

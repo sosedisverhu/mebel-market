@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { enablePageScroll, disablePageScroll } from 'scroll-lock';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import classNames from 'classnames';
@@ -23,12 +24,6 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 class Header extends Component {
-    state = {
-        mobileMenuOpen: false,
-        searchBarOpen: false,
-        searchText: ''
-    };
-
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
@@ -41,8 +36,27 @@ class Header extends Component {
         categories: []
     };
 
+    constructor (props) {
+        super(props);
+        this.mobilePopUp = React.createRef();
+
+        this.state = {
+            mobileMenuOpen: false,
+            searchBarOpen: false,
+            searchText: ''
+        };
+    }
+
     handleMobileMenu = () => {
-        document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
+        if (!this.state.mobileMenuOpen) {
+            disablePageScroll(document.documentElement); // для iOS/macOS
+            disablePageScroll(document.body);
+            enablePageScroll(this.mobilePopUp.current);
+        } else {
+            enablePageScroll(document.documentElement); // для iOS/macOS
+            enablePageScroll(document.body);
+        }
+
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
@@ -86,7 +100,9 @@ class Header extends Component {
                                 <span/>
                                 <span/>
                             </button>
-                            <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
+                            <div ref={this.mobilePopUp}
+                                className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}
+                            >
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
                                         {categories.map(category => {
@@ -127,11 +143,17 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemBottom}
                                             to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/partners`}>{text.partners}</Link>
+                                            to={`${langRoute}/partners`}>
+                                            {text.partners}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/articles`}>{text.articles}</Link>
+                                            to={`${langRoute}/articles`}>
+                                            {text.articles}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                                            to={`${langRoute}/contacts`}>
+                                            {text.contacts}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
