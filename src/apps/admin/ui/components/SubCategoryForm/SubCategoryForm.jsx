@@ -157,7 +157,7 @@ class SubCategoryForm extends Component {
         const { filters } = subCategoryPayload;
 
         filters.ua = this.checkOptions(filters.ua);
-        filters.ru = this.checkOptions(filters.ua);
+        filters.ru = this.checkOptions(filters.ru);
 
         (this.id
             ? editSubCategory({ ...subCategoryPayload, id: this.id })

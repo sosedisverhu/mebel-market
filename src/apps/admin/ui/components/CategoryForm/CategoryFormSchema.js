@@ -84,7 +84,6 @@ export default function ({ data: { title } = {} } = {}) {
             {
                 component: FormFieldFilters,
                 name: 'filters',
-                id: 'testId',
                 valueLangStructure: [{
                     id: 'notDepend',
                     type: 'notDepend',

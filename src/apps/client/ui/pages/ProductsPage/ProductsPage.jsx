@@ -104,6 +104,8 @@ class ProductsPage extends Component {
             this.getFilters(currentCategory, products, isSubCategoryFilters)
         ]) : this.getDefaultFilters(products, langMap);
 
+        console.log('filters', filters);
+
         this.setState({
             products,
             category,
@@ -199,7 +201,7 @@ class ProductsPage extends Component {
                     map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
                 )(products);
                 const options = filterUtil(option =>
-                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                    any(optionInProduct => option.id === optionInProduct, optionsInProduct), filter.options.map(filter => filter));
 
                 return options.length > 1 ? [
                     ...filters,

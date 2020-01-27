@@ -71,18 +71,18 @@ class FilterCheckBox extends Component {
                 >{name}</h2>
                 <div className={styles.options}>
                     {options.map((option, index) => {
-                        const value = filtersMap[id] ? includes(option, filtersMap[id].values) : false;
+                        const value = filtersMap[id] ? includes(option.id, filtersMap[id].values) : false;
 
                         return (
                             <label key={index} className={styles.option}>
                                 <input
                                     className={styles.input}
                                     type="checkbox"
-                                    onChange={this.handleLabelChecked(option)}
+                                    onChange={this.handleLabelChecked(option.id)}
                                     checked={value}
                                 />
                                 <div className={styles.circle}/>
-                                {option}
+                                {option.name}
                             </label>
                         );
                     })}

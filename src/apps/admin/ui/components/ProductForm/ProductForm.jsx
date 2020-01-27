@@ -196,10 +196,13 @@ class ProductForm extends Component {
                         ru: +filterValue
                     };
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.categoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex((option) => option.id === filterValue, this.state.categoryFilters[filterIndex].options);
+                    if (filterValueIndex === -1) {
+                        return categoryFilters;
+                    }
 
                     value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].id;
 
                         return resultFilterValue;
                     }, {}, activeCategory.filters);
@@ -232,10 +235,14 @@ class ProductForm extends Component {
                         ru: +filterValue
                     };
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex((option) => option.id === filterValue, this.state.subCategoryFilters[filterIndex].options);
+
+                    if (filterValueIndex === -1) {
+                        return subCategoryFilters;
+                    }
 
                     value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].id;
 
                         return resultFilterValue;
                     }, {}, activeSubCategory.filters);

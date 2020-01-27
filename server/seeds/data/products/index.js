@@ -70,15 +70,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
+            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre5005rfw', ru: 'fre5005rfw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -150,15 +150,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
-            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
+            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre5005rfw', ru: 'fre5005rfw' } },
+            { id: 'zj4p4w34', value: { ua: '1000', ru: '1000' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -230,15 +230,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
-            { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
-            { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
+            { id: 'gew3wg43f34', value: { ua: 'fwe7ewsf5rfw', ru: 'fwe7ewsf5rfw' } },
+            { id: 'aa3a3aa1w34', value: { ua: 'fqwre765rfw', ru: 'fqwre765rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '4000', ru: '4400' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -310,15 +310,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -390,15 +390,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -470,15 +470,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -550,15 +550,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -630,15 +630,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -710,15 +710,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -790,15 +790,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     },
     {
@@ -870,15 +870,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
+            { id: 'gewgw34', value: { ua: 'fwess65rfw', ru: 'fwess65rfw' } },
             { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'aa3a3aa1w34', value: { ua: 'fre5u75rfw', ru: 'fre5u75rfw' } },
+            { id: 'za4jh4w34', value: { ua: 'fre7w3dw', ru: 'fre7w3dw' } },
+            { id: 'zj4p4w34', value: { ua: '44', ru: '44' } }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: { ua: 'fwess65rfw1', ru: 'fwess65rfw1' } },
+            { id: 'gewgw35', value: { ua: 'fwess65rfw4', ru: 'fwess65rfw4' } }
         ]
     }
 ];
