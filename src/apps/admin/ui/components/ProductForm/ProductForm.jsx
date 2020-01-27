@@ -220,6 +220,7 @@ class ProductForm extends Component {
             if (SUB_CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
                 const id = filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, '');
                 const filterIndex = findIndex(filter => filter.id === id, this.state.subCategoryFilters);
+
                 if (filterIndex === -1) {
                     return subCategoryFilters;
                 }
@@ -232,7 +233,7 @@ class ProductForm extends Component {
                         ru: +filterValue
                     };
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex(option => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
                     value = reduceObj((resultFilterValue, filtersArr, lang) => {
                         resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
@@ -315,7 +316,7 @@ class ProductForm extends Component {
                         formData.append(`product-${product.id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
-                            path: file.path,
+                            path: file.path || file,
                             index: i
                         });
                     }
@@ -361,21 +362,36 @@ class ProductForm extends Component {
         case 'categoryId':
             const activeCategory = this.props.categories.find(category => category.id === changes.categoryId);
             const activeSubCategories = this.props.allSubCategories.filter(subCategory => subCategory.categoryId === activeCategory.id);
+            const newSubCategoryFilters = activeSubCategories[0].filters.ru;
+            const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
 
             this.subCategoriesOptions = activeSubCategories.map(subCategory => ({ value: subCategory.id, name: subCategory.texts.ru.name }));
 
             this.setState({
                 categoryHidden: activeCategory.hidden,
-                categoryFilters: pathOr(['filters', 'ru'], [], activeCategory),
-                subCategoryFilters: activeSubCategories[0].filters.ru
+                categoryFilters,
+                subCategoryFilters: newSubCategoryFilters
+            });
+
+            categoryFilters.map(categoryFilter => {
+                values[`categoryFilter-${categoryFilter.id}`] = undefined;
+            });
+
+            newSubCategoryFilters.map(subCategoryFilter => {
+                values[`subCategoryFilter-${subCategoryFilter.id}`] = undefined;
             });
 
             values.subCategoryId = this.subCategoriesOptions[0].value;
             break;
 
         case 'subCategoryId':
+            const subCategoryFilters = this.props.allSubCategories.find(subCategory => subCategory.id === changes.subCategoryId).filters.ru;
             this.setState({
-                subCategoryFilters: this.props.allSubCategories.find(subCategory => subCategory.id === changes.subCategoryId).filters.ru
+                subCategoryFilters
+            });
+
+            subCategoryFilters.map(subCategoryFilter => {
+                values[`subCategoryFilter-${subCategoryFilter.id}`] = undefined;
             });
             break;
         }
