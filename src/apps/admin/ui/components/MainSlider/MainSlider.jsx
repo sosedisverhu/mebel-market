@@ -128,7 +128,10 @@ const materialStyles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
         overflowY: 'auto',
-        maxHeight: '100vh'
+        maxHeight: '100vh',
+        '@media (max-width:900px)': {
+            width: '90%'
+        }
     }
 });
 

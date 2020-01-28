@@ -42,7 +42,10 @@ const materialStyles = theme => ({
         color: theme.palette.text.secondary
     },
     title: {
-        flex: '0 0 auto'
+        flex: '0 0 auto',
+        '@media (max-width:780px)': {
+            width: '95%'
+        }
     },
     itemsNumber: {
         display: 'flex',

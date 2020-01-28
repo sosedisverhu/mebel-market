@@ -47,6 +47,115 @@ import deleteSubCategoriesByIds from '../../../services/deleteSubCategoriesByIds
 
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
+const materialStyles = theme => ({
+    root: {
+        display: 'flex',
+        '@media (max-width:1200px)': {
+            flexDirection: 'column-reverse'
+        }
+    },
+    drawer: {
+        maxWidth: '400px',
+        flexShrink: 0,
+        '@media (max-width:1200px)': {
+            width: 'calc(100% - 60px)',
+            maxWidth: 'unset',
+            margin: '30px 30px 0 30px',
+            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)'
+        },
+        '@media (max-width:600px)': {
+            width: 'calc(100% - 30px)',
+            margin: '15px 15px 0 15px'
+        },
+        '@media (max-width:400px)': {
+            width: '100%',
+            margin: '15px 0 0 0'
+        }
+    },
+    drawerPaper: {
+        top: '0px',
+        maxWidth: '400px',
+        position: 'relative',
+        minHeight: '93vh',
+        '@media (max-width:1200px)': {
+            zIndex: '0',
+            minHeight: 'unset',
+            width: '100%',
+            maxWidth: 'unset'
+        }
+    },
+    content: {
+        flexGrow: 1,
+        padding: '30px',
+        '@media (max-width:600px)': {
+            padding: '15px'
+        },
+        '@media (max-width:400px)': {
+            padding: '15px 0'
+        }
+    },
+    toolbar: {
+        height: '0px'
+    },
+    toolbarNav: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '5px 30px 5px 30px'
+    },
+    categoryTitle: {
+        height: '30px'
+    },
+    buttonSortable: {
+        position: 'relative',
+        marginRight: '12px',
+        cursor: 'pointer'
+    },
+    modal: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    row: {
+        backgroundColor: 'white',
+        zIndex: 1201,
+        '&:hover $valueActions': {
+            visibility: 'visible'
+        },
+        '&:hover': {
+            backgroundColor: 'rgba(0, 0, 0, 0.07)'
+        }
+    },
+    valueActions: {
+        visibility: 'hidden',
+        '@media (max-width:780px)': {
+            visibility: 'visible'
+        }
+    },
+    listItemText: {
+        cursor: 'default',
+        '@media (max-width:600px)': {
+            maxWidth: '120px'
+        },
+        '@media (max-width:400px)': {
+            padding: '0'
+        }
+    },
+    modalContent: {
+        position: 'absolute',
+        width: '1200px',
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing.unit * 4,
+        outline: 'none',
+        overflowY: 'auto',
+        maxHeight: '100vh',
+        '@media (max-width:1300px)': {
+            width: '90%'
+        }
+    }
+});
+
 const ButtonSortable = SortableHandle(({ classes }) => (
     <ReorderIcon className={classes.buttonSortable}> reorder </ReorderIcon>
 ));
@@ -99,74 +208,6 @@ const tableCells = [
     { prop: subCategory => pathOr(['texts', DEFAULT_LANG, 'name'], '', subCategory) },
     { prop: subCategory => subCategory.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
-
-const materialStyles = theme => ({
-    root: {
-        display: 'flex'
-    },
-    drawer: {
-        width: '400px',
-        flexShrink: 0
-    },
-    drawerPaper: {
-        top: '0px',
-        width: '400px',
-        position: 'relative',
-        minHeight: '100vh'
-    },
-    content: {
-        flexGrow: 1,
-        padding: '30px'
-    },
-    toolbar: {
-        height: '0px'
-    },
-    toolbarNav: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '5px 30px 5px 30px'
-    },
-    categoryTitle: {
-        height: '30px'
-    },
-    buttonSortable: {
-        position: 'relative',
-        marginRight: '12px',
-        cursor: 'pointer'
-    },
-    modal: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    row: {
-        backgroundColor: 'white',
-        zIndex: 1201,
-        '&:hover $valueActions': {
-            visibility: 'visible'
-        },
-        '&:hover': {
-            backgroundColor: 'rgba(0, 0, 0, 0.07)'
-        }
-    },
-    valueActions: {
-        visibility: 'hidden'
-    },
-    listItemText: {
-        cursor: 'default'
-    },
-    modalContent: {
-        position: 'absolute',
-        width: '1200px',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
-        outline: 'none',
-        overflowY: 'auto',
-        maxHeight: '100vh'
-    }
-});
 
 const mapStateToProps = ({ data }) => {
     return {
