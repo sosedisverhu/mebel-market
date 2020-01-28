@@ -30,8 +30,24 @@ class ProductsSlider extends Component {
         };
     }
 
-    componentWillReceiveProps () {
+    componentWillReceiveProps (nextProps) {
+        if (nextProps.widthWindow !== this.props.widthWindow) {
+            const { products } = this.props;
+            const { widthWindow } = nextProps;
+            const width = this.products.clientWidth;
 
+            console.log('nextProps', nextProps);
+
+            let productsNumber = 4;
+            if (widthWindow < 1361) productsNumber = 3;
+            if (widthWindow < 1021) productsNumber = 2;
+            if (widthWindow < 761) productsNumber = 4;
+
+            const productsPacks = splitEvery(productsNumber, products);
+
+
+            this.setState({ width, productsPacks });
+        }
     }
 
     componentDidMount () {
@@ -68,6 +84,8 @@ class ProductsSlider extends Component {
         const { width, activeIndex, productsPacks } = this.state;
         const left = -1 * (width * activeIndex);
         const hidden = productsPacks.length <= 1;
+
+        console.log("productsPacks", productsPacks);
 
         return (
             <div className={classNames(styles.slider, styles[label])}>
