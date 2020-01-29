@@ -67,7 +67,10 @@ class Cart extends Component {
         const { langRoute, langMap, basket, basketIsOpen } = this.props;
         const text = propOr('cart', {}, langMap);
         const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
-        const totalPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
+        const totalPrice = basket.reduce((sum, { quantity, product, properties }) => {
+            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+            return sum + (quantity * size.discountPrice || quantity * size.price);
+        }, 0);
 
         return (
             <div className={styles.cart}>

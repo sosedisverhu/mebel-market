@@ -20,15 +20,8 @@
     }
 }
 
-.advantagesTitle {
-    margin: 15px 0 10px 0;
-    font: 16px/18px RoundedElegance;
-    cursor: pointer;
-    color: blackLighter;
-}
-
 .advantage {
-    margin-top: 6px;
+    margin-top: 16px;
     font: 14px/16px RoundedElegance;
     color: blackLighter;
 }

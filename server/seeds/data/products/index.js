@@ -33,9 +33,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 1799,
+                discount: 10,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -113,9 +131,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2799,
+                discountPrice: 2799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -193,9 +229,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 3799,
+                discountPrice: 3799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -266,16 +320,34 @@ module.exports = [
         },
         date: 1577182957744,
         hidden: false,
-        discount: 0,
-        discountPrice: 3799,
-        price: 3799,
-        actualPrice: 3799,
+        discount: 50,
+        discountPrice: 999,
+        price: 1999,
+        actualPrice: 999,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 999,
+                discount: 50,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -346,16 +418,34 @@ module.exports = [
         },
         date: 1577182957146,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        discount: 50,
+        discountPrice: 999,
+        price: 1999,
+        actualPrice: 999,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 999,
+                discount: 50,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -433,9 +523,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -513,9 +621,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2000,
+                discountPrice: 1799,
+                discount: 15,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -593,9 +719,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -673,9 +817,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -753,9 +915,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -833,9 +1013,27 @@ module.exports = [
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2000,
+                discountPrice: 2000,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {

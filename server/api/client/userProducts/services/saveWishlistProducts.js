@@ -37,7 +37,13 @@ export default function saveWishlistProducts (req, res) {
                             reduce((products, { productId, properties, id }) => {
                                 const product = find(product => product.id === productId, wishlistProducts);
 
-                                return !product || product.hidden ? products : append({ product, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                return append({ product, properties, id }, products);
                             }, [], wishlist)
                         ];
                     })
@@ -72,7 +78,13 @@ export default function saveWishlistProducts (req, res) {
                                 return reduce((products, { productId, properties, id }) => {
                                     const product = find(product => product.id === productId, wishlistProducts);
 
-                                    return !product || product.hidden ? products : append({ product, properties, id }, products);
+                                    if (!product || product.hidden) return products;
+
+                                    const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                    if (!size) return products;
+
+                                    return append({ product, properties, id }, products);
                                 }, [], wishlist);
                             })
                             .then((wishlistProducts) => {
@@ -123,7 +135,13 @@ export default function saveWishlistProducts (req, res) {
                             return reduce((products, { productId, properties, id }) => {
                                 const product = find(product => product.id === productId, wishlistProducts);
 
-                                return !product || product.hidden ? products : append({ product, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                return append({ product, properties, id }, products);
                             }, [], wishlist);
                         })
                         .then((wishlistProducts) => {

@@ -64,7 +64,7 @@ class Cart extends Component {
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
 
-        return wishlist.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.id === properties.size.id)
             ? { isInWishList: true }
             : { isInWishList: false };
     }
@@ -108,7 +108,7 @@ class Cart extends Component {
                 properties
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === properties.size.name);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === properties.size.id);
 
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
@@ -128,7 +128,8 @@ class Cart extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
-        const isDiscount = product.discountPrice && (product.discountPrice !== product.price);
+        const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+        const isDiscount = size.discountPrice;
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -153,7 +154,7 @@ class Cart extends Component {
                             <p className={styles.productNumber}>({product.article})</p>
                         </div>
                         <p className={styles.productSize}>
-                            {text.size} {properties.size.name}
+                            {text.size} {size.name}
                         </p>
                         <div className={styles.productQuantity}>
                             <button
@@ -181,9 +182,9 @@ class Cart extends Component {
                         </div>
                         <div className={styles.productPrices}>
                             {isDiscount &&
-                            <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: isDiscount })}>
-                                {formatMoney(product.actualPrice)}
+                            <p className={styles.productOldPrice}>{formatMoney(size.price)}</p>}
+                            <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
+                                {formatMoney(size.discountPrice || size.price)}
                             </p>
                         </div>
                     </div>
