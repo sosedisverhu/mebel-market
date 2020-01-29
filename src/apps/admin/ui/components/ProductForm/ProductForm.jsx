@@ -163,9 +163,6 @@ class ProductForm extends Component {
             ua_characteristics: uaCharacteristics,
             sizes,
             hidden,
-            discountPrice,
-            price,
-            discount,
             warranty,
             categoryId,
             subCategoryId,
@@ -267,12 +264,18 @@ class ProductForm extends Component {
                     characteristics: uaCharacteristics
                 }
             },
-            sizes,
+            sizes: sizes.map(size => ({
+                name: size.name,
+                price: size.price,
+                discountPrice: size.discountPrice,
+                discount: size.discount,
+                id: size.id
+            })),
             hidden,
-            discountPrice,
-            discount,
+            discountPrice: sizes[0].discountPrice,
+            discount: sizes[0].discount,
             warranty,
-            price,
+            price: sizes[0].price,
             categoryId,
             subCategoryId,
             id,

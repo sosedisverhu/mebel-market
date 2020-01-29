@@ -129,7 +129,7 @@ class CheckoutPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         saveOrder: PropTypes.func.isRequired,
-        basket: PropTypes.object.isRequired
+        basket: PropTypes.array.isRequired
     };
 
     requiredFieldsStart = React.createRef();
@@ -228,7 +228,10 @@ class CheckoutPage extends Component {
         const { deliveryChecked, paymentChecked, orderId } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
-        const productsPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
+        const productsPrice = basket.reduce((sum, { quantity, product, properties }) => {
+            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+            return sum + (quantity * size.discountPrice || quantity * size.price);
+        }, 0);
         const totalPrice = productsPrice + (deliveryChecked.price || 0);
 
         if (!basket.length) {
