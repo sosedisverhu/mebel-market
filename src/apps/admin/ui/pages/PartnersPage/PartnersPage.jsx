@@ -47,7 +47,10 @@ const materialStyles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
         overflowY: 'auto',
-        maxHeight: '100vh'
+        maxHeight: '100vh',
+        '@media (max-width:1300px)': {
+            width: '90%'
+        }
     },
     warningContent: {
         paddingBottom: '0'

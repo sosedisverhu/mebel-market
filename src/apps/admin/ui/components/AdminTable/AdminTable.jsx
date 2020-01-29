@@ -36,7 +36,7 @@ const materialStyles = theme => ({
         paddingRight: theme.spacing.unit
     },
     table: {
-        minWidth: 1020
+        width: '100%'
     },
     tableWrapper: {
         overflowX: 'auto'
@@ -47,7 +47,30 @@ const materialStyles = theme => ({
         }
     },
     valueActions: {
-        visibility: 'hidden'
+        visibility: 'hidden',
+        '@media (max-width:780px)': {
+            visibility: 'visible'
+        }
+    },
+    tableCellHead: {
+        '@media (max-width:700px)': {
+            width: 'auto',
+            padding: '4px 24px'
+        },
+        '@media (max-width:470px)': {
+            width: 'auto',
+            padding: '4px'
+        }
+    },
+    tableCell: {
+        '@media (max-width:600px)': {
+            width: 'auto',
+            padding: '4px'
+        },
+        '@media (max-width:470px)': {
+            width: 'auto',
+            padding: '4px'
+        }
     }
 });
 
@@ -246,7 +269,7 @@ class AdminTable extends React.Component {
                                 </TableCell>
                                 {headerRows.map(
                                     (row, i) => (
-                                        <TableCell key={i}>
+                                        <TableCell className={classes.tableCellHead} key={i}>
                                             {row.label}
                                         </TableCell>
                                     )
@@ -273,7 +296,9 @@ class AdminTable extends React.Component {
                                             <TableCell padding='checkbox'>
                                                 <Checkbox checked={isSelected} onClick={this.handleClick(value)}/>
                                             </TableCell>
-                                            {tableCells.map((tableCell, i) => <TableCell key={i}>{tableCell.prop(value)}</TableCell>)}
+                                            {tableCells.map((tableCell, i) => <TableCell className={classes.tableCell} key={i}>
+                                                {tableCell.prop(value)}
+                                            </TableCell>)}
                                             <TableCell padding='checkbox' align='right'>
                                                 <div className={classes.valueActions}>
                                                     <IconButton onClick={this.props.onFormOpen(value)}>
