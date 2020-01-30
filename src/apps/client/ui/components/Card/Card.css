@@ -41,6 +41,7 @@
             width: 200px;
             min-width: 200px;
             height: auto;
+            max-height: calc(50% - 20px);
 
             .label {
                 font-size: 14px;
@@ -102,6 +103,7 @@
 .img {
     width: 100%;
     height: auto;
+    pointer-events: none;
 }
 
 .labels {
