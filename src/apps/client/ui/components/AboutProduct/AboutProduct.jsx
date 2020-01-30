@@ -53,7 +53,8 @@ class AboutProduct extends Component {
         deleteFromWishlist: PropTypes.func.isRequired,
         basket: PropTypes.array,
         openBasket: PropTypes.func.isRequired,
-        basketIsOpen: PropTypes.bool.isRequired
+        basketIsOpen: PropTypes.bool.isRequired,
+        changeGalleryDiscount: PropTypes.func.isRequired
     };
 
     state = {
@@ -93,6 +94,7 @@ class AboutProduct extends Component {
             activeSizeId: size.id,
             sizeListIsOpen: false
         });
+        this.props.changeGalleryDiscount(size);
     };
 
     sizeListIsOpen = () => {
