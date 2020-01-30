@@ -40,13 +40,16 @@ const materialStyles = {
         alignItems: 'center',
         width: '100%',
         flexWrap: 'wrap',
-        '@media (max-width:800px)': {
+        '@media (max-width:450px)': {
             flexDirection: 'column'
         }
     },
     sizeField: {
-        width: 'calc(50% - 20px)',
-        '@media (max-width:800px)': {
+        width: 'calc(25% - 20px)',
+        '@media (max-width:700px)': {
+            width: 'calc(50% - 20px)'
+        },
+        '@media (max-width:450px)': {
             width: '100%'
         }
 

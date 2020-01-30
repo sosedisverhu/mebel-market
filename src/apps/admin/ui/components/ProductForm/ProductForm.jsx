@@ -110,9 +110,9 @@ class ProductForm extends Component {
             files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
             date: product.date,
-            discountPrice: product.discountPrice,
-            price: product.price,
-            discount: product.discount,
+            minDiscountPrice: product.minDiscountPrice,
+            minPrice: product.minPrice,
+            minDiscount: product.minDiscount,
             warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
@@ -272,10 +272,10 @@ class ProductForm extends Component {
                 id: size.id
             })),
             hidden,
-            discountPrice: sizes[0].discountPrice,
-            discount: sizes[0].discount,
+            minDiscountPrice: sizes[0].discountPrice,
+            minDiscount: sizes[0].discount,
             warranty,
-            price: sizes[0].price,
+            minPrice: sizes[0].price,
             categoryId,
             subCategoryId,
             id,
@@ -289,9 +289,9 @@ class ProductForm extends Component {
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
-        const { discountPrice, price } = productPayload;
+        const { minDiscountPrice, minPrice } = productPayload;
 
-        productPayload.actualPrice = discountPrice || price;
+        productPayload.actualPrice = minDiscountPrice || minPrice;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
             .then(product => {

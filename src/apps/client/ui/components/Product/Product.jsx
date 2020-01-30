@@ -12,13 +12,20 @@ class Product extends Component {
         product: PropTypes.object.isRequired
     };
 
+    state = {
+        activeSize: this.props.product.sizes[0]
+    }
+
+    handleSizeChange = (activeSize) => this.setState({ activeSize });
+
     render () {
         const { product } = this.props;
+        const { activeSize } = this.state;
 
         return <div className={styles.product}>
             <AboutProductTop newClass='mobile' product={product} />
-            <Gallery discount={product.discount} photos={product.files} />
-            <AboutProduct product={product} />
+            <Gallery discount={activeSize.discount} photos={product.files} />
+            <AboutProduct product={product} changeGalleryDiscount={this.handleSizeChange} />
         </div>;
     }
 }

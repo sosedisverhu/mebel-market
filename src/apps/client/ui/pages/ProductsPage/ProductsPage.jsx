@@ -155,7 +155,7 @@ class ProductsPage extends Component {
             return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
                 : filteredProductsByCategory;
         }
-        return products.filter(product => !isEmpty(product.discountPrice) && product.discountPrice !== product.price);
+        return products.filter(product => !isEmpty(product.minDiscountPrice) && product.minDiscountPrice !== product.minPrice);
     };
 
     getDefaultFilters = (products, langMap) => {
