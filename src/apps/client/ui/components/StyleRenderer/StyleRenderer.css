@@ -89,9 +89,17 @@
 
 .style blockquote {
     p {
-        margin: 25px 0;
+        margin: 15px 0;
         font: 16px/18px RoundedElegance;
         color: gray6;
+        padding: 10px 0 10px 20px;
+        border-left: 3px solid gray6;
+
+        @media (max-width: 600px) {
+            font-size: 14px;
+            line-height: 16px;
+            padding-left: 15px;
+        }
     }
 }
 
