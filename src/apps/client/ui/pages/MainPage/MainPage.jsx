@@ -39,7 +39,7 @@ class MainPage extends Component {
                     (result.top) ? result.top.push(product) : result.top = [product];
                 }
 
-                if (product.discountPrice) {
+                if (product.minDiscountPrice) {
                     (result.discount) ? result.discount.push(product) : result.discount = [product];
                 }
 
