@@ -29,7 +29,7 @@ class Advantages extends Component {
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
                                 <img
-                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/quality.png"
+                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/quality.svg"
                                     width='80'
                                     height='80'
                                     alt="quality"
@@ -40,7 +40,7 @@ class Advantages extends Component {
                         </div>
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
-                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/price.png" width='80' height='80' alt="price"/>
+                                <img className={styles.img} src="/src/apps/client/ui/components/Advantages/img/price.svg" width='80' height='80' alt="price"/>
                             </div>
                             <h3 className={styles.advantageTitle}>{text.priceTitle}</h3>
                             <p className={styles.advantageText}>{text.priceText}</p>
@@ -48,7 +48,7 @@ class Advantages extends Component {
                         <div className={styles.advantage}>
                             <div className={styles.imgWrap}>
                                 <img
-                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/delivery.png"
+                                    className={styles.img} src="/src/apps/client/ui/components/Advantages/img/delivery.svg"
                                     width='80'
                                     height='80'
                                     alt="delivery"
