@@ -41,22 +41,22 @@ const materialStyles = {
         alignItems: 'center',
         width: '100%',
         flexWrap: 'wrap',
-        '@media (max-width:450px)': {
+        '@media (max-width:600px)': {
             flexDirection: 'column'
         }
     },
     sizeField: {
         width: 'calc(33% - 20px)',
-        '@media (max-width:700px)': {
-            width: 'calc(50% - 20px)'
-        },
-        '@media (max-width:450px)': {
+        '@media (max-width:600px)': {
             width: '100%'
-        }
+        },
 
     },
     sizeField_long: {
-        width: 'calc(50% - 20px)'
+        width: 'calc(50% - 20px)',
+        '@media (max-width:600px)': {
+            width: '100%'
+        }
     },
     buttonSortable: {
         position: 'relative',
