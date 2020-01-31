@@ -117,7 +117,6 @@ class ProductForm extends Component {
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
-            article: product.article,
             lang: 'ru',
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -167,8 +166,7 @@ class ProductForm extends Component {
             categoryId,
             subCategoryId,
             id,
-            alias,
-            article
+            alias
         } = values;
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -269,7 +267,8 @@ class ProductForm extends Component {
                 price: size.price,
                 discountPrice: size.discountPrice,
                 discount: size.discount,
-                id: size.id
+                id: size.id,
+                article: size.article
             })),
             hidden,
             minDiscountPrice: sizes[0].discountPrice,
@@ -281,8 +280,7 @@ class ProductForm extends Component {
             id,
             alias,
             categoryFilters,
-            subCategoryFilters,
-            article
+            subCategoryFilters
         };
     };
 

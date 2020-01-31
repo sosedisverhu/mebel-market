@@ -48,7 +48,9 @@ export default function saveOrder (req, res) {
                         if (!size) return products;
 
                         properties.size.name = size.name;
-                        return append({ product, quantity, properties, id, basePrice: size.price, price: size.discountPrice, productName }, products);
+                        return append({
+                            product, quantity, properties, id, basePrice: size.price, price: size.discountPrice, productName, article: size.article
+                        }, products);
                     }, [], basket);
 
                     const order = {
@@ -103,6 +105,10 @@ export default function saveOrder (req, res) {
                                                 <td style="font-weight: bold" width='110'>Название</td>
                                                 <td width='110'>${product.productName}</td>
                                             </tr>
+                                            <tr>
+                                                <td style="font-weight: bold" width='110'>Артикул</td>
+                                                <td width='110'>${product.article}</td>
+                                            </tr> 
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Цена</td>
                                                 <td width='110'>${product.price || product.basePrice} грн</td>

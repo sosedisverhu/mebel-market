@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import uniqid from 'uniqid';
+import classNames from 'classnames';
 
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
@@ -45,7 +46,7 @@ const materialStyles = {
         }
     },
     sizeField: {
-        width: 'calc(25% - 20px)',
+        width: 'calc(33% - 20px)',
         '@media (max-width:700px)': {
             width: 'calc(50% - 20px)'
         },
@@ -53,6 +54,9 @@ const materialStyles = {
             width: '100%'
         }
 
+    },
+    sizeField_long: {
+        width: 'calc(50% - 20px)'
     },
     buttonSortable: {
         position: 'relative',
@@ -76,10 +80,18 @@ const Size = SortableElement(({ rowIndex, size, handleSizeDelete, handleSizeChan
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.sizeGroup}>
             <TextField
-                className={classes.sizeField}
+                className={classNames(classes.sizeField, classes.sizeField_long)}
                 label='Размер'
                 value={size.name}
                 onChange={handleSizeChange('name', rowIndex)}
+                margin='normal'
+                variant='outlined'
+            />
+            <TextField
+                className={classNames(classes.sizeField, classes.sizeField_long)}
+                label='Артикул'
+                value={size.article}
+                onChange={handleSizeChange('article', rowIndex)}
                 margin='normal'
                 variant='outlined'
             />
@@ -146,7 +158,7 @@ class FormFieldSizes extends Component {
 
         this.props.onChange([
             ...value,
-            { name: '', price: '', discountPrice: '', discount: '', id: uniqid() }
+            { name: '', article: '', price: '', discountPrice: '', discount: '', id: uniqid() }
         ]);
     };
 

@@ -1,8 +1,8 @@
 import all from '@tinkoff/utils/array/all';
 
 export default (value) => {
-    if (!all(({ name, price }) => !!name && !!price, value)) {
-        return 'Заполните обязательные поля (размер и цену)';
+    if (!all(({ name, price, article }) => !!name && !!price && !!article, value)) {
+        return 'Заполните обязательные поля (размер, артикул и цену)';
     }
 
     if (!all(({ price }) => +price > 0, value)) {

@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import outsideClick from '../../hocs/outsideClick';
-
 import formatMoney from '../../../utils/formatMoney';
-import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
@@ -16,6 +14,8 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import classNames from 'classnames';
 
 import openBasket from '../../../actions/openBasket';
+
+import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import styles from './AboutProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -54,12 +54,12 @@ class AboutProduct extends Component {
         basket: PropTypes.array,
         openBasket: PropTypes.func.isRequired,
         basketIsOpen: PropTypes.bool.isRequired,
-        changeGalleryDiscount: PropTypes.func.isRequired
+        changeGalleryDiscount: PropTypes.func.isRequired,
+        activeSize: PropTypes.object.isRequired
     };
 
     state = {
         sizes: this.props.product.sizes,
-        activeSizeId: this.props.product.sizes[0].id,
         sizeListIsOpen: true,
         selectIsOpen: false,
         isInWishlist: false,
@@ -67,11 +67,10 @@ class AboutProduct extends Component {
     };
 
     componentDidMount () {
-        const { wishlist, product } = this.props;
-        const { activeSizeId } = this.state;
+        const { wishlist, product, activeSize } = this.props;
 
         this.setState({
-            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.id === activeSizeId))
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.id === activeSize.id))
         });
     }
 
@@ -79,8 +78,8 @@ class AboutProduct extends Component {
         const { basket, wishlist, product } = props;
         let values = {};
 
-        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.id === state.activeSizeId));
-        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.id === state.activeSizeId);
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.id === props.activeSize.id));
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.id === props.activeSize.id);
 
         return values;
     }
@@ -91,7 +90,6 @@ class AboutProduct extends Component {
 
     onChangeActiveSize = size => {
         this.setState({
-            activeSizeId: size.id,
             sizeListIsOpen: false
         });
         this.props.changeGalleryDiscount(size);
@@ -110,20 +108,20 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
-        const { isInWishlist, activeSizeId } = this.state;
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product, activeSize } = this.props;
+        const { isInWishlist } = this.state;
 
         if (!isInWishlist) {
             saveProductsToWishlist({
                 productId: product.id,
                 properties: {
                     size: {
-                        id: activeSizeId
+                        id: activeSize.id
                     }
                 }
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === activeSizeId);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === activeSize.id);
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
             }
@@ -131,13 +129,12 @@ class AboutProduct extends Component {
     };
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product } = this.props;
-        const { activeSizeId } = this.state;
+        const { saveProductsToBasket, product, activeSize } = this.props;
         saveProductsToBasket({
             productId: product.id,
             properties: {
                 size: {
-                    id: activeSizeId
+                    id: activeSize.id
                 }
             },
             quantity: 1
@@ -157,17 +154,16 @@ class AboutProduct extends Component {
     };
 
     render () {
-        const { product, langMap, lang } = this.props;
-        const { sizes, activeSizeId, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
+        const { product, langMap, lang, activeSize } = this.props;
+        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
-        const activeSize = product.sizes.find(productSize => productSize.id === activeSizeId);
         const isDiscount = !!activeSize.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
-            <AboutProductTop product={product}/>
+            <AboutProductTop article={activeSize.article} product={product}/>
             {shortDescription &&
             <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>

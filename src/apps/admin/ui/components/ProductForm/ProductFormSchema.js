@@ -41,16 +41,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
-                component: FormFieldInput,
-                name: 'article',
-                schema: {
-                    label: 'Артикул'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните артикул' } }
-                ]
-            },
-            {
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {

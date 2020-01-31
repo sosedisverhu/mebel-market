@@ -6,7 +6,6 @@ module.exports = [
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
-        article: '000001',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -34,6 +33,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000001',
                 name: 'm',
                 price: 1999,
                 discountPrice: 1799,
@@ -41,6 +41,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000002',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -48,6 +49,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000003',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -104,7 +106,6 @@ module.exports = [
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
-        article: '000002',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -132,6 +133,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000021',
                 name: 'm',
                 price: 2799,
                 discountPrice: 2799,
@@ -139,6 +141,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000022',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -146,6 +149,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000023',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -202,7 +206,6 @@ module.exports = [
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
-        article: '000003',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -230,6 +233,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000031',
                 name: 'm',
                 price: 3799,
                 discountPrice: 3799,
@@ -237,6 +241,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000032',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -244,6 +249,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000033',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -300,7 +306,6 @@ module.exports = [
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
-        article: '000004',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -328,6 +333,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000041',
                 name: 'm',
                 price: 1999,
                 discountPrice: 999,
@@ -335,6 +341,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000042',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -342,6 +349,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000043',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -398,7 +406,6 @@ module.exports = [
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
-        article: '000005',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -426,6 +433,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000051',
                 name: 'm',
                 price: 1999,
                 discountPrice: 999,
@@ -433,6 +441,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000052',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -440,6 +449,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000053',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -496,7 +506,6 @@ module.exports = [
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
-        article: '000006',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -524,6 +533,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000061',
                 name: 'm',
                 price: 1799,
                 discountPrice: 1799,
@@ -531,6 +541,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000062',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -538,6 +549,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000063',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -594,7 +606,6 @@ module.exports = [
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
-        article: '000007',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -622,6 +633,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000071',
                 name: 'm',
                 price: 2000,
                 discountPrice: 1799,
@@ -629,6 +641,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000072',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -636,6 +649,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000073',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -692,7 +706,6 @@ module.exports = [
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
-        article: '000008',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -720,6 +733,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000081',
                 name: 'm',
                 price: 1799,
                 discountPrice: 1799,
@@ -727,6 +741,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000082',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -734,6 +749,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000083',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -790,7 +806,6 @@ module.exports = [
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
-        article: '000009',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -818,6 +833,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000091',
                 name: 'm',
                 price: 1799,
                 discountPrice: 1799,
@@ -825,6 +841,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000092',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -832,6 +849,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000093',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -888,7 +906,6 @@ module.exports = [
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
-        article: '000010',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -916,6 +933,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
             {
+                article: '000101',
                 name: 'm',
                 price: 1799,
                 discountPrice: 1799,
@@ -923,6 +941,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000102',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -930,6 +949,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000103',
                 name: 'l',
                 price: 4999,
                 discountPrice: 999,
@@ -986,7 +1006,6 @@ module.exports = [
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
-        article: '000011',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -1014,6 +1033,7 @@ module.exports = [
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
             {
+                article: '000111',
                 name: 'm',
                 price: 2000,
                 discountPrice: 2000,
@@ -1021,6 +1041,7 @@ module.exports = [
                 id: 'k5z5rz0y0'
             },
             {
+                article: '000112',
                 name: 's',
                 price: 3799,
                 discountPrice: 1899,
@@ -1028,6 +1049,7 @@ module.exports = [
                 id: 'k5z5rz0y1'
             },
             {
+                article: '000113',
                 name: 'l',
                 minPrice: 4999,
                 discountPrice: 999,

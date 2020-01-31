@@ -20,11 +20,12 @@ class AboutProductTop extends Component {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
+        article: PropTypes.string.isRequired,
         newClass: PropTypes.string
     };
 
     render () {
-        const { newClass, langMap, lang, product } = this.props;
+        const { newClass, langMap, lang, product, article } = this.props;
         const text = propOr('aboutProductTop', {}, langMap);
 
         return <div className={classNames(styles.root, { [styles[newClass]]: newClass })}>
@@ -35,7 +36,7 @@ class AboutProductTop extends Component {
                 <div className={styles.warranty}>
                     {`${text.warranty} ${product.warranty} ${formatWordDeclension(text.months, product.warranty)}`}
                 </div>
-                <div className={styles.article}>{`${text.article} ${product.article}`}</div>
+                <div className={styles.article}>{`${text.article} ${article}`}</div>
             </div>
         </div>;
     }

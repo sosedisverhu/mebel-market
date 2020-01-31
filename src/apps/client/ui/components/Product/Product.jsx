@@ -23,9 +23,9 @@ class Product extends Component {
         const { activeSize } = this.state;
 
         return <div className={styles.product}>
-            <AboutProductTop newClass='mobile' product={product} />
+            <AboutProductTop newClass='mobile' product={product} article={activeSize.article} />
             <Gallery discount={activeSize.discount} photos={product.files} />
-            <AboutProduct product={product} changeGalleryDiscount={this.handleSizeChange} />
+            <AboutProduct product={product} changeGalleryDiscount={this.handleSizeChange} activeSize={activeSize} />
         </div>;
     }
 }
