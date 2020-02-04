@@ -82,6 +82,7 @@
 }
 
 .content {
+    max-width: 904px;
     margin: 0 auto;
     box-sizing: content-box;
     padding: 35px 16px;
@@ -90,6 +91,10 @@
     @media (max-width: 600px) {
         padding: 20px 16px 15px;
     }
+}
+
+.contentFull {
+    max-width: none;
 }
 
 .description {

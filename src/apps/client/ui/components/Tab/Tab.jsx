@@ -88,7 +88,7 @@ class Tab extends Component {
         }
         case 'characteristic': {
             return (
-                <div>
+                <div className={styles.characteristics}>
                     {product.characteristics[lang].characteristics.map((characteristic, i) => {
                         return (
                             <div className={styles.row} key={i}>
@@ -120,7 +120,9 @@ class Tab extends Component {
                 })}
             </div>
             <div className={styles.contentWrap}>
-                <div className={styles.content}>
+                <div className={classNames(styles.content, {
+                    [styles.contentFull]: activeId === 'comments'
+                })}>
                     {this.getContent()}
                 </div>
             </div>
