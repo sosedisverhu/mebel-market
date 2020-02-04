@@ -10,6 +10,7 @@ import styles from './WishList.css';
 import formatWordDeclension from '../../../utils/formatWordDeclension';
 import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
+import formatMoney from '../../../utils/formatMoney';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -90,17 +91,16 @@ class WishList extends Component {
                     <div className={styles.cover} onClick={this.handleClick} />
                     <div className={styles.popup}>
                         <p className={styles.title}>
-                            {text.title} {wishlist.length > 0 &&
-                                <span>
-                                    {wishlist.length}&nbsp;
-                                    {formatWordDeclension(cartText.product, wishlist.length)}
-                                </span>
-                            }
+                            {text.title} {wishlist.length > 0 && <span>
+                                {wishlist.length}&nbsp;{formatWordDeclension(cartText.product, wishlist.length)}
+                            </span>}
                         </p>
                         {wishlist.length > 0
                             ? <div className={styles.productsContainer}>
-                                {wishlist.map(({ product, properties, id: wishlistItemId }, i) =>
-                                    <div className={styles.wishItemWrapper} key={i}>
+                                {wishlist.map(({ product, properties, id: wishlistItemId }, i) => {
+                                    const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                    return <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
                                             <img className={styles.productImg} src={product.avatar} alt="" />
                                             <div className={styles.productInfo}>
@@ -109,19 +109,15 @@ class WishList extends Component {
                                                     <p className={styles.productNumber}>
                                                         <span className={styles.productNumberTitle}>{text.article} </span>{product.article}
                                                     </p>
-                                                    {properties && properties.size &&
-                                                        <p className={styles.productSize}>{`${text.size} ${properties.size.name}`}</p>}
+                                                    {size &&
+                                                    <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>}
                                                     <div className={styles.productPrices}>
-                                                        {product.discountPrice && (product.discountPrice !== product.price) &&
+                                                        {size && size.discountPrice &&
                                                         <p className={styles.productOldPrice}>
-                                                            {product.price}&#8372;
+                                                            {formatMoney(size.price)}
                                                         </p>}
-                                                        <p className={classNames(
-                                                            styles.productPrice,
-                                                            { [styles.productDiscountPrice]:
-                                                                product.discountPrice && (product.discountPrice !== product.price) }
-                                                        )}>
-                                                            {product.discountPrice}&#8372;
+                                                        <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
+                                                            {formatMoney(size.discountPrice || size.price)}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -132,7 +128,7 @@ class WishList extends Component {
                                                             alt="remove"
                                                         />
                                                     </button>
-                                                    {basket.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+                                                    {basket.find(item => item.product.id === product.id && item.properties.size.id === size.id)
                                                         ? <button className={classNames(styles.cartBtn, styles.inCartBtn)}>
                                                             { windowWidth > 500 ? text.inCartBtn : <img
                                                                 className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"
@@ -148,7 +144,8 @@ class WishList extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>)}
+                                    </div>;
+                                })}
                             </div>
                             : <p className={styles.noProducts}>{text.noProduct}</p>
                         }

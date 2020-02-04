@@ -6,7 +6,7 @@ import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
-import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
+import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
@@ -108,7 +108,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: categoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите категорию новости' } }
+                    { name: 'required', options: { text: 'Выберите категорию товара' } }
                 ]
             },
             {
@@ -119,42 +119,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: subCategoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите подкатегорию новости' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'price',
-                schema: {
-                    label: 'Цена',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните цену товара' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discountPrice',
-                schema: {
-                    label: 'Скидочная цена (грн)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discountPrice', options: { text: 'Введите значение скидки' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discount',
-                schema: {
-                    label: 'Размер скидки (%)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discount', options: { text: 'Введите процент скидки' } },
-                    { name: 'min', options: { minValue: 0 } },
-                    { name: 'max', options: { maxValue: 100 } }
+                    { name: 'required', options: { text: 'Выберите подкатегорию товара' } }
                 ]
             },
             {
@@ -166,13 +131,11 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 }
             },
             {
-                component: FormFieldFeaturesSingular,
+                component: FormFieldSizes,
                 name: 'sizes',
-                schema: {
-                    name: 'Размер'
-                },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните размеры товара' } }
+                    { name: 'required', options: { text: 'Добавьте хотя бы 1 размер для товара' } },
+                    { name: 'sizes' }
                 ]
             },
             {
@@ -246,7 +209,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: categoryFilter.name,
                             options: categoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -288,7 +251,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: subCategoryFilter.name,
                             options: subCategoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -347,9 +310,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             {
                 component: FormFieldFiles,
                 name: 'files',
-                schema: {
-                    max: 6
-                },
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]

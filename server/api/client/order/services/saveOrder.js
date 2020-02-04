@@ -40,12 +40,15 @@ export default function saveOrder (req, res) {
                     const products = reduce((products, { productId, quantity, properties, id }) => {
                         const product = find(product => product.id === productId, baskedProducts);
 
-                        if (!product || product.hidden) {
-                            return products;
-                        }
+                        if (!product || product.hidden) return products;
 
                         const productName = product.texts.ru.name;
-                        return append({ product, quantity, properties, id, basePrice: product.price, price: product.discountPrice, productName }, products);
+                        const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                        if (!size) return products;
+
+                        properties.size.name = size.name;
+                        return append({ product, quantity, properties, id, basePrice: size.price, price: size.discountPrice, productName }, products);
                     }, [], basket);
 
                     const order = {

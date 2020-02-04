@@ -26,16 +26,34 @@ module.exports = [
         },
         date: 1577182954770,
         hidden: false,
-        discount: 10,
-        discountPrice: 1799,
-        price: 1999,
+        minDiscount: 10,
+        minDiscountPrice: 1799,
+        minPrice: 1999,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 1799,
+                discount: 10,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -70,15 +88,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -106,16 +124,34 @@ module.exports = [
         },
         date: 1577182357741,
         hidden: false,
-        discount: 0,
-        discountPrice: 2799,
-        price: 2799,
+        minDiscount: 0,
+        minDiscountPrice: 2799,
+        minPrice: 2799,
         actualPrice: 2799,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2799,
+                discountPrice: 2799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -150,15 +186,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
-            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'f8re765rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -186,16 +222,34 @@ module.exports = [
         },
         date: 1577181957742,
         hidden: false,
-        discount: 0,
-        discountPrice: 3799,
-        price: 3799,
+        minDiscount: 0,
+        minDiscountPrice: 3799,
+        minPrice: 3799,
         actualPrice: 3799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 3799,
+                discountPrice: 3799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -230,15 +284,15 @@ module.exports = [
         views: 0,
         warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
-            { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
-            { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fqwre765rfw' },
+            { id: 'za4jh4w34', value: 'fre7w3dw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -266,16 +320,34 @@ module.exports = [
         },
         date: 1577182957744,
         hidden: false,
-        discount: 0,
-        discountPrice: 3799,
-        price: 3799,
-        actualPrice: 3799,
+        minDiscount: 50,
+        minDiscountPrice: 999,
+        minPrice: 1999,
+        actualPrice: 999,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 999,
+                discount: 50,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -310,15 +382,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -346,16 +418,34 @@ module.exports = [
         },
         date: 1577182957146,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 50,
+        minDiscountPrice: 999,
+        minPrice: 1999,
+        actualPrice: 999,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1999,
+                discountPrice: 999,
+                discount: 50,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -390,15 +480,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -426,16 +516,34 @@ module.exports = [
         },
         date: 1577182957747,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
+        minDiscount: 0,
+        minDiscountPrice: 1799,
+        minPrice: 1799,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -470,15 +578,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -506,16 +614,34 @@ module.exports = [
         },
         date: 1577182957748,
         hidden: false,
-        discount: 15,
-        discountPrice: 1799,
-        price: 2000,
+        minDiscount: 15,
+        minDiscountPrice: 1799,
+        minPrice: 2000,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2000,
+                discountPrice: 1799,
+                discount: 15,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -550,15 +676,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -586,16 +712,34 @@ module.exports = [
         },
         date: 1577182957749,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
+        minDiscount: 0,
+        minDiscountPrice: 1799,
+        minPrice: 1799,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -630,15 +774,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -666,16 +810,34 @@ module.exports = [
         },
         date: 1577182957750,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
+        minDiscount: 0,
+        minDiscountPrice: 1799,
+        minPrice: 1799,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -710,15 +872,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -746,16 +908,34 @@ module.exports = [
         },
         date: 1577182957751,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
+        minDiscount: 0,
+        minDiscountPrice: 1799,
+        minPrice: 1799,
         actualPrice: 1799,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 1799,
+                discountPrice: 1799,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                price: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -790,15 +970,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
@@ -826,16 +1006,34 @@ module.exports = [
         },
         date: 1577182957752,
         hidden: false,
-        discount: 0,
-        discountPrice: 2000,
-        price: 2000,
+        minDiscount: 0,
+        minDiscountPrice: 2000,
+        minPrice: 2000,
         actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
         sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
+            {
+                name: 'm',
+                price: 2000,
+                discountPrice: 2000,
+                discount: 0,
+                id: 'k5z5rz0y0'
+            },
+            {
+                name: 's',
+                price: 3799,
+                discountPrice: 1899,
+                discount: 50,
+                id: 'k5z5rz0y1'
+            },
+            {
+                name: 'l',
+                minPrice: 4999,
+                discountPrice: 999,
+                discount: 80,
+                id: 'k5z5rz0y2'
+            }
         ],
         texts: {
             ru: {
@@ -870,15 +1068,15 @@ module.exports = [
         views: 0,
         warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     }
 ];

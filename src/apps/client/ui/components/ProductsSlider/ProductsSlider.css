@@ -31,8 +31,19 @@
     }
 
     @media (max-width: 430px) {
-        width: 100%;
-        box-sizing: border-box;
+        width: 370px;
+    }
+
+    @media (max-width: 410px) {
+        width: 320px;
+    }
+
+    @media (max-width: 350px) {
+        width: 280px;
+    }
+
+    @media (max-width: 320px) {
+        width: 274px;
     }
 }
 
@@ -48,6 +59,12 @@
     min-width: 100%;
     position: relative;
     transition: left 0.7s ease-in-out;
+
+    @media (max-width: 1024px) {
+        &:active {
+            cursor: grabbing;
+        }
+    }
 }
 
 .productsPack {
@@ -56,8 +73,31 @@
 
     @media (max-width: 760px) {
         flex-wrap: wrap;
-        min-width: 100%;
+        width: 430px;
         justify-content: space-between;
+        margin: 0 10px;
+        position: relative;
+        left: -10px;
+    }
+
+    @media (max-width: 560px) {
+        width: 390px;
+    }
+
+    @media (max-width: 430px) {
+        width: 370px;
+    }
+
+    @media (max-width: 410px) {
+        width: 320px;
+    }
+
+    @media (max-width: 350px) {
+        width: 280px;
+    }
+
+    @media (max-width: 320px) {
+        width: 274px;
     }
 }
 

@@ -24,9 +24,11 @@
     height: 16px;
     transition: .3s ease-out;
 
-    &:hover {
-        background-image: url('./img/wishlist-hover.svg');
-        background-repeat: no-repeat;
+    @media (min-width: 600px) {
+        &:hover {
+            background-image: url('./img/wishlist-hover.svg');
+            background-repeat: no-repeat;
+        }
     }
 }
 
@@ -39,7 +41,7 @@
 
 .popupContainer {
     position: fixed;
-    z-index: 10;
+    z-index: 40;
     top: 50px;
     left: 0;
     width: 100%;

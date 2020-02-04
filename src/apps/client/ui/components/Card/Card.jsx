@@ -29,14 +29,16 @@ class Card extends Component {
         newClass: PropTypes.string,
         labelClass: PropTypes.string,
         categories: PropTypes.array,
-        subCategories: PropTypes.array
+        subCategories: PropTypes.array,
+        setSliderWidth: PropTypes.func
     };
 
     static defaultProps = {
         newClass: '',
         labelClass: '',
         categories: [],
-        subCategories: []
+        subCategories: [],
+        setSliderWidth: () => {}
     };
 
     state = {
@@ -74,14 +76,15 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, discount, actualPrice, price, alias },
+            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias },
             newClass,
             labelClass,
             langRoute,
-            lang
+            lang,
+            setSliderWidth
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
-        const isDiscount = price !== actualPrice;
+        const isDiscount = minPrice !== actualPrice;
 
         return (
             <Link
@@ -93,10 +96,10 @@ class Card extends Component {
                 to={`${langRoute}/${categoryAlias}/${subCategoryAlias}/${alias}`}
             >
                 <div className={styles.labels}>
-                    {this.getLabels(['top'], discount)}
+                    {this.getLabels(['top'], minDiscount)}
                 </div>
                 <div>
-                    <img className={styles.img} src={avatar} alt=''/>
+                    <img className={styles.img} src={avatar} alt='' onLoad={setSliderWidth}/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <p className={styles.productName}>
@@ -104,7 +107,7 @@ class Card extends Component {
                     </p>
 
                     {isDiscount ? <div className={styles.priceOld}>
-                        {price} &#8372;
+                        {minPrice} &#8372;
                     </div> : null}
                     <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
                         {actualPrice} &#8372;

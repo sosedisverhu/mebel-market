@@ -54,14 +54,10 @@
 
 .logoImg {
     display: block;
-    max-width: 100%;
+    max-width: 288px;
 
     @media (max-width: 1160px) {
         width: 200px;
-    }
-
-    @media (max-width: 1135px) {
-        width: 180px;
     }
 
     @media (max-width: 600px) {
@@ -74,6 +70,7 @@
 }
 
 .menuTop {
+    white-space: nowrap;
     @media (max-width: 991px) {
         display: none;
     }
@@ -204,12 +201,12 @@
     padding: 0;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/search.png');
+    background: center no-repeat url('./img/search.svg');
     cursor: pointer;
     transition: .3s ease-out;
 
     &:hover {
-        background-image: url('./img/search-hover.png');
+        background-image: url('./img/search-hover.svg');
     }
 }
 
@@ -308,8 +305,8 @@
 
 .searchInputBottom {
     font-family: RoundedElegance;
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 16px;
     width: 213px;
     height: 19px;
     background-color: whiteBasic;
@@ -329,7 +326,7 @@
     height: 18px;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/searchBottom.png');
+    background: center no-repeat url('./img/searchBottom.svg');
     margin-left: 17px;
 }
 
@@ -409,7 +406,7 @@
     height: calc(100% - 99px);
     max-height: 0;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 40;
     transition: max-height 0.25s ease-out;
 
     &.active {

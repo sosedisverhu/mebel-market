@@ -53,12 +53,13 @@ class AboutProduct extends Component {
         deleteFromWishlist: PropTypes.func.isRequired,
         basket: PropTypes.array,
         openBasket: PropTypes.func.isRequired,
-        basketIsOpen: PropTypes.bool.isRequired
+        basketIsOpen: PropTypes.bool.isRequired,
+        changeGalleryDiscount: PropTypes.func.isRequired
     };
 
     state = {
-        sizes: [],
-        activeSize: {},
+        sizes: this.props.product.sizes,
+        activeSizeId: this.props.product.sizes[0].id,
         sizeListIsOpen: true,
         selectIsOpen: false,
         isInWishlist: false,
@@ -67,12 +68,10 @@ class AboutProduct extends Component {
 
     componentDidMount () {
         const { wishlist, product } = this.props;
-        const { activeSize } = this.state;
+        const { activeSizeId } = this.state;
 
         this.setState({
-            sizes: product.sizes,
-            activeSize: product.sizes[0],
-            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.name === activeSize.name))
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.id === activeSizeId))
         });
     }
 
@@ -80,9 +79,8 @@ class AboutProduct extends Component {
         const { basket, wishlist, product } = props;
         let values = {};
 
-        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name));
-
-        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.name === state.activeSize.name);
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.id === state.activeSizeId));
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.id === state.activeSizeId);
 
         return values;
     }
@@ -93,9 +91,10 @@ class AboutProduct extends Component {
 
     onChangeActiveSize = size => {
         this.setState({
-            activeSize: size,
+            activeSizeId: size.id,
             sizeListIsOpen: false
         });
+        this.props.changeGalleryDiscount(size);
     };
 
     sizeListIsOpen = () => {
@@ -112,17 +111,19 @@ class AboutProduct extends Component {
 
     handleAddToWishlist = () => {
         const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
-        const { isInWishlist, activeSize } = this.state;
+        const { isInWishlist, activeSizeId } = this.state;
 
         if (!isInWishlist) {
             saveProductsToWishlist({
                 productId: product.id,
                 properties: {
-                    size: activeSize
+                    size: {
+                        id: activeSizeId
+                    }
                 }
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === activeSize.name);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === activeSizeId);
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
             }
@@ -131,11 +132,13 @@ class AboutProduct extends Component {
 
     handleBuyClick = () => {
         const { saveProductsToBasket, product } = this.props;
-        const { activeSize } = this.state;
+        const { activeSizeId } = this.state;
         saveProductsToBasket({
             productId: product.id,
             properties: {
-                size: activeSize
+                size: {
+                    id: activeSizeId
+                }
             },
             quantity: 1
         });
@@ -155,25 +158,25 @@ class AboutProduct extends Component {
 
     render () {
         const { product, langMap, lang } = this.props;
-        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
+        const { sizes, activeSizeId, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
-        const isDiscount = product.price !== product.actualPrice;
+        const activeSize = product.sizes.find(productSize => productSize.id === activeSizeId);
+        const isDiscount = !!activeSize.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
             <AboutProductTop product={product}/>
-            <div className={styles.advantagesTitle}>{text.advantages}</div>
             {shortDescription &&
             <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {isDiscount &&
             <span className={styles.priceOld}>
-                {formatMoney(product.price)}
+                {formatMoney(activeSize.price)}
             </span>}
-            <span className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
-                {formatMoney(product.actualPrice)}
+            <span className={classNames(styles.price, styles.discountPrice)}>
+                {formatMoney(activeSize.discountPrice || activeSize.price)}
             </span>
             <div>
                 <span className={styles.sizesTitle}>

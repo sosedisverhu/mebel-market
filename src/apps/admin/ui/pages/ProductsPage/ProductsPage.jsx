@@ -43,21 +43,50 @@ const tableCells = [
 
 const materialStyles = theme => ({
     root: {
-        display: 'flex'
+        display: 'flex',
+        '@media (max-width:1200px)': {
+            flexDirection: 'column-reverse'
+        }
     },
     drawer: {
-        width: '400px',
-        flexShrink: 0
+        maxWidth: '400px',
+        flexShrink: 0,
+        '@media (max-width:1200px)': {
+            width: 'calc(100% - 60px)',
+            maxWidth: 'unset',
+            margin: '30px 30px 0 30px',
+            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)'
+        },
+        '@media (max-width:600px)': {
+            width: 'calc(100% - 30px)',
+            margin: '15px 15px 0 15px'
+        },
+        '@media (max-width:400px)': {
+            width: '100%',
+            margin: '15px 0 0 0'
+        }
     },
     drawerPaper: {
         top: '0px',
-        width: '400px',
+        maxWidth: '400px',
         position: 'relative',
-        minHeight: '100vh'
+        minHeight: '93vh',
+        '@media (max-width:1200px)': {
+            zIndex: '0',
+            minHeight: 'unset',
+            width: '100%',
+            maxWidth: 'unset'
+        }
     },
     content: {
         flexGrow: 1,
-        padding: '30px'
+        padding: '30px',
+        '@media (max-width:600px)': {
+            padding: '15px'
+        },
+        '@media (max-width:400px)': {
+            padding: '15px 0'
+        }
     },
     toolbarNav: {
         display: 'flex',
@@ -84,7 +113,13 @@ const materialStyles = theme => ({
         }
     },
     listItemText: {
-        cursor: 'default'
+        cursor: 'default',
+        '@media (max-width:600px)': {
+            maxWidth: '120px'
+        },
+        '@media (max-width:400px)': {
+            padding: '0'
+        }
     },
     modalContent: {
         position: 'absolute',
@@ -94,7 +129,10 @@ const materialStyles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
         overflowY: 'auto',
-        maxHeight: '100vh'
+        maxHeight: '100vh',
+        '@media (max-width:1300px)': {
+            width: '90%'
+        }
     }
 });
 
@@ -213,7 +251,7 @@ class ProductsPage extends Component {
         this.setState({
             activeCategory: category,
             products: this.getCategoryProducts(category),
-            subCategories: this.props.subCategories.filter((subCategory) => category.id === subCategory.categoryId)
+            subCategories: this.props.subCategories.filter(subCategory => category.id === subCategory.categoryId)
         });
     };
 
@@ -257,6 +295,9 @@ class ProductsPage extends Component {
             </div>;
 
         default:
+            const categoriesWithSubCategories = categories.filter(category => {
+                return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
+            });
             return <div>
                 <AdminTable
                     headerRows={headerRows}
@@ -273,8 +314,9 @@ class ProductsPage extends Component {
                 <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
                         <ProductForm
-                            categories={categories}
+                            categories={categoriesWithSubCategories}
                             subCategories={subCategories}
+                            allSubCategories={this.props.subCategories}
                             activeCategory={activeCategory}
                             product={editableProduct}
                             onDone={this.handleProductFormDone}/>

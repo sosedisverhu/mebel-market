@@ -113,7 +113,8 @@ export default {
     },
     article: {
         moreBtn: 'Подробнее',
-        year: 'года'
+        year: 'года',
+        breadcrumbArticles: 'Статьи'
     },
     searchPage: {
         results: 'результатов по запросу',
@@ -123,7 +124,8 @@ export default {
         placeholder: 'Поиск',
         needHelp: 'Нужна помощь?',
         link: 'Свяжитесь с нами',
-        articles: 'Статьи:'
+        articles: 'Статьи:',
+        search: 'Поиск'
     },
     checkoutPage: {
         checkout: 'Оформление заказа',

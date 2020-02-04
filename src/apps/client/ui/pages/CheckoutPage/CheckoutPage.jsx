@@ -13,6 +13,7 @@ import each from '@tinkoff/utils/array/each';
 import filter from '@tinkoff/utils/array/filter';
 
 import styles from './CheckoutPage.css';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
 import formatMoney from '../../../utils/formatMoney';
@@ -118,7 +119,7 @@ const mapStateToProps = ({ application, data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveOrder: (...payload) => dispatch(saveOrder(...payload))
 });
 
@@ -128,7 +129,7 @@ class CheckoutPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         saveOrder: PropTypes.func.isRequired,
-        basket: PropTypes.object.isRequired
+        basket: PropTypes.array.isRequired
     };
 
     requiredFieldsStart = React.createRef();
@@ -142,7 +143,7 @@ class CheckoutPage extends Component {
         customerComment: '',
         customerAddress: '',
         orderId: null
-    }
+    };
 
     handleChange = fieldName => e => {
         this.setState({ [fieldName]: e.target.value, [`${fieldName}Error`]: false });
@@ -151,12 +152,12 @@ class CheckoutPage extends Component {
     handleDeliveryChange = e => {
         const newDelivery = deliveryOptions.find(delivery => delivery.id === e.target.value);
         this.setState({ deliveryChecked: newDelivery, 'deliveryCheckedError': false });
-    }
+    };
 
     handlePaymentChange = e => {
         const newPayment = paymentOptions.find(payment => payment.id === e.target.value);
         this.setState({ paymentChecked: newPayment, 'paymentCheckedError': false });
-    }
+    };
 
     handleBlur = fieldName => () => {
         const { deliveryChecked } = this.state;
@@ -219,7 +220,7 @@ class CheckoutPage extends Component {
             .then(({ shortId }) => {
                 this.setState({ orderId: shortId });
             });
-    }
+    };
 
     render () {
         const { langMap, lang, basket, langRoute } = this.props;
@@ -227,21 +228,28 @@ class CheckoutPage extends Component {
         const { deliveryChecked, paymentChecked, orderId } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
-        const productsPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
+        const productsPrice = basket.reduce((sum, { quantity, product, properties }) => {
+            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+            return sum + (quantity * size.discountPrice || quantity * size.price);
+        }, 0);
         const totalPrice = productsPrice + (deliveryChecked.price || 0);
 
         if (!basket.length) {
-            return <section className={styles.noItemsContainer}>
-                <div className={styles.noItemsText}>
-                    {text.noItemsInBasket}
+            return <section className={styles.noItemsContainerWrap}>
+                <Breadcrumbs noCategoryPage={text.checkout} />
+                <div className={styles.noItemsContainer}>
+                    <div className={styles.noItemsText}>
+                        {text.noItemsInBasket}
+                    </div>
+                    <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
+                        <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
+                    </Link>
                 </div>
-                <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
-                    <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
-                </Link>
             </section>;
         }
 
         return (<section className={styles.checkoutPage}>
+            <Breadcrumbs noCategoryPage={text.checkout} />
             <form className={styles.content} onSubmit={this.handleSubmit}>
                 <div className={styles.contentTop}>
                     <div className={styles.details}>

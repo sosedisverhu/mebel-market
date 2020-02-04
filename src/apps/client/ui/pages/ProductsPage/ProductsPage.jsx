@@ -34,6 +34,7 @@ const DEFAULT_FILTERS = name => {
             type: 'range',
             min: 0,
             max: 0,
+            dimension: '\u20B4',
             id: 'actualPrice',
             prop: 'actualPrice'
         }
@@ -65,7 +66,7 @@ class ProductsPage extends Component {
         isCategory: true,
         isSubCategoryFilters: false,
         filters: [],
-        filteredProducts: null,
+        filteredProducts: [],
         filtersMap: {},
         currentCategoryFiltersName: 'categoryFilters'
     };
@@ -83,16 +84,10 @@ class ProductsPage extends Component {
     setNewState = (props = this.props) => {
         const { subCategoryAlias, categoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
-        if (!category) {
-            this.setState({
-                isCategory: false
-            });
-            return;
-        }
-        const subCategory = subCategoryAlias && this.getSubCategory(props);
         const isPromotionsPage = categoryAlias === 'promotions';
+        const subCategory = subCategoryAlias && this.getSubCategory(props);
 
-        if (subCategoryAlias && !subCategory && !isPromotionsPage) {
+        if (((!category) || subCategoryAlias && !subCategory) && !isPromotionsPage) {
             this.setState({
                 isCategory: false
             });
@@ -117,7 +112,7 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: null,
+            filteredProducts: products,
             isPromotionsPage
         });
     };
@@ -160,7 +155,7 @@ class ProductsPage extends Component {
             return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
                 : filteredProductsByCategory;
         }
-        return products.filter(product => !isEmpty(product.discountPrice) && product.discountPrice !== product.price);
+        return products.filter(product => !isEmpty(product.minDiscountPrice) && product.minDiscountPrice !== product.minPrice);
     };
 
     getDefaultFilters = (products, langMap) => {
@@ -201,10 +196,10 @@ class ProductsPage extends Component {
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value))
                 )(products);
                 const options = filterUtil(option =>
-                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                    any(optionInProduct => option.id === optionInProduct, optionsInProduct), filter.options.map(filter => filter));
 
                 return options.length > 1 ? [
                     ...filters,
@@ -218,7 +213,7 @@ class ProductsPage extends Component {
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value)
                     )
                 )(products);
 
@@ -258,9 +253,7 @@ class ProductsPage extends Component {
     getFilterValue = (product, filter) => {
         const { isSubCategoryFilters } = this.state;
         const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
-        const { lang } = this.props;
         const productFilterValue = compose(
-            prop(lang),
             prop('value'),
             find(productFilter => productFilter.id === filter.id)
         )(product[currentCategoryName]);
@@ -302,7 +295,7 @@ class ProductsPage extends Component {
 
         this.setState({
             products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : products
         });
     };
 
@@ -312,14 +305,12 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const headerText = propOr('header', {}, langMap);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category}
-                    noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
@@ -336,13 +327,17 @@ class ProductsPage extends Component {
                             })}
                         </div>
                     </div>
+                    <Breadcrumbs
+                        category={category}
+                        subCategory={subCategory}
+                        noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter}>
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${formatWordDeclension(text.results, products.length)}`}
+                                {`${propOr('length', 0, filteredProducts)} ${formatWordDeclension(text.results, products.length)}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>

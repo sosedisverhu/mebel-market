@@ -21,21 +21,21 @@ const Product = new Schema({
     files: [{ type: String, required: true }],
     hidden: { type: Boolean, required: true },
     date: { type: Number, required: true },
-    discount: { type: Number },
+    minDiscount: { type: Number },
     warranty: { type: Number, required: true },
-    discountPrice: { type: Number },
-    price: { type: Number, required: true },
+    minDiscountPrice: { type: Number },
+    minPrice: { type: Number, required: true },
     actualPrice: { type: Number, required: true },
     categoryId: { type: String, required: true },
     subCategoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },
     categoryFilters: [{
         id: { type: String, required: true },
-        value: { type: Object, required: true }
+        value: { type: String, required: true }
     }],
     subCategoryFilters: [{
         id: { type: String, required: true },
-        value: { type: Object, required: true }
+        value: { type: String, required: true }
     }],
     article: { type: String, required: true, unique: true }
 });

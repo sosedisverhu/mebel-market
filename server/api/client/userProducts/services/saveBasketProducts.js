@@ -37,7 +37,13 @@ export default function saveBasketProducts (req, res) {
                             reduce((products, { productId, quantity, properties, id }) => {
                                 const product = find(product => product.id === productId, basketProducts);
 
-                                return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                return append({ product, quantity, properties, id }, products);
                             }, [], basket)
                         ];
                     })
@@ -72,7 +78,13 @@ export default function saveBasketProducts (req, res) {
                                 return reduce((products, { productId, quantity, properties, id }) => {
                                     const product = find(product => product.id === productId, basketProducts);
 
-                                    return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                    if (!product || product.hidden) return products;
+
+                                    const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                    if (!size) return products;
+
+                                    return append({ product, quantity, properties, id }, products);
                                 }, [], basket);
                             })
                             .then((basketProducts) => {
@@ -104,7 +116,7 @@ export default function saveBasketProducts (req, res) {
             const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
                 const basketNotUniq = basket[basketIndex];
 
-                if (basketNotUniq.properties.size.name === properties.size.name) {
+                if (basketNotUniq.properties.size.id === properties.size.id) {
                     return [...basket];
                 }
 
@@ -123,7 +135,13 @@ export default function saveBasketProducts (req, res) {
                             return reduce((products, { productId, quantity, properties, id }) => {
                                 const product = find(product => product.id === productId, basketProducts);
 
-                                return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                return append({ product, quantity, properties, id }, products);
                             }, [], basket);
                         })
                         .then((basketProducts) => {

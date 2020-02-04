@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import classNames from 'classnames';
+
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import pick from '@tinkoff/utils/object/pick';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import findIndex from '@tinkoff/utils/array/findIndex';
-import isObject from '@tinkoff/utils/is/plainObject';
-
-import classNames from 'classnames';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -58,6 +58,7 @@ class ProductForm extends Component {
         product: PropTypes.object,
         categories: PropTypes.array,
         subCategories: PropTypes.array,
+        allSubCategories: PropTypes.array,
         activeCategory: PropTypes.object
     };
 
@@ -66,6 +67,7 @@ class ProductForm extends Component {
         product: {},
         categories: [],
         subCategories: [],
+        allSubCategories: [],
         activeCategory: {}
     };
 
@@ -108,9 +110,9 @@ class ProductForm extends Component {
             files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
             date: product.date,
-            discountPrice: product.discountPrice,
-            price: product.price,
-            discount: product.discount,
+            minDiscountPrice: product.minDiscountPrice,
+            minPrice: product.minPrice,
+            minDiscount: product.minDiscount,
             warranty: product.warranty,
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
@@ -120,25 +122,22 @@ class ProductForm extends Component {
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
                     ...categoryFilters,
-                    [`categoryFilter-${categoryFilter.id}`]: isObject(categoryFilter.value.ru)
-                        ? categoryFilter.value.ru.name : categoryFilter.value.ru
+                    [`categoryFilter-${categoryFilter.id}`]: categoryFilter.value
                 }), {}),
             ...(product.subCategoryFilters || [])
                 .reduce((subCategoryFilters, subCategoryFilter) => ({
                     ...subCategoryFilters,
-                    [`subCategoryFilter-${subCategoryFilter.id}`]: isObject(subCategoryFilter.value.ru)
-                        ? subCategoryFilter.value.ru.name : subCategoryFilter.value.ru
+                    [`subCategoryFilter-${subCategoryFilter.id}`]: subCategoryFilter.value
                 }), {}),
             ...pick(PRODUCTS_VALUES, product)
         };
         this.id = prop('id', product);
 
         const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
-        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories[0]);
+        const subCategoryFilters = pathOr(['filters', 'ru'], [], subCategories.find(subCategory => subCategory.id === this.initialValues.subCategoryId));
 
         this.state = {
             lang: 'ru',
-            activeCategory,
             categoryHidden,
             errorText: '',
             categoryFilters,
@@ -164,9 +163,6 @@ class ProductForm extends Component {
             ua_characteristics: uaCharacteristics,
             sizes,
             hidden,
-            discountPrice,
-            price,
-            discount,
             warranty,
             categoryId,
             subCategoryId,
@@ -174,9 +170,6 @@ class ProductForm extends Component {
             alias,
             article
         } = values;
-
-        const activeCategory = this.props.categories.find(category => category.id === categoryId);
-        const activeSubCategory = this.props.subCategories.find(subCategory => subCategory.id === subCategoryId);
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
             if (CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
@@ -189,18 +182,13 @@ class ProductForm extends Component {
                 let value;
 
                 if (filterType === 'range') {
-                    value = {
-                        ua: +filterValue,
-                        ru: +filterValue
-                    };
+                    value = filterValue;
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.categoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex((option) => option.id === filterValue, this.state.categoryFilters[filterIndex].options);
 
-                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+                    if (filterValueIndex === -1) return categoryFilters;
 
-                        return resultFilterValue;
-                    }, {}, activeCategory.filters);
+                    value = this.state.categoryFilters[filterIndex].options[filterValueIndex].id;
                 }
 
                 return [
@@ -218,6 +206,7 @@ class ProductForm extends Component {
             if (SUB_CATEGORY_FILTER_NAME_REGEX.test(filterName)) {
                 const id = filterName.replace(SUB_CATEGORY_FILTER_NAME_REGEX, '');
                 const filterIndex = findIndex(filter => filter.id === id, this.state.subCategoryFilters);
+
                 if (filterIndex === -1) {
                     return subCategoryFilters;
                 }
@@ -225,18 +214,15 @@ class ProductForm extends Component {
                 let value;
 
                 if (filterType === 'range') {
-                    value = {
-                        ua: +filterValue,
-                        ru: +filterValue
-                    };
+                    value = filterValue;
                 } else {
-                    const filterValueIndex = findIndex((option) => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex(option => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
-                    value = reduceObj((resultFilterValue, filtersArr, lang) => {
-                        resultFilterValue[lang] = filtersArr[filterIndex].options[filterValueIndex].name;
+                    if (filterValueIndex === -1) {
+                        return subCategoryFilters;
+                    }
 
-                        return resultFilterValue;
-                    }, {}, activeSubCategory.filters);
+                    value = this.state.subCategoryFilters[filterIndex].options[filterValueIndex].id;
                 }
 
                 return [
@@ -278,12 +264,18 @@ class ProductForm extends Component {
                     characteristics: uaCharacteristics
                 }
             },
-            sizes,
+            sizes: sizes.map(size => ({
+                name: size.name,
+                price: size.price,
+                discountPrice: size.discountPrice,
+                discount: size.discount,
+                id: size.id
+            })),
             hidden,
-            discountPrice,
-            discount,
+            minDiscountPrice: sizes[0].discountPrice,
+            minDiscount: sizes[0].discount,
             warranty,
-            price,
+            minPrice: sizes[0].price,
             categoryId,
             subCategoryId,
             id,
@@ -297,9 +289,9 @@ class ProductForm extends Component {
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
         const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
-        const { discountPrice, price } = productPayload;
+        const { minDiscountPrice, minPrice } = productPayload;
 
-        productPayload.actualPrice = discountPrice || price;
+        productPayload.actualPrice = minDiscountPrice || minPrice;
 
         (this.id ? editProduct({ ...productPayload, id: this.id }) : saveProduct(productPayload))
             .then(product => {
@@ -313,7 +305,7 @@ class ProductForm extends Component {
                         formData.append(`product-${product.id}-file-${i}`, file.content);
                     } else {
                         oldFiles.push({
-                            path: file,
+                            path: file.path || file,
                             index: i
                         });
                     }
@@ -321,6 +313,7 @@ class ProductForm extends Component {
 
                 formData.append('removedFiles', JSON.stringify(removedFiles));
                 formData.append('oldFiles', JSON.stringify(oldFiles));
+
                 return updateProductFiles(formData, product.id);
             })
             .then(product => {
@@ -357,19 +350,38 @@ class ProductForm extends Component {
 
         case 'categoryId':
             const activeCategory = this.props.categories.find(category => category.id === changes.categoryId);
-            const { lang } = this.state;
+            const activeSubCategories = this.props.allSubCategories.filter(subCategory => subCategory.categoryId === activeCategory.id);
+            const newSubCategoryFilters = activeSubCategories[0].filters.ru;
+            const categoryFilters = pathOr(['filters', 'ru'], [], activeCategory);
+
+            this.subCategoriesOptions = activeSubCategories.map(subCategory => ({ value: subCategory.id, name: subCategory.texts.ru.name }));
 
             this.setState({
                 categoryHidden: activeCategory.hidden,
-                filters: pathOr(['filters', 'ru'], [], activeCategory)
+                categoryFilters,
+                subCategoryFilters: newSubCategoryFilters
             });
 
-            this.subCategoriesOptions = activeCategory.texts[lang].subCategory.map(category => ({
-                value: category.id,
-                name: category.name
-            }));
+            categoryFilters.map(categoryFilter => {
+                values[`categoryFilter-${categoryFilter.id}`] = undefined;
+            });
 
-            values.subCategoryId = activeCategory.texts[lang].subCategory[0].id;
+            newSubCategoryFilters.map(subCategoryFilter => {
+                values[`subCategoryFilter-${subCategoryFilter.id}`] = undefined;
+            });
+
+            values.subCategoryId = this.subCategoriesOptions[0].value;
+            break;
+
+        case 'subCategoryId':
+            const subCategoryFilters = this.props.allSubCategories.find(subCategory => subCategory.id === changes.subCategoryId).filters.ru;
+            this.setState({
+                subCategoryFilters
+            });
+
+            subCategoryFilters.map(subCategoryFilter => {
+                values[`subCategoryFilter-${subCategoryFilter.id}`] = undefined;
+            });
             break;
         }
     };

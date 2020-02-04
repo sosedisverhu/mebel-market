@@ -35,6 +35,7 @@ export default function getUserProducts (req, res) {
             }
 
             const { basket, wishlist, id } = userProducts[0];
+            // console.log('3) wishlist', wishlist);
 
             Promise.all([
                 getProductsByIds(basket.map(basket => basket.productId)),
@@ -45,18 +46,24 @@ export default function getUserProducts (req, res) {
                         reduce((products, { productId, quantity, properties, id }) => {
                             const product = find(product => product.id === productId, basketProducts);
 
-                            return !product ||
-                                product.hidden ||
-                                !find(size => properties.size.name === size.name, product.sizes)
-                                ? products : append({ product, quantity, properties, id }, products);
+                            if (!product || product.hidden) return products;
+
+                            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                            if (!size) return products;
+
+                            return append({ product, quantity, properties, id }, products);
                         }, [], basket),
                         reduce((products, { productId, properties, id }) => {
                             const product = find(product => product.id === productId, wishlistProducts);
 
-                            return !product ||
-                                product.hidden ||
-                                !find(size => properties.size.name === size.name, product.sizes)
-                                ? products : append({ product, properties, id }, products);
+                            if (!product || product.hidden) return products;
+
+                            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+
+                            if (!size) return products;
+
+                            return append({ product, properties, id }, products);
                         }, [], wishlist)
                     ];
                 })

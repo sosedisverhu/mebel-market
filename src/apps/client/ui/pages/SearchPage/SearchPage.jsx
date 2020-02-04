@@ -105,7 +105,7 @@ class SearchPage extends Component {
     }
 
     render () {
-        const { langMap } = this.props;
+        const { langMap, langRoute } = this.props;
         const { products, searchText, articles, loading, newText } = this.state;
         const text = propOr('searchPage', {}, langMap);
 
@@ -117,7 +117,7 @@ class SearchPage extends Component {
 
         return (
             <section className={styles.search}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={`${text.search} "${searchText}"`} />
                 {(products.length || articles.length)
                     ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>
@@ -164,7 +164,7 @@ class SearchPage extends Component {
                                         <button className={styles.searchButton} type="submit"></button>
                                     </form>
                                     <p className={styles.needHelp}>{text.needHelp}</p>
-                                    <Link className={styles.link} to="#" >{text.link}</Link>
+                                    <Link className={styles.link} to={`${langRoute}/contacts`} >{text.link}</Link>
                                 </div>
                             </div>
                         </div>)

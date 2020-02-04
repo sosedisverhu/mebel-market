@@ -10,6 +10,7 @@ import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
 import discount from './discount';
 import filters from './filters';
+import sizes from './sizes';
 
 export default {
     required,
@@ -23,5 +24,6 @@ export default {
     requiredFiles,
     discountPrice,
     discount,
-    filters
+    filters,
+    sizes
 };

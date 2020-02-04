@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { MAX_NEW_PROSUCTS } from '../../../constants/constants';
 
 import styles from './MainPage.css';
-import Slider from '../../components/Slider/Slider';
+import Carousel from '../../components/Carousel/Carousel';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 import MainCategories from '../../components/MainCategories/MainCategories';
 import Advantages from '../../components/Advantages/Advantages';
@@ -39,7 +39,7 @@ class MainPage extends Component {
                     (result.top) ? result.top.push(product) : result.top = [product];
                 }
 
-                if (product.discountPrice) {
+                if (product.minDiscountPrice) {
                     (result.discount) ? result.discount.push(product) : result.discount = [product];
                 }
 
@@ -56,7 +56,7 @@ class MainPage extends Component {
 
         return (
             <div>
-                <Slider/>
+                <Carousel/>
                 {labels.map((label, i) => {
                     return (
                         <div key={i}>
