@@ -100,6 +100,9 @@ const materialStyles = theme => ({
         '@media (max-width: 374px)': {
             fontSize: '8.5px'
         }
+    },
+    colorImg: {
+        marginRight: '6px'
     }
 });
 
@@ -220,7 +223,8 @@ class OrderForm extends Component {
                             <TableCell className={classes.rowLabelSmall} colSpan={1}>Название</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3}>Артикул</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">Количество</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={3} align="center">Размер</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">Размер</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">Цвет</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Цена за единицу</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Всего</TableCell>
                         </TableRow>
@@ -232,7 +236,11 @@ class OrderForm extends Component {
                                     <TableCell className={classes.rowLabelSmall} colSpan={1}>{name}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={3}>{article}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">{quantity}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={3} align="center">{properties.size.name}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">{properties.size.name}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
+                                        <img src={properties.color.file} className={classes.colorImg} width="24" height="12" alt=""/>
+                                        {properties.color.name}
+                                    </TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">
                                         {price ? formatMoney(price) : formatMoney(basePrice)}
                                     </TableCell>

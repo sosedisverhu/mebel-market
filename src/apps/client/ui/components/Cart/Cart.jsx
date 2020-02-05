@@ -22,6 +22,7 @@ const mapStateToProps = ({ application, data }) => {
     return {
         langRoute: application.langRoute,
         langMap: application.langMap,
+        lang: application.lang,
         basket: data.basket,
         basketIsOpen: data.basketIsOpen
     };
@@ -36,6 +37,7 @@ const mapDispatchToProps = dispatch => ({
 class Cart extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
+        lang: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
         outsideClickEnabled: PropTypes.bool,
@@ -64,12 +66,14 @@ class Cart extends Component {
     };
 
     render () {
-        const { langRoute, langMap, basket, basketIsOpen } = this.props;
+        const { langRoute, langMap, basket, basketIsOpen, lang } = this.props;
         const text = propOr('cart', {}, langMap);
         const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
         const totalPrice = basket.reduce((sum, { quantity, product, properties }) => {
-            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
-            return sum + (quantity * size.discountPrice || quantity * size.price);
+            const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+            const color = size.colors.find(color => color.id === properties.size.color.id);
+
+            return sum + (quantity * color.discountPrice || quantity * color.price);
         }, 0);
 
         return (

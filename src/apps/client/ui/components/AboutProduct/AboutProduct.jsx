@@ -54,8 +54,10 @@ class AboutProduct extends Component {
         basket: PropTypes.array,
         openBasket: PropTypes.func.isRequired,
         basketIsOpen: PropTypes.bool.isRequired,
-        changeGalleryDiscount: PropTypes.func.isRequired,
-        activeSize: PropTypes.object.isRequired
+        changeColor: PropTypes.func.isRequired,
+        changeSize: PropTypes.func.isRequired,
+        activeSize: PropTypes.object.isRequired,
+        activeColor: PropTypes.object.isRequired
     };
 
     state = {
@@ -63,14 +65,15 @@ class AboutProduct extends Component {
         sizeListIsOpen: true,
         selectIsOpen: false,
         isInWishlist: false,
-        isInBasket: false
+        isInBasket: false,
+        colorListOpen: false
     };
 
     componentDidMount () {
-        const { wishlist, product, activeSize } = this.props;
+        const { wishlist, product, activeColor } = this.props;
 
         this.setState({
-            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.id === activeSize.id))
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.color.id === activeColor.id))
         });
     }
 
@@ -78,8 +81,9 @@ class AboutProduct extends Component {
         const { basket, wishlist, product } = props;
         let values = {};
 
-        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.id === props.activeSize.id));
-        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.id === props.activeSize.id);
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) &&
+            basket.find(item => item.properties.size.color.id === props.activeColor.id));
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.color.id === props.activeColor.id);
 
         return values;
     }
@@ -92,7 +96,7 @@ class AboutProduct extends Component {
         this.setState({
             sizeListIsOpen: false
         });
-        this.props.changeGalleryDiscount(size);
+        // this.props.changeGalleryDiscount(size);
     };
 
     sizeListIsOpen = () => {
@@ -108,7 +112,7 @@ class AboutProduct extends Component {
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product, activeSize } = this.props;
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product, activeSize, activeColor } = this.props;
         const { isInWishlist } = this.state;
 
         if (!isInWishlist) {
@@ -116,12 +120,15 @@ class AboutProduct extends Component {
                 productId: product.id,
                 properties: {
                     size: {
-                        id: activeSize.id
+                        id: activeSize.id,
+                        color: {
+                            id: activeColor.id
+                        }
                     }
                 }
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === activeSize.id);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.color.id === activeColor.id);
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
             }
@@ -129,12 +136,15 @@ class AboutProduct extends Component {
     };
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product, activeSize } = this.props;
+        const { saveProductsToBasket, product, activeSize, activeColor } = this.props;
         saveProductsToBasket({
             productId: product.id,
             properties: {
                 size: {
-                    id: activeSize.id
+                    id: activeSize.id,
+                    color: {
+                        id: activeColor.id
+                    }
                 }
             },
             quantity: 1
@@ -153,50 +163,76 @@ class AboutProduct extends Component {
         return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
+    changeColorListStatus = () => this.setState((state) => ({ colorListOpen: !state.colorListOpen }));
+
+    handleChangeColor = (color) => {
+        this.changeColorListStatus();
+        this.props.changeColor(color);
+    }
+
     render () {
-        const { product, langMap, lang, activeSize } = this.props;
-        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
+        const { product, langMap, lang, activeSize, activeColor, changeSize } = this.props;
+        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen } = this.state;
         const text = propOr('product', {}, langMap);
-        const isDiscount = !!activeSize.discountPrice;
+        const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
 
         return <div className={styles.root}>
-            <AboutProductTop article={activeSize.article} product={product}/>
+            <AboutProductTop article={activeColor.article} product={product}/>
             {shortDescription &&
             <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {isDiscount &&
             <span className={styles.priceOld}>
-                {formatMoney(activeSize.price)}
+                {formatMoney(activeColor.price)}
             </span>}
             <span className={classNames(styles.price, styles.discountPrice)}>
-                {formatMoney(activeSize.discountPrice || activeSize.price)}
+                {formatMoney(activeColor.discountPrice || activeColor.price)}
             </span>
-            <div>
-                <span className={styles.sizesTitle}>
-                    {!isOneSize ? text.size : text.oneSize}
-                </span>
-                <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
-                    onMouseEnter={() => this.sizeListIsOpen()}
-                    onClick={this.selectIsOpen}
-                >
-                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
-                        {activeSize.name}
-                    </li>
-                    {sizes.map(size => {
-                        if (size.id !== activeSize.id && sizeListIsOpen) {
-                            sizeCounter++;
-                            return <li className={styles.option}
-                                onClick={() => this.onChangeActiveSize(size)}
-                                style={{ top: `${30 * sizeCounter}px` }}
-                                key={size.id}>
-                                {size.name}
-                            </li>;
-                        }
-                    })}
-                </ul>
+            <div className={styles.properties}>
+                <div className={styles.sizesWrap}>
+                    <span className={styles.sizesTitle}>
+                        {!isOneSize ? text.size : text.oneSize}
+                    </span>
+                    <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
+                        onMouseEnter={() => this.sizeListIsOpen()}
+                        onClick={this.selectIsOpen}
+                    >
+                        <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
+                            {activeSize.name}
+                        </li>
+                        {sizes[lang].map(size => {
+                            if (size.id !== activeSize.id && sizeListIsOpen) {
+                                sizeCounter++;
+                                return <li className={styles.option}
+                                    onClick={() => changeSize(size)}
+                                    style={{ top: `${30 * sizeCounter}px` }}
+                                    key={size.id}>
+                                    {size.name}
+                                </li>;
+                            }
+                        })}
+                    </ul>
+                </div>
+                <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                    <div className={styles.colorTitle}>
+                        {text.chooseColor}
+                    </div>
+                    <div className={classNames(styles.color, styles.activeColor)}>
+                        {<img className={styles.colorImg} onClick={this.changeColorListStatus} src={activeColor.file} alt={activeColor.name}/>}
+                    </div>
+                    <ul className={styles.colorList}>
+                        {activeSize.colors.filter(color => color.id !== activeColor.id).map(color =>
+                            <li className={styles.color}
+                                onClick={() => this.handleChangeColor(color)}
+                                key={color.id}>
+                                <img className={styles.colorImg} src={color.file} alt={color.name}/>
+                            </li>
+                        )}
+                    </ul>
+                </div>
             </div>
             <div className={styles.buttons}>
                 <button
