@@ -19,6 +19,8 @@ import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../../../utils/arrayMove';
 
+import FormFieldColors from '../FormFieldColors/FormFieldColors';
+
 const materialStyles = {
     size: {
         flexWrap: 'nowrap',
@@ -37,22 +39,15 @@ const materialStyles = {
     sizeGroup: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: 'column',
         width: '100%',
         flexWrap: 'wrap',
-        '@media (max-width:450px)': {
+        '@media (max-width:600px)': {
             flexDirection: 'column'
         }
     },
     sizeField: {
-        width: 'calc(25% - 20px)',
-        '@media (max-width:700px)': {
-            width: 'calc(50% - 20px)'
-        },
-        '@media (max-width:450px)': {
-            width: '100%'
-        }
-
+        width: '100%'
     },
     buttonSortable: {
         position: 'relative',
@@ -71,44 +66,31 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Size = SortableElement(({ rowIndex, size, handleSizeDelete, handleSizeChange, classes }) => (
+const Size = SortableElement(({
+    rowIndex,
+    size,
+    sizes,
+    handleSizeDelete,
+    handleSizeChange,
+    classes,
+    onChange
+}) => (
     <FormGroup className={classes.size} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.sizeGroup}>
             <TextField
                 className={classes.sizeField}
                 label='Размер'
-                value={size.name}
+                value={size.name || ''}
                 onChange={handleSizeChange('name', rowIndex)}
                 margin='normal'
                 variant='outlined'
             />
-            <TextField
-                className={classes.sizeField}
-                label='Цена'
-                value={size.price}
-                type='number'
-                onChange={handleSizeChange('price', rowIndex)}
-                margin='normal'
-                variant='outlined'
-            />
-            <TextField
-                className={classes.sizeField}
-                label='Скидочная цена'
-                value={size.discountPrice}
-                type='number'
-                onChange={handleSizeChange('discountPrice', rowIndex)}
-                margin='normal'
-                variant='outlined'
-            />
-            <TextField
-                className={classes.sizeField}
-                label='Размер скидки (%)'
-                value={size.discount}
-                type='number'
-                onChange={handleSizeChange('discount', rowIndex)}
-                margin='normal'
-                variant='outlined'
+            <FormFieldColors
+                value={size.colors}
+                sizes={sizes}
+                sizeIndex={rowIndex}
+                onChange={onChange}
             />
         </div>
         <IconButton aria-label='Delete' className={classes.sizeDelButton} onClick={handleSizeDelete(rowIndex)}>
@@ -119,7 +101,7 @@ const Size = SortableElement(({ rowIndex, size, handleSizeDelete, handleSizeChan
 
 const Sizes = SortableContainer(({ sizes, classes, ...rest }) =>
     <div>
-        {sizes.map((size, i) => <Size key={i} index={i} rowIndex={i} size={size} {...rest} classes={classes}/>)}
+        {sizes.map((size, i) => <Size key={i} sizes={sizes} index={i} rowIndex={i} size={size} {...rest} classes={classes}/>)}
     </div>
 );
 
@@ -146,7 +128,7 @@ class FormFieldSizes extends Component {
 
         this.props.onChange([
             ...value,
-            { name: '', price: '', discountPrice: '', discount: '', id: uniqid() }
+            { name: '', colors: [], id: uniqid() }
         ]);
     };
 
@@ -172,13 +154,13 @@ class FormFieldSizes extends Component {
 
     render () {
         const { classes, value, validationMessage } = this.props;
-
         return <div>
             <Sizes
                 axis='xy'
                 sizes={value}
                 handleSizeDelete={this.handleSizeDelete}
                 handleSizeChange={this.handleSizeChange}
+                onChange={this.props.onChange}
                 onSortEnd={this.onDragEnd}
                 classes={classes}
                 useDragHandle

@@ -19,8 +19,7 @@ const VALUES = [
     'subCategoryId',
     'alias',
     'categoryFilters',
-    'subCategoryFilters',
-    'article'
+    'subCategoryFilters'
 ];
 
 export default function prepareProduct (body) {

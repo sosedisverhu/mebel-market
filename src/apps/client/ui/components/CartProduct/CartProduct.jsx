@@ -64,17 +64,17 @@ class Cart extends Component {
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
 
-        return wishlist.find(item => item.product.id === product.id && item.properties.size.id === properties.size.id)
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.color.id === properties.size.color.id)
             ? { isInWishList: true }
             : { isInWishList: false };
     }
 
     componentDidMount () {
-        const { product, wishlist } = this.props;
+        const { product, wishlist, properties } = this.props;
 
         this.setState({
             isInWishList: wishlist.some(item => {
-                return item.product.id === product.id;
+                return item.product.id === product.id && item.properties.size.color.id === properties.size.color.id;
             })
         });
     }
@@ -108,7 +108,7 @@ class Cart extends Component {
                 properties
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.id === properties.size.id);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.color.id === properties.size.color.id);
 
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
@@ -128,8 +128,9 @@ class Cart extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
-        const size = product.sizes.find(productSize => productSize.id === properties.size.id);
-        const isDiscount = size.discountPrice;
+        const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+        const color = size.colors.find(color => color.id === properties.size.color.id);
+        const isDiscount = !!color.discountPrice;
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -151,11 +152,19 @@ class Cart extends Component {
                                     {product.texts[lang].name}
                                 </p>
                             </Link>
-                            <p className={styles.productNumber}>({product.article})</p>
+                            <p className={styles.productNumber}>({color.article})</p>
                         </div>
-                        <p className={styles.productSize}>
-                            {text.size} {size.name}
-                        </p>
+                        <div className={styles.properties}>
+                            <p className={styles.productSize}>
+                                {text.size} {size.name}
+                            </p>
+                            <div className={styles.productColor}>
+                                {text.color}
+                                <div className={styles.productColorImgWrap}>
+                                    <img className={styles.productColorImg} src={color.file} alt={color.name}/>
+                                </div>
+                            </div>
+                        </div>
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -182,9 +191,9 @@ class Cart extends Component {
                         </div>
                         <div className={styles.productPrices}>
                             {isDiscount &&
-                            <p className={styles.productOldPrice}>{formatMoney(size.price)}</p>}
+                            <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
                             <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
-                                {formatMoney(size.discountPrice || size.price)}
+                                {formatMoney(color.discountPrice || color.price)}
                             </p>
                         </div>
                     </div>

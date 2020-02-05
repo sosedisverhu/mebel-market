@@ -8,6 +8,7 @@ import editProduct from './services/editProduct';
 import deleteByIds from './services/deleteByIds';
 import updateFiles from './services/updateFiles';
 import updateAvatar from './services/updateAvatar';
+import updateColor from './services/updateColor';
 import findProductsByName from './services/findProductsByName';
 
 const router = express.Router();
@@ -31,6 +32,9 @@ router.route('/update-files')
 
 router.route('/update-avatar')
     .post(updateAvatar);
+
+router.route('/update-color')
+    .post(updateColor);
 
 router.route('/find')
     .get(findProductsByName);
