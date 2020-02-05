@@ -156,6 +156,11 @@ export default {
         inputText: 'Текст отзыва',
         cancelBtn: 'Отмена'
     },
+    reviewSent: {
+        thanks: 'Спасибо!',
+        publication: 'Ваш отзыв будет опубликован',
+        moderation: 'после модерации'
+    },
     articles: {
         searchResult: 'Статьи:'
     }

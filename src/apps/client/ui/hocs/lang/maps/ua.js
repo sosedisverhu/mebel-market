@@ -155,6 +155,11 @@ export default {
         inputText: 'Текст відгуку',
         cancelBtn: 'Скасувати'
     },
+    reviewSent: {
+        thanks: 'Дякуємо!',
+        publication: 'Ваш відгук буде опублікований',
+        moderation: 'після модерації'
+    },
     articles: {
         searchResult: 'Статті:'
     }

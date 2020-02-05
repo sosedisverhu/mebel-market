@@ -88,7 +88,7 @@ class Tab extends Component {
         }
         case 'characteristic': {
             return (
-                <div className={styles.characteristics}>
+                <div>
                     {product.characteristics[lang].characteristics.map((characteristic, i) => {
                         return (
                             <div className={styles.row} key={i}>

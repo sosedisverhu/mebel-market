@@ -177,6 +177,10 @@
     }
 }
 
+.reviewFieldMiddle{
+    margin: 0 auto;
+}
+
 .showAllMobile {
     display: none;
 
