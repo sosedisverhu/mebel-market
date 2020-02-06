@@ -218,7 +218,7 @@ class ProductForm extends Component {
                 if (filterType === 'range') {
                     value = filterValue;
                 } else {
-                    const filterValueIndex = findIndex(option => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex(option => option.id === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
                     if (filterValueIndex === -1) {
                         return subCategoryFilters;
