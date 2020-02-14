@@ -6,7 +6,9 @@ import ReactHelmet from 'react-helmet';
 import { connect } from 'react-redux';
 
 import { matchPath, withRouter } from 'react-router-dom';
+
 import find from '@tinkoff/utils/array/find';
+
 import { LANGS } from '../../../constants/constants';
 
 const langs = LANGS.slice(1).join('|');
@@ -14,6 +16,7 @@ const langs = LANGS.slice(1).join('|');
 const CATEGORY_PATH = `/:lang(${langs})?/:categoryAlias`;
 const SUBCATEGORY_PATH = `/:lang(${langs})?/:categoryAlias/:subCategoryAlias`;
 const PRODUCT_PATH = `/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`;
+const PROMOTION_PRODUCT_PATH = `/:lang(${langs})?/promotions/:alias`;
 
 const STATIC_ROUTES = [
     { id: 'main', path: `/:lang(${langs})?/`, exact: true },
@@ -21,7 +24,8 @@ const STATIC_ROUTES = [
     { id: 'partners', path: `/:lang(${langs})?/partners`, exact: true },
     { id: 'articles', path: `/:lang(${langs})?/articles`, exact: true },
     { id: 'contacts', path: `/:lang(${langs})?/contacts`, exact: true },
-    { id: 'search', path: `/:lang(${langs})?/search`, exact: true }
+    { id: 'search', path: `/:lang(${langs})?/search`, exact: true },
+    { id: 'promotions', path: `/:lang(${langs})?/promotions`, exact: true }
 ];
 
 const NOT_FOUND_META = {
@@ -42,7 +46,7 @@ const mapStateToProps = ({ application, data }) => {
         langRoute: application.langRoute,
         categories: data.categories,
         subCategories: data.subCategories,
-        productsMap: data.products
+        products: data.products
     };
 };
 
@@ -51,7 +55,7 @@ class Helmet extends Component {
         location: PropTypes.object,
         categories: PropTypes.array,
         subCategories: PropTypes.array,
-        productsMap: PropTypes.array,
+        products: PropTypes.array,
         lang: PropTypes.string.isRequired,
         staticSeo: PropTypes.array
     };
@@ -73,11 +77,12 @@ class Helmet extends Component {
     }
 
     getMeta = (props = this.props) => {
-        const { location: { pathname }, categories, subCategories, productsMap, staticSeo, lang } = props;
+        const { location: { pathname }, categories, subCategories, products, staticSeo, lang } = props;
 
         const categoryPage = matchPath(pathname, { path: CATEGORY_PATH, exact: true });
         const subCategoryPage = matchPath(pathname, { path: SUBCATEGORY_PATH, exact: true });
         const productPage = matchPath(pathname, { path: PRODUCT_PATH, exact: true });
+        const promotionProductPage = matchPath(pathname, { path: PROMOTION_PRODUCT_PATH, exact: true });
         const staticRouteMatch = find(route => matchPath(pathname, route), STATIC_ROUTES);
 
         if (staticRouteMatch) {
@@ -122,7 +127,7 @@ class Helmet extends Component {
             const subCategory = find(subCategory => subCategory.alias === productPage.params.subCategoryAlias, subCategories);
 
             if (subCategory) {
-                const product = find(product => product.subCategoryId === subCategory.id && product.alias === productPage.params.alias, productsMap);
+                const product = find(product => product.subCategoryId === subCategory.id && product.alias === productPage.params.alias, products);
 
                 if (product) {
                     return {
@@ -131,6 +136,19 @@ class Helmet extends Component {
                         seoKeywords: product.texts[lang].seoKeywords
                     };
                 }
+            }
+        }
+
+        if (promotionProductPage) {
+            const promotionProducts = products.filter(product => product.sizes[lang].some(size => size.colors.some(color => color.action)));
+            const product = find(product => product.alias === promotionProductPage.params.alias, promotionProducts);
+
+            if (product) {
+                return {
+                    seoTitle: product.texts[lang].seoTitle,
+                    seoDescription: product.texts[lang].seoDescription,
+                    seoKeywords: product.texts[lang].seoKeywords
+                };
             }
         }
 
