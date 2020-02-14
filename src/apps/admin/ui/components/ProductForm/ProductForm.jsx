@@ -218,7 +218,7 @@ class ProductForm extends Component {
                 if (filterType === 'range') {
                     value = filterValue;
                 } else {
-                    const filterValueIndex = findIndex(option => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex(option => option.id === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
                     if (filterValueIndex === -1) {
                         return subCategoryFilters;
@@ -250,7 +250,8 @@ class ProductForm extends Component {
                     price: +color.price,
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
-                    file: color.file
+                    file: color.file,
+                    action: color.action
                 }))
             })),
             ua: uaSizes.map(size => ({
@@ -263,7 +264,8 @@ class ProductForm extends Component {
                     price: +color.price,
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
-                    file: color.file
+                    file: color.file,
+                    action: color.action
                 }))
             }))
         };
