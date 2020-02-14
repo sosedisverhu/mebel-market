@@ -101,14 +101,14 @@ class ProductPage extends Component {
     };
 
     render () {
-        const { category, subCategory, product } = this.state;
+        const { category, subCategory, product, isPromotion } = this.state;
 
         if (!product) return <NotFoundPage/>;
 
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
-                <Product product={product}/>
+                <Product isPromotion={isPromotion} product={product}/>
                 <Tab product={product}/>
             </div>);
     }

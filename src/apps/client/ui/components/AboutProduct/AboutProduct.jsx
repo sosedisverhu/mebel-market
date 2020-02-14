@@ -58,7 +58,8 @@ class AboutProduct extends Component {
         changeColor: PropTypes.func.isRequired,
         changeSize: PropTypes.func.isRequired,
         activeSize: PropTypes.object.isRequired,
-        activeColor: PropTypes.object.isRequired
+        activeColor: PropTypes.object.isRequired,
+        isPromotion: PropTypes.bool
     };
 
     state = {
@@ -168,15 +169,20 @@ class AboutProduct extends Component {
     }
 
     render () {
-        const { product, langMap, lang, activeSize, activeColor, changeSize } = this.props;
+        const { product, langMap, lang, activeSize, activeColor, changeSize, isPromotion } = this.props;
         const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen, activePopupColorIndex } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
-        const isOneSize = sizes.length === 1;
-        let sizeCounter = 0;
         const colors = activeSize.colors;
-        const activeColorIndex = colors.findIndex(color => color.id === activeColor.id);
+        const actualSizes = isPromotion
+            ? sizes[lang].filter(size => size.colors.some(color => color.action))
+            : sizes[lang];
+        const actualColors = isPromotion ? colors.filter(color => color.action) : colors;
+        const isOneSize = actualSizes.length === 1;
+        const isOneColor = actualColors.length === 1;
+        let sizeCounter = 0;
+        const activeColorIndex = actualColors.findIndex(color => color.id === activeColor.id);
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -202,9 +208,11 @@ class AboutProduct extends Component {
                         <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
                             {activeSize.name}
                         </li>
-                        {sizes[lang].map(size => {
+                        {actualSizes.map(size => {
                             if (size.id !== activeSize.id && sizeListIsOpen) {
                                 sizeCounter++;
+
+                                if (isPromotion && size.colors.every(color => !color.action)) return;
                                 return <li className={styles.option}
                                     onClick={() => changeSize(size)}
                                     style={{ top: `${30 * sizeCounter}px` }}
@@ -217,14 +225,14 @@ class AboutProduct extends Component {
                 </div>
                 <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
                     <div className={styles.colorTitle}>
-                        {text.chooseColor}
+                        {!isOneColor ? text.chooseColor : text.oneColor}
                     </div>
-                    <div className={classNames(styles.color, styles.activeColor)}>
+                    <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })}>
                         <img className={styles.colorImg} onClick={this.changeColorListStatus} src={activeColor.file} alt={activeColor.name} />
                         <div className={styles.view} onClick={this.handleChangePopup(activeColorIndex)} />
                     </div>
                     <ul className={styles.colorList}>
-                        {colors.map((color, i) => {
+                        {actualColors.map((color, i) => {
                             if (color.id !== activeColor.id) {
                                 return <li className={styles.color}
                                     key={color.id}>
@@ -248,7 +256,7 @@ class AboutProduct extends Component {
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                     onClick={this.handleAddToWishlist}/>
             </div>
-            {activePopupColorIndex !== null && <PopupColor colors={colors} activeIndex={activePopupColorIndex} closePopup={this.handleChangePopup}/>}
+            {activePopupColorIndex !== null && <PopupColor colors={actualColors} activeIndex={activePopupColorIndex} closePopup={this.handleChangePopup}/>}
         </div>;
     }
 }

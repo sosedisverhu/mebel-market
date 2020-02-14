@@ -17,20 +17,47 @@ const mapStateToProps = ({ application }) => {
 class Product extends Component {
     static propTypes = {
         product: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired
+        lang: PropTypes.string.isRequired,
+        isPromotion: PropTypes.bool
     };
 
-    state = {
-        activeSize: this.props.product.sizes[this.props.lang][0],
-        activeColor: this.props.product.sizes[this.props.lang][0].colors[0]
+    constructor (props) {
+        super(props);
+        const { isPromotion } = this.props;
+        let activeSize = this.props.product.sizes[this.props.lang][0];
+        let activeColor = this.props.product.sizes[this.props.lang][0].colors[0];
+
+        if (isPromotion) {
+            const activeSizeIndex = this.props.product.sizes[this.props.lang].findIndex(size => size.colors.some(color => color.action));
+            const activeColorIndex = this.props.product.sizes[this.props.lang][activeSizeIndex].colors.findIndex(color => color.action);
+
+            activeSize = this.props.product.sizes[this.props.lang][activeSizeIndex];
+            activeColor = this.props.product.sizes[this.props.lang][activeSizeIndex].colors[activeColorIndex];
+        }
+
+        this.state = {
+            activeSize,
+            activeColor
+        };
     }
 
-    handleSizeChange = activeSize => this.setState({ activeSize, activeColor: activeSize.colors[0] });
+    handleSizeChange = activeSize => {
+        const { isPromotion } = this.props;
+        let activeColor = activeSize.colors[0];
+
+        if (isPromotion) {
+            const activeColorIndex = activeSize.colors.findIndex(color => color.action);
+
+            activeColor = activeSize.colors[activeColorIndex];
+        }
+
+        this.setState({ activeSize, activeColor });
+    };
 
     handleColorChange = activeColor => this.setState({ activeColor });
 
     render () {
-        const { product } = this.props;
+        const { product, isPromotion } = this.props;
         const { activeSize, activeColor } = this.state;
 
         return <div className={styles.product}>
@@ -41,7 +68,8 @@ class Product extends Component {
                 changeSize={this.handleSizeChange}
                 changeColor={this.handleColorChange}
                 activeSize={activeSize}
-                activeColor={activeColor} />
+                activeColor={activeColor}
+                isPromotion={isPromotion}/>
         </div>;
     }
 }

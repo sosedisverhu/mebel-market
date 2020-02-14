@@ -221,6 +221,12 @@
     }
 }
 
+.oneActiveColor {
+    &:before {
+        display: none;
+    }
+}
+
 .colorImg {
     width: 100%;
     height: 100%;
