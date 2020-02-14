@@ -35,7 +35,7 @@
 }
 
 .logoWrapper {
-    margin-right: 100px;
+    margin-right: 96px;
     min-width: 180px;
 
     @media (max-width: 1230px) {

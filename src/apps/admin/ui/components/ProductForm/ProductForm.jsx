@@ -250,7 +250,8 @@ class ProductForm extends Component {
                     price: +color.price,
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
-                    file: color.file
+                    file: color.file,
+                    action: color.action
                 }))
             })),
             ua: uaSizes.map(size => ({
@@ -263,7 +264,8 @@ class ProductForm extends Component {
                     price: +color.price,
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
-                    file: color.file
+                    file: color.file,
+                    action: color.action
                 }))
             }))
         };

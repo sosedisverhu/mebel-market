@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
-import styles from './ProductFilters.css';
+import styles from './ProductSort.css';
 
 const SORTING_OPTIONS = [
     {
@@ -50,7 +50,7 @@ const SORTING_OPTIONS = [
     }
 ];
 
-class ProductFilters extends Component {
+class ProductSort extends Component {
     static propTypes = {
         lang: PropTypes.string.isRequired,
         media: PropTypes.object.isRequired,
@@ -134,4 +134,4 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
-export default connect(mapStateToProps)(ProductFilters);
+export default connect(mapStateToProps)(ProductSort);
