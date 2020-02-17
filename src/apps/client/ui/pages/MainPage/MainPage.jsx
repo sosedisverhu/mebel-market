@@ -65,7 +65,7 @@ class MainPage extends Component {
                             {productsResult[label] &&
                             <section key={label} className={classNames(styles.categorySection, styles[label])}>
                                 <h2 className={styles.title}>{text[label]}</h2>
-                                <ProductsSlider label={label} products={productsResult[label]}/>
+                                <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
                             </section>
                             }
                         </div>);
