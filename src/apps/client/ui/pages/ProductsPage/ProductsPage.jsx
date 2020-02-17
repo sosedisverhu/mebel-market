@@ -72,7 +72,7 @@ class ProductsPage extends Component {
         filteredProducts: [],
         filtersMap: {},
         currentCategoryFiltersName: 'categoryFilters',
-        popupIsOpen: true
+        popupIsOpen: false
     };
 
     componentDidMount () {
