@@ -26,6 +26,7 @@ import Filters from '../../components/Filters/Filters';
 import ProductFilters from '../../components/ProductFilters/ProductFilters';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
+import classNames from 'classnames';
 
 const DEFAULT_FILTERS = name => {
     return [
@@ -52,6 +53,8 @@ class ProductsPage extends Component {
         subCategories: PropTypes.array
     };
 
+    filtersPopup = React.createRef();
+
     static defaultProps = {
         products: [],
         categories: [],
@@ -68,7 +71,8 @@ class ProductsPage extends Component {
         filters: [],
         filteredProducts: [],
         filtersMap: {},
-        currentCategoryFiltersName: 'categoryFilters'
+        currentCategoryFiltersName: 'categoryFilters',
+        popupIsOpen: true
     };
 
     componentDidMount () {
@@ -299,13 +303,33 @@ class ProductsPage extends Component {
         });
     };
 
+    handlePopupChange = () => {
+        const { popupIsOpen } = this.state;
+
+        document.body.style.overflowY = !popupIsOpen ? 'hidden' : 'visible';
+        document.documentElement.style.overflowY = !popupIsOpen ? 'hidden' : 'visible'; // для Safari на iPhone/iPad
+
+        this.setState(state => ({ popupIsOpen: !state.popupIsOpen }));
+    };
+
+    handleFilterMapChanged = filtersMap => {
+        this.setState({
+            filtersMap
+        }, this.filter);
+    };
+
+    handleFiltersClear = () => {
+        this.handlePopupChange();
+        this.handleFilterMapChanged({});
+    }
+
     render () {
         if (!this.state.isCategory) {
             return <NotFoundPage/>;
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const headerText = propOr('header', {}, langMap);
 
@@ -333,7 +357,7 @@ class ProductsPage extends Component {
                         noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
-                            <div className={styles.btnFilter}>
+                            <div className={styles.btnFilter} onClick={this.handlePopupChange}>
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
@@ -353,6 +377,18 @@ class ProductsPage extends Component {
                 </div>
                 <div className={styles.productsSection}>
                     <ProductsGrid products={filteredProducts || products}/>
+                </div>
+                <div className={classNames(styles.popupContainer, { [styles.active]: popupIsOpen })}>
+                    <div className={styles.cover} onClick={this.handlePopupChange}/>
+                    <div className={styles.popup} ref={this.filtersPopup}>
+                        <div className={styles.popupHeader}>
+                            <button className={styles.popupBtnClear} type='button' onClick={this.handleFiltersClear}>{text.popupBtnClear}</button>
+                            <h3 className={styles.popupTitle}>{text.popupTitle}</h3>
+                            <button className={styles.popupBtnDone} type='button' onClick={this.handlePopupChange}>{text.popupBtnDone}</button>
+                        </div>
+                        <Filters mobile={true} filtersMap={filtersMap} filters={filters} onFilter={this.handleFilter} />
+                        <button className={styles.popupBtnApply} type='button' onClick={this.handlePopupChange}>{text.popupBtnApply}</button>
+                    </div>
                 </div>
             </div>);
     }

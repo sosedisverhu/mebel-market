@@ -24,6 +24,27 @@
             transition: max-height 0.25s ease-in;
         }
     }
+
+    @media (max-width: 600px) {
+        position: relative;
+
+        &:before {
+             content: '';
+             position: absolute;
+             left: -16px;
+             bottom: 0;
+             width: calc(100% + 32px);
+             height: 1px;
+             background: rgba(216, 216, 216, 0.5);
+        }
+
+        &.active {
+            .title {
+                background: none;
+                color: blackLight;
+            }
+        }
+    }
 }
 
 .title {
@@ -51,6 +72,35 @@
         transition: 0.25s ease-in;
         transition-property: transform, border-color;
     }
+
+    @media (max-width: 600px) {
+        padding: 0 34px 0 0;
+        width: 100%;
+        font-size: 18px;
+        line-height: 21px;
+
+        &:before {
+            content: url("../FilterCheckBox/img/down.svg");
+            margin-top: -12px;
+            right: 0;
+            border: none;
+            width: auto;
+            height: auto;
+        }
+    }
+}
+
+.activeValue {
+    font: 14px/16px RoundedElegance;;
+    color: gray7;
+
+    @media (min-width: 601px) {
+        display: none;
+    }
+}
+
+.activeValueText {
+    padding-top: 11px;
 }
 
 .sliderWrapper {
@@ -62,6 +112,15 @@
     transition: max-height 0.25s ease-out;
     background: greenBasic;
     min-width: 242px;
+
+    @media (max-width: 600px) {
+        position: relative;
+        top: 0;
+        left: -16px;
+        width: calc(100% + 32px);
+        padding: 0 16px;
+        margin-top: 15px;
+    }
 }
 
 .slider {
@@ -174,6 +233,10 @@
     right: 6px;
     top: 4px;
     z-index: -1;
+
+    @media (max-width: 600px) {
+        z-index: auto;
+    }
 }
 
 .track {

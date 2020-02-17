@@ -19,7 +19,7 @@ class FilterCheckBox extends Component {
         }),
         filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired
     };
 
@@ -61,6 +61,9 @@ class FilterCheckBox extends Component {
         const { filter: { name, options, id }, filtersMap } = this.props;
         const { active } = this.state;
 
+        const activeOptions = options.filter(option => filtersMap[id] && filtersMap[id].values.indexOf(option.id) !== -1);
+        const activeValues = activeOptions.map(activeOption => activeOption.name);
+
         return (
             <div className={classNames(
                 styles.filter,
@@ -69,10 +72,14 @@ class FilterCheckBox extends Component {
                 <h2 className={styles.title}
                     onClick={this.handleTitleClick}
                 >{name}</h2>
+                <div className={styles.activeValueWrap}>
+                    <div className={styles.activeValue}>
+                        {!!activeValues.length && <p className={styles.activeValueText}>{activeValues.join(', ')}</p>}
+                    </div>
+                </div>
                 <div className={styles.options}>
                     {options.map((option, index) => {
                         const value = filtersMap[id] ? includes(option.id, filtersMap[id].values) : false;
-
                         return (
                             <label key={index} className={styles.option}>
                                 <input
