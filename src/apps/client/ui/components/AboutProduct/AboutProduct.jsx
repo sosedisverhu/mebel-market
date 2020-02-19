@@ -66,7 +66,8 @@ class AboutProduct extends Component {
         selectIsOpen: false,
         isInWishlist: false,
         isInBasket: false,
-        colorListOpen: false
+        colorListOpen: false,
+        checkedFeatureIds: {}
     };
 
     componentDidMount () {
@@ -137,6 +138,7 @@ class AboutProduct extends Component {
 
     handleBuyClick = () => {
         const { saveProductsToBasket, product, activeSize, activeColor } = this.props;
+        const { checkedFeatureIds } = this.state;
         saveProductsToBasket({
             productId: product.id,
             properties: {
@@ -145,7 +147,8 @@ class AboutProduct extends Component {
                     color: {
                         id: activeColor.id
                     }
-                }
+                },
+                features: checkedFeatureIds
             },
             quantity: 1
         });
@@ -170,14 +173,36 @@ class AboutProduct extends Component {
         this.props.changeColor(color);
     }
 
+    handleCheckboxChange = (event) => {
+        const { checkedFeatureIds } = this.state;
+        const value = event.target.checked;
+        const name = event.target.name;
+
+        this.setState({
+            checkedFeatureIds: {
+                ...checkedFeatureIds,
+                [name]: value
+            }
+        });
+    }
+
+    handleChangeSize = (size) => {
+        this.setState({ checkedFeatureIds: {} });
+        this.props.changeSize(size);
+    }
+
     render () {
-        const { product, langMap, lang, activeSize, activeColor, changeSize } = this.props;
-        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen } = this.state;
+        const { product, langMap, lang, activeSize, activeColor } = this.props;
+        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen, checkedFeatureIds } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const isOneSize = sizes.length === 1;
         let sizeCounter = 0;
+        const features = activeSize.features || [];
+        const checkedFeatures = features.filter(feature => checkedFeatureIds[feature.id]);
+        const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+        const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -189,7 +214,7 @@ class AboutProduct extends Component {
                 {formatMoney(activeColor.price)}
             </span>}
             <span className={classNames(styles.price, styles.discountPrice)}>
-                {formatMoney(activeColor.discountPrice || activeColor.price)}
+                {formatMoney(resultPrice)}
             </span>
             <div className={styles.properties}>
                 <div className={styles.sizesWrap}>
@@ -207,7 +232,7 @@ class AboutProduct extends Component {
                             if (size.id !== activeSize.id && sizeListIsOpen) {
                                 sizeCounter++;
                                 return <li className={styles.option}
-                                    onClick={() => changeSize(size)}
+                                    onClick={() => this.handleChangeSize(size)}
                                     style={{ top: `${30 * sizeCounter}px` }}
                                     key={size.id}>
                                     {size.name}
@@ -233,6 +258,16 @@ class AboutProduct extends Component {
                         )}
                     </ul>
                 </div>
+            </div>
+            <div className={styles.features}>
+                {features && features.map(feature => {
+                    return <label className={styles.feature}>
+                        <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
+                            onChange={this.handleCheckboxChange} name={feature.id}/>
+                        <span className={styles.featureCheckmark}></span>
+                        {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
+                    </label>;
+                })}
             </div>
             <div className={styles.buttons}>
                 <button

@@ -251,6 +251,11 @@ class ProductForm extends Component {
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
                     file: color.file
+                })),
+                features: size.features.map(feature => ({
+                    id: feature.id,
+                    name: feature.name,
+                    value: +feature.value
                 }))
             })),
             ua: uaSizes.map(size => ({
@@ -264,6 +269,11 @@ class ProductForm extends Component {
                     discountPrice: +color.discountPrice,
                     discount: +color.discount,
                     file: color.file
+                })),
+                features: size.features.map(feature => ({
+                    id: feature.id,
+                    name: feature.name,
+                    value: +feature.value
                 }))
             }))
         };

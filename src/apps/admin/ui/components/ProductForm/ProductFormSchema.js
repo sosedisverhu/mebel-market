@@ -134,6 +134,11 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         discountPrice: 'notDepend',
                         discount: 'notDepend',
                         file: 'notDepend'
+                    }],
+                    features: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        value: 'notDepend'
                     }]
                 }],
                 validators: [

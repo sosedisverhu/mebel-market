@@ -28,9 +28,11 @@ const materialStyles = {
         flexWrap: 'nowrap',
         alignItems: 'center',
         zIndex: 9999,
-        borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
         marginBottom: '5px',
-        paddingBottom: '5px'
+        padding: '5px',
+        marginTop: '15px',
+        borderRadius: '4px',
+        background: '#FFFFFF'
     },
     colors: {
         display: 'flex',

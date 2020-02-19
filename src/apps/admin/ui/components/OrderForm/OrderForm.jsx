@@ -20,6 +20,7 @@ import formatMoney from '../../../../client/utils/formatMoney';
 
 import Form from '../Form/Form';
 import getSchema from './orderFormSchema';
+import styles from '../../../../client/ui/components/AboutProduct/AboutProduct.css';
 
 const mapDispatchToProps = (dispatch) => ({
     editOrder: payload => dispatch(editOrder(payload))
@@ -103,6 +104,13 @@ const materialStyles = theme => ({
     },
     colorImg: {
         marginRight: '6px'
+    },
+    p: {
+        marginTop: '7px',
+        lineHeight: '17px'
+    },
+    featureValue: {
+        color: '#DC4E41'
     }
 });
 
@@ -154,7 +162,12 @@ class OrderForm extends Component {
     render () {
         const { classes, statuses } = this.props;
         const { date, delivery, payment, customer, products } = this.state.order;
-        const productsPrice = products.reduce((sum, { quantity, price, basePrice }) => sum + (quantity * price || quantity * basePrice), 0);
+        const productsPrice = products.reduce((sum, { quantity, price, basePrice, properties }) => {
+            const productPrice = price || basePrice;
+            const featuresPrice = properties.features.reduce((sum, { value }) => sum + value, 0);
+
+            return sum + (quantity * (productPrice + featuresPrice));
+        }, 0);
 
         return <div>
             <Typography variant='h5' className={classes.title}>Заказ</Typography>
@@ -223,8 +236,7 @@ class OrderForm extends Component {
                             <TableCell className={classes.rowLabelSmall} colSpan={1}>Название</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3}>Артикул</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">Количество</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">Размер</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">Цвет</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">Свойства</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Цена за единицу</TableCell>
                             <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Всего</TableCell>
                         </TableRow>
@@ -232,20 +244,29 @@ class OrderForm extends Component {
                     <TableBody>
                         {
                             products.map(({ quantity, price, basePrice, properties, productName: name, article }, i) => {
+                                const featuresPrice = properties.features.reduce((sum, { value }) => sum + value, 0);
+                                const unitPrice = (price || basePrice) + featuresPrice;
                                 return <TableRow key={i}>
                                     <TableCell className={classes.rowLabelSmall} colSpan={1}>{name}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={3}>{article}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">{quantity}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">{properties.size.name}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
-                                        <img src={properties.color.file} className={classes.colorImg} width="24" height="12" alt=""/>
-                                        {properties.color.name}
+                                        <p className={classes.p}>Размер: {properties.size.name}</p>
+                                        <p className={classes.p}>
+                                            Цвет: <img src={properties.color.file} className={classes.colorImg} width="24" height="12" alt=""/>
+                                            {properties.color.name}
+                                        </p>
+                                        {properties.features.map(feature => {
+                                            return <p className={classes.p}>+ {feature.name} (<span className={styles.featureValue}>
+                                                {` + ${formatMoney(feature.value)} `}
+                                            </span>)</p>;
+                                        })}
                                     </TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">
-                                        {price ? formatMoney(price) : formatMoney(basePrice)}
+                                        {formatMoney(unitPrice)}
                                     </TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">
-                                        {formatMoney((price || basePrice) * quantity)}
+                                        {formatMoney(unitPrice * quantity)}
                                     </TableCell>
                                 </TableRow>;
                             })

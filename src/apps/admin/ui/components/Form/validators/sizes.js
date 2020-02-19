@@ -39,4 +39,8 @@ export default (value) => {
     if (!all(({ colors }) => all(({ discount }) => discount ? +discount < 100 : true, colors), value)) {
         return 'Введите размер скидки меньше 100';
     }
+
+    if (!all(({ features }) => all(({ name, value }) => !!name && !!value, features), value)) {
+        return 'Заполните обязательные поля (Название услуги и значение)';
+    }
 };
