@@ -14,7 +14,6 @@ import any from '@tinkoff/utils/array/any';
 import prop from '@tinkoff/utils/object/prop';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import includes from '@tinkoff/utils/array/includes';
-import isEmpty from '@tinkoff/utils/is/empty';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
@@ -23,7 +22,7 @@ import formatWordDeclension from '../../../utils/formatWordDeclension';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import Filters from '../../components/Filters/Filters';
-import ProductFilters from '../../components/ProductFilters/ProductFilters';
+import ProductSort from '../../components/ProductSort/ProductSort';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
 import classNames from 'classnames';
@@ -86,20 +85,23 @@ class ProductsPage extends Component {
     }
 
     setNewState = (props = this.props) => {
-        const { subCategoryAlias, categoryAlias } = this.getMatch(props);
+        const { subCategoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
-        const isPromotionsPage = categoryAlias === 'promotions';
+
+        if (!category) {
+            this.setState({ isCategory: false });
+            return;
+        }
+
         const subCategory = subCategoryAlias && this.getSubCategory(props);
 
-        if (((!category) || subCategoryAlias && !subCategory) && !isPromotionsPage) {
-            this.setState({
-                isCategory: false
-            });
+        if (subCategoryAlias && !subCategory) {
+            this.setState({ isCategory: false });
             return;
         }
 
         const { subCategories, langMap } = props;
-        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory, isPromotionsPage);
+        const products = this.getFilteredProducts(subCategoryAlias, category, subCategory);
         const isSubCategoryFilters = !!subCategoryAlias;
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
@@ -112,12 +114,11 @@ class ProductsPage extends Component {
             products,
             category,
             subCategory,
-            subCategories: !isPromotionsPage ? subCategories.filter(subCategory => subCategory.categoryId === category.id) : [],
+            subCategories: subCategories.filter(subCategory => subCategory.categoryId === category.id),
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: products,
-            isPromotionsPage
+            filteredProducts: products
         });
     };
 
@@ -150,16 +151,12 @@ class ProductsPage extends Component {
         return find(subCategory => (subCategory.categoryId === category.id && subCategory.alias === subCategoryAlias), props.subCategories);
     };
 
-    getFilteredProducts = (subCategoryAlias, category, subCategory, isPromotionsPage, props = this.props) => {
+    getFilteredProducts = (subCategoryAlias, category, subCategory, props = this.props) => {
         const { products } = props;
+        const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
-        if (!isPromotionsPage) {
-            const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
-
-            return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
-                : filteredProductsByCategory;
-        }
-        return products.filter(product => !isEmpty(product.minDiscountPrice) && product.minDiscountPrice !== product.minPrice);
+        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
+            : filteredProductsByCategory;
     };
 
     getDefaultFilters = (products, langMap) => {
@@ -329,9 +326,8 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, isPromotionsPage, popupIsOpen } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
-        const headerText = propOr('header', {}, langMap);
 
         return (
             <div className={styles.productPage}>
@@ -354,7 +350,7 @@ class ProductsPage extends Component {
                     <Breadcrumbs
                         category={category}
                         subCategory={subCategory}
-                        noCategoryPage={isPromotionsPage ? headerText.promotions : ''}/>
+                        noCategoryPage=''/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter} onClick={this.handlePopupChange}>
@@ -370,7 +366,7 @@ class ProductsPage extends Component {
                                     filters={filters}
                                     onFilter={this.handleFilter}
                                 />
-                                <ProductFilters onFilter={this.handleActiveSortClick}/>
+                                <ProductSort onFilter={this.handleActiveSortClick}/>
                             </Fragment>}
                         </div>
                     </div>
