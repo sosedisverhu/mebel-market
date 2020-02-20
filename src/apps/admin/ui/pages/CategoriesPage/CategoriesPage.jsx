@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import pathOr from '@tinkoff/utils/object/pathOr';
+import isEmpty from '@tinkoff/utils/is/empty';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from '@material-ui/icons/Add';
@@ -35,6 +36,9 @@ import { withStyles } from '@material-ui/core/styles';
 import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import SubCategoryForm from '../../components/SubCategoryForm/SubCategoryForm';
 import CategoryForm from '../../components/CategoryForm/CategoryForm';
+import DrawerDouble from '../../components/DrawerDouble/DrawerDouble';
+import AdminTable from '../../components/AdminTable/AdminTable';
+import ProductForm from '../../components/ProductForm/ProductForm';
 
 import arrayMove from '../../../utils/arrayMove';
 
@@ -44,8 +48,33 @@ import editSubCategory from '../../../services/editSubCategory';
 import deleteCategoriesByIds from '../../../services/deleteCategoriesByIds';
 import getSubCategories from '../../../services/getSubCategories';
 import deleteSubCategoriesByIds from '../../../services/deleteSubCategoriesByIds';
+import getProducts from '../../../services/getProducts';
+import deleteProductsByIds from '../../../services/deleteProductsByIds';
 
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+import noop from "@tinkoff/utils/function/noop";
+
+const mapStateToProps = ({ data }) => {
+    return {
+        categories: data.categories,
+        subCategories: data.subCategories,
+        products: data.products
+    };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    getCategories: payload => dispatch(getCategories(payload)),
+    getSubCategories: payload => dispatch(getSubCategories(payload)),
+    editCategory: payload => dispatch(editCategory(payload)),
+    editSubCategory: payload => dispatch(editSubCategory(payload)),
+    deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
+    deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload)),
+    getProducts: payload => dispatch(getProducts(payload)),
+    deleteProducts: payload => dispatch(deleteProductsByIds(payload))
+});
+
+const DEFAULT_LANG = 'ru';
+const DEFAULT_ACTIVE_CATEGORY = { name: '', id: '' };
 
 const materialStyles = theme => ({
     root: {
@@ -209,25 +238,6 @@ const tableCells = [
     { prop: subCategory => subCategory.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 
-const mapStateToProps = ({ data }) => {
-    return {
-        categories: data.categories,
-        subCategories: data.subCategories
-    };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    getCategories: payload => dispatch(getCategories(payload)),
-    getSubCategories: payload => dispatch(getSubCategories(payload)),
-    editCategory: payload => dispatch(editCategory(payload)),
-    editSubCategory: payload => dispatch(editSubCategory(payload)),
-    deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
-    deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload))
-});
-
-const DEFAULT_LANG = 'ru';
-const DEFAULT_ACTIVE_CATEGORY = { name: '', id: '' };
-
 class CategoriesPage extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
@@ -238,56 +248,91 @@ class CategoriesPage extends Component {
         deleteCategories: PropTypes.func.isRequired,
         deleteSubCategories: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
-        subCategories: PropTypes.array
+        subCategories: PropTypes.array,
+        getProducts: PropTypes.func.isRequired,
+        deleteProducts: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         categories: [],
-        subCategories: []
+        subCategories: [],
+        products: [],
+        getCategories: noop,
+        getProducts: noop
     };
 
-    state = {
-        loading: true,
-        activeCategory: DEFAULT_ACTIVE_CATEGORY,
-        subCategoryFormShowed: false,
-        categoryFormShowed: false,
-        editableCategory: {},
-        editableSubCategory: {},
-        categories: [],
-        subCategories: [],
-        valueForDelete: null
-    };
+    constructor(props) {
+        super(props);
+
+        const { products } = this.props;
+
+        this.state = {
+            loading: true,
+            activeCategory: null,
+            activeSubCategory: null,
+            subCategoryFormShowed: false,
+            categoryFormShowed: false,
+            productFormShowed: false,
+            editableCategory: {},
+            editableSubCategory: {},
+            categories: [],
+            subCategories: [],
+            valueForDelete: null,
+            products
+        };
+    }
 
     componentDidMount () {
+        const { getSubCategories, getCategories, getProducts } = this.props;
+
         Promise.all([
-            this.props.getSubCategories(),
-            this.props.getCategories()
+            getSubCategories(),
+            getCategories(),
+            getProducts()
         ])
             .then(() => {
+                const { categories } = this.props;
+                const products = this.getCategoryProducts(categories[0]);
+
                 this.setState({
                     loading: false,
-                    categories: this.props.categories,
-                    activeCategory: this.props.categories[0] || DEFAULT_ACTIVE_CATEGORY,
-                    subCategories: this.getCategory(this.props.categories[0])
+                    categories: categories,
+                    products
                 });
             });
     }
 
-    getCategory = (activeCategory = this.state.activeCategory) => {
-        return this.props.subCategories.filter(subCategory => subCategory.categoryId === activeCategory.id);
+    getActiveSubCategories = (activeCategory = this.state.activeCategory) => {
+        return this.props.subCategories.filter(subCategory => subCategory.categoryId === pathOr(['id'], '', activeCategory));
     };
 
-    handleSubCategoryFormOpen = subCategory => () => {
-        this.setState({
-            subCategoryFormShowed: true,
-            editableSubCategory: subCategory
-        });
+    getCategoryProducts = (activeCategory = this.state.activeCategory) => {
+        return this.props.products.filter(product => product.categoryId === pathOr(['id'], '', activeCategory));
+    };
+
+    setCategoryProducts = () => {
+        this.setState({ products: this.getCategoryProducts() });
+    }
+
+    setActiveSubItem = (value) => {
+        this.setState({ activeSubCategory: value });
+    }
+
+    getSubCategoryProducts = (activeSubCategory = this.state.activeSubCategory) => {
+        return this.props.products.filter(product => product.subCategoryId === activeSubCategory.id);
     };
 
     handleCategoryFormOpen = category => () => {
         this.setState({
             categoryFormShowed: true,
             editableCategory: category
+        });
+    };
+
+    handleSubCategoryFormOpen = subCategory => () => {
+        this.setState({
+            subCategoryFormShowed: true,
+            editableSubCategory: subCategory
         });
     };
 
@@ -300,14 +345,14 @@ class CategoriesPage extends Component {
 
                 this.setState({
                     categories: categories,
-                    activeCategory: categories.find(category => category.id === activeCategory.id) || categories[0]
+                    activeCategory: categories.find(category => category.id === pathOr(['id'], '', activeCategory)) || categories[0]
                 });
                 this.handleCloseCategoryForm();
 
                 this.props.getSubCategories()
                     .then(() => {
                         this.setState({
-                            subCategories: this.getCategory()
+                            subCategories: this.getActiveSubCategories()
                         });
                     });
             });
@@ -317,7 +362,7 @@ class CategoriesPage extends Component {
         this.props.getSubCategories()
             .then(() => {
                 this.setState({
-                    subCategories: this.getCategory()
+                    subCategories: this.getActiveSubCategories()
                 });
                 this.handleCloseSubCategoryForm();
             });
@@ -329,18 +374,6 @@ class CategoriesPage extends Component {
         });
     };
 
-    handleSubCategoryDelete = subcategory => {
-        return this.props.deleteSubCategories(subcategory)
-            .then(() => {
-                this.props.getSubCategories()
-                    .then(() => {
-                        this.setState({
-                            subCategories: this.getCategory()
-                        });
-                    });
-            });
-    };
-
     handleWarningDisagree = () => {
         this.setState({
             valueForDelete: null
@@ -348,25 +381,33 @@ class CategoriesPage extends Component {
     };
 
     handleWarningAgree = () => {
-        const { valueForDelete, activeCategory } = this.state;
+        const { valueForDelete, activeCategory, categories } = this.state;
+        const valueType = categories.includes(valueForDelete) ? 'category' : 'subCategory';
 
-        this.props.deleteCategories(valueForDelete.id)
-            .then(() => {
-                getCategories();
-            })
-            .then(() => {
-                this.props.subCategories.forEach((subCategory) => {
-                    if (subCategory.categoryId === valueForDelete.id) {
-                        this.handleSubCategoryDelete(subCategory.id);
-                    }
+        if (valueType === 'category') {
+            return this.props.deleteCategories(valueForDelete.id)
+                .then(() => {
+                    getCategories();
+                })
+                .then(() => {
+                    this.setState({
+                        categories: this.props.categories,
+                        activeCategory: activeCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
+                        valueForDelete: null
+                    });
                 });
-            })
+        }
+
+
+        this.props.deleteSubCategories(valueForDelete.id)
             .then(() => {
-                this.setState({
-                    categories: this.props.categories,
-                    activeCategory: activeCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
-                    valueForDelete: null
-                });
+                this.props.getSubCategories()
+                    .then(() => {
+                        this.setState({
+                            subCategories: this.getActiveSubCategories(),
+                            valueForDelete: null
+                        });
+                    });
             });
     };
 
@@ -386,11 +427,19 @@ class CategoriesPage extends Component {
     handleCategoryClick = category => () => {
         this.setState({
             activeCategory: category,
-            subCategories: this.getCategory(category)
+            subCategories: this.getActiveSubCategories(category),
+            products: this.getCategoryProducts(category)
         });
     };
 
-    onDragEnd = ({ oldIndex, newIndex }) => {
+    handleSubCategoryClick = subCategory => () => {
+        this.setState({
+            activeSubCategory: subCategory,
+            products: this.getSubCategoryProducts(subCategory)
+        });
+    };
+
+    onDragCategoriesEnd = ({ oldIndex, newIndex }) => {
         const { categories } = this.state;
         const newValues = arrayMove(categories, oldIndex, newIndex);
 
@@ -405,7 +454,7 @@ class CategoriesPage extends Component {
         });
     };
 
-    onDragSubCategoryEnd = (oldIndex, newIndex) => {
+    onDragSubCategoriesEnd = ({ oldIndex, newIndex }) => {
         const { subCategories } = this.state;
         const newValues = arrayMove(subCategories, oldIndex, newIndex);
 
@@ -425,65 +474,105 @@ class CategoriesPage extends Component {
         const {
             loading,
             activeCategory,
-            editableSubCategory,
-            subCategoryFormShowed,
+            activeSubCategory,
+            editableProduct,
+            productFormShowed,
             categories,
-            subCategories
+            subCategories,
+            products,
+            subCategoryFormShowed,
+            editableSubCategory
         } = this.state;
 
-        if (loading) {
-            return <div className={classes.loader}>
-                <CircularProgress/>
-            </div>;
-        }
+        switch (true) {
+            case loading:
+                return <div className={classes.loader}>
+                    <CircularProgress/>
+                </div>;
 
-        if (!categories.length) {
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>
-                    Создайте сначала категорию
-                </Typography>
-            </div>;
-        }
+            case !categories.length:
+                return <div>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        Создайте сначала категорию
+                    </Typography>
+                </div>;
 
-        if (!activeCategory) {
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>
-                    Выберите категорию
-                </Typography>
-            </div>;
-        }
+            case !activeCategory:
+                return <div>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        Выберите категорию
+                    </Typography>
+                </div>;
 
-        return <div>
-            <div className={classes.toolbar}/>
-            <AdminTableSortable
-                headerRows={headerRows}
-                tableCells={tableCells}
-                values={subCategories}
-                headerText={`Подкатегории в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
-                onDelete={this.handleSubCategoryDelete}
-                deleteValueWarningTitle='Вы точно хотите удалить подкатегорию?'
-                deleteValuesWarningTitle='Вы точно хотите удалить следующие подкатегории?'
-                filters={false}
-                onFormOpen={this.handleSubCategoryFormOpen}
-                onDragEnd={this.onDragSubCategoryEnd}
-                isSmall
-            />
-            <Modal
-                open={subCategoryFormShowed}
-                onClose={this.handleCloseSubCategoryForm}
-                className={classes.modal}
-                disableEnforceFocus
-            >
-                <Paper className={classes.modalContent}>
-                    <SubCategoryForm
-                        categories={categories}
-                        subCategories={subCategories}
-                        activeCategory={activeCategory}
-                        subCategory={editableSubCategory}
-                        onDone={this.handleSubCategoryFormDone}/>
-                </Paper>
-            </Modal>
-        </div>;
+            case !subCategories.length:
+                return <div>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        В категории нет подкатегорий
+                    </Typography>
+                </div>;
+
+            case isEmpty(activeSubCategory) && !products.length:
+                return <div>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        {`В категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}" нет товаров`}
+                    </Typography>
+                </div>;
+
+            case !isEmpty(activeSubCategory) && !products.length:
+                return <div>
+                    <Typography variant='h6' className={classes.categoryTitle}>
+                        {`В подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}" нет товаров`}
+                    </Typography>
+                </div>;
+
+            default:
+                const categoriesWithSubCategories = categories.filter(category => {
+                    return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
+                });
+                const haderText = isEmpty(activeSubCategory)
+                    ? `Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`
+                    : `Товары в подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}"`;
+                return <div>
+                    <AdminTable
+                        headerRows={headerRows}
+                        tableCells={tableCells}
+                        values={products}
+                        headerText={haderText}
+                        onDelete={this.handleProductDelete}
+                        deleteValueWarningTitle='Вы точно хотите удалить товар?'
+                        deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
+                        filters={false}
+                        onFormOpen={this.handleProductFormOpen}
+                        isSmall
+                    />
+                    <Modal
+                        open={subCategoryFormShowed}
+                        onClose={this.handleCloseSubCategoryForm}
+                        className={classes.modal}
+                        disableEnforceFocus
+                    >
+                        <Paper className={classes.modalContent}>
+                            <SubCategoryForm
+                                categories={categories}
+                                subCategories={subCategories}
+                                activeCategory={activeCategory}
+                                subCategory={editableSubCategory}
+                                onDone={this.handleSubCategoryFormDone}/>
+                        </Paper>
+                    </Modal>
+                    <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
+                        <Paper className={classes.modalContent}>
+                            <ProductForm
+                                categories={categoriesWithSubCategories}
+                                subCategories={subCategories}
+                                allSubCategories={this.props.subCategories}
+                                activeCategory={activeCategory}
+                                product={editableProduct}
+                                onDone={this.handleProductFormDone}/>
+                        </Paper>
+                    </Modal>
+                </div>;
+        }
     };
 
     render () {
@@ -492,46 +581,36 @@ class CategoriesPage extends Component {
             editableCategory,
             valueForDelete,
             categories,
+            subCategories,
             lang,
-            categoryFormShowed
+            categoryFormShowed,
+            activeCategory,
+            activeSubCategory
         } = this.state;
 
         return <main className={classes.root}>
             <div className={classes.content}>
                 {this.renderTable()}
             </div>
-            <Drawer
-                className={classes.drawer}
-                variant="permanent"
-                anchor="right"
-                classes={{
-                    paper: classes.drawerPaper
-                }}
-            >
-                <div className={classes.toolbarNav}>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        Категории
-                    </Typography>
-                    <Tooltip title='Добавление'>
-                        <IconButton aria-label='Add' onClick={this.handleCategoryFormOpen()}>
-                            <AddIcon/>
-                        </IconButton>
-                    </Tooltip>
-                </div>
-                <Divider/>
-                <div className={classes.toolbar}/>
-                <SortableWrapper
-                    axis='xy'
-                    onFormOpen={this.handleCategoryFormOpen}
-                    onCategoryDelete={this.handleCategoryDelete}
-                    onCategoryClick={this.handleCategoryClick}
-                    onSortEnd={this.onDragEnd}
-                    category={categories}
-                    lang={lang}
-                    useDragHandle
-                    classes={classes}
-                />
-            </Drawer>
+            <DrawerDouble
+                anchor='left'
+                variant='permanent'
+                items={categories}
+                subItems={subCategories}
+                openFormItem={this.handleCategoryFormOpen}
+                deleteItem={this.handleCategoryDelete}
+                clickItem={this.handleCategoryClick}
+                openFormSubItem={this.handleSubCategoryFormOpen}
+                activeItem={activeCategory}
+                titleItems='Категории'
+                titleSubItems={`Подкатегории в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
+                lang={lang}
+                clickSubItem={this.handleSubCategoryClick}
+                sortItemsEnd={this.onDragCategoriesEnd}
+                sortSubItemsEnd={this.onDragSubCategoriesEnd}
+                setProductsItem={this.setCategoryProducts}
+                setActiveSubItem={this.setActiveSubItem}
+            />
             <Modal
                 open={categoryFormShowed}
                 onClose={this.handleCloseCategoryForm}
@@ -548,10 +627,12 @@ class CategoriesPage extends Component {
             </Modal>
             <Dialog open={!!valueForDelete} onClose={this.handleWarningDisagree}>
                 <DialogTitle>
-                    Вы точно хотите удалить категорию?
+                    {subCategories
+                        ? 'Вы точно хотите удалить категорию?'
+                        : 'Вы точно хотите удалить подкатегорию?'}
                 </DialogTitle>
                 <DialogContent className={classes.warningContent}>
-                    <DialogContentText>{valueForDelete && valueForDelete.name}</DialogContentText>
+                    <DialogContentText>{pathOr(['texts', DEFAULT_LANG, 'name'], '', valueForDelete)}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={this.handleWarningDisagree} color='primary'>
