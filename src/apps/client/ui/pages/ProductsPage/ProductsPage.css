@@ -85,6 +85,7 @@
 .filterPanelWrap {
     width: 100%;
     padding: 0 16px;
+    position: relative;
     background: whiteBasic;
 
     @media (max-width: 600px) {
@@ -138,8 +139,8 @@
 
     @media (max-width: 960px) {
         position: absolute;
-        right: 16px;
-        top: 12px;
+        right: 18px;
+        top: -30px;
         margin-top: 0;
     }
 }
