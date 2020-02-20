@@ -98,7 +98,8 @@ class WishList extends Component {
                         {wishlist.length > 0
                             ? <div className={styles.productsContainer}>
                                 {wishlist.map(({ product, properties, id: wishlistItemId }, i) => {
-                                    const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+                                    const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+                                    const color = size.colors.find(color => color.id === properties.size.color.id);
 
                                     return <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
@@ -107,17 +108,22 @@ class WishList extends Component {
                                                 <div>
                                                     <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
                                                     <p className={styles.productNumber}>
-                                                        <span className={styles.productNumberTitle}>{text.article} </span>{product.article}
+                                                        <span className={styles.productNumberTitle}>{text.article} </span>{size.article}
                                                     </p>
-                                                    {size &&
-                                                    <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>}
+                                                    <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>
+                                                    <div className={styles.productColor}>
+                                                        {text.color}
+                                                        <div className={styles.productColorImgWrap}>
+                                                            <img className={styles.productColorImg} src={color.file} alt={color.name}/>
+                                                        </div>
+                                                    </div>
                                                     <div className={styles.productPrices}>
-                                                        {size && size.discountPrice &&
+                                                        {color && !!color.discountPrice &&
                                                         <p className={styles.productOldPrice}>
-                                                            {formatMoney(size.price)}
+                                                            {formatMoney(color.price)}
                                                         </p>}
                                                         <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
-                                                            {formatMoney(size.discountPrice || size.price)}
+                                                            {formatMoney(color.discountPrice || color.price)}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -128,7 +134,7 @@ class WishList extends Component {
                                                             alt="remove"
                                                         />
                                                     </button>
-                                                    {basket.find(item => item.product.id === product.id && item.properties.size.id === size.id)
+                                                    {basket.find(item => item.product.id === product.id && item.properties.size.color.id === color.id)
                                                         ? <button className={classNames(styles.cartBtn, styles.inCartBtn)}>
                                                             { windowWidth > 500 ? text.inCartBtn : <img
                                                                 className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"

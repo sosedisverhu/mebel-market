@@ -41,16 +41,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
-                component: FormFieldInput,
-                name: 'article',
-                schema: {
-                    label: 'Артикул'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните артикул' } }
-                ]
-            },
-            {
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {
@@ -133,6 +123,19 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             {
                 component: FormFieldSizes,
                 name: 'sizes',
+                valueLangStructure: [{
+                    name: 'notDepend',
+                    id: 'notDepend',
+                    colors: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        article: 'notDepend',
+                        price: 'notDepend',
+                        discountPrice: 'notDepend',
+                        discount: 'notDepend',
+                        file: 'notDepend'
+                    }]
+                }],
                 validators: [
                     { name: 'required', options: { text: 'Добавьте хотя бы 1 размер для товара' } },
                     { name: 'sizes' }

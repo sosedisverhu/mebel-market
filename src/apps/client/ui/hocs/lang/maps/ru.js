@@ -22,7 +22,8 @@ export default {
         size: 'Выберите размер:',
         oneSize: 'Размер:',
         tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
-        inBasket: 'В корзине'
+        inBasket: 'В корзине',
+        chooseColor: 'Выберите цвет:'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -46,7 +47,8 @@ export default {
         cartBtn: 'В корзину',
         noProduct: 'Вы не добавили в избранное ни одного товара',
         article: 'Артикул:',
-        inCartBtn: 'В корзине'
+        inCartBtn: 'В корзине',
+        color: 'Цвет:'
     },
     cart: {
         title: 'Корзина:',
@@ -59,7 +61,8 @@ export default {
         totalPrice: 'Всего:',
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки',
-        noProduct: 'Вы не добавили в корзину ни одного товара'
+        noProduct: 'Вы не добавили в корзину ни одного товара',
+        color: 'Цвет:'
     },
     productsPage: {
         filterBtn: 'Фильтры',

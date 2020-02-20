@@ -6,7 +6,6 @@ module.exports = [
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
-        article: '000001',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -26,35 +25,132 @@ module.exports = [
         },
         date: 1577182954770,
         hidden: false,
-        minDiscount: 10,
-        minDiscountPrice: 1799,
-        minPrice: 1999,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1999,
-                discountPrice: 1799,
-                discount: 10,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p> В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -104,7 +200,6 @@ module.exports = [
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
-        article: '000002',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -124,35 +219,132 @@ module.exports = [
         },
         date: 1577182357741,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 2799,
-        minPrice: 2799,
-        actualPrice: 2799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 2799,
-                discountPrice: 2799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -202,7 +394,6 @@ module.exports = [
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
-        article: '000003',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -222,35 +413,132 @@ module.exports = [
         },
         date: 1577181957742,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 3799,
-        minPrice: 3799,
-        actualPrice: 3799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 3799,
-                discountPrice: 3799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -300,7 +588,6 @@ module.exports = [
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
-        article: '000004',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -320,35 +607,132 @@ module.exports = [
         },
         date: 1577182957744,
         hidden: false,
-        minDiscount: 50,
-        minDiscountPrice: 999,
-        minPrice: 1999,
-        actualPrice: 999,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1999,
-                discountPrice: 999,
-                discount: 50,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -398,7 +782,6 @@ module.exports = [
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
-        article: '000005',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -418,35 +801,132 @@ module.exports = [
         },
         date: 1577182957146,
         hidden: false,
-        minDiscount: 50,
-        minDiscountPrice: 999,
-        minPrice: 1999,
-        actualPrice: 999,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1999,
-                discountPrice: 999,
-                discount: 50,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -496,7 +976,6 @@ module.exports = [
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
-        article: '000006',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -516,35 +995,132 @@ module.exports = [
         },
         date: 1577182957747,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 1799,
-        minPrice: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1799,
-                discountPrice: 1799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -594,7 +1170,6 @@ module.exports = [
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
-        article: '000007',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -614,35 +1189,132 @@ module.exports = [
         },
         date: 1577182957748,
         hidden: false,
-        minDiscount: 15,
-        minDiscountPrice: 1799,
-        minPrice: 2000,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 2000,
-                discountPrice: 1799,
-                discount: 15,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -692,7 +1364,6 @@ module.exports = [
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
-        article: '000008',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -712,35 +1383,132 @@ module.exports = [
         },
         date: 1577182957749,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 1799,
-        minPrice: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1799,
-                discountPrice: 1799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -790,7 +1558,6 @@ module.exports = [
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
-        article: '000009',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -810,35 +1577,132 @@ module.exports = [
         },
         date: 1577182957750,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 1799,
-        minPrice: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1799,
-                discountPrice: 1799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -888,7 +1752,6 @@ module.exports = [
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
-        article: '000010',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -908,35 +1771,132 @@ module.exports = [
         },
         date: 1577182957751,
         hidden: false,
-        minDiscount: 0,
-        minDiscountPrice: 1799,
-        minPrice: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 1799,
-                discountPrice: 1799,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                price: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -986,7 +1946,6 @@ module.exports = [
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
-        article: '000011',
         characteristics: {
             ru: {
                 characteristics: [{
@@ -1006,35 +1965,132 @@ module.exports = [
         },
         date: 1577182957752,
         hidden: false,
-        minDiscount: 0,
+        minDiscount: 33,
         minDiscountPrice: 2000,
-        minPrice: 2000,
+        minPrice: 3000,
         actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
-        sizes: [
-            {
-                name: 'm',
-                price: 2000,
-                discountPrice: 2000,
-                discount: 0,
-                id: 'k5z5rz0y0'
-            },
-            {
-                name: 's',
-                price: 3799,
-                discountPrice: 1899,
-                discount: 50,
-                id: 'k5z5rz0y1'
-            },
-            {
-                name: 'l',
-                minPrice: 4999,
-                discountPrice: 999,
-                discount: 80,
-                id: 'k5z5rz0y2'
-            }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +

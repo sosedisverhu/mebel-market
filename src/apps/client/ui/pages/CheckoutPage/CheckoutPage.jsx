@@ -229,8 +229,10 @@ class CheckoutPage extends Component {
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
         const productsPrice = basket.reduce((sum, { quantity, product, properties }) => {
-            const size = product.sizes.find(productSize => productSize.id === properties.size.id);
-            return sum + (quantity * size.discountPrice || quantity * size.price);
+            const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+            const color = size.colors.find(color => color.id === properties.size.color.id);
+
+            return sum + (quantity * color.discountPrice || quantity * color.price);
         }, 0);
         const totalPrice = productsPrice + (deliveryChecked.price || 0);
 

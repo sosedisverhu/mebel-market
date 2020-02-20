@@ -39,9 +39,13 @@ export default function saveBasketProducts (req, res) {
 
                                 if (!product || product.hidden) return products;
 
-                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
 
                                 if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
 
                                 return append({ product, quantity, properties, id }, products);
                             }, [], basket)
@@ -80,9 +84,13 @@ export default function saveBasketProducts (req, res) {
 
                                     if (!product || product.hidden) return products;
 
-                                    const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+                                    const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
 
                                     if (!size) return products;
+
+                                    const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                    if (!color) return products;
 
                                     return append({ product, quantity, properties, id }, products);
                                 }, [], basket);
@@ -116,7 +124,7 @@ export default function saveBasketProducts (req, res) {
             const newBasket = basketRepeatIndexes.reduce((newBasket, basketIndex) => {
                 const basketNotUniq = basket[basketIndex];
 
-                if (basketNotUniq.properties.size.id === properties.size.id) {
+                if (basketNotUniq.productId === productId && basketNotUniq.properties === properties) {
                     return [...basket];
                 }
 
@@ -137,9 +145,13 @@ export default function saveBasketProducts (req, res) {
 
                                 if (!product || product.hidden) return products;
 
-                                const size = product.sizes.find(productSize => productSize.id === properties.size.id);
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
 
                                 if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
 
                                 return append({ product, quantity, properties, id }, products);
                             }, [], basket);

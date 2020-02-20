@@ -22,6 +22,7 @@ import saveProduct from '../../../services/saveProduct';
 import editProduct from '../../../services/editProduct';
 import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
+import updateProductColor from '../../../services/updateProductColor';
 
 const PRODUCTS_VALUES = ['name', 'hidden'];
 const CATEGORY_FILTER_NAME_REGEX = /categoryFilter-/g;
@@ -54,6 +55,7 @@ class ProductForm extends Component {
         editProduct: PropTypes.func.isRequired,
         updateProductFiles: PropTypes.func.isRequired,
         updateProductAvatar: PropTypes.func.isRequired,
+        updateProductColor: PropTypes.func.isRequired,
         onDone: PropTypes.func,
         product: PropTypes.object,
         categories: PropTypes.array,
@@ -105,7 +107,8 @@ class ProductForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
-            sizes: product.sizes || [],
+            ru_sizes: pathOr(['sizes', 'ru'], '', product) || [],
+            ua_sizes: pathOr(['sizes', 'ua'], '', product) || [],
             avatar: { files: product.avatar ? [product.avatar] : [] },
             files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
@@ -117,7 +120,6 @@ class ProductForm extends Component {
             categoryId: activeCategory.id,
             subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
             alias: product.alias,
-            article: product.article,
             lang: 'ru',
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -161,14 +163,14 @@ class ProductForm extends Component {
             ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
-            sizes,
+            ru_sizes: ruSizes,
+            ua_sizes: uaSizes,
             hidden,
             warranty,
             categoryId,
             subCategoryId,
             id,
-            alias,
-            article
+            alias
         } = values;
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -216,7 +218,7 @@ class ProductForm extends Component {
                 if (filterType === 'range') {
                     value = filterValue;
                 } else {
-                    const filterValueIndex = findIndex(option => option.name === filterValue, this.state.subCategoryFilters[filterIndex].options);
+                    const filterValueIndex = findIndex(option => option.id === filterValue, this.state.subCategoryFilters[filterIndex].options);
 
                     if (filterValueIndex === -1) {
                         return subCategoryFilters;
@@ -236,6 +238,35 @@ class ProductForm extends Component {
 
             return subCategoryFilters;
         }, [], values);
+
+        const sizes = {
+            ru: ruSizes.map(size => ({
+                name: size.name,
+                id: size.id,
+                colors: size.colors.map(color => ({
+                    id: color.id,
+                    name: color.name,
+                    article: color.article,
+                    price: +color.price,
+                    discountPrice: +color.discountPrice,
+                    discount: +color.discount,
+                    file: color.file
+                }))
+            })),
+            ua: uaSizes.map(size => ({
+                name: size.name,
+                id: size.id,
+                colors: size.colors.map(color => ({
+                    id: color.id,
+                    name: color.name,
+                    article: color.article,
+                    price: +color.price,
+                    discountPrice: +color.discountPrice,
+                    discount: +color.discount,
+                    file: color.file
+                }))
+            }))
+        };
 
         return {
             texts: {
@@ -264,31 +295,24 @@ class ProductForm extends Component {
                     characteristics: uaCharacteristics
                 }
             },
-            sizes: sizes.map(size => ({
-                name: size.name,
-                price: size.price,
-                discountPrice: size.discountPrice,
-                discount: size.discount,
-                id: size.id
-            })),
+            sizes,
             hidden,
-            minDiscountPrice: sizes[0].discountPrice,
-            minDiscount: sizes[0].discount,
+            minDiscountPrice: sizes.ru[0].colors[0].discountPrice,
+            minDiscount: sizes.ru[0].colors[0].discount,
             warranty,
-            minPrice: sizes[0].price,
+            minPrice: sizes.ru[0].colors[0].price,
             categoryId,
             subCategoryId,
             id,
             alias,
             categoryFilters,
-            subCategoryFilters,
-            article
+            subCategoryFilters
         };
     };
 
     handleSubmit = values => {
         const productPayload = this.getProductPayload(values);
-        const { editProduct, saveProduct, updateProductAvatar, updateProductFiles, onDone } = this.props;
+        const { editProduct, saveProduct, updateProductAvatar, updateProductColor, updateProductFiles, onDone } = this.props;
         const { minDiscountPrice, minPrice } = productPayload;
 
         productPayload.actualPrice = minDiscountPrice || minPrice;
@@ -318,13 +342,28 @@ class ProductForm extends Component {
             })
             .then(product => {
                 const { files } = values.avatar;
-                if (files[0].content) {
-                    const formData = new FormData();
 
-                    formData.append(`product-${product.id}-avatar`, files[0].content);
+                if (!files[0].content) return product;
 
-                    return updateProductAvatar(formData, product.id);
-                }
+                const formData = new FormData();
+                formData.append(`product-${product.id}-avatar`, files[0].content);
+
+                return updateProductAvatar(formData, product.id);
+            })
+            .then(product => {
+                const formData = new FormData();
+
+                values.ru_sizes.forEach(size => {
+                    size.colors.forEach(color => {
+                        const { files } = color.file;
+
+                        if (files && files[0].content) {
+                            formData.append(`color-${size.id}-${color.id}-file`, files[0].content);
+                        }
+                    });
+                });
+
+                return updateProductColor(formData, product.id);
             })
             .then(onDone)
             .catch(error => {
@@ -440,7 +479,8 @@ const mapDispatchToProps = dispatch => ({
     saveProduct: payload => dispatch(saveProduct(payload)),
     editProduct: payload => dispatch(editProduct(payload)),
     updateProductFiles: (...payload) => dispatch(updateProductFiles(...payload)),
-    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload))
+    updateProductAvatar: (...payload) => dispatch(updateProductAvatar(...payload)),
+    updateProductColor: (...payload) => dispatch(updateProductColor(...payload))
 });
 
 export default withStyles(materialStyles)(connect(null, mapDispatchToProps)(ProductForm));

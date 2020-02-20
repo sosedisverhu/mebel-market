@@ -17,7 +17,6 @@ class ProductPage extends Component {
         location: PropTypes.object.isRequired,
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
-        lang: PropTypes.string.isRequired,
         products: PropTypes.array.isRequired,
         categories: PropTypes.array.isRequired,
         subCategories: PropTypes.array.isRequired
@@ -105,7 +104,6 @@ const mapStateToProps = ({ data, application }) => {
     return {
         langMap: application.langMap,
         langRoute: application.langRoute,
-        lang: application.lang,
         products: data.products,
         categories: data.categories,
         subCategories: data.subCategories
