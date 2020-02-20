@@ -94,7 +94,7 @@ class ProductPage extends Component {
 
     render () {
         const { category, subCategory, product } = this.state;
-        console.log(product);
+
         if (isEmpty(product)) return <NotFoundPage/>;
 
         return (
