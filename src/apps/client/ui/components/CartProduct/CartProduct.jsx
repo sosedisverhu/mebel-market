@@ -134,6 +134,12 @@ class CartProduct extends Component {
         const color = size.colors.find(color => color.id === properties.size.color.id);
         const isDiscount = !!color.discountPrice;
 
+        const allFeatures = size.features || [];
+        const checkedFeatureIds = properties.features || {};
+        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+        const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+        const resultPrice = (color.discountPrice || color.price) + featuresPrice;
+
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
                 <Link
@@ -167,6 +173,9 @@ class CartProduct extends Component {
                                 </div>
                             </div>
                         </div>
+                        {checkedFeatures && <div className={styles.features}>
+                            {checkedFeatures.map(feature => <p className={styles.feature}>{`+ ${feature.name}`}</p>)}
+                        </div>}
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -195,7 +204,7 @@ class CartProduct extends Component {
                             {isDiscount &&
                             <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
                             <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
-                                {formatMoney(color.discountPrice || color.price)}
+                                {formatMoney(resultPrice)}
                             </p>
                         </div>
                     </div>

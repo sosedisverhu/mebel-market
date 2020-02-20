@@ -20,21 +20,24 @@ import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../../../utils/arrayMove';
 
 import FormFieldColors from '../FormFieldColors/FormFieldColors';
+import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
 
 const materialStyles = {
-    size: {
-        flexWrap: 'nowrap',
-        alignItems: 'center',
-        zIndex: 9999,
-        borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
-        marginBottom: '5px',
-        paddingBottom: '5px'
-    },
     sizes: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: '210px'
+    },
+    size: {
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+        zIndex: 9999,
+        marginBottom: '5px',
+        padding: '5px',
+        marginTop: '20px',
+        borderRadius: '4px',
+        background: '#F3F3F3'
     },
     sizeGroup: {
         display: 'flex',
@@ -59,6 +62,14 @@ const materialStyles = {
         display: 'flex',
         justifyContent: 'flex-end',
         paddingRight: '80px'
+    },
+    h6: {
+        color: 'rgba(0, 0, 0, 0.87)',
+        fontSize: '1.25rem',
+        fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+        fontWeight: '500',
+        lineHeight: '1.6',
+        paddingLeft: '36px'
     }
 };
 
@@ -85,6 +96,17 @@ const Size = SortableElement(({
                 onChange={handleSizeChange('name', rowIndex)}
                 margin='normal'
                 variant='outlined'
+            />
+            <h6 className={classes.h6}>Дополнительные опции</h6>
+            <FormFieldSizeFeatures
+                value={size.features}
+                onChange={onChange}
+                sizes={sizes}
+                sizeIndex={rowIndex}
+                schema={{
+                    name: 'Название услуги',
+                    value: 'Цена'
+                }}
             />
             <FormFieldColors
                 value={size.colors}
@@ -128,7 +150,7 @@ class FormFieldSizes extends Component {
 
         this.props.onChange([
             ...value,
-            { name: '', colors: [], id: uniqid() }
+            { name: '', colors: [], features: [], id: uniqid() }
         ]);
     };
 

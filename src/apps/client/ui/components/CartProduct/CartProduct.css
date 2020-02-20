@@ -147,6 +147,19 @@
     }
 }
 
+.feature {
+    font-size: 14px;
+    line-height: 16px;
+    color: blackLight;
+    margin-bottom: 6px;
+
+    @media (max-width: 500px) {
+        font-size: 13px;
+        line-height: 15px;
+        margin-bottom: 10px;
+    }
+}
+
 .productColor {
     @media (max-width: 500px) {
         display: flex;

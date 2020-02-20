@@ -57,6 +57,12 @@ export default function saveOrder (req, res) {
                             file: color.file
                         };
                         properties.size.color.img = color.name;
+
+                        const allFeatures = size.features || [];
+                        const checkedFeatureIds = properties.features || {};
+                        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+                        properties.features = checkedFeatures;
+
                         return append({
                             product,
                             quantity,
@@ -117,6 +123,9 @@ export default function saveOrder (req, res) {
                                     <td width='110' style="font-weight: bold">Товары:</td>
                                 </tr>
                                 ${products.map((product) => {
+        const featuresPrice = product.properties.features.reduce((sum, { value }) => sum + value, 0);
+        const unitPrice = (product.price || product.basePrice) + featuresPrice;
+
         return `<tr>
                                                 <td style="font-weight: bold" width='110'>Название</td>
                                                 <td width='110'>${product.productName}</td>
@@ -127,12 +136,22 @@ export default function saveOrder (req, res) {
                                             </tr> 
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Цена</td>
-                                                <td width='110'>${product.price || product.basePrice} грн</td>
+                                                <td width='110'>${unitPrice} грн</td>
                                             </tr> 
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Количество</td>
                                                 <td width='110'>${product.quantity} штк.</td>
                                             </tr>
+                                            ${product.properties.features.length
+        ? `<tr>
+                                            <td style="font-weight: bold" width='110'>Дополнительно</td>
+                                            <td width='60'>${product.properties.features.map(feature => {
+        return '+ ' + feature.name + '; <br>';
+    }
+    )}
+                                            </td>
+                                        </tr>`
+        : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Размер</td>
                                                 <td width='110'>${product.properties.size.name}</td>

@@ -64,7 +64,7 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 ));
 
 const Feature =
-    SortableElement(({ rowIndex, feature, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
+    SortableElement(({ rowIndex, feature, handleFeatureDelete, sizeIndex, handleFeatureChange, classes, schema }) => (
         <FormGroup className={classes.feature} row>
             <ButtonSortable imageClassName={classes.buttonSortable}/>
             <div className={classes.featureGroup}>
@@ -72,7 +72,7 @@ const Feature =
                     className={classes.featureField}
                     label={schema.name || ''}
                     value={feature.name || ''}
-                    onChange={handleFeatureChange('name', rowIndex)}
+                    onChange={handleFeatureChange('name', sizeIndex, rowIndex)}
                     margin='normal'
                     variant='outlined'
                 />
@@ -80,12 +80,13 @@ const Feature =
                     className={classes.featureField}
                     label={schema.value}
                     value={feature.value || ''}
-                    onChange={handleFeatureChange('value', rowIndex)}
+                    onChange={handleFeatureChange('value', sizeIndex, rowIndex)}
+                    type='number'
                     margin='normal'
                     variant='outlined'
                 />
             </div>
-            <IconButton aria-label='Delete' onClick={handleFeatureDelete(rowIndex)}>
+            <IconButton aria-label='Delete' onClick={handleFeatureDelete(sizeIndex, rowIndex)}>
                 <DeleteIcon/>
             </IconButton>
         </FormGroup>
@@ -105,13 +106,15 @@ const Features = SortableContainer(({ features, classes, ...rest }) =>
     </div>
 );
 
-class FormFieldFeaturesDouble extends Component {
+class FormFieldSizeFeatures extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
         validationMessage: PropTypes.string,
-        schema: PropTypes.object
+        schema: PropTypes.object,
+        sizeIndex: PropTypes.number.isRequired,
+        sizes: PropTypes.array.isRequired
     };
 
     static defaultProps = {
@@ -119,7 +122,6 @@ class FormFieldFeaturesDouble extends Component {
         onChange: noop,
         validationMessage: '',
         schema: {},
-        sizeIndex: 0,
         sizes: []
     };
 
@@ -127,41 +129,45 @@ class FormFieldFeaturesDouble extends Component {
         isSorting: false
     };
 
-    handleFeatureAdd = () => {
-        const { value } = this.props;
+    handleFeatureAdd = i => () => {
+        const { sizes } = this.props;
 
-        this.props.onChange([
-            ...value,
+        if (!sizes[i].features) sizes[i].features = [];
+
+        sizes[i].features = [
+            ...sizes[i].features,
             {
+                id: uniqid(),
                 name: '',
-                value: '',
-                id: uniqid()
-            }
-        ]);
+                value: ''
+            }];
+
+        this.props.onChange(sizes);
     };
 
-    handleFeatureChange = (prop, i) => event => {
-        const { value } = this.props;
+    handleFeatureChange = (prop, sizeIndex, featureIndex) => event => {
+        const { sizes, onChange } = this.props;
 
-        value[i][prop] = event.target.value;
-
-        this.props.onChange(value);
+        sizes[sizeIndex].features[featureIndex][prop] = event.target.value;
+        onChange(sizes);
     };
 
-    handleFeatureDelete = i => () => {
-        const { value } = this.props;
+    handleFeatureDelete = (sizeIndex, featureIndex) => () => {
+        const { sizes } = this.props;
 
-        this.props.onChange(remove(i, 1, value));
+        sizes[sizeIndex].features = remove(featureIndex, 1, sizes[sizeIndex].features);
+        this.props.onChange(sizes);
     };
 
     onDragEnd = ({ oldIndex, newIndex }) => {
-        const { value } = this.props;
+        const { value, sizes, sizeIndex } = this.props;
 
-        this.props.onChange(arrayMove(value, oldIndex, newIndex));
+        sizes[sizeIndex].features = arrayMove(value, oldIndex, newIndex);
+        this.props.onChange(sizes);
     };
 
     render () {
-        const { classes, value, validationMessage, schema } = this.props;
+        const { classes, value, validationMessage, schema, sizeIndex } = this.props;
 
         return <div>
             <Features
@@ -174,9 +180,10 @@ class FormFieldFeaturesDouble extends Component {
                 useDragHandle
                 validationMessage={validationMessage}
                 schema={schema}
+                sizeIndex={sizeIndex}
             />
             <div className={classes.addButton}>
-                <Fab color='primary' size='small' onClick={this.handleFeatureAdd}>
+                <Fab color='primary' size='small' onClick={this.handleFeatureAdd(sizeIndex)}>
                     <AddIcon/>
                 </Fab>
             </div>
@@ -184,4 +191,4 @@ class FormFieldFeaturesDouble extends Component {
     }
 }
 
-export default withStyles(materialStyles)(FormFieldFeaturesDouble);
+export default withStyles(materialStyles)(FormFieldSizeFeatures);
