@@ -92,7 +92,7 @@
 }
 
 .activeValue {
-    font: 14px/16px RoundedElegance;;
+    font: 14px/16px RoundedElegance;
     color: gray7;
 
     @media (min-width: 601px) {
