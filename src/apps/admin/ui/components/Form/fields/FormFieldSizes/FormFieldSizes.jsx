@@ -97,7 +97,7 @@ const Size = SortableElement(({
                 margin='normal'
                 variant='outlined'
             />
-            <h6 className={classes.h6}>Дополнительные услуги</h6>
+            <h6 className={classes.h6}>Дополнительные опции</h6>
             <FormFieldSizeFeatures
                 value={size.features}
                 onChange={onChange}
@@ -105,7 +105,7 @@ const Size = SortableElement(({
                 sizeIndex={rowIndex}
                 schema={{
                     name: 'Название услуги',
-                    value: 'Значение'
+                    value: 'Цена'
                 }}
             />
             <FormFieldColors
