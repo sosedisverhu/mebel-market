@@ -28,7 +28,9 @@ class ProductPage extends Component {
         product: {}
     };
 
-    componentDidMount () {
+    constructor (...args) {
+        super(...args);
+
         const { categoryAlias, subCategoryAlias, alias } = this.getMatch();
         const category = this.getCategory(categoryAlias);
         if (!category) return;
@@ -37,13 +39,17 @@ class ProductPage extends Component {
         const product = this.getProduct(alias, category, subCategory);
         if (!product) return;
 
-        this.setState({
+        this.state = {
             category,
             subCategory,
             product
-        });
+        };
+    }
 
-        product && addProductViews(product.id);
+    componentDidMount () {
+        const { product } = this.state;
+
+        product.id && addProductViews(product.id);
     };
 
     componentDidUpdate (prevProps) {

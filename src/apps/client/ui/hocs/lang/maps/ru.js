@@ -152,11 +152,20 @@ export default {
     comments: {
         showAll: 'Показать все',
         feedbackBtn: 'Оставить отзыв',
+        firstFeedbackBtn: 'Будьте первым, кто оставит отзыв',
         userRating: 'Ваша оценка товара',
         inputName: 'Ваше имя и фамилия *',
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
-        cancelBtn: 'Отмена'
+        cancelBtn: 'Отмена',
+        nameError: 'Введите ваше имя',
+        emailPhoneError: 'Введите ваш телефон или почтовый адрес',
+        ratingError: 'Оцените товар'
+    },
+    reviewSent: {
+        thanks: 'Спасибо!',
+        publication: 'Ваш отзыв будет опубликован',
+        moderation: 'после модерации'
     },
     articles: {
         searchResult: 'Статьи:'

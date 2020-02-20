@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
-class Cart extends Component {
+class CartProduct extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
@@ -60,6 +60,8 @@ class Cart extends Component {
     static defaultProps = {
         wishlist: []
     };
+
+    state = {};
 
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
@@ -211,4 +213,4 @@ class Cart extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(CartProduct);

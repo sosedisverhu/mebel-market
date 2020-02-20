@@ -20,4 +20,4 @@ class ProductsGrid extends Component {
     }
 }
 
-export default (ProductsGrid);
+export default ProductsGrid;
