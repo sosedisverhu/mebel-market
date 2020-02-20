@@ -72,7 +72,11 @@ export default {
             several: 'Результата',
             much: 'Результатів'
         },
-        price: 'Ціна'
+        price: 'Ціна',
+        popupTitle: 'Фільтри',
+        popupBtnClear: 'Очистити',
+        popupBtnDone: 'Готово',
+        popupBtnApply: 'Застосувати'
     },
     aboutProductTop: {
         warranty: 'Гарантія',

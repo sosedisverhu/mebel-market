@@ -4,6 +4,7 @@
 @value greenBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value gray4 from '../../../../../css/colors.css';
+@value gray7 from '../../../../../css/colors.css';
 
 .productPage {
     position: relative;
@@ -84,6 +85,7 @@
 .filterPanelWrap {
     width: 100%;
     padding: 0 16px;
+    position: relative;
     background: whiteBasic;
 
     @media (max-width: 600px) {
@@ -137,9 +139,17 @@
 
     @media (max-width: 960px) {
         position: absolute;
-        right: 16px;
-        top: 12px;
+        right: 18px;
+        top: -30px;
         margin-top: 0;
+    }
+}
+
+.filtersWrap {
+    display: flex;
+
+    @media (max-width: 600px) {
+        display: none;
     }
 }
 
@@ -149,4 +159,100 @@
     padding-bottom: 30px;
     background: gray3;
     overflow: hidden;
+}
+
+.popupContainer {
+    position: fixed;
+    z-index: 40;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow: auto;
+    visibility: hidden;
+    opacity: 0;
+
+     @media (max-width: 600px) {
+         &.active {
+             visibility: visible;
+             opacity: 1;
+         }
+     }
+}
+
+.cover {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(4px);
+    cursor: default;
+}
+
+.popup {
+    background: whiteBasic;
+    position: absolute;
+    top: 0;
+    right: 60px;
+    font-family: RoundedElegance;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        right: 0;
+        min-width: auto;
+    }
+}
+
+.popupHeader {
+    position: relative;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.popupTitle {
+    font-size: 24px;
+    line-height: 28px;
+    color: gray7;
+    text-align: center;
+}
+
+.popupBtnClear {
+    font: 16px/18px RoundedElegance;
+    color: gray7;
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    left: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.popupBtnDone {
+    font: 16px/18px RoundedElegance;
+    color: greenBasic;
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    right: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.popupBtnApply {
+    font: 18px/21px RoundedElegance;
+    color: whiteBasic;
+    padding: 10px 20px;
+    background: blackLight;
+    margin: 15px 0;
+    border: none;
+    outline: none;
 }
