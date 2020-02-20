@@ -133,7 +133,8 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         price: 'notDepend',
                         discountPrice: 'notDepend',
                         discount: 'notDepend',
-                        file: 'notDepend'
+                        file: 'notDepend',
+                        action: 'notDepend'
                     }]
                 }],
                 validators: [

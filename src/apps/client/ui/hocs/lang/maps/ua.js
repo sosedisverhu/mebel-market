@@ -23,7 +23,8 @@ export default {
         oneSize: 'Розмір:',
         tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'У кошику',
-        chooseColor: 'Оберіть колір:'
+        chooseColor: 'Оберіть колір:',
+        oneColor: 'Колір:'
     },
     breadcrumbs: {
         main: 'Головна'

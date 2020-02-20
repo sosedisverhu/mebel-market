@@ -22,6 +22,7 @@ import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import Helmet from './ui/components/Helmet/Helmet.jsx';
+import PromotionsPage from './ui/pages/PromotionsPage/PromotionsPage.jsx';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -89,6 +90,8 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route exact path={`/:lang(${langs})?/promotions`} render={this.renderComponent(PromotionsPage)} />
+                        <Route exact path={`/:lang(${langs})?/promotions/:alias`} render={this.renderComponent(ProductPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)}/>
