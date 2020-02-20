@@ -21,7 +21,8 @@ class ProductsSlider extends Component {
     static propTypes = {
         label: PropTypes.string.isRequired,
         products: PropTypes.array.isRequired,
-        widthWindow: PropTypes.number.isRequired
+        widthWindow: PropTypes.number.isRequired,
+        isPromotion: PropTypes.bool
     };
 
     constructor (props) {
@@ -124,7 +125,7 @@ class ProductsSlider extends Component {
     };
 
     render () {
-        const { label, widthWindow } = this.props;
+        const { label, widthWindow, isPromotion } = this.props;
         const { activeIndex, productsPacks, left } = this.state;
         const hidden = productsPacks.length <= 1;
 
@@ -149,6 +150,7 @@ class ProductsSlider extends Component {
                                         labelClass={label}
                                         key={product.id}
                                         product={product}
+                                        isPromotion={isPromotion}
                                         setSliderWidth={this.setWidth}/>)}
                                 </div>;
                             })}

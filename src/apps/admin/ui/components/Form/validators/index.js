@@ -1,6 +1,7 @@
 import required from './required';
 import email from './email';
 import phone from './phone';
+import isNumber from './isNumber';
 import max from './max';
 import min from './min';
 import featuresSingular from './featuresSingular';
@@ -17,6 +18,7 @@ export default {
     phone,
     featuresSingular,
     featuresDouble,
+    isNumber,
     max,
     min,
     requiredFiles,

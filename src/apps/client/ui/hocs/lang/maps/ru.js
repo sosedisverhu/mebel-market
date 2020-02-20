@@ -23,7 +23,8 @@ export default {
         oneSize: 'Размер:',
         tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'В корзине',
-        chooseColor: 'Выберите цвет:'
+        chooseColor: 'Выберите цвет:',
+        oneColor: 'Цвет:'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -71,7 +72,11 @@ export default {
             several: 'Результата',
             much: 'Результатов'
         },
-        price: 'Цена'
+        price: 'Цена',
+        popupTitle: 'Фильтры',
+        popupBtnClear: 'Очистить',
+        popupBtnDone: 'Готово',
+        popupBtnApply: 'Применить'
     },
     aboutProductTop: {
         warranty: 'Гарантия',
@@ -152,11 +157,20 @@ export default {
     comments: {
         showAll: 'Показать все',
         feedbackBtn: 'Оставить отзыв',
+        firstFeedbackBtn: 'Будьте первым, кто оставит отзыв',
         userRating: 'Ваша оценка товара',
         inputName: 'Ваше имя и фамилия *',
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
-        cancelBtn: 'Отмена'
+        cancelBtn: 'Отмена',
+        nameError: 'Введите ваше имя',
+        emailPhoneError: 'Введите ваш телефон или почтовый адрес',
+        ratingError: 'Оцените товар'
+    },
+    reviewSent: {
+        thanks: 'Спасибо!',
+        publication: 'Ваш отзыв будет опубликован',
+        moderation: 'после модерации'
     },
     articles: {
         searchResult: 'Статьи:'

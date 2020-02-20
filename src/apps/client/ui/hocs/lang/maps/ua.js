@@ -23,7 +23,8 @@ export default {
         oneSize: 'Розмір:',
         tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'У кошику',
-        chooseColor: 'Оберіть колір:'
+        chooseColor: 'Оберіть колір:',
+        oneColor: 'Колір:'
     },
     breadcrumbs: {
         main: 'Головна'
@@ -71,7 +72,11 @@ export default {
             several: 'Результата',
             much: 'Результатів'
         },
-        price: 'Ціна'
+        price: 'Ціна',
+        popupTitle: 'Фільтри',
+        popupBtnClear: 'Очистити',
+        popupBtnDone: 'Готово',
+        popupBtnApply: 'Застосувати'
     },
     aboutProductTop: {
         warranty: 'Гарантія',
@@ -151,11 +156,20 @@ export default {
     comments: {
         showAll: 'Показати усі',
         feedbackBtn: 'Залишити відгук',
+        firstFeedbackBtn: 'Будьте першим, хто залишить відгук',
         userRating: 'Ваша оцінка товару',
         inputName: 'Ваше ім\'я та прізвище *',
         inputEmailPhone: 'Ел. пошта або телефон *',
         inputText: 'Текст відгуку',
-        cancelBtn: 'Скасувати'
+        cancelBtn: 'Скасувати',
+        nameError: 'Введіть ваше ім\'я',
+        emailPhoneError: 'Введіть ваш телефон або поштову адресу',
+        ratingError: 'Оцініть товар'
+    },
+    reviewSent: {
+        thanks: 'Дякуємо!',
+        publication: 'Ваш відгук буде опублікований',
+        moderation: 'після модерації'
     },
     articles: {
         searchResult: 'Статті:'

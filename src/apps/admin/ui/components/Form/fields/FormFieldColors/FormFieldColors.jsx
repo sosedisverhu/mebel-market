@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/core/styles';
@@ -80,6 +82,12 @@ const materialStyles = {
         fontWeight: '500',
         lineHeight: '1.6',
         paddingLeft: '36px'
+    },
+    checkbox: {
+        width: '100%',
+        '& input': {
+            zIndex: '-1'
+        }
     }
 };
 
@@ -87,7 +95,7 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, handleColorChange, classes }) => (
+const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, handleColorChange, handleColorCheckboxChange, classes }) => (
     <FormGroup className={classes.color} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.colorGroup}>
@@ -138,6 +146,18 @@ const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, 
                 schema={{ max: 1 }}
                 onChange={handleColorChange('file', sizeIndex, rowIndex)}
                 value={ !isEmpty(color.file) ? { files: [color.file] } : {} }/>
+            <div className={classes.checkbox}>
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                            checked={color.action || ''}
+                            onChange={handleColorCheckboxChange('action', sizeIndex, rowIndex)}
+                            color='primary'
+                        />
+                    }
+                    label="Акционный товар"
+                />
+            </div>
         </div>
         <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, rowIndex)}>
             <DeleteIcon />
@@ -203,6 +223,13 @@ class FormFieldColors extends Component {
         }
     };
 
+    handleColorCheckboxChange = (prop, sizeIndex, colorIndex) => (event, checked) => {
+        event.preventDefault();
+        const { sizes } = this.props;
+        sizes[sizeIndex].colors[colorIndex][prop] = checked;
+        this.props.onChange(sizes);
+    };
+
     handleColorDelete = (sizeIndex, colorIndex) => () => {
         const { sizes } = this.props;
 
@@ -227,6 +254,7 @@ class FormFieldColors extends Component {
                 colors={value}
                 handleColorDelete={this.handleColorDelete}
                 handleColorChange={this.handleColorChange}
+                handleColorCheckboxChange={this.handleColorCheckboxChange}
                 onSortEnd={this.onDragEnd}
                 classes={classes}
                 sizeIndex={sizeIndex}

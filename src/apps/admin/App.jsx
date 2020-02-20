@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
-
-import checkAuthentication from './services/checkAuthentication';
-
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { matchPath } from 'react-router';
+import { connect } from 'react-redux';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import isNull from '@tinkoff/utils/is/nil';
+
+import checkAuthentication from './services/checkAuthentication';
 
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './ui/pages/CategoriesPage/CategoriesPage';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
 import PartnersPage from './ui/pages/PartnersPage/PartnersPage.jsx';
+import ReviewsPage from './ui/pages/ReviewsPage/ReviewsPage';
 import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
-
 import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
-
-import isNull from '@tinkoff/utils/is/nil';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -37,7 +36,7 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     checkAuthentication: payload => dispatch(checkAuthentication(payload))
 });
 
@@ -90,6 +89,7 @@ class App extends Component {
                 <Route exact path='/admin/articles' component={ArticlesPage} />
                 <Route exact path='/admin/categories' component={CategoriesPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
+                <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
                 <Route exact path='/admin/orders' component={OrdersPage} />
             </Switch>

@@ -1,6 +1,7 @@
 import {
     SET_ARTICLES,
     SET_PRODUCTS,
+    SET_REVIEWS,
     SET_CATEGORIES,
     SET_SUB_CATEGORIES,
     SET_PARTNERS,
@@ -15,6 +16,7 @@ const initialState = {
     labels: ['top', 'discount'],
     articles: [],
     products: [],
+    reviews: [],
     categories: [],
     subCategories: [],
     partners: [],
@@ -31,6 +33,8 @@ export default function (state = initialState, action) {
         return { ...state, scrollToCharacteristic: action.payload };
     case SET_PRODUCTS:
         return { ...state, products: action.payload };
+    case SET_REVIEWS:
+        return { ...state, reviews: action.payload };
     case SET_CATEGORIES:
         return { ...state, categories: action.payload };
     case SET_SUB_CATEGORIES:

@@ -30,7 +30,8 @@ class Card extends Component {
         labelClass: PropTypes.string,
         categories: PropTypes.array,
         subCategories: PropTypes.array,
-        setSliderWidth: PropTypes.func
+        setSliderWidth: PropTypes.func,
+        isPromotion: PropTypes.bool
     };
 
     static defaultProps = {
@@ -81,7 +82,8 @@ class Card extends Component {
             labelClass,
             langRoute,
             lang,
-            setSliderWidth
+            setSliderWidth,
+            isPromotion
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const isDiscount = minPrice !== actualPrice;
@@ -93,7 +95,7 @@ class Card extends Component {
                     { [styles[newClass]]: newClass },
                     { [styles[labelClass]]: labelClass }
                 )}
-                to={`${langRoute}/${categoryAlias}/${subCategoryAlias}/${alias}`}
+                to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
                 <div className={styles.labels}>
                     {this.getLabels(['top'], minDiscount)}

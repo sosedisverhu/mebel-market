@@ -19,7 +19,7 @@ class FilterSlider extends Component {
         }),
         filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired
     };
 
@@ -138,6 +138,13 @@ class FilterSlider extends Component {
             <div className={classNames(styles.filter, { [styles.active]: active })}>
                 <div className={styles.title} onClick={this.handleTitleClick}>
                     {name}
+                </div>
+                <div className={styles.activeValueWrap}>
+                    <div className={styles.activeValue}>
+                        {(+value.min !== +min || +value.max !== +max)
+                            ? <p className={styles.activeValueText}>{`${dimension} ${value.min.toFixed(1)} - ${dimension}  ${value.max.toFixed(1)}`}</p>
+                            : null}
+                    </div>
                 </div>
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>

@@ -155,8 +155,6 @@
 
     &.active {
         .activeColor{
-            border-bottom: none;
-
             &:before{
                 transform: rotate(180deg);
                 border-color: blackLight transparent transparent transparent;
@@ -184,6 +182,15 @@
     box-sizing: content-box;
     list-style: none;
     margin-top: 10px;
+    position: relative;
+
+
+
+    &:hover {
+        .view {
+            display: flex;
+        }
+    }
 }
 .activeColor {
     border: 1px solid gray0;
@@ -204,6 +211,16 @@
          transition: 0.25s ease-out;
          transition-property: transform, border-color;
     }
+
+    .view {
+        display: flex;
+    }
+}
+
+.oneActiveColor {
+    &:before {
+        display: none;
+    }
 }
 
 .colorImg {
@@ -212,11 +229,28 @@
     cursor: pointer;
 }
 
+.view {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    left: calc(100% + 1px);
+    top: 0;
+    background: gray3;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: none;
+
+    &:before {
+        content: url('./img/view.svg');
+    }
+}
+
 .colorList {
     border: 1px solid gray0;
     border-top: none;
     position: absolute;
-    top: 100%;
+    top: calc(100% - 1px);
     left: 0;
     background: gray3;
     z-index: 1;

@@ -9,5 +9,15 @@
 
     @media (max-width: 600px) {
         display: none;
+        flex-direction: column;
+        width: 100%;
+
+        &.mobile {
+            display: flex;
+        }
     }
+}
+
+.mobile {
+    display: none;
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import classNames from 'classnames';
+
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
 import Comments from '../Comments/Comments';
@@ -52,13 +54,13 @@ class Tab extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            activeId: this.props.tabs[0] && this.props.tabs[0].id
+            activeId: this.props.tabs[0] && this.props.tabs[0].id,
+            userName: '',
+            userPhone: '',
+            userComment: '',
+            userMark: ''
         };
         this.tabTitles = React.createRef();
-    }
-
-    handleChange (id) {
-        this.setState({ activeId: id });
     }
 
     componentWillReceiveProps (nextProps) {
@@ -70,35 +72,36 @@ class Tab extends Component {
         }
     }
 
+    handleChange (id) {
+        this.setState({ activeId: id });
+    }
+
     getContent () {
-        const { activeId } = this.state;
         const { product, lang } = this.props;
 
-        if (activeId === 'description') {
+        switch (this.state.activeId) {
+        case 'description': {
             return (
                 <div className={styles.description}>
                     <StyleRenderer newClass='description' html={product.texts[lang].description}/>
                 </div>);
         }
-
-        if (activeId === 'comments') {
+        case 'characteristic': {
             return (
                 <div>
-                    <Comments />
-                </div>
-            );
+                    {product.characteristics[lang].characteristics.map((characteristic, i) => {
+                        return (
+                            <div className={styles.row} key={i}>
+                                <h3 className={styles.characterTitle}>{characteristic.name}</h3>
+                                <p className={styles.characterText}>{characteristic.value}</p>
+                            </div>);
+                    })}
+                </div>);
         }
-
-        return (
-            <div>
-                {product.characteristics[lang].characteristics.map((characteristic, i) => {
-                    return (
-                        <div className={styles.row} key={i}>
-                            <h3 className={styles.characterTitle}>{characteristic.name}</h3>
-                            <p className={styles.characterText}>{characteristic.value}</p>
-                        </div>);
-                })}
-            </div>);
+        case 'comments': {
+            return <Comments productId={product.id}/>;
+        }
+        }
     }
 
     render () {
@@ -117,7 +120,9 @@ class Tab extends Component {
                 })}
             </div>
             <div className={styles.contentWrap}>
-                <div className={styles.content}>
+                <div className={classNames(styles.content, {
+                    [styles.contentFull]: activeId === 'comments'
+                })}>
                     {this.getContent()}
                 </div>
             </div>
