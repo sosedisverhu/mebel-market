@@ -157,7 +157,10 @@ export default {
         inputName: 'Ваше имя и фамилия *',
         inputEmailPhone: 'Эл. почта или телефон *',
         inputText: 'Текст отзыва',
-        cancelBtn: 'Отмена'
+        cancelBtn: 'Отмена',
+        nameError: 'Введите ваше имя',
+        emailPhoneError: 'Введите ваш телефон или почтовый адрес',
+        ratingError: 'Оцените товар'
     },
     reviewSent: {
         thanks: 'Спасибо!',

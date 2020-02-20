@@ -248,7 +248,7 @@
 
     &.active {
          margin-top: 30px;
-         max-height: 400px;
+         max-height: 430px;
          transition: max-height 0.2s ease-in;
     }
 
@@ -302,15 +302,27 @@
     border: 1px solid gray0;
     box-sizing: border-box;
     padding: 8px;
-    margin-bottom: 20px;
-
-    &:last-of-type {
-        margin-bottom: 15px;
-    }
 
     &::placeholder {
         color: gray0;
     }
+}
+
+.inputWithError {
+    margin-bottom: 20px;
+}
+
+.commentInputError {
+    border: 1px red solid;
+    background: rgba(216, 0, 0, 0.05);
+}
+
+.errorText {
+    font-size: 14px;
+    color: red;
+    font-family: RoundedElegance;
+    margin-top: 10px;
+    display: block;
 }
 
 .inputText {

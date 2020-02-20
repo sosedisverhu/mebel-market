@@ -47,7 +47,12 @@ class Comments extends Component {
         reviews: [],
         isNotReviews: true,
         showAll: false,
-        reviewIsSent: false
+        reviewIsSent: false,
+        error: {
+            rating: false,
+            inputName: false,
+            inputEmailPhone: false
+        }
     };
 
     componentDidMount () {
@@ -90,7 +95,13 @@ class Comments extends Component {
     };
 
     handleClickStar = newRating => {
-        this.setState({ newRating });
+        this.setState({
+            newRating,
+            error: {
+                ...this.state.error,
+                rating: false
+            }
+        });
     };
 
     toggleForm = () => {
@@ -100,6 +111,19 @@ class Comments extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const { inputName, inputEmailPhone, inputText, newRating } = this.state;
+        const newError = {
+            rating: !newRating,
+            inputName: !inputName,
+            inputEmailPhone: !inputEmailPhone
+        };
+
+        this.setState({
+            error: newError
+        });
+
+        if (newError.rating || newError.inputName || newError.inputEmailPhone) {
+            return;
+        }
 
         this.props.saveReview({
             user: {
@@ -115,7 +139,22 @@ class Comments extends Component {
     };
 
     handleChange = fieldName => e => {
-        this.setState({ [fieldName]: e.target.value });
+        this.setState({
+            [fieldName]: e.target.value,
+            error: {
+                ...this.state.error,
+                [fieldName]: false
+            }
+        });
+    };
+
+    handleBlur = fieldName => e => {
+        this.setState({
+            error: {
+                ...this.state.error,
+                [fieldName]: !e.target.value
+            }
+        });
     };
 
     handleCancel = () => {
@@ -155,7 +194,7 @@ class Comments extends Component {
 
     render () {
         const { langMap } = this.props;
-        const { formIsOpen, inputName, inputEmailPhone, inputText, reviews, reviewsLength, showAll, reviewIsSent } = this.state;
+        const { formIsOpen, inputName, inputEmailPhone, inputText, reviews, reviewsLength, showAll, reviewIsSent, error } = this.state;
         const text = propOr('comments', {}, langMap);
 
         return (
@@ -197,7 +236,12 @@ class Comments extends Component {
                                 >
                                     {text.showAll}
                                 </span>}
-                                <p className={classNames(styles.feedbackTitle, { [styles.active]: formIsOpen }, { [styles.firstFeedbackTitle]: reviewsLength < 1 })}
+                                <p
+                                    className={
+                                        classNames(styles.feedbackTitle,
+                                            { [styles.active]: formIsOpen },
+                                            { [styles.firstFeedbackTitle]: reviewsLength < 1 })
+                                    }
                                     onClick={this.toggleForm}>
                                     {reviewsLength < 1 ? text.firstFeedbackBtn : text.feedbackBtn}
                                 </p>
@@ -213,26 +257,43 @@ class Comments extends Component {
                                         {this.changeRating()}
                                     </div>
                                 </div>
-                                <input className={styles.commentInput}
-                                    type="text"
-                                    name='inputName'
-                                    placeholder={text.inputName}
-                                    value={inputName}
-                                    onChange={this.handleChange('inputName')}
-                                />
-                                <input className={styles.commentInput}
-                                    type="text"
-                                    name='inputEmailPhone'
-                                    placeholder={text.inputEmailPhone}
-                                    value={inputEmailPhone}
-                                    onChange={this.handleChange('inputEmailPhone')}
-                                />
-                                <textarea className={classNames(styles.commentInput, styles.inputText)}
-                                    name="inputText"
-                                    placeholder={text.inputText}
-                                    value={inputText}
-                                    onChange={this.handleChange('inputText')}
-                                />
+                                <div className={styles.inputWithError}>
+                                    <input
+                                        className={classNames(styles.commentInput, {
+                                            [styles.commentInputError]: error.inputName
+                                        })}
+                                        type="text"
+                                        name='inputName'
+                                        placeholder={text.inputName}
+                                        value={inputName}
+                                        onChange={this.handleChange('inputName')}
+                                        onBlur={this.handleBlur('inputName')}
+                                    />
+                                    {error.inputName && <span className={styles.errorText}>{text.nameError}</span>}
+                                </div>
+                                <div className={styles.inputWithError}>
+                                    <input
+                                        className={classNames(styles.commentInput, {
+                                            [styles.commentInputError]: error.inputEmailPhone
+                                        })}
+                                        type="text"
+                                        name='inputEmailPhone'
+                                        placeholder={text.inputEmailPhone}
+                                        value={inputEmailPhone}
+                                        onChange={this.handleChange('inputEmailPhone')}
+                                        onBlur={this.handleBlur('inputEmailPhone')}
+                                    />
+                                    {error.inputEmailPhone && <span className={styles.errorText}>{text.emailPhoneError}</span>}
+                                </div>
+                                <div className={styles.inputWithError}>
+                                    <textarea className={classNames(styles.commentInput, styles.inputText)}
+                                        name="inputText"
+                                        placeholder={text.inputText}
+                                        value={inputText}
+                                        onChange={this.handleChange('inputText')}
+                                    />
+                                    {error.rating && <span className={styles.errorText}>{text.ratingError}</span>}
+                                </div>
                                 <div className={styles.formButtonsWrapper}>
                                     <button className={styles.feedbackBtn} type='submit'>
                                         {text.feedbackBtn}

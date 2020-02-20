@@ -156,7 +156,10 @@ export default {
         inputName: 'Ваше ім\'я та прізвище *',
         inputEmailPhone: 'Ел. пошта або телефон *',
         inputText: 'Текст відгуку',
-        cancelBtn: 'Скасувати'
+        cancelBtn: 'Скасувати',
+        nameError: 'Введіть ваше ім\'я',
+        emailPhoneError: 'Введіть ваш телефон або поштову адресу',
+        ratingError: 'Оцініть товар'
     },
     reviewSent: {
         thanks: 'Дякуємо!',
