@@ -7,7 +7,7 @@
     display: block;
     background-color: blackLight;
     flex-direction: column;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
 }
 
 .headerTop {
@@ -161,7 +161,7 @@
     padding-left: 40%;
     border: none;
     background-color: blackLight;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 16px;
     color: whiteBasic;
     line-height: 18px;
@@ -304,7 +304,7 @@
 }
 
 .searchInputBottom {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 14px;
     line-height: 16px;
     width: 213px;

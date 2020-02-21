@@ -6,7 +6,7 @@
 @value greenBasic from '../../../../../css/colors.css';
 
 .commentsContainer {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     max-width: 1700px;
     display: flex;
     justify-content: space-between;
@@ -107,12 +107,13 @@
 
 .name {
     font-size: 18px;
-    line-height: 21px;
+    line-height: 27px;
     color: blackLight;
 
     @media (max-width: 600px) {
         margin-bottom: 10px;
         font-size: 16px;
+        line-height: 24px;
     }
 }
 
@@ -155,13 +156,13 @@
 
 .commentText {
     font-size: 16px;
-    line-height: 18px;
+    line-height: 24px;
     color: rgba(35, 35, 35, 0.7);
     margin-bottom: 15px;
 
     @media (max-width: 600px) {
         font-size: 14px;
-        line-height: 16px;
+        line-height: 21px;
     }
 }
 
@@ -197,7 +198,7 @@
 .feedbackTitle {
     display: inline-block;
     font-size: 18px;
-    line-height: 21px;
+    line-height: 27px;
     color: blackLight;
     text-decoration-line: underline;
     cursor: pointer;
@@ -265,7 +266,7 @@
 
 .userRatingText {
     font-size: 16px;
-    line-height: 18px;
+    line-height: 24px;
     color: blackLight;
 }
 
@@ -293,9 +294,9 @@
 }
 
 .commentInput {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 16px;
-    line-height: 18px;
+    line-height: 24px;
     color: blackLight;
     width: 100%;
     background-color: whiteBasic;
@@ -319,8 +320,9 @@
 
 .errorText {
     font-size: 14px;
+    line-height: 21px;
     color: red;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     margin-top: 10px;
     display: block;
 }
@@ -340,7 +342,7 @@
 
 .feedbackBtn, .cancelBtn {
     @mixin removeDefaultButton;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 18px;
     padding: 10px 20px;
     line-height: 21px;

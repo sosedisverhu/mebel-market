@@ -72,7 +72,7 @@ textarea {
 }
 
 .h2 {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackLight;
     padding-bottom: 5px;
     border-bottom: 2px solid blackLight;
@@ -85,7 +85,7 @@ textarea {
 
 .infoInput,
 .infoTextArea {
-    font: 16px/18px RoundedElegance;
+    font: 16px/24px GilroyRegular;
     color: blackLight;
     background: whiteBasic;
     border: 1px solid gray0;
@@ -144,7 +144,7 @@ textarea {
 }
 
 .h3 {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     margin-top: 20px;
     padding-bottom: 5px;
@@ -159,7 +159,7 @@ textarea {
 }
 
 .radioLabel {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: gray6;
     color: rgba(35, 35, 35, 0.3);
     padding: 0 0 0 22px;
@@ -192,7 +192,7 @@ textarea {
 
 .radioDescription {
     font-size: 12px;
-    line-height: 16px;
+    line-height: 18px;
     padding-top: 3px;
 }
 
@@ -230,7 +230,7 @@ textarea {
 
 .products {
     width: 100%;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
 }
 
 .priceWrap {
@@ -258,7 +258,7 @@ textarea {
 }
 
 .priceRow {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     padding: 20px 15px 0 15px;
     display: flex;
@@ -266,7 +266,7 @@ textarea {
 }
 
 .priceTotal {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackLight;
     margin-top: 23px;
     border-top: 1px solid gray0;
@@ -276,7 +276,7 @@ textarea {
 }
 
 .buttonSubmit {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     padding: 10px 20px;
     border: none;
     margin: 30px auto 0 auto;
@@ -310,7 +310,7 @@ textarea {
 }
 
 .noItemsText {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 32px;
     line-height: 39px;
     text-align: center;
@@ -326,7 +326,7 @@ textarea {
 }
 
 .noItemsTextButton {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     padding: 10px 20px;
     border: none;
     margin: 30px auto 0 auto;

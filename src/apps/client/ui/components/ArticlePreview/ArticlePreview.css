@@ -8,7 +8,7 @@
     background-color: whiteBasic;
     padding: 20px;
     margin: 15px;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     display: flex;
     flex-direction: column;
 
@@ -37,14 +37,14 @@
 
 .title {
     font-size: 24px;
-    line-height: 28px;
+    line-height: 36px;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     margin-bottom: 20px;
 
     @media (max-width: 600px) {
         font-size: 18px;
-        line-height: 21px;
+        line-height: 27px;
         margin-bottom: 10px;
     }
 }
@@ -55,14 +55,14 @@
 
 .article p {
     font-size: 18px;
-    line-height: 21px;
+    line-height: 27px;
     color: rgba(35, 35, 35, 0.7);
     margin-bottom: 20px;
     height: 100%;
 
     @media (max-width: 600px) {
         font-size: 14px;
-        line-height: 16px;
+        line-height: 21px;
         margin-bottom: 15px;
     }
 }
@@ -76,7 +76,7 @@
 .readMoreBtn {
     @mixin removeDefaultButton;
     padding: 0;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 18px;
     line-height: 21px;
     color: blackLighter;
