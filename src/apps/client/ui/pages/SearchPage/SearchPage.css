@@ -27,7 +27,7 @@
 }
 
 .panelTopTitle {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLight;
     padding: 16px 0;
 
@@ -43,7 +43,7 @@
 }
 
 .quantity {
-    font: 36px/41px RoundedElegance;
+    font: 36px/41px GilroyRegular;
     color: blackBasic;
     position: relative;
     max-width: 1240px;
@@ -118,7 +118,7 @@
 }
 
 .searchNotFoundText {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackBasic;
 
     @media (max-width: 600px) {
@@ -129,7 +129,7 @@
 }
 
 .tryAgain {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackBasic;
     margin-top: 75px;
 
@@ -167,7 +167,7 @@
 }
 
 .searchInput {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLight;
     margin-top: 30px;
     width: 100%;
@@ -175,7 +175,7 @@
     outline: none;
 
     &:placeholder {
-        font: 16px/18px RoundedElegance;
+        font: 16px/18px GilroyRegular;
         color: gray6;
     }
 }
@@ -195,7 +195,7 @@
 }
 
 .needHelp {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackBasic;
     margin-top: 75px;
 
@@ -207,7 +207,7 @@
 }
 
 .link {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: whiteBasic;
     padding: 10px 20px;
     margin-top: 20px;
