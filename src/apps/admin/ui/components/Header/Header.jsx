@@ -32,7 +32,10 @@ const materialStyles = {
         flexGrow: 1
     },
     popper: {
-        zIndex: 1
+        zIndex: 3
+    },
+    button: {
+        textAlign: 'center'
     }
 };
 
@@ -121,7 +124,7 @@ class Header extends Component {
                 <Typography variant='h6' color='inherit' className={classes.title}>
                     {this.getHeaderTitle()}
                 </Typography>
-                <Button color='inherit' component={Link} to='/admin/credentials'>Сменить учетные данные</Button>
+                <Button className={classes.button} color='inherit' component={Link} to='/admin/credentials'>Сменить учетные данные</Button>
                 <Button color='inherit' onClick={this.handleLogout}>Выйти</Button>
             </Toolbar>
         </AppBar>;
