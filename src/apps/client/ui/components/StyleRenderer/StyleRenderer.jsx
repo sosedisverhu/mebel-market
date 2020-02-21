@@ -21,13 +21,16 @@ export default class StyleRenderer extends Component {
     }
 
     setInstagramPosts = () => {
-        document.querySelectorAll('oembed[url]').forEach(element => {
-            const url = element.getAttribute('url');
+        const object = document.querySelectorAll('oembed[url]');
+        for (let element in object) {
+            if (object.hasOwnProperty(element)) {
+                const url = element.getAttribute('url');
 
-            if (url.indexOf('https://www.instagram.com') === 0) {
-                element.innerHTML = getInstagramTemplate(url);
+                if (url.indexOf('https://www.instagram.com') === 0) {
+                    element.innerHTML = getInstagramTemplate(url);
+                }
             }
-        });
+        }
 
         window.instgrm.Embeds.process();
     };
