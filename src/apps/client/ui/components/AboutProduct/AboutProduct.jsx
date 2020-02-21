@@ -19,6 +19,7 @@ import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
 import styles from './AboutProduct.css';
 import SizesSelect from '../SizesSelect/SizesSelect';
+import ColorsSelect from '../ColorsSelect/ColorsSelect';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -101,13 +102,13 @@ class AboutProduct extends Component {
     };
 
     selectIsOpen = () => {
-        this.setState(state => ({
+        this.setState(({
             selectIsOpen: true
         }));
     };
 
     selectIsClosed = () => {
-        this.setState(state => ({
+        this.setState(({
             selectIsOpen: false
         }));
     };
@@ -166,12 +167,13 @@ class AboutProduct extends Component {
         return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
-    changeColorListStatus = () => this.setState((state) => ({ colorListOpen: !state.colorListOpen }));
+    changeColorListOpen = () => this.setState({ colorListOpen: true });
+    changeColorListClose = () => this.setState(({ colorListOpen: false }));
 
     handleChangePopup = (activePopupColorIndex = null) => () => this.setState({ activePopupColorIndex });
 
     handleChangeColor = (color) => {
-        this.changeColorListStatus();
+        this.state.colorListOpen ? this.changeColorListClose() : this.changeColorListOpen();
         this.props.changeColor(color);
     };
 
@@ -210,7 +212,6 @@ class AboutProduct extends Component {
         const checkedFeatures = features.filter(feature => checkedFeatureIds[feature.id]);
         const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
         const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
-        const activeColorIndex = actualColors.findIndex(color => color.id === activeColor.id);
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -246,21 +247,17 @@ class AboutProduct extends Component {
                     <div className={styles.colorTitle}>
                         {!isOneColor ? text.chooseColor : text.oneColor}
                     </div>
-                    <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })}>
-                        <img className={styles.colorImg} onClick={this.changeColorListStatus} src={activeColor.file} alt={activeColor.name} />
-                        <div className={styles.view} onClick={this.handleChangePopup(activeColorIndex)} />
-                    </div>
-                    <ul className={styles.colorList}>
-                        {actualColors.map((color, i) => {
-                            if (color.id !== activeColor.id) {
-                                return <li className={styles.color}
-                                    key={color.id}>
-                                    <img className={styles.colorImg} onClick={() => this.handleChangeColor(color)} src={color.file} alt={color.name} />
-                                    <div className={styles.view} onClick={this.handleChangePopup(i)} />
-                                </li>;
-                            }
-                        })}
-                    </ul>
+                    <ColorsSelect
+                        activeSize={activeSize}
+                        isPromotion={isPromotion}
+                        handleChangeSize={this.handleChangeSize}
+                        activeColor={activeColor}
+                        handleChangeColor={this.handleChangeColor}
+                        changeColorListOpen={this.changeColorListOpen}
+                        changeColorListClose={this.changeColorListClose}
+                        handleChangePopup={this.handleChangePopup}
+                        colorListOpen={colorListOpen}
+                    />
                 </div>
             </div>
             <div className={styles.features}>
