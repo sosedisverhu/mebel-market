@@ -58,7 +58,6 @@
     line-height: 27px;
     color: rgba(35, 35, 35, 0.7);
     margin-bottom: 20px;
-    height: 100%;
 
     @media (max-width: 600px) {
         font-size: 14px;
@@ -71,6 +70,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: auto;
 }
 
 .readMoreBtn {
