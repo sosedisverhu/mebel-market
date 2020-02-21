@@ -69,7 +69,7 @@ class Sort extends Component {
     state = {
         active: false,
         valueOption: SORTING_OPTIONS[0].id
-    }
+    };
 
     handleSelectClose = () => {
         this.setState({ active: false });
