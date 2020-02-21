@@ -459,7 +459,7 @@
     &:after {
         position: absolute;
         content: '';
-        background: url('./img/menuItemArrow.png') center no-repeat;
+        background: url('./img/menuItemArrow.svg') center no-repeat;
         width: 14px;
         height: 100%;
         right: 15px;
