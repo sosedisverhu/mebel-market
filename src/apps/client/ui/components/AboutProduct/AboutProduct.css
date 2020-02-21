@@ -183,8 +183,8 @@
     list-style: none;
     margin-top: 10px;
     position: relative;
-
-
+    border-top: 1px solid gray0;
+    border-bottom: 1px solid gray0;
 
     &:hover {
         .view {
@@ -247,7 +247,8 @@
 }
 
 .colorList {
-    border: 1px solid gray0;
+    border-left: 1px solid gray0;
+    border-right: 1px solid gray0;
     border-top: none;
     position: absolute;
     top: calc(100% - 1px);
