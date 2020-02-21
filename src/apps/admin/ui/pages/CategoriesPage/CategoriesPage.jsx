@@ -310,19 +310,20 @@ class CategoriesPage extends Component {
         return this.props.products.filter(product => product.categoryId === pathOr(['id'], '', activeCategory));
     };
 
-    setCategoryProducts = () => {
-        this.setState({ products: this.getCategoryProducts() });
-    }
-
-    setActiveSubItem = (value) => {
-        this.setState({ activeSubCategory: value });
-    }
-
     getSubCategoryProducts = (activeSubCategory = this.state.activeSubCategory) => {
         return this.props.products.filter(product => product.subCategoryId === activeSubCategory.id);
     };
 
+    setCategoryProducts = () => {
+        this.setState({ products: this.getCategoryProducts() });
+    };
+
+    setActiveSubItem = (value) => {
+        this.setState({ activeSubCategory: value });
+    };
+
     handleCategoryFormOpen = category => () => {
+        console.log('handleCategoryFormOpen');
         this.setState({
             categoryFormShowed: true,
             editableCategory: category
@@ -330,6 +331,7 @@ class CategoriesPage extends Component {
     };
 
     handleSubCategoryFormOpen = subCategory => () => {
+        console.log('handleSubCategoryFormOpen');
         this.setState({
             subCategoryFormShowed: true,
             editableSubCategory: subCategory
@@ -381,7 +383,7 @@ class CategoriesPage extends Component {
     };
 
     handleWarningAgree = () => {
-        const { valueForDelete, activeCategory, categories } = this.state;
+        const { valueForDelete, activeCategory, categories, activeSubCategory } = this.state;
         const valueType = categories.includes(valueForDelete) ? 'category' : 'subCategory';
 
         if (valueType === 'category') {
@@ -390,21 +392,28 @@ class CategoriesPage extends Component {
                     getCategories();
                 })
                 .then(() => {
+                    const { categories } = this.props;
+                    const newActiveCategory = activeCategory === valueForDelete && categories[0];
+
                     this.setState({
-                        categories: this.props.categories,
-                        activeCategory: activeCategory === valueForDelete && DEFAULT_ACTIVE_CATEGORY,
+                        categories,
+                        activeCategory: newActiveCategory,
+                        products: this.getCategoryProducts(newActiveCategory),
                         valueForDelete: null
                     });
                 });
         }
 
-
         this.props.deleteSubCategories(valueForDelete.id)
             .then(() => {
                 this.props.getSubCategories()
                     .then(() => {
+                        const subCategories = this.getActiveSubCategories();
+                        const newActiveSubCategory = activeSubCategory === valueForDelete && subCategories[0];
                         this.setState({
-                            subCategories: this.getActiveSubCategories(),
+                            subCategories,
+                            activeSubCategory: newActiveSubCategory,
+                            products: this.getSubCategoryProducts(newActiveSubCategory),
                             valueForDelete: null
                         });
                     });
@@ -469,6 +478,46 @@ class CategoriesPage extends Component {
         });
     };
 
+    handleProductDelete = product => {
+        const { activeSubCategory } = this.state;
+
+        return this.props.deleteProducts(product)
+            .then(() => {
+                this.props.getProducts()
+                    .then(() => {
+                        const products = !activeSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
+
+                        this.setState({ products });
+                    });
+            });
+    };
+
+    handleProductFormOpen = product => () => {
+        this.setState({
+            productFormShowed: true,
+            editableProduct: product
+        });
+    };
+
+    handleCloseProductForm = () => {
+        this.setState({
+            productFormShowed: false,
+            editableProduct: null
+        });
+    };
+
+    handleProductFormDone = () => {
+        const { activeSubCategory } = this.state;
+
+        this.props.getProducts()
+            .then(() => {
+                const products = !activeSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
+
+                this.setState({ products });
+                this.handleCloseProductForm();
+            });
+    };
+
     renderTable = () => {
         const { classes } = this.props;
         const {
@@ -484,94 +533,97 @@ class CategoriesPage extends Component {
             editableSubCategory
         } = this.state;
 
+        console.log('subCategoryFormShowed', subCategoryFormShowed);
+        console.log('categoryFormShowed', this.state.categoryFormShowed);
+
         switch (true) {
-            case loading:
-                return <div className={classes.loader}>
-                    <CircularProgress/>
-                </div>;
+        case loading:
+            return <div className={classes.loader}>
+                <CircularProgress/>
+            </div>;
 
-            case !categories.length:
-                return <div>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        Создайте сначала категорию
-                    </Typography>
-                </div>;
+        case !categories.length:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Создайте сначала категорию
+                </Typography>
+            </div>;
 
-            case !activeCategory:
-                return <div>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        Выберите категорию
-                    </Typography>
-                </div>;
+        case !activeCategory:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    Выберите категорию
+                </Typography>
+            </div>;
 
-            case !subCategories.length:
-                return <div>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        В категории нет подкатегорий
-                    </Typography>
-                </div>;
+        case !subCategories.length:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    В категории нет подкатегорий
+                </Typography>
+            </div>;
 
-            case isEmpty(activeSubCategory) && !products.length:
-                return <div>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        {`В категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}" нет товаров`}
-                    </Typography>
-                </div>;
+        case isEmpty(activeSubCategory) && !products.length:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    {`В категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}" нет товаров`}
+                </Typography>
+            </div>;
 
-            case !isEmpty(activeSubCategory) && !products.length:
-                return <div>
-                    <Typography variant='h6' className={classes.categoryTitle}>
-                        {`В подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}" нет товаров`}
-                    </Typography>
-                </div>;
+        case !isEmpty(activeSubCategory) && !products.length:
+            return <div>
+                <Typography variant='h6' className={classes.categoryTitle}>
+                    {`В подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}" нет товаров`}
+                </Typography>
+            </div>;
 
-            default:
-                const categoriesWithSubCategories = categories.filter(category => {
-                    return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
-                });
-                const haderText = isEmpty(activeSubCategory)
-                    ? `Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`
-                    : `Товары в подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}"`;
-                return <div>
-                    <AdminTable
-                        headerRows={headerRows}
-                        tableCells={tableCells}
-                        values={products}
-                        headerText={haderText}
-                        onDelete={this.handleProductDelete}
-                        deleteValueWarningTitle='Вы точно хотите удалить товар?'
-                        deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
-                        filters={false}
-                        onFormOpen={this.handleProductFormOpen}
-                        isSmall
-                    />
-                    <Modal
-                        open={subCategoryFormShowed}
-                        onClose={this.handleCloseSubCategoryForm}
-                        className={classes.modal}
-                        disableEnforceFocus
-                    >
-                        <Paper className={classes.modalContent}>
-                            <SubCategoryForm
-                                categories={categories}
-                                subCategories={subCategories}
-                                activeCategory={activeCategory}
-                                subCategory={editableSubCategory}
-                                onDone={this.handleSubCategoryFormDone}/>
-                        </Paper>
-                    </Modal>
-                    <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
-                        <Paper className={classes.modalContent}>
-                            <ProductForm
-                                categories={categoriesWithSubCategories}
-                                subCategories={subCategories}
-                                allSubCategories={this.props.subCategories}
-                                activeCategory={activeCategory}
-                                product={editableProduct}
-                                onDone={this.handleProductFormDone}/>
-                        </Paper>
-                    </Modal>
-                </div>;
+        default:
+            const categoriesWithSubCategories = categories.filter(category => {
+                return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
+            });
+            const haderText = isEmpty(activeSubCategory)
+                ? `Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`
+                : `Товары в подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}"`;
+            return <div>
+                <AdminTable
+                    headerRows={headerRows}
+                    tableCells={tableCells}
+                    values={products}
+                    headerText={haderText}
+                    deleteValueWarningTitle='Вы точно хотите удалить товар?'
+                    deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
+                    filters={false}
+                    isSmall
+                    onDelete={this.handleProductDelete}
+                    onFormOpen={this.handleProductFormOpen}
+                />
+                <Modal
+                    open={subCategoryFormShowed}
+                    onClose={this.handleCloseSubCategoryForm}
+                    className={classes.modal}
+                    disableEnforceFocus
+                >
+                    <Paper className={classes.modalContent}>
+                        <SubCategoryForm
+                            categories={categories}
+                            subCategories={subCategories}
+                            activeCategory={activeCategory}
+                            subCategory={editableSubCategory}
+                            onDone={this.handleSubCategoryFormDone}/>
+                    </Paper>
+                </Modal>
+                <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
+                    <Paper className={classes.modalContent}>
+                        <ProductForm
+                            categories={categoriesWithSubCategories}
+                            subCategories={subCategories}
+                            allSubCategories={this.props.subCategories}
+                            activeCategory={activeCategory}
+                            product={editableProduct}
+                            onDone={this.handleProductFormDone}/>
+                    </Paper>
+                </Modal>
+            </div>;
         }
     };
 
@@ -584,8 +636,7 @@ class CategoriesPage extends Component {
             subCategories,
             lang,
             categoryFormShowed,
-            activeCategory,
-            activeSubCategory
+            activeCategory
         } = this.state;
 
         return <main className={classes.root}>
@@ -598,9 +649,9 @@ class CategoriesPage extends Component {
                 items={categories}
                 subItems={subCategories}
                 openFormItem={this.handleCategoryFormOpen}
+                openFormSubItem={this.handleSubCategoryFormOpen}
                 deleteItem={this.handleCategoryDelete}
                 clickItem={this.handleCategoryClick}
-                openFormSubItem={this.handleSubCategoryFormOpen}
                 activeItem={activeCategory}
                 titleItems='Категории'
                 titleSubItems={`Подкатегории в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}

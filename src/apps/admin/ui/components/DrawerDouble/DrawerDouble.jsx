@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import isEmpty from '@tinkoff/utils/is/empty';
-
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -252,7 +250,7 @@ class DrawerDouble extends Component {
                     {!isSubItemsActive ? titleItems : titleSubItems}
                 </Typography>
                 <Tooltip title='Добавление'>
-                    <IconButton aria-label='Add' onClick={openFormItem()}>
+                    <IconButton aria-label='Add' onClick={!isSubItemsActive ? openFormItem() : openFormSubItem()}>
                         <AddIcon/>
                     </IconButton>
                 </Tooltip>
