@@ -3,37 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import pathOr from '@tinkoff/utils/object/pathOr';
-import isEmpty from '@tinkoff/utils/is/empty';
+import noop from '@tinkoff/utils/function/noop';
 
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AddIcon from '@material-ui/icons/Add';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import Tooltip from '@material-ui/core/Tooltip';
 import DialogActions from '@material-ui/core/DialogActions';
 import Dialog from '@material-ui/core/Dialog';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
-import ReorderIcon from '@material-ui/icons/Reorder';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import FolderIcon from '@material-ui/icons/Folder';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
-import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import SubCategoryForm from '../../components/SubCategoryForm/SubCategoryForm';
 import CategoryForm from '../../components/CategoryForm/CategoryForm';
 import DrawerDouble from '../../components/DrawerDouble/DrawerDouble';
@@ -51,9 +36,6 @@ import deleteSubCategoriesByIds from '../../../services/deleteSubCategoriesByIds
 import getProducts from '../../../services/getProducts';
 import deleteProductsByIds from '../../../services/deleteProductsByIds';
 
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import noop from "@tinkoff/utils/function/noop";
-
 const mapStateToProps = ({ data }) => {
     return {
         categories: data.categories,
@@ -65,52 +47,21 @@ const mapStateToProps = ({ data }) => {
 const mapDispatchToProps = (dispatch) => ({
     getCategories: payload => dispatch(getCategories(payload)),
     getSubCategories: payload => dispatch(getSubCategories(payload)),
+    getProducts: payload => dispatch(getProducts(payload)),
     editCategory: payload => dispatch(editCategory(payload)),
     editSubCategory: payload => dispatch(editSubCategory(payload)),
     deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
     deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload)),
-    getProducts: payload => dispatch(getProducts(payload)),
     deleteProducts: payload => dispatch(deleteProductsByIds(payload))
 });
 
 const DEFAULT_LANG = 'ru';
-const DEFAULT_ACTIVE_CATEGORY = { name: '', id: '' };
 
 const materialStyles = theme => ({
     root: {
         display: 'flex',
         '@media (max-width:1200px)': {
             flexDirection: 'column-reverse'
-        }
-    },
-    drawer: {
-        maxWidth: '400px',
-        flexShrink: 0,
-        '@media (max-width:1200px)': {
-            width: 'calc(100% - 60px)',
-            maxWidth: 'unset',
-            margin: '30px 30px 0 30px',
-            boxShadow: '0px 1px 5px 0px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 3px 1px -2px rgba(0,0,0,0.12)'
-        },
-        '@media (max-width:600px)': {
-            width: 'calc(100% - 30px)',
-            margin: '15px 15px 0 15px'
-        },
-        '@media (max-width:400px)': {
-            width: '100%',
-            margin: '15px 0 0 0'
-        }
-    },
-    drawerPaper: {
-        top: '0px',
-        maxWidth: '400px',
-        position: 'relative',
-        minHeight: '93vh',
-        '@media (max-width:1200px)': {
-            zIndex: '0',
-            minHeight: 'unset',
-            width: '100%',
-            maxWidth: 'unset'
         }
     },
     content: {
@@ -123,52 +74,13 @@ const materialStyles = theme => ({
             padding: '15px 0'
         }
     },
-    toolbar: {
-        height: '0px'
-    },
-    toolbarNav: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '5px 30px 5px 30px'
-    },
     categoryTitle: {
         height: '30px'
-    },
-    buttonSortable: {
-        position: 'relative',
-        marginRight: '12px',
-        cursor: 'pointer'
     },
     modal: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    row: {
-        backgroundColor: 'white',
-        zIndex: 1201,
-        '&:hover $valueActions': {
-            visibility: 'visible'
-        },
-        '&:hover': {
-            backgroundColor: 'rgba(0, 0, 0, 0.07)'
-        }
-    },
-    valueActions: {
-        visibility: 'hidden',
-        '@media (max-width:780px)': {
-            visibility: 'visible'
-        }
-    },
-    listItemText: {
-        cursor: 'default',
-        '@media (max-width:600px)': {
-            maxWidth: '120px'
-        },
-        '@media (max-width:400px)': {
-            padding: '0'
-        }
     },
     modalContent: {
         position: 'absolute',
@@ -184,49 +96,6 @@ const materialStyles = theme => ({
         }
     }
 });
-
-const ButtonSortable = SortableHandle(({ classes }) => (
-    <ReorderIcon className={classes.buttonSortable}> reorder </ReorderIcon>
-));
-
-const ItemSortable = SortableElement(({ onFormOpen, onCategoryDelete, name, onCategoryClick, value, classes }) => (
-    <ListItem onClick={onCategoryClick(value)} button className={classes.row}>
-        <ButtonSortable classes={classes}/>
-        <ListItemIcon>
-            <FolderIcon/>
-        </ListItemIcon>
-        <ListItemText
-            className={classes.listItemText}
-            primary={name}
-        />
-        <div className={classes.valueActions}>
-            <ListItemSecondaryAction>
-                <IconButton onClick={onFormOpen(value)}>
-                    <EditIcon/>
-                </IconButton>
-                <IconButton onClick={onCategoryDelete(value)} edge="end" aria-label="delete">
-                    <DeleteIcon/>
-                </IconButton>
-            </ListItemSecondaryAction>
-        </div>
-    </ListItem>
-));
-
-const SortableWrapper = SortableContainer((
-    {
-        category,
-        ...rest
-    }) =>
-    <List>
-        {
-            category.map((value, i) => {
-                const name = pathOr(['texts', DEFAULT_LANG, 'name'], '', value);
-
-                return <ItemSortable key={i} name={name} value={value} index={i} {...rest}/>;
-            })
-        }
-    </List>
-);
 
 const headerRows = [
     { id: 'name', label: 'Название' },
@@ -249,6 +118,7 @@ class CategoriesPage extends Component {
         deleteSubCategories: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
         subCategories: PropTypes.array,
+        products: PropTypes.array,
         getProducts: PropTypes.func.isRequired,
         deleteProducts: PropTypes.func.isRequired
     };
@@ -261,24 +131,24 @@ class CategoriesPage extends Component {
         getProducts: noop
     };
 
-    constructor(props) {
+    constructor (props) {
         super(props);
-
-        const { products } = this.props;
 
         this.state = {
             loading: true,
+            categories: [],
             activeCategory: null,
+            subCategories: [],
             activeSubCategory: null,
-            subCategoryFormShowed: false,
+            products: [],
             categoryFormShowed: false,
+            subCategoryFormShowed: false,
             productFormShowed: false,
             editableCategory: {},
             editableSubCategory: {},
-            categories: [],
-            subCategories: [],
-            valueForDelete: null,
-            products
+            isSelectedCategory: false,
+            isSelectedSubCategory: false,
+            valueForDelete: null
         };
     }
 
@@ -292,11 +162,15 @@ class CategoriesPage extends Component {
         ])
             .then(() => {
                 const { categories } = this.props;
-                const products = this.getCategoryProducts(categories[0]);
+                const activeCategory = categories[0];
+                const subCategories = this.getActiveSubCategories(activeCategory);
+                const products = this.getCategoryProducts(activeCategory);
 
                 this.setState({
                     loading: false,
-                    categories: categories,
+                    categories,
+                    activeCategory,
+                    subCategories,
                     products
                 });
             });
@@ -314,16 +188,7 @@ class CategoriesPage extends Component {
         return this.props.products.filter(product => product.subCategoryId === activeSubCategory.id);
     };
 
-    setCategoryProducts = () => {
-        this.setState({ products: this.getCategoryProducts() });
-    };
-
-    setActiveSubItem = (value) => {
-        this.setState({ activeSubCategory: value });
-    };
-
     handleCategoryFormOpen = category => () => {
-        console.log('handleCategoryFormOpen');
         this.setState({
             categoryFormShowed: true,
             editableCategory: category
@@ -331,7 +196,6 @@ class CategoriesPage extends Component {
     };
 
     handleSubCategoryFormOpen = subCategory => () => {
-        console.log('handleSubCategoryFormOpen');
         this.setState({
             subCategoryFormShowed: true,
             editableSubCategory: subCategory
@@ -363,8 +227,10 @@ class CategoriesPage extends Component {
     handleSubCategoryFormDone = () => {
         this.props.getSubCategories()
             .then(() => {
+                const subCategories = this.getActiveSubCategories();
                 this.setState({
-                    subCategories: this.getActiveSubCategories()
+                    subCategories,
+                    activeSubCategory: subCategories[0]
                 });
                 this.handleCloseSubCategoryForm();
             });
@@ -373,6 +239,14 @@ class CategoriesPage extends Component {
     handleCategoryDelete = category => () => {
         this.setState({
             valueForDelete: category
+        });
+    };
+
+    handleClickBack = () => {
+        this.setState({
+            isSelectedCategory: false,
+            isSelectedSubCategory: false,
+            products: this.getCategoryProducts()
         });
     };
 
@@ -410,6 +284,7 @@ class CategoriesPage extends Component {
                     .then(() => {
                         const subCategories = this.getActiveSubCategories();
                         const newActiveSubCategory = activeSubCategory === valueForDelete && subCategories[0];
+
                         this.setState({
                             subCategories,
                             activeSubCategory: newActiveSubCategory,
@@ -435,6 +310,7 @@ class CategoriesPage extends Component {
 
     handleCategoryClick = category => () => {
         this.setState({
+            isSelectedCategory: true,
             activeCategory: category,
             subCategories: this.getActiveSubCategories(category),
             products: this.getCategoryProducts(category)
@@ -443,6 +319,7 @@ class CategoriesPage extends Component {
 
     handleSubCategoryClick = subCategory => () => {
         this.setState({
+            isSelectedSubCategory: true,
             activeSubCategory: subCategory,
             products: this.getSubCategoryProducts(subCategory)
         });
@@ -479,13 +356,13 @@ class CategoriesPage extends Component {
     };
 
     handleProductDelete = product => {
-        const { activeSubCategory } = this.state;
+        const { isSelectedSubCategory } = this.state;
 
         return this.props.deleteProducts(product)
             .then(() => {
                 this.props.getProducts()
                     .then(() => {
-                        const products = !activeSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
+                        const products = !isSelectedSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
 
                         this.setState({ products });
                     });
@@ -507,11 +384,11 @@ class CategoriesPage extends Component {
     };
 
     handleProductFormDone = () => {
-        const { activeSubCategory } = this.state;
+        const { isSelectedSubCategory } = this.state;
 
         this.props.getProducts()
             .then(() => {
-                const products = !activeSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
+                const products = !isSelectedSubCategory ? this.getCategoryProducts() : this.getSubCategoryProducts();
 
                 this.setState({ products });
                 this.handleCloseProductForm();
@@ -529,12 +406,8 @@ class CategoriesPage extends Component {
             categories,
             subCategories,
             products,
-            subCategoryFormShowed,
-            editableSubCategory
+            isSelectedSubCategory
         } = this.state;
-
-        console.log('subCategoryFormShowed', subCategoryFormShowed);
-        console.log('categoryFormShowed', this.state.categoryFormShowed);
 
         switch (true) {
         case loading:
@@ -559,21 +432,7 @@ class CategoriesPage extends Component {
         case !subCategories.length:
             return <div>
                 <Typography variant='h6' className={classes.categoryTitle}>
-                    В категории нет подкатегорий
-                </Typography>
-            </div>;
-
-        case isEmpty(activeSubCategory) && !products.length:
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>
-                    {`В категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}" нет товаров`}
-                </Typography>
-            </div>;
-
-        case !isEmpty(activeSubCategory) && !products.length:
-            return <div>
-                <Typography variant='h6' className={classes.categoryTitle}>
-                    {`В подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}" нет товаров`}
+                    {`В категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}" нет подкатегорий`}
                 </Typography>
             </div>;
 
@@ -581,7 +440,7 @@ class CategoriesPage extends Component {
             const categoriesWithSubCategories = categories.filter(category => {
                 return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
             });
-            const haderText = isEmpty(activeSubCategory)
+            const haderText = !isSelectedSubCategory
                 ? `Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`
                 : `Товары в подкатегории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeSubCategory)}"`;
             return <div>
@@ -597,21 +456,6 @@ class CategoriesPage extends Component {
                     onDelete={this.handleProductDelete}
                     onFormOpen={this.handleProductFormOpen}
                 />
-                <Modal
-                    open={subCategoryFormShowed}
-                    onClose={this.handleCloseSubCategoryForm}
-                    className={classes.modal}
-                    disableEnforceFocus
-                >
-                    <Paper className={classes.modalContent}>
-                        <SubCategoryForm
-                            categories={categories}
-                            subCategories={subCategories}
-                            activeCategory={activeCategory}
-                            subCategory={editableSubCategory}
-                            onDone={this.handleSubCategoryFormDone}/>
-                    </Paper>
-                </Modal>
                 <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
                         <ProductForm
@@ -636,7 +480,10 @@ class CategoriesPage extends Component {
             subCategories,
             lang,
             categoryFormShowed,
-            activeCategory
+            activeCategory,
+            isSelectedCategory,
+            subCategoryFormShowed,
+            editableSubCategory
         } = this.state;
 
         return <main className={classes.root}>
@@ -646,21 +493,20 @@ class CategoriesPage extends Component {
             <DrawerDouble
                 anchor='left'
                 variant='permanent'
+                isSelectedItem={isSelectedCategory}
+                lang={lang}
                 items={categories}
                 subItems={subCategories}
+                clickItem={this.handleCategoryClick}
+                clickSubItem={this.handleSubCategoryClick}
                 openFormItem={this.handleCategoryFormOpen}
                 openFormSubItem={this.handleSubCategoryFormOpen}
                 deleteItem={this.handleCategoryDelete}
-                clickItem={this.handleCategoryClick}
-                activeItem={activeCategory}
-                titleItems='Категории'
-                titleSubItems={`Подкатегории в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
-                lang={lang}
-                clickSubItem={this.handleSubCategoryClick}
                 sortItemsEnd={this.onDragCategoriesEnd}
                 sortSubItemsEnd={this.onDragSubCategoriesEnd}
-                setProductsItem={this.setCategoryProducts}
-                setActiveSubItem={this.setActiveSubItem}
+                clickBack={this.handleClickBack}
+                titleItems='Категории'
+                titleSubItems={`Подкатегории в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
             />
             <Modal
                 open={categoryFormShowed}
@@ -676,9 +522,24 @@ class CategoriesPage extends Component {
                     />
                 </Paper>
             </Modal>
+            <Modal
+                open={subCategoryFormShowed}
+                onClose={this.handleCloseSubCategoryForm}
+                className={classes.modal}
+                disableEnforceFocus
+            >
+                <Paper className={classes.modalContent}>
+                    <SubCategoryForm
+                        categories={categories}
+                        subCategories={subCategories}
+                        activeCategory={activeCategory}
+                        subCategory={editableSubCategory}
+                        onDone={this.handleSubCategoryFormDone}/>
+                </Paper>
+            </Modal>
             <Dialog open={!!valueForDelete} onClose={this.handleWarningDisagree}>
                 <DialogTitle>
-                    {subCategories
+                    {!isSelectedCategory
                         ? 'Вы точно хотите удалить категорию?'
                         : 'Вы точно хотите удалить подкатегорию?'}
                 </DialogTitle>

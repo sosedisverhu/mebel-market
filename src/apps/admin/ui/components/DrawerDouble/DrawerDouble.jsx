@@ -10,26 +10,29 @@ import AddIcon from '@material-ui/icons/Add';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
-import {SortableContainer, SortableElement, SortableHandle} from "react-sortable-hoc";
-import List from "@material-ui/core/List";
-import pathOr from "@tinkoff/utils/object/pathOr";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import FolderIcon from "@material-ui/icons/Folder";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ReorderIcon from "@material-ui/icons/Reorder";
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+import List from '@material-ui/core/List';
+import pathOr from '@tinkoff/utils/object/pathOr';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import FolderIcon from '@material-ui/icons/Folder';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ReorderIcon from '@material-ui/icons/Reorder';
 
 const materialStyles = theme => ({
     toolbarNav: {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '5px 18px'
+        padding: '5px 18px',
+        '@media (max-width:1200px)': {
+            padding: '0'
+        }
     },
-    categoryTitle: {
+    drawerTitle: {
         lineHeight: '1.4',
         padding: '0 15px'
     },
@@ -56,21 +59,10 @@ const materialStyles = theme => ({
         width: '100%',
         position: 'relative',
         minHeight: '93vh',
-        border: '2px solid red',
         '@media (max-width:1200px)': {
             zIndex: '0',
             minHeight: 'unset',
             maxWidth: 'unset'
-        }
-    },
-    content: {
-        flexGrow: 1,
-        padding: '30px',
-        '@media (max-width:600px)': {
-            padding: '15px'
-        },
-        '@media (max-width:400px)': {
-            padding: '15px 0'
         }
     },
     buttonSortable: {
@@ -78,11 +70,6 @@ const materialStyles = theme => ({
         marginRight: '12px',
         cursor: 'pointer',
         zIndex: '1'
-    },
-    modal: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     row: {
         backgroundColor: 'white',
@@ -112,25 +99,17 @@ const materialStyles = theme => ({
             padding: '0'
         }
     },
-    modalContent: {
-        position: 'absolute',
-        width: '1200px',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
-        outline: 'none',
-        overflowY: 'auto',
-        maxHeight: '100vh',
-        '@media (max-width:1300px)': {
-            width: '90%'
-        }
-    },
     itemCover: {
         position: 'absolute',
         left: '0',
         top: '0',
         width: '100%',
         height: '100%'
+    },
+    buttonBack: {
+        '@media (max-width:1200px)': {
+            paddingRight: '0'
+        }
     }
 });
 
@@ -194,74 +173,61 @@ class DrawerDouble extends Component {
         openFormSubItem: PropTypes.func.isRequired,
         titleItems: PropTypes.string.isRequired,
         titleSubItems: PropTypes.string.isRequired,
-        setProductsItem: PropTypes.func.isRequired,
-        setActiveSubItem: PropTypes.func.isRequired
-
-        // getCategories: PropTypes.func.isRequired,
-        // getSubCategories: PropTypes.func.isRequired,
-        // editCategory: PropTypes.func.isRequired,
-        // editSubCategory: PropTypes.func.isRequired,
-        // deleteCategories: PropTypes.func.isRequired,
-        // deleteSubCategories: PropTypes.func.isRequired,
-        // categories: PropTypes.array.isRequired,
-        // subCategories: PropTypes.array
+        isSelectedItem: PropTypes.bool.isRequired,
+        clickBack: PropTypes.func.isRequired
     };
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            isSubItemsActive: false
-        }
-    }
 
     handleClickItem = (item) => () => {
         const { clickItem } = this.props;
-        this.setState({isSubItemsActive: true});
 
         clickItem(item)();
     }
 
     handleClickSubItem = (item) => () => {
-        const { clickSubItem, setActiveSubItem } = this.props;
-        setActiveSubItem(item);
+        const { clickSubItem } = this.props;
         clickSubItem(item)();
     }
 
-    handleClickBack = () => {
-        const { setProductsItem, setActiveSubItem } = this.props;
-        this.setState({isSubItemsActive: false});
-        setActiveSubItem(null);
-        setProductsItem();
-    };
-
     render () {
-        const { classes, anchor, variant, openFormItem, openFormSubItem, items, subItems, sortItemsEnd, sortSubItemsEnd, deleteItem, titleItems, titleSubItems } = this.props;
-        const { isSubItemsActive } = this.state;
+        const {
+            classes,
+            anchor,
+            variant,
+            openFormItem,
+            openFormSubItem,
+            items,
+            subItems,
+            sortItemsEnd,
+            sortSubItemsEnd,
+            deleteItem, titleItems,
+            titleSubItems,
+            isSelectedItem,
+            clickBack
+        } = this.props;
 
         return <Drawer className={classes.drawer} anchor={anchor} variant={variant} classes={{ paper: classes.drawerPaper }} >
             <div className={classes.toolbarNav}>
-                {isSubItemsActive && <Tooltip title='Назад'>
-                    <IconButton aria-label='Add' onClick={this.handleClickBack}>
+                {isSelectedItem && <Tooltip className={classes.buttonBack} title='Назад'>
+                    <IconButton aria-label='Add' onClick={clickBack}>
                         <ArrowBack/>
                     </IconButton>
                 </Tooltip>}
-                <Typography variant='h6' className={classes.categoryTitle}>
-                    {!isSubItemsActive ? titleItems : titleSubItems}
+                <Typography variant='h6' className={classes.drawerTitle}>
+                    {!isSelectedItem ? titleItems : titleSubItems}
                 </Typography>
                 <Tooltip title='Добавление'>
-                    <IconButton aria-label='Add' onClick={!isSubItemsActive ? openFormItem() : openFormSubItem()}>
+                    <IconButton aria-label='Add' onClick={!isSelectedItem ? openFormItem() : openFormSubItem()}>
                         <AddIcon/>
                     </IconButton>
                 </Tooltip>
             </div>
             <Divider/>
             <SortableWrapper
-                onOpenFormItem={(item) => !isSubItemsActive ? openFormItem(item) : openFormSubItem(item)}
-                onClickItem={!isSubItemsActive ? this.handleClickItem : this.handleClickSubItem }
+                onOpenFormItem={(item) => !isSelectedItem ? openFormItem(item) : openFormSubItem(item)}
+                onClickItem={!isSelectedItem ? this.handleClickItem : this.handleClickSubItem }
                 onDeleteItem={(item) => deleteItem(item)}
-                onSortEnd={!isSubItemsActive ? sortItemsEnd : sortSubItemsEnd}
-                items={!isSubItemsActive ? items : subItems}
+                onSortEnd={!isSelectedItem ? sortItemsEnd : sortSubItemsEnd}
+                items={!isSelectedItem ? items : subItems}
                 useDragHandle
                 classes={classes}
             />
