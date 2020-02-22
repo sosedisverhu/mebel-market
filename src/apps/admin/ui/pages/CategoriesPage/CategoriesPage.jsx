@@ -491,7 +491,6 @@ class CategoriesPage extends Component {
                 {this.renderTable()}
             </div>
             <DrawerDouble
-                anchor='left'
                 variant='permanent'
                 isSelectedItem={isSelectedCategory}
                 lang={lang}

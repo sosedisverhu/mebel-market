@@ -160,7 +160,6 @@ const SortableWrapper = SortableContainer((
 class DrawerDouble extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        anchor: PropTypes.string.isRequired,
         variant: PropTypes.string.isRequired,
         openFormItem: PropTypes.func.isRequired,
         items: PropTypes.array.isRequired,
@@ -191,7 +190,6 @@ class DrawerDouble extends Component {
     render () {
         const {
             classes,
-            anchor,
             variant,
             openFormItem,
             openFormSubItem,
@@ -205,7 +203,7 @@ class DrawerDouble extends Component {
             clickBack
         } = this.props;
 
-        return <Drawer className={classes.drawer} anchor={anchor} variant={variant} classes={{ paper: classes.drawerPaper }} >
+        return <Drawer className={classes.drawer} anchor='right' variant={variant} classes={{ paper: classes.drawerPaper }} >
             <div className={classes.toolbarNav}>
                 {isSelectedItem && <Tooltip className={classes.buttonBack} title='Назад'>
                     <IconButton aria-label='Add' onClick={clickBack}>
