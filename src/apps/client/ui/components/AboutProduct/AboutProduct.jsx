@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
-import outsideClick from '../../hocs/outsideClick';
+
 import formatMoney from '../../../utils/formatMoney';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
@@ -18,6 +18,8 @@ import openBasket from '../../../actions/openBasket';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
 import styles from './AboutProduct.css';
+import SizesSelect from '../SizesSelect/SizesSelect';
+import ColorsSelect from '../ColorsSelect/ColorsSelect';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -39,15 +41,12 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-@outsideClick
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
@@ -81,7 +80,7 @@ class AboutProduct extends Component {
         });
     }
 
-    static getDerivedStateFromProps (props, state) {
+    static getDerivedStateFromProps (props) {
         const { basket, wishlist, product } = props;
         let values = {};
 
@@ -103,8 +102,14 @@ class AboutProduct extends Component {
     };
 
     selectIsOpen = () => {
-        this.setState(state => ({
-            selectIsOpen: !state.selectIsOpen
+        this.setState(({
+            selectIsOpen: true
+        }));
+    };
+
+    selectIsClosed = () => {
+        this.setState(({
+            selectIsOpen: false
         }));
     };
 
@@ -162,14 +167,15 @@ class AboutProduct extends Component {
         return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
-    changeColorListStatus = () => this.setState((state) => ({ colorListOpen: !state.colorListOpen }));
+    changeColorListOpen = () => this.setState({ colorListOpen: true });
+    changeColorListClose = () => this.setState(({ colorListOpen: false }));
 
     handleChangePopup = (activePopupColorIndex = null) => () => this.setState({ activePopupColorIndex });
 
     handleChangeColor = (color) => {
-        this.changeColorListStatus();
+        this.state.colorListOpen ? this.changeColorListClose() : this.changeColorListOpen();
         this.props.changeColor(color);
-    }
+    };
 
     handleCheckboxChange = (event) => {
         const { checkedFeatureIds } = this.state;
@@ -182,15 +188,15 @@ class AboutProduct extends Component {
                 [name]: value
             }
         });
-    }
+    };
 
     handleChangeSize = (size) => {
         this.setState({ checkedFeatureIds: {} });
         this.props.changeSize(size);
-    }
+    };
 
     render () {
-        const { product, langMap, lang, activeSize, activeColor, changeSize, isPromotion } = this.props;
+        const { product, langMap, lang, activeSize, activeColor, isPromotion } = this.props;
         const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen, checkedFeatureIds, activePopupColorIndex } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = !!activeColor.discountPrice;
@@ -202,12 +208,10 @@ class AboutProduct extends Component {
         const actualColors = isPromotion ? colors.filter(color => color.action) : colors;
         const isOneSize = actualSizes.length === 1;
         const isOneColor = actualColors.length === 1;
-        let sizeCounter = 0;
         const features = activeSize.features || [];
         const checkedFeatures = features.filter(feature => checkedFeatureIds[feature.id]);
         const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
         const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
-        const activeColorIndex = actualColors.findIndex(color => color.id === activeColor.id);
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -226,47 +230,34 @@ class AboutProduct extends Component {
                     <span className={styles.sizesTitle}>
                         {!isOneSize ? text.size : text.oneSize}
                     </span>
-                    <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
-                        onMouseEnter={() => this.sizeListIsOpen()}
-                        onClick={this.selectIsOpen}
-                    >
-                        <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
-                            {activeSize.name}
-                        </li>
-                        {actualSizes.map(size => {
-                            if (size.id !== activeSize.id && sizeListIsOpen) {
-                                sizeCounter++;
-
-                                if (isPromotion && size.colors.every(color => !color.action)) return;
-                                return <li className={styles.option}
-                                    onClick={() => this.handleChangeSize(size)}
-                                    style={{ top: `${30 * sizeCounter}px` }}
-                                    key={size.id}>
-                                    {size.name}
-                                </li>;
-                            }
-                        })}
-                    </ul>
+                    <SizesSelect
+                        selectIsOpen={selectIsOpen}
+                        activeSize={activeSize}
+                        sizes={sizes}
+                        sizeListIsOpen={sizeListIsOpen}
+                        isPromotion={isPromotion}
+                        lang={lang}
+                        sizeListIsOpenSwitch={this.sizeListIsOpen}
+                        selectIsOpenSwitch={this.selectIsOpen}
+                        selectIsClosedSwitch={this.selectIsClosed}
+                        handleChangeSize={this.handleChangeSize}
+                    />
                 </div>
                 <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
                     <div className={styles.colorTitle}>
                         {!isOneColor ? text.chooseColor : text.oneColor}
                     </div>
-                    <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })}>
-                        <img className={styles.colorImg} onClick={this.changeColorListStatus} src={activeColor.file} alt={activeColor.name} />
-                        <div className={styles.view} onClick={this.handleChangePopup(activeColorIndex)} />
-                    </div>
-                    <ul className={styles.colorList}>
-                        {actualColors.map((color, i) => {
-                            if (color.id !== activeColor.id) {
-                                return <li className={styles.color}
-                                    key={color.id}>
-                                    <img className={styles.colorImg} onClick={() => this.handleChangeColor(color)} src={color.file} alt={color.name} />
-                                    <div className={styles.view} onClick={this.handleChangePopup(i)} />
-                                </li>;
-                            }
-                        })}
-                    </ul>
+                    <ColorsSelect
+                        activeSize={activeSize}
+                        isPromotion={isPromotion}
+                        handleChangeSize={this.handleChangeSize}
+                        activeColor={activeColor}
+                        handleChangeColor={this.handleChangeColor}
+                        changeColorListOpen={this.changeColorListOpen}
+                        changeColorListClose={this.changeColorListClose}
+                        handleChangePopup={this.handleChangePopup}
+                        colorListOpen={colorListOpen}
+                    />
                 </div>
             </div>
             <div className={styles.features}>
@@ -274,7 +265,7 @@ class AboutProduct extends Component {
                     return <label className={styles.feature}>
                         <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
                             onChange={this.handleCheckboxChange} name={feature.id}/>
-                        <span className={styles.featureCheckmark}></span>
+                        <span className={styles.featureCheckmark}/>
                         {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
                     </label>;
                 })}

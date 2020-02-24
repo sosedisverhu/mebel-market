@@ -30,7 +30,7 @@
 }
 
 .title {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: gray0;
     position: relative;
     padding: 35px 25px;
@@ -106,7 +106,7 @@
 }
 
 .descriptionTitle {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     margin-top: 30px;
 
@@ -116,7 +116,7 @@
 }
 
 .descriptionText {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: rgba(35, 35, 35, 0.7);
     margin-top: 10px;
 
@@ -143,7 +143,7 @@
 
 .characterTitle {
     width: 50%;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     padding-right: 10px;
 
@@ -155,7 +155,7 @@
 
 .characterText {
     width: 50%;
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: rgba(35, 35, 35, 0.7);
 
     @media (max-width: 600px) {

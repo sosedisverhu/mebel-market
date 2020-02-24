@@ -26,7 +26,7 @@
 }
 
 .title {
-    font: 24px/28px RoundedElegance;
+    font: 24px/36px GilroyRegular;
     color: blackLight;
     padding-right: 440px;
     position: relative;
@@ -54,7 +54,7 @@
 
     @media (max-width: 600px) {
         font-size: 20px;
-        line-height: 23px;
+        line-height: 30px;
         padding: 0;
 
         &:after {
@@ -64,7 +64,7 @@
 }
 
 .date {
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     position: absolute;
     right: 16px;
     top: 36px;

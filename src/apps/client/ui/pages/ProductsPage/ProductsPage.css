@@ -56,7 +56,7 @@
 
 .subCategory {
     padding: 0 30px;
-    font: 16px/38px RoundedElegance;
+    font: 16px/38px GilroyRegular;
     color: blackLight;
     text-decoration: none;
     position: relative;
@@ -115,7 +115,7 @@
     position: relative;
     display: none;
     background: whiteBasic;
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     color: blackBasic;
 
     &:before {
@@ -133,7 +133,7 @@
 
 .results {
     margin: 16px 0 10px 0;
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLight;
     white-space: nowrap;
 
@@ -195,7 +195,7 @@
     position: absolute;
     top: 0;
     right: 60px;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,7 +222,7 @@
 }
 
 .popupBtnClear {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: gray7;
     position: absolute;
     top: 50%;
@@ -235,7 +235,7 @@
 }
 
 .popupBtnDone {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: greenBasic;
     position: absolute;
     top: 50%;
@@ -248,7 +248,7 @@
 }
 
 .popupBtnApply {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: whiteBasic;
     padding: 10px 20px;
     background: blackLight;

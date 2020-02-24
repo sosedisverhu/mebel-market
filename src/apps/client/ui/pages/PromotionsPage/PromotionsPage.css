@@ -41,7 +41,7 @@
     position: relative;
     display: none;
     background: whiteBasic;
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     color: blackBasic;
 
     &:before {
@@ -59,7 +59,7 @@
 
 .results {
     margin: 16px 0 10px 0;
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLight;
     white-space: nowrap;
 

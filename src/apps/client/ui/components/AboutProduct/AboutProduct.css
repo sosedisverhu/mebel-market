@@ -22,14 +22,14 @@
 
 .advantage {
     margin-top: 16px;
-    font: 14px/16px RoundedElegance;
+    font: 14px/21px GilroyRegular;
     color: blackLighter;
 }
 
 .details {
     margin-top: 10px;
     display: block;
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     color: blackLighter;
     text-decoration: underline;
     cursor: pointer;
@@ -38,7 +38,7 @@
 .priceOld {
     padding-right: 25px;
     display: inline-block;
-    font: 25px/41px RoundedElegance;
+    font: 25px/41px GilroyRegular;
     color: gray0;
     text-decoration: line-through;
 }
@@ -46,7 +46,7 @@
 .price {
     margin: 10px 0;
     display: inline-block;
-    font: 36px/41px RoundedElegance;
+    font: 36px/41px GilroyRegular;
     color: blackLight;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .sizesTitle {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLighter;
 }
 
@@ -93,7 +93,7 @@
     display: inline-block;
     border: 1px solid gray;
     background: whiteBasic;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     overflow: hidden;
     color: blackLight;
     cursor: pointer;
@@ -171,7 +171,7 @@
 }
 
 .colorTitle {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLighter;
     margin-bottom: 6px;
 }
@@ -183,8 +183,8 @@
     list-style: none;
     margin-top: 10px;
     position: relative;
-
-
+    border-top: 1px solid gray0;
+    border-bottom: 1px solid gray0;
 
     &:hover {
         .view {
@@ -247,7 +247,8 @@
 }
 
 .colorList {
-    border: 1px solid gray0;
+    border-left: 1px solid gray0;
+    border-right: 1px solid gray0;
     border-top: none;
     position: absolute;
     top: calc(100% - 1px);
@@ -263,7 +264,7 @@
 
 .feature {
     display: block;
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: #232323;
     margin-top: 10px;
     padding-left: 28px;
@@ -320,7 +321,7 @@
 }
 
 .btnBuy {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: whiteBasic;
     padding: 6px 10px;
     min-width: 202px;

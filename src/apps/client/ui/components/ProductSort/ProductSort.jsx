@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
+import outsideClick from '../../hocs/outsideClick';
+
 import styles from './ProductSort.css';
 
 const SORTING_OPTIONS = [
@@ -50,11 +52,14 @@ const SORTING_OPTIONS = [
     }
 ];
 
+@outsideClick
 class ProductSort extends Component {
     static propTypes = {
         lang: PropTypes.string.isRequired,
         media: PropTypes.object.isRequired,
-        onFilter: PropTypes.func.isRequired
+        onFilter: PropTypes.func.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired,
+        outsideClickEnabled: PropTypes.bool
     };
 
     state = {
@@ -83,8 +88,26 @@ class ProductSort extends Component {
     };
 
     onFiltersClick = () => {
+        const { filtersIsOpen } = this.state;
+
+        if (filtersIsOpen) {
+            this.handleFiltersClose();
+        } else {
+            this.handleFiltersOpen();
+
+            this.props.turnOnClickOutside(this, this.handleFiltersClose);
+        }
+    };
+
+    handleFiltersOpen = () => {
         this.setState({
-            filtersIsOpen: !this.state.filtersIsOpen
+            filtersIsOpen: true
+        });
+    };
+
+    handleFiltersClose = () => {
+        this.setState({
+            filtersIsOpen: false
         });
     };
 

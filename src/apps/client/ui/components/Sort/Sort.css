@@ -32,7 +32,7 @@
 .activeOption {
     background: gray4;
     box-sizing: border-box;
-    font: 300 14px/17px RoundedElegance;
+    font: 300 14px/17px GilroyRegular;
     color: blackLight;
     padding: 6px 41px 6px 16px;
     position: relative;
@@ -82,6 +82,6 @@
 
 .option {
     padding: 5px;
-    font: 14px/17px RoundedElegance;
+    font: 14px/17px GilroyRegular;
     cursor: pointer;
 }
