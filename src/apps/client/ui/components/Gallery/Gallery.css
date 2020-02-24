@@ -70,6 +70,7 @@
     left: 0;
     transition: left .5s ease-in-out;
     display: flex;
+    align-items: flex-start;
     width: 100%;
 }
 
