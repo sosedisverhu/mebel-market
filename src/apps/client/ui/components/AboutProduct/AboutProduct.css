@@ -247,9 +247,9 @@
 }
 
 .colorList {
+    border-top: 1px solid gray0;
     border-left: 1px solid gray0;
     border-right: 1px solid gray0;
-    border-top: none;
     position: absolute;
     top: calc(100% - 1px);
     left: 0;
