@@ -549,8 +549,8 @@ class CategoriesPage extends Component {
             <Dialog open={!!valueForDelete} onClose={this.handleWarningDisagree}>
                 <DialogTitle>
                     {!isSelectedCategory
-                        ? 'Вы точно хотите удалить категорию?'
-                        : 'Вы точно хотите удалить подкатегорию?'}
+                        ? 'Вы точно хотите удалить категорию и все подкатегории и товары в ней?'
+                        : 'Вы точно хотите удалить подкатегорию и все товары в ней?'}
                 </DialogTitle>
                 <DialogContent className={classes.warningContent}>
                     <DialogContentText>{pathOr(['texts', DEFAULT_LANG, 'name'], '', valueForDelete)}</DialogContentText>
