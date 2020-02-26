@@ -185,7 +185,7 @@ class CategoriesPage extends Component {
     };
 
     getSubCategoryProducts = (activeSubCategory = this.state.activeSubCategory) => {
-        return this.props.products.filter(product => product.subCategoryId === activeSubCategory.id);
+        return this.props.products.filter(product => product.subCategoryId === pathOr(['id'], '', activeSubCategory));
     };
 
     handleCategoryFormOpen = category => () => {
@@ -257,17 +257,21 @@ class CategoriesPage extends Component {
     };
 
     handleWarningAgree = () => {
+        const { deleteSubCategories, deleteCategories, getSubCategories, getProducts } = this.props;
         const { valueForDelete, activeCategory, categories, activeSubCategory } = this.state;
         const valueType = categories.includes(valueForDelete) ? 'category' : 'subCategory';
 
         if (valueType === 'category') {
-            return this.props.deleteCategories(valueForDelete.id)
+            Promise.all([
+                deleteCategories(valueForDelete.id),
+                getSubCategories(),
+                getProducts()
+            ])
                 .then(() => {
-                    getCategories();
                 })
                 .then(() => {
                     const { categories } = this.props;
-                    const newActiveCategory = activeCategory === valueForDelete && categories[0];
+                    const newActiveCategory = activeCategory === valueForDelete ? categories[0] : activeCategory;
 
                     this.setState({
                         categories,
@@ -278,21 +282,27 @@ class CategoriesPage extends Component {
                 });
         }
 
-        this.props.deleteSubCategories(valueForDelete.id)
-            .then(() => {
-                this.props.getSubCategories()
-                    .then(() => {
-                        const subCategories = this.getActiveSubCategories();
-                        const newActiveSubCategory = activeSubCategory === valueForDelete && subCategories[0];
+        if (valueType === 'subCategory') {
+            Promise.all([
+                deleteSubCategories(valueForDelete.id),
+                getSubCategories(),
+                getProducts()
+            ])
+                .then(() => {
+                    this.props.getSubCategories()
+                        .then(() => {
+                            const subCategories = this.getActiveSubCategories();
+                            const newActiveSubCategory = activeSubCategory === valueForDelete ? subCategories[0] : activeSubCategory;
 
-                        this.setState({
-                            subCategories,
-                            activeSubCategory: newActiveSubCategory,
-                            products: this.getSubCategoryProducts(newActiveSubCategory),
-                            valueForDelete: null
+                            this.setState({
+                                subCategories,
+                                activeSubCategory: newActiveSubCategory,
+                                products: this.getSubCategoryProducts(newActiveSubCategory),
+                                valueForDelete: null
+                            });
                         });
-                    });
-            });
+                });
+        }
     };
 
     handleCloseSubCategoryForm = () => {
