@@ -22,6 +22,7 @@ import Recovery from './ui/components/Recovery/Recovery.jsx';
 import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
 import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
+import CredentialsPage from './ui/pages/CredentialsPage/CredentialsPage.jsx';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -92,6 +93,7 @@ class App extends Component {
                 <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
                 <Route exact path='/admin/orders' component={OrdersPage} />
+                <Route exact path='/admin/credentials' component={CredentialsPage} />
             </Switch>
         </main>;
     }
