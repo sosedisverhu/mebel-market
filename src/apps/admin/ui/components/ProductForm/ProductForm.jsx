@@ -27,6 +27,7 @@ import updateProductColor from '../../../services/updateProductColor';
 const PRODUCTS_VALUES = ['name', 'hidden'];
 const CATEGORY_FILTER_NAME_REGEX = /categoryFilter-/g;
 const SUB_CATEGORY_FILTER_NAME_REGEX = /subCategoryFilter-/g;
+const dublicateProperties = ['article', 'price', 'discountPrice', 'discount'];
 
 const materialStyles = theme => ({
     error: {
@@ -92,6 +93,18 @@ class ProductForm extends Component {
             name: subCategory.texts[defaultLang].name
         }));
 
+        const productSizes = pathOr(['sizes'], '', product) || [];
+        for (let lang in productSizes) {
+            const sizes = productSizes[lang];
+            sizes.forEach(size => {
+                size.colors.forEach(color => {
+                    for (let property in color) {
+                        if (color[property] === size[property] && dublicateProperties.includes(property)) color[property] = '';
+                    }
+                });
+            });
+        }
+
         this.initialValues = {
             ru_name: ru.name || '',
             ua_name: ua.name || '',
@@ -107,8 +120,8 @@ class ProductForm extends Component {
             ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
-            ru_sizes: pathOr(['sizes', 'ru'], '', product) || [],
-            ua_sizes: pathOr(['sizes', 'ua'], '', product) || [],
+            ru_sizes: pathOr(['ru'], '', productSizes) || [],
+            ua_sizes: pathOr(['ua'], '', productSizes) || [],
             avatar: { files: product.avatar ? [product.avatar] : [] },
             files: { files: product.files ? product.files : [] },
             hidden: (categoryHidden ? false : product.hidden) || false,
@@ -241,15 +254,19 @@ class ProductForm extends Component {
 
         const sizes = {
             ru: ruSizes.map(size => ({
-                name: size.name,
                 id: size.id,
+                name: size.name,
+                article: size.article,
+                price: +size.price,
+                discountPrice: +size.discountPrice,
+                discount: +size.discount,
                 colors: size.colors.map(color => ({
                     id: color.id,
                     name: color.name,
-                    article: color.article,
-                    price: +color.price,
-                    discountPrice: +color.discountPrice,
-                    discount: +color.discount,
+                    article: color.article || size.article || '',
+                    price: +color.price || +size.price || 0,
+                    discountPrice: +color.discountPrice || +size.discountPrice || 0,
+                    discount: +color.discount || +size.discount || 0,
                     file: color.file,
                     action: color.action
                 })),
@@ -260,15 +277,19 @@ class ProductForm extends Component {
                 }))
             })),
             ua: uaSizes.map(size => ({
-                name: size.name,
                 id: size.id,
+                name: size.name,
+                article: size.article,
+                price: +size.price,
+                discountPrice: +size.discountPrice,
+                discount: +size.discount,
                 colors: size.colors.map(color => ({
                     id: color.id,
                     name: color.name,
-                    article: color.article,
-                    price: +color.price,
-                    discountPrice: +color.discountPrice,
-                    discount: +color.discount,
+                    article: color.article || size.article || '',
+                    price: +color.price || +size.price || 0,
+                    discountPrice: +color.discountPrice || +size.discountPrice || 0,
+                    discount: +color.discount || +size.discount || 0,
                     file: color.file,
                     action: color.action
                 })),
