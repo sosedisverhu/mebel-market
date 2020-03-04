@@ -21,6 +21,7 @@ import arrayMove from '../../../../../utils/arrayMove';
 
 import FormFieldColors from '../FormFieldColors/FormFieldColors';
 import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
+import classNames from 'classnames';
 
 const materialStyles = {
     sizes: {
@@ -49,8 +50,23 @@ const materialStyles = {
             flexDirection: 'column'
         }
     },
+    fieldsGroup: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        flexWrap: 'wrap'
+    },
     sizeField: {
-        width: '100%'
+        width: 'calc(33% - 20px)',
+        '@media (max-width:600px)': {
+            width: '100%'
+        }
+    },
+    sizeFieldLong: {
+        width: 'calc(50% - 20px)',
+        '@media (max-width:600px)': {
+            width: '100%'
+        }
     },
     buttonSortable: {
         position: 'relative',
@@ -89,14 +105,51 @@ const Size = SortableElement(({
     <FormGroup className={classes.size} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.sizeGroup}>
-            <TextField
-                className={classes.sizeField}
-                label='Размер'
-                value={size.name || ''}
-                onChange={handleSizeChange('name', rowIndex)}
-                margin='normal'
-                variant='outlined'
-            />
+            <div className={classes.fieldsGroup}>
+                <TextField
+                    className={classNames(classes.sizeField, classes.sizeFieldLong)}
+                    label='Размер'
+                    value={size.name || ''}
+                    onChange={handleSizeChange('name', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                />
+                <TextField
+                    className={classNames(classes.sizeField, classes.sizeFieldLong)}
+                    label='Артикул'
+                    value={size.article || ''}
+                    onChange={handleSizeChange('article', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                />
+                <TextField
+                    className={classes.sizeField}
+                    label='Цена'
+                    value={size.price || ''}
+                    type='number'
+                    onChange={handleSizeChange('price', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                />
+                <TextField
+                    className={classes.sizeField}
+                    label='Скидочная цена'
+                    value={size.discountPrice || ''}
+                    type='number'
+                    onChange={handleSizeChange('discountPrice', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                />
+                <TextField
+                    className={classes.sizeField}
+                    label='Размер скидки (%)'
+                    value={size.discount || ''}
+                    type='number'
+                    onChange={handleSizeChange('discount', rowIndex)}
+                    margin='normal'
+                    variant='outlined'
+                />
+            </div>
             <h6 className={classes.h6}>Дополнительные опции</h6>
             <FormFieldSizeFeatures
                 value={size.features}

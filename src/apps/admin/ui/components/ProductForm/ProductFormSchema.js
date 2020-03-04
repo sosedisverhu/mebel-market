@@ -125,6 +125,10 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 name: 'sizes',
                 valueLangStructure: [{
                     name: 'notDepend',
+                    article: 'notDepend',
+                    price: 'notDepend',
+                    discountPrice: 'notDepend',
+                    discount: 'notDepend',
                     id: 'notDepend',
                     colors: [{
                         id: 'notDepend',
