@@ -131,7 +131,7 @@ class ProductForm extends Component {
             minDiscount: product.minDiscount,
             warranty: product.warranty,
             categoryId: activeCategory.id,
-            subCategoryId: product.subCategoryId ? product.subCategoryId : subCategories[0].id,
+            subCategoryId: product.subCategoryId ? product.subCategoryId : pathOr(['id'], '', subCategories[0]),
             alias: product.alias,
             lang: 'ru',
             ...(product.categoryFilters || [])

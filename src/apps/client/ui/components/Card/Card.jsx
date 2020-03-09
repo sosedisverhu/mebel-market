@@ -52,8 +52,8 @@ class Card extends Component {
         const { product, categories, subCategories } = this.props;
 
         this.setState({
-            categoryAlias: find(category => category.id === product.categoryId, categories).alias,
-            subCategoryAlias: find(subCategory => subCategory.id === product.subCategoryId, subCategories).alias
+            categoryAlias: (find(category => category.id === product.categoryId, categories) || {}).alias,
+            subCategoryAlias: (find(subCategory => subCategory.id === product.subCategoryId, subCategories) || {}).alias
         });
     }
 
