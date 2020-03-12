@@ -38,7 +38,7 @@ class Partners extends Component {
                                 <div className={styles.partnerItem} key={i}>
                                     <h2 className={styles.partnerName}>{partner.texts[lang].name}</h2>
                                     <div className={styles.logoWrapper}>
-                                        <img src={partner.logo} alt=''/>
+                                        <img className={styles.logoImg} src={partner.logo} alt=''/>
                                     </div>
                                     <p className={styles.partnerDescription}>{partner.texts[lang].description}</p>
                                 </div>
