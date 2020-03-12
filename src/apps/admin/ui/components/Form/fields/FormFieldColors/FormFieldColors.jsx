@@ -24,6 +24,7 @@ import isEmpty from '@tinkoff/utils/is/empty';
 import arrayMove from '../../../../../utils/arrayMove';
 
 import FormFieldFiles from '../FormFieldFiles/FormFieldFiles';
+import FormFieldButton from '../FormFieldButton/FormFieldButton';
 
 const materialStyles = {
     color: {
@@ -88,6 +89,9 @@ const materialStyles = {
         '& input': {
             zIndex: '-1'
         }
+    },
+    duplicateBtnWrap: {
+        marginBottom: '20px'
     }
 };
 
@@ -95,7 +99,16 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, handleColorChange, handleColorCheckboxChange, classes }) => (
+const Color = SortableElement(({
+    rowIndex,
+    sizeIndex,
+    color,
+    handleColorDelete,
+    handleColorChange,
+    handleColorCheckboxChange,
+    classes,
+    handleClickDuplicate
+}) => (
     <FormGroup className={classes.color} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.colorGroup}>
@@ -145,7 +158,7 @@ const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, 
             <FormFieldFiles
                 schema={{ max: 1 }}
                 onChange={handleColorChange('file', sizeIndex, rowIndex)}
-                value={ !isEmpty(color.file) ? { files: [color.file] } : {} }/>
+                value={!isEmpty(color.file) ? { files: [color.file] } : {}}/>
             <div className={classes.checkbox}>
                 <FormControlLabel
                     control={
@@ -158,9 +171,14 @@ const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, 
                     label="Акционный товар"
                 />
             </div>
+            <div className={classes.duplicateBtnWrap}>
+                <FormFieldButton
+                    schema={{ label: 'Дублировать для всех размеров', onClick: () => handleClickDuplicate(color) }}/>
+            </div>
         </div>
-        <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, rowIndex)}>
-            <DeleteIcon />
+        <IconButton aria-label='Delete' className={classes.colorDelButton}
+            onClick={handleColorDelete(sizeIndex, rowIndex)}>
+            <DeleteIcon/>
         </IconButton>
     </FormGroup>
 ));
@@ -176,9 +194,12 @@ class FormFieldColors extends Component {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
+        onChangeCustomField: PropTypes.func,
         validationMessage: PropTypes.string,
         sizeIndex: PropTypes.number.isRequired,
-        sizes: PropTypes.array.isRequired
+        sizes: PropTypes.array.isRequired,
+        values: PropTypes.object,
+        langs: PropTypes.array
     };
 
     static defaultProps = {
@@ -244,6 +265,35 @@ class FormFieldColors extends Component {
         this.props.onChange(sizes);
     };
 
+    handleClickDuplicate = (duplicateColor) => {
+        const { values, langs } = this.props;
+        const newId = uniqid();
+
+        for (const lang in langs) {
+            const sizes = values[`${langs[lang]}_sizes`];
+            let colorLang = null;
+
+            sizes.forEach(size => {
+                size.colors.forEach(color => {
+                    if (color.article === duplicateColor.article) colorLang = color;
+                });
+            });
+
+            if (!colorLang) return;
+
+            sizes.forEach(size => {
+                if (!size.colors.find(color => color.article === colorLang.article)) {
+                    size.colors.push({
+                        ...colorLang,
+                        id: newId
+                    });
+                }
+            });
+
+            this.props.onChangeCustomField(sizes, `${lang}_sizes`);
+        }
+    };
+
     render () {
         const { classes, value, validationMessage, sizeIndex } = this.props;
 
@@ -260,6 +310,7 @@ class FormFieldColors extends Component {
                 sizeIndex={sizeIndex}
                 useDragHandle
                 validationMessage={validationMessage}
+                handleClickDuplicate={this.handleClickDuplicate}
             />
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleColorAdd(sizeIndex)}>
