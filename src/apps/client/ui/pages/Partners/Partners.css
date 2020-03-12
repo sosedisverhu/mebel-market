@@ -130,6 +130,7 @@
 .logoWrapper {
     position: relative;
     margin-bottom: 40px;
+    display: block;
 
     &:after {
         position: absolute;
@@ -143,8 +144,8 @@
     }
 }
 
-.logoWrapper {
-    display: block;
+.logoImg {
+    max-width: 180px;
 }
 
 .partnerDescription {
