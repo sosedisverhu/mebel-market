@@ -7,7 +7,7 @@ const Admin = new Schema({
     password: { type: String, required: true },
     email: { type: String, required: true },
     id: { type: String, required: true },
-    sections: ['orders', 'products', 'partners', 'articles']
+    sections: { type: Array, required: true }
 });
 
 export default mongoose.model('Admin', Admin);

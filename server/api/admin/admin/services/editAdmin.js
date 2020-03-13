@@ -13,7 +13,7 @@ export default function editAdmin (req, res) {
                 email: admin.email,
                 login: admin.login,
                 sections: admin.sections
-            }
+            };
             res.status(OKEY_STATUS_CODE).send(editedAdmin);
         })
         .catch(() => {

@@ -65,10 +65,13 @@ export default function ({ settings: { isEdit } = {} } = {}) {
                 schema: {
                     label: 'Права на разделы',
                     options: [
-                        { label: 'Заказы', value: 'orders' },
+                        { label: 'Главный слайдер', value: 'main' },
                         { label: 'Продукты', value: 'products' },
+                        { label: 'Статьи', value: 'articles' },
+                        { label: 'Смена учетных данных', value: 'credentials' },
                         { label: 'Партнёры', value: 'partners' },
-                        { label: 'Статьи', value: 'articles' }
+                        { label: 'SEO', value: 'seo' },
+                        { label: 'Добавление новых админов', value: 'admins' }
                     ]
                 }
             },

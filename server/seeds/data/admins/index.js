@@ -9,5 +9,12 @@ module.exports = [
         id: 'admin_id',
         sections: ['main', 'products', 'articles', 'credentials', 'partners', 'seo', 'admins'],
         isMain: true
+    },
+    {
+        login: 'admin2',
+        password: md5('admin2'),
+        email: 'dev.occam@gmail.com',
+        id: 'admin_id2',
+        sections: ['main', 'products']
     }
 ];

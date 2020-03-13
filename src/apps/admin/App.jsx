@@ -23,6 +23,7 @@ import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 
 import isNull from '@tinkoff/utils/is/nil';
+import includes from '@tinkoff/utils/array/includes';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import '../../../client/vendor';
@@ -84,18 +85,17 @@ class App extends Component {
             return <Authentication />;
         }
 
-
         return <main>
             <Header />
             <Switch>
-                {sections.includes('main') && <Route exact path='/admin' component={MainSliderPage} />}
-                {sections.includes('products') && <Route exact path='/admin/products' component={ProductsPage} />}
-                {sections.includes('articles') && <Route exact path='/admin/articles' component={ArticlesPage} />}
-                {sections.includes('products') && <Route exact path='/admin/categories' component={CategoriesPage} />}
-                {sections.includes('partners') && <Route exact path='/admin/partners' component={PartnersPage} />}
-                {sections.includes('seo') && <Route exact path='/admin/seo' component={SeoPage} />}
-                {sections.includes('admins') && <Route exact path='/admin/admins' component={AdminPage} />}
-                {sections.includes('products') && <Route exact path='/admin/orders' component={OrdersPage} />}
+                {includes('main', sections) && <Route exact path='/admin' component={MainSliderPage} />}
+                {includes('products', sections) && <Route exact path='/admin/products' component={ProductsPage} />}
+                {includes('articles', sections) && <Route exact path='/admin/articles' component={ArticlesPage} />}
+                {includes('products', sections) && <Route exact path='/admin/categories' component={CategoriesPage} />}
+                {includes('partners', sections) && <Route exact path='/admin/partners' component={PartnersPage} />}
+                {includes('seo', sections) && <Route exact path='/admin/seo' component={SeoPage} />}
+                {includes('admins', sections) && <Route exact path='/admin/admins' component={AdminPage} />}
+                {includes('products', sections) && <Route exact path='/admin/orders' component={OrdersPage} />}
             </Switch>
         </main>;
     }

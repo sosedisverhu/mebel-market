@@ -4,8 +4,8 @@ import getAllAdminsQuery from '../queries/getAllAdmins';
 
 export default function getAllAdmins (req, res) {
     getAllAdminsQuery()
-        .then(admin => {
-            const editedAdmin = admin.map(admin => {
+        .then(admins => {
+            const editedAdmin = admins.map(admin => {
                 return {
                     login: admin.login,
                     email: admin.email,

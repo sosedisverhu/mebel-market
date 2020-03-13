@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
@@ -9,7 +10,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import AdminForm from '../../components/AdminForm/AdminForm';
 
-import { connect } from 'react-redux';
 import getAdmins from '../../../services/getAdmins';
 import deleteAdminsByIds from '../../../services/deleteAdminsByIds';
 
@@ -55,7 +55,7 @@ const mapStateToProps = ({ data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     getAdmins: payload => dispatch(getAdmins(payload)),
     deleteAdmins: payload => dispatch(deleteAdminsByIds(payload))
 });

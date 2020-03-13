@@ -24,7 +24,7 @@ export default function checkAuthentication (req, res) {
             email: admin.email,
             login: admin.login,
             sections: admin.sections
-        }
+        };
 
         res.status(OKEY_STATUS_CODE).send(editedAdmin);
     });

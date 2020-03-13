@@ -24,6 +24,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import logout from '../../../services/logout';
 
+import includes from '@tinkoff/utils/array/includes';
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
 
@@ -117,7 +118,7 @@ class Header extends Component {
                                             if (route.notMenu) {
                                                 return null;
                                             }
-                                            return admin.sections.includes(route.section) && <MenuItem key={i} component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
+                                            return includes(route.section, admin.sections) && <MenuItem key={i} component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
                                         })}
                                     </MenuList>
                                 </ClickAwayListener>
