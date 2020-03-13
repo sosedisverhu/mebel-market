@@ -31,7 +31,7 @@ router.route('/check-recovery-token')
 router.route('/recover-change')
     .post(changeRecoveryCredentials);
 
-router.use(verification);
+router.use(verification('admins'));
 
 router.route('/change')
     .post(changeCredentials);

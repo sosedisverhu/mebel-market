@@ -6,7 +6,7 @@ import upload from './services/upload';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('products'));
 
 router.route('/upload')
     .post(upload);

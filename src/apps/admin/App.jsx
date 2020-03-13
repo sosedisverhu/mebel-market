@@ -88,16 +88,16 @@ class App extends Component {
         return <main>
             <Header />
             <Switch>
-                {includes('main', sections) && <Route exact path='/admin' component={MainSliderPage} />}
-                {includes('products', sections) && <Route exact path='/admin/products' component={ProductsPage} />}
-                {includes('articles', sections) && <Route exact path='/admin/articles' component={ArticlesPage} />}
-                {includes('products', sections) && <Route exact path='/admin/categories' component={CategoriesPage} />}
-                {includes('partners', sections) && <Route exact path='/admin/partners' component={PartnersPage} />}
-                {includes('reviews', sections) && <Route exact path='/admin/reviews' component={ReviewsPage} />}
-                {includes('seo', sections) && <Route exact path='/admin/seo' component={SeoPage} />}
-                {includes('admins', sections) && <Route exact path='/admin/admins' component={AdminPage} />}
-                {includes('products', sections) && <Route exact path='/admin/orders' component={OrdersPage} />}
-                {includes('credentials', sections) && <Route exact path='/admin/credentials' component={CredentialsPage} />}
+                <Route exact path='/admin' component={MainSliderPage} />
+                <Route exact path='/admin/products' component={ProductsPage} />
+                <Route exact path='/admin/articles' component={ArticlesPage} />
+                <Route exact path='/admin/categories' component={CategoriesPage} />
+                <Route exact path='/admin/partners' component={PartnersPage} />
+                <Route exact path='/admin/reviews' component={ReviewsPage} />
+                <Route exact path='/admin/seo' component={SeoPage} />
+                <Route exact path='/admin/admins' component={AdminPage} />
+                <Route exact path='/admin/orders' component={OrdersPage} />
+                <Route exact path='/admin/credentials' component={CredentialsPage} />
             </Switch>
         </main>;
     }

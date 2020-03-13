@@ -7,7 +7,7 @@ import updateSeo from './services/updateSeo';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('seo'));
 
 router.route('/')
     .get(getAllSeo);
