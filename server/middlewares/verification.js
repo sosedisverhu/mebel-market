@@ -12,7 +12,7 @@ const verification = name => (req, res, next) => {
         jsonwebtoken.verify(token, publicKey, {
             algorithm: 'RS256'
         }, (err, admin) => {
-            if (err || !admin || !(admin.sections.indexOf(name) + 1)) {
+            if (err || !admin || (!(admin.sections.indexOf(name) + 1)) && name !== '*') {
                 return res.status(FORBIDDEN_STATUS_CODE).end();
             }
             next();
