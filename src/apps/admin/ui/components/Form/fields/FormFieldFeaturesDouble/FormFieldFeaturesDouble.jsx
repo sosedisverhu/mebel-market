@@ -35,11 +35,16 @@ const materialStyles = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        '@media (max-width:780px)': {
+            flexDirection: 'column'
+        }
     },
     featureField: {
-        width: 'calc(50% - 20px)'
-
+        width: 'calc(50% - 20px)',
+        '@media (max-width:780px)': {
+            width: '100%'
+        }
     },
     buttonSortable: {
         position: 'relative',
@@ -113,7 +118,9 @@ class FormFieldFeaturesDouble extends Component {
         value: [],
         onChange: noop,
         validationMessage: '',
-        schema: {}
+        schema: {},
+        sizeIndex: 0,
+        sizes: []
     };
 
     state = {

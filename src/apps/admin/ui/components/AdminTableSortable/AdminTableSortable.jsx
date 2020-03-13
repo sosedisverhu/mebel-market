@@ -109,7 +109,7 @@ const materialStyles = theme => ({
         paddingRight: theme.spacing.unit
     },
     table: {
-        minWidth: 1020
+        width: '100%'
     },
     tableWrapper: {
         overflowX: 'auto'
@@ -124,7 +124,23 @@ const materialStyles = theme => ({
     tabButtonSortable: {
         display: 'table-cell',
         textAlign: 'left',
-        width: '239px'
+        width: '239px',
+        '@media (max-width:1200px)': {
+            width: 'auto'
+        }
+    },
+    tableCell: {
+        color: 'rgba(0, 0, 0, 0.87)',
+        fontSize: '0.8125rem',
+        fontWeight: '400',
+        display: 'table-cell',
+        fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+        textAlign: 'left',
+        width: '438px',
+        '@media (max-width:780px)': {
+            width: 'auto',
+            padding: '4px 12px'
+        }
     },
     buttonSortable: {
         position: 'relative',
@@ -134,7 +150,21 @@ const materialStyles = theme => ({
     },
     valueActions: {
         display: 'flex',
-        visibility: 'hidden'
+        visibility: 'hidden',
+        '@media (max-width:780px)': {
+            visibility: 'visible',
+            flexDirection: 'column'
+        }
+    },
+    tableCellHead: {
+        '@media (max-width:600px)': {
+            width: 'auto',
+            padding: '4px 24px'
+        },
+        '@media (max-width:470px)': {
+            width: 'auto',
+            padding: '4px 12px'
+        }
     }
 });
 
@@ -291,7 +321,7 @@ class AdminTableSortable extends React.Component {
                                 </TableCell>
                                 {headerRows.map(
                                     (row, i) => (
-                                        <TableCell key={i}>
+                                        <TableCell key={i} className={classes.tableCellHead}>
                                             {row.label}
                                         </TableCell>
                                     )

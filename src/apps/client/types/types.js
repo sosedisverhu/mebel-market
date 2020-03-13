@@ -1,5 +1,6 @@
 export const // eslint-disable-line one-var
     SET_PRODUCTS = 'SET_PRODUCTS',
+    SET_REVIEWS = 'SET_REVIEWS',
     SET_LANG_MAP = 'SET_LANG_MAP',
     SET_LANG_ROUTE = 'SET_LANG_ROUTE',
     SET_LANG = 'SET_LANG',

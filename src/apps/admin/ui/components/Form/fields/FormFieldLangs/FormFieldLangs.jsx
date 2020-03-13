@@ -17,7 +17,10 @@ const materialStyles = {
     },
     langNav: {
         maxWidth: '50px',
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        '@media (max-width:780px)': {
+            minWidth: '50px'
+        }
     },
     langNavError: {
         color: 'red !important'

@@ -2,12 +2,12 @@
 @value blackLight from '../../../../../css/colors.css';
 
 .style strong {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-weight: 600;
 }
 
 .style i {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-style: italic;
 }
 
@@ -19,14 +19,14 @@
 .style ol {
     padding-left: 20px;
     margin: 20px 0 15px 0;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     position: relative;
 }
 
 .style ul li,
 .style ol li {
     margin: 15px 0;
-    font: 16px/18px RoundedElegance;
+    font: 16px/24px GilroyRegular;
     color: gray6;
 }
 
@@ -58,7 +58,7 @@
     h4,
     h5,
     h6 {
-        font-family: RoundedElegance;
+        font-family: GilroyRegular;
         color: blackLight;
         margin: 30px 0 15px 0;
     }
@@ -66,32 +66,40 @@
 
 .style h2 {
     font-size: 22px;
-    line-height: 25px;
+    line-height: 33px;
 }
 
 .style h3 {
     font-size: 20px;
-    line-height: 23px;
+    line-height: 30px;
 }
 
 .style h4 {
     font-size: 18px;
-    line-height: 21px;
+    line-height: 27px;
 }
 
 .style.description h4 {
     @media (max-width: 600px) {
         font-size: 16px;
-        line-height: 18px;
+        line-height: 24px;
         margin-bottom: 10px;
     }
 }
 
 .style blockquote {
     p {
-        margin: 25px 0;
-        font: 16px/18px RoundedElegance;
+        margin: 15px 0;
+        font: 16px/24px GilroyRegular;
         color: gray6;
+        padding: 10px 0 10px 20px;
+        border-left: 3px solid gray6;
+
+        @media (max-width: 600px) {
+            font-size: 14px;
+            line-height: 21px;
+            padding-left: 15px;
+        }
     }
 }
 
@@ -149,18 +157,18 @@
 }
 
 .style p {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     letter-spacing: 1px;
     text-align: left;
     font-size: 16px;
-    line-height: 19px;
+    line-height: 24px;
     color: gray6;
     position: relative;
     margin-top: 15px;
 
     @media (max-width: 780px) {
         font-size: 14px;
-        line-height: 17px;
+        line-height: 21px;
     }
 }
 
@@ -168,12 +176,12 @@
     @media (max-width: 600px) {
         margin-top: 10px;
         font-size: 14px;
-        line-height: 16px;
+        line-height: 21px;
     }
 }
 
 .style a {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     color: gray6;
     transition: 0.2s ease;
     opacity: 0.7;

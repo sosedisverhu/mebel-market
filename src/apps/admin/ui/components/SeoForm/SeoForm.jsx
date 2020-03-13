@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Form from '../Form/Form';
 
+import { withStyles } from '@material-ui/core';
 import getSchema from './seoFormSchema';
 
 import noop from '@tinkoff/utils/function/noop';
@@ -11,8 +12,15 @@ import isEqual from '@tinkoff/utils/is/equal';
 import compose from '@tinkoff/utils/function/compose';
 import omit from '@tinkoff/utils/object/omit';
 
+const materialStyles = () => ({
+    root: {
+        width: '100%'
+    }
+});
+
 class SeoForm extends Component {
     static propTypes = {
+        classes: PropTypes.object.isRequired,
         values: PropTypes.object.isRequired,
         onSubmit: PropTypes.func
     };
@@ -98,17 +106,20 @@ class SeoForm extends Component {
 
     render () {
         const { disabled } = this.state;
+        const { classes } = this.props;
 
-        return <Form
-            initialValues={this.initialValues}
-            langs={['ru', 'ua']}
-            schema={getSchema({
-                settings: { disabled }
-            })}
-            onChange={this.handleChange}
-            onSubmit={this.handleSubmit}
-        />;
+        return <div className={classes.root}>
+            <Form
+                initialValues={this.initialValues}
+                langs={['ru', 'ua']}
+                schema={getSchema({
+                    settings: { disabled }
+                })}
+                onChange={this.handleChange}
+                onSubmit={this.handleSubmit}
+            />
+        </div>;
     }
 }
 
-export default SeoForm;
+export default (withStyles(materialStyles)(SeoForm));

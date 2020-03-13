@@ -19,7 +19,7 @@
 }
 
 .name {
-    font: 36px/41px RoundedElegance;
+    font: 36px/54px GilroyRegular;
     color: blackLight;
 
     @media (max-width: 1000px) {
@@ -28,7 +28,7 @@
 
     @media (max-width: 600px) {
         font-size: 24px;
-        line-height: 28px;
+        line-height: 36px;
     }
 
 }
@@ -44,7 +44,7 @@
 }
 
 .warranty {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLighter;
     padding-right: 10px;
 
@@ -55,7 +55,7 @@
 }
 
 .article {
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     text-transform: capitalize;
     color: gray0;
 

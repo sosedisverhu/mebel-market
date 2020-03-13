@@ -82,7 +82,7 @@ const materialStyles = theme => ({
         maxHeight: '100vh',
         '@media (max-width: 780px)': {
             padding: '15px',
-            maxHeight: '90vh'
+            width: '90%'
         }
     },
     spacer: {
@@ -129,7 +129,7 @@ const materialStyles = theme => ({
         marginTop: theme.spacing.unit * 3
     },
     rowLabel: {
-        '@media (max-width: 780px)': {
+        '@media (max-width: 1000px)': {
             padding: '4px 24px'
         },
         '@media (max-width: 600px)': {
@@ -137,6 +137,16 @@ const materialStyles = theme => ({
         },
         '@media (max-width: 425px)': {
             padding: '2px 6px'
+        }
+    },
+    rowLabel_3: {
+        '@media (max-width: 750px)': {
+            display: 'none'
+        }
+    },
+    rowLabel_2: {
+        '@media (max-width: 450px)': {
+            display: 'none'
         }
     }
 });
@@ -263,7 +273,7 @@ class OrdersPage extends Component {
                             <TableRow>
                                 {headerRows.map(
                                     (row, i) => (
-                                        <TableCell key={i} className={classes.rowLabel}>
+                                        <TableCell key={i} className={classNames(classes.rowLabel, classes[`rowLabel_${i}`])}>
                                             {row.label}
                                         </TableCell>
                                     )
@@ -284,7 +294,9 @@ class OrdersPage extends Component {
                                             className={classes.row}
                                         >
                                             {this.tableCells.map((tableCell, i) =>
-                                                <TableCell key={i} className={classes.rowLabel}>{tableCell.prop(value)}</TableCell>)}
+                                                <TableCell key={i} className={classNames(classes.rowLabel, classes[`rowLabel_${i}`])}>
+                                                    {tableCell.prop(value)}
+                                                </TableCell>)}
                                             <TableCell padding='checkbox' align='right'>
                                                 <div className={classes.valueActions}>
                                                     <IconButton onClick={this.handleFormOpen(value)} className={classes.rowLabel}>

@@ -69,6 +69,7 @@ export default function ({ settings: { isEdit } = {} } = {}) {
                         { label: 'Продукты', value: 'products' },
                         { label: 'Статьи', value: 'articles' },
                         { label: 'Смена учетных данных', value: 'credentials' },
+                        { label: 'Комментарии', value: 'reviews' },
                         { label: 'Партнёры', value: 'partners' },
                         { label: 'SEO', value: 'seo' },
                         { label: 'Добавление новых админов', value: 'admins' }

@@ -1,0 +1,19 @@
+.wrapper{
+    padding: 159px 0;
+    font-family: GilroyRegular;
+    text-align: center;
+
+    @media (max-width: 850px) {
+        padding: 143px 0;
+    }
+}
+
+.wrapper h1{
+    font-size: 36px;
+    line-height: 41px;
+}
+
+.wrapper p{
+    font-size: 24px;
+    line-height: 36px;
+}

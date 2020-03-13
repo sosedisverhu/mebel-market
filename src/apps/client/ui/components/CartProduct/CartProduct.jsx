@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
-class Cart extends Component {
+class CartProduct extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
@@ -61,20 +61,22 @@ class Cart extends Component {
         wishlist: []
     };
 
+    state = {};
+
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
 
-        return wishlist.find(item => item.product.id === product.id && item.properties.size.name === properties.size.name)
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.color.id === properties.size.color.id)
             ? { isInWishList: true }
             : { isInWishList: false };
     }
 
     componentDidMount () {
-        const { product, wishlist } = this.props;
+        const { product, wishlist, properties } = this.props;
 
         this.setState({
             isInWishList: wishlist.some(item => {
-                return item.product.id === product.id;
+                return item.product.id === product.id && item.properties.size.color.id === properties.size.color.id;
             })
         });
     }
@@ -108,7 +110,7 @@ class Cart extends Component {
                 properties
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === properties.size.name);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.color.id === properties.size.color.id);
 
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
@@ -128,7 +130,15 @@ class Cart extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
-        const isDiscount = product.discountPrice && (product.discountPrice !== product.price);
+        const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+        const color = size.colors.find(color => color.id === properties.size.color.id);
+        const isDiscount = !!color.discountPrice;
+
+        const allFeatures = size.features || [];
+        const checkedFeatureIds = properties.features || {};
+        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+        const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+        const resultPrice = (color.discountPrice || color.price) + featuresPrice;
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
@@ -150,11 +160,22 @@ class Cart extends Component {
                                     {product.texts[lang].name}
                                 </p>
                             </Link>
-                            <p className={styles.productNumber}>({product.article})</p>
+                            <p className={styles.productNumber}>({color.article})</p>
                         </div>
-                        <p className={styles.productSize}>
-                            {text.size} {properties.size.name}
-                        </p>
+                        <div className={styles.properties}>
+                            <p className={styles.productSize}>
+                                {text.size} {size.name}
+                            </p>
+                            <div className={styles.productColor}>
+                                {text.color}
+                                <div className={styles.productColorImgWrap}>
+                                    <img className={styles.productColorImg} src={color.file} alt={color.name}/>
+                                </div>
+                            </div>
+                        </div>
+                        {checkedFeatures && <div className={styles.features}>
+                            {checkedFeatures.map(feature => <p className={styles.feature}>{`+ ${feature.name}`}</p>)}
+                        </div>}
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -181,9 +202,9 @@ class Cart extends Component {
                         </div>
                         <div className={styles.productPrices}>
                             {isDiscount &&
-                            <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={classNames(styles.productPrice, { [styles.productDiscountPrice]: isDiscount })}>
-                                {formatMoney(product.actualPrice)}
+                            <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
+                            <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
+                                {formatMoney(resultPrice)}
                             </p>
                         </div>
                     </div>
@@ -201,4 +222,4 @@ class Cart extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(CartProduct);

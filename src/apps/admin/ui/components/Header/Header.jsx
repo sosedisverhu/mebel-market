@@ -33,7 +33,10 @@ const materialStyles = {
         flexGrow: 1
     },
     popper: {
-        zIndex: 1
+        zIndex: 3
+    },
+    button: {
+        textAlign: 'center'
     }
 };
 

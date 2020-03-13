@@ -11,6 +11,7 @@
     margin: 0 auto;
     padding: 0 60px;
     height: 86px;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -59,13 +60,16 @@
 }
 
 .developedWrapper {
+    height: 100%;
     position: absolute;
     left: 50%;
+    top: 0;
     transform: translateX(-50%);
     color: blackLight;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-family: HelveticaNeueCyr;
     font-size: 14px;
     line-height: 14px;
@@ -136,7 +140,7 @@
 }
 
 .contactsLink {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     text-decoration: none;
     font-size: 14px;
     line-height: 16px;

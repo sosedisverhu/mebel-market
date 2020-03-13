@@ -7,15 +7,17 @@ import FilterCheckBox from '../FilterCheckBox/FilterCheckBox';
 import FilterSlider from '../FilterSlider/FilterSlider';
 import styles from './Filters.css';
 
+import classNames from 'classnames';
+
 const Filters = props => {
     const handleFilter = filter => values => {
         props.onFilter(filter, values);
     };
 
-    const { filters, filtersMap } = props;
+    const { filters, filtersMap, mobile } = props;
 
     return (
-        <div className={styles.filters}>
+        <div className={classNames(styles.filters, { [styles.mobile]: mobile })}>
             {!isEmpty(filters) &&
             filters.map(filter => {
                 return filter.type === 'checkbox'
@@ -38,7 +40,8 @@ const Filters = props => {
 Filters.propTypes = {
     onFilter: PropTypes.func.isRequired,
     filtersMap: PropTypes.object.isRequired,
-    filters: PropTypes.array.isRequired
+    filters: PropTypes.array.isRequired,
+    mobile: PropTypes.bool
 };
 
 export default Filters;

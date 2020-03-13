@@ -15,7 +15,7 @@
     flex-direction: column;
     align-items: center;
     background-color: whiteBasic;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
 
     @media (max-width: 1279px) {
         padding: 0 16px;
@@ -169,7 +169,7 @@
     cursor: pointer;
     margin-bottom: 30px;
     background-color: blackLight;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 18px;
     line-height: 21px;
     color: whiteBasic;

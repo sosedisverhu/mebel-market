@@ -46,7 +46,7 @@
     margin-top: 17px;
     padding: 0 60px;
     position: relative;
-    font: 144px/166px RoundedElegance;
+    font: 144px/166px GilroyRegular;
     letter-spacing: 0.17em;
     color: blackBasic;
     text-align: center;
@@ -97,14 +97,14 @@
 .text {
     margin-top: 20px;
     max-width: 315px;
-    font: 24px/28px RoundedElegance;
+    font: 24px/36px GilroyRegular;
     color: blackBasic;
 }
 
 .link {
     margin-top: 70px;
     padding: 10px 20px;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: whiteBasic;
     background: blackLight;
     text-decoration: none;

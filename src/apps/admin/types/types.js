@@ -7,6 +7,7 @@ export const // eslint-disable-line one-var
     SET_FILTERED_ARTICLES = 'SET_FILTERED_ARTICLES',
     SET_MAIN_SLIDES = 'SET_MAIN_SLIDES',
     SET_PARTNERS = 'SET_PARTNERS',
+    SET_REVIEWS = 'SET_REVIEWS',
     SET_SEO = 'SET_SEO',
     SET_ADMINS = 'SET_ADMINS',
     SET_ORDERS = 'SET_ORDERS';

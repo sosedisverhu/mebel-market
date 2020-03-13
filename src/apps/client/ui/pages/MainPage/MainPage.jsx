@@ -16,6 +16,7 @@ import Advantages from '../../components/Advantages/Advantages';
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
+        lang: application.lang,
         products: data.products,
         labels: data.labels
     };
@@ -24,12 +25,13 @@ const mapStateToProps = ({ application, data }) => {
 class MainPage extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         labels: PropTypes.array.isRequired,
         products: PropTypes.array.isRequired
     };
 
     render () {
-        const { langMap, products, labels } = this.props;
+        const { langMap, lang, products, labels } = this.props;
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
@@ -39,7 +41,7 @@ class MainPage extends Component {
                     (result.top) ? result.top.push(product) : result.top = [product];
                 }
 
-                if (product.discountPrice) {
+                if (product.sizes[lang].some(size => size.colors.some(color => color.action))) {
                     (result.discount) ? result.discount.push(product) : result.discount = [product];
                 }
 
@@ -63,7 +65,7 @@ class MainPage extends Component {
                             {productsResult[label] &&
                             <section key={label} className={classNames(styles.categorySection, styles[label])}>
                                 <h2 className={styles.title}>{text[label]}</h2>
-                                <ProductsSlider label={label} products={productsResult[label]}/>
+                                <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
                             </section>
                             }
                         </div>);

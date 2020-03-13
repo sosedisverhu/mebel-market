@@ -129,7 +129,7 @@ class CheckoutPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         saveOrder: PropTypes.func.isRequired,
-        basket: PropTypes.object.isRequired
+        basket: PropTypes.array.isRequired
     };
 
     requiredFieldsStart = React.createRef();
@@ -228,7 +228,17 @@ class CheckoutPage extends Component {
         const { deliveryChecked, paymentChecked, orderId } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
-        const productsPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
+        const productsPrice = basket.reduce((sum, { quantity, product, properties }) => {
+            const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+            const color = size.colors.find(color => color.id === properties.size.color.id);
+            const productPrice = color.discountPrice || color.price;
+            const allFeatures = size.features || [];
+            const checkedFeatureIds = properties.features || {};
+            const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+            const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+
+            return sum + (quantity * (productPrice + featuresPrice));
+        }, 0);
         const totalPrice = productsPrice + (deliveryChecked.price || 0);
 
         if (!basket.length) {

@@ -7,7 +7,7 @@ module.exports = [
         password: md5('admin'),
         email: 'dev.occam@gmail.com',
         id: 'admin_id',
-        sections: ['main', 'products', 'articles', 'credentials', 'partners', 'seo', 'admins'],
+        sections: ['main', 'products', 'articles', 'credentials', 'reviews', 'partners', 'seo', 'admins'],
         isMain: true
     },
     {

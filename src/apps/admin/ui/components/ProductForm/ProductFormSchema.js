@@ -6,7 +6,7 @@ import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
-import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
+import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
@@ -38,16 +38,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 },
                 validators: [
                     { name: 'required', options: { text: 'Заполните название товара' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'article',
-                schema: {
-                    label: 'Артикул'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните артикул' } }
                 ]
             },
             {
@@ -123,41 +113,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
-                component: FormFieldInput,
-                name: 'price',
-                schema: {
-                    label: 'Цена',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните цену товара' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discountPrice',
-                schema: {
-                    label: 'Скидочная цена (грн)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discountPrice', options: { text: 'Введите значение скидки' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discount',
-                schema: {
-                    label: 'Размер скидки (%)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discount', options: { text: 'Введите процент скидки' } },
-                    { name: 'min', options: { minValue: 0 } },
-                    { name: 'max', options: { maxValue: 100 } }
-                ]
-            },
-            {
                 component: FormFieldTitle,
                 name: 'size-title',
                 schema: {
@@ -166,13 +121,34 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 }
             },
             {
-                component: FormFieldFeaturesSingular,
+                component: FormFieldSizes,
                 name: 'sizes',
-                schema: {
-                    name: 'Размер'
-                },
+                valueLangStructure: [{
+                    name: 'notDepend',
+                    article: 'notDepend',
+                    price: 'notDepend',
+                    discountPrice: 'notDepend',
+                    discount: 'notDepend',
+                    id: 'notDepend',
+                    colors: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        article: 'notDepend',
+                        price: 'notDepend',
+                        discountPrice: 'notDepend',
+                        discount: 'notDepend',
+                        file: 'notDepend',
+                        action: 'notDepend'
+                    }],
+                    features: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        value: 'notDepend'
+                    }]
+                }],
                 validators: [
-                    { name: 'required', options: { text: 'Заполните размеры товара' } }
+                    { name: 'required', options: { text: 'Добавьте хотя бы 1 размер для товара' } },
+                    { name: 'sizes' }
                 ]
             },
             {

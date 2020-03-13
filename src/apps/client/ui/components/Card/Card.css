@@ -41,6 +41,7 @@
             width: 200px;
             min-width: 200px;
             height: auto;
+            max-height: calc(50% - 20px);
 
             .label {
                 font-size: 14px;
@@ -102,6 +103,7 @@
 .img {
     width: 100%;
     height: auto;
+    pointer-events: none;
 }
 
 .labels {
@@ -111,7 +113,7 @@
 }
 
 .label {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     padding: 0 18px;
     background: greenBasic;
     color: whiteBasic;
@@ -146,7 +148,7 @@
 }
 
 .productName {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     padding: 5px 10px;
     text-align: center;
@@ -166,7 +168,7 @@
 }
 
 .price {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     margin-bottom: 15px;
     text-align: center;
@@ -183,7 +185,7 @@
 }
 
 .priceOld {
-    font: 15px/17px RoundedElegance;
+    font: 15px/17px GilroyRegular;
     text-decoration-line: line-through;
     color: gray0;
     position: absolute;

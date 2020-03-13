@@ -40,12 +40,39 @@ export default function saveOrder (req, res) {
                     const products = reduce((products, { productId, quantity, properties, id }) => {
                         const product = find(product => product.id === productId, baskedProducts);
 
-                        if (!product || product.hidden) {
-                            return products;
-                        }
+                        if (!product || product.hidden) return products;
 
                         const productName = product.texts.ru.name;
-                        return append({ product, quantity, properties, id, basePrice: product.price, price: product.discountPrice, productName }, products);
+                        const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                        if (!size) return products;
+
+                        const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                        if (!color) return products;
+
+                        properties.size.name = size.name;
+                        properties.color = {
+                            name: color.name,
+                            file: color.file
+                        };
+                        properties.size.color.img = color.name;
+
+                        const allFeatures = size.features || [];
+                        const checkedFeatureIds = properties.features || {};
+                        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+                        properties.features = checkedFeatures;
+
+                        return append({
+                            product,
+                            quantity,
+                            properties,
+                            id,
+                            basePrice: color.price,
+                            price: color.discountPrice,
+                            productName,
+                            article: color.article
+                        }, products);
                     }, [], basket);
 
                     const order = {
@@ -96,21 +123,42 @@ export default function saveOrder (req, res) {
                                     <td width='110' style="font-weight: bold">Товары:</td>
                                 </tr>
                                 ${products.map((product) => {
+        const featuresPrice = product.properties.features.reduce((sum, { value }) => sum + value, 0);
+        const unitPrice = (product.price || product.basePrice) + featuresPrice;
+
         return `<tr>
                                                 <td style="font-weight: bold" width='110'>Название</td>
                                                 <td width='110'>${product.productName}</td>
                                             </tr>
                                             <tr>
+                                                <td style="font-weight: bold" width='110'>Артикул</td>
+                                                <td width='110'>${product.article}</td>
+                                            </tr> 
+                                            <tr>
                                                 <td style="font-weight: bold" width='110'>Цена</td>
-                                                <td width='110'>${product.price || product.basePrice} грн</td>
+                                                <td width='110'>${unitPrice} грн</td>
                                             </tr> 
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Количество</td>
                                                 <td width='110'>${product.quantity} штк.</td>
                                             </tr>
+                                            ${product.properties.features.length
+        ? `<tr>
+                                            <td style="font-weight: bold" width='110'>Дополнительно</td>
+                                            <td width='60'>${product.properties.features.map(feature => {
+        return '+ ' + feature.name + '; <br>';
+    }
+    )}
+                                            </td>
+                                        </tr>`
+        : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Размер</td>
                                                 <td width='110'>${product.properties.size.name}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold" width='110'>Цвет</td>
+                                                <td width='110'>${product.properties.color.name}</td>
                                             </tr>`;
     })}
                             </table>`;

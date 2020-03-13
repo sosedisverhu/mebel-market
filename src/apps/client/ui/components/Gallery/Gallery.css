@@ -33,7 +33,7 @@
     padding: 4px 10px;
     top: 6px;
     right: 0;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: whiteBasic;
     background: redBasic;
     z-index: 1;
@@ -70,6 +70,7 @@
     left: 0;
     transition: left .5s ease-in-out;
     display: flex;
+    align-items: flex-start;
     width: 100%;
 }
 

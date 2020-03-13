@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
-import outsideClick from '../../hocs/outsideClick';
 
 import formatMoney from '../../../utils/formatMoney';
-import AboutProductTop from '../AboutProductTop/AboutProductTop';
 
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
@@ -16,7 +14,12 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import classNames from 'classnames';
 
 import openBasket from '../../../actions/openBasket';
+
+import AboutProductTop from '../AboutProductTop/AboutProductTop';
+import PopupColor from '../PopupColor/PopupColor';
 import styles from './AboutProduct.css';
+import SizesSelect from '../SizesSelect/SizesSelect';
+import ColorsSelect from '../ColorsSelect/ColorsSelect';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -38,64 +41,58 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-@outsideClick
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
         basket: PropTypes.array,
         openBasket: PropTypes.func.isRequired,
-        basketIsOpen: PropTypes.bool.isRequired
+        basketIsOpen: PropTypes.bool.isRequired,
+        changeColor: PropTypes.func.isRequired,
+        changeSize: PropTypes.func.isRequired,
+        activeSize: PropTypes.object.isRequired,
+        activeColor: PropTypes.object.isRequired,
+        isPromotion: PropTypes.bool
     };
 
     state = {
-        sizes: [],
-        activeSize: {},
+        sizes: this.props.product.sizes,
         sizeListIsOpen: true,
         selectIsOpen: false,
         isInWishlist: false,
-        isInBasket: false
+        isInBasket: false,
+        colorListOpen: false,
+        checkedFeatureIds: {},
+        activePopupColorIndex: null
     };
 
     componentDidMount () {
-        const { wishlist, product } = this.props;
-        const { activeSize } = this.state;
+        const { wishlist, product, activeColor } = this.props;
 
         this.setState({
-            sizes: product.sizes,
-            activeSize: product.sizes[0],
-            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.name === activeSize.name))
+            isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.color.id === activeColor.id))
         });
     }
 
-    static getDerivedStateFromProps (props, state) {
+    static getDerivedStateFromProps (props) {
         const { basket, wishlist, product } = props;
         let values = {};
 
-        values.isInBasket = !!(basket.find(item => item.product.id === product.id) && basket.find(item => item.properties.size.name === state.activeSize.name));
-
-        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.name === state.activeSize.name);
+        values.isInBasket = !!(basket.find(item => item.product.id === product.id) &&
+            basket.find(item => item.properties.size.color.id === props.activeColor.id));
+        values.isInWishlist = !!wishlist.find(item => item.product.id === product.id && item.properties.size.color.id === props.activeColor.id);
 
         return values;
     }
 
     scrollToTitles = () => {
         this.props.setScrollToCharacteristic(true);
-    };
-
-    onChangeActiveSize = size => {
-        this.setState({
-            activeSize: size,
-            sizeListIsOpen: false
-        });
     };
 
     sizeListIsOpen = () => {
@@ -105,24 +102,35 @@ class AboutProduct extends Component {
     };
 
     selectIsOpen = () => {
-        this.setState(state => ({
-            selectIsOpen: !state.selectIsOpen
+        this.setState(({
+            selectIsOpen: true
+        }));
+    };
+
+    selectIsClosed = () => {
+        this.setState(({
+            selectIsOpen: false
         }));
     };
 
     handleAddToWishlist = () => {
-        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product } = this.props;
-        const { isInWishlist, activeSize } = this.state;
+        const { saveProductsToWishlist, deleteFromWishlist, wishlist, product, activeSize, activeColor } = this.props;
+        const { isInWishlist } = this.state;
 
         if (!isInWishlist) {
             saveProductsToWishlist({
                 productId: product.id,
                 properties: {
-                    size: activeSize
+                    size: {
+                        id: activeSize.id,
+                        color: {
+                            id: activeColor.id
+                        }
+                    }
                 }
             });
         } else {
-            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.name === activeSize.name);
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.color.id === activeColor.id);
             if (wishlistItem) {
                 deleteFromWishlist(wishlistItem.id);
             }
@@ -130,12 +138,18 @@ class AboutProduct extends Component {
     };
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product } = this.props;
-        const { activeSize } = this.state;
+        const { saveProductsToBasket, product, activeSize, activeColor } = this.props;
+        const { checkedFeatureIds } = this.state;
         saveProductsToBasket({
             productId: product.id,
             properties: {
-                size: activeSize
+                size: {
+                    id: activeSize.id,
+                    color: {
+                        id: activeColor.id
+                    }
+                },
+                features: checkedFeatureIds
             },
             quantity: 1
         });
@@ -153,51 +167,108 @@ class AboutProduct extends Component {
         return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
+    changeColorListOpen = () => this.setState({ colorListOpen: true });
+    changeColorListClose = () => this.setState(({ colorListOpen: false }));
+
+    handleChangePopup = (activePopupColorIndex = null) => () => this.setState({ activePopupColorIndex });
+
+    handleChangeColor = (color) => {
+        this.state.colorListOpen ? this.changeColorListClose() : this.changeColorListOpen();
+        this.props.changeColor(color);
+    };
+
+    handleCheckboxChange = (event) => {
+        const { checkedFeatureIds } = this.state;
+        const value = event.target.checked;
+        const name = event.target.name;
+
+        this.setState({
+            checkedFeatureIds: {
+                ...checkedFeatureIds,
+                [name]: value
+            }
+        });
+    };
+
+    handleChangeSize = (size) => {
+        this.setState({ checkedFeatureIds: {} });
+        this.props.changeSize(size);
+    };
+
     render () {
-        const { product, langMap, lang } = this.props;
-        const { sizes, activeSize, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket } = this.state;
+        const { product, langMap, lang, activeSize, activeColor, isPromotion } = this.props;
+        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen, checkedFeatureIds, activePopupColorIndex } = this.state;
         const text = propOr('product', {}, langMap);
-        const isDiscount = product.price !== product.actualPrice;
+        const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
-        const isOneSize = sizes.length === 1;
-        let sizeCounter = 0;
+        const colors = activeSize.colors;
+        const actualSizes = isPromotion
+            ? sizes[lang].filter(size => size.colors.some(color => color.action))
+            : sizes[lang];
+        const actualColors = isPromotion ? colors.filter(color => color.action) : colors;
+        const isOneSize = actualSizes.length === 1;
+        const isOneColor = actualColors.length === 1;
+        const features = activeSize.features || [];
+        const checkedFeatures = features.filter(feature => checkedFeatureIds[feature.id]);
+        const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+        const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
 
         return <div className={styles.root}>
-            <AboutProductTop product={product}/>
-            <div className={styles.advantagesTitle}>{text.advantages}</div>
+            <AboutProductTop article={activeColor.article} product={product}/>
             {shortDescription &&
             <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             {isDiscount &&
             <span className={styles.priceOld}>
-                {formatMoney(product.price)}
+                {formatMoney(activeColor.price)}
             </span>}
-            <span className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
-                {formatMoney(product.actualPrice)}
+            <span className={classNames(styles.price, styles.discountPrice)}>
+                {formatMoney(resultPrice)}
             </span>
-            <div>
-                <span className={styles.sizesTitle}>
-                    {!isOneSize ? text.size : text.oneSize}
-                </span>
-                <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
-                    onMouseEnter={() => this.sizeListIsOpen()}
-                    onClick={this.selectIsOpen}
-                >
-                    <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
-                        {activeSize.name}
-                    </li>
-                    {sizes.map(size => {
-                        if (size.id !== activeSize.id && sizeListIsOpen) {
-                            sizeCounter++;
-                            return <li className={styles.option}
-                                onClick={() => this.onChangeActiveSize(size)}
-                                style={{ top: `${30 * sizeCounter}px` }}
-                                key={size.id}>
-                                {size.name}
-                            </li>;
-                        }
-                    })}
-                </ul>
+            <div className={styles.properties}>
+                <div className={styles.sizesWrap}>
+                    <span className={styles.sizesTitle}>
+                        {!isOneSize ? text.size : text.oneSize}
+                    </span>
+                    <SizesSelect
+                        selectIsOpen={selectIsOpen}
+                        activeSize={activeSize}
+                        sizes={sizes}
+                        sizeListIsOpen={sizeListIsOpen}
+                        isPromotion={isPromotion}
+                        lang={lang}
+                        sizeListIsOpenSwitch={this.sizeListIsOpen}
+                        selectIsOpenSwitch={this.selectIsOpen}
+                        selectIsClosedSwitch={this.selectIsClosed}
+                        handleChangeSize={this.handleChangeSize}
+                    />
+                </div>
+                <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                    <div className={styles.colorTitle}>
+                        {!isOneColor ? text.chooseColor : text.oneColor}
+                    </div>
+                    <ColorsSelect
+                        activeSize={activeSize}
+                        isPromotion={isPromotion}
+                        handleChangeSize={this.handleChangeSize}
+                        activeColor={activeColor}
+                        handleChangeColor={this.handleChangeColor}
+                        changeColorListOpen={this.changeColorListOpen}
+                        changeColorListClose={this.changeColorListClose}
+                        handleChangePopup={this.handleChangePopup}
+                        colorListOpen={colorListOpen}
+                    />
+                </div>
+            </div>
+            <div className={styles.features}>
+                {features && features.map(feature => {
+                    return <label className={styles.feature}>
+                        <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
+                            onChange={this.handleCheckboxChange} name={feature.id}/>
+                        <span className={styles.featureCheckmark}/>
+                        {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
+                    </label>;
+                })}
             </div>
             <div className={styles.buttons}>
                 <button
@@ -211,6 +282,7 @@ class AboutProduct extends Component {
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                     onClick={this.handleAddToWishlist}/>
             </div>
+            {activePopupColorIndex !== null && <PopupColor colors={actualColors} activeIndex={activePopupColorIndex} closePopup={this.handleChangePopup}/>}
         </div>;
     }
 }

@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { connect } from 'react-redux';
-
-import checkAuthentication from './services/checkAuthentication';
-
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { matchPath } from 'react-router';
+import { connect } from 'react-redux';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import isNull from '@tinkoff/utils/is/nil';
+import includes from '@tinkoff/utils/array/includes';
+import propOr from '@tinkoff/utils/object/propOr';
+
+import checkAuthentication from './services/checkAuthentication';
 
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './ui/pages/CategoriesPage/CategoriesPage';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
 import PartnersPage from './ui/pages/PartnersPage/PartnersPage.jsx';
+import ReviewsPage from './ui/pages/ReviewsPage/ReviewsPage';
 import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
 import AdminPage from './ui/pages/AdminPage/AdminPage.jsx';
-
 import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
-
-import isNull from '@tinkoff/utils/is/nil';
-import includes from '@tinkoff/utils/array/includes';
-import propOr from '@tinkoff/utils/object/propOr';
+import CredentialsPage from './ui/pages/CredentialsPage/CredentialsPage.jsx';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -39,7 +39,7 @@ const mapStateToProps = ({ application }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     checkAuthentication: payload => dispatch(checkAuthentication(payload))
 });
 
@@ -93,9 +93,11 @@ class App extends Component {
                 {includes('articles', sections) && <Route exact path='/admin/articles' component={ArticlesPage} />}
                 {includes('products', sections) && <Route exact path='/admin/categories' component={CategoriesPage} />}
                 {includes('partners', sections) && <Route exact path='/admin/partners' component={PartnersPage} />}
+                {includes('reviews', sections) && <Route exact path='/admin/reviews' component={ReviewsPage} />}
                 {includes('seo', sections) && <Route exact path='/admin/seo' component={SeoPage} />}
                 {includes('admins', sections) && <Route exact path='/admin/admins' component={AdminPage} />}
                 {includes('products', sections) && <Route exact path='/admin/orders' component={OrdersPage} />}
+                {includes('credentials', sections) && <Route exact path='/admin/credentials' component={CredentialsPage} />}
             </Switch>
         </main>;
     }

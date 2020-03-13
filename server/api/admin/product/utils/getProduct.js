@@ -9,17 +9,16 @@ export default function getProduct (body) {
         files,
         hidden,
         date,
-        discountPrice,
-        price,
+        minDiscountPrice,
+        minPrice,
         actualPrice,
-        discount,
+        minDiscount,
         warranty,
         categoryId,
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters,
-        article
+        subCategoryFilters
     } = body;
 
     return {
@@ -32,16 +31,15 @@ export default function getProduct (body) {
         files,
         hidden,
         date,
-        discountPrice,
-        price,
+        minDiscountPrice,
+        minPrice,
         actualPrice,
-        discount,
+        minDiscount,
         warranty,
         categoryId,
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters,
-        article
+        subCategoryFilters
     };
 }

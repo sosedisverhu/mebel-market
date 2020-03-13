@@ -7,7 +7,7 @@
     display: block;
     background-color: blackLight;
     flex-direction: column;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
 }
 
 .headerTop {
@@ -35,7 +35,7 @@
 }
 
 .logoWrapper {
-    margin-right: 100px;
+    margin-right: 96px;
     min-width: 180px;
 
     @media (max-width: 1230px) {
@@ -70,6 +70,7 @@
 }
 
 .menuTop {
+    white-space: nowrap;
     @media (max-width: 991px) {
         display: none;
     }
@@ -160,7 +161,7 @@
     padding-left: 40%;
     border: none;
     background-color: blackLight;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 16px;
     color: whiteBasic;
     line-height: 18px;
@@ -200,12 +201,12 @@
     padding: 0;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/search.png');
+    background: center no-repeat url('./img/search.svg');
     cursor: pointer;
     transition: .3s ease-out;
 
     &:hover {
-        background-image: url('./img/search-hover.png');
+        background-image: url('./img/search-hover.svg');
     }
 }
 
@@ -303,7 +304,7 @@
 }
 
 .searchInputBottom {
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 14px;
     line-height: 16px;
     width: 213px;
@@ -325,7 +326,7 @@
     height: 18px;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/searchBottom.png');
+    background: center no-repeat url('./img/searchBottom.svg');
     margin-left: 17px;
 }
 
@@ -458,7 +459,7 @@
     &:after {
         position: absolute;
         content: '';
-        background: url('./img/menuItemArrow.png') center no-repeat;
+        background: url('./img/menuItemArrow.svg') center no-repeat;
         width: 14px;
         height: 100%;
         right: 15px;

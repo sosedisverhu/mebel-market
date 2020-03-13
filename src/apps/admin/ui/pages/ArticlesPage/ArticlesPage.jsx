@@ -24,11 +24,6 @@ const headerRows = [
     { id: 'alias', label: 'Alias' },
     { id: 'active', label: 'Active' }
 ];
-const tableCells = [
-    { prop: article => pathOr(['texts', DEFAULT_LANG, 'name'], '', article) },
-    { prop: article => <a target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{`/articles/${pathOr(['alias'], '', article)}`}</a> },
-    { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
-];
 
 const materialStyles = theme => ({
     loader: {
@@ -50,10 +45,41 @@ const materialStyles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
         overflowY: 'auto',
-        maxHeight: '100vh'
+        maxHeight: '100vh',
+        '@media (max-width:1300px)': {
+            width: '90%'
+        }
     },
     warningContent: {
         paddingBottom: '0'
+    },
+    columnName: {
+        maxWidth: '400px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        '@media (max-width:1020px)': {
+            maxWidth: '200px'
+        },
+        '@media (max-width:750px)': {
+            maxWidth: '100px'
+        },
+        '@media (max-width:340px)': {
+            maxWidth: '80px'
+        }
+    },
+    columnAlias: {
+        maxWidth: '200px',
+        display: 'block',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        '@media (max-width:850px)': {
+            maxWidth: '100px'
+        },
+        '@media (max-width:400px)': {
+            maxWidth: '50px'
+        }
     }
 });
 
@@ -88,6 +114,13 @@ class ArticlePage extends Component {
             formShowed: false,
             editableArticle: null
         };
+        this.tableCells = [
+            { prop: article => <div className={this.props.classes.columnName}>{pathOr(['texts', DEFAULT_LANG, 'name'], '', article)}</div> },
+            { prop: article => <a className={this.props.classes.columnAlias} target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>
+                {`/articles/${pathOr(['alias'], '', article)}`}
+            </a> },
+            { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
+        ];
     }
 
     componentDidMount () {
@@ -138,7 +171,7 @@ class ArticlePage extends Component {
         return <div>
             <AdminTable
                 headerRows={headerRows}
-                tableCells={tableCells}
+                tableCells={this.tableCells}
                 values={articles}
                 headerText='Новости'
                 deleteValueWarningTitle='Вы точно хотите удалить новость?'
