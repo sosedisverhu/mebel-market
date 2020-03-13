@@ -16,6 +16,7 @@ const langs = LANGS.slice(1).join('|');
 const CATEGORY_PATH = `/:lang(${langs})?/:categoryAlias`;
 const SUBCATEGORY_PATH = `/:lang(${langs})?/:categoryAlias/:subCategoryAlias`;
 const PRODUCT_PATH = `/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`;
+const ARTICLE_PATH = `/:lang(${langs})?/articles/:alias`;
 const PROMOTION_PRODUCT_PATH = `/:lang(${langs})?/promotions/:alias`;
 
 const STATIC_ROUTES = [
@@ -46,7 +47,8 @@ const mapStateToProps = ({ application, data }) => {
         langRoute: application.langRoute,
         categories: data.categories,
         subCategories: data.subCategories,
-        products: data.products
+        products: data.products,
+        articles: data.articles
     };
 };
 
@@ -56,6 +58,7 @@ class Helmet extends Component {
         categories: PropTypes.array,
         subCategories: PropTypes.array,
         products: PropTypes.array,
+        articles: PropTypes.array,
         lang: PropTypes.string.isRequired,
         staticSeo: PropTypes.array
     };
@@ -65,7 +68,8 @@ class Helmet extends Component {
         categories: [],
         subCategories: [],
         staticSeo: [],
-        products: {}
+        products: {},
+        articles: []
     };
 
     constructor (...args) {
@@ -77,12 +81,13 @@ class Helmet extends Component {
     }
 
     getMeta = (props = this.props) => {
-        const { location: { pathname }, categories, subCategories, products, staticSeo, lang } = props;
+        const { location: { pathname }, categories, subCategories, products, staticSeo, lang, articles } = props;
 
         const categoryPage = matchPath(pathname, { path: CATEGORY_PATH, exact: true });
         const subCategoryPage = matchPath(pathname, { path: SUBCATEGORY_PATH, exact: true });
         const productPage = matchPath(pathname, { path: PRODUCT_PATH, exact: true });
         const promotionProductPage = matchPath(pathname, { path: PROMOTION_PRODUCT_PATH, exact: true });
+        const articlePage = matchPath(pathname, { path: ARTICLE_PATH, exact: true });
         const staticRouteMatch = find(route => matchPath(pathname, route), STATIC_ROUTES);
 
         if (staticRouteMatch) {
@@ -148,6 +153,18 @@ class Helmet extends Component {
                     seoTitle: product.texts[lang].seoTitle,
                     seoDescription: product.texts[lang].seoDescription,
                     seoKeywords: product.texts[lang].seoKeywords
+                };
+            }
+        }
+
+        if (articlePage) {
+            const article = find(article => article.alias === articlePage.params.alias, articles);
+
+            if (article) {
+                return {
+                    seoTitle: article.texts[lang].seoTitle,
+                    seoDescription: article.texts[lang].seoDescription,
+                    seoKeywords: article.texts[lang].seoKeywords
                 };
             }
         }
