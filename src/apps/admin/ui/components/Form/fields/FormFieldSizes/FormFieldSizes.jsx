@@ -107,6 +107,20 @@ const materialStyles = {
     },
     indicator: {
         zIndex: 9999
+    },
+    labelContainer: {
+        padding: '6px 0 6px 6px',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+        overflow: 'hidden'
+    },
+    tabRoot: {
+        maxWidth: '230px',
+
+        '@media (max-width:960px)': {
+            maxWidth: '150px',
+            fontSize: '0.8rem'
+        }
     }
 };
 
@@ -247,7 +261,7 @@ const SortableTab = SortableElement(({
 }) => (
     <div className={classes.sortableTab}>
         <ButtonSortable imageClassName={classes.buttonSortableTab}/>
-        <Tab onClick={() => handleTabChange(index)} label={label} {...tabProps}/>
+        <Tab classes={{ labelContainer: classes.labelContainer, root: classes.tabRoot }} onClick={() => handleTabChange(index)} label={label} {...tabProps}/>
         <IconButton aria-label='Delete' className={classes.sizeDelButton} onClick={handleSizeDelete(rowIndex)}>
             <DeleteIcon/>
         </IconButton>
@@ -349,7 +363,7 @@ class FormFieldSizes extends Component {
         const { classes, value, validationMessage, values, langs } = this.props;
         const { tabsValue, isSorting } = this.state;
         return <div>
-            <Sizes
+            {!!value.length && <Sizes
                 axis='x'
                 sizes={value}
                 handleSizeDelete={this.handleSizeDelete}
@@ -366,7 +380,7 @@ class FormFieldSizes extends Component {
                 tabsValue={tabsValue}
                 values={values}
                 langs={langs}
-            />
+            />}
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleSizeAdd}>
                     <AddIcon />
