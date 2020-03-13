@@ -243,7 +243,7 @@ class AboutProduct extends Component {
                         handleChangeSize={this.handleChangeSize}
                     />
                 </div>
-                <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                {!isOneColor && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
                     <div className={styles.colorTitle}>
                         {!isOneColor ? text.chooseColor : text.oneColor}
                     </div>
@@ -258,7 +258,7 @@ class AboutProduct extends Component {
                         handleChangePopup={this.handleChangePopup}
                         colorListOpen={colorListOpen}
                     />
-                </div>
+                </div>}
             </div>
             <div className={styles.features}>
                 {features && features.map(feature => {
