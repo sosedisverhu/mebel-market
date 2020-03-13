@@ -100,8 +100,8 @@ class Card extends Component {
                 <div className={styles.labels}>
                     {this.getLabels(['top'], minDiscount)}
                 </div>
-                <div>
-                    <img className={styles.img} src={avatar} alt='' onLoad={setSliderWidth}/>
+                <div className={styles.imgWrap}>
+                    <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <p className={styles.productName}>

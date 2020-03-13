@@ -100,6 +100,7 @@ class WishList extends Component {
                                 {wishlist.map(({ product, properties, id: wishlistItemId }, i) => {
                                     const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
                                     const color = size.colors.find(color => color.id === properties.size.color.id);
+                                    const isManyColors = size.colors.length > 1;
 
                                     return <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
@@ -111,12 +112,12 @@ class WishList extends Component {
                                                         <span className={styles.productNumberTitle}>{text.article} </span>{size.article}
                                                     </p>
                                                     <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>
-                                                    <div className={styles.productColor}>
+                                                    {isManyColors && <div className={styles.productColor}>
                                                         {text.color}
                                                         <div className={styles.productColorImgWrap}>
                                                             <img className={styles.productColorImg} src={color.file} alt={color.name}/>
                                                         </div>
-                                                    </div>
+                                                    </div>}
                                                     <div className={styles.productPrices}>
                                                         {color && !!color.discountPrice &&
                                                         <p className={styles.productOldPrice}>
