@@ -137,7 +137,7 @@ class CheckoutPage extends Component {
     state = {
         deliveryChecked: deliveryOptions[0],
         paymentChecked: paymentOptions[0],
-        customerName: '',
+        customerName: 'Test',
         customerTel: '+380',
         customerEmail: '',
         customerComment: '',
