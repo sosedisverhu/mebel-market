@@ -4,7 +4,8 @@ import {
     SET_LANG_ROUTE,
     SET_MEDIA_INFO,
     SET_MAIN_SLIDES,
-    SET_SEO
+    SET_SEO,
+    SET_DOMAIN
 } from '../types/types';
 import { DEFAULT_LANG, DEFAULT_LANG_ROUTE } from '../constants/constants';
 
@@ -33,6 +34,8 @@ export default function (state = initialState, action) {
         return { ...state, langRoute: action.payload };
     case SET_SEO:
         return { ...state, staticSeo: action.payload };
+    case SET_DOMAIN:
+        return { ...state, domain: action.payload };
     default:
         return state;
     }

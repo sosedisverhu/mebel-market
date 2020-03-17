@@ -8,8 +8,10 @@ import { connect } from 'react-redux';
 import { matchPath, withRouter } from 'react-router-dom';
 
 import find from '@tinkoff/utils/array/find';
+import map from '@tinkoff/utils/array/map';
 
 import { LANGS } from '../../../constants/constants';
+import getLangRouteParts from '../../../utils/getLangRouteParts';
 
 const langs = LANGS.slice(1).join('|');
 
@@ -48,7 +50,8 @@ const mapStateToProps = ({ application, data }) => {
         categories: data.categories,
         subCategories: data.subCategories,
         products: data.products,
-        articles: data.articles
+        articles: data.articles,
+        domain: application.domain
     };
 };
 
@@ -60,7 +63,8 @@ class Helmet extends Component {
         products: PropTypes.array,
         articles: PropTypes.array,
         lang: PropTypes.string.isRequired,
-        staticSeo: PropTypes.array
+        staticSeo: PropTypes.array,
+        domain: PropTypes.string.isRequired
     };
 
     static defaultProps = {
@@ -81,7 +85,7 @@ class Helmet extends Component {
     }
 
     getMeta = (props = this.props) => {
-        const { location: { pathname }, categories, subCategories, products, staticSeo, lang, articles } = props;
+        const { location: { pathname }, categories, subCategories, products, staticSeo, lang, articles, domain } = props;
 
         const categoryPage = matchPath(pathname, { path: CATEGORY_PATH, exact: true });
         const subCategoryPage = matchPath(pathname, { path: SUBCATEGORY_PATH, exact: true });
@@ -89,6 +93,7 @@ class Helmet extends Component {
         const promotionProductPage = matchPath(pathname, { path: PROMOTION_PRODUCT_PATH, exact: true });
         const articlePage = matchPath(pathname, { path: ARTICLE_PATH, exact: true });
         const staticRouteMatch = find(route => matchPath(pathname, route), STATIC_ROUTES);
+        const { routeWithoutLang } = getLangRouteParts(pathname);
 
         if (staticRouteMatch) {
             const staticSeoPage = find(page => page.name === staticRouteMatch.id, staticSeo);
@@ -97,7 +102,13 @@ class Helmet extends Component {
                 return {
                     seoTitle: staticSeoPage.texts[lang].seoTitle,
                     seoDescription: staticSeoPage.texts[lang].seoDescription,
-                    seoKeywords: staticSeoPage.texts[lang].seoKeywords
+                    seoKeywords: staticSeoPage.texts[lang].seoKeywords,
+                    canonical: `${domain}${pathname}`,
+                    lang: lang === 'ua' ? 'uk' : lang,
+                    langLinks: [
+                        { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                        { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                    ]
                 };
             }
 
@@ -111,7 +122,13 @@ class Helmet extends Component {
                 return {
                     seoTitle: category.texts[lang].seoTitle,
                     seoDescription: category.texts[lang].seoDescription,
-                    seoKeywords: category.texts[lang].seoKeywords
+                    seoKeywords: category.texts[lang].seoKeywords,
+                    canonical: `${domain}${pathname}`,
+                    lang: lang === 'ua' ? 'uk' : lang,
+                    langLinks: [
+                        { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                        { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                    ]
                 };
             }
         }
@@ -123,7 +140,13 @@ class Helmet extends Component {
                 return {
                     seoTitle: subCategory.texts[lang].seoTitle,
                     seoDescription: subCategory.texts[lang].seoDescription,
-                    seoKeywords: subCategory.texts[lang].seoKeywords
+                    seoKeywords: subCategory.texts[lang].seoKeywords,
+                    canonical: `${domain}${pathname}`,
+                    lang: lang === 'ua' ? 'uk' : lang,
+                    langLinks: [
+                        { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                        { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                    ]
                 };
             }
         }
@@ -138,7 +161,13 @@ class Helmet extends Component {
                     return {
                         seoTitle: product.texts[lang].seoTitle,
                         seoDescription: product.texts[lang].seoDescription,
-                        seoKeywords: product.texts[lang].seoKeywords
+                        seoKeywords: product.texts[lang].seoKeywords,
+                        canonical: `${domain}${pathname}`,
+                        lang: lang === 'ua' ? 'uk' : lang,
+                        langLinks: [
+                            { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                            { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                        ]
                     };
                 }
             }
@@ -152,7 +181,13 @@ class Helmet extends Component {
                 return {
                     seoTitle: product.texts[lang].seoTitle,
                     seoDescription: product.texts[lang].seoDescription,
-                    seoKeywords: product.texts[lang].seoKeywords
+                    seoKeywords: product.texts[lang].seoKeywords,
+                    canonical: `${domain}${pathname}`,
+                    lang: lang === 'ua' ? 'uk' : lang,
+                    langLinks: [
+                        { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                        { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                    ]
                 };
             }
         }
@@ -164,7 +199,13 @@ class Helmet extends Component {
                 return {
                     seoTitle: article.texts[lang].seoTitle,
                     seoDescription: article.texts[lang].seoDescription,
-                    seoKeywords: article.texts[lang].seoKeywords
+                    seoKeywords: article.texts[lang].seoKeywords,
+                    canonical: `${domain}${pathname}`,
+                    lang: lang === 'ua' ? 'uk' : lang,
+                    langLinks: [
+                        { lang: 'ru', link: `${domain}${routeWithoutLang}` },
+                        { lang: 'uk', link: `${domain}/ua${routeWithoutLang}` }
+                    ]
                 };
             }
         }
@@ -186,9 +227,12 @@ class Helmet extends Component {
         const { meta } = this.state;
 
         return <ReactHelmet>
+            <html lang={meta.lang} />
             <title>{meta.seoTitle}</title>
             <meta name='description' content={meta.seoDescription} />
             <meta name='keywords' content={meta.seoKeywords} />
+            <link rel='canonical' href={meta.canonical}/>
+            {map((langLink, i) => <link key={i} rel='alternate' hreflang={langLink.lang} href={langLink.link}/>, meta.langLinks)}
         </ReactHelmet>;
     }
 }

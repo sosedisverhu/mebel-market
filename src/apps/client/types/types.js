@@ -16,4 +16,5 @@ export const // eslint-disable-line one-var
     SET_WISHLIST = 'SET_WISHLIST',
     OPEN_BASKET = 'OPEN_BASKET',
     CLOSE_BASKET = 'CLOSE_BASKET',
-    SET_SEO = 'SET_SEO';
+    SET_SEO = 'SET_SEO',
+    SET_DOMAIN = 'SET_DOMAIN';
