@@ -144,6 +144,11 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         id: 'notDepend',
                         name: 'depend',
                         value: 'notDepend'
+                    }],
+                    tableSizes: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        value: 'notDepend'
                     }]
                 }],
                 validators: [

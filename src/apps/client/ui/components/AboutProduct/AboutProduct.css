@@ -63,9 +63,36 @@
     }
 }
 
+.sizesWrap {
+    @media (max-width: 500px) {
+        max-width: 202px;
+    }
+}
+
 .sizesTitle {
     font: 16px/18px GilroyRegular;
     color: blackLighter;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sizesTitleMark {
+    display: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: url('./img/questionMarkWhite.png');
+    transition: background 0.25s ease-in;
+
+    &.visible {
+        display: flex;
+    }
+
+    &:hover {
+        transition-timing-function: ease-out;
+        background: url('./img/questionMarkBlack.png');
+    }
 }
 
 .select {

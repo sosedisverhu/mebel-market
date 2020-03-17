@@ -1,0 +1,217 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value gray8 from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+    overflow-y: auto;
+
+    @media (max-width: 830px) {
+        display: block;
+    }
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.popup {
+    position: absolute;
+    top: 0;
+    margin: 40px 0;
+    background: whiteBasic;
+    padding: 20px;
+    width: 812px;
+    z-index: 100;
+    font: 18px/21px GilroyRegular;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 830px) {
+        width: auto;
+        max-width: 600px;
+        margin: 30px auto;
+        position: relative;
+    }
+
+    @media (max-width: 630px) {
+        margin: 30px 16px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 50px 15px 26px 15px;
+    }
+
+    @media (max-width: 430px) {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
+
+.title {
+    font: 24px/28px GilroyRegular;
+    margin: 0 20px 13px 20px;
+    color: #232323;
+    padding-bottom: 7px;
+    position: relative;
+    text-align: center;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: blackLight;
+    }
+
+    @media (max-width: 600px) {
+        margin: 0;
+    }
+}
+
+.tableWrap {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+    max-width: 611px;
+
+    @media (max-width: 630px) {
+        margin-top: 10px;
+    }
+}
+
+.rowTitle {
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 10px;
+
+    @media (min-width: 631px) {
+        display: none;
+    }
+
+    @media (max-width: 630px) {
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+}
+
+.rowWrap {
+    &:first-child {
+        .rowTitle {
+            display: block;
+        }
+    }
+}
+
+.row {
+    display: flex;
+
+    @media (max-width: 630px) {
+        flex-direction: column;
+    }
+}
+
+.cellSize {
+    padding: 10px;
+    background: greenBasic;
+    color: whiteBasic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid whiteBasic;
+
+    @media (min-width: 631px) {
+        width: calc((100% - 4px ) / 3);
+        min-width: calc((100% - 4px ) / 3);
+    }
+
+    @media (max-width: 630px) {
+        height: 70px;
+    }
+}
+
+.columnComponents {
+    flex-grow: 2;
+}
+
+.rowComponent {
+    display: flex;
+
+    @media (max-width: 630px) {
+        flex-direction: column;
+    }
+}
+
+.cellComponentName {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray8;
+
+    @media (min-width: 631px) {
+        width: 50%;
+        min-width: 50%;
+        border-left: 2px solid whiteBasic;
+        border-bottom: 2px solid whiteBasic;
+    }
+
+    @media (max-width: 630px) {
+        margin-top: 8px;
+    }
+}
+
+
+.cellComponentSize {
+    flex-grow: 1;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray3;
+
+    @media (min-width: 631px) {
+        border-left: 2px solid whiteBasic;
+        border-bottom: 2px solid whiteBasic;
+    }
+
+    @media (max-width: 630px) {
+        margin-top: 2px;
+    }
+}
+
+.close {
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    &:after {
+      content: url("./img/close.svg");
+    }
+
+    @media (max-width: 600px) {
+        top: 6px;
+        right: 6px;
+    }
+}

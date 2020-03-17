@@ -24,6 +24,7 @@ import arrayMove from '../../../../../utils/arrayMove';
 
 import FormFieldColors from '../FormFieldColors/FormFieldColors';
 import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
+import FormFieldTableSizes from '../FormFieldTableSizes/FormFieldTableSizes';
 import classNames from 'classnames';
 
 const materialStyles = {
@@ -224,6 +225,17 @@ const Size = ({
             schema={{
                 name: 'Название услуги',
                 value: 'Цена'
+            }}
+        />
+        <h6 className={classes.h6}>Таблица размеров</h6>
+        <FormFieldTableSizes
+            value={size.tableSizes}
+            onChange={onChange}
+            sizes={sizes}
+            sizeIndex={rowIndex}
+            schema={{
+                name: 'Свойство',
+                value: 'Размер'
             }}
         />
         <FormFieldColors

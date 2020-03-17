@@ -24,7 +24,10 @@ export default {
         tabs: [{ name: 'Описание', id: '1' }, { name: 'Характеристики', id: '2' }],
         inBasket: 'В корзине',
         chooseColor: 'Выберите цвет:',
-        oneColor: 'Цвет:'
+        oneColor: 'Цвет:',
+        sizesMarkDescr: 'Открыть таблицу размеров',
+        tableSizesTitle: 'Таблица размеров',
+        tableSizesRowTitle: 'Размер товара'
     },
     breadcrumbs: {
         main: 'Главная'
