@@ -170,7 +170,6 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 
 const SortableTab = SortableElement(({
     sizeIndex,
-    rowIndex,
     label,
     handleColorDelete,
     tabProps,
@@ -181,7 +180,7 @@ const SortableTab = SortableElement(({
     <div className={classes.sortableTab}>
         <ButtonSortable imageClassName={classes.buttonSortableTab}/>
         <Tab classes={{ labelContainer: classes.labelContainer, root: classes.tabRoot }} onClick={() => handleTabChange(index)} label={label} {...tabProps}/>
-        <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, rowIndex)}>
+        <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, index)}>
             <DeleteIcon/>
         </IconButton>
     </div>
@@ -394,7 +393,7 @@ class FormFieldColors extends Component {
             if (!duplicateColor) return;
 
             sizes.forEach(size => {
-                if (!size.colors.find(color => color.article === duplicateColor.article)) {
+                if (!size.colors.find(color => color.id === duplicateColor.id)) {
                     size.colors.push({
                         ...duplicateColor,
                         id: newId

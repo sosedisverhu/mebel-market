@@ -251,7 +251,6 @@ Size.propTypes = {
 };
 
 const SortableTab = SortableElement(({
-    rowIndex,
     label,
     handleSizeDelete,
     tabProps,
@@ -262,7 +261,7 @@ const SortableTab = SortableElement(({
     <div className={classes.sortableTab}>
         <ButtonSortable imageClassName={classes.buttonSortableTab}/>
         <Tab classes={{ labelContainer: classes.labelContainer, root: classes.tabRoot }} onClick={() => handleTabChange(index)} label={label} {...tabProps}/>
-        <IconButton aria-label='Delete' className={classes.sizeDelButton} onClick={handleSizeDelete(rowIndex)}>
+        <IconButton aria-label='Delete' className={classes.sizeDelButton} onClick={handleSizeDelete(index)}>
             <DeleteIcon/>
         </IconButton>
     </div>
@@ -337,7 +336,6 @@ class FormFieldSizes extends Component {
 
     handleSizeDelete = i => () => {
         const { value } = this.props;
-
         this.props.onChange(remove(i, 1, value));
     };
 
