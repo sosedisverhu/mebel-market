@@ -8,7 +8,8 @@ export default function getAvailablePartnersByIds (req, res) {
     getPartnersByIds(ids)
         .then(partners => {
             const availablePartners = partners
-                .filter(partner => !partner.hidden);
+                .filter(partner => !partner.hidden)
+                .sort((prev, next) => prev.positionIndex - next.positionIndex);
 
             res.status(OKEY_STATUS_CODE).send(availablePartners);
         })

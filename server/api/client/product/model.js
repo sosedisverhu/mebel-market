@@ -36,7 +36,8 @@ const Product = new Schema({
     subCategoryFilters: [{
         id: { type: String, required: true },
         value: { type: String, required: true }
-    }]
+    }],
+    positionIndex: { type: Number }
 });
 
 export default mongoose.model('Product', Product);
