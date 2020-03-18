@@ -18,6 +18,10 @@ export default (value) => {
     }
 
     if (!all(({ features }) => all(({ name, value }) => !!name && !!value, features), value)) {
-        return 'Заполните обязательные поля (Название услуги и значение)';
+        return 'Заполните обязательные поля (Название услуги и значение для \'Дополнительные опции\')';
+    }
+
+    if (!all(({ tableSizes }) => all(({ name, value }) => !!name && !!value, tableSizes), value)) {
+        return 'Заполните обязательные поля (Свойство и размер для \'Таблица размеров\')';
     }
 };
