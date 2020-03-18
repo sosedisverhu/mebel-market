@@ -3,9 +3,10 @@ import nodemailer from 'nodemailer';
 const LOGIN = process.env.LOGIN || 'stubbs.development@gmail.com';
 const PASS = process.env.PASS || '7t5e6zh3gbkp';
 const SENDER = process.env.SENDER || 'mebel-market-bot';
+const RECEIVER = process.env.RECEIVER || 'v.bilous14@gmail.com';
 
 export default function saveApplication (subject, content, successCallback, failureCallback, receiverEmail) {
-    const RECEIVER = receiverEmail || process.env.RECEIVER || 'n.brinzuk@gmail.com';
+    const receiver = receiverEmail || RECEIVER;
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -15,7 +16,7 @@ export default function saveApplication (subject, content, successCallback, fail
     });
     const mailOptions = {
         from: SENDER,
-        to: RECEIVER,
+        to: receiver,
         subject,
         html: content
     };
