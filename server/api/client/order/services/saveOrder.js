@@ -179,6 +179,7 @@ export default function saveOrder (req, res) {
                             sendOrderQuery(
                                 `${SUBJECT}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,
                                 content,
+                                files,
                                 successCallback,
                                 failureCallback
                             );

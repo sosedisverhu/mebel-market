@@ -5,7 +5,7 @@ const PASS = process.env.PASS || 'fNDCNBtDKMBv';
 const SENDER = process.env.SENDER || 'mebel-market-bot';
 const RECEIVER = process.env.RECEIVER || 'n.brinzuk@gmail.com';
 
-export default function saveApplication (subject, content, successCallback, failureCallback) {
+export default function saveApplication (subject, content, files = [], successCallback, failureCallback) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -17,7 +17,8 @@ export default function saveApplication (subject, content, successCallback, fail
         from: SENDER,
         to: RECEIVER,
         subject,
-        html: content
+        html: content,
+        attachments: files
     };
 
     return transporter.sendMail(mailOptions, error => {
