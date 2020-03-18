@@ -8,6 +8,10 @@ import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc';
 
 import getProductsByIds from '../../product/queries/getProductsByIds';
 import getBasketProducts from '../../userProducts/queries/getUserProducts';
+import getCategories from '../../category/queries/getAllCategories';
+import getSubCategories from '../../subCategory/queries/getAllSubCategories';
+
+import getCustomerLetterTemplate from '../templates/customerLetter';
 
 import {
     NOT_FOUND_STATUS_CODE,
@@ -19,6 +23,7 @@ import editBasketProduct from '../../userProducts/queries/editUserProduct';
 import sendOrderQuery from '../queries/sendOrderQuery';
 
 const SUBJECT = 'Новый заказ';
+const SUBJECT_CLIENT = 'Заказ №';
 
 export default function saveOrder (req, res) {
     const successCallback = () => res.sendStatus(OKEY_STATUS_CODE);
@@ -126,7 +131,7 @@ export default function saveOrder (req, res) {
         const featuresPrice = product.properties.features.reduce((sum, { value }) => sum + value, 0);
         const unitPrice = (product.price || product.basePrice) + featuresPrice;
 
-        return `<tr>
+        return `                            <tr>
                                                 <td style="font-weight: bold" width='110'>Название</td>
                                                 <td width='110'>${product.productName}</td>
                                             </tr>
@@ -182,6 +187,23 @@ export default function saveOrder (req, res) {
                                 successCallback,
                                 failureCallback
                             );
+                            Promise.all([
+                                getCategories(),
+                                getSubCategories()
+                            ])
+                                .then(values => {
+                                    const categories = values[0];
+                                    const subCategories = values[1];
+                                    const clientMessageContent = getCustomerLetterTemplate(order, categories, subCategories);
+
+                                    sendOrderQuery(
+                                        `${SUBJECT_CLIENT} ${order.shortId}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,
+                                        clientMessageContent,
+                                        successCallback,
+                                        failureCallback,
+                                        order.customer.email
+                                    );
+                                });
                         })
                         .catch(() => {
                             res.status(SERVER_ERROR_STATUS_CODE).end();
