@@ -28,7 +28,7 @@ const SUBJECT_CLIENT = 'Заказ №';
 export default function saveOrder (req, res) {
     const successCallback = () => res.sendStatus(OKEY_STATUS_CODE);
     const failureCallback = () => res.sendStatus(SERVER_ERROR_STATUS_CODE);
-    const { payment, delivery, customer: { name, email, phone, comment, address } = {} } = req.body;
+    const { payment, delivery, customer: { name, email, phone, comment, address } = {}, domain } = req.body;
 
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
 
@@ -194,7 +194,7 @@ export default function saveOrder (req, res) {
                                 .then(values => {
                                     const categories = values[0];
                                     const subCategories = values[1];
-                                    const clientMessageContent = getCustomerLetterTemplate(order, categories, subCategories);
+                                    const clientMessageContent = getCustomerLetterTemplate(order, categories, subCategories, domain);
 
                                     sendOrderQuery(
                                         `${SUBJECT_CLIENT} ${order.shortId}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,

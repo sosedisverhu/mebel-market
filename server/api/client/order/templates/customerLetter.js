@@ -4,8 +4,6 @@ import format from 'date-fns/format';
 import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc';
 import find from '@tinkoff/utils/array/find';
 
-const DOMAIN = 'http://5.53.124.95';
-
 function getGeaturesHTML(features) {
     let featuresHTML = '';
     features.forEach(feature => {
@@ -21,7 +19,7 @@ function getCategoriesAlias(categoryId, subCategoryId, categories, subCategories
     return `${category}/${subCategory}`;
 }
 
-export default function customerLetter (order, categories, subCategories) {
+export default function customerLetter (order, categories, subCategories, domain) {
     const { customer, delivery, payment, products } = order;
     const productsPrice = products.reduce((sum, { quantity, price, basePrice, properties }) => {
         const productPrice = price || basePrice;
@@ -40,15 +38,15 @@ export default function customerLetter (order, categories, subCategories) {
             <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;margin-top:10px;margin-bottom:10px;width:100%">
                 <tbody><tr>
                     <td align="center" style="padding-right:20px;padding-top:5px;padding-bottom:5px;width:200px;vertical-align:top;">
-                        <a href=${DOMAIN + productLink} style="text-decoration:none;line-height:0" target="_blank">
-                            <img src=${DOMAIN + product.product.avatar} border="0" width="80" height="95" alt=${product.productName} style="display:block;background-color:#ffffff; width: 100%; height: auto;" class="CToWUd">
+                        <a href=${domain + productLink} style="text-decoration:none;line-height:0" target="_blank">
+                            <img src=${domain + product.product.avatar} border="0" width="80" height="95" alt=${product.productName} style="display:block;background-color:#ffffff; width: 100%; height: auto;" class="CToWUd">
                         </a>
                     </td>
                     <td style="padding-top:5px;padding-bottom:5px;vertical-align:top">
                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                             <tbody><tr>
                                 <td colspan="3" style="padding:0 0 3px 0;line-height:20px">
-                                    <a href=${DOMAIN + productLink} style="color:#3e77aa;font-size:15px;text-decoration:none;word-break:break-word" target="_blank">${product.productName}</a><span style="white-space:nowrap;font-size:12px;color:#999999;padding-left:10px">${product.article}</span>
+                                    <a href=${domain + productLink} style="color:#3e77aa;font-size:15px;text-decoration:none;word-break:break-word" target="_blank">${product.productName}</a><span style="white-space:nowrap;font-size:12px;color:#999999;padding-left:10px">${product.article}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -253,7 +251,7 @@ export default function customerLetter (order, categories, subCategories) {
                                         <![endif]--><a href="http://example.com/" style="outline:none" tabindex="-1"
                                                        target="_blank"> <img align="center" title="Logo" border="0"
                                                                              class="center autowidth"
-                                                                             src=${DOMAIN + '/src/apps/client/ui/components/Header/img/logo.png'}
+                                                                             src=${domain + '/src/apps/client/ui/components/Header/img/logo.png'}
                                                                              style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; width: 100%; max-width: 300px; display: block;"
                                                                              width="123"/></a>
                                         <!--[if mso]></td></tr></table><![endif]-->
@@ -436,19 +434,19 @@ export default function customerLetter (order, categories, subCategories) {
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
                                                         valign="top"><a href="http://example.com/" target="_blank"><img
                                                             alt="Facebook" height="32"
-                                                            src=${DOMAIN + '/client/images/facebook.png'}
+                                                            src=${domain + '/client/images/facebook.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="Facebook" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
                                                         valign="top"><a href="http://example.com/" target="_blank"><img
                                                             alt="YouTube" height="32"
-                                                            src=${DOMAIN + '/client/images/youtube.png'}
+                                                            src=${domain + '/client/images/youtube.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="YouTube" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
                                                         valign="top"><a href="http://example.com/" target="_blank"><img
                                                             alt="Instagram" height="32"
-                                                            src=${DOMAIN + '/client/images/instagram.png'}
+                                                            src=${domain + '/client/images/instagram.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="Instagram" width="32"/></a></td>
                                                 </tr>
