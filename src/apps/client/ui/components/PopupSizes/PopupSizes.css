@@ -10,15 +10,8 @@
     top: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     z-index: 11;
     overflow-y: auto;
-
-    @media (max-width: 830px) {
-        display: block;
-    }
 }
 
 .cover {
@@ -29,40 +22,42 @@
     height: 100%;
     background: rgba(66, 66, 66, 0.3);
     backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.popupWrap {
+    height: 100%;
+    text-align: center;
+
+    &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+    }
 }
 
 .popup {
-    position: absolute;
-    top: 0;
-    margin: 40px 0;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 100%;
+    padding: 30px;
+}
+
+.popupContent {
+    position: relative;
     background: whiteBasic;
     padding: 20px;
-    width: 812px;
-    z-index: 100;
     font: 18px/21px GilroyRegular;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    @media (max-width: 830px) {
-        width: auto;
-        max-width: 600px;
-        margin: 30px auto;
-        position: relative;
-    }
-
-    @media (max-width: 630px) {
-        margin: 30px 16px;
-    }
-
-    @media (max-width: 600px) {
-        padding: 50px 15px 26px 15px;
-    }
-
-    @media (max-width: 430px) {
-        padding-left: 25px;
-        padding-right: 25px;
-    }
+    width: 100%;
+    max-width: 812px;
+    margin: 0 auto;
+    z-index: 110;
 }
 
 .title {
@@ -96,6 +91,7 @@
 
     @media (max-width: 630px) {
         margin-top: 10px;
+        max-width: 80%;
     }
 }
 
@@ -103,6 +99,7 @@
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 10px;
+    text-align: left;
 
     @media (min-width: 631px) {
         display: none;
