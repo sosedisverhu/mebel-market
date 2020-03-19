@@ -115,6 +115,7 @@ const mapStateToProps = ({ application, data }) => {
         lang: application.lang,
         langMap: application.langMap,
         langRoute: application.langRoute,
+        domain: application.domain,
         basket: data.basket
     };
 };
@@ -129,7 +130,8 @@ class CheckoutPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         saveOrder: PropTypes.func.isRequired,
-        basket: PropTypes.array.isRequired
+        basket: PropTypes.array.isRequired,
+        domain: PropTypes.string.isRequired
     };
 
     requiredFieldsStart = React.createRef();
@@ -172,6 +174,7 @@ class CheckoutPage extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const errors = {};
+        const { domain } = this.props;
         const { deliveryChecked, paymentChecked, customerName, customerEmail, customerTel, customerAddress, customerComment } = this.state;
         let isFormValid = true;
 
@@ -215,7 +218,8 @@ class CheckoutPage extends Component {
                 comment: customerComment
             },
             delivery: deliveryChecked,
-            payment: paymentChecked
+            payment: paymentChecked,
+            domain
         })
             .then(({ shortId }) => {
                 this.setState({ orderId: shortId });

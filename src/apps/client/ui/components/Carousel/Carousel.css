@@ -24,6 +24,8 @@
     display: inline-block;
     position: relative;
     width: 100vw;
+    overflow: hidden;
+    margin-bottom: -3px;
 }
 
 .imageWrapper {
