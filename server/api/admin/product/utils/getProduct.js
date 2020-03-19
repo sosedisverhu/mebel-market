@@ -18,7 +18,8 @@ export default function getProduct (body) {
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters
+        subCategoryFilters,
+        labels
     } = body;
 
     return {
@@ -40,6 +41,7 @@ export default function getProduct (body) {
         subCategoryId,
         alias,
         categoryFilters,
-        subCategoryFilters
+        subCategoryFilters,
+        labels
     };
 }

@@ -18,7 +18,6 @@ export default {
     product: {
         details: 'Детальні характеристики',
         buy: 'Купити',
-        labelTop: 'Хіт',
         size: 'Оберіть розмір:',
         oneSize: 'Розмір:',
         tabs: [{ name: 'Опис', id: '1' }, { name: 'Характеристики', id: '2' }],
@@ -27,7 +26,9 @@ export default {
         oneColor: 'Колір:',
         sizesMarkDescr: 'Відкрити таблицю з розмірами',
         tableSizesTitle: 'Таблиця розмірів',
-        tableSizesRowTitle: 'Розмір товару'
+        tableSizesRowTitle: 'Розмір товару',
+        top: 'Топ продаж',
+        new: 'Новинка'
     },
     breadcrumbs: {
         main: 'Головна'

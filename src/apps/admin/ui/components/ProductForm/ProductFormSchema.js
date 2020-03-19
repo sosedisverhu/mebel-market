@@ -10,6 +10,7 @@ import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
+import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
 
 export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, categoryFilters, subCategoryFilters } = {} } = {}) {
     return {
@@ -291,6 +292,26 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     ]
                 });
             })),
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'titleLabels',
+                schema: {
+                    label: 'Лейблы товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldCheckboxes,
+                name: 'labels',
+                schema: {
+                    label: 'Лейбл',
+                    options: [{ label: 'Топ продаж', value: 'top' }, { label: 'Новинка', value: 'new' }]
+                }
+            },
             {
                 component: FormFieldDivider,
                 name: 'divider'

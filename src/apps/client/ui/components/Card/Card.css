@@ -41,7 +41,6 @@
             width: 200px;
             min-width: 200px;
             height: auto;
-            max-height: calc(50% - 20px);
 
             .label {
                 font-size: 14px;
@@ -123,7 +122,8 @@
     padding: 0 18px;
     background: greenBasic;
     color: whiteBasic;
-    margin-top: 8px;
+    margin-top: 10px;
+    text-align: center;
 
     @media (max-width: 640px) {
         font-size: 14px;

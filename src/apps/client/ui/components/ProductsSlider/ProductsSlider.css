@@ -70,6 +70,7 @@
 .productsPack {
     display: flex;
     width: 100%;
+    align-items: flex-start;
 
     @media (max-width: 760px) {
         flex-wrap: wrap;
