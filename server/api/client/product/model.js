@@ -37,6 +37,7 @@ const Product = new Schema({
         id: { type: String, required: true },
         value: { type: String, required: true }
     }],
+    positionIndex: { type: Number },
     labels: { type: Array, required: true }
 });
 
