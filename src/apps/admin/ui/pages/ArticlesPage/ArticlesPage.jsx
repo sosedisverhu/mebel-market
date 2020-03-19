@@ -173,9 +173,9 @@ class ArticlePage extends Component {
                 headerRows={headerRows}
                 tableCells={this.tableCells}
                 values={articles}
-                headerText='Новости'
-                deleteValueWarningTitle='Вы точно хотите удалить новость?'
-                deleteValuesWarningTitle='Вы точно хотите удалить следующие новости?'
+                headerText='Статьи'
+                deleteValueWarningTitle='Вы точно хотите удалить статью?'
+                deleteValuesWarningTitle='Вы точно хотите удалить следующие статьи?'
                 onDelete={this.props.deleteArticles}
                 onProductClone={this.handleArticleClone}
                 onFormOpen={this.handleFormOpen}
