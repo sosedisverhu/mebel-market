@@ -80,19 +80,31 @@
 .sizesTitleMark {
     display: none;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
-    background: url('./img/questionMarkWhite.png');
+    width: 16px;
+    height: 16px;
+    background: whiteBasic;
     transition: background 0.25s ease-in;
+    border-radius: 50%;
+    position: relative;
 
     &.visible {
         display: flex;
     }
 
     &:hover {
+        background: blackLight;
         transition-timing-function: ease-out;
-        background: url('./img/questionMarkBlack.png');
+
+        .sizesTitleMarkImg {
+            filter: brightness(0) invert(1);
+        }
     }
+}
+
+.sizesTitleMarkImg {
+    position: absolute;
+    left: -1px;
+    top: -1px;
 }
 
 .select {

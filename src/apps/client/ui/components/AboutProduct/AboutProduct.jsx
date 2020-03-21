@@ -246,9 +246,14 @@ class AboutProduct extends Component {
                 <div className={styles.sizesWrap}>
                     <div className={styles.sizesTitle}>
                         {!isOneSize ? text.size : text.oneSize}
-                        <div title={text.sizesMarkDescr} onClick={this.handleChangePopupSizes()} className={classNames(
+                        <div onClick={this.handleChangePopupSizes()} className={classNames(
                             styles.sizesTitleMark,
-                            { [styles.visible]: isTableSizes })} />
+                            { [styles.visible]: isTableSizes })} >
+                            <img
+                                className={styles.sizesTitleMarkImg}
+                                src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
+                                width="18" height="18" alt={text.sizesMarkDescr}/>
+                        </div>
                     </div>
                     <SizesSelect
                         selectIsOpen={selectIsOpen}

@@ -18,6 +18,7 @@ import Form from '../Form/Form';
 import getSchema from './ArticleFormSchema';
 import saveArticle from '../../../services/saveArticle';
 import editArticle from '../../../services/editArticle';
+import format from 'date-fns/format';
 
 const NEWS_VALUES = ['name', 'hidden'];
 
@@ -68,7 +69,7 @@ class ArticleForm extends Component {
         const ua = pathOr(['texts', 'ua'], '', article);
 
         this.initialValues = {
-            date: article.date,
+            date: article.date ? format(article.date, 'yyyyy-MM-dd') : format(new Date(), 'yyyyy-MM-dd'),
             ru_name: ru.name || '',
             ua_name: ua.name || '',
             ru_preview: ru.preview || '',
@@ -105,6 +106,7 @@ class ArticleForm extends Component {
             ru_seoDescription: ruSeoDescription,
             ua_seoKeywords: uaSeoKeywords,
             ru_seoKeywords: ruSeoKeywords,
+            date,
             hidden,
             id,
             alias
@@ -128,6 +130,7 @@ class ArticleForm extends Component {
                     seoKeywords: uaSeoKeywords.words.join(', ')
                 }
             },
+            date: +new Date(date),
             hidden,
             id,
             alias

@@ -36,31 +36,35 @@ class PopupSizes extends Component {
 
         return <div className={styles.root}>
             <div className={styles.cover} onClick={this.props.closePopup()} />
-            <div className={styles.popup} ref={this.popup} >
-                <h3 className={styles.title}>{text.tableSizesTitle}</h3>
-                <div className={styles.tableWrap}>
-                    <div className={styles.table}>
-                        {sizes.map(size => {
-                            if (!size.tableSizes.length) return;
+            <div className={styles.popupWrap}>
+                <div className={styles.popup}>
+                    <div className={styles.popupContent} ref={this.popup} >
+                        <h3 className={styles.title}>{text.tableSizesTitle}</h3>
+                        <div className={styles.tableWrap}>
+                            <div className={styles.table}>
+                                {sizes.map(size => {
+                                    if (!size.tableSizes.length) return;
 
-                            return <div className={styles.rowWrap}>
-                                <h4 className={styles.rowTitle}>{text.tableSizesRowTitle}</h4>
-                                <div className={styles.row}>
-                                    <div className={styles.cellSize}>{size.name}</div>
-                                    <div className={styles.columnComponents}>
-                                        {size.tableSizes.map(component => {
-                                            return <div className={styles.rowComponent}>
-                                                <div className={styles.cellComponentName}>{component.name}</div>
-                                                <div className={styles.cellComponentSize}>{component.value}</div>
-                                            </div>;
-                                        })}
-                                    </div>
-                                </div>
-                            </div>;
-                        })}
+                                    return <div className={styles.rowWrap}>
+                                        <h4 className={styles.rowTitle}>{text.tableSizesRowTitle}</h4>
+                                        <div className={styles.row}>
+                                            <div className={styles.cellSize}>{size.name}</div>
+                                            <div className={styles.columnComponents}>
+                                                {size.tableSizes.map(component => {
+                                                    return <div className={styles.rowComponent}>
+                                                        <div className={styles.cellComponentName}>{component.name}</div>
+                                                        <div className={styles.cellComponentSize}>{component.value}</div>
+                                                    </div>;
+                                                })}
+                                            </div>
+                                        </div>
+                                    </div>;
+                                })}
+                            </div>
+                        </div>
+                        <div onClick={this.props.closePopup()} className={styles.close} />
                     </div>
                 </div>
-                <div onClick={this.props.closePopup()} className={styles.close} />
             </div>
         </div>;
     }

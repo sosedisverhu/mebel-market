@@ -20,7 +20,7 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 
-import AdminTable from '../../components/AdminTable/AdminTable.jsx';
+import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import ProductForm from '../../components/ProductForm/ProductForm';
 
 import getCategories from '../../../services/getCategories';
@@ -28,6 +28,7 @@ import getSubCategories from '../../../services/getSubCategories';
 import editCategory from '../../../services/editCategory';
 import getProducts from '../../../services/getProducts';
 import deleteProductsByIds from '../../../services/deleteProductsByIds';
+import editProductsPositions from '../../../services/editProductsPositions';
 
 const headerRows = [
     { id: 'name', label: 'Название' },
@@ -149,7 +150,8 @@ const mapDispatchToProps = dispatch => ({
     getSubCategories: payload => dispatch(getSubCategories(payload)),
     editCategory: payload => dispatch(editCategory(payload)),
     getProducts: payload => dispatch(getProducts(payload)),
-    deleteProducts: payload => dispatch(deleteProductsByIds(payload))
+    deleteProducts: payload => dispatch(deleteProductsByIds(payload)),
+    editPositions: payload => dispatch(editProductsPositions(payload))
 });
 
 const DEFAULT_LANG = 'ru';
@@ -164,7 +166,8 @@ class ProductsPage extends Component {
         getCategories: PropTypes.func.isRequired,
         getSubCategories: PropTypes.func.isRequired,
         getProducts: PropTypes.func.isRequired,
-        deleteProducts: PropTypes.func.isRequired
+        deleteProducts: PropTypes.func.isRequired,
+        editPositions: PropTypes.func.isRequired
     };
 
     static defaultProps = {
@@ -256,7 +259,7 @@ class ProductsPage extends Component {
     };
 
     renderTable = () => {
-        const { classes } = this.props;
+        const { classes, editPositions } = this.props;
         const {
             loading,
             activeCategory,
@@ -299,17 +302,18 @@ class ProductsPage extends Component {
                 return this.props.subCategories.some(subCategory => subCategory.categoryId === category.id);
             });
             return <div>
-                <AdminTable
+                <AdminTableSortable
                     headerRows={headerRows}
                     tableCells={tableCells}
                     values={products}
+                    onChange={editPositions}
                     headerText={`Товары в категории "${pathOr(['texts', DEFAULT_LANG, 'name'], '', activeCategory)}"`}
                     onDelete={this.handleProductDelete}
                     deleteValueWarningTitle='Вы точно хотите удалить товар?'
                     deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'
                     filters={false}
                     onFormOpen={this.handleProductFormOpen}
-                    isSmall
+                    cloneElem={false}
                 />
                 <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
