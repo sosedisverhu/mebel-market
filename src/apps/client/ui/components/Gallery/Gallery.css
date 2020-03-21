@@ -115,7 +115,7 @@
     }
 
     @media (max-width:600px) {
-        margin-right: 16px;
+        padding-right: 16px;
     }
 }
 
