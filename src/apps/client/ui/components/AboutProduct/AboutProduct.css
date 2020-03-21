@@ -56,6 +56,15 @@
 
 .properties {
     display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1190px) and (min-width: 1001px) {
+        flex-direction: column;
+    }
+
+    @media (max-width: 1000px) {
+        justify-content: flex-start;
+    }
 
     @media (max-width: 500px) {
         flex-direction: column;
@@ -189,7 +198,7 @@
 }
 
 .colorWrap {
-    margin-left: 100px;
+    margin: 0 50px;
     position: relative;
 
     &.active {
@@ -202,6 +211,10 @@
         .colorList {
             display: block;
         }
+    }
+
+    @media (max-width: 1190px) {
+        margin: 0 0 0 100px;
     }
 
     @media (max-width: 500px) {

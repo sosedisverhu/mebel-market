@@ -28,7 +28,8 @@ export default {
         tableSizesTitle: 'Таблиця розмірів',
         tableSizesRowTitle: 'Розмір товару',
         top: 'Топ продаж',
-        new: 'Новинка'
+        new: 'Новинка',
+        onScreen: 'На весь екран'
     },
     breadcrumbs: {
         main: 'Головна'
