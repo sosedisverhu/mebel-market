@@ -36,7 +36,7 @@ class AboutProductTop extends Component {
                 <div className={styles.warranty}>
                     {`${text.warranty} ${product.warranty} ${formatWordDeclension(text.months, product.warranty)}`}
                 </div>
-                <div className={styles.article}>{`${text.article} ${article}`}</div>
+                {!!article && <div className={styles.article}>{`${text.article} ${article}`}</div>}
             </div>
         </div>;
     }

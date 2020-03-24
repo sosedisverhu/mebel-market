@@ -109,7 +109,8 @@ class WishList extends Component {
                                                 <div>
                                                     <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
                                                     <p className={styles.productNumber}>
-                                                        <span className={styles.productNumberTitle}>{text.article} </span>{size.article}
+                                                        {!!color.article && <span className={styles.productNumberTitle}>{text.article} </span>}
+                                                        {color.article}
                                                     </p>
                                                     <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>
                                                     {isManyColors && <div className={styles.productColor}>
