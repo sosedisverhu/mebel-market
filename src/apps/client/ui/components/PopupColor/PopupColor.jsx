@@ -139,7 +139,7 @@ class PopupColor extends Component {
                             <div className={classNames(styles.left, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(-1)} />
                             <div className={classNames(styles.right, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(1)} />
                             <p className={styles.numbers}>{`${activeIndex + 1} / ${colors.length}`}</p>
-                            <p className={styles.article}>{activeColor.article}</p>
+                            {!!activeColor.article && <p className={styles.article}>{activeColor.article}</p>}
                         </div>
 
                         <div onClick={this.props.closePopup()} className={styles.close} />
