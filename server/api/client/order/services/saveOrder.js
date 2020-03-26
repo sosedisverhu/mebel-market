@@ -136,11 +136,11 @@ export default function saveOrder (req, res) {
                                                 <td width='110'>${product.productName}</td>
                                             </tr>
                                             ${product.article
-                                            ? `<tr>
+        ? `<tr>
                                                 <td style="font-weight: bold" width='110'>Артикул</td>
                                                 <td width='110'>${product.article}</td>
                                             </tr>`
-                                            : ''}
+        : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Цена</td>
                                                 <td width='110'>${unitPrice} грн</td>
