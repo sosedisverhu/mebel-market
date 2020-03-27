@@ -28,22 +28,19 @@ class PopupGallery extends Component {
 
     state = {
         activeSlideIndex: this.props.activeSlideIndex,
-        sliderHeight: 0,
         sliderLeft: 0,
         sliderWidth: 0
     }
 
     componentDidMount () {
-        disableBodyScroll(this.popup.current);
-
         const { activeSlideIndex } = this.state;
         const sliderWidth = this.photoSliderTrack.current.clientWidth;
-        const currentSlideHeight = this.getSlideHeight(activeSlideIndex);
+
+        disableBodyScroll(this.popup.current);
 
         this.setState({
             sliderWidth,
-            sliderLeft: sliderWidth * activeSlideIndex,
-            sliderHeight: currentSlideHeight
+            sliderLeft: sliderWidth * activeSlideIndex
         });
     }
 
@@ -53,15 +50,13 @@ class PopupGallery extends Component {
 
     componentWillReceiveProps (nextProps) {
         const { activeSlideIndex } = this.state;
-        const currentSlideHeight = this.getSlideHeight(activeSlideIndex);
 
         if (nextProps.mediaWidth !== this.props.mediaWidth) {
             const sliderWidth = this.photoSliderTrack.current.clientWidth;
 
             this.setState({
                 sliderLeft: sliderWidth * activeSlideIndex,
-                sliderWidth,
-                sliderHeight: currentSlideHeight
+                sliderWidth
             });
         }
     }
@@ -91,7 +86,7 @@ class PopupGallery extends Component {
         const { activeSlideIndex, sliderWidth } = this.state;
         const nextActiveSlideIndex = deltaX > 0 ? activeSlideIndex - 1 : activeSlideIndex + 1;
 
-        this.photoSliderTrack.current.style.transition = `left .5s ease-in-out, height .5s ease-in-out`;
+        this.photoSliderTrack.current.style.transition = `left .5s ease-in-out`;
 
         if (Math.abs(deltaX) < IGNORE_SWIPE_DISTANCE || nextActiveSlideIndex === -1 || nextActiveSlideIndex === photos.length) {
             return this.setState({
@@ -105,26 +100,17 @@ class PopupGallery extends Component {
             activeSlideIndex: nextActiveSlideIndex,
             sliderLeft: nextActiveSlideIndex <= photos.length - 1
                 ? sliderWidth * nextActiveSlideIndex
-                : 0,
-            sliderHeight: nextActiveSlideIndex <= photos.length - 1
-                ? this.getSlideHeight(nextActiveSlideIndex)
-                : this.getSlideHeight(0)
+                : 0
         });
     };
 
     handleImgClick = (index) => {
         const { sliderWidth } = this.state;
-        const currentSlideHeight = this.getSlideHeight(index);
 
         this.setState({
             activeSlideIndex: index,
-            sliderLeft: index * sliderWidth,
-            sliderHeight: currentSlideHeight
+            sliderLeft: index * sliderWidth
         });
-    };
-
-    getSlideHeight = (index) => {
-        return this.photoSliderTrack.current.children[index].offsetHeight;
     };
 
     setSliderSizes = (index) => {
@@ -132,8 +118,7 @@ class PopupGallery extends Component {
         const sliderWidth = this.photoSliderTrack.current.clientWidth;
         if (index === activeSlideIndex) {
             this.setState({
-                sliderWidth,
-                sliderHeight: this.getSlideHeight(activeSlideIndex)
+                sliderWidth
             });
         }
     };
@@ -149,10 +134,10 @@ class PopupGallery extends Component {
 
     render () {
         const { photos } = this.props;
-        const { activeSlideIndex, sliderHeight, sliderLeft } = this.state;
+        const { activeSlideIndex, sliderLeft } = this.state;
 
         return <div className={styles.root}>
-            <div className={styles.cover} />
+            <div className={styles.cover} onClick={this.props.closePopup} />
             <div className={styles.popupWrap}>
                 <div className={styles.popup}>
                     <div className={styles.popupContent} ref={this.popup}>
@@ -164,10 +149,10 @@ class PopupGallery extends Component {
                                     onDragEnd={this.handleDragEnd}
                                     allowDefaultAction
                                     touchable
+                                    styles={{ height: '100%' }}
                                 >
                                     <div className={styles.mainImages}>
-                                        <div className={styles.slider} ref={this.photoSliderTrack} style={{ height: sliderHeight,
-                                            left: -sliderLeft }}>
+                                        <div className={styles.slider} ref={this.photoSliderTrack} style={{ left: -sliderLeft }}>
                                             {photos.map((img, i) => {
                                                 return (<div className={styles.mainImgWrap} key={i}>
                                                     <img className={styles.mainImg}
@@ -179,8 +164,8 @@ class PopupGallery extends Component {
                                         </div>
                                     </div>
                                 </Draggable>
-                                <div className={styles.arrowLeft} onClick={this.handleArrowClick(activeSlideIndex - 1)}/>
-                                <div className={styles.arrowRight} onClick={this.handleArrowClick(activeSlideIndex + 1)}/>
+                                {photos.length > 1 && <div className={styles.arrowLeft} onClick={this.handleArrowClick(activeSlideIndex - 1)}/>}
+                                {photos.length > 1 && <div className={styles.arrowRight} onClick={this.handleArrowClick(activeSlideIndex + 1)}/>}
                             </div>
                         </div>
                         {photos.length > 1 && <div className={styles.additionalImgs}>
@@ -199,7 +184,7 @@ class PopupGallery extends Component {
                                 );
                             })}
                         </div>}
-                        <div onClick={this.props.closePopup} className={styles.close} />
+                        <div className={styles.close} onClick={this.props.closePopup} />
                     </div>
                 </div>
             </div>
