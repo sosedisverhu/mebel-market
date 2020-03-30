@@ -8,5 +8,5 @@ export default [
     { id: 'partners', section: 'partners', path: '/admin/partners', exact: true, title: 'Партнёры' },
     { id: 'seo', section: 'seo', path: '/admin/seo', exact: true, title: 'SEO' },
     { id: 'admin', section: 'admins', path: '/admin/admins', exact: true, title: 'Админы' },
-    { id: 'seo', section: 'products', path: '/admin/orders', exact: true, title: 'Заказы' }
+    { id: 'orders', section: 'products', path: '/admin/orders', exact: true, title: 'Заказы' }
 ];
