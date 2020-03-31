@@ -50,14 +50,14 @@ import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import App from '../src/apps/client/App.jsx';
 
-// const credentials = {
-//     key: fs.readFileSync('server/https/private.key'),
-//     cert: fs.readFileSync('server/https/oschad_com_ua.crt'),
-//     ca: [
-//         fs.readFileSync('server/https/AddTrust_External_CA_Root.crt'),
-//         fs.readFileSync('server/https/USERTrust_RSA_Certification_Authority.crt')
-//     ]
-// };
+const credentials = {
+    key: fs.readFileSync('server/https/private.key'),
+    cert: fs.readFileSync('server/https/mebelmarket_ua.crt'),
+    ca: [
+        fs.readFileSync('server/https/AddTrust_External_CA_Root.crt'),
+        fs.readFileSync('server/https/USERTrust_RSA_Certification_Authority.crt')
+    ]
+};
 
 const ignoreHttpsHosts = [/localhost:(\d{4})/];
 
@@ -72,7 +72,7 @@ app.use(helmet());
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 
 // redirects
-// app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
+app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
 
 // static
 app.get(/\.chunk\.(js|css)$/, expressStaticGzip(rootPath, {
@@ -164,6 +164,6 @@ app.listen(PORT, function () {
     console.log('listening on port', PORT); // eslint-disable-line no-console
 });
 
-// const httpsServer = https.createServer(credentials, app);
-//
-// httpsServer.listen(HTTPS_PORT);
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(HTTPS_PORT);
