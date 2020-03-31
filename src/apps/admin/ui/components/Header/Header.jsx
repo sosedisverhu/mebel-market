@@ -40,6 +40,9 @@ const materialStyles = {
     button: {
         textAlign: 'center'
     },
+    menuItem: {
+        position: 'relative'
+    },
     notification: {
         width: '18px',
         height: '18px',
@@ -98,7 +101,7 @@ class Header extends Component {
     };
 
     componentDidMount () {
-        const { admin, getOrders, getReviews } = this.props;
+        const { admin, getOrders, getReviews, orders, reviews } = this.props;
         const ordersRoute = routes.find(route => route.id === 'orders');
         const reviewsRoute = routes.find(route => route.id === 'reviews');
         const notificationRoutesIds = [];
@@ -112,12 +115,23 @@ class Header extends Component {
             notificationRoutesIds.push('reviews');
         }
 
-        this.setState({ notificationRoutesIds });
+        this.setState({
+            notificationRoutesIds,
+            orders,
+            reviews: reviews.filter(review => !review.checked)
+        });
     }
 
     componentWillReceiveProps (nextProps) {
         if (this.props.orders !== nextProps.orders || this.props.reviews !== nextProps.reviews) {
-            this.setState({ notifications: nextProps.orders.length + nextProps.reviews.length });
+            const orders = nextProps.orders;
+            const reviews = nextProps.reviews.filter(review => !review.checked);
+
+            this.setState({
+                notifications: orders.length + reviews.length,
+                orders,
+                reviews
+            });
         }
     }
 
@@ -147,8 +161,8 @@ class Header extends Component {
     };
 
     render () {
-        const { classes, admin, orders, reviews } = this.props;
-        const { menuShowed, notifications } = this.state;
+        const { classes, admin } = this.props;
+        const { menuShowed, notifications, notificationRoutesIds } = this.state;
 
         return <AppBar position='static'>
             <Toolbar>
@@ -181,8 +195,19 @@ class Header extends Component {
                                                 return null;
                                             }
                                             return includes(route.section, admin.sections) &&
-                                                <div key={i}>
-                                                    <MenuItem component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
+                                                <div key={i} className={classes.menuItem}>
+                                                    {(includes(route.id, notificationRoutesIds) && this.state[route.id].length) &&
+                                                    <span
+                                                        className={classNames(
+                                                            classes.notification,
+                                                            { [classes.smallNotification]: this.state[route.id].length > 9 })}
+                                                    >
+                                                        {this.state[route.id].length < 100 ? this.state[route.id].length : '99+'}
+                                                    </span>
+                                                    }
+                                                    <MenuItem component={Link} onClick={this.handleClose} to={route.path}>
+                                                        {route.title}
+                                                    </MenuItem>;
                                                 </div>;
                                         })}
                                     </MenuList>
