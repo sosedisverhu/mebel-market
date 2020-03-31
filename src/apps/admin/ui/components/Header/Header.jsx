@@ -175,10 +175,10 @@ class Header extends Component {
                     }}
                 >
                     <MenuIcon/>
-                    {notifications &&
-                    <span className={classNames(classes.notification, { [classes.smallNotification]: notifications > 9 })}>
-                        {notifications < 100 ? notifications : '99+'}
-                    </span>}
+                    {notifications
+                        ? <span className={classNames(classes.notification, { [classes.smallNotification]: notifications > 9 })}>
+                            {notifications < 100 ? notifications : '99+'}
+                        </span> : null}
                 </IconButton>
                 <Popper open={menuShowed} anchorEl={this.anchorEl} className={classes.popper} transition disablePortal>
                     {({ TransitionProps, placement }) => (
