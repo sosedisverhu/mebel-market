@@ -108,43 +108,39 @@ class PopupColor extends Component {
 
         return <div className={styles.root}>
             <div className={styles.cover} onClick={this.props.closePopup()} />
-            <div className={styles.popupWrap}>
-                <div className={styles.popup}>
-                    <div className={styles.popupContent} ref={this.popup} >
-                        <h3 className={styles.title}>{activeColor.name}</h3>
-                        <div className={styles.gallery}>
-                            <Draggable
-                                onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
-                                onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
-                                onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
-                                allowDefaultAction
-                                touchable
-                            >
-                                <div className={styles.mainImgWrap}>
-                                    <div className={styles.slider} ref={this.colorSliderTrack} style={{ left }}>
-                                        {
-                                            colors.map((color, i) => {
-                                                return (
-                                                    <img className={styles.mainImg}
-                                                        src={color.file}
-                                                        alt="main image"
-                                                        onLoad={this.setWidthAndLeft}
-                                                        key={i}/>
-                                                );
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                            </Draggable>
-                            <div className={classNames(styles.left, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(-1)} />
-                            <div className={classNames(styles.right, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(1)} />
-                            <p className={styles.numbers}>{`${activeIndex + 1} / ${colors.length}`}</p>
-                            {!!activeColor.article && <p className={styles.article}>{activeColor.article}</p>}
+            <div className={styles.popup} ref={this.popup} >
+                <h3 className={styles.title}>{activeColor.name}</h3>
+                <div className={styles.gallery}>
+                    <Draggable
+                        onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
+                        onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
+                        onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
+                        allowDefaultAction
+                        touchable
+                    >
+                        <div className={styles.mainImgWrap}>
+                            <div className={styles.slider} ref={this.colorSliderTrack} style={{ left }}>
+                                {
+                                    colors.map((color, i) => {
+                                        return (
+                                            <img className={styles.mainImg}
+                                                src={color.file}
+                                                alt="main image"
+                                                onLoad={this.setWidthAndLeft}
+                                                key={i}/>
+                                        );
+                                    })
+                                }
+                            </div>
                         </div>
-
-                        <div onClick={this.props.closePopup()} className={styles.close} />
-                    </div>
+                    </Draggable>
+                    <div className={classNames(styles.left, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(-1)} />
+                    <div className={classNames(styles.right, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(1)} />
+                    <p className={styles.numbers}>{`${activeIndex + 1} / ${colors.length}`}</p>
+                    <p className={styles.article}>{activeColor.article}</p>
                 </div>
+
+                <div onClick={this.props.closePopup()} className={styles.close} />
             </div>
         </div>;
     }

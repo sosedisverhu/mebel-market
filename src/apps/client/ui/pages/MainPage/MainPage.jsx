@@ -35,6 +35,7 @@ class MainPage extends Component {
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
+            .sort((prev, next) => next.date - prev.date)
             .reduce((result, product) => {
                 if (includes('top', product.labels)) {
                     (result.top) ? result.top.push(product) : result.top = [product];

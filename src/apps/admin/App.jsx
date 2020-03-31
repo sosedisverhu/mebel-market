@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import isNull from '@tinkoff/utils/is/nil';
+import includes from '@tinkoff/utils/array/includes';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import checkAuthentication from './services/checkAuthentication';
 
-import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './ui/pages/CategoriesPage/CategoriesPage';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
@@ -20,6 +21,7 @@ import Header from './ui/components/Header/Header.jsx';
 import Authentication from './ui/components/Authentication/Authentication.jsx';
 import Recovery from './ui/components/Recovery/Recovery.jsx';
 import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
+import AdminPage from './ui/pages/AdminPage/AdminPage.jsx';
 import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 import CredentialsPage from './ui/pages/CredentialsPage/CredentialsPage.jsx';
@@ -33,7 +35,7 @@ const RECOVERY_URL = '/admin/recovery';
 
 const mapStateToProps = ({ application }) => {
     return {
-        authenticated: application.authenticated
+        admin: application.admin
     };
 };
 
@@ -44,8 +46,9 @@ const mapDispatchToProps = dispatch => ({
 class App extends Component {
     static propTypes = {
         checkAuthentication: PropTypes.func.isRequired,
-        authenticated: PropTypes.bool,
-        location: PropTypes.object
+        authenticated: PropTypes.object,
+        location: PropTypes.object,
+        admin: PropTypes.object
     };
 
     static defaultProps = {
@@ -65,33 +68,34 @@ class App extends Component {
     }
 
     render () {
-        const { authenticated } = this.props;
+        const { admin } = this.props;
+        const sections = propOr('sections', [], admin);
 
         if (this.isRecovery) {
             return <Recovery />;
         }
 
-        if (isNull(authenticated)) {
+        if (isNull(admin)) {
             return <div className={styles.loader}>
                 <CircularProgress />
             </div>;
         }
 
-        if (!authenticated) {
+        if (!admin) {
             return <Authentication />;
         }
 
         return <main>
             <Header />
             <Switch>
-                <Route exact path='/admin' component={MainPage} />
-                <Route exact path='/admin/mainSlider' component={MainSliderPage} />
+                <Route exact path='/admin' component={MainSliderPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
                 <Route exact path='/admin/articles' component={ArticlesPage} />
                 <Route exact path='/admin/categories' component={CategoriesPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
                 <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
+                <Route exact path='/admin/admins' component={AdminPage} />
                 <Route exact path='/admin/orders' component={OrdersPage} />
                 <Route exact path='/admin/credentials' component={CredentialsPage} />
             </Switch>

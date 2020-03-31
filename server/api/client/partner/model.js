@@ -6,8 +6,7 @@ const Partner = new Schema({
     id: { type: String, required: true },
     texts: { type: Object, required: true },
     hidden: { type: Boolean, required: true },
-    logo: { type: String },
-    positionIndex: { type: Number }
+    logo: { type: String }
 });
 
 export default mongoose.model('Partner', Partner);

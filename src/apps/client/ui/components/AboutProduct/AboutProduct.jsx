@@ -17,7 +17,6 @@ import openBasket from '../../../actions/openBasket';
 
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
-import PopupSizes from '../PopupSizes/PopupSizes';
 import styles from './AboutProduct.css';
 import SizesSelect from '../SizesSelect/SizesSelect';
 import ColorsSelect from '../ColorsSelect/ColorsSelect';
@@ -70,8 +69,7 @@ class AboutProduct extends Component {
         isInBasket: false,
         colorListOpen: false,
         checkedFeatureIds: {},
-        activePopupColorIndex: null,
-        isPopupSizes: false
+        activePopupColorIndex: null
     };
 
     componentDidMount () {
@@ -174,10 +172,6 @@ class AboutProduct extends Component {
 
     handleChangePopup = (activePopupColorIndex = null) => () => this.setState({ activePopupColorIndex });
 
-    handleChangePopupSizes = () => () => {
-        this.setState((state) => ({ isPopupSizes: !state.isPopupSizes }));
-    };
-
     handleChangeColor = (color) => {
         this.state.colorListOpen ? this.changeColorListClose() : this.changeColorListOpen();
         this.props.changeColor(color);
@@ -203,17 +197,7 @@ class AboutProduct extends Component {
 
     render () {
         const { product, langMap, lang, activeSize, activeColor, isPromotion } = this.props;
-        const {
-            sizes,
-            sizeListIsOpen,
-            selectIsOpen,
-            isInWishlist,
-            isInBasket,
-            colorListOpen,
-            checkedFeatureIds,
-            activePopupColorIndex,
-            isPopupSizes
-        } = this.state;
+        const { sizes, sizeListIsOpen, selectIsOpen, isInWishlist, isInBasket, colorListOpen, checkedFeatureIds, activePopupColorIndex } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
@@ -228,7 +212,6 @@ class AboutProduct extends Component {
         const checkedFeatures = features.filter(feature => checkedFeatureIds[feature.id]);
         const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
         const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
-        const isTableSizes = actualSizes.some(size => size.tableSizes && size.tableSizes.length);
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -244,17 +227,9 @@ class AboutProduct extends Component {
             </span>
             <div className={styles.properties}>
                 <div className={styles.sizesWrap}>
-                    <div className={styles.sizesTitle}>
+                    <span className={styles.sizesTitle}>
                         {!isOneSize ? text.size : text.oneSize}
-                        <div onClick={this.handleChangePopupSizes()} className={classNames(
-                            styles.sizesTitleMark,
-                            { [styles.visible]: isTableSizes })} >
-                            <img
-                                className={styles.sizesTitleMarkImg}
-                                src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
-                                width="18" height="18" alt={text.sizesMarkDescr}/>
-                        </div>
-                    </div>
+                    </span>
                     <SizesSelect
                         selectIsOpen={selectIsOpen}
                         activeSize={activeSize}
@@ -268,7 +243,7 @@ class AboutProduct extends Component {
                         handleChangeSize={this.handleChangeSize}
                     />
                 </div>
-                {!isOneColor && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
                     <div className={styles.colorTitle}>
                         {!isOneColor ? text.chooseColor : text.oneColor}
                     </div>
@@ -283,7 +258,7 @@ class AboutProduct extends Component {
                         handleChangePopup={this.handleChangePopup}
                         colorListOpen={colorListOpen}
                     />
-                </div>}
+                </div>
             </div>
             <div className={styles.features}>
                 {features && features.map(feature => {
@@ -308,7 +283,6 @@ class AboutProduct extends Component {
                     onClick={this.handleAddToWishlist}/>
             </div>
             {activePopupColorIndex !== null && <PopupColor colors={actualColors} activeIndex={activePopupColorIndex} closePopup={this.handleChangePopup}/>}
-            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes}/>}
         </div>;
     }
 }

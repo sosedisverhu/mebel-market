@@ -100,7 +100,6 @@ class WishList extends Component {
                                 {wishlist.map(({ product, properties, id: wishlistItemId }, i) => {
                                     const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
                                     const color = size.colors.find(color => color.id === properties.size.color.id);
-                                    const isManyColors = size.colors.length > 1;
 
                                     return <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
@@ -109,16 +108,15 @@ class WishList extends Component {
                                                 <div>
                                                     <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
                                                     <p className={styles.productNumber}>
-                                                        {!!color.article && <span className={styles.productNumberTitle}>{text.article} </span>}
-                                                        {color.article}
+                                                        <span className={styles.productNumberTitle}>{text.article} </span>{size.article}
                                                     </p>
                                                     <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>
-                                                    {isManyColors && <div className={styles.productColor}>
+                                                    <div className={styles.productColor}>
                                                         {text.color}
                                                         <div className={styles.productColorImgWrap}>
                                                             <img className={styles.productColorImg} src={color.file} alt={color.name}/>
                                                         </div>
-                                                    </div>}
+                                                    </div>
                                                     <div className={styles.productPrices}>
                                                         {color && !!color.discountPrice &&
                                                         <p className={styles.productOldPrice}>

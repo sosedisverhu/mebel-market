@@ -56,15 +56,6 @@
 
 .properties {
     display: flex;
-    justify-content: space-between;
-
-    @media (max-width: 1190px) and (min-width: 1001px) {
-        flex-direction: column;
-    }
-
-    @media (max-width: 1000px) {
-        justify-content: flex-start;
-    }
 
     @media (max-width: 500px) {
         flex-direction: column;
@@ -72,48 +63,9 @@
     }
 }
 
-.sizesWrap {
-    @media (max-width: 500px) {
-        max-width: 202px;
-    }
-}
-
 .sizesTitle {
     font: 16px/18px GilroyRegular;
     color: blackLighter;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.sizesTitleMark {
-    display: none;
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-    background: whiteBasic;
-    transition: background 0.25s ease-in;
-    border-radius: 50%;
-    position: relative;
-
-    &.visible {
-        display: flex;
-    }
-
-    &:hover {
-        background: blackLight;
-        transition-timing-function: ease-out;
-
-        .sizesTitleMarkImg {
-            filter: brightness(0) invert(1);
-        }
-    }
-}
-
-.sizesTitleMarkImg {
-    position: absolute;
-    left: -1px;
-    top: -1px;
 }
 
 .select {
@@ -198,7 +150,7 @@
 }
 
 .colorWrap {
-    margin: 0 50px;
+    margin-left: 100px;
     position: relative;
 
     &.active {
@@ -211,10 +163,6 @@
         .colorList {
             display: block;
         }
-    }
-
-    @media (max-width: 1190px) {
-        margin: 0 0 0 100px;
     }
 
     @media (max-width: 500px) {

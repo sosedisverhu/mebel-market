@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+
+import classNames from 'classnames';
 
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import classNames from 'classnames';
+
+import MainSlideForm from '../MainSlideForm/MainSlideForm';
 
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import Paper from '@material-ui/core/Paper';
 import Modal from '@material-ui/core/Modal';
+import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
+
+import { connect } from 'react-redux';
+import getMainSlides from '../../../services/getMainSlides';
+import updateSlides from '../../../services/updateSlides';
 
 import map from '@tinkoff/utils/array/map';
 import remove from '@tinkoff/utils/array/remove';
 import equal from '@tinkoff/utils/is/equal';
 import noop from '@tinkoff/utils/function/noop';
 import arrayMove from '../../../utils/arrayMove';
-
-import getMainSlides from '../../../services/getMainSlides';
-import updateSlides from '../../../services/updateSlides';
-
-import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import MainSlideForm from '../MainSlideForm/MainSlideForm';
-import EditIcon from '@material-ui/icons/Edit';
-
-const LANGS = ['ru', 'ua'];
 
 const materialStyles = theme => ({
     root: {
@@ -116,7 +115,6 @@ const materialStyles = theme => ({
     submitButtonNoSlides: {
         marginTop: '16px'
     },
-
     modal: {
         display: 'flex',
         justifyContent: 'center',
@@ -141,7 +139,7 @@ const Image = SortableHandle(({ imageClassName, src }) => (
     <img className={imageClassName} src={src} alt=''/>
 ));
 
-const SlidePreview = SortableElement(({ slide, index, classes, onFileDelete, isSorting, onFileEdit }) =>
+const SlidePreview = SortableElement(({ slide, index, classes, onFileDelete, onFileEdit, onFileLoad, isSorting }) =>
     <div className={classNames(classes.fileItem, {
         [classes.fileItemSorting]: isSorting
     })}>
@@ -158,10 +156,12 @@ const SlidePreview = SortableElement(({ slide, index, classes, onFileDelete, isS
                 aria-label='Delete'
                 onClick={onFileDelete(index)}
             >
-                <DeleteIcon/>
+                <DeleteIcon />
             </IconButton>
         </div>
-        <Image src={slide.path} imageClassName={classes.fileImage}/>
+        <Image src={slide.path} imageClassName={classNames(classes.fileImage, {
+            [classes.fileImageError]: slide.wrongDimensions
+        })} />
     </div>);
 
 const SlidesPreviews = SortableContainer(({ slides, classes, ...rest }) =>
@@ -175,13 +175,13 @@ const SlidesPreviews = SortableContainer(({ slides, classes, ...rest }) =>
         />)}
     </div>);
 
-const mapStateToProps = ({ data }) => {
+const mapStateToProps = ({ application }) => {
     return {
-        slider: data.slider
+        slides: application.mainSlides
     };
 };
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     getMainSlides: payload => dispatch(getMainSlides(payload)),
     updateSlides: payload => dispatch(updateSlides(payload))
 });
@@ -191,27 +191,25 @@ class MainSlider extends Component {
         classes: PropTypes.object.isRequired,
         getMainSlides: PropTypes.func.isRequired,
         updateSlides: PropTypes.func.isRequired,
-        slider: PropTypes.object.isRequired,
-        langs: PropTypes.array
+        slides: PropTypes.array
     };
 
     static defaultProps = {
-        slider: {},
-        langs: LANGS
+        slides: []
     };
 
     constructor (...args) {
         super(...args);
 
-        const activeLang = this.props.langs[0];
-
         this.state = {
-            slides: [],
+            slides: this.props.slides.map(slide => ({
+                path: slide.path || '/wrong-path',
+                showed: slide.showed
+            })),
             removedSlides: [],
             isSorting: false,
             loading: true,
             disabled: true,
-            activeLang,
             formShowed: false
         };
 
@@ -219,26 +217,22 @@ class MainSlider extends Component {
     }
 
     componentDidMount () {
-        const { activeLang } = this.state;
-
         this.props.getMainSlides()
             .then(() => {
                 this.setState({
-                    loading: false,
-                    slides: this.props.slider[`slides_${activeLang}`] || []
+                    loading: false
                 });
             });
     }
 
     componentWillReceiveProps (nextProps) {
-        const { activeLang } = this.state;
-
-        if (nextProps.slider[`slides_${activeLang}`] !== this.props.slider[`slides_${activeLang}`]) {
+        if (nextProps.slides !== this.props.slides) {
             this.setState({
+                slides: nextProps.slides,
                 disabled: true
             });
 
-            this.slidesPaths = nextProps.slider[`slides_${activeLang}`].map(slide => slide.path);
+            this.slidesPaths = nextProps.slides.map(slide => slide.path);
         }
     }
 
@@ -263,12 +257,12 @@ class MainSlider extends Component {
         });
     };
 
-    handleFilesUpload = e => {
+    handleFilesUpload = (event) => {
         const newFiles = map(file => ({
             content: file,
             path: URL.createObjectURL(file),
             showed: true
-        }), e.target.files);
+        }), event.target.files);
 
         const slides = [...this.state.slides, ...newFiles];
 
@@ -277,6 +271,18 @@ class MainSlider extends Component {
         }, this.handleSlidesChanged);
 
         event.target.value = '';
+    };
+
+    handleFileEdit = i => () => {
+        const { slides } = this.state;
+
+        this.setState({
+            formShowed: true,
+            editableSlideInfo: {
+                index: i,
+                slide: slides[i]
+            }
+        });
     };
 
     handleFileDelete = i => () => {
@@ -290,56 +296,6 @@ class MainSlider extends Component {
             slides: remove(i, 1, slides),
             removedSlides
         }, this.handleSlidesChanged);
-    };
-
-    handleSubmit = e => {
-        e.preventDefault();
-
-        const { activeLang } = this.state;
-        const { slides, removedSlides } = this.state;
-        const formData = new FormData();
-        const cleanedSlides = slides.map(slide => {
-            const isOld = !slide.content;
-
-            return {
-                link: slide.link,
-                newTab: !!slide.newTab,
-                path: isOld && slide.path,
-                oldSlidePath: slide.oldSlidePath
-            };
-        });
-
-        slides.forEach((file, i) => {
-            if (file.content) {
-                formData.append(`slide-file-${i}`, file.content);
-            }
-        });
-
-        formData.append('removedSlides', JSON.stringify(removedSlides));
-        formData.append('slides', JSON.stringify(cleanedSlides));
-        // formData.append(`slides_${activeLang}`, JSON.stringify(this.props.slider[`slides_${activeLang}`]));
-        formData.append(`lang`, activeLang);
-
-        return this.props.updateSlides(formData);
-    };
-
-    handleLangChange = (activeLang) => {
-        this.setState({
-            activeLang,
-            slides: this.props.slider[`slides_${activeLang}`] || []
-        });
-    };
-
-    handleFileEdit = i => () => {
-        const { slides } = this.state;
-
-        this.setState({
-            formShowed: true,
-            editableSlideInfo: {
-                index: i,
-                slide: slides[i]
-            }
-        });
     };
 
     handleClosetForm = () => {
@@ -369,27 +325,60 @@ class MainSlider extends Component {
         });
     };
 
+    handleSubmit = event => {
+        event.preventDefault();
+
+        const { slides, removedSlides } = this.state;
+        const formData = new FormData();
+        const cleanedSlides = slides.map(slide => {
+            const isOld = !slide.content;
+
+            return {
+                link: slide.link,
+                newTab: !!slide.newTab,
+                path: isOld && slide.path,
+                oldSlidePath: slide.oldSlidePath
+            };
+        });
+
+        slides.forEach((file, i) => {
+            if (file.content) {
+                formData.append(`slide-file-${i}`, file.content);
+            }
+        });
+
+        formData.append('removedSlides', JSON.stringify(removedSlides));
+        formData.append('slides', JSON.stringify(cleanedSlides));
+
+        return this.props.updateSlides(formData);
+    };
+
     render () {
-        const { classes, langs } = this.props;
-        const { slides, isSorting, disabled, activeLang, formShowed, editableSlideInfo } = this.state;
+        const { classes } = this.props;
+        const { slides, isSorting, loading, disabled, formShowed, editableSlideInfo } = this.state;
+
+        if (loading) {
+            return <div className={classes.loader}>
+                <CircularProgress />
+            </div>;
+        }
 
         return <div className={classes.root}>
-            <FormFieldLangs name="lang" schema={{ langs: langs }} value={activeLang} onChange={this.handleLangChange}/>
             <form onSubmit={this.handleSubmit}>
                 <Typography variant='h6'>Photos</Typography>
                 <div className={classes.upload}>
                     <input
                         className={classes.uploadInput}
-                        id={`uploadInput_${activeLang}`}
+                        id='uploadInput'
                         type='file'
                         accept='image/*'
                         onChange={this.handleFilesUpload}
                         multiple
                     />
-                    <label htmlFor={`uploadInput_${activeLang}`}>
+                    <label htmlFor='uploadInput'>
                         <Button variant='contained' component='span' color='default'>
-                            Загрузить
-                            <CloudUploadIcon className={classes.uploadIcon}/>
+                            Upload
+                            <CloudUploadIcon className={classes.uploadIcon} />
                         </Button>
                     </label>
                 </div>
@@ -413,7 +402,7 @@ class MainSlider extends Component {
                     type='submit'
                     disabled={disabled}
                 >
-                    Сохранить
+                    Save
                 </Button>
             </form>
             <Modal open={formShowed} onClose={this.handleClosetForm} className={classes.modal}>

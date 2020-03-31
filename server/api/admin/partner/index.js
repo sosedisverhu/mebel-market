@@ -8,11 +8,10 @@ import editPartner from './services/editPartner';
 import deleteByIds from './services/deleteByIds';
 import updateLogo from './services/updateLogo';
 import findPartnerByName from './services/findPartnerByName';
-import editPositions from './services/editPartnersPositions';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('partners'));
 
 router.route('/all')
     .get(getPartners);
@@ -31,8 +30,5 @@ router.route('/update-logo')
 
 router.route('/find')
     .get(findPartnerByName);
-
-router.route('/edit-positions')
-    .post(editPositions);
 
 export default router;

@@ -248,7 +248,7 @@ class OrderForm extends Component {
                                 const unitPrice = (price || basePrice) + featuresPrice;
                                 return <TableRow key={i}>
                                     <TableCell className={classes.rowLabelSmall} colSpan={1}>{name}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={3} align="center">{article || '-'}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={3}>{article}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={1} align="center">{quantity}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
                                         <p className={classes.p}>Размер: {properties.size.name}</p>

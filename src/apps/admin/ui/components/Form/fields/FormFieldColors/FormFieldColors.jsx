@@ -14,10 +14,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/core/styles';
@@ -28,7 +24,6 @@ import isEmpty from '@tinkoff/utils/is/empty';
 import arrayMove from '../../../../../utils/arrayMove';
 
 import FormFieldFiles from '../FormFieldFiles/FormFieldFiles';
-import FormFieldButton from '../FormFieldButton/FormFieldButton';
 
 const materialStyles = {
     color: {
@@ -93,109 +88,14 @@ const materialStyles = {
         '& input': {
             zIndex: '-1'
         }
-    },
-    duplicateBtnWrap: {
-        marginBottom: '20px'
-    },
-    sizesTabsWrap: {
-        marginTop: '20px'
-    },
-    sortableTab: {
-        display: 'flex',
-        alignItems: 'center',
-        zIndex: '9998',
-        border: '1px solid #D8D8D8',
-        padding: '0 8px',
-        borderRadius: '4px 4px 0 0',
-        background: '#F9F9F9'
-    },
-    buttonSortableTab: {
-        cursor: 'pointer'
-    },
-    colorDelButton: {
-        padding: '7px'
-    },
-    indicator: {
-        zIndex: 9999
-    },
-    labelContainer: {
-        padding: '6px 0 6px 6px',
-        whiteSpace: 'nowrap',
-        textOverflow: 'ellipsis',
-        overflow: 'hidden'
-    },
-    tabRoot: {
-        maxWidth: '230px',
-
-        '@media (max-width:960px)': {
-            maxWidth: '150px',
-            fontSize: '0.8rem'
-        }
     }
 };
-
-function TabPanel (props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <Typography
-            component="div"
-            role="tabpanel"
-            hidden={value !== index}
-            id={`colors-tabpanel-${index}`}
-            aria-labelledby={`colors-tab-${index}`}
-            {...other}
-        >
-            {value === index && <div>{children}</div>}
-        </Typography>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired
-};
-
-function tabProps (index) {
-    return {
-        id: `colors-tab-${index}`,
-        'aria-controls': `colors-tabpanel-${index}`
-    };
-}
 
 const ButtonSortable = SortableHandle(({ imageClassName }) => (
     <ReorderIcon className={imageClassName}> reorder </ReorderIcon>
 ));
 
-const SortableTab = SortableElement(({
-    sizeIndex,
-    label,
-    handleColorDelete,
-    tabProps,
-    handleTabChange,
-    index,
-    classes
-}) => (
-    <div className={classes.sortableTab}>
-        <ButtonSortable imageClassName={classes.buttonSortableTab}/>
-        <Tab classes={{ labelContainer: classes.labelContainer, root: classes.tabRoot }} onClick={() => handleTabChange(index)} label={label} {...tabProps}/>
-        <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, index)}>
-            <DeleteIcon/>
-        </IconButton>
-    </div>
-));
-
-const Color = SortableElement(({
-    rowIndex,
-    sizeIndex,
-    color,
-    handleColorDelete,
-    handleColorChange,
-    handleColorCheckboxChange,
-    classes,
-    handleClickDuplicate
-}) => (
+const Color = SortableElement(({ rowIndex, sizeIndex, color, handleColorDelete, handleColorChange, handleColorCheckboxChange, classes }) => (
     <FormGroup className={classes.color} row>
         <ButtonSortable imageClassName={classes.buttonSortable}/>
         <div className={classes.colorGroup}>
@@ -245,7 +145,7 @@ const Color = SortableElement(({
             <FormFieldFiles
                 schema={{ max: 1 }}
                 onChange={handleColorChange('file', sizeIndex, rowIndex)}
-                value={!isEmpty(color.file) ? { files: [color.file] } : {}}/>
+                value={ !isEmpty(color.file) ? { files: [color.file] } : {} }/>
             <div className={classes.checkbox}>
                 <FormControlLabel
                     control={
@@ -258,45 +158,16 @@ const Color = SortableElement(({
                     label="Акционный товар"
                 />
             </div>
-            <div className={classes.duplicateBtnWrap}>
-                <FormFieldButton
-                    schema={{ label: 'Дублировать для всех размеров', onClick: () => handleClickDuplicate(color.id) }}/>
-            </div>
         </div>
-        <IconButton aria-label='Delete' className={classes.colorDelButton}
-            onClick={handleColorDelete(sizeIndex, rowIndex)}>
-            <DeleteIcon/>
+        <IconButton aria-label='Delete' className={classes.colorDelButton} onClick={handleColorDelete(sizeIndex, rowIndex)}>
+            <DeleteIcon />
         </IconButton>
     </FormGroup>
 ));
 
-const Colors = SortableContainer(({ colors, classes, tabsValue, handleTabsChange, ...rest }) =>
-    <div className={classes.sizesTabsWrap}>
-        <AppBar position="static" color="default">
-            <Tabs
-                value={tabsValue}
-                onChange={(event, newTabsValue) => handleTabsChange(newTabsValue)}
-                indicatorColor="primary"
-                classes={{ indicator: classes.indicator }}
-                textColor="primary"
-                variant="scrollable"
-                scrollButtons="auto" >
-                {colors.map((color, i) => {
-                    return <SortableTab
-                        handleTabChange={handleTabsChange}
-                        key={i} index={i}
-                        label={color.name || 'Без названия'}
-                        tabProps={tabProps(i)}
-                        classes={classes}
-                        {...rest} />;
-                })}
-            </Tabs>
-        </AppBar>
-        {colors.map((color, i) => <TabPanel value={tabsValue} key={i} index={i}>
-            <Color key={i} index={i} rowIndex={i} color={color} {...rest} classes={classes}/>
-        </TabPanel>)}
-
-        {/* {colors.map((color, i) => <Color key={i} index={i} rowIndex={i} color={color} {...rest} classes={classes}/>)} */}
+const Colors = SortableContainer(({ colors, classes, ...rest }) =>
+    <div>
+        {colors.map((color, i) => <Color key={i} index={i} rowIndex={i} color={color} {...rest} classes={classes}/>)}
     </div>
 );
 
@@ -305,12 +176,9 @@ class FormFieldColors extends Component {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
         onChange: PropTypes.func,
-        onChangeCustomField: PropTypes.func,
         validationMessage: PropTypes.string,
         sizeIndex: PropTypes.number.isRequired,
-        sizes: PropTypes.array.isRequired,
-        values: PropTypes.object,
-        langs: PropTypes.array
+        sizes: PropTypes.array.isRequired
     };
 
     static defaultProps = {
@@ -322,7 +190,7 @@ class FormFieldColors extends Component {
     };
 
     state = {
-        tabsValue: 0
+        isSorting: false
     };
 
     handleColorAdd = i => () => {
@@ -376,45 +244,13 @@ class FormFieldColors extends Component {
         this.props.onChange(sizes);
     };
 
-    handleClickDuplicate = (duplicateColorId) => {
-        const { values, langs } = this.props;
-        const newId = uniqid();
-
-        for (const lang in langs) {
-            const sizes = values[`${langs[lang]}_sizes`];
-            let duplicateColor = null;
-
-            sizes.forEach(size => {
-                size.colors.forEach(color => {
-                    if (color.id === duplicateColorId) duplicateColor = color;
-                });
-            });
-
-            if (!duplicateColor) return;
-
-            sizes.forEach(size => {
-                if (!size.colors.find(color => color.id === duplicateColor.id)) {
-                    size.colors.push({
-                        ...duplicateColor,
-                        id: newId
-                    });
-                }
-            });
-
-            this.props.onChangeCustomField(sizes, `${lang}_sizes`);
-        }
-    };
-
-    handleTabsChange = (newTabsValue) => this.setState({ tabsValue: newTabsValue });
-
     render () {
         const { classes, value, validationMessage, sizeIndex } = this.props;
-        const { tabsValue } = this.state;
 
         return <div>
             <h6 className={classes.h6}>Цвета товара</h6>
-            {!!value.length && <Colors
-                axis='x'
+            <Colors
+                axis='xy'
                 colors={value}
                 handleColorDelete={this.handleColorDelete}
                 handleColorChange={this.handleColorChange}
@@ -424,10 +260,7 @@ class FormFieldColors extends Component {
                 sizeIndex={sizeIndex}
                 useDragHandle
                 validationMessage={validationMessage}
-                handleClickDuplicate={this.handleClickDuplicate}
-                handleTabsChange={this.handleTabsChange}
-                tabsValue={tabsValue}
-            />}
+            />
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleColorAdd(sizeIndex)}>
                     <AddIcon />

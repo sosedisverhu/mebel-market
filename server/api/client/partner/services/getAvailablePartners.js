@@ -6,8 +6,7 @@ export default function getAvailablePartners (req, res) {
     getAllPartners()
         .then(partners => {
             const availablePartners = partners
-                .filter(partner => !partner.hidden)
-                .sort((prev, next) => prev.positionIndex - next.positionIndex);
+                .filter(partner => !partner.hidden);
 
             res.status(OKEY_STATUS_CODE).send(availablePartners);
         })

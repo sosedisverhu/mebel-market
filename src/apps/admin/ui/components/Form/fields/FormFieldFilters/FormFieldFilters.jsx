@@ -49,9 +49,6 @@ const Filter = SortableElement((
         editableOptionText,
         editableFilterIndex,
         editableOptionIndex,
-        onSortOptionsStart,
-        onSortOptionsEnd,
-        isSortingOptions,
         classes
     }) => {
     const isEditable = editableFilterIndex === filterIndex;
@@ -121,21 +118,22 @@ const Filter = SortableElement((
                                         </Fab>
                                     </Fragment>
                             }
-                            <Options
-                                axis='xy'
-                                options={filter.options}
-                                filterIndex={filterIndex}
-                                isEditable={isEditable}
-                                pressDelay={200}
-                                classes={classes}
-                                onSortStart={onSortOptionsStart}
-                                onSortEnd={onSortOptionsEnd(filterIndex)}
-                                editableOptionIndex={editableOptionIndex}
-                                onFilterOptionEditStart={onFilterOptionEditStart}
-                                onFilterOptionDelete={onFilterOptionDelete}
-                                isSortingOptions={isSortingOptions}
-                                disabled={editableFilterIndex === filterIndex}
-                            />
+
+                            <div className={classes.optionsWrapp}>
+                                {
+                                    filter.options &&
+                                    filter.options.map((option, i) => <Chip
+                                        key={i}
+                                        label={option.name}
+                                        variant={(!isEditable || editableOptionIndex !== i) && 'outlined'}
+                                        color="primary"
+                                        onDelete={onFilterOptionDelete(filterIndex, i)}
+                                        className={classes.chip}
+                                        onClick={onFilterOptionEditStart(filterIndex, i)}
+                                        clickable
+                                    />)
+                                }
+                            </div>
                         </div>
                     }
                     {
@@ -156,35 +154,6 @@ const Filter = SortableElement((
         </FormGroup>
     );
 });
-
-const Option = SortableElement((
-    {
-        classes,
-        editableOptionIndex,
-        onFilterOptionDelete,
-        onFilterOptionEditStart,
-        filterIndex,
-        index,
-        option,
-        isEditable,
-        isSortingOptions
-    }) =>
-    <Chip
-        label={option.name}
-        variant={(!isEditable || editableOptionIndex !== index) && 'outlined'}
-        color="primary"
-        onDelete={onFilterOptionDelete(filterIndex, index)}
-        className={classNames(classes.chip, { [classes.optionIsSortable]: isSortingOptions })}
-        onClick={onFilterOptionEditStart(filterIndex, index)}
-        clickable
-    />
-);
-
-const Options = SortableContainer(({ options, classes, ...rest }) =>
-    <div className={classes.optionsWrapp}>
-        {options && options.map((option, i) => <Option key={i} index={i} option={option} classes={classes} {...rest} />)}
-    </div>
-);
 
 const Filters = SortableContainer(({ filters, classes, ...rest }) =>
     <div className={classes.filtersWrapp}>
@@ -270,8 +239,6 @@ const materialStyles = theme => ({
     chip: {
         margin: '4px',
         marginBottom: '19px',
-        zIndex: '3000',
-        background: '#FFFFFF',
         '& span': {
             minWidth: '40px'
         }
@@ -284,9 +251,6 @@ const materialStyles = theme => ({
         display: 'flex',
         margin: '15px',
         justifyContent: 'flex-end'
-    },
-    optionIsSortable: {
-        background: 'none'
     }
 });
 
@@ -307,8 +271,7 @@ class FormFieldFilters extends Component {
         newOptionTexts: this.props.value.map(() => ({ id: uniqid(), name: '' })),
         editableOptionText: '',
         editableFilterIndex: null,
-        editableOptionIndex: null,
-        isSortingOptions: false
+        editableOptionIndex: null
     };
 
     handleFilterAdd = () => {
@@ -448,12 +411,6 @@ class FormFieldFilters extends Component {
         });
     };
 
-    onDragOptionsStart = () => {
-        this.setState({
-            isSortingOptions: true
-        });
-    };
-
     onDragEnd = ({ oldIndex, newIndex }) => {
         const { value } = this.props;
 
@@ -463,20 +420,9 @@ class FormFieldFilters extends Component {
         });
     };
 
-    onDragOptionsEnd = (filterIndex) => ({ oldIndex, newIndex }) => {
-        const { value: filters } = this.props;
-
-        filters[filterIndex].options = arrayMove(filters[filterIndex].options, oldIndex, newIndex);
-        this.props.onChange(filters);
-
-        this.setState({
-            isSortingOptions: false
-        });
-    };
-
     render () {
         const { classes, value } = this.props;
-        const { isSorting, isSortingOptions, newOptionTexts, editableOptionText, editableFilterIndex, editableOptionIndex } = this.state;
+        const { isSorting, newOptionTexts, editableOptionText, editableFilterIndex, editableOptionIndex } = this.state;
 
         return <div className={classes.createFiltersWrapp}>
             <Filters
@@ -493,14 +439,11 @@ class FormFieldFilters extends Component {
                 onFilterOptionEditCancel={this.handleFilterOptionEditCancel}
                 onSortStarТt={this.onDragStart}
                 onSortEnd={this.onDragEnd}
-                onSortOptionsStart={this.onDragOptionsStart}
-                onSortOptionsEnd={this.onDragOptionsEnd}
                 newOptionTexts={newOptionTexts}
                 editableOptionText={editableOptionText}
                 editableFilterIndex={editableFilterIndex}
                 editableOptionIndex={editableOptionIndex}
                 isSorting={isSorting}
-                isSortingOptions={isSortingOptions}
                 useDragHandle
                 classes={classes}
             />

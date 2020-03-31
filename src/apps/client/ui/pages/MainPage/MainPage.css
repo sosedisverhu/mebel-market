@@ -3,17 +3,21 @@
 @value gray5 from '../../../../../css/colors.css';
 
 .categorySection {
-    background: whiteBasic;
+    background: gray5;
 
-    &.top {
-        background: gray5;
+    &:nth-child(odd) {
+        background: whiteBasic;
 
         .title {
             &:before {
                 left: auto;
                 right: 0;
             }
+        }
+    }
 
+    &.top {
+        .title {
             @media (max-width: 600px) {
                 padding-top: 30px;
             }

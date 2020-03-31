@@ -132,7 +132,6 @@ class CartProduct extends Component {
         const text = propOr('cart', {}, langMap);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
         const color = size.colors.find(color => color.id === properties.size.color.id);
-        const isManyColors = size.colors.length > 1;
         const isDiscount = !!color.discountPrice;
 
         const allFeatures = size.features || [];
@@ -161,18 +160,18 @@ class CartProduct extends Component {
                                     {product.texts[lang].name}
                                 </p>
                             </Link>
-                            {!!color.article && <p className={styles.productNumber}>({color.article})</p>}
+                            <p className={styles.productNumber}>({color.article})</p>
                         </div>
                         <div className={styles.properties}>
                             <p className={styles.productSize}>
                                 {text.size} {size.name}
                             </p>
-                            {isManyColors && <div className={styles.productColor}>
+                            <div className={styles.productColor}>
                                 {text.color}
                                 <div className={styles.productColorImgWrap}>
                                     <img className={styles.productColorImg} src={color.file} alt={color.name}/>
                                 </div>
-                            </div>}
+                            </div>
                         </div>
                         {checkedFeatures && <div className={styles.features}>
                             {checkedFeatures.map(feature => <p className={styles.feature}>{`+ ${feature.name}`}</p>)}

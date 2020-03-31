@@ -9,7 +9,6 @@ import getPartners from '../src/apps/client/services/server/getPartners';
 import getSeo from '../src/apps/client/services/server/getSeo';
 import getUserProducts from '../src/apps/client/services/server/getUserProducts';
 import getMainSlides from '../src/apps/client/services/server/getMainSlides';
-import getDomain from '../src/apps/client/services/server/getDomain';
 
 export default [
     getMobileDetect,
@@ -22,6 +21,5 @@ export default [
     getPartners,
     getUserProducts,
     getSeo,
-    getMainSlides,
-    getDomain
+    getMainSlides
 ];

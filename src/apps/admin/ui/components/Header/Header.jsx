@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { matchPath } from 'react-router';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 
 import routes from '../../../constants/routes';
 
-import { withRouter, Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
@@ -21,9 +22,11 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
-import { connect } from 'react-redux';
 import logout from '../../../services/logout';
+import getOrders from '../../../services/getOrders';
+import getReviews from '../../../services/getReviews';
 
+import includes from '@tinkoff/utils/array/includes';
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
 
@@ -36,27 +39,101 @@ const materialStyles = {
     },
     button: {
         textAlign: 'center'
+    },
+    menuItem: {
+        position: 'relative'
+    },
+    notification: {
+        width: '18px',
+        height: '18px',
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        paddingBottom: '2px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '12px',
+        background: 'red',
+        borderRadius: '50%'
+    },
+    smallNotification: {
+        fontSize: '9px'
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    logout: payload => dispatch(logout(payload))
+const mapStateToProps = ({ application, data }) => {
+    return {
+        admin: application.admin,
+        orders: data.orders,
+        reviews: data.reviews
+    };
+};
+
+const mapDispatchToProps = dispatch => ({
+    logout: payload => dispatch(logout(payload)),
+    getOrders: payload => dispatch(getOrders(payload)),
+    getReviews: payload => dispatch(getReviews(payload))
 });
 
 class Header extends Component {
     static propTypes = {
         location: PropTypes.object,
         classes: PropTypes.object.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        getOrders: PropTypes.func.isRequired,
+        getReviews: PropTypes.func.isRequired,
+        admin: PropTypes.object,
+        orders: PropTypes.array,
+        reviews: PropTypes.array
     };
 
     static defaultProps = {
-        location: {}
+        location: {},
+        orders: [],
+        reviews: []
     };
 
     state = {
-        menuShowed: false
+        menuShowed: false,
+        notificationRoutesIds: [],
+        notifications: 0
     };
+
+    componentDidMount () {
+        const { admin, getOrders, getReviews, orders, reviews } = this.props;
+        const ordersRoute = routes.find(route => route.id === 'orders');
+        const reviewsRoute = routes.find(route => route.id === 'reviews');
+        const notificationRoutesIds = [];
+
+        if (includes(ordersRoute.section, admin.sections)) {
+            getOrders();
+            notificationRoutesIds.push('orders');
+        }
+        if (includes(reviewsRoute.section, admin.sections)) {
+            getReviews();
+            notificationRoutesIds.push('reviews');
+        }
+
+        this.setState({
+            notificationRoutesIds,
+            orders,
+            reviews: reviews.filter(review => !review.checked)
+        });
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.orders !== nextProps.orders || this.props.reviews !== nextProps.reviews) {
+            const orders = nextProps.orders;
+            const reviews = nextProps.reviews.filter(review => !review.checked);
+
+            this.setState({
+                notifications: orders.length + reviews.length,
+                orders,
+                reviews
+            });
+        }
+    }
 
     getHeaderTitle = () => {
         const { location: { pathname } } = this.props;
@@ -84,8 +161,8 @@ class Header extends Component {
     };
 
     render () {
-        const { classes } = this.props;
-        const { menuShowed } = this.state;
+        const { classes, admin } = this.props;
+        const { menuShowed, notifications, notificationRoutesIds } = this.state;
 
         return <AppBar position='static'>
             <Toolbar>
@@ -97,7 +174,11 @@ class Header extends Component {
                         this.anchorEl = node;
                     }}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
+                    {notifications
+                        ? <span className={classNames(classes.notification, { [classes.smallNotification]: notifications > 9 })}>
+                            {notifications < 100 ? notifications : '99+'}
+                        </span> : null}
                 </IconButton>
                 <Popper open={menuShowed} anchorEl={this.anchorEl} className={classes.popper} transition disablePortal>
                     {({ TransitionProps, placement }) => (
@@ -113,7 +194,21 @@ class Header extends Component {
                                             if (route.notMenu) {
                                                 return null;
                                             }
-                                            return <MenuItem key={i} component={Link} onClick={this.handleClose} to={route.path}>{route.title}</MenuItem>;
+                                            return includes(route.section, admin.sections) &&
+                                                <div key={i} className={classes.menuItem}>
+                                                    {(includes(route.id, notificationRoutesIds) && this.state[route.id].length) &&
+                                                    <span
+                                                        className={classNames(
+                                                            classes.notification,
+                                                            { [classes.smallNotification]: this.state[route.id].length > 9 })}
+                                                    >
+                                                        {this.state[route.id].length < 100 ? this.state[route.id].length : '99+'}
+                                                    </span>
+                                                    }
+                                                    <MenuItem component={Link} onClick={this.handleClose} to={route.path}>
+                                                        {route.title}
+                                                    </MenuItem>;
+                                                </div>;
                                         })}
                                     </MenuList>
                                 </ClickAwayListener>
@@ -124,11 +219,12 @@ class Header extends Component {
                 <Typography variant='h6' color='inherit' className={classes.title}>
                     {this.getHeaderTitle()}
                 </Typography>
-                <Button className={classes.button} color='inherit' component={Link} to='/admin/credentials'>Сменить учетные данные</Button>
+                <Button color='inherit'>{admin.login}</Button>
+                <Button color='inherit' component={Link} to='/admin/credentials'>Сменить учетные данные</Button>
                 <Button color='inherit' onClick={this.handleLogout}>Выйти</Button>
             </Toolbar>
         </AppBar>;
     }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(withStyles(materialStyles)(Header)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(materialStyles)(Header)));

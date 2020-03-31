@@ -10,13 +10,12 @@ import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 
-import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
+import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import PartnerForm from '../../components/PartnerForm/PartnerForm';
 
 import { connect } from 'react-redux';
 import getPartners from '../../../services/getPartners';
 import deletePartnersByIds from '../../../services/deletePartnersByIds';
-import editPartnersPositions from '../../../services/editPartnersPositions';
 
 const DEFAULT_LANG = 'ru';
 const headerRows = [
@@ -66,8 +65,7 @@ const mapStateToProps = ({ data }) => {
 
 const mapDispatchToProps = (dispatch) => ({
     getPartners: payload => dispatch(getPartners(payload)),
-    deletePartners: payload => dispatch(deletePartnersByIds(payload)),
-    editPositions: payload => dispatch(editPartnersPositions(payload))
+    deletePartners: payload => dispatch(deletePartnersByIds(payload))
 });
 
 class PartnersPage extends Component {
@@ -75,7 +73,6 @@ class PartnersPage extends Component {
         classes: PropTypes.object.isRequired,
         getPartners: PropTypes.func.isRequired,
         deletePartners: PropTypes.func.isRequired,
-        editPositions: PropTypes.func.isRequired,
         partners: PropTypes.array
     };
 
@@ -122,7 +119,7 @@ class PartnersPage extends Component {
     };
 
     render () {
-        const { classes, partners, editPositions } = this.props;
+        const { classes, partners } = this.props;
         const { loading, editablePartner, formShowed } = this.state;
 
         if (loading) {
@@ -132,18 +129,15 @@ class PartnersPage extends Component {
         }
 
         return <div>
-            <AdminTableSortable
+            <AdminTable
                 headerRows={headerRows}
                 tableCells={tableCells}
                 values={partners}
-                onChange={editPositions}
                 headerText='Партнёры'
                 deleteValueWarningTitle='Вы точно хотите удалить партнёра?'
                 deleteValuesWarningTitle='Вы точно хотите удалить следующих партнёров?'
                 onDelete={this.props.deletePartners}
                 onFormOpen={this.handleFormOpen}
-                filters={false}
-                cloneElem={false}
             />
             <Modal open={formShowed} onClose={this.handleClosePartnerForm} className={classes.modal}>
                 <Paper className={classes.modalContent}>

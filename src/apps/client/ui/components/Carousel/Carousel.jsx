@@ -16,12 +16,11 @@ const TIME_TO_NEXT_SWITCHING = 8000;
 const SWITCHING_DURATION = 800;
 const IGNORE_SWIPE_DISTANCE = 50;
 
-const mapStateToProps = ({ application, data }) => {
+const mapStateToProps = ({ application }) => {
     return {
-        slides: data.slider[`slides_${application.lang}`] || [],
+        slides: application.mainSlides,
         mediaWidth: application.media.width,
-        langMap: application.langMap,
-        lang: application.lang
+        langMap: application.langMap
     };
 };
 
@@ -29,8 +28,7 @@ class Carousel extends Component {
     static propTypes = {
         slides: PropTypes.array,
         mediaWidth: PropTypes.number,
-        langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired
+        langMap: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -271,21 +269,21 @@ class Carousel extends Component {
                 <div className={styles.sliderTrack} ref={this.sliderTrack}>
                     { slides.map((slide, i) => this.renderSlide(slide, i, slides)) }
                 </div>
-                {slides.length > 1 && <div className={styles.arrows}>
+                <div>
                     <div className={styles.arrowLeft} onClick={this.setActiveSlide(activeSlideIndex - 1)}/>
                     <div className={styles.arrowRight} onClick={this.setActiveSlide(activeSlideIndex + 1)}/>
-                </div>}
+                </div>
                 <div className={styles.bottomBlock}>
                     <a className={classNames(styles.text, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                         href={slides[activeSlideIndex].link}
                         target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider}</a>
-                    {slides.length > 1 && <div className={styles.dots}>
+                    <div className={styles.dots}>
                         { slides.map((slide, i) =>
                             <div
                                 className={classNames(styles.dot, { [styles.dotActive]: i === activeSlideIndex })}
                                 onClick={this.setActiveSlide(i)}
                                 key={i} />) }
-                    </div>}
+                    </div>
                 </div>
             </Draggable>
         </div>;

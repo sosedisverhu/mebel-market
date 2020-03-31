@@ -10,11 +10,10 @@ import updateFiles from './services/updateFiles';
 import updateAvatar from './services/updateAvatar';
 import updateColor from './services/updateColor';
 import findProductsByName from './services/findProductsByName';
-import editPositions from './services/editProductsPositions';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('products'));
 
 router.route('/all')
     .get(getProducts);
@@ -39,8 +38,5 @@ router.route('/update-color')
 
 router.route('/find')
     .get(findProductsByName);
-
-router.route('/edit-positions')
-    .post(editPositions);
 
 export default router;

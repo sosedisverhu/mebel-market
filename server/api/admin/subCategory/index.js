@@ -10,7 +10,7 @@ import findSubCategoriesByName from './services/findSubCategoriesByName';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('products'));
 
 router.route('/all')
     .get(getSubCategories);

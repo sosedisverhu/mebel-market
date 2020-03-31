@@ -12,8 +12,6 @@
     position: relative;
     width: 9999px;
     left: 0;
-    display: flex;
-    align-items: flex-start;
 
     @media (max-width: 1024px) {
         &:active {
@@ -26,8 +24,6 @@
     display: inline-block;
     position: relative;
     width: 100vw;
-    overflow: hidden;
-    margin-bottom: -3px;
 }
 
 .imageWrapper {

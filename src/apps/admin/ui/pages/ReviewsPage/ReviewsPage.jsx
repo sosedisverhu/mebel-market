@@ -219,18 +219,7 @@ class ReviewsPage extends Component {
 
     render () {
         const { classes } = this.props;
-        const {
-            loading,
-            searchValue,
-            newReviews,
-            products,
-            productReviewsIsRendered,
-            openedProduct,
-            productReviews,
-            deleteFormIsOpen,
-            deleteReview,
-            reviewsFormIsRendered
-        } = this.state;
+        const { loading, searchValue, newReviews, products, productReviewsIsRendered, openedProduct, productReviews, deleteFormIsOpen, deleteReview, reviewsFormIsRendered } = this.state;
 
         if (loading) {
             return <div className={classes.loader}>

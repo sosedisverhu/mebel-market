@@ -5,7 +5,6 @@ import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbo
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
-import FormFieldDate from '../Form/fields/FormFieldDate/FormFieldDate';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -42,7 +41,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Название'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните название статьи' } }
+                    { name: 'required', options: { text: 'Заполните название новости' } }
                 ]
             },
             {
@@ -53,7 +52,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Описание'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните описание статьи' } }
+                    { name: 'required', options: { text: 'Заполните описание новости' } }
                 ]
             },
             {
@@ -126,16 +125,6 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Ключевые слова',
                     multiline: false
                 }
-            },
-            {
-                component: FormFieldDate,
-                name: 'date',
-                schema: {
-                    label: 'Дата публикации'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Выберите дату публикации' } }
-                ]
             },
             {
                 component: FormFieldCheckbox,

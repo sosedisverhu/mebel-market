@@ -57,20 +57,36 @@ class Card extends Component {
         });
     }
 
+    getLabels = (labels, discount) => {
+        if (discount) {
+            return labels.map((label, index) => {
+                return (
+                    <div key={index} className={`${styles.label} ${styles.discount}`}>
+                        -{discount}<span className={styles.percentage}>%</span>
+                    </div>);
+            });
+        } else if (labels) {
+            return labels.map((label, index) => {
+                return label === 'top' &&
+                    <div key={index} className={`${styles.label} ${styles.hit}`}>
+                        {propOr('product', {}, this.props.langMap).labelTop}
+                    </div>;
+            });
+        }
+    };
+
     render () {
         const {
-            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels },
+            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias },
             newClass,
             labelClass,
             langRoute,
             lang,
             setSliderWidth,
-            isPromotion,
-            langMap
+            isPromotion
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const isDiscount = minPrice !== actualPrice;
-        const text = propOr('product', {}, langMap);
 
         return (
             <Link
@@ -82,17 +98,10 @@ class Card extends Component {
                 to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
                 <div className={styles.labels}>
-                    {labels.sort().reverse().map(label => {
-                        return <div key={label} className={classNames(styles.label, styles[label])}>
-                            {text[label]}
-                        </div>;
-                    })}
-                    {!!minDiscount && <div className={classNames(styles.label, styles.discount)}>
-                        -{minDiscount}<span className={styles.percentage}>%</span>
-                    </div>}
+                    {this.getLabels(['top'], minDiscount)}
                 </div>
-                <div className={styles.imgWrap}>
-                    <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
+                <div>
+                    <img className={styles.img} src={avatar} alt='' onLoad={setSliderWidth}/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <p className={styles.productName}>

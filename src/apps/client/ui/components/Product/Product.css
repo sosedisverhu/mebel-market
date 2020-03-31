@@ -4,7 +4,6 @@
     padding: 0 16px 30px 16px;
     box-sizing: content-box;
     margin: 0 auto;
-    overflow: hidden;
 
     @media (max-width: 1000px) {
         flex-direction: column;

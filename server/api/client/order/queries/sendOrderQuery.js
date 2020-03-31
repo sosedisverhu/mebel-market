@@ -1,12 +1,11 @@
 import nodemailer from 'nodemailer';
 
 const LOGIN = process.env.LOGIN || 'stubbs.development@gmail.com';
-const PASS = process.env.PASS || '7t5e6zh3gbkp';
+const PASS = process.env.PASS || 'fNDCNBtDKMBv';
 const SENDER = process.env.SENDER || 'mebel-market-bot';
 const RECEIVER = process.env.RECEIVER || 'n.brinzuk@gmail.com';
 
-export default function saveApplication (subject, content, successCallback, failureCallback, receiverEmail) {
-    const receiver = receiverEmail || RECEIVER;
+export default function saveApplication (subject, content, successCallback, failureCallback) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -16,7 +15,7 @@ export default function saveApplication (subject, content, successCallback, fail
     });
     const mailOptions = {
         from: SENDER,
-        to: receiver,
+        to: RECEIVER,
         subject,
         html: content
     };
