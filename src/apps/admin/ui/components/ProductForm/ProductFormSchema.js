@@ -11,8 +11,18 @@ import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/Form
 import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
+import FormFieldButtonCopyFilters from '../Form/fields/FormFieldButtonCopyFilters/FormFieldButtonCopyFilters';
 
-export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, categoryFilters, subCategoryFilters } = {} } = {}) {
+export default function ({ data: {
+    title,
+    categoriesOptions,
+    subCategoriesOptions,
+    categoryHidden,
+    categoryFilters,
+    subCategoryFilters,
+    categories,
+    allSubCategories
+} = {} } = {}) {
     return {
         fields: [
             {
@@ -163,34 +173,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldTitle,
-                name: 'characteristics-title',
-                schema: {
-                    label: 'Характеристики товара',
-                    variant: 'h5'
-                }
-            },
-            {
-                component: FormFieldFeaturesDouble,
-                name: 'characteristics',
-                valueLangStructure: [{
-                    name: 'depend',
-                    value: 'depend',
-                    id: 'notDepend'
-                }],
-                schema: {
-                    name: 'Название характеристики',
-                    value: 'Значения'
-                },
-                validators: [
-                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
-                ]
-            },
-            {
-                component: FormFieldDivider,
-                name: 'divider'
-            },
-            {
-                component: FormFieldTitle,
                 name: 'form-title',
                 schema: {
                     label: 'Гарантия на товар',
@@ -292,6 +274,48 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     ]
                 });
             })),
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldButtonCopyFilters,
+                name: 'copyFilters',
+                schema: {
+                    label: 'Скопировать фильтры в характеристики',
+                    type: 'button',
+                    categories: categories,
+                    allSubCategories: allSubCategories
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'characteristics-title',
+                schema: {
+                    label: 'Характеристики товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldFeaturesDouble,
+                name: 'characteristics',
+                valueLangStructure: [{
+                    name: 'depend',
+                    value: 'depend',
+                    id: 'notDepend'
+                }],
+                schema: {
+                    name: 'Название характеристики',
+                    value: 'Значения'
+                },
+                validators: [
+                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
+                ]
+            },
             {
                 component: FormFieldDivider,
                 name: 'divider'

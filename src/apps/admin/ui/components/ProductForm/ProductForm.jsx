@@ -478,7 +478,7 @@ class ProductForm extends Component {
     };
 
     render () {
-        const { classes } = this.props;
+        const { classes, categories, allSubCategories } = this.props;
         const { categoryHidden, errorText, categoryFilters, subCategoryFilters } = this.state;
 
         return <div>
@@ -492,7 +492,9 @@ class ProductForm extends Component {
                         subCategoriesOptions: this.subCategoriesOptions,
                         categoryHidden,
                         categoryFilters,
-                        subCategoryFilters
+                        subCategoryFilters,
+                        categories: categories,
+                        allSubCategories
                     }
                 })}
                 onChange={this.handleChange}
