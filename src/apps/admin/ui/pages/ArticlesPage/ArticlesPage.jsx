@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
 import { connect } from 'react-redux';
 import getArticles from '../../../services/getArticles';
@@ -112,13 +113,13 @@ class ArticlePage extends Component {
         this.state = {
             loading: true,
             formShowed: false,
+            warningFormShowed: false,
             editableArticle: null
         };
         this.tableCells = [
             { prop: article => <div className={this.props.classes.columnName}>{pathOr(['texts', DEFAULT_LANG, 'name'], '', article)}</div> },
-            { prop: article => <a className={this.props.classes.columnAlias} target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>
-                {`/articles/${pathOr(['alias'], '', article)}`}
-            </a> },
+            { prop: article => <a className={this.props.classes.columnAlias} target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{`/articles/${pathOr(['alias'], '', article)}`}
+                </a> },
             { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
         ];
     }
@@ -131,6 +132,12 @@ class ArticlePage extends Component {
                 });
             });
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     handleFormDone = () => {
         this.props.getArticles()
@@ -154,13 +161,14 @@ class ArticlePage extends Component {
     handleCloseArticleForm = () => {
         this.setState({
             formShowed: false,
+            warningFormShowed: false,
             editableArticle: null
         });
     };
 
     render () {
         const { classes, articles } = this.props;
-        const { loading, editableArticle, formShowed } = this.state;
+        const { loading, editableArticle, formShowed, warningFormShowed } = this.state;
 
         if (loading) {
             return <div className={classes.loader}>
@@ -180,11 +188,17 @@ class ArticlePage extends Component {
                 onProductClone={this.handleArticleClone}
                 onFormOpen={this.handleFormOpen}
             />
-            <Modal open={formShowed} onClose={this.handleCloseArticleForm} className={classes.modal} disableEnforceFocus>
+            <Modal open={formShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
                     <ArticleForm article={editableArticle} onDone={this.handleFormDone}/>
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && formShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleCloseArticleForm}
+            />
         </div>;
     }
 }

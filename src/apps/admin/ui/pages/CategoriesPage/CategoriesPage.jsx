@@ -24,6 +24,7 @@ import CategoryForm from '../../components/CategoryForm/CategoryForm';
 import DrawerDouble from '../../components/DrawerDouble/DrawerDouble';
 import AdminTable from '../../components/AdminTable/AdminTable';
 import ProductForm from '../../components/ProductForm/ProductForm';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
 import arrayMove from '../../../utils/arrayMove';
 
@@ -141,6 +142,7 @@ class CategoriesPage extends Component {
             subCategories: [],
             activeSubCategory: null,
             products: [],
+            warningFormShowed: false,
             categoryFormShowed: false,
             subCategoryFormShowed: false,
             productFormShowed: false,
@@ -175,6 +177,12 @@ class CategoriesPage extends Component {
                 });
             });
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     getActiveSubCategories = (activeCategory = this.state.activeCategory) => {
         return this.props.subCategories.filter(subCategory => subCategory.categoryId === pathOr(['id'], '', activeCategory));
@@ -308,13 +316,15 @@ class CategoriesPage extends Component {
     handleCloseSubCategoryForm = () => {
         this.setState({
             subCategoryFormShowed: false,
+            warningFormShowed: false,
             editableSubCategory: null
         });
     };
 
     handleCloseCategoryForm = () => {
         this.setState({
-            categoryFormShowed: false
+            categoryFormShowed: false,
+            warningFormShowed: false
         });
     };
 
@@ -389,6 +399,7 @@ class CategoriesPage extends Component {
     handleCloseProductForm = () => {
         this.setState({
             productFormShowed: false,
+            warningFormShowed: false,
             editableProduct: null
         });
     };
@@ -413,6 +424,7 @@ class CategoriesPage extends Component {
             activeSubCategory,
             editableProduct,
             productFormShowed,
+            warningFormShowed,
             categories,
             subCategories,
             products,
@@ -466,7 +478,7 @@ class CategoriesPage extends Component {
                     onDelete={this.handleProductDelete}
                     onFormOpen={this.handleProductFormOpen}
                 />
-                <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
+                <Modal open={productFormShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
                         <ProductForm
                             categories={categoriesWithSubCategories}
@@ -477,6 +489,12 @@ class CategoriesPage extends Component {
                             onDone={this.handleProductFormDone}/>
                     </Paper>
                 </Modal>
+                <CloseFormDialog
+                    open={warningFormShowed && productFormShowed}
+                    text='Вы точно хотите закрыть форму?'
+                    onClose={this.handleChangeFormClose}
+                    onDone={this.handleCloseProductForm}
+                />
             </div>;
         }
     };
@@ -489,9 +507,10 @@ class CategoriesPage extends Component {
             categories,
             subCategories,
             lang,
-            categoryFormShowed,
             activeCategory,
             isSelectedCategory,
+            warningFormShowed,
+            categoryFormShowed,
             subCategoryFormShowed,
             editableSubCategory
         } = this.state;
@@ -519,7 +538,7 @@ class CategoriesPage extends Component {
             />
             <Modal
                 open={categoryFormShowed}
-                onClose={this.handleCloseCategoryForm}
+                onClose={() => this.handleChangeFormClose(true)}
                 className={classes.modal}
                 disableEnforceFocus
             >
@@ -531,9 +550,15 @@ class CategoriesPage extends Component {
                     />
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && categoryFormShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleCloseCategoryForm}
+            />
             <Modal
                 open={subCategoryFormShowed}
-                onClose={this.handleCloseSubCategoryForm}
+                onClose={() => this.handleChangeFormClose(true)}
                 className={classes.modal}
                 disableEnforceFocus
             >
@@ -546,6 +571,12 @@ class CategoriesPage extends Component {
                         onDone={this.handleSubCategoryFormDone}/>
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && subCategoryFormShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleCloseSubCategoryForm}
+            />
             <Dialog open={!!valueForDelete} onClose={this.handleWarningDisagree}>
                 <DialogTitle>
                     {!isSelectedCategory
