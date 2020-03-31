@@ -51,14 +51,14 @@ import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import App from '../src/apps/client/App.jsx';
 
-const credentials = {
-    key: fs.readFileSync('server/https/private.key'),
-    cert: fs.readFileSync('server/https/oschad_com_ua.crt'),
-    ca: [
-        fs.readFileSync('server/https/AddTrust_External_CA_Root.crt'),
-        fs.readFileSync('server/https/USERTrust_RSA_Certification_Authority.crt')
-    ]
-};
+// const credentials = {
+//     key: fs.readFileSync('server/https/private.key'),
+//     cert: fs.readFileSync('server/https/oschad_com_ua.crt'),
+//     ca: [
+//         fs.readFileSync('server/https/AddTrust_External_CA_Root.crt'),
+//         fs.readFileSync('server/https/USERTrust_RSA_Certification_Authority.crt')
+//     ]
+// };
 
 const ignoreHttpsHosts = [/localhost:(\d{4})/];
 
