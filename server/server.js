@@ -45,7 +45,6 @@ import renderAdminPage from '../src/apps/admin/html';
 
 import verification from './helpers/verification';
 
-
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
@@ -73,7 +72,7 @@ app.use(helmet());
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 
 // redirects
-app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
+// app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
 
 // static
 app.get(/\.chunk\.(js|css)$/, expressStaticGzip(rootPath, {
