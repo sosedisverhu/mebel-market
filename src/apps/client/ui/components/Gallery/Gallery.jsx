@@ -5,15 +5,18 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import noop from '@tinkoff/utils/function/noop';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Gallery.css';
 import Draggable from '../Draggable/Draggable';
+import PopupGallery from '../PopupGallery/PopupGallery';
 
 const IGNORE_SWIPE_DISTANCE = 50;
 
 const mapStateToProps = ({ application }) => {
     return {
-        mediaWidth: application.media.width
+        mediaWidth: application.media.width,
+        langMap: application.langMap
     };
 };
 
@@ -22,7 +25,8 @@ class Gallery extends Component {
         photos: PropTypes.array.isRequired,
         mediaWidth: PropTypes.number.isRequired,
         location: PropTypes.object.isRequired,
-        discount: PropTypes.number
+        discount: PropTypes.number,
+        langMap: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -35,10 +39,11 @@ class Gallery extends Component {
         this.maxSlideIndex = this.props.photos.length - 1;
         this.photoSliderTrack = React.createRef();
         this.state = {
-            activeImg: 0,
             activeSlideIndex: 0,
             sliderLeft: 0,
-            sliderWidth: 0
+            sliderWidth: 0,
+            sliderHeight: 'auto',
+            isPopup: false
         };
     }
 
@@ -71,11 +76,11 @@ class Gallery extends Component {
 
         if (Math.abs(deltaX) < IGNORE_SWIPE_DISTANCE || nextActiveSlideIndex === -1 || nextActiveSlideIndex === photos.length) {
             this.photoSliderTrack.current.style.left = `-${this.startLeft}px`;
-            this.photoSliderTrack.current.style.transition = `left .2s ease-in-out`;
+            this.photoSliderTrack.current.style.transition = `left .2s ease-in-out, height .2s ease-in-out`;
 
             return this.setState({
                 sliderLeft: sliderWidth * activeSlideIndex,
-                activeImg: activeSlideIndex
+                activeSlideIndex
             });
         }
 
@@ -85,41 +90,74 @@ class Gallery extends Component {
             sliderLeft: nextActiveSlideIndex <= this.maxSlideIndex
                 ? sliderWidth * nextActiveSlideIndex
                 : 0,
-            activeImg: nextActiveSlideIndex
+            sliderHeight: nextActiveSlideIndex <= this.maxSlideIndex
+                ? this.getSlideHeight(nextActiveSlideIndex)
+                : this.getSlideHeight(0)
         });
 
-        this.photoSliderTrack.current.style.transition = `left .5s ease-in-out`;
+        this.photoSliderTrack.current.style.transition = `left .5s ease-in-out, height .5s ease-in-out`;
         this.photoSliderTrack.current.style.left = `-${sliderWidth * nextActiveSlideIndex}px`;
     };
 
     handleImgClick = (index) => {
         const { sliderWidth } = this.state;
-        this.setState({ activeImg: index, activeSlideIndex: index, sliderLeft: index * sliderWidth });
+        const currentSlideHeight = this.getSlideHeight(index);
+
+        this.setState({
+            activeSlideIndex: index,
+            sliderLeft: index * sliderWidth,
+            sliderHeight: currentSlideHeight
+        });
         this.photoSliderTrack.current.style.left = `-${index * sliderWidth}px`;
     };
 
-    handleArrowClick = direction => () => {
-        const { activeImg, sliderWidth } = this.state;
-        const newIndex = direction === 'left' ? activeImg - 1 : activeImg + 1;
+    handleArrowClick = (index) => () => {
+        const { photos } = this.props;
 
-        this.setState({
-            activeImg: newIndex,
-            sliderLeft: newIndex * sliderWidth
-        });
+        if (index >= photos.length) index = 0;
+        if (index < 0) index = photos.length - 1;
 
-        this.photoSliderTrack.current.style.left = `-${newIndex * sliderWidth}px`;
+        this.handleImgClick(index);
     };
 
+    setSliderSizes = (index) => {
+        const { activeSlideIndex } = this.state;
+        if (index === activeSlideIndex) {
+            this.setState({
+                sliderWidth: this.photoSliderTrack.current.clientWidth,
+                sliderHeight: this.getSlideHeight(activeSlideIndex)
+            });
+        }
+    };
+
+    getSlideHeight = (index) => {
+        return this.photoSliderTrack.current.children[index].offsetHeight;
+    };
+
+    componentDidMount () {
+        const { activeSlideIndex } = this.state;
+        const sliderWidth = this.photoSliderTrack.current.clientWidth;
+        const currentSlideHeight = this.getSlideHeight(activeSlideIndex);
+
+        this.setState({
+            sliderWidth,
+            sliderHeight: currentSlideHeight
+        });
+    }
+
     componentWillReceiveProps (nextProps) {
+        const { activeSlideIndex } = this.state;
+        const currentSlideHeight = this.getSlideHeight(activeSlideIndex);
+
         if (nextProps.mediaWidth !== this.props.mediaWidth) {
-            const { activeSlideIndex } = this.state;
             const sliderWidth = this.photoSliderTrack.current.clientWidth;
 
             this.maxLeft = sliderWidth * this.maxSlide;
             this.setState({
                 sliderLeft: sliderWidth * activeSlideIndex,
-                activeImg: activeSlideIndex,
-                sliderWidth
+                activeSlideIndex,
+                sliderWidth,
+                sliderHeight: currentSlideHeight
             });
 
             this.photoSliderTrack.current.style.left = `-${activeSlideIndex * sliderWidth}px`;
@@ -127,48 +165,53 @@ class Gallery extends Component {
 
         if (this.props.location !== nextProps.location || this.props.location.pathname !== nextProps.location.pathname) {
             this.setState({
-                activeImg: 0,
                 activeSlideIndex: 0,
-                sliderLeft: 0
+                sliderLeft: 0,
+                sliderHeight: currentSlideHeight
             });
         }
     }
 
-    setSliderWidth = () => {
-        this.setState({ sliderWidth: this.photoSliderTrack.current.clientWidth });
-    }
+    handleChangePopup = () => {
+        this.setState({ isPopup: !this.state.isPopup });
+    };
 
     render () {
-        const { photos, discount, mediaWidth } = this.props;
-        const { activeImg } = this.state;
+        const { photos, discount, mediaWidth, langMap } = this.props;
+        const { sliderHeight, activeSlideIndex, isPopup } = this.state;
+        const text = propOr('product', {}, langMap);
 
         return (
             <div className={styles.gallery}>
                 {discount ? <div className={styles.discount}>{discount}<span className={styles.percentage}>%</span></div> : null}
-                <Draggable
-                    onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
-                    onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
-                    onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
-                    allowDefaultAction
-                    touchable
-                >
-                    <div className={styles.mainImgWrap}>
-                        <div className={styles.slider}
-                            ref={this.photoSliderTrack}>
-                            {
-                                photos.map((img, i) => {
+                <div className={styles.sliderWrap}>
+                    <Draggable
+                        onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}
+                        onDrag={mediaWidth < 1024 ? this.handleDragProcess : noop}
+                        onDragEnd={mediaWidth < 1024 ? this.handleDragEnd : noop}
+                        allowDefaultAction
+                        touchable
+                    >
+                        <div className={styles.mainImgWrap}>
+                            <div className={styles.slider} ref={this.photoSliderTrack} style={{ height: sliderHeight }}>
+                                {photos.map((img, i) => {
                                     return (
                                         <img className={styles.mainImg}
                                             src={img}
                                             alt="main image"
-                                            onLoad={this.setSliderWidth}
+                                            onLoad={() => this.setSliderSizes(i)}
                                             key={i}/>
                                     );
-                                })
-                            }
+                                })}
+                            </div>
                         </div>
+                    </Draggable>
+                    {photos.length > 1 && <div className={styles.arrowLeft} onClick={this.handleArrowClick(activeSlideIndex - 1)}/>}
+                    {photos.length > 1 && <div className={styles.arrowRight} onClick={this.handleArrowClick(activeSlideIndex + 1)}/>}
+                    <div className={styles.tools}>
+                        <h3 className={styles.toolOpen} onClick={this.handleChangePopup}>{text.onScreen}</h3>
                     </div>
-                </Draggable>
+                </div>
                 {photos.length > 1 && <div className={styles.additionalImgs}>
                     {
                         photos.map((img, index) => {
@@ -176,7 +219,7 @@ class Gallery extends Component {
                                 <div key={index}
                                     onClick={() => this.handleImgClick(index)}
                                     className={classNames(styles.additionalImgWrap, {
-                                        [styles.active]: index === activeImg
+                                        [styles.active]: index === activeSlideIndex
                                     })}>
                                     <img
                                         className={styles.additionalImg}
@@ -187,6 +230,11 @@ class Gallery extends Component {
                         })
                     }
                 </div>}
+                {isPopup && mediaWidth > 1000 && <PopupGallery
+                    photos={photos}
+                    activeSlideIndex={activeSlideIndex}
+                    closePopup={this.handleChangePopup}
+                />}
             </div>
         );
     }

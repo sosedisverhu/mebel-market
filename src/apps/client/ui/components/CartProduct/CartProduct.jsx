@@ -161,7 +161,7 @@ class CartProduct extends Component {
                                     {product.texts[lang].name}
                                 </p>
                             </Link>
-                            <p className={styles.productNumber}>({color.article})</p>
+                            {!!color.article && <p className={styles.productNumber}>({color.article})</p>}
                         </div>
                         <div className={styles.properties}>
                             <p className={styles.productSize}>

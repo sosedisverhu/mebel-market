@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import pathOr from '@tinkoff/utils/object/pathOr';
 
@@ -12,8 +13,8 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import PartnerForm from '../../components/PartnerForm/PartnerForm';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
-import { connect } from 'react-redux';
 import getPartners from '../../../services/getPartners';
 import deletePartnersByIds from '../../../services/deletePartnersByIds';
 import editPartnersPositions from '../../../services/editPartnersPositions';
@@ -64,7 +65,7 @@ const mapStateToProps = ({ data }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     getPartners: payload => dispatch(getPartners(payload)),
     deletePartners: payload => dispatch(deletePartnersByIds(payload)),
     editPositions: payload => dispatch(editPartnersPositions(payload))
@@ -83,15 +84,12 @@ class PartnersPage extends Component {
         partners: []
     };
 
-    constructor (...args) {
-        super(...args);
-
-        this.state = {
-            loading: true,
-            formShowed: false,
-            editablePartner: null
-        };
-    }
+    state = {
+        loading: true,
+        formShowed: false,
+        warningFormShowed: false,
+        editablePartner: null
+    };
 
     componentDidMount () {
         this.props.getPartners()
@@ -101,6 +99,12 @@ class PartnersPage extends Component {
                 });
             });
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     handleFormDone = () => {
         this.props.getPartners()
@@ -117,13 +121,14 @@ class PartnersPage extends Component {
     handleClosePartnerForm = () => {
         this.setState({
             formShowed: false,
+            warningFormShowed: false,
             editablePartner: null
         });
     };
 
     render () {
         const { classes, partners, editPositions } = this.props;
-        const { loading, editablePartner, formShowed } = this.state;
+        const { loading, editablePartner, formShowed, warningFormShowed } = this.state;
 
         if (loading) {
             return <div className={classes.loader}>
@@ -145,11 +150,17 @@ class PartnersPage extends Component {
                 filters={false}
                 cloneElem={false}
             />
-            <Modal open={formShowed} onClose={this.handleClosePartnerForm} className={classes.modal}>
+            <Modal open={formShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal}>
                 <Paper className={classes.modalContent}>
                     <PartnerForm partner={editablePartner} onDone={this.handleFormDone}/>
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && formShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleClosePartnerForm}
+            />
         </div>;
     }
 }
