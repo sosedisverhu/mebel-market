@@ -25,6 +25,7 @@ import updateSlides from '../../../services/updateSlides';
 
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import MainSlideForm from '../MainSlideForm/MainSlideForm';
+import CloseFormDialog from '../CloseFormDialog/CloseFormDialog';
 import EditIcon from '@material-ui/icons/Edit';
 
 const LANGS = ['ru', 'ua'];
@@ -212,6 +213,7 @@ class MainSlider extends Component {
             loading: true,
             disabled: true,
             activeLang,
+            warningFormShowed: false,
             formShowed: false
         };
 
@@ -241,6 +243,12 @@ class MainSlider extends Component {
             this.slidesPaths = nextProps.slider[`slides_${activeLang}`].map(slide => slide.path);
         }
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     onDragStart = () => {
         this.setState({
@@ -345,6 +353,7 @@ class MainSlider extends Component {
     handleClosetForm = () => {
         this.setState({
             formShowed: false,
+            warningFormShowed: false,
             editableSlideInfo: null
         });
     };
@@ -371,7 +380,7 @@ class MainSlider extends Component {
 
     render () {
         const { classes, langs } = this.props;
-        const { slides, isSorting, disabled, activeLang, formShowed, editableSlideInfo } = this.state;
+        const { slides, isSorting, disabled, activeLang, formShowed, warningFormShowed, editableSlideInfo } = this.state;
 
         return <div className={classes.root}>
             <FormFieldLangs name="lang" schema={{ langs: langs }} value={activeLang} onChange={this.handleLangChange}/>
@@ -416,11 +425,17 @@ class MainSlider extends Component {
                     Сохранить
                 </Button>
             </form>
-            <Modal open={formShowed} onClose={this.handleClosetForm} className={classes.modal}>
+            <Modal open={formShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal}>
                 <Paper className={classes.modalContent}>
                     <MainSlideForm editableSlideInfo={editableSlideInfo} onDone={this.handleFormDone}/>
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && formShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleClosetForm}
+            />
         </div>;
     }
 }

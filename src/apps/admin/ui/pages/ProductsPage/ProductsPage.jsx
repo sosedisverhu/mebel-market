@@ -22,6 +22,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTableSortable from '../../components/AdminTableSortable/AdminTableSortable.jsx';
 import ProductForm from '../../components/ProductForm/ProductForm';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
 import getCategories from '../../../services/getCategories';
 import getSubCategories from '../../../services/getSubCategories';
@@ -181,6 +182,7 @@ class ProductsPage extends Component {
     state = {
         loading: true,
         activeCategory: DEFAULT_ACTIVE_CATEGORY,
+        warningFormShowed: false,
         productFormShowed: false,
         editableProduct: {},
         categories: [],
@@ -209,6 +211,12 @@ class ProductsPage extends Component {
                 });
             });
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     getCategoryProducts = (activeCategory = this.state.activeCategory) => {
         return this.props.products.filter(product => product.categoryId === activeCategory.id);
@@ -246,6 +254,7 @@ class ProductsPage extends Component {
     handleCloseProductForm = () => {
         this.setState({
             productFormShowed: false,
+            warningFormShowed: false,
             editableProduct: null
         });
     };
@@ -265,6 +274,7 @@ class ProductsPage extends Component {
             activeCategory,
             editableProduct,
             productFormShowed,
+            warningFormShowed,
             categories,
             subCategories,
             products
@@ -315,7 +325,7 @@ class ProductsPage extends Component {
                     onFormOpen={this.handleProductFormOpen}
                     cloneElem={false}
                 />
-                <Modal open={productFormShowed} onClose={this.handleCloseProductForm} className={classes.modal} disableEnforceFocus>
+                <Modal open={productFormShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal} disableEnforceFocus>
                     <Paper className={classes.modalContent}>
                         <ProductForm
                             categories={categoriesWithSubCategories}
@@ -326,6 +336,12 @@ class ProductsPage extends Component {
                             onDone={this.handleProductFormDone}/>
                     </Paper>
                 </Modal>
+                <CloseFormDialog
+                    open={warningFormShowed && productFormShowed}
+                    text='Вы точно хотите закрыть форму?'
+                    onClose={this.handleChangeFormClose}
+                    onDone={this.handleCloseProductForm}
+                />
             </div>;
         }
     };
