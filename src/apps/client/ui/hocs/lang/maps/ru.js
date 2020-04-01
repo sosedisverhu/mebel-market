@@ -81,7 +81,10 @@ export default {
         popupTitle: 'Фильтры',
         popupBtnClear: 'Очистить',
         popupBtnDone: 'Готово',
-        popupBtnApply: 'Применить'
+        popupBtnApply: 'Применить',
+        filter_actualPrice: 'Цена',
+        filter_size: 'Размер',
+        filter_color: 'Цвет'
     },
     aboutProductTop: {
         warranty: 'Гарантия',
