@@ -18,6 +18,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '@material-ui/core/Chip';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 import trim from '@tinkoff/utils/string/trim';
 import { withStyles } from '@material-ui/core/styles';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
@@ -52,7 +54,8 @@ const Filter = SortableElement((
         onSortOptionsStart,
         onSortOptionsEnd,
         isSortingOptions,
-        classes
+        classes,
+        schema
     }) => {
     const isEditable = editableFilterIndex === filterIndex;
 
@@ -148,6 +151,18 @@ const Filter = SortableElement((
                             variant='outlined'
                         />
                     }
+                    { schema.viewInAnotherFilters && <div className={classes.checkbox}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={filter.viewInAnotherFilters || ''}
+                                    onChange={onFilterChange('viewInAnotherFilters', filterIndex)}
+                                    color='primary'
+                                />
+                            }
+                            label="Показывать фильтр в подкатегории"
+                        />
+                    </div>}
                 </div>
                 <IconButton aria-label='Delete' className={classes.deleteFilterButton} onClick={onFilterDelete(filterIndex)}>
                     <DeleteIcon/>
@@ -294,12 +309,14 @@ class FormFieldFilters extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        schema: PropTypes.object
     };
 
     static defaultProps = {
         value: [],
-        onChange: noop
+        onChange: noop,
+        schema: {}
     };
 
     state = {
@@ -327,11 +344,15 @@ class FormFieldFilters extends Component {
         });
     };
 
-    handleFilterChange = (prop, i) => event => {
+    handleFilterChange = (prop, i) => (event, checked) => {
         const { value } = this.props;
         const newValue = [...value];
 
-        newValue[i][prop] = event.target.value;
+        if (typeof (checked) === 'boolean') {
+            newValue[i][prop] = checked;
+        } else {
+            newValue[i][prop] = event.target.value;
+        }
 
         if (newValue[i].options === undefined) {
             newValue[i].options = [];
@@ -475,7 +496,7 @@ class FormFieldFilters extends Component {
     };
 
     render () {
-        const { classes, value } = this.props;
+        const { classes, value, schema } = this.props;
         const { isSorting, isSortingOptions, newOptionTexts, editableOptionText, editableFilterIndex, editableOptionIndex } = this.state;
 
         return <div className={classes.createFiltersWrapp}>
@@ -503,6 +524,7 @@ class FormFieldFilters extends Component {
                 isSortingOptions={isSortingOptions}
                 useDragHandle
                 classes={classes}
+                schema={schema}
             />
             <div className={classes.buttonWrapp}>
                 <Fab size="small" color='primary' onClick={this.handleFilterAdd} aria-label="Add">

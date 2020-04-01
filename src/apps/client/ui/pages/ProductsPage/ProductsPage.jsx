@@ -113,7 +113,7 @@ class ProductsPage extends Component {
 
         const filters = currentCategory ? flatten([
             this.getDefaultFilters(products, langMap),
-            this.getFilters(currentCategory, products, isSubCategoryFilters)
+            this.getFilters(currentCategory, products, category, subCategory)
         ]) : this.getDefaultFilters(products, langMap);
 
         this.setState({
@@ -238,18 +238,37 @@ class ProductsPage extends Component {
         }, []);
     };
 
-    getFilters = (category, products, isSubCategoryFilters) => {
+    getFilters = (currentCategory, products, category, subCategory) => {
         const { lang } = this.props;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryName = subCategory ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryFilters = category.filters[lang];
 
-        return (category.filters[lang] || []).reduce((filters, filter) => {
+        if (subCategory) {
+            const requiredCategoryFilters = category.filters[lang].filter(categoryFilter => categoryFilter.viewInAnotherFilters);
+            requiredCategoryFilters.forEach(requiredCategoryFilter => {
+                if (!currentCategoryFilters.find(currentCategoryFilter => currentCategoryFilter.id === requiredCategoryFilter.id)) {
+                    currentCategoryFilters.push(requiredCategoryFilter);
+                }
+            });
+        }
+
+        return (currentCategoryFilters || []).reduce((filters, filter) => {
             switch (filter.type) {
             case 'checkbox':
                 const optionsInProduct = compose(
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value))
+                    map(product => {
+                        const productFilters = [...product[currentCategoryName]];
+                        if (subCategory) {
+                            const requiredCategoryFilters = category.filters[lang]
+                                .filter(categoryFilter => categoryFilter.viewInAnotherFilters)
+                                .map(categoryFilter => product.categoryFilters.find(filter => filter.id === categoryFilter.id));
+                            productFilters.push(...requiredCategoryFilters);
+                        }
+                        return productFilters.map(productFilter => filter.id === productFilter.id && productFilter.value);
+                    })
                 )(products);
 
                 const options = filterUtil(option =>
@@ -305,12 +324,10 @@ class ProductsPage extends Component {
     };
 
     getFilterValue = (product, filter) => {
-        const { isSubCategoryFilters } = this.state;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
         const productFilterValue = compose(
             prop('value'),
             find(productFilter => productFilter.id === filter.id)
-        )(product[currentCategoryName]);
+        )([...product.categoryFilters, ...product.subCategoryFilters]);
 
         return filter.prop ? product[filter.prop] : productFilterValue;
     };
