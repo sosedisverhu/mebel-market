@@ -428,6 +428,13 @@ export default function ({ data: {
             },
             {
                 component: FormFieldCheckbox,
+                name: 'viewOneColor',
+                schema: {
+                    label: 'Показывать цвет, если он один'
+                }
+            },
+            {
+                component: FormFieldCheckbox,
                 name: 'hidden',
                 hint: categoryHidden && 'Товар будет скрыт, т.к. он находится в скрытой категории',
                 schema: {

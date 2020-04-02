@@ -19,7 +19,8 @@ export default function getProduct (body) {
         alias,
         categoryFilters,
         subCategoryFilters,
-        labels
+        labels,
+        viewOneColor
     } = body;
 
     return {
@@ -42,6 +43,7 @@ export default function getProduct (body) {
         alias,
         categoryFilters,
         subCategoryFilters,
-        labels
+        labels,
+        viewOneColor
     };
 }

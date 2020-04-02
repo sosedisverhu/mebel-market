@@ -24,7 +24,7 @@ import updateProductFiles from '../../../services/updateProductFiles';
 import updateProductAvatar from '../../../services/updateProductAvatar';
 import updateProductColor from '../../../services/updateProductColor';
 
-const PRODUCTS_VALUES = ['name', 'hidden'];
+const PRODUCTS_VALUES = ['name', 'hidden', 'viewOneColor'];
 const CATEGORY_FILTER_NAME_REGEX = /categoryFilter-/g;
 const SUB_CATEGORY_FILTER_NAME_REGEX = /subCategoryFilter-/g;
 const dublicateProperties = ['article', 'price', 'discountPrice', 'discount'];
@@ -185,7 +185,8 @@ class ProductForm extends Component {
             subCategoryId,
             id,
             alias,
-            labels
+            labels,
+            viewOneColor
         } = values;
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -352,7 +353,8 @@ class ProductForm extends Component {
             alias,
             categoryFilters,
             subCategoryFilters,
-            labels
+            labels,
+            viewOneColor
         };
     };
 

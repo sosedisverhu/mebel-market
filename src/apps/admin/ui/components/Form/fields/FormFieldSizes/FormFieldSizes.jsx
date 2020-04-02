@@ -26,7 +26,7 @@ import FormFieldColors from '../FormFieldColors/FormFieldColors';
 import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
 import FormFieldTableSizes from '../FormFieldTableSizes/FormFieldTableSizes';
 import classNames from 'classnames';
-import FormFieldButton from "../FormFieldButton/FormFieldButton";
+import FormFieldButton from '../FormFieldButton/FormFieldButton';
 
 const materialStyles = {
     size: {
@@ -267,7 +267,8 @@ Size.propTypes = {
     onChange: PropTypes.func.isRequired,
     onChangeCustomField: PropTypes.func.isRequired,
     values: PropTypes.object.isRequired,
-    langs: PropTypes.array.isRequired
+    langs: PropTypes.array.isRequired,
+    onClickDuplicateOptions: PropTypes.func.isRequired
 };
 
 const SortableTab = SortableElement(({

@@ -268,9 +268,9 @@ class AboutProduct extends Component {
                         handleChangeSize={this.handleChangeSize}
                     />
                 </div>
-                {!isOneColor && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                {(!isOneColor || product.viewOneColor) && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
                     <div className={styles.colorTitle}>
-                        {!isOneColor ? text.chooseColor : text.oneColor}
+                        {text.chooseColor}
                     </div>
                     <ColorsSelect
                         activeSize={activeSize}

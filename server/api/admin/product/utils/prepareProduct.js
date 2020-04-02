@@ -20,7 +20,8 @@ const VALUES = [
     'alias',
     'categoryFilters',
     'subCategoryFilters',
-    'labels'
+    'labels',
+    'viewOneColor'
 ];
 
 export default function prepareProduct (body) {
