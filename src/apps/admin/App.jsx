@@ -12,7 +12,6 @@ import checkAuthentication from './services/checkAuthentication';
 
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
-import CategoriesPage from './ui/pages/CategoriesPage/CategoriesPage';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
 import PartnersPage from './ui/pages/PartnersPage/PartnersPage.jsx';
 import ReviewsPage from './ui/pages/ReviewsPage/ReviewsPage';
@@ -88,7 +87,6 @@ class App extends Component {
                 <Route exact path='/admin/mainSlider' component={MainSliderPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
                 <Route exact path='/admin/articles' component={ArticlesPage} />
-                <Route exact path='/admin/categories' component={CategoriesPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
                 <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
