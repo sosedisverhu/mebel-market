@@ -29,7 +29,8 @@ export default {
         tableSizesRowTitle: 'Розмір товару',
         top: 'Топ продаж',
         new: 'Новинка',
-        onScreen: 'На весь екран'
+        onScreen: 'На весь екран',
+        selectThisColor: 'Вибрати даний колір'
     },
     breadcrumbs: {
         main: 'Головна'

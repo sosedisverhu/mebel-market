@@ -172,7 +172,14 @@ class AboutProduct extends Component {
     changeColorListOpen = () => this.setState({ colorListOpen: true });
     changeColorListClose = () => this.setState(({ colorListOpen: false }));
 
-    handleChangePopup = (activePopupColorIndex = null) => () => this.setState({ activePopupColorIndex });
+    handleChangePopup = (activePopupColorIndex) => {
+        this.setState({
+            activePopupColorIndex: typeof (activePopupColorIndex) === 'number'
+                ? activePopupColorIndex
+                : null,
+            colorListOpen: false
+        });
+    };
 
     handleChangePopupSizes = () => () => {
         this.setState((state) => ({ isPopupSizes: !state.isPopupSizes }));
@@ -307,7 +314,12 @@ class AboutProduct extends Component {
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                     onClick={this.handleAddToWishlist}/>
             </div>
-            {activePopupColorIndex !== null && <PopupColor colors={actualColors} activeIndex={activePopupColorIndex} closePopup={this.handleChangePopup}/>}
+            {activePopupColorIndex !== null && <PopupColor
+                colors={actualColors}
+                activeIndex={activePopupColorIndex}
+                closePopup={this.handleChangePopup}
+                handleChangeColor={this.handleChangeColor}
+            />}
             {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes}/>}
         </div>;
     }
