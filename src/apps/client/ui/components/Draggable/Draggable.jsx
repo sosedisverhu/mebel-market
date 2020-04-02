@@ -48,7 +48,8 @@ export default class Draggable extends PureComponent {
         /**
          * Enable touch events
          */
-        touchable: pt.bool
+        touchable: pt.bool,
+        styles: pt.object
     };
 
     static defaultProps = {
@@ -60,7 +61,8 @@ export default class Draggable extends PureComponent {
         onDragEnd: noop,
         dragTimeout: 0,
         dragThreshold: 0,
-        allowDefaultAction: false
+        allowDefaultAction: false,
+        styles: {}
     };
 
     componentWillUnmount () {
@@ -214,6 +216,7 @@ export default class Draggable extends PureComponent {
             allowDefaultAction,
             dataQaType,
             touchable,
+            styles,
             ...props
         } = this.props;
 
@@ -226,6 +229,7 @@ export default class Draggable extends PureComponent {
                 onDragEnd={preventEvent}
                 onMouseDown={this.handleMouseDown}
                 onTouchStart={touchable ? this.handleMouseDown : noop}
+                style={styles}
             />
         );
     }

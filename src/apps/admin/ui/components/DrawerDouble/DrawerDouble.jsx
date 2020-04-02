@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
+
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -10,7 +12,6 @@ import AddIcon from '@material-ui/icons/Add';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
-import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import List from '@material-ui/core/List';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,7 +23,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
-const materialStyles = theme => ({
+const materialStyles = () => ({
     toolbarNav: {
         display: 'flex',
         justifyContent: 'space-between',
