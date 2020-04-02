@@ -15,6 +15,7 @@ import noop from '@tinkoff/utils/function/noop';
 const TIME_TO_NEXT_SWITCHING = 8000;
 const SWITCHING_DURATION = 800;
 const IGNORE_SWIPE_DISTANCE = 50;
+const IMAGE_HEIGHT_TO_WIDTH = 0.384;
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -45,7 +46,8 @@ class Carousel extends Component {
         this.sliderTrack = React.createRef();
         this.state = {
             activeSlideIndex: 0,
-            sliderLeft: 0
+            sliderLeft: 0,
+            imageHeight: 0
         };
     }
 
@@ -63,7 +65,8 @@ class Carousel extends Component {
             this.sliderTrack.current.style.transition = `left ${SWITCHING_DURATION}ms`;
             this.maxLeft = (nextProps.mediaWidth * this.maxSlide) + scrollbarWidth * this.maxSlide;
             this.setState({
-                sliderLeft: sliderLeft
+                sliderLeft: sliderLeft,
+                imageHeight: nextProps.mediaWidth * IMAGE_HEIGHT_TO_WIDTH
             });
         }
     }
@@ -124,6 +127,9 @@ class Carousel extends Component {
 
     componentDidMount () {
         this.startSlider();
+        this.setState({
+            imageHeight: window.innerWidth * IMAGE_HEIGHT_TO_WIDTH
+        });
     }
 
     componentWillUnmount () {
@@ -234,7 +240,7 @@ class Carousel extends Component {
     };
 
     renderSlide = (slide, i) => <div className={styles.slide} key={i}>
-        <div className={styles.imageWrapper}>
+        <div className={styles.imageWrapper} style={ this.props.mediaWidth > 768 ? { height: this.state.imageHeight } : {}}>
             <img
                 className={styles.image} src={slide.path}
                 alt={`slide${i}`}
