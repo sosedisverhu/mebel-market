@@ -5,6 +5,7 @@ node_modules/
 npm-debug.log*
 public/
 server/compiled/
+server/compiled/
 webpackAssets.json
 src/apps/admin/files
 *.DS_Store
