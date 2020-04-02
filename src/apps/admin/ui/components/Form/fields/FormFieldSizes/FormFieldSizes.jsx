@@ -26,6 +26,7 @@ import FormFieldColors from '../FormFieldColors/FormFieldColors';
 import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
 import FormFieldTableSizes from '../FormFieldTableSizes/FormFieldTableSizes';
 import classNames from 'classnames';
+import FormFieldButton from "../FormFieldButton/FormFieldButton";
 
 const materialStyles = {
     size: {
@@ -122,6 +123,9 @@ const materialStyles = {
             maxWidth: '150px',
             fontSize: '0.8rem'
         }
+    },
+    duplicateBtnWrap: {
+        marginBottom: '30px'
     }
 };
 
@@ -168,7 +172,8 @@ const Size = ({
     onChange,
     onChangeCustomField,
     values,
-    langs
+    langs,
+    onClickDuplicateOptions
 }) => (
     <div className={classes.size}>
         <div className={classes.fieldsGroup}>
@@ -227,6 +232,9 @@ const Size = ({
                 value: 'Цена'
             }}
         />
+        {!!size.features.length && <div className={classes.duplicateBtnWrap}>
+            <FormFieldButton schema={{ label: "Дублировать 'Дополнительные опции' для всех размеров", onClick: () => onClickDuplicateOptions(size.id) }}/>
+        </div>}
         <h6 className={classes.h6}>Таблица размеров</h6>
         <FormFieldTableSizes
             value={size.tableSizes}
@@ -367,6 +375,25 @@ class FormFieldSizes extends Component {
         });
     };
 
+    handleClickDuplicateOptions = (currentSizeId) => {
+        const { values, langs } = this.props;
+
+        for (const lang in langs) {
+            const sizes = values[`${langs[lang]}_sizes`];
+            const currentSize = sizes.find(size => size.id === currentSizeId);
+
+            if (!currentSize) return;
+
+            sizes.forEach(size => {
+                if (size.id !== currentSizeId) {
+                    size.features.push(...currentSize.features);
+                }
+            });
+
+            this.props.onChangeCustomField(sizes, `${lang}_sizes`);
+        }
+    };
+
     handleTabsChange = (newTabsValue) => this.setState({ tabsValue: newTabsValue });
 
     render () {
@@ -390,6 +417,7 @@ class FormFieldSizes extends Component {
                 tabsValue={tabsValue}
                 values={values}
                 langs={langs}
+                onClickDuplicateOptions={this.handleClickDuplicateOptions}
             />}
             <div className={classes.addButton}>
                 <Fab color='primary' size='small' onClick={this.handleSizeAdd}>
