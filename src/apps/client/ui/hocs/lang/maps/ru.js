@@ -29,7 +29,8 @@ export default {
         tableSizesRowTitle: 'Размер товара',
         top: 'Топ продаж',
         new: 'Новинка',
-        onScreen: 'На весь экран'
+        onScreen: 'На весь экран',
+        selectThisColor: 'Выбрать этот цвет'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -81,7 +82,10 @@ export default {
         popupTitle: 'Фильтры',
         popupBtnClear: 'Очистить',
         popupBtnDone: 'Готово',
-        popupBtnApply: 'Применить'
+        popupBtnApply: 'Применить',
+        filter_actualPrice: 'Цена',
+        filter_size: 'Размер',
+        filter_color: 'Цвет'
     },
     aboutProductTop: {
         warranty: 'Гарантия',

@@ -38,7 +38,8 @@ const Product = new Schema({
         value: { type: String, required: true }
     }],
     positionIndex: { type: Number },
-    labels: { type: Array, required: true }
+    labels: { type: Array, required: true },
+    viewOneColor: { type: Boolean, required: true }
 });
 
 export default mongoose.model('Product', Product);

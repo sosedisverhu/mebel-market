@@ -14,6 +14,7 @@ import any from '@tinkoff/utils/array/any';
 import prop from '@tinkoff/utils/object/prop';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import includes from '@tinkoff/utils/array/includes';
+import intersection from '@tinkoff/utils/array/intersection';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
@@ -27,19 +28,24 @@ import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
 import classNames from 'classnames';
 
-const DEFAULT_FILTERS = name => {
-    return [
-        {
-            name: name,
-            type: 'range',
-            min: 0,
-            max: 0,
-            dimension: '\u20B4',
-            id: 'actualPrice',
-            prop: 'actualPrice'
-        }
-    ];
-};
+const DEFAULT_FILTERS = [
+    {
+        type: 'range',
+        min: 0,
+        max: 0,
+        dimension: '\u20B4',
+        id: 'actualPrice',
+        prop: 'actualPrice'
+    },
+    {
+        type: 'checkbox',
+        id: 'size'
+    },
+    {
+        type: 'checkbox',
+        id: 'color'
+    }
+];
 
 class ProductsPage extends Component {
     static propTypes = {
@@ -107,7 +113,7 @@ class ProductsPage extends Component {
 
         const filters = currentCategory ? flatten([
             this.getDefaultFilters(products, langMap),
-            this.getFilters(currentCategory, products, isSubCategoryFilters)
+            this.getFilters(currentCategory, products, category, subCategory)
         ]) : this.getDefaultFilters(products, langMap);
 
         this.setState({
@@ -160,9 +166,54 @@ class ProductsPage extends Component {
     };
 
     getDefaultFilters = (products, langMap) => {
+        const { lang } = this.props;
         const text = propOr('productsPage', {}, langMap);
-        return DEFAULT_FILTERS(text.price).reduce((filters, filter) => {
+        return DEFAULT_FILTERS.reduce((filters, filter) => {
             switch (filter.type) {
+            case 'checkbox':
+                if (filter.id === 'size') {
+                    const options = [];
+                    products.forEach(product => {
+                        product.sizes[lang].forEach(size => {
+                            if (options.every(option => option.name !== size.name.trim())) {
+                                options.push({ id: size.name.trim(), name: size.name.trim() });
+                            }
+                        });
+                    });
+
+                    return options.length > 1 ? [
+                        ...filters,
+                        {
+                            ...filter,
+                            name: text[`filter_${filter.id}`],
+                            options
+                        }
+                    ] : filters;
+                }
+
+                if (filter.id === 'color') {
+                    const options = [];
+                    products.forEach(product => {
+                        product.sizes[lang].forEach(size => {
+                            size.colors.forEach(color => {
+                                if (options.every(option => option.name !== color.name.trim())) {
+                                    options.push({ id: color.name.trim(), name: color.name.trim() });
+                                }
+                            });
+                        });
+                    });
+
+                    return options.length > 1 ? [
+                        ...filters,
+                        {
+                            ...filter,
+                            name: text[`filter_${filter.id}`],
+                            options
+                        }
+                    ] : filters;
+                }
+
+                return [];
             case 'range':
                 const prices = compose(
                     uniq,
@@ -176,6 +227,7 @@ class ProductsPage extends Component {
                     ...filters,
                     {
                         ...filter,
+                        name: text[`filter_${filter.id}`],
                         min,
                         max
                     }
@@ -186,19 +238,39 @@ class ProductsPage extends Component {
         }, []);
     };
 
-    getFilters = (category, products, isSubCategoryFilters) => {
+    getFilters = (currentCategory, products, category, subCategory) => {
         const { lang } = this.props;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryName = subCategory ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryFilters = category.filters[lang];
 
-        return (category.filters[lang] || []).reduce((filters, filter) => {
+        if (subCategory) {
+            const requiredCategoryFilters = category.filters[lang].filter(categoryFilter => categoryFilter.viewInAnotherFilters);
+            requiredCategoryFilters.forEach(requiredCategoryFilter => {
+                if (!currentCategoryFilters.find(currentCategoryFilter => currentCategoryFilter.id === requiredCategoryFilter.id)) {
+                    currentCategoryFilters.push(requiredCategoryFilter);
+                }
+            });
+        }
+
+        return (currentCategoryFilters || []).reduce((filters, filter) => {
             switch (filter.type) {
             case 'checkbox':
                 const optionsInProduct = compose(
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value))
+                    map(product => {
+                        const productFilters = [...product[currentCategoryName]];
+                        if (subCategory) {
+                            const requiredCategoryFilters = category.filters[lang]
+                                .filter(categoryFilter => categoryFilter.viewInAnotherFilters)
+                                .map(categoryFilter => product.categoryFilters.find(filter => filter.id === categoryFilter.id));
+                            productFilters.push(...requiredCategoryFilters);
+                        }
+                        return productFilters.map(productFilter => filter.id === productFilter.id && productFilter.value);
+                    })
                 )(products);
+
                 const options = filterUtil(option =>
                     any(optionInProduct => option.id === optionInProduct, optionsInProduct), filter.options.map(filter => filter));
 
@@ -252,28 +324,37 @@ class ProductsPage extends Component {
     };
 
     getFilterValue = (product, filter) => {
-        const { isSubCategoryFilters } = this.state;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
         const productFilterValue = compose(
             prop('value'),
             find(productFilter => productFilter.id === filter.id)
-        )(product[currentCategoryName]);
+        )([...product.categoryFilters, ...product.subCategoryFilters]);
 
         return filter.prop ? product[filter.prop] : productFilterValue;
     };
 
     filter = () => {
+        const { lang } = this.props;
         const { products } = this.state;
         const newFilteredProducts = reduceObj((filteredProducts, { filter, values }) => {
             switch (filter.type) {
             case 'checkbox':
-                return !values.length
-                    ? filteredProducts
-                    : filterUtil(product => {
-                        const value = this.getFilterValue(product, filter);
-
-                        return includes(value, values);
+                if (!values.length) return filteredProducts;
+                if (filter.id === 'size') {
+                    return filterUtil(product => {
+                        return !!intersection(product.sizes[lang].map(size => size.name), values).length;
                     }, filteredProducts);
+                }
+                if (filter.id === 'color') {
+                    return filterUtil(product => {
+                        const sizes = product.sizes[lang];
+                        const colors = flatten(sizes.map(size => size.colors));
+                        return !!intersection(colors.map(color => color.name), values).length;
+                    }, filteredProducts);
+                }
+                return filterUtil(product => {
+                    const value = this.getFilterValue(product, filter);
+                    return includes(value, values);
+                }, filteredProducts);
             case 'range':
                 return filterUtil(product => {
                     const value = this.getFilterValue(product, filter);
