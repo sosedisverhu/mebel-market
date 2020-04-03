@@ -232,7 +232,7 @@ const Size = ({
                 value: 'Цена'
             }}
         />
-        {!!size.features.length && <div className={classes.duplicateBtnWrap}>
+        {!!size.features && !!size.features.length && <div className={classes.duplicateBtnWrap}>
             <FormFieldButton schema={{ label: "Дублировать 'Дополнительные опции' для всех размеров", onClick: () => onClickDuplicateOptions(size.id) }}/>
         </div>}
         <h6 className={classes.h6}>Таблица размеров</h6>
@@ -387,6 +387,9 @@ class FormFieldSizes extends Component {
 
             sizes.forEach(size => {
                 if (size.id !== currentSizeId) {
+                    if (!size.features) {
+                        size.features = [];
+                    }
                     size.features.push(...currentSize.features);
                 }
             });
