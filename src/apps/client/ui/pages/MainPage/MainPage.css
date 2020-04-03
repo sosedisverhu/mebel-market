@@ -4,6 +4,7 @@
 
 .categorySection {
     background: whiteBasic;
+    min-height: 270px;
 
     &.top {
         background: gray5;

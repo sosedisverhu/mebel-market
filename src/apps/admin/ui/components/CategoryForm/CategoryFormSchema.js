@@ -92,8 +92,12 @@ export default function ({ data: { title } = {} } = {}) {
                         id: 'notDepend',
                         name: 'depend'
                     }],
-                    dimension: 'depend'
+                    dimension: 'depend',
+                    viewInAnotherFilters: 'notDepend'
                 }],
+                schema: {
+                    viewInAnotherFilters: true
+                },
                 validators: [
                     { name: 'filters' }
                 ]
