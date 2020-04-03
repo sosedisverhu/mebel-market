@@ -289,12 +289,8 @@ class OrderForm extends Component {
                             <TableCell className={classes.rowLabel} align="center">{formatMoney(productsPrice)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className={classes.rowLabel} colSpan={4}>Цена за доставку</TableCell>
-                            <TableCell className={classes.rowLabel} align="center">{formatMoney(delivery.price || 0)}</TableCell>
-                        </TableRow>
-                        <TableRow>
                             <TableCell className={classes.rowLabel} colSpan={4}>Всего</TableCell>
-                            <TableCell className={classes.rowLabel} align="center">{formatMoney(productsPrice + (delivery.price || 0))}</TableCell>
+                            <TableCell className={classes.rowLabel} align="center">{formatMoney(productsPrice)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

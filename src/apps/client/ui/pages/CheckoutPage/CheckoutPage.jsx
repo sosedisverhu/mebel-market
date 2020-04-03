@@ -33,8 +33,7 @@ const deliveryOptions = [
         texts: {
             ru: { option: 'Почтой' },
             ua: { option: 'Поштою' }
-        },
-        price: 125
+        }
     }
 ];
 
@@ -243,7 +242,7 @@ class CheckoutPage extends Component {
 
             return sum + (quantity * (productPrice + featuresPrice));
         }, 0);
-        const totalPrice = productsPrice + (deliveryChecked.price || 0);
+        const totalPrice = productsPrice;
 
         if (!basket.length) {
             return <section className={styles.noItemsContainerWrap}>
@@ -278,7 +277,6 @@ class CheckoutPage extends Component {
                         </div>
                         <div className={styles.priceWrap}>
                             <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
-                            {deliveryChecked.price && <p className={styles.priceRow}>{text.deliveryPrice} <span>{formatMoney(deliveryChecked.price)}</span></p>}
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                         </div>
                     </div>
@@ -360,7 +358,6 @@ class CheckoutPage extends Component {
                     </div>
                     <div className={classNames(styles.priceWrap, styles.mobile)}>
                         <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
-                        {deliveryChecked.price && <p className={styles.priceRow}>{text.deliveryPrice} <span>{formatMoney(deliveryChecked.price)}</span></p>}
                         <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                     </div>
                 </div>

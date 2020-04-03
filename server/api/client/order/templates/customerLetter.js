@@ -342,11 +342,6 @@ export default function customerLetter (order, categories, subCategories, domain
                                                     ${delivery.id === 'pickup'
                                                         ? delivery.texts.ru.description
                                                         : customer.address}
-                                                </td>                                                
-                                                <td style="width:180px;text-align:right;vertical-align:top;padding:0">
-                                                    <span style="font-size:15px;font-style:italic"> ${delivery.price
-                                                        ? formatMoney(delivery.price)
-                                                        : 'бесплатно'}</span>
                                                 </td>
                                             </tr>
                                             </tbody></table>
