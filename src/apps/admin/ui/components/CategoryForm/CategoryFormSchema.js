@@ -3,7 +3,6 @@ import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
@@ -161,12 +160,11 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {

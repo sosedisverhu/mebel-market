@@ -4,7 +4,6 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldDate from '../Form/fields/FormFieldDate/FormFieldDate';
 
 export default function ({ data: { title } = {} } = {}) {
@@ -119,12 +118,11 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {

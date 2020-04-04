@@ -55,8 +55,8 @@ class SeoForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' }
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords
         };
     };
 
@@ -74,12 +74,12 @@ class SeoForm extends Component {
                 ua: {
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 },
                 ru: {
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 }
             }
         };

@@ -4,7 +4,6 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
 
 export default function ({ data: { title, categoryHidden } = {} } = {}) {
@@ -138,12 +137,11 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {

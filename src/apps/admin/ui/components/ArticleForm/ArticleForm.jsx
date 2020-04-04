@@ -80,8 +80,8 @@ class ArticleForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords,
             hidden: article.hidden || false,
             alias: article.alias,
             ...pick(NEWS_VALUES, article)
@@ -119,7 +119,7 @@ class ArticleForm extends Component {
                     content: ruContent,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 },
                 ua: {
                     name: uaName,
@@ -127,7 +127,7 @@ class ArticleForm extends Component {
                     content: uaContent,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 }
             },
             date: +new Date(date),

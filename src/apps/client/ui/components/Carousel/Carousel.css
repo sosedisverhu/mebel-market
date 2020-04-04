@@ -37,18 +37,6 @@
     z-index: -1;
     width: 100vw;
     display: flex;
-
-    @media (max-width: 768px){
-        height: 400px;
-    }
-
-    @media (max-width: 600px){
-        height: 300px;
-    }
-
-    @media (max-width: 425px){
-        height: 216px;
-    }
 }
 
 .image {

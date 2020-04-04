@@ -1,7 +1,6 @@
 import FormFieldTitle from '../Form/fields/FormFieldTitle/FormFieldTitle.jsx';
 import FormFieldInput from '../Form/fields/FormFieldInput/FormFieldInput.jsx';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs.jsx';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 
 export default function ({ settings: { disabled } } = {}) {
@@ -47,12 +46,11 @@ export default function ({ settings: { disabled } } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {

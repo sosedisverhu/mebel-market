@@ -116,8 +116,8 @@ class ProductForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords,
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
             ru_sizes: pathOr(['ru'], '', productSizes) || [],
@@ -322,7 +322,7 @@ class ProductForm extends Component {
                     shortDescription: ruShortDescription,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 },
                 ua: {
                     name: uaName,
@@ -330,7 +330,7 @@ class ProductForm extends Component {
                     shortDescription: uaShortDescription,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 }
             },
             characteristics: {

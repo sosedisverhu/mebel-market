@@ -68,6 +68,7 @@
 }
 
 .productsPack {
+    padding: 2px;
     display: flex;
     width: 100%;
     align-items: flex-start;

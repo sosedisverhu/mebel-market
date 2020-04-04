@@ -8,7 +8,6 @@ import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
 import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
 import FormFieldButtonCopyFilters from '../Form/fields/FormFieldButtonCopyFilters/FormFieldButtonCopyFilters';
@@ -414,12 +413,11 @@ export default function ({ data: {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {
