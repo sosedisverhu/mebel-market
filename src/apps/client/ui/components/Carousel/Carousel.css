@@ -1,4 +1,4 @@
-﻿﻿@value whiteBasic from '../../../../../css/colors.css';
+﻿@value whiteBasic from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 
@@ -191,7 +191,7 @@
 
     &.dotActive {
         &:before {
-            background: blackLight;
+            background: greenBasic;
             transition: background 0.25s ease-in;
         }
     }

@@ -81,6 +81,32 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
             },
             {
                 component: FormFieldTitle,
+                name: 'filtersTitle',
+                schema: {
+                    label: 'Дефолтные фильтры для подкатегории',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldCheckbox,
+                name: 'sizeFilter',
+                schema: {
+                    label: 'Включить фильтр по размерам'
+                }
+            },
+            {
+                component: FormFieldCheckbox,
+                name: 'colorFilter',
+                schema: {
+                    label: 'Включить фильтр по цветам'
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
                 name: 'seoTitle',
                 schema: {
                     label: 'Сео',

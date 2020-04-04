@@ -112,9 +112,9 @@ class ProductsPage extends Component {
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
         const filters = currentCategory ? flatten([
-            this.getDefaultFilters(products, langMap),
+            this.getDefaultFilters(products, langMap, currentCategory),
             this.getFilters(currentCategory, products, category, subCategory)
-        ]) : this.getDefaultFilters(products, langMap);
+        ]) : this.getDefaultFilters(products, langMap, currentCategory);
 
         this.setState({
             products,
@@ -165,13 +165,13 @@ class ProductsPage extends Component {
             : filteredProductsByCategory;
     };
 
-    getDefaultFilters = (products, langMap) => {
+    getDefaultFilters = (products, langMap, currentCategory) => {
         const { lang } = this.props;
         const text = propOr('productsPage', {}, langMap);
         return DEFAULT_FILTERS.reduce((filters, filter) => {
             switch (filter.type) {
             case 'checkbox':
-                if (filter.id === 'size') {
+                if (filter.id === 'size' && currentCategory.sizeFilter) {
                     const options = [];
                     products.forEach(product => {
                         product.sizes[lang].forEach(size => {
@@ -191,7 +191,7 @@ class ProductsPage extends Component {
                     ] : filters;
                 }
 
-                if (filter.id === 'color') {
+                if (filter.id === 'color' && currentCategory.colorFilter) {
                     const options = [];
                     products.forEach(product => {
                         product.sizes[lang].forEach(size => {
@@ -213,7 +213,7 @@ class ProductsPage extends Component {
                     ] : filters;
                 }
 
-                return [];
+                return filters;
             case 'range':
                 const prices = compose(
                     uniq,

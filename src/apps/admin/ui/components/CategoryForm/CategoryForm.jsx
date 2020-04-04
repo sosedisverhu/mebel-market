@@ -83,6 +83,8 @@ class CategoryForm extends Component {
             alias: category.alias || '',
             hidden: category.hidden || false,
             ...pick(CATEGORIES_VALUES, category),
+            sizeFilter: category.sizeFilter,
+            colorFilter: category.colorFilter,
             filters: [],
             ua_filters: pathOr(['filters', 'ua'], [], category),
             ru_filters: pathOr(['filters', 'ru'], [], category),
@@ -113,6 +115,8 @@ class CategoryForm extends Component {
             positionIndex,
             id,
             alias,
+            sizeFilter,
+            colorFilter,
             ua_filters: uaFilters,
             ru_filters: ruFilters
         }) => {
@@ -138,7 +142,9 @@ class CategoryForm extends Component {
                 ru: ruFilters
             },
             id,
-            alias
+            alias,
+            sizeFilter,
+            colorFilter
         };
     };
 

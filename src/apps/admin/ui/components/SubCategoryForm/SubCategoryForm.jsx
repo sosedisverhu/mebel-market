@@ -85,6 +85,8 @@ class SubCategoryForm extends Component {
             categoryId: activeCategory.id,
             hidden: (categoryHidden ? false : subCategory.hidden) || false,
             alias: subCategory.alias,
+            sizeFilter: subCategory.sizeFilter,
+            colorFilter: subCategory.colorFilter,
             lang: 'ru',
             ...pick(SUB_CATEGORIES_VALUES, subCategory),
             ua_filters: pathOr(['filters', 'ua'], [], subCategory),
@@ -114,6 +116,8 @@ class SubCategoryForm extends Component {
             positionIndex,
             id,
             alias,
+            sizeFilter,
+            colorFilter,
             ua_filters: uaFilters,
             ru_filters: ruFilters
         }) => {
@@ -140,7 +144,9 @@ class SubCategoryForm extends Component {
             categoryId,
             positionIndex,
             id,
-            alias
+            alias,
+            sizeFilter,
+            colorFilter
         };
     };
 

@@ -83,13 +83,13 @@ class App extends Component {
         return <main>
             <Header />
             <Switch>
-                <Route exact path='/admin' component={MainSliderPage} />
+                <Route exact path='/admin' component={OrdersPage} />
                 <Route exact path='/admin/products' component={ProductsPage} />
                 <Route exact path='/admin/articles' component={ArticlesPage} />
+                <Route exact path='/admin/slider' component={MainSliderPage} />
                 <Route exact path='/admin/partners' component={PartnersPage} />
                 <Route exact path='/admin/reviews' component={ReviewsPage} />
                 <Route exact path='/admin/seo' component={SeoPage} />
-                <Route exact path='/admin/orders' component={OrdersPage} />
                 <Route exact path='/admin/credentials' component={CredentialsPage} />
             </Switch>
         </main>;
