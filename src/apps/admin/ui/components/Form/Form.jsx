@@ -146,6 +146,15 @@ class Form extends Component {
         return changesByLang;
     };
 
+    handleFieldChangeCustomFields = (newFields) => {
+        this.setState({
+            values: {
+                ...this.state.values,
+                ...newFields
+            }
+        });
+    };
+
     createField = (field, i) => {
         const { langs } = this.props;
         const { values, validationMessages, lang } = this.state;
@@ -155,6 +164,7 @@ class Form extends Component {
         const fieldProps = {
             onChange: this.handleFieldChange(field, fieldName),
             onChangeCustomField: (value, customFieldName) => this.handleFieldChange(field, customFieldName)(),
+            onChangeCustomFields: (newFields) => this.handleFieldChangeCustomFields(newFields),
             onBlur: this.handleFieldBlur(field),
             name: fieldName,
             value: values[fieldName],

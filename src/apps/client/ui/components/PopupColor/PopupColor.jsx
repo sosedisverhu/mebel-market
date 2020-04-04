@@ -5,6 +5,7 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 import classNames from 'classnames';
 
 import noop from '@tinkoff/utils/function/noop';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import Draggable from '../Draggable/Draggable';
 import styles from './PopupColor.css';
@@ -13,7 +14,8 @@ const IGNORE_SWIPE_DISTANCE = 50;
 
 const mapStateToProps = ({ application }) => {
     return {
-        mediaWidth: application.media.width
+        mediaWidth: application.media.width,
+        langMap: application.langMap
     };
 };
 
@@ -22,7 +24,9 @@ class PopupColor extends Component {
         closePopup: PropTypes.func.isRequired,
         activeIndex: PropTypes.object.isRequired,
         mediaWidth: PropTypes.number.isRequired,
-        colors: PropTypes.array.isRequired
+        colors: PropTypes.array.isRequired,
+        langMap: PropTypes.object.isRequired,
+        handleChangeColor: PropTypes.func.isRequired
     };
 
     popup = React.createRef();
@@ -100,14 +104,22 @@ class PopupColor extends Component {
         this.setActiveIndex(activeIndex + 1);
     };
 
+    handleChangeColor = (color) => {
+        const { closePopup, handleChangeColor } = this.props;
+
+        handleChangeColor(color);
+        closePopup();
+    };
+
     render () {
-        const { mediaWidth, colors } = this.props;
+        const { mediaWidth, colors, langMap } = this.props;
         const { activeIndex, left } = this.state;
         const hidden = colors.length <= 1;
+        const text = propOr('product', {}, langMap);
         const activeColor = colors.find((color, i) => i === activeIndex);
 
         return <div className={styles.root}>
-            <div className={styles.cover} onClick={this.props.closePopup()} />
+            <div className={styles.cover} onClick={this.props.closePopup} />
             <div className={styles.popupWrap}>
                 <div className={styles.popup}>
                     <div className={styles.popupContent} ref={this.popup} >
@@ -138,11 +150,15 @@ class PopupColor extends Component {
                             </Draggable>
                             <div className={classNames(styles.left, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(-1)} />
                             <div className={classNames(styles.right, { [styles.hidden]: hidden })} onClick={() => this.handleArrowClick(1)} />
-                            <p className={styles.numbers}>{`${activeIndex + 1} / ${colors.length}`}</p>
-                            {!!activeColor.article && <p className={styles.article}>{activeColor.article}</p>}
+                            <div className={styles.info}>
+                                <p className={styles.article}>{!!activeColor.article && activeColor.article}</p>
+                                <p className={styles.numbers}>{`${activeIndex + 1} / ${colors.length}`}</p>
+                            </div>
                         </div>
-
-                        <div onClick={this.props.closePopup()} className={styles.close} />
+                        {colors.length > 1 && <button className={styles.buttonChangeColor} onClick={() => this.handleChangeColor(activeColor)}>
+                            {text.selectThisColor}
+                        </button>}
+                        <div onClick={this.props.closePopup} className={styles.close} />
                     </div>
                 </div>
             </div>

@@ -167,7 +167,7 @@ class CartProduct extends Component {
                             <p className={styles.productSize}>
                                 {text.size} {size.name}
                             </p>
-                            {isManyColors && <div className={styles.productColor}>
+                            {(isManyColors || product.viewOneColor) && <div className={styles.productColor}>
                                 {text.color}
                                 <div className={styles.productColorImgWrap}>
                                     <img className={styles.productColorImg} src={color.file} alt={color.name}/>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { matchPath } from 'react-router';
 
 import { enablePageScroll, disablePageScroll } from 'scroll-lock';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -12,7 +13,13 @@ import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
 
+import { LANGS } from '../../../constants/constants';
+
 import styles from './Header.css';
+
+const langs = LANGS
+    .slice(1)
+    .join('|');
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -29,7 +36,8 @@ class Header extends Component {
         langMap: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        categories: PropTypes.array
+        categories: PropTypes.array,
+        location: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -85,9 +93,10 @@ class Header extends Component {
     };
 
     render () {
-        const { langRoute, langMap, lang, categories } = this.props;
+        const { langRoute, langMap, lang, categories, location: { pathname } } = this.props;
         const { mobileMenuOpen, searchBarOpen, searchText } = this.state;
         const text = propOr('header', {}, langMap);
+        const isHomePage = !!matchPath(pathname, { path: `/:lang(${langs})?`, exact: true });
 
         return (
             <div className={styles.header}>
@@ -159,10 +168,13 @@ class Header extends Component {
                             </div>
                         </div>
                         <div className={styles.logoWrapper}>
-                            <Link to={`${langRoute}/`}>
-                                <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png"
-                                    alt="mebel market logo"/>
-                            </Link>
+                            {isHomePage
+                                ? <div>
+                                    <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png" alt="mebel market logo"/>
+                                </div>
+                                : <Link to={`${langRoute}/`}>
+                                    <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png" alt="mebel market logo"/>
+                                </Link>}
                         </div>
                         <div className={styles.menuTop}>
                             <NavLink
