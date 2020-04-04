@@ -158,14 +158,6 @@
     top: 0;
     width: 0;
     height: 0;
-
-    &:checked {
-        + .circle {
-            &:before {
-                background: blackLight;
-            }
-        }
-    }
 }
 
 .circle {
@@ -203,4 +195,20 @@
             margin-left: -6px;
          }
     }
+}
+
+.inputChecked {
+    &:before {
+         content: '';
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         width: 10px;
+         height: 10px;
+         margin-top: -5px;
+         margin-left: -5px;
+         transition: background 0.25s ease-in;
+         background: blackLight;
+         border-radius: 50%;
+     }
 }
