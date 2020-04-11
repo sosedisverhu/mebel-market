@@ -10,7 +10,6 @@ import isNull from '@tinkoff/utils/is/nil';
 
 import checkAuthentication from './services/checkAuthentication';
 
-import MainPage from './ui/pages/MainPage/MainPage.jsx';
 import ProductsPage from './ui/pages/ProductsPage/ProductsPage.jsx';
 import ArticlesPage from './ui/pages/ArticlesPage/ArticlesPage.jsx';
 import PartnersPage from './ui/pages/PartnersPage/PartnersPage.jsx';

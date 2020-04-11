@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch) => ({
     deleteCategories: payload => dispatch(deleteCategoriesByIds(payload)),
     deleteSubCategories: payload => dispatch(deleteSubCategoriesByIds(payload)),
     deleteProducts: payload => dispatch(deleteProductsByIds(payload)),
-    editPositions: payload => dispatch(editProductsPositions(payload))
+    editPositions: (...payload) => dispatch(editProductsPositions(...payload))
 });
 
 const DEFAULT_LANG = 'ru';
@@ -185,7 +185,7 @@ class ProductsPage extends Component {
     getActiveSubCategories = (activeCategory = this.state.activeCategory) => {
         return this.props.subCategories.filter(subCategory => subCategory.categoryId === pathOr(['id'], '', activeCategory));
     };
-    
+
     handleChangeFormClose = value => {
         this.setState({
             warningFormShowed: value
@@ -193,11 +193,19 @@ class ProductsPage extends Component {
     };
 
     getCategoryProducts = (activeCategory = this.state.activeCategory) => {
-        return this.props.products.filter(product => product.categoryId === pathOr(['id'], '', activeCategory));
+        return this.props.products
+            .filter(product => product.categoryId === pathOr(['id'], '', activeCategory))
+            .sort((prev, next) =>
+                (prev.positionIndexInCategory - next.positionIndexInCategory)
+            );
     };
 
     getSubCategoryProducts = (activeSubCategory = this.state.activeSubCategory) => {
-        return this.props.products.filter(product => product.subCategoryId === pathOr(['id'], '', activeSubCategory));
+        return this.props.products
+            .filter(product => product.subCategoryId === pathOr(['id'], '', activeSubCategory))
+            .sort((prev, next) =>
+                (prev.positionIndexInSubCategory - next.positionIndexInSubCategory)
+            );
     };
 
     handleCategoryFormOpen = category => () => {
@@ -418,8 +426,12 @@ class ProductsPage extends Component {
             });
     };
 
+    handleEditPosition = type => values => {
+        this.props.editPositions(values, type);
+    };
+
     renderTable = () => {
-        const { classes, editPositions } = this.props;
+        const { classes } = this.props;
         const {
             loading,
             activeCategory,
@@ -472,7 +484,7 @@ class ProductsPage extends Component {
                     headerRows={headerRows}
                     tableCells={tableCells}
                     values={products}
-                    onChange={editPositions}
+                    onChange={this.handleEditPosition(isSelectedSubCategory ? 'subcategory' : 'category')}
                     headerText={haderText}
                     deleteValueWarningTitle='Вы точно хотите удалить товар?'
                     deleteValuesWarningTitle='Вы точно хотите удалить следующие товары?'

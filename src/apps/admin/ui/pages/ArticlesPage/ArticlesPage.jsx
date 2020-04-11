@@ -118,8 +118,13 @@ class ArticlePage extends Component {
         };
         this.tableCells = [
             { prop: article => <div className={this.props.classes.columnName}>{pathOr(['texts', DEFAULT_LANG, 'name'], '', article)}</div> },
-            { prop: article => <a className={this.props.classes.columnAlias} target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{`/articles/${pathOr(['alias'], '', article)}`}
-            </a> },
+            { prop: article =>
+                <a
+                    className={this.props.classes.columnAlias}
+                    target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}
+                >
+                    {`/articles/${pathOr(['alias'], '', article)}`}
+                </a> },
             { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
         ];
     }

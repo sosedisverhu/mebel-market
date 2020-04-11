@@ -111,8 +111,8 @@ class PromotionsPage extends Component {
         const sortOption = find(sort => sort.id === valueOption, optionsArray);
 
         this.setState({
-            products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : products
+            products: [...products.sort(sortOption.sort())],
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort())] : products
         });
     };
 

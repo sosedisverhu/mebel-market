@@ -81,7 +81,6 @@ class FilterCheckBox extends Component {
                     {options.map((option, index) => {
                         const value = filtersMap[id] ? includes(option.id, filtersMap[id].values) : false;
 
-                        console.log(value);
                         return (
                             <label key={index} className={styles.option}>
                                 <input

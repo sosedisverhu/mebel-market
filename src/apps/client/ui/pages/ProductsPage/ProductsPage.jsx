@@ -124,7 +124,8 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: products
+            filteredProducts: products,
+            type: subCategoryAlias ? 'subcategory' : 'category'
         });
     };
 
@@ -161,8 +162,24 @@ class ProductsPage extends Component {
         const { products } = props;
         const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
-        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
-            : filteredProductsByCategory;
+        return subCategoryAlias
+            ? filteredProductsByCategory
+                .filter(product => product.subCategoryId === subCategory.id)
+                .sort((product, nextProduct) => {
+                    if (!subCategoryAlias) {
+                        return product.positionIndexInCategory - nextProduct.positionIndexInCategory;
+                    } else {
+                        return product.positionIndexInSubCategory - nextProduct.positionIndexInSubCategory;
+                    }
+                })
+            : filteredProductsByCategory
+                .sort((product, nextProduct) => {
+                    if (!subCategoryAlias) {
+                        return product.positionIndexInCategory - nextProduct.positionIndexInCategory;
+                    } else {
+                        return product.positionIndexInSubCategory - nextProduct.positionIndexInSubCategory;
+                    }
+                });
     };
 
     getDefaultFilters = (products, langMap, currentCategory) => {
@@ -372,12 +389,12 @@ class ProductsPage extends Component {
     };
 
     handleActiveSortClick = (valueOption, optionsArray) => {
-        const { products, filteredProducts } = this.state;
+        const { products, filteredProducts, type } = this.state;
         const sortOption = find(sort => sort.id === valueOption, optionsArray);
 
         this.setState({
-            products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : products
+            products: [...products.sort(sortOption.sort(type))],
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort(type))] : products
         });
     };
 

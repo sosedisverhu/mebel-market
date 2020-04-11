@@ -15,7 +15,17 @@ const SORTING_OPTIONS = [
             ua: 'Від нових до старих'
         },
         id: 'dateNew',
-        sort: (product, nextProduct) => nextProduct.date - product.date
+        sort: (type) => (product, nextProduct) => {
+            if (type) {
+                if (type === 'category') {
+                    return product.positionIndexInCategory - nextProduct.positionIndexInCategory;
+                } else {
+                    return product.positionIndexInSubCategory - nextProduct.positionIndexInSubCategory;
+                }
+            }
+
+            return product.date - nextProduct.date;
+        }
     },
     {
         texts: {
@@ -23,7 +33,17 @@ const SORTING_OPTIONS = [
             ua: 'Від старих до нових'
         },
         id: 'dateOld',
-        sort: (product, nextProduct) => product.date - nextProduct.date
+        sort: (type) => (product, nextProduct) => {
+            if (type) {
+                if (type === 'category') {
+                    return nextProduct.positionIndexInCategory - product.positionIndexInCategory;
+                } else {
+                    return nextProduct.positionIndexInSubCategory - product.positionIndexInSubCategory;
+                }
+            }
+
+            return nextProduct.date - product.date;
+        }
     },
     {
         texts: {
@@ -31,7 +51,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дешевих до дорогих'
         },
         id: 'priceMin',
-        sort: (product, nextProduct) => product.actualPrice - nextProduct.actualPrice
+        sort: () => (product, nextProduct) => product.actualPrice - nextProduct.actualPrice
     },
     {
         texts: {
@@ -39,7 +59,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дорогих до дешевих'
         },
         id: 'priceMax',
-        sort: (product, nextProduct) => nextProduct.actualPrice - product.actualPrice
+        sort: () => (product, nextProduct) => nextProduct.actualPrice - product.actualPrice
     },
     {
         texts: {
@@ -48,7 +68,7 @@ const SORTING_OPTIONS = [
         },
         text: 'По популярности',
         id: 'view',
-        sort: (product, nextProduct) => nextProduct.views - product.views
+        sort: () => (product, nextProduct) => nextProduct.views - product.views
     }
 ];
 
@@ -59,7 +79,8 @@ class ProductSort extends Component {
         media: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
         turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        type: PropTypes.string
     };
 
     state = {
