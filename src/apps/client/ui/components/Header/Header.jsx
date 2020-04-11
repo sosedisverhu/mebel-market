@@ -99,7 +99,7 @@ class Header extends Component {
         const isHomePage = !!matchPath(pathname, { path: `/:lang(${langs})?`, exact: true });
 
         return (
-            <div className={styles.header}>
+            <header className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
                         <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
@@ -257,7 +257,7 @@ class Header extends Component {
                         <button className={styles.searchBtnBottom} type="submit"/>
                     </form>
                 </div>
-            </div>
+            </header>
         );
     }
 }

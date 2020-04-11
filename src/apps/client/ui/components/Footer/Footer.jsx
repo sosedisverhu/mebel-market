@@ -5,7 +5,7 @@ import styles from './Footer.css';
 class Footer extends Component {
     render () {
         return (
-            <div className={styles.footer}>
+            <footer className={styles.footer}>
                 <div className={styles.footerContainer}>
                     <div className={styles.iconsWrapper}>
                         <a href="#" target="_blank" className={styles.instagramLink}>
@@ -39,7 +39,7 @@ class Footer extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
         );
     }
 }
