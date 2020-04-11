@@ -50,27 +50,28 @@ class PromotionsPage extends Component {
         products: []
     };
 
-    state = {
-        products: [],
-        filters: [],
-        filteredProducts: [],
-        filtersMap: {}
-    };
+    constructor (...args) {
+        super(...args);
 
-    componentDidMount () {
-        this.setNewState();
+        this.state = {
+            products: [],
+            filters: [],
+            filteredProducts: [],
+            filtersMap: {},
+            ...this.getNewState()
+        };
     }
 
-    setNewState = () => {
+    getNewState = () => {
         const { langMap } = this.props;
         const products = this.getActionProducts();
         const filters = this.getDefaultFilters(products, langMap);
 
-        this.setState({
+        return {
             products,
             filters,
             filteredProducts: products
-        });
+        };
     };
 
     getActionProducts = () => {

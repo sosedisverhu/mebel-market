@@ -66,31 +66,34 @@ class ProductsPage extends Component {
         subCategories: []
     };
 
-    state = {
-        products: [],
-        category: {},
-        subCategory: {},
-        subCategories: [],
-        isCategory: true,
-        isSubCategoryFilters: false,
-        filters: [],
-        filteredProducts: [],
-        filtersMap: {},
-        currentCategoryFiltersName: 'categoryFilters',
-        popupIsOpen: false
-    };
+    constructor (...args) {
+        super(...args);
 
-    componentDidMount () {
-        this.setNewState();
+        this.state = {
+            products: [],
+            category: {},
+            subCategory: {},
+            subCategories: [],
+            isCategory: true,
+            isSubCategoryFilters: false,
+            filters: [],
+            filteredProducts: [],
+            filtersMap: {},
+            currentCategoryFiltersName: 'categoryFilters',
+            popupIsOpen: false,
+            ...this.getNewState()
+        };
     }
 
     componentWillReceiveProps (nextProps) {
         if (this.props.location.pathname !== nextProps.location.pathname) {
-            this.setNewState(nextProps);
+            this.setState({
+                ...this.getNewState(nextProps)
+            });
         }
     }
 
-    setNewState = (props = this.props) => {
+    getNewState = (props = this.props) => {
         const { subCategoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
 
@@ -116,7 +119,7 @@ class ProductsPage extends Component {
             this.getFilters(currentCategory, products, category, subCategory)
         ]) : this.getDefaultFilters(products, langMap, currentCategory);
 
-        this.setState({
+        return {
             products,
             category,
             subCategory,
@@ -126,7 +129,7 @@ class ProductsPage extends Component {
             filters,
             filteredProducts: products,
             type: subCategoryAlias ? 'subcategory' : 'category'
-        });
+        };
     };
 
     getMatch = (props = this.props) => {
