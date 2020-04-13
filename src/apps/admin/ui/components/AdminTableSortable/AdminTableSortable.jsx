@@ -92,7 +92,7 @@ const SortableWrapp = SortableContainer((
                         onProductClone={onProductClone}
                         classes={classes}
                         value={value}
-                        index={i}
+                        index={i + page * rowsPerPage}
                     />
                 );
             })}

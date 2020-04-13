@@ -13,8 +13,6 @@ import saveProductQuery from '../../../client/product/queries/saveProduct';
 import getProductsInCategory from '../../../client/product/queries/getProductsInCategory';
 import getProductsInSubCategory from '../../../client/product/queries/getProductsInSubCategory';
 
-import getMaxOfArray from '../../../../../src/apps/client/utils/getMaxOfArray';
-
 export default function saveProduct (req, res) {
     const product = prepareProduct(req.body);
     const id = uniqid();
@@ -27,19 +25,14 @@ export default function saveProduct (req, res) {
         getProductsInSubCategory(subCategoryId)
     ])
         .then(([productsInCategory, productsInSubCategory]) => {
-            const productsInCategoryIndexes = productsInCategory.map(product => product.positionIndexInCategory);
-            const productsInSubCategoryIndexes = productsInSubCategory.map(product => product.positionIndexInSubCategory);
-            const productsInCategoryIndexesMax = getMaxOfArray(productsInCategoryIndexes);
-            const productsInSubCategoryIndexesMax = getMaxOfArray(productsInSubCategoryIndexes);
-
             saveProductQuery({
                 ...product,
                 viewOneColor: product.viewOneColor || false,
                 date,
                 id,
                 views,
-                positionIndexInCategory: productsInCategoryIndexesMax + 1,
-                positionIndexInSubCategory: productsInSubCategoryIndexesMax + 1
+                positionIndexInCategory: productsInCategory.length,
+                positionIndexInSubCategory: productsInSubCategory.length
             })
                 .then(product => {
                     res.status(OKEY_STATUS_CODE).send(product);
