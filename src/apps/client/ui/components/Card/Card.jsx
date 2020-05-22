@@ -71,23 +71,24 @@ class Card extends Component {
             activeSizes
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
-        const isDiscount = minPrice !== actualPrice;
         const text = propOr('product', {}, langMap);
-
-        console.log(this.props.product);
-        console.log(activeSizes);
-
+        
         const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
-        let minActivePrice;
+        let minActivePrice = minPrice;
+        let minActualPrice = actualPrice;
         let minDiscountPrice;
-        console.log(activePrices);
+        let isDiscount = minActivePrice !== minActualPrice;
 
         if(activePrices.length >= 1) {
             minActivePrice = activePrices[0].colors[0].price;
             minDiscountPrice = activePrices[0].colors[0].discountPrice;
+            minActualPrice = minDiscountPrice || minActivePrice;
+            isDiscount = minActivePrice !== minActualPrice;
         }
         console.log(minActivePrice);
         console.log(minDiscountPrice);
+        console.log(minActualPrice);
+        
   
         return (
             <Link
@@ -117,10 +118,10 @@ class Card extends Component {
                     </p>
 
                     {isDiscount ? <div className={styles.priceOld}>
-                        {minPrice} &#8372;
+                        {minActivePrice} &#8372;
                     </div> : null}
                     <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
-                        {actualPrice} &#8372;
+                        {minActualPrice} &#8372;
                     </div>
 
                 </div>
