@@ -98,7 +98,6 @@ class ProductsPage extends Component {
         const category = this.getCategory(props);
 
         if (!category) {
-            // this.setState({ isCategory: false });
             return {
                 isCategory: false
             };
@@ -107,7 +106,6 @@ class ProductsPage extends Component {
         const subCategory = subCategoryAlias && this.getSubCategory(props);
 
         if (subCategoryAlias && !subCategory) {
-            // this.setState({ isCategory: false });
             return {
                 isCategory: false
             };
