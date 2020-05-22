@@ -98,15 +98,19 @@ class ProductsPage extends Component {
         const category = this.getCategory(props);
 
         if (!category) {
-            this.setState({ isCategory: false });
-            return;
+            // this.setState({ isCategory: false });
+            return {
+                isCategory: false
+            };
         }
 
         const subCategory = subCategoryAlias && this.getSubCategory(props);
 
         if (subCategoryAlias && !subCategory) {
-            this.setState({ isCategory: false });
-            return;
+            // this.setState({ isCategory: false });
+            return {
+                isCategory: false
+            };
         }
 
         const { subCategories, langMap } = props;
@@ -114,6 +118,8 @@ class ProductsPage extends Component {
         const isSubCategoryFilters = !!subCategoryAlias;
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
+        
+        console.log(currentCategory);
         const filters = currentCategory ? flatten([
             this.getDefaultFilters(products, langMap, currentCategory),
             this.getFilters(currentCategory, products, category, subCategory)
@@ -144,7 +150,6 @@ class ProductsPage extends Component {
         }
 
         const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
-
         return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;
     };
 
