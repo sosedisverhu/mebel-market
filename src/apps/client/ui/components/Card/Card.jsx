@@ -7,6 +7,7 @@ import classNames from 'classnames';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
+import includes from '@tinkoff/utils/array/includes'
 
 import styles from './Card.css';
 
@@ -59,19 +60,35 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels },
+            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes },
             newClass,
             labelClass,
             langRoute,
             lang,
             setSliderWidth,
             isPromotion,
-            langMap
+            langMap,
+            activeSizes
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const isDiscount = minPrice !== actualPrice;
         const text = propOr('product', {}, langMap);
 
+        console.log(this.props.product);
+        console.log(activeSizes);
+
+        const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
+        let minActivePrice;
+        let minDiscountPrice;
+        console.log(activePrices);
+
+        if(activePrices.length >= 1) {
+            minActivePrice = activePrices[0].colors[0].price;
+            minDiscountPrice = activePrices[0].colors[0].discountPrice;
+        }
+        console.log(minActivePrice);
+        console.log(minDiscountPrice);
+  
         return (
             <Link
                 className={classNames(
