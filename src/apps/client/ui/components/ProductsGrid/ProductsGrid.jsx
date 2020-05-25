@@ -16,13 +16,13 @@ class ProductsGrid extends Component {
 
         return (
             <div className={styles.products}>
-                {products.map(product => 
-                <Card 
-                    isPromotion={isPromotion} 
-                    key={product.id} 
-                    product={product} 
-                    activeSizes = {activeSizes}
-                />)}
+                {products.map(product =>
+                    <Card
+                        isPromotion={isPromotion}
+                        key={product.id}
+                        product={product}
+                        activeSizes = {activeSizes}
+                    />)}
             </div>
         );
     }

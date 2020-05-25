@@ -431,7 +431,7 @@ class ProductsPage extends Component {
         const { langMap, langRoute, lang } = this.props;
         const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
-        const activeSizes = pathOr(['filtersMap','size','values'],[],this.state);
+        const activeSizes = pathOr(['filtersMap', 'size', 'values'], [], this.state);
 
         return (
             <div className={styles.productPage}>
@@ -476,7 +476,7 @@ class ProductsPage extends Component {
                     </div>
                 </div>
                 <div className={styles.productsSection}>
-                    <ProductsGrid 
+                    <ProductsGrid
                         products={filteredProducts || products}
                         activeSizes={activeSizes}
                     />
