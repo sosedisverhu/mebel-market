@@ -12,6 +12,7 @@ const mainSlider = new Schema({
     slides_ua: [{
         path: { type: String, required: true },
         link: { type: String, required: true },
+        name: { type: String },
         newTab: { type: Boolean, required: true }
     }]
 });
