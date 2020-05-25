@@ -32,7 +32,8 @@ class Card extends Component {
         categories: PropTypes.array,
         subCategories: PropTypes.array,
         setSliderWidth: PropTypes.func,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        activeSizes: PropTypes.array
     };
 
     static defaultProps = {
@@ -76,20 +77,15 @@ class Card extends Component {
         const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
-        let minDiscountPrice;
         let isDiscount = minActivePrice !== minActualPrice;
 
         if(activePrices.length >= 1) {
+            const minDiscountPrice = activePrices[0].colors[0].discountPrice;
             minActivePrice = activePrices[0].colors[0].price;
-            minDiscountPrice = activePrices[0].colors[0].discountPrice;
             minActualPrice = minDiscountPrice || minActivePrice;
             isDiscount = minActivePrice !== minActualPrice;
         }
-        console.log(minActivePrice);
-        console.log(minDiscountPrice);
-        console.log(minActualPrice);
-        
-  
+
         return (
             <Link
                 className={classNames(

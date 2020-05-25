@@ -8,7 +8,7 @@ class ProductsGrid extends Component {
     static propTypes = {
         products: PropTypes.array.isRequired,
         isPromotion: PropTypes.bool,
-        filteredProductSizes: PropTypes.array
+        activeSizes: PropTypes.array
     };
 
     render () {

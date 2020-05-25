@@ -117,8 +117,6 @@ class ProductsPage extends Component {
         const isSubCategoryFilters = !!subCategoryAlias;
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
-        
-        console.log(currentCategory);
         const filters = currentCategory ? flatten([
             this.getDefaultFilters(products, langMap, currentCategory),
             this.getFilters(currentCategory, products, category, subCategory)
@@ -434,7 +432,6 @@ class ProductsPage extends Component {
         const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
         const activeSizes = pathOr(['filtersMap','size','values'],[],this.state);
-        console.log(pathOr(['filtersMap','size','values'],[],this.state));
 
         return (
             <div className={styles.productPage}>
