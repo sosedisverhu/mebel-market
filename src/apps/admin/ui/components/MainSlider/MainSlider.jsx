@@ -313,6 +313,7 @@ class MainSlider extends Component {
                 link: slide.link,
                 newTab: !!slide.newTab,
                 path: isOld && slide.path,
+                name: isOld && slide.name,
                 oldSlidePath: slide.oldSlidePath
             };
         });
