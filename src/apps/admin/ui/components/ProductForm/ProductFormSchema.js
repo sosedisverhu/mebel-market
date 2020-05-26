@@ -132,7 +132,8 @@ export default function ({ data: {
             },
             {
                 component: FormFieldInput,
-                name: 'size-column',
+                name: 'sizeColumn',
+                valueLangStructure: 'depend',
                 schema: {
                     label: 'Название столбца размеров',
                     type: 'string'
@@ -140,7 +141,8 @@ export default function ({ data: {
             },
             {
                 component: FormFieldInput,
-                name: 'description-column',
+                name: 'descriptionColumn',
+                valueLangStructure: 'depend',
                 schema: {
                     label: 'Название столбца свойств',
                     type: 'string'
