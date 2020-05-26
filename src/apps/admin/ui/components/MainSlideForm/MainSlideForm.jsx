@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import pick from '@tinkoff/utils/object/pick';
 
-const SLIDE_VALUES = ['name','link', 'path', 'newTab'];
+const SLIDE_VALUES = ['name', 'link', 'path', 'newTab'];
 
 const materialStyles = theme => ({
     uploadInput: {

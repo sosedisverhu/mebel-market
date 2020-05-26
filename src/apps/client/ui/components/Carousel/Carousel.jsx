@@ -261,7 +261,6 @@ class Carousel extends Component {
         const { slides, langMap, mediaWidth } = this.props;
         const { activeSlideIndex } = this.state;
         const text = propOr('mainPage', {}, langMap);
-        const defaultText = 'Помочь с выбором';
 
         if (!slides.length) {
             return null;
@@ -285,7 +284,7 @@ class Carousel extends Component {
                 <div className={styles.bottomBlock}>
                     <a className={classNames(styles.text, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                         href={slides[activeSlideIndex].link}
-                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider || defaultText}</a>
+                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
                     {slides.length > 1 && <div className={styles.dots}>
                         { slides.map((slide, i) =>
                             <div
@@ -297,7 +296,7 @@ class Carousel extends Component {
             </Draggable>
             <a className={classNames(styles.text, styles.tablet, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                 href={slides[activeSlideIndex].link}
-                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider || defaultText}</a>
+                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
         </div>;
     }
 }
