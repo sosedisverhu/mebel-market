@@ -95,11 +95,15 @@
     }
 }
 
-.rowTitle {
+.rowTitles {
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 10px;
     text-align: left;
+    width: 66.66%;
+    .rowTitle {
+        width: 50%;
+    }
 
     @media (min-width: 631px) {
         display: none;
@@ -113,11 +117,9 @@
 
 .rowWrap {
     &:first-child {
-        .rowTitle {
+        .rowTitles {
             display: flex;
-            width: 66%;
             justify-content: space-between;
-
         }
     }
 }
