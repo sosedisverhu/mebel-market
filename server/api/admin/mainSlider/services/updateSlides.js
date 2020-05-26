@@ -29,7 +29,7 @@ export default function updateSlides (req, res) {
             return {
                 path: slide.path,
                 link: slide.link,
-                name: slide.name || 'Помочь с выбором',
+                name: slide.name,
                 newTab: !!slide.newTab
             };
         });
