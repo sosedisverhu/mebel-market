@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
+import pathOr from '@tinkoff/utils/object/pathOr';
 import flatten from '@tinkoff/utils/array/flatten';
 import compose from '@tinkoff/utils/function/compose';
 import uniq from '@tinkoff/utils/array/uniq';
@@ -98,15 +99,17 @@ class ProductsPage extends Component {
         const category = this.getCategory(props);
 
         if (!category) {
-            this.setState({ isCategory: false });
-            return;
+            return {
+                isCategory: false
+            };
         }
 
         const subCategory = subCategoryAlias && this.getSubCategory(props);
 
         if (subCategoryAlias && !subCategory) {
-            this.setState({ isCategory: false });
-            return;
+            return {
+                isCategory: false
+            };
         }
 
         const { subCategories, langMap } = props;
@@ -144,7 +147,6 @@ class ProductsPage extends Component {
         }
 
         const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
-
         return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;
     };
 
@@ -429,6 +431,7 @@ class ProductsPage extends Component {
         const { langMap, langRoute, lang } = this.props;
         const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
+        const activeSizes = pathOr(['filtersMap', 'size', 'values'], [], this.state);
 
         return (
             <div className={styles.productPage}>
@@ -473,7 +476,10 @@ class ProductsPage extends Component {
                     </div>
                 </div>
                 <div className={styles.productsSection}>
-                    <ProductsGrid products={filteredProducts || products}/>
+                    <ProductsGrid
+                        products={filteredProducts || products}
+                        activeSizes={activeSizes}
+                    />
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: popupIsOpen })}>
                     <div className={styles.cover} onClick={this.handlePopupChange}/>
