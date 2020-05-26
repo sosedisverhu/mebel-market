@@ -114,7 +114,10 @@
 .rowWrap {
     &:first-child {
         .rowTitle {
-            display: block;
+            display: flex;
+            width: 66%;
+            justify-content: space-between;
+
         }
     }
 }

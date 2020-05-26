@@ -33,6 +33,7 @@ class PopupSizes extends Component {
     render () {
         const { sizes, langMap } = this.props;
         const text = propOr('product', {}, langMap);
+        const c = 'ewr';
 
         return <div className={styles.root}>
             <div className={styles.cover} onClick={this.props.closePopup()} />
@@ -46,7 +47,10 @@ class PopupSizes extends Component {
                                     if (!size.tableSizes.length) return;
 
                                     return <div className={styles.rowWrap}>
-                                        <h4 className={styles.rowTitle}>{text.tableSizesRowTitle}</h4>
+                                        <div className={styles.rowTitle}>
+                                            <h4>{c || text.tableSizesRowTitle}</h4>
+                                            <h4>{c || ''}</h4>
+                                        </div>
                                         <div className={styles.row}>
                                             <div className={styles.cellSize}>{size.name}</div>
                                             <div className={styles.columnComponents}>
