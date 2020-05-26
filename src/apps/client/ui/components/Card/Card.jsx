@@ -73,13 +73,12 @@ class Card extends Component {
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const text = propOr('product', {}, langMap);
-
-        const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
-
-        if (activePrices.length >= 1) {
+        
+        if (activeSizes.length >= 1) {
+            const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
             const minDiscountPrice = activePrices[0].colors[0].discountPrice;
             minActivePrice = activePrices[0].colors[0].price;
             minActualPrice = minDiscountPrice || minActivePrice;
