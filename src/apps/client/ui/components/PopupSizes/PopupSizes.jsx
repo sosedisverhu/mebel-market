@@ -9,7 +9,8 @@ import styles from './PopupSizes.css';
 
 const mapStateToProps = ({ application }) => {
     return {
-        langMap: application.langMap
+        langMap: application.langMap,
+        lang: application.lang
     };
 };
 
@@ -31,10 +32,11 @@ class PopupSizes extends Component {
     }
 
     render () {
-        const { sizes, langMap } = this.props;
+        const { sizes, langMap, lang, subCategory } = this.props;
         const text = propOr('product', {}, langMap);
-        const c1 = '';
-        const c2 = 'Свойство товара';
+        const sizeColumn = subCategory.texts[`${lang}`].sizeColumn || text.tableSizesRowTitle;
+        const descriptionColumn = subCategory.texts[`${lang}`].descriptionColumn || '';
+        const valueColumn = subCategory.texts[`${lang}`].valueColumn || '';
 
         return <div className={styles.root}>
             <div className={styles.cover} onClick={this.props.closePopup()} />
@@ -49,8 +51,9 @@ class PopupSizes extends Component {
 
                                     return <div className={styles.rowWrap}>
                                         <div className={styles.rowTitles}>
-                                            <h4 className={styles.rowTitle}>{c1 || text.tableSizesRowTitle}</h4>
-                                            <h4 className={styles.rowTitle}>{c2 || ''}</h4>
+                                            <h4 className={styles.rowTitle}>{sizeColumn}</h4>
+                                            <h4 className={styles.rowTitle}>{descriptionColumn}</h4>
+                                            <h4 className={styles.rowTitle}>{valueColumn}</h4>
                                         </div>
                                         <div className={styles.row}>
                                             <div className={styles.cellSize}>{size.name}</div>

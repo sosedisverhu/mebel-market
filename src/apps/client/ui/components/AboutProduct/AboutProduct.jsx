@@ -209,7 +209,7 @@ class AboutProduct extends Component {
     };
 
     render () {
-        const { product, langMap, lang, activeSize, activeColor, isPromotion } = this.props;
+        const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory } = this.props;
         const {
             sizes,
             sizeListIsOpen,
@@ -320,7 +320,7 @@ class AboutProduct extends Component {
                 closePopup={this.handleChangePopup}
                 handleChangeColor={this.handleChangeColor}
             />}
-            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes}/>}
+            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory}/>}
         </div>;
     }
 }
