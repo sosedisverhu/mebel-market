@@ -124,6 +124,30 @@ export default function ({ data: {
             },
             {
                 component: FormFieldTitle,
+                name: 'columns-title',
+                schema: {
+                    label: 'Название для столбцов таблицы размеров товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'size-column',
+                schema: {
+                    label: 'Название столбца размеров',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'description-column',
+                schema: {
+                    label: 'Название столбца свойств',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldTitle,
                 name: 'size-title',
                 schema: {
                     label: 'Размеры товара',
