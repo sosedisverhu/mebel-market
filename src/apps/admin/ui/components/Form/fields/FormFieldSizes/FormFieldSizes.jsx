@@ -25,6 +25,7 @@ import arrayMove from '../../../../../utils/arrayMove';
 import FormFieldColors from '../FormFieldColors/FormFieldColors';
 import FormFieldSizeFeatures from '../FormFieldSizeFeatures/FormFieldSizeFeatures';
 import FormFieldTableSizes from '../FormFieldTableSizes/FormFieldTableSizes';
+import FormFieldShares from '../FormFieldShares/FormFieldShares';
 import classNames from 'classnames';
 import FormFieldButton from '../FormFieldButton/FormFieldButton';
 
@@ -244,6 +245,22 @@ const Size = ({
             schema={{
                 name: 'Свойство',
                 value: 'Размер'
+            }}
+        />
+        <h6 className={classes.h6}>Скидки</h6>
+        <FormFieldShares
+            value={size.shares}
+            onChange={onChange}
+            sizes={sizes}
+            sizeIndex={rowIndex}
+            schema={{
+                labelType: 'Тип',
+                typeOptions: [
+                    { value: 'discount', label: 'Скидка' },
+                    { value: 'present', label: 'Подарок' }
+                ],
+                labelValue: 'Размер скидки',
+                selectPlaceholder: 'Продукты'
             }}
         />
         <FormFieldColors
