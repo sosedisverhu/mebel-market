@@ -294,6 +294,9 @@ class Carousel extends Component {
                     </div>}
                 </div>
             </Draggable>
+            <a className={classNames(styles.text, styles.tablet, { [styles.activeText]: !!slides[activeSlideIndex].link })}
+                href={slides[activeSlideIndex].link}
+                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider}</a>
         </div>;
     }
 }
