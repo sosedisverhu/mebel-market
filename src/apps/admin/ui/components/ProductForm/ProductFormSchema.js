@@ -341,7 +341,7 @@ export default function ({ data: {
                             value: 'true'
                         },
                         {
-                            label: 'Нет в наличии',
+                            label: 'Под заказ',
                             value: 'false'
                         }
                     ]
