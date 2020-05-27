@@ -34,9 +34,9 @@ class PopupSizes extends Component {
     render () {
         const { sizes, langMap, lang, subCategory } = this.props;
         const text = propOr('product', {}, langMap);
-        const sizeColumn = subCategory.texts[`${lang}`].sizeColumn || text.tableSizesRowTitle;
-        const descriptionColumn = subCategory.texts[`${lang}`].descriptionColumn || '';
-        const valueColumn = subCategory.texts[`${lang}`].valueColumn || '';
+        const sizeColumn = subCategory.texts[lang].sizeColumn || text.tableSizesRowTitle;
+        const descriptionColumn = subCategory.texts[lang].descriptionColumn || '';
+        const valueColumn = subCategory.texts[lang].valueColumn || '';
         
         return <div className={styles.root}>
             <div className={styles.cover} onClick={this.props.closePopup()} />
