@@ -186,7 +186,8 @@ class ProductForm extends Component {
             id,
             alias,
             labels,
-            viewOneColor
+            viewOneColor,
+            exist
         } = values;
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -313,7 +314,7 @@ class ProductForm extends Component {
                 }))
             }))
         };
-
+        console.log(exist)
         return {
             texts: {
                 ru: {
@@ -354,7 +355,8 @@ class ProductForm extends Component {
             categoryFilters,
             subCategoryFilters,
             labels,
-            viewOneColor
+            viewOneColor,
+            exist
         };
     };
 
