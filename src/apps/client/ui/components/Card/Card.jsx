@@ -7,6 +7,7 @@ import classNames from 'classnames';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import find from '@tinkoff/utils/array/find';
+import includes from '@tinkoff/utils/array/includes';
 
 import styles from './Card.css';
 
@@ -31,7 +32,8 @@ class Card extends Component {
         categories: PropTypes.array,
         subCategories: PropTypes.array,
         setSliderWidth: PropTypes.func,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        activeSizes: PropTypes.array
     };
 
     static defaultProps = {
@@ -59,18 +61,29 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels },
+            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes },
             newClass,
             labelClass,
             langRoute,
             lang,
             setSliderWidth,
             isPromotion,
-            langMap
+            langMap,
+            activeSizes
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
-        const isDiscount = minPrice !== actualPrice;
         const text = propOr('product', {}, langMap);
+        let minActivePrice = minPrice;
+        let minActualPrice = actualPrice;
+        let isDiscount = minActivePrice !== minActualPrice;
+        
+        if (activeSizes.length >= 1) {
+            const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
+            const minDiscountPrice = activePrices[0].colors[0].discountPrice;
+            minActivePrice = activePrices[0].colors[0].price;
+            minActualPrice = minDiscountPrice || minActivePrice;
+            isDiscount = minActivePrice !== minActualPrice;
+        }
 
         return (
             <Link
@@ -100,10 +113,10 @@ class Card extends Component {
                     </p>
 
                     {isDiscount ? <div className={styles.priceOld}>
-                        {minPrice} &#8372;
+                        {minActivePrice} &#8372;
                     </div> : null}
                     <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
-                        {actualPrice} &#8372;
+                        {minActualPrice} &#8372;
                     </div>
 
                 </div>
