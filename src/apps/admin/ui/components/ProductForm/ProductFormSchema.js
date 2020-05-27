@@ -321,7 +321,7 @@ export default function ({ data: {
                 name: 'divider'
             },
             {
-            component: FormFieldTitle,
+                component: FormFieldTitle,
                 name: 'titleExist',
                 schema: {
                     label: 'Наличие товара',

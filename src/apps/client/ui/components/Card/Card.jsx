@@ -61,7 +61,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes },
+            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes, exist },
             newClass,
             labelClass,
             langRoute,
@@ -73,10 +73,11 @@ class Card extends Component {
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const text = propOr('product', {}, langMap);
+        const isExist = exist || 'true'; // перевірка на наявність продукту
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
-        
+
         if (activeSizes.length >= 1) {
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
             const minDiscountPrice = activePrices[0].colors[0].discountPrice;
