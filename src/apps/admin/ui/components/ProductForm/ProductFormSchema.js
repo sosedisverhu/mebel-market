@@ -320,6 +320,37 @@ export default function ({ data: {
                 name: 'divider'
             },
             {
+            component: FormFieldTitle,
+                name: 'titleExist',
+                schema: {
+                    label: 'Наличие товара',
+                    variant: 'h5'
+                }
+            },
+            // {
+            //     component: FormFieldRadios,
+            //     name: 'schedule',
+            //     validators: [
+            //         { name: 'required', options: { text: 'Select schedule type' } }
+            //     ],
+            //     schema: {
+            //         options: [
+            //             {
+            //                 label: 'Full time',
+            //                 value: 'full'
+            //             },
+            //             {
+            //                 label: 'Part time',
+            //                 value: 'part'
+            //             }
+            //         ]
+            //     }
+            // },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
                 component: FormFieldTitle,
                 name: 'titleLabels',
                 schema: {
