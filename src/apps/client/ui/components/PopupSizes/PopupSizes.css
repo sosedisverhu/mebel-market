@@ -112,6 +112,12 @@
     @media (max-width: 630px) {
         margin-top: 30px;
         margin-bottom: 15px;
+        .rowTitle {
+            display: none;
+            &:first-child {
+                display: block;
+            }
+        }
     }
 }
 
