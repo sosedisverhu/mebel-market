@@ -222,6 +222,7 @@ class AboutProduct extends Component {
             isPopupSizes
         } = this.state;
         const text = propOr('product', {}, langMap);
+        const exist = propOr('exist', 'true', product);
         const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const colors = activeSize.colors;

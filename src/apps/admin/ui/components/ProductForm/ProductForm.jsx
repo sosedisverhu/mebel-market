@@ -134,6 +134,7 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : pathOr(['id'], '', subCategories[0]),
             alias: product.alias,
             lang: 'ru',
+            exist: product.exist || 'true',
             labels: product.labels || [],
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({

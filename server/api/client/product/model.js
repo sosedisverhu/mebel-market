@@ -41,7 +41,7 @@ const Product = new Schema({
     positionIndexInSubCategory: { type: Number },
     labels: { type: Array, required: true },
     viewOneColor: { type: Boolean, required: true },
-    exist: { type: Boolean, required: true }
+    exist: { type: String, required: true }
 });
 
 export default mongoose.model('Product', Product);
