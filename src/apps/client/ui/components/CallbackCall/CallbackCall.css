@@ -1,0 +1,9 @@
+.phoneIcon {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    cursor: pointer;
+}

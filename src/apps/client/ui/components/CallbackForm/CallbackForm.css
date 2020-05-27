@@ -1,0 +1,57 @@
+@value whiteBasic from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    overflow-y: auto;
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.popupWrap {
+    height: 100%;
+    text-align: center;
+
+    &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+    }
+}
+
+.popup {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 100%;
+    padding: 30px;
+}
+
+.popupContent {
+    position: relative;
+    background: whiteBasic;
+    padding: 20px;
+    font: 18px/21px GilroyRegular;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 812px;
+    margin: 0 auto;
+    z-index: 110;
+}
