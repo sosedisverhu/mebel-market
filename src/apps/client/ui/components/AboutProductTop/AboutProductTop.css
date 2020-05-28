@@ -54,6 +54,17 @@
     }
 }
 
+.existText {
+    display: inline-block;
+    font: 13px/15px GilroyRegular;
+    text-align: center;
+    color: #25716C;
+    align-self: center;
+    &.notExist {
+        color: #DC4E41;
+    }
+}
+
 .article {
     font: 14px/16px GilroyRegular;
     text-transform: capitalize;
