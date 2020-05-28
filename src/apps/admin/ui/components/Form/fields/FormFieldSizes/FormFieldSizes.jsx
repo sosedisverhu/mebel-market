@@ -259,7 +259,7 @@ const Size = ({
                     { value: 'discount', label: 'Скидка' },
                     { value: 'present', label: 'Подарок' }
                 ],
-                labelValue: 'Размер скидки',
+                labelValue: 'Размер скидки (грн)',
                 selectPlaceholder: 'Продукты'
             }}
         />

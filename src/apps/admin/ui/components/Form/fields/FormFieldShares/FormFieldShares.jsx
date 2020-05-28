@@ -192,7 +192,7 @@ class FormFieldShares extends Component {
         }
 
         if (prop === 'type') {
-            sizes[sizeIndex].shares[shareIndex].value = '';
+            sizes[sizeIndex].shares[shareIndex].value = 0;
         }
 
         onChange(sizes);

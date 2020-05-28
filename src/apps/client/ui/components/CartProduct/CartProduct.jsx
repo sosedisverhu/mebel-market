@@ -54,11 +54,15 @@ class CartProduct extends Component {
         product: PropTypes.object.isRequired,
         properties: PropTypes.object.isRequired,
         wishlist: PropTypes.array.isRequired,
-        deleteFromWishlist: PropTypes.func.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired,
+        presentsQuantity: PropTypes.number,
+        discountsQuantity: PropTypes.number
     };
 
     static defaultProps = {
-        wishlist: []
+        wishlist: [],
+        presentsQuantity: 0,
+        discountsQuantity: 0
     };
 
     state = {};
@@ -127,7 +131,7 @@ class CartProduct extends Component {
     };
 
     render () {
-        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
+        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, presentsQuantity, discountsQuantity } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
@@ -208,6 +212,12 @@ class CartProduct extends Component {
                                 {formatMoney(resultPrice)}
                             </p>
                         </div>
+                        {/* test block start */}
+                        {!!(discountsQuantity || presentsQuantity) && <div style={{ border: '1px solid red', width: '100%', padding: '10px 35px' }}>
+                            {!!discountsQuantity && <p>{`Количество скидочных товаров: ${discountsQuantity}`}</p>}
+                            {!!presentsQuantity && <p>{`Количество подарочных товаров: ${presentsQuantity}`}</p>}
+                        </div>}
+                        {/* test block end */}
                     </div>
                     <div className={styles.buttons}>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
