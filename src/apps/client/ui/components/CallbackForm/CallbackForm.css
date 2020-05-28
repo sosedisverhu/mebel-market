@@ -24,7 +24,6 @@
 .popupWrap {
     height: 100%;
     text-align: center;
-
     &:after {
         display: inline-block;
         vertical-align: middle;
@@ -45,13 +44,116 @@
 .popupContent {
     position: relative;
     background: whiteBasic;
-    padding: 20px;
     font: 18px/21px GilroyRegular;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
-    max-width: 812px;
+    height: 370px;
+    max-width: 640px;
     margin: 0 auto;
     z-index: 110;
+}
+
+.escape {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.userInfo {
+    width: 385px;
+}
+
+.title {
+    font: 32px/39px GilroyRegular;
+    font-weight: bold;
+    margin-top: 40px;
+    
+}
+
+.dataField {
+    width: 100%;
+    margin-top: 29px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    button {
+        font: 16px/19px GilroyRegular;
+        letter-spacing: 0.02em;
+        border: none;
+        color: #FFF;
+        margin-top: 37px;
+        background: #232323;
+        padding: 13px 87px;
+    }
+}
+.form {
+    position: relative;
+    width: 71%;
+    height: 45px;
+    margin-bottom: 24px;
+    overflow: hidden;
+
+    input {
+        font: 16px/19px GilroyRegular;
+        color: #232323;
+        width: 100%;
+        height: 100%;
+        padding-top: 20px;
+        border: none;
+        outline: none;
+    }
+
+    input:focus + .labelName .contentName,
+    input:valid + .labelName .contentName {
+        transform: translateY(-150%);
+        font: 12px/14px GilroyRegular;
+        color: #919191;
+    }
+
+    label {
+        position: absolute;
+        bottom: 0px;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid #000;
+
+    }
+
+}
+.contentName {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.reference {
+    padding: 62px 60px 0px 25px;
+    width: 255px;
+    background: linear-gradient(0deg, rgba(37, 113, 108, 0.8), rgba(37, 113, 108, 0.8)), url('./img/banner.png');
+}
+.referenceInfo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.line {
+    margin-bottom: 44px;
+    height: 2px;
+    width: 100%;
+    background: #FFF;
+}
+.referenceText {
+    font: 14px/21px GilroyRegular;
+    letter-spacing: 0.02em;
+    color: #FFF;
+    text-align: left;
 }
