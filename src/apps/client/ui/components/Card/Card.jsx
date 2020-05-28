@@ -73,7 +73,7 @@ class Card extends Component {
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
         const text = propOr('product', {}, langMap);
-        const isExist = exist || 'true'; // перевірка на наявність продукту
+        const isExist = exist || 'true'; 
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
@@ -107,6 +107,9 @@ class Card extends Component {
                 </div>
                 <div className={styles.imgWrap}>
                     <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
+                </div>
+                <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                    {isExist === 'true' ? 'В наличии' : 'Под заказ'}
                 </div>
                 <div className={styles.bottomPanel}>
                     <p className={styles.productName}>
