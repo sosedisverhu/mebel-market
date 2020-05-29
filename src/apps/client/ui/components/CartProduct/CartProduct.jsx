@@ -16,6 +16,8 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
+import getShareTypeQuantity from '../../../utils/getShareTypeQuantity';
+
 import styles from './CartProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -55,14 +57,12 @@ class CartProduct extends Component {
         properties: PropTypes.object.isRequired,
         wishlist: PropTypes.array.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
-        presentsQuantity: PropTypes.number,
-        discountsQuantity: PropTypes.number
+        shares: PropTypes.array
     };
 
     static defaultProps = {
         wishlist: [],
-        presentsQuantity: 0,
-        discountsQuantity: 0
+        shares: []
     };
 
     state = {};
@@ -131,13 +131,15 @@ class CartProduct extends Component {
     };
 
     render () {
-        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, presentsQuantity, discountsQuantity } = this.props;
+        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, shares } = this.props;
         const { isInWishList } = this.state;
         const text = propOr('cart', {}, langMap);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
         const color = size.colors.find(color => color.id === properties.size.color.id);
         const isManyColors = size.colors.length > 1;
         const isDiscount = !!color.discountPrice;
+        const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
+        const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
 
         const allFeatures = size.features || [];
         const checkedFeatureIds = properties.features || {};

@@ -1,8 +1,10 @@
 /* eslint-disable */
-import formatMoney from '../../../../../src/apps/client/utils/formatMoney';
 import format from 'date-fns/format';
 import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc';
 import find from '@tinkoff/utils/array/find';
+
+import formatMoney from '../../../../../src/apps/client/utils/formatMoney';
+import getSharesPrice from '../../../../../src/apps/client/utils/getSharesPrice';
 
 function getGeaturesHTML(features) {
     let featuresHTML = '';
@@ -19,7 +21,7 @@ function getCategoriesAlias(categoryId, subCategoryId, categories, subCategories
     return `${category}/${subCategory}`;
 }
 
-export default function customerLetter (order, categories, subCategories, domain) {
+export default function customerLetter (order, categories, subCategories, domain, shares) {
     const { customer, delivery, payment, products } = order;
     const productsPrice = products.reduce((sum, { quantity, price, basePrice, properties }) => {
         const productPrice = price || basePrice;
@@ -27,6 +29,8 @@ export default function customerLetter (order, categories, subCategories, domain
 
         return sum + (quantity * (productPrice + featuresPrice));
     }, 0);
+    const sharesPrice = getSharesPrice(shares);
+    const totalPrice = productsPrice - sharesPrice;
     let productsHTML = '';
 
     products.forEach((product) => {
@@ -367,12 +371,36 @@ export default function customerLetter (order, categories, subCategories, domain
                                             </tbody></table>
                                     </td>
                                 </tr>
+                                ${sharesPrice
+        ? `<tr>
+                                        <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:17px;padding-bottom:17px">
+                                            <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
+                                                <tbody><tr>
+                                                    <td style="font-size:15px;vertical-align:top;width:140px">Цена без скидки</td>
+                                                    <td style="font-size:15px;text-align:right;vertical-align:top">${formatMoney(productsPrice)}</td>
+                                                </tr>
+                                                </tbody></table>
+                                        </td>
+                                    </tr>`
+        : ''}
+                                ${sharesPrice
+        ? `<tr>
+                                        <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:17px;padding-bottom:17px">
+                                            <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
+                                                <tbody><tr>
+                                                    <td style="font-size:15px;vertical-align:top;width:140px">Размер скидки</td>
+                                                    <td style="font-size:15px;text-align:right;vertical-align:top">${formatMoney(sharesPrice)}</td>
+                                                </tr>
+                                                </tbody></table>
+                                        </td>
+                                    </tr>`
+        : ''}
                                 <tr>
                                     <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:22px;padding-bottom:22px">
                                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                             <tbody><tr>
                                                 <td style="font-size:18px;vertical-align:baseline">Всего к оплате</td>
-                                                <td style="font-size:26px;text-align:right;vertical-align:baseline">${formatMoney(productsPrice + (delivery.price || 0))}</td>
+                                                <td style="font-size:26px;text-align:right;vertical-align:baseline">${formatMoney(totalPrice + (delivery.price || 0))}</td>
                                             </tr>
                                             </tbody></table>
                                     </td>

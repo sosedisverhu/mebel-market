@@ -16,9 +16,13 @@ import styles from './CheckoutPage.css';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
-import formatMoney from '../../../utils/formatMoney';
 
 import saveOrder from '../../../services/client/saveOrder';
+
+import formatMoney from '../../../utils/formatMoney';
+import getProductsPrice from '../../../utils/getProductsPrice';
+import getSharesPrice from '../../../utils/getSharesPrice';
+import getShares from '../../../utils/getShares';
 
 const deliveryOptions = [
     {
@@ -135,16 +139,28 @@ class CheckoutPage extends Component {
 
     requiredFieldsStart = React.createRef();
 
-    state = {
-        deliveryChecked: deliveryOptions[0],
-        paymentChecked: paymentOptions[0],
-        customerName: '',
-        customerTel: '+380',
-        customerEmail: '',
-        customerComment: '',
-        customerAddress: '',
-        orderId: null
-    };
+    constructor (...args) {
+        super(...args);
+        const { basket, lang } = this.props;
+
+        this.state = {
+            deliveryChecked: deliveryOptions[0],
+            paymentChecked: paymentOptions[0],
+            customerName: '',
+            customerTel: '+380',
+            customerEmail: '',
+            customerComment: '',
+            customerAddress: '',
+            orderId: null,
+            shares: getShares(basket, lang)
+        };
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.basket !== nextProps.basket) {
+            this.setState({ shares: getShares(nextProps.basket, nextProps.lang) });
+        }
+    }
 
     handleChange = fieldName => e => {
         this.setState({ [fieldName]: e.target.value, [`${fieldName}Error`]: false });
@@ -227,22 +243,15 @@ class CheckoutPage extends Component {
 
     render () {
         const { langMap, lang, basket, langRoute } = this.props;
+        const { shares } = this.state;
 
         const { deliveryChecked, paymentChecked, orderId } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
-        const productsPrice = basket.reduce((sum, { quantity, product, properties }) => {
-            const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
-            const color = size.colors.find(color => color.id === properties.size.color.id);
-            const productPrice = color.discountPrice || color.price;
-            const allFeatures = size.features || [];
-            const checkedFeatureIds = properties.features || {};
-            const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
-            const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
 
-            return sum + (quantity * (productPrice + featuresPrice));
-        }, 0);
-        const totalPrice = productsPrice;
+        const productsPrice = getProductsPrice(basket, lang);
+        const sharesPrice = getSharesPrice(shares);
+        const totalPrice = productsPrice - sharesPrice;
 
         if (!basket.length) {
             return <section className={styles.noItemsContainerWrap}>
@@ -272,9 +281,16 @@ class CheckoutPage extends Component {
                                     properties={properties}
                                     basketItemId={basketItemId}
                                     newClass='orderItem'
+                                    shares={shares}
                                     key={i} />
                             )}
                         </div>
+                        {/* test block start */}
+                        <div style={{ border: '1px solid red', width: '100%', padding: '10px 35px' }}>
+                            <p>{`Цена без скидки: ${productsPrice}`}</p>
+                            <p>{`Размер скидки: ${sharesPrice}`}</p>
+                        </div>
+                        {/* test block end */}
                         <div className={styles.priceWrap}>
                             <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>

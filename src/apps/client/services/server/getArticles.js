@@ -11,7 +11,7 @@ export default function getProducts (req) {
             request
                 .get(`${host}/api/client/article/all`)
                 .timeout({
-                    deadline: 20001
+                    deadline: 2000
                 })
         )
             .then(articles => {
