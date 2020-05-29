@@ -57,7 +57,7 @@ class Product extends Component {
     handleColorChange = activeColor => this.setState({ activeColor });
 
     render () {
-        const { product, isPromotion } = this.props;
+        const { product, isPromotion, subCategory } = this.props;
         const { activeSize, activeColor } = this.state;
 
         return <div className={styles.product}>
@@ -69,7 +69,8 @@ class Product extends Component {
                 changeColor={this.handleColorChange}
                 activeSize={activeSize}
                 activeColor={activeColor}
-                isPromotion={isPromotion}/>
+                isPromotion={isPromotion}
+                subCategory={subCategory}/>
         </div>;
     }
 }

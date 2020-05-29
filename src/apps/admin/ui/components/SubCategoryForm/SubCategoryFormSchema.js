@@ -106,6 +106,46 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
             },
             {
                 component: FormFieldTitle,
+                name: 'columnsTitle',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название для столбцов таблицы размеров товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'sizeColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца размеров',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'descriptionColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца свойств',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'valueColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца значения',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
                 name: 'seoTitle',
                 schema: {
                     label: 'Сео',

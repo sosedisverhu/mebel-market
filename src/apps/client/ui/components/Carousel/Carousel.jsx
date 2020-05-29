@@ -284,7 +284,7 @@ class Carousel extends Component {
                 <div className={styles.bottomBlock}>
                     <a className={classNames(styles.text, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                         href={slides[activeSlideIndex].link}
-                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider}</a>
+                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
                     {slides.length > 1 && <div className={styles.dots}>
                         { slides.map((slide, i) =>
                             <div
@@ -296,7 +296,7 @@ class Carousel extends Component {
             </Draggable>
             <a className={classNames(styles.text, styles.tablet, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                 href={slides[activeSlideIndex].link}
-                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{text.slider}</a>
+                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
         </div>;
     }
 }
