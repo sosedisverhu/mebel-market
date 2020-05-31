@@ -18,7 +18,8 @@
     "start:prod": "npm run build:static:prod && npm run build:server:prod && npm run start:server",
     "start:forever:server": "forever start server/compiled/server.js",
     "stop:forever:server": "forever stopall",
-    "deploy": "npm run stop:forever:server && npm run build:static:prod && npm run build:server:prod && cross-env PORT=80 npm run start:forever:server"
+    "deploy": "npm run stop:forever:server && npm run build:static:prod && npm run build:server:prod && cross-env PORT=80 npm run start:forever:server",
+    "deploy:dev": "npm run stop:forever:server && npm run build:static:dev && npm run build:server:dev && cross-env PORT=80 npm run start:forever:server"
   },
   "repository": {
     "type": "git",
