@@ -108,7 +108,7 @@
     "@ckeditor/ckeditor5-react": "^2.0.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "@sosedisverhu/ckeditor5-build-classic": "^22.0.0",
+    "@sosedisverhu/ckeditor5-build-classic": "^23.0.0",
     "@tinkoff/utils": "^2.0.0",
     "body-parser": "^1.18.3",
     "body-scroll-lock": "^2.6.4",
