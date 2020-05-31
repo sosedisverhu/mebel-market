@@ -79,12 +79,14 @@ class Card extends Component {
         let isDiscount = minActivePrice !== minActualPrice;
 
         if (activeSizes.length >= 1) {
-            console.log(sizes.ru, activeSizes);
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
-            const minDiscountPrice = activePrices[0].colors[0].discountPrice;
-            minActivePrice = activePrices[0].colors[0].price;
-            minActualPrice = minDiscountPrice || minActivePrice;
-            isDiscount = minActivePrice !== minActualPrice;
+
+            if (activePrices.length) {
+                const minDiscountPrice = activePrices[0].colors[0].discountPrice;
+                minActivePrice = activePrices[0].colors[0].price;
+                minActualPrice = minDiscountPrice || minActivePrice;
+                isDiscount = minActivePrice !== minActualPrice;
+            }
         }
 
         return (
