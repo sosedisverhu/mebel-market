@@ -41,6 +41,7 @@ class Card extends Component {
         labelClass: '',
         categories: [],
         subCategories: [],
+        activeSizes: [],
         setSliderWidth: () => {}
     };
 
@@ -76,7 +77,7 @@ class Card extends Component {
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
-        
+
         if (activeSizes.length >= 1) {
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
             const minDiscountPrice = activePrices[0].colors[0].discountPrice;
