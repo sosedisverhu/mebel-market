@@ -151,7 +151,7 @@ class MainSlideForm extends Component {
                 </label>
             </FormControl>
             <TextField
-                label='Имя'
+                label='Название кнопки'
                 value={slide.name}
                 onChange={this.handleChange('name')}
                 margin='normal'
