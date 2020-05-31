@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import uploadFile from '../../../services/uploadFile';
 
 import CKEditor from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@sosedisverhu/ckeditor5-build-classic';
 // import '@sosedisverhu/ckeditor5-build-classic/build/translations/en.js'; // for en admin panel
 
 import UploadImagePlugin from './plugins/UploadImage/UploadImage';

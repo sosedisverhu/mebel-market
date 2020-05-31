@@ -111,11 +111,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@ckeditor/ckeditor5-build-classic@^19.0.1":
-  version "19.0.1"
-  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-19.0.1.tgz#14fa2da034710e111dfd6869f7cea9f0b60cab0f"
-  integrity sha512-Lwd9AzbR2Iqhk4CzALyoULNKBslTHdetiLYF/RprNBfkMmOG7M3IH4Y7oqoNLQ80t5LsQEpOGlvo2iBAO0J3nQ==
-
 "@ckeditor/ckeditor5-react@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-react/-/ckeditor5-react-2.0.0.tgz#05c00d17840b54e1126aee97ffe25a1dd2713d4b"
@@ -196,10 +191,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@sosedisverhu/ckeditor5-build-classic@^21.0.0":
-  version "21.0.0"
-  resolved "https://registry.yarnpkg.com/@sosedisverhu/ckeditor5-build-classic/-/ckeditor5-build-classic-21.0.0.tgz#9d7e7861befd0f39f5fb831ea3175cfcd2487c36"
-  integrity sha512-MCZe+tI+hi/HWZfBaNlRBT+/DorfyvCMl0Gr601jT3XHgLJdjGZSktKyPzJzlSA+8ckghmU49Ge9CQbLbnfV/w==
+"@sosedisverhu/ckeditor5-build-classic@^22.0.0":
+  version "22.0.0"
+  resolved "https://registry.yarnpkg.com/@sosedisverhu/ckeditor5-build-classic/-/ckeditor5-build-classic-22.0.0.tgz#af67d834d12f7453d215dd5a253e6106a500f6b4"
+  integrity sha512-vUzaSaUePCn/fPPhkUir2TemAHWxDQtnx4wRhV7EBK+ipqnl1aZlLk4XD2cwLNUcwUAm8yyBPp2JLQuZkZ//9A==
 
 "@tinkoff/utils@^2.0.0":
   version "2.0.0"
