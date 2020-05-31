@@ -46,7 +46,12 @@ const common = {
             },
             {
                 test: /\.svg$/,
-                loader: 'file-loader'
+                loader: 'file-loader',
+                exclude: [/ckeditor5-[^/]+\/theme\/icons\/[^/]+\.svg$/]
+            },
+            {
+                test: /ckeditor5-[^/]+\/theme\/icons\/[^/]+\.svg$/,
+                use: [ 'raw-loader' ]
             },
             {
                 test: /\.png$/,
@@ -121,7 +126,7 @@ const common = {
         new CleanWebpackPlugin(['public'], {
             root: path.join(__dirname, '..')
         }),
-        new webpack.NormalModuleReplacementPlugin(/babel-runtime\/core-js\/promise/, path.resolve(__dirname, '../utils/polyfill/promise')),
+        // new webpack.NormalModuleReplacementPlugin(/babel-runtime\/core-js\/promise/, path.resolve(__dirname, '../utils/polyfill/promise')),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 
