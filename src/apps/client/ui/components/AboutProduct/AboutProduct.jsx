@@ -74,7 +74,7 @@ class AboutProduct extends Component {
         isPopupSizes: false
     };
 
-    componentDidMount() {
+    componentDidMount () {
         const { wishlist, product, activeColor } = this.props;
 
         this.setState({
@@ -82,7 +82,7 @@ class AboutProduct extends Component {
         });
     }
 
-    static getDerivedStateFromProps(props) {
+    static getDerivedStateFromProps (props) {
         const { basket, wishlist, product } = props;
         let values = {};
 
@@ -208,7 +208,7 @@ class AboutProduct extends Component {
         this.props.changeSize(size);
     };
 
-    render() {
+    render () {
         const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory } = this.props;
         const {
             sizes,
