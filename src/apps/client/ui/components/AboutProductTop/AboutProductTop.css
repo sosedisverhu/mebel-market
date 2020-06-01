@@ -60,9 +60,12 @@
     text-align: center;
     color: #25716C;
     align-self: center;
-    &.notExist {
-        color: #DC4E41;
+    @media (min-width: 1000px) {
+        display: none;
     }
+}
+.notExist {
+    color: #DC4E41;
 }
 
 .article {

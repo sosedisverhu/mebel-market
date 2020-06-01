@@ -39,7 +39,7 @@ class AboutProductTop extends Component {
                     {`${text.warranty} ${product.warranty} ${formatWordDeclension(text.months, product.warranty)}`}
                 </div>
                 <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
-                    {isExist === 'true' ? 'В наличии' : 'Под заказ'}
+                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
                 </div>
                 {!!article && <div className={styles.article}>{`${text.article} ${article}`}</div>}
             </div>

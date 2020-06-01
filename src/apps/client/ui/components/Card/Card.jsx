@@ -77,7 +77,7 @@ class Card extends Component {
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
-
+console.log(langMap);
         if (activeSizes.length >= 1) {
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
             const minDiscountPrice = activePrices[0].colors[0].discountPrice;
@@ -109,7 +109,7 @@ class Card extends Component {
                     <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
                 </div>
                 <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
-                    {isExist === 'true' ? 'В наличии' : 'Под заказ'}
+                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
                 </div>
                 <div className={styles.bottomPanel}>
                     <p className={styles.productName}>

@@ -254,7 +254,7 @@ class AboutProduct extends Component {
                     </span>
                 </span>
                 <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
-                    {isExist === 'true' ? 'В наличии' : 'Под заказ'}
+                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
                 </div>
             </div>
             <div className={styles.properties}>
