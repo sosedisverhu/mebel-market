@@ -29,7 +29,14 @@
         }
     }
 }
+.disablePhoneIcon {
+    @media (max-width: 767px) {
+        display: none;
+    }
+}
 .phone {
+    width: 100%;
+    height: 100%;
     transition: all 0.5s ease-in;
     path {
         fill: #FFF; 

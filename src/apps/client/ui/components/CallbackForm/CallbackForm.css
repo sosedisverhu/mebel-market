@@ -39,6 +39,9 @@
     position: relative;
     width: 100%;
     padding: 30px;
+    @media (max-width: 767px) {
+        padding: 0;
+    }
 }
 
 .popupContent {
@@ -51,6 +54,10 @@
     max-width: 640px;
     margin: 0 auto;
     z-index: 110;
+    @media (max-width: 767px) {
+        height: 100vh;
+        max-width: 100%;
+    }
 }
 
 .escape {
@@ -65,13 +72,22 @@
 
 .userInfo {
     width: 385px;
+    @media (max-width: 767px) {
+        width: calc(114/360 * 100%);
+    }
 }
 
 .title {
     font: 32px/39px GilroyRegular;
     font-weight: bold;
     margin-top: 40px;
-    
+    @media (max-width: 767px) {
+        width: 100%;
+        position: absolute;
+        top: calc(60/640 * 100vh);
+        left: 0;
+        margin: 0;
+    }
 }
 
 .dataField {
@@ -80,12 +96,22 @@
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    @media (max-width: 767px) {
+        width: 100%;
+        position: absolute;
+        top: calc(320/640 * 100vh);
+        left: 0;
+    }
 }
 .form {
     position: relative;
-    width: 71%;
+    width: calc(274/385 * 100%);
     height: 250px;
     overflow: hidden;
+    @media (max-width: 767px) {
+        height: calc(272/640 * 100vh);
+        width: calc(328/360 * 100%);
+    }
 
     input {
         font: 16px/19px GilroyRegular;
@@ -99,6 +125,11 @@
         padding-top: 20px;
         border: none;
         outline: none;
+        @media (max-width: 767px) {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
     }
 
     input:focus + .labelName .contentName,
@@ -120,6 +151,9 @@ label {
 }
 .labelName {
     margin-top: 29px;
+    @media (max-width: 767px) {
+        margin-top: 0px;
+    }
 }
 .labelPhone {
     margin-top: 24px;
@@ -138,6 +172,7 @@ label {
     position: absolute;
     bottom: 0;
     left: 0;
+    width: 100%;
     font: 16px/19px GilroyRegular;
     letter-spacing: 0.02em;
     border: none;
@@ -145,10 +180,6 @@ label {
     background: #232323;
     padding: 13px 87px;
     cursor: pointer;
-    img {
-        width: 100%;
-        height: 100%;
-    }
 }
 .successfulSubmit {
     position: absolute;
@@ -166,6 +197,10 @@ label {
     img {
         width: 24px;
         height: 24px;
+        border-radius: 50%;
+    }
+    @media (max-width: 767px) {
+        background: transparent;
     }
 }
 .contentName {
@@ -179,6 +214,10 @@ label {
     padding: 62px 60px 0px 25px;
     width: 255px;
     background: linear-gradient(0deg, rgba(37, 113, 108, 0.8), rgba(37, 113, 108, 0.8)), url('./img/banner.png');
+    @media (max-width: 767px) {
+        width: calc(246/360 * 100%);
+        padding: 123px 32px 0px 16px;
+    }
 }
 .referenceInfo {
     display: flex;
@@ -191,6 +230,9 @@ label {
     height: 2px;
     width: 100%;
     background: #FFF;
+    @media (max-width: 767px) {
+        margin-bottom: 24px;
+    }
 }
 .referenceText {
     font: 14px/21px GilroyRegular;
