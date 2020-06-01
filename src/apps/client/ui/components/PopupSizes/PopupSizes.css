@@ -95,11 +95,15 @@
     }
 }
 
-.rowTitle {
+.rowTitles {
     font-size: 18px;
     line-height: 21px;
     margin-bottom: 10px;
     text-align: left;
+    width: 100%;
+    .rowTitle {
+        width: 33.33%;
+    }
 
     @media (min-width: 631px) {
         display: none;
@@ -108,13 +112,20 @@
     @media (max-width: 630px) {
         margin-top: 30px;
         margin-bottom: 15px;
+        .rowTitle {
+            display: none;
+            &:first-child {
+                display: block;
+            }
+        }
     }
 }
 
 .rowWrap {
     &:first-child {
-        .rowTitle {
-            display: block;
+        .rowTitles {
+            display: flex;
+            justify-content: space-between;
         }
     }
 }

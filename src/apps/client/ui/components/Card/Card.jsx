@@ -41,6 +41,7 @@ class Card extends Component {
         labelClass: '',
         categories: [],
         subCategories: [],
+        activeSizes: [],
         setSliderWidth: () => {}
     };
 
@@ -79,10 +80,13 @@ class Card extends Component {
 
         if (activeSizes.length >= 1) {
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
-            const minDiscountPrice = activePrices[0].colors[0].discountPrice;
-            minActivePrice = activePrices[0].colors[0].price;
-            minActualPrice = minDiscountPrice || minActivePrice;
-            isDiscount = minActivePrice !== minActualPrice;
+
+            if (activePrices.length) {
+                const minDiscountPrice = activePrices[0].colors[0].discountPrice;
+                minActivePrice = activePrices[0].colors[0].price;
+                minActualPrice = minDiscountPrice || minActivePrice;
+                isDiscount = minActivePrice !== minActualPrice;
+            }
         }
 
         return (

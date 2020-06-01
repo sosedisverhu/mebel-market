@@ -108,7 +108,7 @@ class ProductPage extends Component {
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
-                <Product isPromotion={isPromotion} product={product}/>
+                <Product isPromotion={isPromotion} product={product} subCategory={subCategory}/>
                 <Tab product={product}/>
             </div>);
     }
