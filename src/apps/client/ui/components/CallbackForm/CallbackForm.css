@@ -213,7 +213,7 @@ label {
 .reference {
     padding: 62px 60px 0px 25px;
     width: 255px;
-    background: linear-gradient(0deg, rgba(37, 113, 108, 0.8), rgba(37, 113, 108, 0.8)), url('./img/banner.png');
+    background: url('./img/banner.png');
     @media (max-width: 767px) {
         width: calc(246/360 * 100%);
         padding: 123px 32px 0px 16px;
