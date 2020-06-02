@@ -180,6 +180,14 @@ export default {
         publication: 'Ваш відгук буде опублікований',
         moderation: 'після модерації'
     },
+    callback: {
+        btnConfirm: 'Підтвердити',
+        title: "Зв'язатись з нами",
+        firstField: "Ім'я",
+        secondField: 'Телефон',
+        text: 'lorem lorem lorem lorem',
+        validationText: '*Введіть номер телефону'
+    },
     articles: {
         searchResult: 'Статті:'
     }

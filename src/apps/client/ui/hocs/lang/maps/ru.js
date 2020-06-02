@@ -181,6 +181,14 @@ export default {
         publication: 'Ваш отзыв будет опубликован',
         moderation: 'после модерации'
     },
+    callback: {
+        btnConfirm: 'Подтвердить',
+        title: 'Связаться с нами',
+        firstField: 'Имя',
+        secondField: 'Телефон',
+        text: 'lorem lorem lorem lorem',
+        validationText: '*Введите номер телефона'
+    },
     articles: {
         searchResult: 'Статьи:'
     }

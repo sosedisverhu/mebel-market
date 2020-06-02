@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import CallbackForm from '../CallbackForm/CallbackForm';
+
+import propOr from '@tinkoff/utils/object/propOr';
 
 import classNames from 'classnames';
 
 import styles from './CallbackCall.css';
+
+const mapStateToProps = ({ application }) => {
+    return {
+        langMap: application.langMap
+    };
+};
 
 class CallbackCall extends Component {
 
@@ -22,6 +31,8 @@ class CallbackCall extends Component {
 
     render () {
         const { isPopupCall } = this.state;
+        const { langMap } = this.props;
+        const text = propOr('callback', {}, langMap);
 
         return (<div>
             <div className={classNames(styles.phoneIcon, {[styles.disablePhoneIcon]: this.state.isPopupCall })} onClick={this.handleClick}>
@@ -31,10 +42,10 @@ class CallbackCall extends Component {
                 </svg>
                 </div>
             </div>
-            {isPopupCall && <CallbackForm closePopup = {this.closePopup} />}
+            {isPopupCall && <CallbackForm closePopup = {this.closePopup} text={text} />}
         </div>
         );
     }
 }
 
-export default CallbackCall;
+export default connect(mapStateToProps)(CallbackCall);
