@@ -29,6 +29,7 @@ export default function updateSlides (req, res) {
             return {
                 path: slide.path,
                 link: slide.link,
+                name: slide.name,
                 newTab: !!slide.newTab
             };
         });

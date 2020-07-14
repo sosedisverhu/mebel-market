@@ -7,6 +7,9 @@ const SubCategory = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
+            sizeColumn: { type: String },
+            descriptionColumn: { type: String },
+            valueColumn: { type: String },
             seoTitle: { type: String },
             seoDescription: { type: String },
             seoKeywords: { type: String }

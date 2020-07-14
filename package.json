@@ -18,7 +18,8 @@
     "start:prod": "npm run build:static:prod && npm run build:server:prod && npm run start:server",
     "start:forever:server": "forever start server/compiled/server.js",
     "stop:forever:server": "forever stopall",
-    "deploy": "npm run stop:forever:server && npm run build:static:prod && npm run build:server:prod && cross-env PORT=80 npm run start:forever:server"
+    "deploy": "npm run stop:forever:server && npm run build:static:prod && npm run build:server:prod && cross-env PORT=80 npm run start:forever:server",
+    "deploy:dev": "npm run stop:forever:server && npm run build:static:dev && npm run build:server:dev && cross-env PORT=80 npm run start:forever:server"
   },
   "repository": {
     "type": "git",
@@ -105,10 +106,10 @@
     "webpack-stylish": "^0.1.8"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
     "@ckeditor/ckeditor5-react": "^2.0.0",
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "@sosedisverhu/ckeditor5-build-classic": "^23.0.0",
     "@tinkoff/utils": "^2.0.0",
     "body-parser": "^1.18.3",
     "body-scroll-lock": "^2.6.4",

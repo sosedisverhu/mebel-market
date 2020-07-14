@@ -111,6 +111,17 @@
     left: 0;
     bottom: 0;
     z-index: 10;
+    @media (max-width: 1024px) {
+        bottom: 61px;
+    }
+
+    @media (max-width: 800px) {
+        bottom: 50px;
+    }
+
+    @media (max-width: 600px) {
+        bottom: 34px;
+    }
 }
 
 .text {
@@ -126,10 +137,19 @@
     transition: opacity 0.8s ease;
     opacity: 0;
     z-index: -1;
+    &.tablet {
+        display: none;
+    }
 
     &.activeText {
         opacity: 1;
         z-index: 1;
+    }
+    @media (max-width: 1024px) {
+        display: none;
+        &.tablet {
+            display: block;
+        }
     }
 
     @media (max-width: 800px) {
