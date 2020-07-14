@@ -148,7 +148,7 @@
     "scrollbar-width": "^3.1.1",
     "smoothscroll-polyfill": "^0.4.4",
     "style-loader": "^1.0.0",
-    "superagent": "3.5.2",
+    "superagent": "3.7.0",
     "uniqid": "^5.0.3"
   }
 }
