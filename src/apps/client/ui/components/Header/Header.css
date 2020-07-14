@@ -403,9 +403,9 @@
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0x);
     width: 100%;
-    height: calc(100% - 99px);
+    height: calc(100vh - 100px);
     max-height: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
     z-index: 40;
     transition: max-height 0.25s ease-out;
 
