@@ -405,7 +405,7 @@
     width: 100%;
     height: calc(100vh - 100px);
     max-height: 0;
-    overflow-y: scroll;
+    overflow-y: auto;
     z-index: 40;
     transition: max-height 0.25s ease-out;
 
