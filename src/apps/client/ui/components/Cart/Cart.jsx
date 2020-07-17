@@ -132,13 +132,23 @@ class Cart extends Component {
                         }
                         {basket.length > 0 &&
                         <div className={styles.cartBottomInfo}>
-                            {/* test block start */}
-                            <div style={{ border: '1px solid red', width: '100%', padding: '10px 35px' }}>
-                                <p>{`Цена без скидки: ${productsPrice}`}</p>
-                                <p>{`Размер скидки: ${sharesPrice}`}</p>
-                            </div>
-                            {/* test block end */}
                             <div className={styles.totalPriceContainer}>
+                                {!!sharesPrice && <div className={styles.totalPriceWrapper}>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        Цена без скидки:
+                                    </p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        {formatMoney(productsPrice)}
+                                    </p>
+                                </div>}
+                                {!!sharesPrice && <div className={styles.totalPriceWrapper}>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        Размер скидки:
+                                    </p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        {formatMoney(sharesPrice)}
+                                    </p>
+                                </div>}
                                 <div className={styles.totalPriceWrapper}>
                                     <p className={styles.totalPrice}>
                                         {text.totalPrice}

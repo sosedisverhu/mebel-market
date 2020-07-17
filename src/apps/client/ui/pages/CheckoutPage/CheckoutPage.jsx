@@ -285,14 +285,9 @@ class CheckoutPage extends Component {
                                     key={i} />
                             )}
                         </div>
-                        {/* test block start */}
-                        <div style={{ border: '1px solid red', width: '100%', padding: '10px 35px' }}>
-                            <p>{`Цена без скидки: ${productsPrice}`}</p>
-                            <p>{`Размер скидки: ${sharesPrice}`}</p>
-                        </div>
-                        {/* test block end */}
                         <div className={styles.priceWrap}>
                             <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
+                            {!!sharesPrice && <p className={styles.priceRow}>Размер скидки: <span>{formatMoney(sharesPrice)}</span></p>}
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                         </div>
                     </div>

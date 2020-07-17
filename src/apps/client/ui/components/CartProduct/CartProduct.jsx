@@ -17,6 +17,7 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
 import getShareTypeQuantity from '../../../utils/getShareTypeQuantity';
+import outsideClick from '../../hocs/outsideClick';
 
 import styles from './CartProduct.css';
 
@@ -39,6 +40,7 @@ const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
+@outsideClick
 class CartProduct extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
@@ -57,7 +59,9 @@ class CartProduct extends Component {
         properties: PropTypes.object.isRequired,
         wishlist: PropTypes.array.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
-        shares: PropTypes.array
+        shares: PropTypes.array,
+        turnOnClickOutside: PropTypes.func,
+        outsideClickEnabled: PropTypes.bool
     };
 
     static defaultProps = {
@@ -65,7 +69,17 @@ class CartProduct extends Component {
         shares: []
     };
 
-    state = {};
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            isPresentMessage: false,
+            isDiscountMessage: false
+        };
+
+        this.sharePresent = React.createRef();
+        this.shareDiscount = React.createRef();
+    }
 
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
@@ -130,9 +144,37 @@ class CartProduct extends Component {
         return `${category}/${subCategory}`;
     };
 
+    handleShowPresentMessage = () => {
+        const { isPresentMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isPresentMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isPresentMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.sharePresent.current, () => this.closeMessage('isPresentMessage'));
+    };
+
+    handleShowDiscountMessage = () => {
+        const { isDiscountMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isDiscountMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isDiscountMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.shareDiscount.current, () => this.closeMessage('isDiscountMessage'));
+    };
+
+    closeMessage = (messageName) => {
+        this.setState({ [messageName]: false });
+    };
+
     render () {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, shares } = this.props;
-        const { isInWishList } = this.state;
+        const { isInWishList, isPresentMessage, isDiscountMessage } = this.state;
         const text = propOr('cart', {}, langMap);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
         const color = size.colors.find(color => color.id === properties.size.color.id);
@@ -158,6 +200,26 @@ class CartProduct extends Component {
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
+                        {!!presentsQuantity && <div ref={this.sharePresent} className={classNames(styles.share, { [styles.active]: isPresentMessage })} onClick={this.handleShowPresentMessage}>
+                            Подарок
+                            {presentsQuantity < quantity && <span>&nbsp;{`(${presentsQuantity} из ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>
+                                    Товары, отмеченные как "Подарок" Вы получите бесплатно
+                                </div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
+                        {!!discountsQuantity && <div ref={this.shareDiscount} className={classNames(styles.share, { [styles.active]: isDiscountMessage })} onClick={this.handleShowDiscountMessage}>
+                            Акция
+                            {discountsQuantity < quantity && <span>&nbsp;{`(${discountsQuantity} из ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>
+                                    На товары, отмеченные как "Акция" Вы получаете дополнительную скидку
+                                </div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
                         <div className={styles.productOption}>
                             <Link
                                 className={styles.productNameLink}
@@ -214,12 +276,6 @@ class CartProduct extends Component {
                                 {formatMoney(resultPrice)}
                             </p>
                         </div>
-                        {/* test block start */}
-                        {!!(discountsQuantity || presentsQuantity) && <div style={{ border: '1px solid red', width: '100%', padding: '10px 35px' }}>
-                            {!!discountsQuantity && <p>{`Количество скидочных товаров: ${discountsQuantity}`}</p>}
-                            {!!presentsQuantity && <p>{`Количество подарочных товаров: ${presentsQuantity}`}</p>}
-                        </div>}
-                        {/* test block end */}
                     </div>
                     <div className={styles.buttons}>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}

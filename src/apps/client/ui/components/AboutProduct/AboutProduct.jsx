@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import propOr from '@tinkoff/utils/object/propOr';
+import find from '@tinkoff/utils/array/find';
+
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 
 import formatMoney from '../../../utils/formatMoney';
@@ -18,16 +21,22 @@ import openBasket from '../../../actions/openBasket';
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
 import PopupSizes from '../PopupSizes/PopupSizes';
+import PopupPresents from '../PopupPresents/PopupPresents';
 import styles from './AboutProduct.css';
 import SizesSelect from '../SizesSelect/SizesSelect';
 import ColorsSelect from '../ColorsSelect/ColorsSelect';
+import outsideClick from '../../hocs/outsideClick';
 
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
+        langRoute: application.langRoute,
         lang: application.lang,
         wishlist: data.wishlist,
         basket: data.basket,
+        products: data.products,
+        categories: data.categories,
+        subCategories: data.subCategories,
         basketIsOpen: data.basketIsOpen
     };
 };
@@ -42,13 +51,18 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
+@outsideClick
 class AboutProduct extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
+        langRoute: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         setScrollToCharacteristic: PropTypes.func.isRequired,
         wishlist: PropTypes.array,
+        products: PropTypes.array.isRequired,
+        categories: PropTypes.array.isRequired,
+        subCategories: PropTypes.array.isRequired,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
@@ -59,20 +73,30 @@ class AboutProduct extends Component {
         changeSize: PropTypes.func.isRequired,
         activeSize: PropTypes.object.isRequired,
         activeColor: PropTypes.object.isRequired,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        turnOnClickOutside: PropTypes.func,
+        outsideClickEnabled: PropTypes.bool
     };
 
-    state = {
-        sizes: this.props.product.sizes,
-        sizeListIsOpen: true,
-        selectIsOpen: false,
-        isInWishlist: false,
-        isInBasket: false,
-        colorListOpen: false,
-        checkedFeatureIds: {},
-        activePopupColorIndex: null,
-        isPopupSizes: false
-    };
+    constructor (props) {
+        super(props);
+
+        this.shareInfo = React.createRef();
+
+        this.state = {
+            sizes: this.props.product.sizes,
+            sizeListIsOpen: true,
+            selectIsOpen: false,
+            isInWishlist: false,
+            isInBasket: false,
+            colorListOpen: false,
+            checkedFeatureIds: {},
+            activePopupColorIndex: null,
+            isPopupSizes: false,
+            isPopupPresents: false,
+            isShareInfo: false
+        };
+    }
 
     componentDidMount () {
         const { wishlist, product, activeColor } = this.props;
@@ -140,10 +164,22 @@ class AboutProduct extends Component {
     };
 
     handleBuyClick = () => {
-        const { saveProductsToBasket, product, activeSize, activeColor } = this.props;
+        const { product, activeSize, activeColor } = this.props;
         const { checkedFeatureIds } = this.state;
-        saveProductsToBasket({
-            productId: product.id,
+        const sharesPresent = activeSize.shares && activeSize.shares.filter(share => share.type === 'present');
+
+        if (sharesPresent && sharesPresent.length) {
+            this.openPopupPresents();
+            return;
+        }
+
+        this.saveProductToBasket(product.id, activeSize, activeColor, checkedFeatureIds);
+    };
+
+    saveProductToBasket = (productId, activeSize, activeColor, checkedFeatureIds = {}) => {
+        console.log('checkedFeatureIds', checkedFeatureIds);
+        return this.props.saveProductsToBasket({
+            productId,
             properties: {
                 size: {
                     id: activeSize.id,
@@ -155,6 +191,34 @@ class AboutProduct extends Component {
             },
             quantity: 1
         });
+    };
+
+    handleWithoutPresentsClick = () => {
+        const { product, activeSize, activeColor } = this.props;
+        const { checkedFeatureIds } = this.state;
+
+        this.saveProductToBasket(product.id, activeSize, activeColor, checkedFeatureIds);
+    };
+
+    handleWithPresentsClick = (presents) => {
+        const { product, activeSize, activeColor } = this.props;
+        const { checkedFeatureIds } = this.state;
+
+        this.saveProductToBasket(product.id, activeSize, activeColor, checkedFeatureIds)
+            .then(() => {
+                this.addPresentsToBasket(presents);
+            });
+    };
+
+    addPresentsToBasket = (presents) => {
+        if (presents.length) {
+            const present = presents[0];
+
+            this.saveProductToBasket(present.id, present.activeSize, present.activeColor)
+                .then(() => {
+                    this.addPresentsToBasket(presents.splice(1));
+                });
+        }
     };
 
     handleOpenBasket = () => {
@@ -170,6 +234,7 @@ class AboutProduct extends Component {
     };
 
     changeColorListOpen = () => this.setState({ colorListOpen: true });
+
     changeColorListClose = () => this.setState(({ colorListOpen: false }));
 
     handleChangePopup = (activePopupColorIndex) => {
@@ -208,8 +273,41 @@ class AboutProduct extends Component {
         this.props.changeSize(size);
     };
 
+    handleShowShareInfo = () => {
+        const { isShareInfo } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isShareInfo) {
+            return this.closeShareInfo();
+        }
+
+        this.setState({ isShareInfo: true });
+        !outsideClickEnabled && turnOnClickOutside(this.shareInfo.current, this.closeShareInfo);
+    };
+
+    closeShareInfo = () => {
+        this.setState({ isShareInfo: false });
+    };
+
+    getProductLink = (product) => {
+        const { langRoute, categories, subCategories } = this.props;
+        const categoryAlias = (find(category => category.id === product.categoryId, categories) || {}).alias;
+        const subCategoryAlias = (find(subCategory => subCategory.id === product.subCategoryId, subCategories) || {}).alias;
+        const link = `${langRoute}/${categoryAlias + '/' + subCategoryAlias}/${product.alias}`;
+
+        return link;
+    };
+
+    openPopupPresents = () => {
+        this.setState({ isPopupPresents: true });
+    };
+
+    handleClosePopupPresents = () => {
+        this.setState({ isPopupPresents: false });
+    };
+
     render () {
-        const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory } = this.props;
+        const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory, products } = this.props;
         const {
             sizes,
             sizeListIsOpen,
@@ -219,7 +317,9 @@ class AboutProduct extends Component {
             colorListOpen,
             checkedFeatureIds,
             activePopupColorIndex,
-            isPopupSizes
+            isPopupSizes,
+            isPopupPresents,
+            isShareInfo
         } = this.state;
         const text = propOr('product', {}, langMap);
         const isDiscount = !!activeColor.discountPrice;
@@ -236,6 +336,9 @@ class AboutProduct extends Component {
         const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
         const resultPrice = (activeColor.discountPrice || activeColor.price) + featuresPrice;
         const isTableSizes = actualSizes.some(size => size.tableSizes && size.tableSizes.length);
+        const shares = activeSize.shares || [];
+        const sharesDiscount = shares.filter(share => share.type === 'discount');
+        const sharesPresent = shares.filter(share => share.type === 'present');
 
         return <div className={styles.root}>
             <AboutProductTop article={activeColor.article} product={product}/>
@@ -273,6 +376,7 @@ class AboutProduct extends Component {
                         selectIsOpenSwitch={this.selectIsOpen}
                         selectIsClosedSwitch={this.selectIsClosed}
                         handleChangeSize={this.handleChangeSize}
+                        additionalClass='aboutProduct'
                     />
                 </div>
                 {(!isOneColor || product.viewOneColor) && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
@@ -280,21 +384,22 @@ class AboutProduct extends Component {
                         {text.chooseColor}
                     </div>
                     <ColorsSelect
+                        styles={styles}
                         activeSize={activeSize}
                         isPromotion={isPromotion}
-                        handleChangeSize={this.handleChangeSize}
                         activeColor={activeColor}
                         handleChangeColor={this.handleChangeColor}
                         changeColorListOpen={this.changeColorListOpen}
                         changeColorListClose={this.changeColorListClose}
                         handleChangePopup={this.handleChangePopup}
                         colorListOpen={colorListOpen}
+                        withPopup
                     />
                 </div>}
             </div>
             <div className={styles.features}>
                 {features && features.map(feature => {
-                    return <label className={styles.feature}>
+                    return <label key={feature.id} className={styles.feature}>
                         <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
                             onChange={this.handleCheckboxChange} name={feature.id}/>
                         <span className={styles.featureCheckmark}/>
@@ -313,6 +418,58 @@ class AboutProduct extends Component {
                 </button>
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                     onClick={this.handleAddToWishlist}/>
+                {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
+                    {isShareInfo && <div className={styles.shareInfo}>
+                        {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
+                            <div className={styles.shareInfoDescr}>Вы получите скидку при покупке этого товара вместе с одним из этих товаров/групой товаров</div>
+                            <ul className={styles.shareInfoProducts}>
+                                {sharesDiscount.map(share => {
+                                    return <li className={styles.shareInfoProductItem}>
+                                        {share.products.map(shareProduct => {
+                                            const product = find(product => product.id === shareProduct.value, products);
+                                            const link = this.getProductLink(product);
+
+                                            return <Link
+                                                to={link}
+                                                className={styles.shareInfoProductLink}
+                                                href="#" target='_blank'>
+                                                {shareProduct.label}
+                                            </Link>;
+                                        })}
+                                        <span className={styles.shareInfoProductDiscount}>
+                                            (<span className={styles.shareInfoProductDiscountValue}>
+                                                {` - ${formatMoney(share.value)} `}
+                                            </span>)
+                                        </span>
+                                    </li>;
+                                })}
+                            </ul>
+                        </div>}
+                        {!!sharesPresent.length && <div className={styles.shareInfoPresent}>
+                            <div className={styles.shareInfoDescr}>
+                                {sharesDiscount.length ? 'Или при покупке этого товара Вы гарантировано получаете в подарок:' : 'При покупке этого товара Вы гарантировано получаете в подарок:'}
+                                <span className={styles.shareInfoDescrSpan}>&nbsp;(на  выбор)</span></div>
+                            <ul className={styles.shareInfoProducts}>
+                                {sharesPresent.map(share => {
+                                    return <li className={styles.shareInfoProductItem}>
+                                        {share.products.map(shareProduct => {
+                                            const product = find(product => product.id === shareProduct.value, products);
+                                            const link = this.getProductLink(product);
+
+                                            return <Link
+                                                to={link}
+                                                className={styles.shareInfoProductLink}
+                                                href="#" target='_blank'>
+                                                {shareProduct.label}
+                                            </Link>;
+                                        })}
+                                    </li>;
+                                })}
+                            </ul>
+                        </div>}
+                    </div>}
+                    <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>Акция</button>
+                </div>}
             </div>
             {activePopupColorIndex !== null && <PopupColor
                 colors={actualColors}
@@ -321,6 +478,7 @@ class AboutProduct extends Component {
                 handleChangeColor={this.handleChangeColor}
             />}
             {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory}/>}
+            {isPopupPresents && <PopupPresents shares={sharesPresent} closePopup={this.handleClosePopupPresents} isPromotion={isPromotion} disagree={this.handleWithoutPresentsClick} agree={this.handleWithPresentsClick} />}
         </div>;
     }
 }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 
 import propOr from '@tinkoff/utils/object/propOr';
+import pathOr from '@tinkoff/utils/object/pathOr';
 import find from '@tinkoff/utils/array/find';
 import includes from '@tinkoff/utils/array/includes';
 
@@ -60,6 +61,14 @@ class Card extends Component {
         });
     }
 
+    getIsShareByType = (type) => {
+        const { product, lang } = this.props;
+        const sizes = pathOr(['sizes', lang], [], product);
+        const isShare = sizes.some(size => (size.shares || []).some(share => share.type === type));
+
+        return isShare;
+    };
+
     render () {
         const {
             product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes },
@@ -77,6 +86,8 @@ class Card extends Component {
         let minActivePrice = minPrice;
         let minActualPrice = actualPrice;
         let isDiscount = minActivePrice !== minActualPrice;
+        const isSharePresent = this.getIsShareByType('present');
+        const isShareDiscount = this.getIsShareByType('discount');
 
         if (activeSizes.length >= 1) {
             const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
@@ -106,6 +117,14 @@ class Card extends Component {
                     })}
                     {!!minDiscount && <div className={classNames(styles.label, styles.discount)}>
                         -{minDiscount}<span className={styles.percentage}>%</span>
+                    </div>}
+                    {isSharePresent && <div className={classNames(styles.label, styles.share)}>
+                        {/* {text.sharePresent} */}
+                        + Подарок
+                    </div>}
+                    {isShareDiscount && <div className={classNames(styles.label, styles.share)}>
+                        {/* {text.shareDiscount} */}
+                        Акция
                     </div>}
                 </div>
                 <div className={styles.imgWrap}>

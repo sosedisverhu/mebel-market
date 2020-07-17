@@ -10,6 +10,7 @@ class SizesSelect extends Component {
     static propTypes = {
         activeSize: PropTypes.object,
         sizes: PropTypes.object,
+        additionalClass: PropTypes.string,
         sizeListIsOpenSwitch: PropTypes.func,
         selectIsOpenSwitch: PropTypes.func,
         selectIsClosedSwitch: PropTypes.func,
@@ -34,7 +35,7 @@ class SizesSelect extends Component {
     };
 
     render () {
-        const { selectIsOpen, activeSize, sizes, sizeListIsOpen, isPromotion, lang, sizeListIsOpenSwitch, handleChangeSize } = this.props;
+        const { selectIsOpen, activeSize, sizes, sizeListIsOpen, isPromotion, lang, sizeListIsOpenSwitch, handleChangeSize, additionalClass } = this.props;
         let sizeCounter = 0;
         const actualSizes = isPromotion
             ? sizes[lang].filter(size => size.colors.some(color => color.action))
@@ -42,7 +43,7 @@ class SizesSelect extends Component {
         const isOneSize = actualSizes.length === 1;
 
         return (
-            <ul className={classNames(styles.select, { [styles.active]: selectIsOpen })}
+            <ul className={classNames(styles.select, { [styles.active]: selectIsOpen }, { [styles[additionalClass]]: additionalClass })}
                 onMouseEnter={() => sizeListIsOpenSwitch()}
                 onClick={this.handleOpenSizes}
             >

@@ -151,10 +151,11 @@
 
 .totalPriceContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 68px;
+    padding: 18px 0;
     background-color: gray2;
 }
 
@@ -171,9 +172,15 @@
 
 .totalPrice {
     font-size: 24px;
-    line-height: 28px;
+    line-height: 32px;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
+
+    &.small {
+        font-size: 16px;
+        line-height: 1.5;
+        text-shadow: none;
+    }
 }
 
 .noProducts {
