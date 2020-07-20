@@ -63,6 +63,7 @@ class AboutProduct extends Component {
         products: PropTypes.array.isRequired,
         categories: PropTypes.array.isRequired,
         subCategories: PropTypes.array.isRequired,
+        subCategory: PropTypes.object.isRequired,
         saveProductsToWishlist: PropTypes.func.isRequired,
         saveProductsToBasket: PropTypes.func.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
@@ -177,7 +178,6 @@ class AboutProduct extends Component {
     };
 
     saveProductToBasket = (productId, activeSize, activeColor, checkedFeatureIds = {}) => {
-        console.log('checkedFeatureIds', checkedFeatureIds);
         return this.props.saveProductsToBasket({
             productId,
             properties: {
@@ -421,7 +421,11 @@ class AboutProduct extends Component {
                 {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
                     {isShareInfo && <div className={styles.shareInfo}>
                         {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
-                            <div className={styles.shareInfoDescr}>Вы получите скидку при покупке этого товара вместе с одним из этих товаров/групой товаров</div>
+                            <div className={styles.shareInfoDescr}>
+                                {text.getShareDiscount}
+                                {sharesDiscount.some(share => share.products.length > 1) && text.groupOfProducts}
+                                :
+                            </div>
                             <ul className={styles.shareInfoProducts}>
                                 {sharesDiscount.map(share => {
                                     return <li className={styles.shareInfoProductItem}>
@@ -447,8 +451,8 @@ class AboutProduct extends Component {
                         </div>}
                         {!!sharesPresent.length && <div className={styles.shareInfoPresent}>
                             <div className={styles.shareInfoDescr}>
-                                {sharesDiscount.length ? 'Или при покупке этого товара Вы гарантировано получаете в подарок:' : 'При покупке этого товара Вы гарантировано получаете в подарок:'}
-                                <span className={styles.shareInfoDescrSpan}>&nbsp;(на  выбор)</span></div>
+                                {sharesDiscount.length ? text.orGetSharePresent : text.getSharePresent}
+                                <span className={styles.shareInfoDescrSpan}>&nbsp;{text.atChoice}</span></div>
                             <ul className={styles.shareInfoProducts}>
                                 {sharesPresent.map(share => {
                                     return <li className={styles.shareInfoProductItem}>
@@ -468,7 +472,9 @@ class AboutProduct extends Component {
                             </ul>
                         </div>}
                     </div>}
-                    <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>Акция</button>
+                    <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>
+                        {text.share}
+                    </button>
                 </div>}
             </div>
             {activePopupColorIndex !== null && <PopupColor
@@ -478,7 +484,12 @@ class AboutProduct extends Component {
                 handleChangeColor={this.handleChangeColor}
             />}
             {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory}/>}
-            {isPopupPresents && <PopupPresents shares={sharesPresent} closePopup={this.handleClosePopupPresents} isPromotion={isPromotion} disagree={this.handleWithoutPresentsClick} agree={this.handleWithPresentsClick} />}
+            {isPopupPresents && <PopupPresents
+                shares={sharesPresent}
+                closePopup={this.handleClosePopupPresents}
+                isPromotion={isPromotion}
+                disagree={this.handleWithoutPresentsClick}
+                agree={this.handleWithPresentsClick} />}
         </div>;
     }
 }

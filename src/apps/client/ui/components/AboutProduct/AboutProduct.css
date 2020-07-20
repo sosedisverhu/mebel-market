@@ -5,6 +5,7 @@
 @value redBasic from '../../../../../css/colors.css';
 @value gray0 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value gray6 from '../../../../../css/colors.css';
 
 .root {
     margin-top: 30px;
@@ -324,7 +325,7 @@
 .feature {
     display: block;
     font: 16px/18px GilroyRegular;
-    color: #232323;
+    color: blackLight;
     margin-top: 10px;
     padding-left: 28px;
     position: relative;
@@ -359,7 +360,7 @@
     width: 16px;
     height: 16px;
     background: gray3;
-    border: 1px solid #25716C;
+    border: 1px solid greenBasic;
 
     &:before {
         content: "";
@@ -455,12 +456,12 @@
 
 .shareInfoDescr {
     font: 14px/16px GilroyRegular;
-    color: #232323;
+    color: blackLight;
     margin-top: 8px;
 }
 
 .shareInfoDescrSpan {
-    color: #656565;
+    color: gray6;
 }
 
 .shareInfoProducts {
@@ -476,7 +477,7 @@
 
     &::-webkit-scrollbar-thumb {
         width: 6px;
-        background: #919191;
+        background: gray0;
     }
 }
 
@@ -494,13 +495,13 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: #25716C;
+        background: greenBasic;
     }
 }
 
 .shareInfoProductLink {
     text-decoration: none;
-    color: #25716C;
+    color: greenBasic;
     display: block;
     line-height: 1.25;
 
@@ -518,17 +519,17 @@
 .shareInfoProductDiscount {
     text-decoration: none;
     white-space: nowrap;
-    color: #DC4E41;
+    color: redBasic;
 }
 
 .shareInfoBtn {
     font: 24px/28px GilroyRegular;
-    color: #FFFFFF;
+    color: whiteBasic;
     width: 172px;
     height: 40px;
-    border: 1px solid #DC4E41;
+    border: 1px solid redBasic;
     box-sizing: border-box;
-    background: #DC4E41;
+    background: redBasic;
     cursor: pointer;
     outline: none;
     position: relative;
@@ -542,7 +543,7 @@
 
     &.active {
         background: whiteBasic;
-        color: #DC4E41;
+        color: redBasic;
 
         &:after {
             content: url('./img/attentionRed.svg');

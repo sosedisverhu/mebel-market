@@ -287,7 +287,7 @@ class CheckoutPage extends Component {
                         </div>
                         <div className={styles.priceWrap}>
                             <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
-                            {!!sharesPrice && <p className={styles.priceRow}>Размер скидки: <span>{formatMoney(sharesPrice)}</span></p>}
+                            {!!sharesPrice && <p className={styles.priceRow}>{text.shareValue} <span>{formatMoney(sharesPrice)}</span></p>}
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                         </div>
                     </div>

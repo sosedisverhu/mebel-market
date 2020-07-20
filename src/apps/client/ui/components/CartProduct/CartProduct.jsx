@@ -200,23 +200,25 @@ class CartProduct extends Component {
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
-                        {!!presentsQuantity && <div ref={this.sharePresent} className={classNames(styles.share, { [styles.active]: isPresentMessage })} onClick={this.handleShowPresentMessage}>
-                            Подарок
-                            {presentsQuantity < quantity && <span>&nbsp;{`(${presentsQuantity} из ${quantity})`}</span>}
+                        {!!presentsQuantity && <div ref={this.sharePresent} className={classNames(
+                            styles.share,
+                            { [styles.active]: isPresentMessage }
+                        )} onClick={this.handleShowPresentMessage}>
+                            {text.present}
+                            {presentsQuantity < quantity && <span>&nbsp;{`(${presentsQuantity} ${text.of} ${quantity})`}</span>}
                             <div className={styles.shareInfo}>
-                                <div className={styles.shareInfoMessage}>
-                                    Товары, отмеченные как "Подарок" Вы получите бесплатно
-                                </div>
+                                <div className={styles.shareInfoMessage}>{text.presentDescription}</div>
                                 <span className={styles.shareInfoIcon}/>
                             </div>
                         </div>}
-                        {!!discountsQuantity && <div ref={this.shareDiscount} className={classNames(styles.share, { [styles.active]: isDiscountMessage })} onClick={this.handleShowDiscountMessage}>
-                            Акция
-                            {discountsQuantity < quantity && <span>&nbsp;{`(${discountsQuantity} из ${quantity})`}</span>}
+                        {!!discountsQuantity && <div ref={this.shareDiscount} className={classNames(
+                            styles.share,
+                            { [styles.active]: isDiscountMessage }
+                        )} onClick={this.handleShowDiscountMessage}>
+                            {text.discount}
+                            {discountsQuantity < quantity && <span>&nbsp;{`(${discountsQuantity} ${text.of} ${quantity})`}</span>}
                             <div className={styles.shareInfo}>
-                                <div className={styles.shareInfoMessage}>
-                                    На товары, отмеченные как "Акция" Вы получаете дополнительную скидку
-                                </div>
+                                <div className={styles.shareInfoMessage}>{text.discountDescription}</div>
                                 <span className={styles.shareInfoIcon}/>
                             </div>
                         </div>}

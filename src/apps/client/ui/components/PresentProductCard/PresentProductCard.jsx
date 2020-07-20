@@ -5,7 +5,6 @@ import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import propOr from '@tinkoff/utils/object/propOr';
 import classNames from 'classnames';
-import find from '@tinkoff/utils/array/find';
 
 import SizesSelect from '../SizesSelect/SizesSelect';
 import ColorsSelect from '../ColorsSelect/ColorsSelect';

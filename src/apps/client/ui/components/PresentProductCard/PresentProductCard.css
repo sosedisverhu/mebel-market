@@ -61,7 +61,7 @@
 
 .sizesTitle {
     font: 14px/16px GilroyRegular;
-    color: #FFFFFF;
+    color: whiteBasic;
     text-align: left;
 }
 
@@ -93,7 +93,7 @@
 
 .colorTitle {
     font: 14px/16px GilroyRegular;
-    color: #FFFFFF;
+    color: whiteBasic;
     margin-bottom: 6px;
     text-align: left;
 }

@@ -134,17 +134,13 @@ class Cart extends Component {
                         <div className={styles.cartBottomInfo}>
                             <div className={styles.totalPriceContainer}>
                                 {!!sharesPrice && <div className={styles.totalPriceWrapper}>
-                                    <p className={classNames(styles.totalPrice, styles.small)}>
-                                        Цена без скидки:
-                                    </p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>{text.priceWithoutShare}</p>
                                     <p className={classNames(styles.totalPrice, styles.small)}>
                                         {formatMoney(productsPrice)}
                                     </p>
                                 </div>}
                                 {!!sharesPrice && <div className={styles.totalPriceWrapper}>
-                                    <p className={classNames(styles.totalPrice, styles.small)}>
-                                        Размер скидки:
-                                    </p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>{text.shareValue}</p>
                                     <p className={classNames(styles.totalPrice, styles.small)}>
                                         {formatMoney(sharesPrice)}
                                     </p>

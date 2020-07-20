@@ -17,6 +17,8 @@ const mapStateToProps = ({ application }) => {
 class PopupSizes extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
+        subCategory: PropTypes.object.isRequired,
         closePopup: PropTypes.func.isRequired,
         sizes: PropTypes.array.isRequired
     };

@@ -30,7 +30,16 @@ export default {
         top: 'Топ продаж',
         new: 'Новинка',
         onScreen: 'На весь экран',
-        selectThisColor: 'Выбрать этот цвет'
+        selectThisColor: 'Выбрать этот цвет',
+        getShareDiscount: 'Вы получите скидку при покупке этого товара вместе с одним из этих товаров',
+        groupOfProducts: '/групой товаров',
+        orGetSharePresent: 'Или при покупке этого товара Вы гарантировано получаете в подарок:',
+        getSharePresent: 'При покупке этого товара Вы гарантировано получаете в подарок:',
+        atChoice: '(на  выбор)',
+        share: 'Акция',
+        choicePresent: 'Выберите подарок',
+        withoutPresent: 'Спасибо, подарок не нужен',
+        withPresent: 'Подтвердить'
     },
     breadcrumbs: {
         main: 'Главная'
@@ -69,7 +78,14 @@ export default {
         checkout: 'Оформить заказ',
         continueShopping: 'Продолжить покупки',
         noProduct: 'Вы не добавили в корзину ни одного товара',
-        color: 'Цвет:'
+        color: 'Цвет:',
+        present: 'Подарок',
+        presentDescription: 'Товары, отмеченные как "Подарок" Вы получите бесплатно',
+        discount: 'Акция',
+        discountDescription: 'На товары, отмеченные как "Акция" Вы получаете дополнительную скидку',
+        of: 'из',
+        priceWithoutShare: 'Цена без скидки:',
+        shareValue: 'Размер скидки:'
     },
     productsPage: {
         filterBtn: 'Фильтры',
@@ -161,7 +177,8 @@ export default {
         cardDescr: '(укажите номер заказа в описании платежа)',
         price: 'Стоимость заказа:',
         toMain: 'На главную',
-        noItemsInBasket: 'В корзине еще нет товаров'
+        noItemsInBasket: 'В корзине еще нет товаров',
+        shareValue: 'Размер скидки:'
     },
     comments: {
         showAll: 'Показать все',

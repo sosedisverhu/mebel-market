@@ -63,7 +63,7 @@
 .title {
     font: 24px/28px GilroyRegular;
     margin: 0 20px;
-    color: #232323;
+    color: blackLight;
     padding-bottom: 7px;
     position: relative;
     text-align: center;
@@ -124,17 +124,17 @@
 
 .radioLabel {
     font: 14px/18px GilroyMedium;
-    color: #25716C;
+    color: greenBasic;
     margin-top: 15px;
     display: block;
     position: relative;
     cursor: pointer;
     padding: 16px 16px 16px 43px;
-    border: 2px solid #F1F1F1;
+    border: 2px solid gray3;
     transition: background 0.25s ease-in;
 
     &.active {
-        background: #F1F1F1;
+        background: gray3;
     }
 }
 
@@ -169,7 +169,7 @@
     top: calc(50% - 8px);
     width: 16px;
     height: 16px;
-    background: #F1F1F1;
+    background: gray3;
     border-radius: 50%;
 
     &:before {
@@ -217,8 +217,8 @@
 
 .btnConfirm {
     font: 18px/21px GilroyMedium;
-    color: #FFFFFF;
-    background: #232323;
+    color: whiteBasic;
+    background: blackLight;
     border: none;
     outline: none;
     padding: 6px 44px;

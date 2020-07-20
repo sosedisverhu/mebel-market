@@ -132,7 +132,7 @@ class PopupPresents extends Component {
             <div className={styles.popupWrap}>
                 <div className={styles.popup}>
                     <div className={styles.popupContent} ref={this.popup} >
-                        <h3 className={styles.title}>Выберите подарок</h3>
+                        <h3 className={styles.title}>{text.choicePresent}</h3>
                         <div className={styles.shares}>
                             {shares.map(share => {
                                 return <label className={classNames(styles.share, { [styles.shareManyProducts]: share.products.length > 1 })}>
@@ -166,11 +166,10 @@ class PopupPresents extends Component {
                                     </div>
                                 </label>;
                             })}
-
                         </div>
                         <div className={styles.buttons}>
-                            <button className={styles.btnWithoutPresent} onClick={this.handleDisagreeClick}>Спасибо, подарок не нужен</button>
-                            <button className={styles.btnConfirm} onClick={this.handleAgreeClick}>Подтвердить</button>
+                            <button className={styles.btnWithoutPresent} onClick={this.handleDisagreeClick}>{text.withoutPresent}</button>
+                            <button className={styles.btnConfirm} onClick={this.handleAgreeClick}>{text.withPresent}</button>
                         </div>
                         <div onClick={this.props.closePopup} className={styles.close} />
                     </div>
