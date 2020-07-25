@@ -10,7 +10,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressStaticGzip from 'express-static-gzip';
 import { renderToString } from 'react-dom/server';
-import { redirectToHTTPS } from 'express-http-to-https';
+// import { redirectToHTTPS } from 'express-http-to-https';
 
 import map from '@tinkoff/utils/array/map';
 
@@ -59,7 +59,7 @@ const credentials = {
     ]
 };
 
-const ignoreHttpsHosts = [/localhost:(\d{4})/];
+// const ignoreHttpsHosts = [/localhost:(\d{4})/];
 
 const rootPath = path.resolve(__dirname, '..');
 const PORT = process.env.PORT || 3000;
@@ -72,7 +72,7 @@ app.use(helmet());
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
 
 // redirects
-app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
+// app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
 
 // static
 app.get(/\.chunk\.(js|css)$/, expressStaticGzip(rootPath, {

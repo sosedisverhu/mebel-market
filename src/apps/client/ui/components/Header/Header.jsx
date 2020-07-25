@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { matchPath } from 'react-router';
-
-import { enablePageScroll, disablePageScroll } from 'scroll-lock';
+import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import classNames from 'classnames';
@@ -57,12 +56,11 @@ class Header extends Component {
 
     handleMobileMenu = () => {
         if (!this.state.mobileMenuOpen) {
-            disablePageScroll(document.documentElement); // для iOS/macOS
-            disablePageScroll(document.body);
-            enablePageScroll(this.mobilePopUp.current);
+            disableBodyScroll(document.documentElement); // для iOS/macOS
+            disableBodyScroll(this.mobilePopUp.current);
         } else {
-            enablePageScroll(document.documentElement); // для iOS/macOS
-            enablePageScroll(document.body);
+            clearAllBodyScrollLocks(document.documentElement); // для iOS/macOS
+            clearAllBodyScrollLocks();
         }
 
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
