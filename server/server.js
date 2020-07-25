@@ -36,6 +36,7 @@ import clientMainSliderApi from './api/client/mainSlider';
 import clientOrderApi from './api/client/order';
 import adminOrderApi from './api/admin/order';
 import clientSearchApi from './api/client/search';
+import clientFormApi from './api/client/form';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -120,6 +121,7 @@ app.use('/api/admin/main-slider', adminMainSliderApi);
 app.use('/api/client/main-slider', clientMainSliderApi);
 app.use('/api/client/order', clientOrderApi);
 app.use('/api/admin/order', adminOrderApi);
+app.use('/api/client/form', clientFormApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

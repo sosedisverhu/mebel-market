@@ -1,7 +1,7 @@
 .phoneIcon {
     position: fixed;
-    right: 60px;
-    bottom: 60px;
+    right: 30px;
+    bottom: 30px;
     width: 64px;
     height: 64px;
     display: flex;
@@ -39,7 +39,7 @@
     height: 100%;
     transition: all 0.5s ease-in;
     path {
-        fill: #FFF; 
+        fill: #FFF;
     }
 }
 

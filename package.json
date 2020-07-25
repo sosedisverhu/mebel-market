@@ -112,7 +112,7 @@
     "@sosedisverhu/ckeditor5-build-classic": "^23.0.0",
     "@tinkoff/utils": "^2.0.0",
     "body-parser": "^1.18.3",
-    "body-scroll-lock": "^2.6.4",
+    "body-scroll-lock": "^3.0.3",
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.4",

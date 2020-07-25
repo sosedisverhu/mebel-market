@@ -185,7 +185,8 @@ export default {
         title: "Зв'язатись з нами",
         firstField: "Ім'я",
         secondField: 'Телефон',
-        text: 'lorem lorem lorem lorem',
+        text: <div>Наш менеджер з Вами звяжется в найближчий час! <br/>
+            Якщо Ваше питання не може чекати, подзвоніть нам по номеру <a href='tel:+380679000522'>+380679000522</a></div>,
         validationText: '*Введіть номер телефону'
     },
     articles: {

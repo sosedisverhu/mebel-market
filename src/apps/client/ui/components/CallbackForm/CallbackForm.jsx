@@ -1,31 +1,41 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
-import escape from 'src/apps/client/ui/components/CallbackForm/img/escape.svg';
-import tik from 'src/apps/client/ui/components/CallbackForm/img/tik.png';
 import classNames from 'classnames';
 
 import styles from './CallbackForm.css';
 
 class CallbackForm extends Component {
+    static propTypes = {
+        text: PropTypes.object.isRequired,
+        closePopup: PropTypes.func.isRequired,
+        sendCallApplication: PropTypes.func.isRequired
+    };
 
     state = {
         name: '',
         phone: '',
         error: false,
         successfulSubmit: false
-    }
+    };
 
     popup = React.createRef();
 
     handleSubmit = (e) => {
         e.preventDefault();
+
+        if (this.state.successfulSubmit) {
+            return;
+        }
+
         let isFormValid = true;
         if (this.state.phone === '') {
             isFormValid = false;
             this.setState({
-                error: true,
-            })
+                error: true
+            });
         }
         if (!isFormValid) {
             return;
@@ -33,34 +43,39 @@ class CallbackForm extends Component {
         this.setState({
             successfulSubmit: true
         });
-    }
+        this.props.sendCallApplication({
+            phone: this.state.phone || '',
+            name: this.state.name || ''
+        });
+    };
 
     handleNameChange = (e) => {
-        const name = e.target.value
+        const name = e.target.value;
         this.setState({
             name,
             successfulSubmit: false
         });
-    }
+    };
+
     handlePhoneChange = (e) => {
-        const phone = e.target.value
+        const phone = e.target.value;
         this.setState({
             phone,
             error: false,
             successfulSubmit: false
         });
-    }
+    };
 
-    componentDidMount() {
+    componentDidMount () {
         disableBodyScroll(this.popup.current);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         clearAllBodyScrollLocks();
     }
 
-    render() {
-        const { text } = this.props
+    render () {
+        const { text } = this.props;
 
         return (
             <div className={styles.root}>
@@ -69,7 +84,7 @@ class CallbackForm extends Component {
                     <div className={styles.popup}>
                         <div className={styles.popupContent} ref={this.popup} >
                             <div className={styles.escape} onClick={this.props.closePopup()}>
-                                <img src={escape} alt="icon" />
+                                <img src='/src/apps/client/ui/components/CallbackForm/img/escape.svg' alt="icon" />
                             </div>
                             <div className={styles.userInfo}>
                                 <h1 className={styles.title}>{text.title}</h1>
@@ -81,22 +96,24 @@ class CallbackForm extends Component {
                                         </label>
 
                                         <input onChange={this.handlePhoneChange} type="text" name="phone" autoComplete="off" required />
-                                        <label htmlFor="phone" className={classNames(styles.labelPhone, {[styles.errorBorder]: this.state.error})}>
+                                        <label htmlFor="phone" className={classNames(styles.labelPhone, { [styles.errorBorder]: this.state.error })}>
                                             <span className={styles.contentName}>{text.secondField}</span>
                                         </label>
                                         {this.state.error && <div className={styles.errorMessage}>{text.validationText}</div>}
-                                        {!this.state.successfulSubmit && <button type="submit" formNoValidate="formnovalidate" className={styles.submit}>{text.btnConfirm}</button>}
+                                        {!this.state.successfulSubmit && <button type="submit" formNoValidate="formnovalidate" className={styles.submit}>
+                                            {text.btnConfirm}
+                                        </button>}
                                         {this.state.successfulSubmit && <button formNoValidate="formnovalidate" className={styles.successfulSubmit}>
-                                            <img src={tik} alt="button"/>
+                                            <img src='/src/apps/client/ui/components/CallbackForm/img/tik.png' alt="button"/>
                                         </button>}
                                     </form>
                                 </div>
                             </div>
                             <div className={styles.reference}>
                                 <div className={styles.referenceInfo}>
-                                    <div className={styles.line}></div>
+                                    <div className={styles.line} />
                                     <div className={styles.referenceText}>
-                                       {text.text}
+                                        {text.text}
                                     </div>
                                 </div>
                             </div>
