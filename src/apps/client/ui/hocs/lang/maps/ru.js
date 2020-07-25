@@ -181,6 +181,15 @@ export default {
         publication: 'Ваш отзыв будет опубликован',
         moderation: 'после модерации'
     },
+    callback: {
+        btnConfirm: 'Подтвердить',
+        title: 'Связаться с нами',
+        firstField: 'Имя',
+        secondField: 'Телефон',
+        text: <div>Наш менеджер свяжется с Вами в ближайшее время! <br/>
+            Если Ваш вопрос не может ждать, позвоните нам по номеру <a href='tel:+380679000522'>+380679000522</a></div>,
+        validationText: '*Введите номер телефона'
+    },
     articles: {
         searchResult: 'Статьи:'
     },
