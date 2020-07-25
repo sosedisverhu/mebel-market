@@ -21,6 +21,7 @@ const VALUES = [
     'categoryFilters',
     'subCategoryFilters',
     'labels',
+    'exist',
     'viewOneColor'
 ];
 

@@ -182,5 +182,9 @@ export default {
     },
     articles: {
         searchResult: 'Статті:'
+    },
+    exist: {
+        inStock: 'В наявності',
+        order: 'Під замовлення'
     }
 };

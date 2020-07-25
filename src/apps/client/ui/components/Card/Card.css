@@ -8,8 +8,8 @@
 .product {
     width: 288px;
     min-width: 288px;
-    height: 355px;
-    max-height: 365px;
+    height: 391px;
+    max-height: 401px;
     margin: 30px 26px 2px 2px;
     position: relative;
     display: flex;
@@ -46,6 +46,12 @@
                 font-size: 14px;
                 line-height: 16px;
                 padding: 3px 10px;
+            }
+
+            .existText {
+                font-size: 13px;
+                line-height: 15px;
+                padding: 7px 0 4px 0;
             }
 
             .bottomPanel {
@@ -170,6 +176,17 @@
         flex-direction: column;
         justify-content: center;
     }
+}
+
+.existText {
+    font: 14px/16px GilroyRegular;
+    text-align: center;
+    color: #25716C;
+    padding: 10px 0;
+}
+
+.notExist {
+    color: #DC4E41;
 }
 
 .productName {

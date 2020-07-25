@@ -183,5 +183,9 @@ export default {
     },
     articles: {
         searchResult: 'Статьи:'
+    },
+    exist: {
+        inStock: 'В наличии',
+        order: 'Под заказ'
     }
 };
