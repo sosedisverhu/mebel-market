@@ -222,6 +222,7 @@ class AboutProduct extends Component {
             isPopupSizes
         } = this.state;
         const text = propOr('product', {}, langMap);
+        const isExist = propOr('exist', 'true', product);
         const isDiscount = !!activeColor.discountPrice;
         const shortDescription = product.texts[lang].shortDescription;
         const colors = activeSize.colors;
@@ -238,17 +239,24 @@ class AboutProduct extends Component {
         const isTableSizes = actualSizes.some(size => size.tableSizes && size.tableSizes.length);
 
         return <div className={styles.root}>
-            <AboutProductTop article={activeColor.article} product={product}/>
+            <AboutProductTop article={activeColor.article} product={product} />
             {shortDescription &&
-            <p className={styles.advantage} dangerouslySetInnerHTML = {{ __html: this.convertNewLinesToBr(shortDescription) }}/>}
+                <p className={styles.advantage} dangerouslySetInnerHTML={{ __html: this.convertNewLinesToBr(shortDescription) }} />}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
-            {isDiscount &&
-            <span className={styles.priceOld}>
-                {formatMoney(activeColor.price)}
-            </span>}
-            <span className={classNames(styles.price, styles.discountPrice)}>
-                {formatMoney(resultPrice)}
-            </span>
+            <div className={styles.priceTag}>
+                <span>
+                    {isDiscount &&
+                    <span className={styles.priceOld}>
+                        {formatMoney(activeColor.price)}
+                    </span>}
+                    <span className={classNames(styles.price, styles.discountPrice)}>
+                        {formatMoney(resultPrice)}
+                    </span>
+                </span>
+                <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
+                </div>
+            </div>
             <div className={styles.properties}>
                 <div className={styles.sizesWrap}>
                     <div className={styles.sizesTitle}>
@@ -259,7 +267,7 @@ class AboutProduct extends Component {
                             <img
                                 className={styles.sizesTitleMarkImg}
                                 src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
-                                width="18" height="18" alt={text.sizesMarkDescr}/>
+                                width="18" height="18" alt={text.sizesMarkDescr} />
                         </div>
                     </div>
                     <SizesSelect
@@ -296,8 +304,8 @@ class AboutProduct extends Component {
                 {features && features.map(feature => {
                     return <label className={styles.feature}>
                         <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
-                            onChange={this.handleCheckboxChange} name={feature.id}/>
-                        <span className={styles.featureCheckmark}/>
+                            onChange={this.handleCheckboxChange} name={feature.id} />
+                        <span className={styles.featureCheckmark} />
                         {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
                     </label>;
                 })}
@@ -312,7 +320,7 @@ class AboutProduct extends Component {
                     }
                 </button>
                 <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
-                    onClick={this.handleAddToWishlist}/>
+                    onClick={this.handleAddToWishlist} />
             </div>
             {activePopupColorIndex !== null && <PopupColor
                 colors={actualColors}
@@ -320,7 +328,7 @@ class AboutProduct extends Component {
                 closePopup={this.handleChangePopup}
                 handleChangeColor={this.handleChangeColor}
             />}
-            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory}/>}
+            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
         </div>;
     }
 }
