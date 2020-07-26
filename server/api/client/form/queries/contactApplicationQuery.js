@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 
-const LOGIN = process.env.LOGIN || 'stubbs.development@gmail.com';
-const PASS = process.env.PASS || '7t5e6zh3gbkp';
-const SENDER = process.env.SENDER || 'mebel-market-bot';
-const RECEIVER = process.env.RECEIVER || 'v.bilous14@gmail.com';
+const LOGIN = process.env.LOGIN || 'mebelmarket123@gmail.com';
+const PASS = process.env.PASS || 'Qweqwe123.';
+const SENDER = process.env.SENDER || 'МебельМаркет <mebelmarket123@gmail.com>';
+const RECEIVER = process.env.RECEIVER || 'maxiv4545@gmail.com';
 
 export default function contactApplication (subject, content, files, successCallback, failureCallback) {
     const transporter = nodemailer.createTransport({
