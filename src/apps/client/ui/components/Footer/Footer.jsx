@@ -31,7 +31,6 @@ class Footer extends Component {
                     <div className={styles.contactsWrapper}>
                         <div className={styles.contactsLinkWrapperTop}>
                             <a className={styles.contactsLink} href="tel:+380443557720">(044) 355-77-20</a>
-                            <a className={styles.contactsLink} href="tel:+380500511000">(050) 051-10-00</a>
                         </div>
                         <div className={styles.contactsLinkWrapperBottom}>
                             <a className={styles.contactsLink} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>
