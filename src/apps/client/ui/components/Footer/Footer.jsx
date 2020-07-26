@@ -8,13 +8,13 @@ class Footer extends Component {
             <footer className={styles.footer}>
                 <div className={styles.footerContainer}>
                     <div className={styles.iconsWrapper}>
-                        <a href="#" target="_blank" className={styles.instagramLink}>
+                        <a href="https://www.instagram.com/mebelmarket.ua/" target="_blank" className={styles.instagramLink}>
                             <div className={styles.instagram}/>
                         </a>
-                        <a href="#" target="_blank" className={styles.facebookLink}>
+                        <a href="https://www.facebook.com/mmebelmarket/" target="_blank" className={styles.facebookLink}>
                             <div className={styles.facebook}/>
                         </a>
-                        <a href="#" target="_blank">
+                        <a href="https://www.youtube.com/channel/UComiyZA3-1qXTnArdGyeF1g" target="_blank">
                             <div className={styles.youtube}/>
                         </a>
                     </div>
