@@ -59,7 +59,8 @@ class AboutProduct extends Component {
         changeSize: PropTypes.func.isRequired,
         activeSize: PropTypes.object.isRequired,
         activeColor: PropTypes.object.isRequired,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        subCategory: PropTypes.object.isRequired
     };
 
     state = {

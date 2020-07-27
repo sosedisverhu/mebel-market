@@ -18,7 +18,8 @@ class Product extends Component {
     static propTypes = {
         product: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        subCategory: PropTypes.object.isRequired
     };
 
     constructor (props) {

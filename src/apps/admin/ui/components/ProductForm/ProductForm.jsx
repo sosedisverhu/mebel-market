@@ -315,7 +315,7 @@ class ProductForm extends Component {
                 }))
             }))
         };
-        console.log(exist);
+
         return {
             texts: {
                 ru: {
