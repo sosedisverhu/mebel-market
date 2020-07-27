@@ -1,5 +1,5 @@
 export default [
-    { id: 'orders', section: 'products', path: '/admin', exact: true, title: 'Заказы' },
+    { id: 'orders', section: 'orders', path: '/admin', exact: true, title: 'Заказы' },
     { id: 'products', section: 'products', path: '/admin/products', exact: true, title: 'Товары' },
     { id: 'articles', section: 'articles', path: '/admin/articles', exact: true, title: 'Статьи' },
     { id: 'mainSlider', section: 'main', path: '/admin/slider', exact: true, title: 'Слайдер' },
