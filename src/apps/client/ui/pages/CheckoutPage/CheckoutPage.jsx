@@ -173,7 +173,7 @@ class CheckoutPage extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const errors = {};
-        const { domain } = this.props;
+        const { domain, lang } = this.props;
         const { deliveryChecked, paymentChecked, customerName, customerEmail, customerTel, customerAddress, customerComment } = this.state;
         let isFormValid = true;
 
@@ -218,7 +218,8 @@ class CheckoutPage extends Component {
             },
             delivery: deliveryChecked,
             payment: paymentChecked,
-            domain
+            domain,
+            lang
         })
             .then(({ shortId }) => {
                 this.setState({ orderId: shortId });
