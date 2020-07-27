@@ -1,8 +1,8 @@
 import nodemailer from 'nodemailer';
 
-const LOGIN = process.env.LOGIN || 'dev.occam@gmail.com';
-const PASS = process.env.PASS || 'R4*KCCe-r*<5bEsQ';
-const SENDER = process.env.SENDER || 'Dev minion';
+const LOGIN = process.env.LOGIN || 'mebelmarket123@gmail.com';
+const PASS = process.env.PASS || 'Qweqwe123.';
+const SENDER = process.env.SENDER || 'МебельМаркет <mebelmarket123@gmail.com>';
 
 export default function sendRecoveryEmail (email, subject, content, successCallback, failureCallback) {
     const transporter = nodemailer.createTransport({

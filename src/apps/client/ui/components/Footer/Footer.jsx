@@ -8,13 +8,13 @@ class Footer extends Component {
             <footer className={styles.footer}>
                 <div className={styles.footerContainer}>
                     <div className={styles.iconsWrapper}>
-                        <a href="#" target="_blank" className={styles.instagramLink}>
+                        <a href="https://www.instagram.com/mebelmarket.ua/" target="_blank" className={styles.instagramLink}>
                             <div className={styles.instagram}/>
                         </a>
-                        <a href="#" target="_blank" className={styles.facebookLink}>
+                        <a href="https://www.facebook.com/mmebelmarket/" target="_blank" className={styles.facebookLink}>
                             <div className={styles.facebook}/>
                         </a>
-                        <a href="#" target="_blank">
+                        <a href="https://www.youtube.com/channel/UComiyZA3-1qXTnArdGyeF1g" target="_blank">
                             <div className={styles.youtube}/>
                         </a>
                     </div>
@@ -31,7 +31,6 @@ class Footer extends Component {
                     <div className={styles.contactsWrapper}>
                         <div className={styles.contactsLinkWrapperTop}>
                             <a className={styles.contactsLink} href="tel:+380443557720">(044) 355-77-20</a>
-                            <a className={styles.contactsLink} href="tel:+380500511000">(050) 051-10-00</a>
                         </div>
                         <div className={styles.contactsLinkWrapperBottom}>
                             <a className={styles.contactsLink} href="mailto:mebelmarket@gmail.com">mebelmarket@gmail.com</a>

@@ -63,7 +63,6 @@ class PopupOrder extends Component {
                                     <p className={styles.addressText}>{text.addressText}</p>
                                 </div>
                                 <div className={styles.phones}>
-                                    <a className={styles.phone} href="tel:+380500511000">(050) 051-10-00</a>
                                     <a className={styles.phone} href="tel:+380679000522">(067) 900-05-22</a>
                                 </div>
                             </div>)

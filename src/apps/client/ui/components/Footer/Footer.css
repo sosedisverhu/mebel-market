@@ -155,13 +155,6 @@
     }
 }
 
-.contactsLinkWrapperTop .contactsLink:first-child {
-    margin-right: 52px;
-
-    @media (max-width: 992px) {
-        margin-right: 0;
-    }
-}
 .contactsLinkWrapperBottom .contactsLink:first-child {
     margin-right: 47px;
 

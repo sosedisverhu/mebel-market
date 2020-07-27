@@ -298,7 +298,7 @@ export default function customerLetter (order, categories, subCategories, domain
                             <div style="color:#000000; font-family:Poppins, Arial, Helvetica, sans-serif; line-height:1.5;padding-top:30px; max-width: 680px; min-width: 640px;">
                                 <div style="font-size: 14px; line-height: 1.5; color: #000000; font-family: Poppins, Arial, Helvetica, sans-serif; mso-line-height-alt: 21px; ">
                                     <h1 style="font-size:28px; line-height:32px; padding-bottom:15px; font-weight:normal; margin:0; color: #414141;">
-                                        ${customer.name}, спасибо за ваш заказ!</h1>
+                                        ${customer.name}, спасибо за Ваш заказ!</h1>
                                     <p style="font-size:15px; line-height:24px; margin:0; color: #919191;">Ваша заявка принята.</p>
                                 </div>
                             </div>
@@ -427,19 +427,19 @@ export default function customerLetter (order, categories, subCategories, domain
                                                     style="vertical-align: top; display: inline-block; text-align: center;"
                                                     valign="top">
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.facebook.com/mmebelmarket/" target="_blank"><img
                                                             alt="Facebook" height="32"
                                                             src=${domain + '/client/images/facebook.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="Facebook" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.youtube.com/channel/UComiyZA3-1qXTnArdGyeF1g" target="_blank"><img
                                                             alt="YouTube" height="32"
                                                             src=${domain + '/client/images/youtube.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="YouTube" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.instagram.com/mebelmarket.ua/" target="_blank"><img
                                                             alt="Instagram" height="32"
                                                             src=${domain + '/client/images/instagram.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
@@ -471,12 +471,6 @@ export default function customerLetter (order, categories, subCategories, domain
                                             <span style="font-size: 12px;"><a href="tel:+380443557720"
                                                                               style="text-decoration: none; color: #ffffff;"
                                                                               title="tel:+380443557720">+38 (044) 355-77-20</a></span>
-                                        </p>
-
-                                        <p style="font-size: 12px; line-height: 1.4; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
-                                            <span style="font-size: 12px;"><a href="tel:+380500511000"
-                                                                              style="text-decoration: none; color: #ffffff;"
-                                                                              title="tel:+380500511000">+38 (050) 051-10-00</a></span>
                                         </p>
 
                                         <p style="font-size: 12px; line-height: 1.4; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">

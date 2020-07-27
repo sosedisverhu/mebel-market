@@ -23,6 +23,7 @@ import Contacts from './ui/pages/Contacts/Contacts.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import Helmet from './ui/components/Helmet/Helmet.jsx';
 import PromotionsPage from './ui/pages/PromotionsPage/PromotionsPage.jsx';
+import CallbackCall from './ui/components/CallbackCall/CallbackCall';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -99,6 +100,7 @@ class App extends Component {
                     </Switch>
                 </div>
                 <Footer />
+                <CallbackCall />
             </div>
         </main>;
     }
