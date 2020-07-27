@@ -8,7 +8,7 @@ import deleteByIds from './services/deleteByIds';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('reviews'));
 
 router.route('/all')
     .get(getReviews);

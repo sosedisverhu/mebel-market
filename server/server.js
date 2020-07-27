@@ -14,7 +14,7 @@ import { renderToString } from 'react-dom/server';
 
 import map from '@tinkoff/utils/array/map';
 
-import adminAuthenticationApi from './api/admin/authentication';
+import adminAuthenticationApi from './api/admin/admin';
 import adminProductApi from './api/admin/product';
 import clientProductApi from './api/client/product';
 import adminArticleApi from './api/admin/article';

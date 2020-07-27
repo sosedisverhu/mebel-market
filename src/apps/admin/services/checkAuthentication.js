@@ -11,11 +11,11 @@ export default function authenticate () {
 
         base(
             request
-                .get('/api/admin/authentication/check')
+                .get('/api/admin/authentication/getAdmin')
                 .query({ token })
         )
-            .then(() => {
-                return dispatch(authenticateAction(true));
+            .then((admin) => {
+                return dispatch(authenticateAction(admin));
             })
             .catch(() => {
                 return dispatch(authenticateAction(false));
