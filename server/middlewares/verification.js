@@ -31,6 +31,6 @@ const verification = name => (req, res, next) => {
     } else {
         return res.status(FORBIDDEN_STATUS_CODE).end();
     }
-}
+};
 
 export default verification;
