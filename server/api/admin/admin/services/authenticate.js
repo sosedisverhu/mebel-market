@@ -36,17 +36,18 @@ export default function authenticate (req, res) {
                     sections: ['orders', 'main', 'products', 'articles', 'reviews', 'partners', 'seo', 'admins', 'credentials']
                 })
                     .then(() => {
-                        console.log('+++');
-                    });
-
-                res.status(OKEY_STATUS_CODE).json({
-                    token: token,
-                    user: {
-                        email: admin.email,
-                        login: admin.login,
-                        sections: admin.sections
-                    }
-                });
+                        res.status(OKEY_STATUS_CODE).json({
+                            token: token,
+                            user: {
+                                email: admin.email,
+                                login: admin.login,
+                                sections: admin.sections
+                            }
+                        });
+                    })
+                    .catch((err) => {
+                        res.status(OKEY_STATUS_CODE).send(err);
+                    })
             });
         })
         .catch(() => {
