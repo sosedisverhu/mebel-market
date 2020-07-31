@@ -17,8 +17,10 @@ const mapStateToProps = ({ application }) => {
 class PopupSizes extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
+        lang: PropTypes.string.isRequired,
         closePopup: PropTypes.func.isRequired,
-        sizes: PropTypes.array.isRequired
+        sizes: PropTypes.array.isRequired,
+        subCategory: PropTypes.object.isRequired
     };
 
     popup = React.createRef();

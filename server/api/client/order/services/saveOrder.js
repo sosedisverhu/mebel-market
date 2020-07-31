@@ -11,7 +11,8 @@ import getBasketProducts from '../../userProducts/queries/getUserProducts';
 import getCategories from '../../category/queries/getAllCategories';
 import getSubCategories from '../../subCategory/queries/getAllSubCategories';
 
-import getCustomerLetterTemplate from '../templates/customerLetter';
+import getCustomerLetterTemplateRU from '../templates/customerLetterRU';
+import getCustomerLetterTemplateUA from '../templates/customerLetterUA';
 
 import {
     NOT_FOUND_STATUS_CODE,
@@ -28,7 +29,7 @@ const SUBJECT_CLIENT = 'Заказ №';
 export default function saveOrder (req, res) {
     const successCallback = () => res.sendStatus(OKEY_STATUS_CODE);
     const failureCallback = () => res.sendStatus(SERVER_ERROR_STATUS_CODE);
-    const { payment, delivery, customer: { name, email, phone, comment, address } = {}, domain } = req.body;
+    const { payment, delivery, customer: { name, email, phone, comment, address } = {}, domain, lang } = req.body;
 
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
 
@@ -47,23 +48,34 @@ export default function saveOrder (req, res) {
 
                         if (!product || product.hidden) return products;
 
-                        const productName = product.texts.ru.name;
-                        const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+                        const productNameRu = product.texts.ru.name;
+                        const productNameUa = product.texts.ua.name;
 
-                        if (!size) return products;
+                        const sizeRu = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+                        const sizeUa = product.sizes.ua.find(productSize => productSize.id === properties.size.id);
 
-                        const color = size.colors.find(color => color.id === properties.size.color.id);
+                        if (!sizeRu) return products;
 
-                        if (!color) return products;
+                        const colorRu = sizeRu.colors.find(color => color.id === properties.size.color.id);
+                        const colorUa = sizeUa.colors.find(color => color.id === properties.size.color.id);
 
-                        properties.size.name = size.name;
-                        properties.color = {
-                            name: color.name,
-                            file: color.file
+                        if (!colorRu) return products;
+
+                        properties.size.nameRu = sizeRu.name;
+                        properties.colorRu = {
+                            name: colorRu.name,
+                            file: colorRu.file
                         };
-                        properties.size.color.img = color.name;
+                        properties.size.color.imgRu = colorRu.name;
 
-                        const allFeatures = size.features || [];
+                        properties.size.nameUa = sizeUa.name;
+                        properties.colorUa = {
+                            name: colorUa.name,
+                            file: colorUa.file
+                        };
+                        properties.size.color.imgUa = colorUa.name;
+
+                        const allFeatures = sizeRu.features || [];
                         const checkedFeatureIds = properties.features || {};
                         const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
                         properties.features = checkedFeatures;
@@ -73,10 +85,11 @@ export default function saveOrder (req, res) {
                             quantity,
                             properties,
                             id,
-                            basePrice: color.price,
-                            price: color.discountPrice,
-                            productName,
-                            article: color.article
+                            basePrice: colorRu.price,
+                            price: colorRu.discountPrice,
+                            productNameRu,
+                            productNameUa,
+                            article: colorRu.article
                         }, products);
                     }, [], basket);
 
@@ -133,7 +146,7 @@ export default function saveOrder (req, res) {
 
         return `                            <tr>
                                                 <td style="font-weight: bold" width='110'>Название</td>
-                                                <td width='110'>${product.productName}</td>
+                                                <td width='110'>${product.productNameRu}</td>
                                             </tr>
                                             ${product.article
         ? `<tr>
@@ -161,11 +174,11 @@ export default function saveOrder (req, res) {
         : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Размер</td>
-                                                <td width='110'>${product.properties.size.name}</td>
+                                                <td width='110'>${product.properties.size.nameRu}</td>
                                             </tr>
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Цвет</td>
-                                                <td width='110'>${product.properties.color.name}</td>
+                                                <td width='110'>${product.properties.colorRu.name}</td>
                                             </tr>`;
     })}
                             </table>`;
@@ -196,7 +209,9 @@ export default function saveOrder (req, res) {
                                 .then(values => {
                                     const categories = values[0];
                                     const subCategories = values[1];
-                                    const clientMessageContent = getCustomerLetterTemplate(order, categories, subCategories, domain);
+                                    const clientMessageContent = lang === 'ru'
+                                        ? getCustomerLetterTemplateRU(order, categories, subCategories, domain)
+                                        : getCustomerLetterTemplateUA(order, categories, subCategories, domain);
 
                                     sendOrderQuery(
                                         `${SUBJECT_CLIENT} ${order.shortId}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,
