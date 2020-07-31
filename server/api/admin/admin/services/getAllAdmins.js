@@ -6,15 +6,17 @@ export default function getAllAdmins (req, res) {
     try {
         getAllAdminsQuery()
             .then(admins => {
-                const editedAdmin = admins.map(admin => {
-                    const { login, email, sections, id } = admin;
-                    return {
-                        login,
-                        email,
-                        sections,
-                        id
-                    };
-                });
+                const editedAdmin = admins
+                    .filter(admin => !admin.isMain)
+                    .map(admin => {
+                        const { login, email, sections, id } = admin;
+                        return {
+                            login,
+                            email,
+                            sections,
+                            id
+                        };
+                    });
                 res.status(OKEY_STATUS_CODE).send(editedAdmin);
             })
             .catch(() => {
