@@ -31,6 +31,7 @@ export default function authenticate (req, res) {
                 }
 
                 changeCredentials({
+                    id: admin.id,
                     isMain: true,
                     sections: ['orders', 'main', 'products', 'articles', 'reviews', 'partners', 'seo', 'admins', 'credentials']
                 })
