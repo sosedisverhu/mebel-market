@@ -26,7 +26,7 @@ class CallbackForm extends Component {
     popup = React.createRef();
 
     handleSubmit = (e) => {
-        const { phone, name, successfulSubmit} = this.state;
+        const { phone, name, successfulSubmit } = this.state;
         e.preventDefault();
 
         if (successfulSubmit) {
@@ -69,15 +69,15 @@ class CallbackForm extends Component {
         });
     };
 
-    componentDidMount() {
+    componentDidMount () {
         disableBodyScroll(this.popup.current);
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         clearAllBodyScrollLocks();
     }
 
-    render() {
+    render () {
         const { text } = this.props;
 
         return (
