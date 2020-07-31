@@ -9,4 +9,5 @@ export const // eslint-disable-line one-var
     SET_PARTNERS = 'SET_PARTNERS',
     SET_REVIEWS = 'SET_REVIEWS',
     SET_SEO = 'SET_SEO',
-    SET_ORDERS = 'SET_ORDERS';
+    SET_ORDERS = 'SET_ORDERS',
+    SET_ADMINS = 'SET_ADMINS';

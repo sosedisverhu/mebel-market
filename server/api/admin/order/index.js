@@ -7,7 +7,7 @@ import editOrder from './services/editOrder';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('orders'));
 
 router.route('/all')
     .get(getOrders);

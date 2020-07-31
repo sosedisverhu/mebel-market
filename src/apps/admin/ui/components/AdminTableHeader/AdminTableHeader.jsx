@@ -198,7 +198,7 @@ class AdminTableHeader extends Component {
                         {
                             selected.map((category, i) => <ListItem key={i}>
                                 <ListItemText
-                                    primary={category.texts.ru.name}
+                                    primary={category.login ? category.login : category.texts.ru.name}
                                 />
                             </ListItem>)
                         }

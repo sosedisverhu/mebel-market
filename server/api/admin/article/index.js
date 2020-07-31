@@ -12,7 +12,7 @@ import findArticleByName from './services/findArticleByName';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('articles'));
 
 router.route('/all')
     .get(getArticles);
