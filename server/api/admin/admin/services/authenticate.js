@@ -5,6 +5,7 @@ import path from 'path';
 
 import { OKEY_STATUS_CODE, FORBIDDEN_STATUS_CODE, SERVER_ERROR_STATUS_CODE } from '../../../../constants/constants';
 import getAdminByLogin from '../queries/getAdminByLogin';
+import changeCredentials from '../queries/changeCredentials';
 
 const privateKey = fs.readFileSync(path.resolve(__dirname, 'privateKeys/adminPrivateKey.ppk'), 'utf8');
 
@@ -28,6 +29,14 @@ export default function authenticate (req, res) {
                 if (err || !token) {
                     return res.status(SERVER_ERROR_STATUS_CODE).end();
                 }
+
+                changeCredentials({
+                    isMain: true,
+                    sections: ['orders', 'main', 'products', 'articles', 'reviews', 'partners', 'seo', 'admins', 'credentials']
+                })
+                    .then(() => {
+                        console.log('+++');
+                    });
 
                 res.status(OKEY_STATUS_CODE).json({
                     token: token,
