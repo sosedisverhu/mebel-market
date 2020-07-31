@@ -6,9 +6,8 @@ export default function getAllAdmins (req, res) {
     try {
         getAllAdminsQuery()
             .then(admins => {
-                console.log(admins);
                 const editedAdmin = admins
-                    .filter(admin => !admin.isMain)
+                    .filter(admin => admin.id !== 'admin_id')
                     .map(admin => {
                         const { login, email, sections, id } = admin;
                         return {
