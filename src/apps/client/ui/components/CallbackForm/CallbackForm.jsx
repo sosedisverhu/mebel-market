@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import InputMask from 'react-input-mask';
 
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 import classNames from 'classnames';
 
 import styles from './CallbackForm.css';
+import { MAX_PHONE_LENGTH } from '../../../constants/constants';
 
 class CallbackForm extends Component {
     static propTypes = {
@@ -24,14 +26,15 @@ class CallbackForm extends Component {
     popup = React.createRef();
 
     handleSubmit = (e) => {
+        const { phone, name, successfulSubmit } = this.state;
         e.preventDefault();
 
-        if (this.state.successfulSubmit) {
+        if (successfulSubmit) {
             return;
         }
 
         let isFormValid = true;
-        if (this.state.phone === '') {
+        if (phone === '' || phone.length - phone.replace(/\d/gm, '').length !== MAX_PHONE_LENGTH) {
             isFormValid = false;
             this.setState({
                 error: true
@@ -44,8 +47,8 @@ class CallbackForm extends Component {
             successfulSubmit: true
         });
         this.props.sendCallApplication({
-            phone: this.state.phone || '',
-            name: this.state.name || ''
+            phone: phone || '',
+            name: name || ''
         });
     };
 
@@ -89,13 +92,21 @@ class CallbackForm extends Component {
                             <div className={styles.userInfo}>
                                 <h1 className={styles.title}>{text.title}</h1>
                                 <div className={styles.dataField}>
-                                    <form className={styles.form } onSubmit={this.handleSubmit}>
+                                    <form className={styles.form} onSubmit={this.handleSubmit}>
                                         <input onChange={this.handleNameChange} type="text" name="name" autoComplete="off" required />
                                         <label htmlFor="name" className={styles.labelName}>
                                             <span className={styles.contentName}>{text.firstField}</span>
                                         </label>
 
-                                        <input onChange={this.handlePhoneChange} type="text" name="phone" autoComplete="off" required />
+                                        <InputMask mask="+38 (999) 999 99 99" onChange={this.handlePhoneChange}>
+                                            {(inputProps) => <input
+                                                {...inputProps}
+                                                name="phone"
+                                                placeholder="+38 (___) ___ __ __ *"
+                                                type="text"
+                                                autoComplete='off'
+                                            />}
+                                        </InputMask>
                                         <label htmlFor="phone" className={classNames(styles.labelPhone, { [styles.errorBorder]: this.state.error })}>
                                             <span className={styles.contentName}>{text.secondField}</span>
                                         </label>
@@ -104,7 +115,7 @@ class CallbackForm extends Component {
                                             {text.btnConfirm}
                                         </button>}
                                         {this.state.successfulSubmit && <button formNoValidate="formnovalidate" className={styles.successfulSubmit}>
-                                            <img src='/src/apps/client/ui/components/CallbackForm/img/tik.png' alt="button"/>
+                                            <img src='/src/apps/client/ui/components/CallbackForm/img/tik.png' alt="button" />
                                         </button>}
                                     </form>
                                 </div>
