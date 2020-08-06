@@ -253,8 +253,8 @@ class OrderForm extends Component {
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
                                         <p className={classes.p}>Размер: {properties.size.name}</p>
                                         <p className={classes.p}>
-                                            Цвет: <img src={properties.color.file} className={classes.colorImg} width="24" height="12" alt=""/>
-                                            {properties.color.name}
+                                            Цвет: <img src={properties.colorRu.file} className={classes.colorImg} width="24" height="12" alt=""/>
+                                            {properties.colorRu.name}
                                         </p>
                                         {properties.features.map(feature => {
                                             return <p className={classes.p}>+ {feature.name} (<span className={styles.featureValue}>

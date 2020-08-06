@@ -27,8 +27,8 @@ const SUBJECT = 'Новый заказ';
 const SUBJECT_CLIENT = 'Заказ №';
 
 export default function saveOrder (req, res) {
-    const successCallback = () => res.sendStatus(OKEY_STATUS_CODE);
-    const failureCallback = () => res.sendStatus(SERVER_ERROR_STATUS_CODE);
+    const successCallback = () => res.status(OKEY_STATUS_CODE);
+    const failureCallback = () => res.status(SERVER_ERROR_STATUS_CODE);
     const { payment, delivery, customer: { name, email, phone, comment, address } = {}, domain, lang } = req.body;
 
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
