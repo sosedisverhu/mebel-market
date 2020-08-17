@@ -12,7 +12,7 @@ import editPositions from './services/editPartnersPositions';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('partners'));
 
 router.route('/all')
     .get(getPartners);

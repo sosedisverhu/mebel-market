@@ -6,7 +6,8 @@ const Admin = new Schema({
     login: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true },
-    id: { type: String, required: true }
+    id: { type: String, required: true },
+    sections: { type: Array, required: true }
 });
 
 export default mongoose.model('Admin', Admin);

@@ -9,12 +9,17 @@ import recover from './services/recover';
 import checkRecoveryToken from './services/checkRecoveryToken';
 import changeRecoveryCredentials from './services/changeRecoveryCredentials';
 
+import getAllAdmins from './services/getAllAdmins';
+import saveAdmin from './services/saveAdmin';
+import editAdmin from './services/editAdmin';
+import deleteAdmin from './services/deleteAdmin';
+
 const router = express.Router();
 
 router.route('/authenticate')
     .post(authenticate);
 
-router.route('/check')
+router.route('/getAdmin')
     .get(checkAuthentication);
 
 router.route('/recover')
@@ -26,9 +31,15 @@ router.route('/check-recovery-token')
 router.route('/recover-change')
     .post(changeRecoveryCredentials);
 
-router.use(verification);
+router.use(verification('admins'));
 
 router.route('/change')
     .post(changeCredentials);
+
+router.route('/admin')
+    .get(getAllAdmins)
+    .post(saveAdmin)
+    .put(editAdmin)
+    .delete(deleteAdmin);
 
 export default router;

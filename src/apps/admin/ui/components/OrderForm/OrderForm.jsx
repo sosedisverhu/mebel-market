@@ -248,14 +248,14 @@ class OrderForm extends Component {
                     </TableHead>
                     <TableBody>
                         {
-                            products.map(({ product, quantity, price, basePrice, properties, productName: name, article }, i) => {
+                            products.map(({ product, quantity, price, basePrice, properties, productName: name, productNameRu: nameRu, article }, i) => {
                                 const featuresPrice = properties.features.reduce((sum, { value }) => sum + value, 0);
                                 const unitPrice = (price || basePrice) + featuresPrice;
                                 const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
                                 const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
 
                                 return <TableRow key={i}>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={1}>{name}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={1}>{name || nameRu}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">{article || '-'}</TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
                                         <p>{`Всего: ${quantity}`}</p>
@@ -263,10 +263,16 @@ class OrderForm extends Component {
                                         {!!presentsQuantity && <p>{`(Подарки: ${presentsQuantity} из ${quantity})`}</p>}
                                     </TableCell>
                                     <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
-                                        <p className={classes.p}>Размер: {properties.size.name}</p>
+                                        <p className={classes.p}>Размер: {properties.size.name || properties.size.nameRu}</p>
                                         <p className={classes.p}>
-                                            Цвет: <img src={properties.color.file} className={classes.colorImg} width="24" height="12" alt=""/>
-                                            {properties.color.name}
+                                            Цвет: <img
+                                                src={(properties.color || properties.colorRu).file}
+                                                className={classes.colorImg}
+                                                width="24"
+                                                height="12"
+                                                alt=""
+                                            />
+                                            {(properties.color || properties.colorRu).name}
                                         </p>
                                         {properties.features.map(feature => {
                                             return <p className={classes.p}>+ {feature.name} (<span className={styles.featureValue}>

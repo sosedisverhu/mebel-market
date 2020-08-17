@@ -209,7 +209,7 @@ class Gallery extends Component {
                     {photos.length > 1 && <div className={styles.arrowLeft} onClick={this.handleArrowClick(activeSlideIndex - 1)}/>}
                     {photos.length > 1 && <div className={styles.arrowRight} onClick={this.handleArrowClick(activeSlideIndex + 1)}/>}
                     <div className={styles.tools}>
-                        <h3 className={styles.toolOpen} onClick={this.handleChangePopup}>{text.onScreen}</h3>
+                        <div className={styles.toolOpen} onClick={this.handleChangePopup}>{text.onScreen}</div>
                     </div>
                 </div>
                 {photos.length > 1 && <div className={styles.additionalImgs}>

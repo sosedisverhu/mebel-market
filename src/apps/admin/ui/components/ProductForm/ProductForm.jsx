@@ -134,6 +134,7 @@ class ProductForm extends Component {
             subCategoryId: product.subCategoryId ? product.subCategoryId : pathOr(['id'], '', subCategories[0]),
             alias: product.alias,
             lang: 'ru',
+            exist: product.exist || 'true',
             labels: product.labels || [],
             ...(product.categoryFilters || [])
                 .reduce((categoryFilters, categoryFilter) => ({
@@ -186,7 +187,8 @@ class ProductForm extends Component {
             id,
             alias,
             labels,
-            viewOneColor
+            viewOneColor,
+            exist
         } = values;
 
         const categoryFilters = reduceObj((categoryFilters, filterValue, filterName) => {
@@ -366,7 +368,8 @@ class ProductForm extends Component {
             categoryFilters,
             subCategoryFilters,
             labels,
-            viewOneColor
+            viewOneColor,
+            exist
         };
     };
 

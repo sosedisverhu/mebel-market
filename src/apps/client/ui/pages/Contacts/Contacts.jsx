@@ -105,7 +105,6 @@ class Contacts extends Component {
                         <div className={styles.phonesContainer}>
                             <h2 className={styles.infoTitle}>{text.phonesTitle}</h2>
                             <a className={styles.infoText} href="tel:+380443557720">(044) 355-77-20</a>
-                            <a className={styles.infoText} href="tel:+380500511000">(050) 051-10-00</a>
                             <a className={styles.infoText} href="tel:+380679000522">(067) 900-05-22</a>
                         </div>
                         <div className={styles.emailScheduleContainer}>

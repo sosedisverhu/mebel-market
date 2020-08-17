@@ -21,12 +21,14 @@ class AboutProductTop extends Component {
         lang: PropTypes.string.isRequired,
         product: PropTypes.object.isRequired,
         article: PropTypes.string.isRequired,
-        newClass: PropTypes.string
+        newClass: PropTypes.string,
+        isExist: PropTypes.string
     };
 
     render () {
         const { newClass, langMap, lang, product, article } = this.props;
         const text = propOr('aboutProductTop', {}, langMap);
+        const isExist = propOr('exist', 'true', product);
 
         return <div className={classNames(styles.root, { [styles[newClass]]: newClass })}>
             <h1 className={styles.name}>
@@ -35,6 +37,9 @@ class AboutProductTop extends Component {
             <div className={styles.warrantyArticleWrap}>
                 <div className={styles.warranty}>
                     {`${text.warranty} ${product.warranty} ${formatWordDeclension(text.months, product.warranty)}`}
+                </div>
+                <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
                 </div>
                 {!!article && <div className={styles.article}>{`${text.article} ${article}`}</div>}
             </div>

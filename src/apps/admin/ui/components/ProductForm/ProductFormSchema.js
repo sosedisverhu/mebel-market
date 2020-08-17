@@ -11,6 +11,7 @@ import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/Form
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
 import FormFieldButtonCopyFilters from '../Form/fields/FormFieldButtonCopyFilters/FormFieldButtonCopyFilters';
+import FormFieldRadios from '../Form/fields/FormFieldRadios/FormFieldRadios';
 
 export default function ({ data: {
     title,
@@ -321,6 +322,37 @@ export default function ({ data: {
                 validators: [
                     { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
                 ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'titleExist',
+                schema: {
+                    label: 'Наличие товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldRadios,
+                name: 'exist',
+                validators: [
+                    { name: 'required', options: { text: 'Подтвердите наявность в наличии' } }
+                ],
+                schema: {
+                    options: [
+                        {
+                            label: 'Есть в наличии',
+                            value: 'true'
+                        },
+                        {
+                            label: 'Под заказ',
+                            value: 'false'
+                        }
+                    ]
+                }
             },
             {
                 component: FormFieldDivider,

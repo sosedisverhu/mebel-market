@@ -1,10 +1,9 @@
 /* eslint-disable */
+import formatMoney from '../../../../../src/apps/client/utils/formatMoney';
 import format from 'date-fns/format';
 import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc';
 import find from '@tinkoff/utils/array/find';
-
-import formatMoney from '../../../../../src/apps/client/utils/formatMoney';
-import getSharesPrice from '../../../../../src/apps/client/utils/getSharesPrice';
+import getSharesPrice from "../../../../../src/apps/client/utils/getSharesPrice";
 
 function getGeaturesHTML(features) {
     let featuresHTML = '';
@@ -21,7 +20,7 @@ function getCategoriesAlias(categoryId, subCategoryId, categories, subCategories
     return `${category}/${subCategory}`;
 }
 
-export default function customerLetter (order, categories, subCategories, domain, shares) {
+export default function customerLetterUA (order, categories, subCategories, domain, shares) {
     const { customer, delivery, payment, products } = order;
     const productsPrice = products.reduce((sum, { quantity, price, basePrice, properties }) => {
         const productPrice = price || basePrice;
@@ -43,14 +42,14 @@ export default function customerLetter (order, categories, subCategories, domain
                 <tbody><tr>
                     <td align="center" style="padding-right:20px;padding-top:5px;padding-bottom:5px;width:200px;vertical-align:top;">
                         <a href=${domain + productLink} style="text-decoration:none;line-height:0" target="_blank">
-                            <img src=${domain + product.product.avatar} border="0" width="80" height="95" alt=${product.productName} style="display:block;background-color:#ffffff; width: 100%; height: auto;" class="CToWUd">
+                            <img src=${domain + product.product.avatar} border="0" width="80" height="95" alt=${product.productNameUa} style="display:block;background-color:#ffffff; width: 100%; height: auto;" class="CToWUd">
                         </a>
                     </td>
                     <td style="padding-top:5px;padding-bottom:5px;vertical-align:top">
                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                             <tbody><tr>
                                 <td colspan="3" style="padding:0 0 3px 0;line-height:20px">
-                                    <a href=${domain + productLink} style="color:#3e77aa;font-size:15px;text-decoration:none;word-break:break-word" target="_blank">${product.productName}</a><span style="white-space:nowrap;font-size:12px;color:#999999;padding-left:10px">${product.article}</span>
+                                    <a href=${domain + productLink} style="color:#3e77aa;font-size:15px;text-decoration:none;word-break:break-word" target="_blank">${product.productNameUa}</a><span style="white-space:nowrap;font-size:12px;color:#999999;padding-left:10px">${product.article}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -62,12 +61,12 @@ export default function customerLetter (order, categories, subCategories, domain
                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%;    margin-top:10px;">
                             <tbody>
                                 <tr>
-                                    <td style="font-size:15px;width:140px;vertical-align:top;padding-top:5px">Размер</td>
-                                    <td style="font-size:15px;width:100px;vertical-align:top;padding-top:5px;text-align: right;">${product.properties.size.name}</td>
+                                    <td style="font-size:15px;width:140px;vertical-align:top;padding-top:5px">Розмір</td>
+                                    <td style="font-size:15px;width:100px;vertical-align:top;padding-top:5px;text-align: right;">${product.properties.size.nameUa}</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:15px;width:140px;vertical-align:top;padding-top:5px">Цвет</td>
-                                    <td style="font-size:15px;width:100px;vertical-align:top;padding-top:5px;text-align: right;">${product.properties.color.name}</td>
+                                    <td style="font-size:15px;width:140px;vertical-align:top;padding-top:5px">Колір</td>
+                                    <td style="font-size:15px;width:100px;vertical-align:top;padding-top:5px;text-align: right;">${product.properties.colorUa.name}</td>
                                 </tr>
                                 ${product.properties.features.length
 ? `<tr>
@@ -302,8 +301,8 @@ export default function customerLetter (order, categories, subCategories, domain
                             <div style="color:#000000; font-family:Poppins, Arial, Helvetica, sans-serif; line-height:1.5;padding-top:30px; max-width: 680px; min-width: 640px;">
                                 <div style="font-size: 14px; line-height: 1.5; color: #000000; font-family: Poppins, Arial, Helvetica, sans-serif; mso-line-height-alt: 21px; ">
                                     <h1 style="font-size:28px; line-height:32px; padding-bottom:15px; font-weight:normal; margin:0; color: #414141;">
-                                        ${customer.name}, спасибо за ваш заказ!</h1>
-                                    <p style="font-size:15px; line-height:24px; margin:0; color: #919191;">Ваша заявка принята.</p>
+                                        ${customer.name}, дякуємо за Ваше замовлення!</h1>
+                                    <p style="font-size:15px; line-height:24px; margin:0; color: #919191;">Ваша заявка прийнята.</p>
                                 </div>
                             </div>
                             <!--[if mso]></td></tr></table><![endif]-->
@@ -331,9 +330,9 @@ export default function customerLetter (order, categories, subCategories, domain
                                     ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'dd.MM.yyyy HH:mm')}</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size:13px;padding-bottom:5px;width:280px;vertical-align:top;color:#999999">Название и цена товара</td>
-                                    <td style="font-size:13px;padding-bottom:5px;width:100px;vertical-align:top;color:#999999">Кол-во</td>
-                                    <td style="font-size:13px;padding-bottom:5px;width:200px;text-align:right;vertical-align:top;color:#999999">Сумма</td>
+                                    <td style="font-size:13px;padding-bottom:5px;width:280px;vertical-align:top;color:#999999">Назва и ціна товару</td>
+                                    <td style="font-size:13px;padding-bottom:5px;width:100px;vertical-align:top;color:#999999">К-сть</td>
+                                    <td style="font-size:13px;padding-bottom:5px;width:200px;text-align:right;vertical-align:top;color:#999999">Сума</td>
                                 </tr>
                                 ${productsHTML}
                                 <tr>
@@ -342,9 +341,9 @@ export default function customerLetter (order, categories, subCategories, domain
                                             <tbody><tr>
                                                 <td style="width:140px;vertical-align:top;padding:0;font-size:15px;">Доставка</td>
                                                 <td style="vertical-align:top;padding:0;font-size:15px;">
-                                                    ${delivery.texts.ru.option}
+                                                    ${delivery.texts.ua.option}
                                                     ${delivery.id === 'pickup'
-                                                        ? delivery.texts.ru.description
+                                                        ? delivery.texts.ua.description
                                                         : customer.address}
                                                 </td>
                                             </tr>
@@ -356,7 +355,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                             <tbody><tr>
                                                 <td style="font-size:15px;vertical-align:top;width:140px">Оплата</td>
-                                                <td style="font-size:15px;vertical-align:top">${payment.texts.ru.option}</td>
+                                                <td style="font-size:15px;vertical-align:top">${payment.texts.ua.option}</td>
                                             </tr>
                                             </tbody></table>
                                     </td>
@@ -365,7 +364,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                     <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:17px;padding-bottom:17px">
                                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                             <tbody><tr>
-                                                <td style="font-size:15px;vertical-align:top;width:140px">Покупатель</td>
+                                                <td style="font-size:15px;vertical-align:top;width:140px">Покупець</td>
                                                 <td style="font-size:15px;vertical-align:top">${customer.name}, ${customer.phone}</td>
                                             </tr>
                                             </tbody></table>
@@ -376,7 +375,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                         <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:17px;padding-bottom:17px">
                                             <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                                 <tbody><tr>
-                                                    <td style="font-size:15px;vertical-align:top;width:140px">Цена без скидки</td>
+                                                    <td style="font-size:15px;vertical-align:top;width:140px">Ціна без знижки</td>
                                                     <td style="font-size:15px;text-align:right;vertical-align:top">${formatMoney(productsPrice)}</td>
                                                 </tr>
                                                 </tbody></table>
@@ -388,7 +387,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                         <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:17px;padding-bottom:17px">
                                             <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                                 <tbody><tr>
-                                                    <td style="font-size:15px;vertical-align:top;width:140px">Размер скидки</td>
+                                                    <td style="font-size:15px;vertical-align:top;width:140px">Розмір знижки</td>
                                                     <td style="font-size:15px;text-align:right;vertical-align:top">${formatMoney(sharesPrice)}</td>
                                                 </tr>
                                                 </tbody></table>
@@ -399,7 +398,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                     <td colspan="3" style="border-top:1px solid #f0f0f0;padding-top:22px;padding-bottom:22px">
                                         <table cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;width:100%">
                                             <tbody><tr>
-                                                <td style="font-size:18px;vertical-align:baseline">Всего к оплате</td>
+                                                <td style="font-size:18px;vertical-align:baseline">Всього до сплати</td>
                                                 <td style="font-size:26px;text-align:right;vertical-align:baseline">${formatMoney(totalPrice + (delivery.price || 0))}</td>
                                             </tr>
                                             </tbody></table>
@@ -455,19 +454,19 @@ export default function customerLetter (order, categories, subCategories, domain
                                                     style="vertical-align: top; display: inline-block; text-align: center;"
                                                     valign="top">
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.facebook.com/mmebelmarket/" target="_blank"><img
                                                             alt="Facebook" height="32"
                                                             src=${domain + '/client/images/facebook.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="Facebook" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.youtube.com/channel/UComiyZA3-1qXTnArdGyeF1g" target="_blank"><img
                                                             alt="YouTube" height="32"
                                                             src=${domain + '/client/images/youtube.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
                                                             title="YouTube" width="32"/></a></td>
                                                     <td style="word-break: break-word; vertical-align: top; padding-bottom: 0; padding-right: 4px; padding-left: 4px;"
-                                                        valign="top"><a href="http://example.com/" target="_blank"><img
+                                                        valign="top"><a href="https://www.instagram.com/mebelmarket.ua/" target="_blank"><img
                                                             alt="Instagram" height="32"
                                                             src=${domain + '/client/images/instagram.png'}
                                                             style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: none; display: block;"
@@ -487,7 +486,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                 <div style="color:#ffffff;font-family:Poppins, Arial, Helvetica, sans-serif;line-height:1.2;padding-top:20px;padding-right:10px;padding-bottom:20px;padding-left:10px;">
                                     <div style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Poppins, Arial, Helvetica, sans-serif; mso-line-height-alt: 17px;">
                                         <p style="font-size: 12px; line-height: 1.6; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
-                                            <span style="font-size: 12px;">Киев, ул. Большая Окружная, 4</span></p>
+                                            <span style="font-size: 12px;">Київ, вул. Велика Кільцева, 4</span></p>
 
                                         <p style="font-size: 12px; line-height: 1.6; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
                                             <span style="font-size: 12px;"><a href="mailto:mebelmarket@gmail.com"
@@ -499,12 +498,6 @@ export default function customerLetter (order, categories, subCategories, domain
                                             <span style="font-size: 12px;"><a href="tel:+380443557720"
                                                                               style="text-decoration: none; color: #ffffff;"
                                                                               title="tel:+380443557720">+38 (044) 355-77-20</a></span>
-                                        </p>
-
-                                        <p style="font-size: 12px; line-height: 1.4; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
-                                            <span style="font-size: 12px;"><a href="tel:+380500511000"
-                                                                              style="text-decoration: none; color: #ffffff;"
-                                                                              title="tel:+380500511000">+38 (050) 051-10-00</a></span>
                                         </p>
 
                                         <p style="font-size: 12px; line-height: 1.4; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
@@ -547,7 +540,7 @@ export default function customerLetter (order, categories, subCategories, domain
                                 <div style="color:#ffffff;font-family:Poppins, Arial, Helvetica, sans-serif;line-height:1.2;padding-top:15px;padding-right:10px;padding-bottom:15px;padding-left:10px;">
                                     <div style="font-size: 14px; line-height: 1.2; color: #ffffff; font-family: Poppins, Arial, Helvetica, sans-serif; mso-line-height-alt: 17px;">
                                         <p style="font-size: 12px; line-height: 1.6; word-break: break-word; text-align: center; mso-line-height-alt: 13px; margin: 0;">
-                                            <span style="font-size: 12px;">2020 © Все права защищены</span></p>
+                                            <span style="font-size: 12px;">2020 © Всі права захищені</span></p>
                                     </div>
                                 </div>
                                 <!--[if mso]></td></tr></table><![endif]-->

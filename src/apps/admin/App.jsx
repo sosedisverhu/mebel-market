@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import isNull from '@tinkoff/utils/is/nil';
+import includes from '@tinkoff/utils/array/includes';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import checkAuthentication from './services/checkAuthentication';
 
@@ -21,6 +23,7 @@ import SeoPage from './ui/pages/SeoPage/SeoPage.jsx';
 import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 import CredentialsPage from './ui/pages/CredentialsPage/CredentialsPage.jsx';
+import AdminPage from './ui/pages/AdminPage/AdminPage.jsx';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -31,7 +34,7 @@ const RECOVERY_URL = '/admin/recovery';
 
 const mapStateToProps = ({ application }) => {
     return {
-        authenticated: application.authenticated
+        admin: application.admin
     };
 };
 
@@ -42,8 +45,8 @@ const mapDispatchToProps = dispatch => ({
 class App extends Component {
     static propTypes = {
         checkAuthentication: PropTypes.func.isRequired,
-        authenticated: PropTypes.bool,
-        location: PropTypes.object
+        location: PropTypes.object,
+        admin: PropTypes.object
     };
 
     static defaultProps = {
@@ -63,33 +66,35 @@ class App extends Component {
     }
 
     render () {
-        const { authenticated } = this.props;
+        const { admin } = this.props;
+        const sections = propOr('sections', [], admin);
 
         if (this.isRecovery) {
             return <Recovery />;
         }
 
-        if (isNull(authenticated)) {
+        if (isNull(admin)) {
             return <div className={styles.loader}>
                 <CircularProgress />
             </div>;
         }
 
-        if (!authenticated) {
+        if (!admin) {
             return <Authentication />;
         }
 
         return <main>
             <Header />
             <Switch>
-                <Route exact path='/admin' component={OrdersPage} />
-                <Route exact path='/admin/products' component={ProductsPage} />
-                <Route exact path='/admin/articles' component={ArticlesPage} />
-                <Route exact path='/admin/slider' component={MainSliderPage} />
-                <Route exact path='/admin/partners' component={PartnersPage} />
-                <Route exact path='/admin/reviews' component={ReviewsPage} />
-                <Route exact path='/admin/seo' component={SeoPage} />
-                <Route exact path='/admin/credentials' component={CredentialsPage} />
+                {includes('orders', sections) && <Route exact path='/admin' component={OrdersPage}/>}
+                {includes('products', sections) && <Route exact path='/admin/products' component={ProductsPage}/>}
+                {includes('articles', sections) && <Route exact path='/admin/articles' component={ArticlesPage}/>}
+                {includes('main', sections) && <Route exact path='/admin/slider' component={MainSliderPage}/>}
+                {includes('partners', sections) && <Route exact path='/admin/partners' component={PartnersPage}/>}
+                {includes('reviews', sections) && <Route exact path='/admin/reviews' component={ReviewsPage}/>}
+                {includes('seo', sections) && <Route exact path='/admin/seo' component={SeoPage}/>}
+                {includes('admins', sections) && <Route exact path='/admin/admins' component={AdminPage}/>}
+                {includes('credentials', sections) && <Route exact path='/admin/credentials' component={CredentialsPage}/>}
             </Switch>
         </main>;
     }

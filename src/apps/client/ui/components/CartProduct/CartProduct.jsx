@@ -176,13 +176,12 @@ class CartProduct extends Component {
         const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, shares } = this.props;
         const { isInWishList, isPresentMessage, isDiscountMessage } = this.state;
         const text = propOr('cart', {}, langMap);
+        const isExist = propOr('exist', 'true', product);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
         const color = size.colors.find(color => color.id === properties.size.color.id);
-        const isManyColors = size.colors.length > 1;
         const isDiscount = !!color.discountPrice;
         const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
         const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
-
         const allFeatures = size.features || [];
         const checkedFeatureIds = properties.features || {};
         const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
@@ -196,7 +195,7 @@ class CartProduct extends Component {
                     to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
                     onClick={this.handlePopupClose}
                 >
-                    <img className={styles.productImg} src={product.avatar} alt=''/>
+                    <img className={styles.productImg} src={product.avatar} alt='' />
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
@@ -237,16 +236,11 @@ class CartProduct extends Component {
                             <p className={styles.productSize}>
                                 {text.size} {size.name}
                             </p>
-                            {(isManyColors || product.viewOneColor) && <div className={styles.productColor}>
-                                {text.color}
-                                <div className={styles.productColorImgWrap}>
-                                    <img className={styles.productColorImg} src={color.file} alt={color.name}/>
-                                </div>
-                            </div>}
                         </div>
                         {checkedFeatures && <div className={styles.features}>
                             {checkedFeatures.map(feature => <p className={styles.feature}>{`+ ${feature.name}`}</p>)}
                         </div>}
+
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -271,9 +265,13 @@ class CartProduct extends Component {
                                 disabled={quantity >= MAX_QUANTITY}>+
                             </button>
                         </div>
+                        <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                            {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
+                        </div>
+
                         <div className={styles.productPrices}>
                             {isDiscount &&
-                            <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
+                                <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
                             <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
                                 {formatMoney(resultPrice)}
                             </p>
@@ -282,10 +280,10 @@ class CartProduct extends Component {
                     <div className={styles.buttons}>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
                             type="button"
-                            onClick={this.handleAddToWishlist}/>
+                            onClick={this.handleAddToWishlist} />
                         <button className={styles.removeBtn}
                             type="button"
-                            onClick={this.removeProduct(basketItemId)}/>
+                            onClick={this.removeProduct(basketItemId)} />
                     </div>
                 </div>
             </div>

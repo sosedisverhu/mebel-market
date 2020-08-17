@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.priceTag {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .priceOld {
     padding-right: 25px;
     display: inline-block;
@@ -53,6 +59,22 @@
 
 .discountPrice{
     color: redBasic;
+}
+
+.existText {
+    display: inline-block;
+    font: 16px/16px GilroyRegular;
+    text-align: left;
+    color: #25716C;
+    align-self: center;
+    width: 173px;
+    @media (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.notExist {
+    color: #DC4E41;
 }
 
 .properties {

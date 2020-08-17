@@ -186,6 +186,22 @@
     }
 }
 
+.existText {
+    position: absolute;
+    right: 25px;
+    bottom: 57px;
+    display: inline-block;
+    font: 16px/16px GilroyRegular;
+    text-align: center;
+    color: #25716C;
+    @media (max-width: 500px) {
+        right: 16px;
+    }
+}
+.notExist {
+    color: #DC4E41;
+}
+
 .productSize {
     font-size: 14px;
     line-height: 16px;
@@ -210,34 +226,6 @@
         line-height: 15px;
         margin-bottom: 10px;
     }
-}
-
-.productColor {
-    @media (max-width: 500px) {
-        display: flex;
-        margin-bottom: 12px;
-        font-size: 13px;
-        line-height: 15px;
-    }
-}
-
-.productColorImgWrap {
-    width: 69px;
-    height: 22px;
-    overflow: hidden;
-    margin: 7px 0 -25px 0;
-    border: gray0;
-
-    @media (max-width: 500px) {
-        width: 54px;
-        height: 15px;
-        margin: 0 0 0 26px;
-    }
-}
-
-.productColorImg {
-    width: 100%;
-    height: auto;
 }
 
 .productQuantity {

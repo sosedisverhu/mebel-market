@@ -14,7 +14,7 @@ import editPositions from './services/editProductsPositions';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('products'));
 
 router.route('/all')
     .get(getProducts);
