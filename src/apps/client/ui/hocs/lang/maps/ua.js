@@ -30,7 +30,16 @@ export default {
         top: 'Топ продаж',
         new: 'Новинка',
         onScreen: 'На весь екран',
-        selectThisColor: 'Вибрати даний колір'
+        selectThisColor: 'Вибрати даний колір',
+        getShareDiscount: 'Ви отримаєте знижку при купівлі цього товару разом з одним з цих товарів',
+        groupOfProducts: '/групою товарів',
+        orGetSharePresent: 'Або ж при купівлі цього товару Ви гарантовано отримуєте в подарунок:',
+        getSharePresent: 'При купівлі цього товару Ви гарантовано отримуєте в подарунок:',
+        atChoice: '(на  вибір)',
+        share: 'Акція',
+        choicePresent: 'Оберіть подарунок',
+        withoutPresent: 'Дякую, подарунок не потрібен',
+        withPresent: 'Підтвердити'
     },
     breadcrumbs: {
         main: 'Головна'
@@ -69,7 +78,14 @@ export default {
         checkout: 'Оформити замовлення',
         continueShopping: 'Продовжити покупки',
         noProduct: 'Ви не додали в кошик жодного товару',
-        color: 'Колір:'
+        color: 'Колір:',
+        present: 'Подарунок',
+        presentDescription: 'Товари, відмічені як "Подарунок" Ви отримаєте безкоштовно',
+        discount: 'Акція',
+        discountDescription: 'На товари, відмічені як "Акція" Ви отримуєте додаткову знижку',
+        of: 'з',
+        priceWithoutShare: 'Ціна без знижки:',
+        shareValue: 'Розмір знижки:'
     },
     productsPage: {
         filterBtn: 'Фільтри',
@@ -160,7 +176,8 @@ export default {
         cardDescr: '(вкажіть номер замовлення в описі платежу)',
         price: 'Вартість замовлення:',
         toMain: 'На головну',
-        noItemsInBasket: 'В кошику ще немає товарів'
+        noItemsInBasket: 'В кошику ще немає товарів',
+        shareValue: 'Розмір знижки:'
     },
     comments: {
         showAll: 'Показати усі',

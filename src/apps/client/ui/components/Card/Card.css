@@ -166,6 +166,10 @@
     background: whiteBasic;
 }
 
+.share {
+    background: redBasic;
+}
+
 .bottomPanel {
     position: relative;
 

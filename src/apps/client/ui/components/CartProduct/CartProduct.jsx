@@ -16,6 +16,9 @@ import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
+import getShareTypeQuantity from '../../../utils/getShareTypeQuantity';
+import outsideClick from '../../hocs/outsideClick';
+
 import styles from './CartProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -37,6 +40,7 @@ const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
+@outsideClick
 class CartProduct extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
@@ -54,14 +58,28 @@ class CartProduct extends Component {
         product: PropTypes.object.isRequired,
         properties: PropTypes.object.isRequired,
         wishlist: PropTypes.array.isRequired,
-        deleteFromWishlist: PropTypes.func.isRequired
+        deleteFromWishlist: PropTypes.func.isRequired,
+        shares: PropTypes.array,
+        turnOnClickOutside: PropTypes.func,
+        outsideClickEnabled: PropTypes.bool
     };
 
     static defaultProps = {
-        wishlist: []
+        wishlist: [],
+        shares: []
     };
 
-    state = {};
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            isPresentMessage: false,
+            isDiscountMessage: false
+        };
+
+        this.sharePresent = React.createRef();
+        this.shareDiscount = React.createRef();
+    }
 
     static getDerivedStateFromProps (props) {
         const { wishlist, product, properties } = props;
@@ -126,14 +144,44 @@ class CartProduct extends Component {
         return `${category}/${subCategory}`;
     };
 
+    handleShowPresentMessage = () => {
+        const { isPresentMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isPresentMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isPresentMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.sharePresent.current, () => this.closeMessage('isPresentMessage'));
+    };
+
+    handleShowDiscountMessage = () => {
+        const { isDiscountMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isDiscountMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isDiscountMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.shareDiscount.current, () => this.closeMessage('isDiscountMessage'));
+    };
+
+    closeMessage = (messageName) => {
+        this.setState({ [messageName]: false });
+    };
+
     render () {
-        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
-        const { isInWishList } = this.state;
+        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, shares } = this.props;
+        const { isInWishList, isPresentMessage, isDiscountMessage } = this.state;
         const text = propOr('cart', {}, langMap);
         const isExist = propOr('exist', 'true', product);
         const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
         const color = size.colors.find(color => color.id === properties.size.color.id);
         const isDiscount = !!color.discountPrice;
+        const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
+        const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
         const allFeatures = size.features || [];
         const checkedFeatureIds = properties.features || {};
         const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
@@ -151,6 +199,28 @@ class CartProduct extends Component {
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
+                        {!!presentsQuantity && <div ref={this.sharePresent} className={classNames(
+                            styles.share,
+                            { [styles.active]: isPresentMessage }
+                        )} onClick={this.handleShowPresentMessage}>
+                            {text.present}
+                            {presentsQuantity < quantity && <span>&nbsp;{`(${presentsQuantity} ${text.of} ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>{text.presentDescription}</div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
+                        {!!discountsQuantity && <div ref={this.shareDiscount} className={classNames(
+                            styles.share,
+                            { [styles.active]: isDiscountMessage }
+                        )} onClick={this.handleShowDiscountMessage}>
+                            {text.discount}
+                            {discountsQuantity < quantity && <span>&nbsp;{`(${discountsQuantity} ${text.of} ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>{text.discountDescription}</div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
                         <div className={styles.productOption}>
                             <Link
                                 className={styles.productNameLink}

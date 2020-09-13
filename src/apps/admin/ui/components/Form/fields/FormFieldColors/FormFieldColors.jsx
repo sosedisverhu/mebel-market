@@ -103,7 +103,7 @@ const materialStyles = {
     sortableTab: {
         display: 'flex',
         alignItems: 'center',
-        zIndex: '9998',
+        zIndex: '9990',
         border: '1px solid #D8D8D8',
         padding: '0 8px',
         borderRadius: '4px 4px 0 0',
@@ -116,7 +116,7 @@ const materialStyles = {
         padding: '7px'
     },
     indicator: {
-        zIndex: 9999
+        zIndex: 9991
     },
     labelContainer: {
         padding: '6px 0 6px 6px',

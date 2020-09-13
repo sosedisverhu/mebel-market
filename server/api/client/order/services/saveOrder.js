@@ -23,6 +23,8 @@ import {
 import editBasketProduct from '../../userProducts/queries/editUserProduct';
 import sendOrderQuery from '../queries/sendOrderQuery';
 
+import getShares from '../../../../../src/apps/client/utils/getShares';
+
 const SUBJECT = 'Новый заказ';
 const SUBJECT_CLIENT = 'Заказ №';
 
@@ -93,16 +95,19 @@ export default function saveOrder (req, res) {
                         }, products);
                     }, [], basket);
 
+                    const shares = getShares(products);
+
                     const order = {
                         id: uniqid(),
                         shortId: uniqid.time(),
                         date: Date.now(),
                         customer: { name, email, phone, comment, address },
-                        delivery: delivery,
-                        payment: payment,
+                        delivery,
+                        payment,
                         products,
                         comment: '',
-                        status: 'new'
+                        status: 'new',
+                        shares
                     };
 
                     const content = `<table>
@@ -210,8 +215,8 @@ export default function saveOrder (req, res) {
                                     const categories = values[0];
                                     const subCategories = values[1];
                                     const clientMessageContent = lang === 'ru'
-                                        ? getCustomerLetterTemplateRU(order, categories, subCategories, domain)
-                                        : getCustomerLetterTemplateUA(order, categories, subCategories, domain);
+                                        ? getCustomerLetterTemplateRU(order, categories, subCategories, domain, shares)
+                                        : getCustomerLetterTemplateUA(order, categories, subCategories, domain, shares);
 
                                     sendOrderQuery(
                                         `${SUBJECT_CLIENT} ${order.shortId}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,

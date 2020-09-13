@@ -17,6 +17,7 @@ const mapStateToProps = ({ application }) => {
 class Product extends Component {
     static propTypes = {
         product: PropTypes.object.isRequired,
+        subCategory: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         isPromotion: PropTypes.bool,
         subCategory: PropTypes.object.isRequired

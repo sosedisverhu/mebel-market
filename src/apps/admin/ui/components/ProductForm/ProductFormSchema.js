@@ -160,11 +160,18 @@ export default function ({ data: {
                         id: 'notDepend',
                         name: 'depend',
                         value: 'notDepend'
+                    }],
+                    shares: [{
+                        id: 'notDepend',
+                        type: 'notDepend',
+                        value: 'notDepend',
+                        products: 'notDepend'
                     }]
                 }],
                 validators: [
                     { name: 'required', options: { text: 'Добавьте хотя бы 1 размер для товара' } },
-                    { name: 'sizes' }
+                    { name: 'sizes' },
+                    { name: 'shares' }
                 ]
             },
             {

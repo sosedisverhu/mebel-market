@@ -284,6 +284,12 @@ class ProductForm extends Component {
                     id: tableSize.id,
                     name: tableSize.name,
                     value: tableSize.value
+                })),
+                shares: (size.shares || []).map((share) => ({
+                    id: share.id,
+                    type: share.type,
+                    products: share.products,
+                    value: share.value
                 }))
             })),
             ua: uaSizes.map(size => ({
@@ -312,6 +318,12 @@ class ProductForm extends Component {
                     id: tableSize.id,
                     name: tableSize.name,
                     value: tableSize.value
+                })),
+                shares: (size.shares || []).map((share) => ({
+                    id: share.id,
+                    type: share.type,
+                    products: share.products,
+                    value: share.value
                 }))
             }))
         };

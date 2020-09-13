@@ -15,7 +15,12 @@ import openBasket from '../../../actions/openBasket';
 import closeBasket from '../../../actions/closeBasket';
 
 import formatWordDeclension from '../../../utils/formatWordDeclension';
+
 import formatMoney from '../../../utils/formatMoney';
+import getShares from '../../../utils/getShares';
+import getProductsPrice from '../../../utils/getProductsPrice';
+import getSharesPrice from '../../../utils/getSharesPrice';
+
 import styles from './Cart.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -47,6 +52,22 @@ class Cart extends Component {
         closeBasket: PropTypes.func.isRequired
     };
 
+    // productsWithShare = [
+    //     {
+    //         productId: 'Кровать 1',
+    //         maxQuantity: '4'
+    //     }
+    // ];
+
+    constructor (...args) {
+        super(...args);
+        const { basket, lang } = this.props;
+
+        this.state = {
+            shares: getShares(basket, lang)
+        };
+    }
+
     handlePopupClose = () => {
         document.body.style.overflowY = 'visible';
         document.documentElement.style.overflowY = 'visible'; // для Safari на iPhone/iPad
@@ -65,21 +86,20 @@ class Cart extends Component {
         openBasket();
     };
 
+    componentWillReceiveProps (nextProps) {
+        if (this.props.basket !== nextProps.basket) {
+            this.setState({ shares: getShares(nextProps.basket, nextProps.lang) });
+        }
+    }
+
     render () {
         const { langRoute, langMap, basket, basketIsOpen, lang } = this.props;
+        const { shares } = this.state;
         const text = propOr('cart', {}, langMap);
         const quantityAll = basket.reduce((sum, { quantity }) => sum + quantity, 0);
-        const totalPrice = basket.reduce((sum, { quantity, product, properties }) => {
-            const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
-            const color = size.colors.find(color => color.id === properties.size.color.id);
-            const productPrice = color.discountPrice || color.price;
-            const allFeatures = size.features || [];
-            const checkedFeatureIds = properties.features || {};
-            const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
-            const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
-
-            return sum + (quantity * (productPrice + featuresPrice));
-        }, 0);
+        const productsPrice = getProductsPrice(basket, lang);
+        const sharesPrice = getSharesPrice(shares);
+        const totalPrice = productsPrice - sharesPrice;
 
         return (
             <div className={styles.cart}>
@@ -92,41 +112,54 @@ class Cart extends Component {
                     <div className={styles.popup}>
                         <p className={styles.title}>
                             {text.title} {basket.length > 0 &&
-                            <span>
-                                {quantityAll}&nbsp;
-                                {formatWordDeclension(text.product, basket.length)}
-                            </span>
+                        <span>
+                            {quantityAll}&nbsp;
+                            {formatWordDeclension(text.product, basket.length)}
+                        </span>
                             }</p>
                         {basket.length > 0
                             ? <div className={styles.productsContainer}>
-                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) =>
-                                    <CartProduct product={product}
-                                        quantity={quantity}
-                                        properties={properties}
-                                        basketItemId={basketItemId}
-                                        key={i} />
+                                {basket.map(({ properties, quantity, product, id: basketItemId }, i) => <CartProduct
+                                    product={product}
+                                    quantity={quantity}
+                                    properties={properties}
+                                    basketItemId={basketItemId}
+                                    shares={shares}
+                                    key={i}/>
                                 )}
                             </div>
                             : <p className={styles.noProducts}>{text.noProduct}</p>
                         }
                         {basket.length > 0 &&
-                            <div className={styles.cartBottomInfo}>
-                                <div className={styles.totalPriceContainer}>
-                                    <div className={styles.totalPriceWrapper}>
-                                        <p className={styles.totalPrice}>
-                                            {text.totalPrice}
-                                        </p>
-                                        <p className={styles.totalPrice}>
-                                            {formatMoney(totalPrice)}
-                                        </p>
-                                    </div>
+                        <div className={styles.cartBottomInfo}>
+                            <div className={styles.totalPriceContainer}>
+                                {!!sharesPrice && <div className={styles.totalPriceWrapper}>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>{text.priceWithoutShare}</p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        {formatMoney(productsPrice)}
+                                    </p>
+                                </div>}
+                                {!!sharesPrice && <div className={styles.totalPriceWrapper}>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>{text.shareValue}</p>
+                                    <p className={classNames(styles.totalPrice, styles.small)}>
+                                        {formatMoney(sharesPrice)}
+                                    </p>
+                                </div>}
+                                <div className={styles.totalPriceWrapper}>
+                                    <p className={styles.totalPrice}>
+                                        {text.totalPrice}
+                                    </p>
+                                    <p className={styles.totalPrice}>
+                                        {formatMoney(totalPrice)}
+                                    </p>
                                 </div>
-                                <Link to={`${langRoute}/order`} >
-                                    <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>
-                                        {text.checkout}
-                                    </button>
-                                </Link>
                             </div>
+                            <Link to={`${langRoute}/order`} >
+                                <button className={styles.checkoutBtn} onClick={this.handlePopupClose}>
+                                    {text.checkout}
+                                </button>
+                            </Link>
+                        </div>
                         }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>
                             {text.continueShopping}

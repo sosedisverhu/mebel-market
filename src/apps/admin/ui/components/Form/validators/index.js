@@ -11,6 +11,7 @@ import discountPrice from './discountPrice';
 import discount from './discount';
 import filters from './filters';
 import sizes from './sizes';
+import shares from './shares';
 
 export default {
     required,
@@ -25,5 +26,6 @@ export default {
     discountPrice,
     discount,
     filters,
-    sizes
+    sizes,
+    shares
 };

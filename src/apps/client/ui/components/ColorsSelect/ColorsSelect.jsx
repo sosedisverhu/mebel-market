@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import outsideClick from '../../hocs/outsideClick';
 import classNames from 'classnames';
 
-import styles from '../AboutProduct/AboutProduct.css';
+import noop from '@tinkoff/utils/function/noop';
 
 @outsideClick
 class ColorsSelect extends Component {
     static propTypes = {
         activeSize: PropTypes.object,
+        styles: PropTypes.object,
         activeColor: PropTypes.object,
         handleChangePopup: PropTypes.func,
         changeColorListOpen: PropTypes.func,
@@ -17,7 +18,13 @@ class ColorsSelect extends Component {
         colorListOpen: PropTypes.bool,
         isPromotion: PropTypes.bool,
         turnOnClickOutside: PropTypes.func,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        withPopup: PropTypes.bool
+    };
+
+    static defaultProps = {
+        handleChangePopup: noop,
+        withPopup: false
     };
 
     handleOpenColors = () => {
@@ -32,7 +39,7 @@ class ColorsSelect extends Component {
     };
 
     render () {
-        const { activeSize, isPromotion, activeColor, handleChangeColor, handleChangePopup } = this.props;
+        const { activeSize, isPromotion, activeColor, handleChangeColor, handleChangePopup, withPopup, styles } = this.props;
         const colors = activeSize.colors;
         const actualColors = isPromotion ? colors.filter(color => color.action) : colors;
         const isOneColor = actualColors.length === 1;
@@ -42,7 +49,7 @@ class ColorsSelect extends Component {
             <div className={styles.colorsWrapper}>
                 <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })} onClick={this.handleOpenColors}>
                     <img className={styles.colorImg} src={activeColor.file} alt={activeColor.name} />
-                    <div className={styles.view} onClick={() => handleChangePopup(activeColorIndex)} />
+                    {withPopup && <div className={styles.view} onClick={() => handleChangePopup(activeColorIndex)} />}
                 </div>
                 <ul className={styles.colorList}>
                     {actualColors.map((color, i) => {

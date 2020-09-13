@@ -15,6 +15,7 @@ const Order = new Schema({
     delivery: { type: Object, required: true },
     payment: { type: Object, required: true },
     products: { type: Array, required: true },
+    shares: { type: Array },
     date: { type: Number, required: true },
     comment: { type: String, required: false },
     status: { type: String, required: true }

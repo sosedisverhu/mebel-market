@@ -14,6 +14,11 @@
 }
 
 @font-face {
+  font-family: 'GilroyMedium';
+  src: url('./font/Gilroy-Medium.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'Rubik';
   src: url('./font/Rubik-Regular.ttf') format('truetype');
 }
