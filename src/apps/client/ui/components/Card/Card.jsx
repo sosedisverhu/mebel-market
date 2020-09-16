@@ -120,12 +120,10 @@ class Card extends Component {
                         -{minDiscount}<span className={styles.percentage}>%</span>
                     </div>}
                     {isSharePresent && <div className={classNames(styles.label, styles.share)}>
-                        {/* {text.sharePresent} */}
-                        + Подарок
+                        {text.sharePresent}
                     </div>}
                     {isShareDiscount && <div className={classNames(styles.label, styles.share)}>
-                        {/* {text.shareDiscount} */}
-                        Акция
+                        {text.shareDiscount}
                     </div>}
                 </div>
                 <div className={styles.imgWrap}>
