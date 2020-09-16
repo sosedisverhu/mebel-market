@@ -39,7 +39,9 @@ export default {
         share: 'Акция',
         choicePresent: 'Выберите подарок',
         withoutPresent: 'Спасибо, подарок не нужен',
-        withPresent: 'Подтвердить'
+        withPresent: 'Подтвердить',
+        sharePresent: '+ Подарок',
+        shareDiscount: 'Акция'
     },
     breadcrumbs: {
         main: 'Главная'
