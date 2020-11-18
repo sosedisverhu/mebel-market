@@ -8,6 +8,7 @@ import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import StyleRenderer from '../../components/StyleRenderer/StyleRenderer';
 
@@ -64,6 +65,7 @@ class ArticlePage extends Component {
 
         return <section className={styles.root}>
             <Breadcrumbs noCategoryPage={text.breadcrumbArticles} article={article} />
+            <DeliveryOffer mobile/>
             <div className={styles.articleWrap}>
                 <div className={styles.article}>
                     <h1 className={styles.title}>{article.texts[lang].name}</h1>

@@ -6,6 +6,7 @@ import styles from './Articles.css';
 
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 import Sort from '../../components/Sort/Sort';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -86,6 +87,7 @@ class Articles extends Component {
         return (
             <section className={styles.articles}>
                 <Breadcrumbs noCategoryPage={text.searchResult.substring(0, text.searchResult.length - 1)}/>
+                <DeliveryOffer mobile/>
                 {articles.length
                     ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>

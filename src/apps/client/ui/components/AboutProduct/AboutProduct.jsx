@@ -27,6 +27,8 @@ import SizesSelect from '../SizesSelect/SizesSelect';
 import ColorsSelect from '../ColorsSelect/ColorsSelect';
 import outsideClick from '../../hocs/outsideClick';
 
+import cross from './img/cross.svg';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -348,7 +350,7 @@ class AboutProduct extends Component {
                 <p className={styles.advantage} dangerouslySetInnerHTML={{ __html: this.convertNewLinesToBr(shortDescription) }} />}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
             <div className={styles.priceTag}>
-                <span>
+                <span className={styles.priceTagPriceWrapper}>
                     {isDiscount &&
                     <span className={styles.priceOld}>
                         {formatMoney(activeColor.price)}
@@ -417,21 +419,31 @@ class AboutProduct extends Component {
                 })}
             </div>
             <div className={styles.buttons}>
-                <button
-                    className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
-                    onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
-                    {!isInBasket
-                        ? text.buy
-                        : text.inBasket
-                    }
-                </button>
-                <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
-                    onClick={this.handleAddToWishlist}/>
+                <div className={styles.simpleButtons}>
+                    <button
+                        className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                        onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
+                        {!isInBasket
+                            ? text.buy
+                            : text.inBasket
+                        }
+                    </button>
+                    <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
+                        onClick={this.handleAddToWishlist}/>
+                </div>
                 {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
                     {isShareInfo && <div className={styles.shareInfo}>
                         {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
                             <div className={styles.shareInfoDescr}>
-                                {text.getShareDiscount}
+                                {text.getShareDiscount1}
+                                {sharesDiscount.map(share => {
+                                    return <span className={styles.shareInfoProductDiscount}>
+                                                (<span className={styles.shareInfoProductDiscountValue}>
+                                            {` - ${formatMoney(share.value)} `}
+                                        </span>)
+                                    </span>;
+                                })}
+                                {text.getShareDiscount2}
                                 {sharesDiscount.some(share => share.products.length > 1) && text.groupOfProducts}
                                 :
                             </div>
@@ -449,37 +461,37 @@ class AboutProduct extends Component {
                                                 {shareProduct.label}
                                             </Link>;
                                         })}
-                                        <span className={styles.shareInfoProductDiscount}>
-                                            (<span className={styles.shareInfoProductDiscountValue}>
-                                                {` - ${formatMoney(share.value)} `}
-                                            </span>)
-                                        </span>
                                     </li>;
                                 })}
                             </ul>
                         </div>}
                         {!!sharesPresent.length && <div className={styles.shareInfoPresent}>
                             <div className={styles.shareInfoDescr}>
-                                {sharesDiscount.length ? text.orGetSharePresent : text.getSharePresent}
+                                {sharesDiscount.length ? text.getSharePresent : text.getSharePresent}
                                 <span className={styles.shareInfoDescrSpan}>&nbsp;{text.atChoice}</span></div>
                             <ul className={styles.shareInfoProducts}>
                                 {sharesPresent.map(share => {
-                                    return <li className={styles.shareInfoProductItem}>
+                                    return <li>
                                         {share.products.map(shareProduct => {
                                             const product = find(product => product.id === shareProduct.value, products);
                                             const link = this.getProductLink(product);
 
-                                            return <Link
-                                                to={link}
-                                                className={styles.shareInfoProductLink}
-                                                href="#" target='_blank'>
-                                                {shareProduct.label}
-                                            </Link>;
+                                            return <li className={styles.shareInfoProductItem}>
+                                                <Link
+                                                    to={link}
+                                                    className={styles.shareInfoProductLink}
+                                                    href="#" target='_blank'>
+                                                    {shareProduct.label}
+                                                </Link>
+                                            </li>;
                                         })}
                                     </li>;
                                 })}
                             </ul>
                         </div>}
+                        <div className={styles.closePromotion} onClick={this.closeShareInfo}>
+                            <img src={cross} alt="close"/>
+                        </div>
                     </div>}
                     <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>
                         {text.share}

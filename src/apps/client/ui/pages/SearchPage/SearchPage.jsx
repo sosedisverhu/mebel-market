@@ -12,6 +12,7 @@ import searchByText from '../../../services/client/searchByText';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 
 import styles from './SearchPage.css';
 import Sort from '../../components/Sort/Sort';
@@ -118,6 +119,7 @@ class SearchPage extends Component {
         return (
             <section className={styles.search}>
                 <Breadcrumbs noCategoryPage={`${text.search} "${searchText}"`} />
+                <DeliveryOffer mobile/>
                 {(products.length || articles.length)
                     ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>

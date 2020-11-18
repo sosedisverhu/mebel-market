@@ -14,6 +14,7 @@ import filter from '@tinkoff/utils/array/filter';
 
 import styles from './CheckoutPage.css';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
 
@@ -270,6 +271,7 @@ class CheckoutPage extends Component {
 
         return (<section className={styles.checkoutPage}>
             <Breadcrumbs noCategoryPage={text.checkout} />
+            <DeliveryOffer mobile/>
             <form className={styles.content} onSubmit={this.handleSubmit}>
                 <div className={styles.contentTop}>
                     <div className={styles.details}>
