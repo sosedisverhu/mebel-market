@@ -2,7 +2,6 @@
 @value blackLight from '../../../../../css/colors.css';
 @value redBasic from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
-@value blackBasic from '../../../../../css/colors.css';
 
 .header {
     display: block;
@@ -217,7 +216,6 @@
     align-items: center;
     justify-content: center;
     background-color: whiteBasic;
-    position: relative;
 }
 
 .menuBottom {
