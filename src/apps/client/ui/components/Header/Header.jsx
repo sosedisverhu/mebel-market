@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
+import DeliveryOffer from '../DeliveryOffer/DeliveryOffer.jsx';
 
 import { LANGS } from '../../../constants/constants';
 
@@ -242,6 +243,7 @@ class Header extends Component {
                             {text.promotions}
                         </NavLink>
                     </div>
+                    <DeliveryOffer/>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
                             <input

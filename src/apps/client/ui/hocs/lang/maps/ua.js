@@ -58,6 +58,10 @@ export default {
         sleepAccessories: 'Аксесуари для сну',
         promotions: 'Акції'
     },
+    deliveryOffer: {
+        freeDelivery: 'Безкоштовна доставка',
+        startingFrom: 'від 4000 грн'
+    },
     wishList: {
         title: 'Обране:',
         size: 'Розмір:',

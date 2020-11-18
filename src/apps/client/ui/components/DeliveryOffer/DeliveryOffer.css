@@ -1,0 +1,64 @@
+@value redBasic from '../../../../../css/colors.css';
+@value blackBasic from '../../../../../css/colors.css';
+@value whiteBasic from '../../../../../css/colors.css';
+
+.deliveryContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 60px;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 1200px) {
+        display: none;
+    }
+
+}
+
+.deliveryContainerMobile {
+    display: none;
+    
+    @media (max-width: 1200px) {
+        position: block;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 60px;
+        display: flex;
+        align-items: center;
+        background: whiteBasic;
+        padding: 11px 0;
+        margin-top: 28px;
+        justify-content: center;
+        border-bottom: 8px solid #F1F1F1;
+    }
+}
+
+.deliveryTextContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.deliveryText {
+    font-family: GilroyRegular;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: redBasic;
+}
+
+.deliverySum {
+    font-family: GilroyMedium;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: blackBasic;
+}
+
+.deliveryIcon {
+    margin-right: 15px;
+}

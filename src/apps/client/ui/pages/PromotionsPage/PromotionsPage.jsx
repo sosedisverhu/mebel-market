@@ -17,6 +17,7 @@ import getMaxOfArray from '../../../utils/getMaxOfArray';
 import formatWordDeclension from '../../../utils/formatWordDeclension';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import ProductSort from '../../components/ProductSort/ProductSort';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import Filters from '../../components/Filters/Filters';
@@ -167,6 +168,7 @@ class PromotionsPage extends Component {
             <div className={styles.productPage}>
                 <div>
                     <Breadcrumbs noCategoryPage={headerText.promotions}/>
+                    <DeliveryOffer mobile/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter}>
