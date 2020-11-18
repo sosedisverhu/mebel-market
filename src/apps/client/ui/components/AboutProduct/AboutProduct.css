@@ -573,6 +573,7 @@
     color: greenBasic;
     display: block;
     line-height: 1.25;
+    font-family: GilroyRegular;
 
     &:first-child {
         &:before {
