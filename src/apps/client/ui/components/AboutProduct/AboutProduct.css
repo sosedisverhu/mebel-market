@@ -477,6 +477,7 @@
     box-shadow: 0px 0px 8px rgba(37, 113, 108, 0.2);
     width: 505px;
     padding: 10px 16px;
+    z-index: 3;
 
     &:after {
         position: absolute;
