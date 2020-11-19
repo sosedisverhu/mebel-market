@@ -449,17 +449,19 @@ class AboutProduct extends Component {
                             </div>
                             <ul className={styles.shareInfoProducts}>
                                 {sharesDiscount.map(share => {
-                                    return <li className={styles.shareInfoProductItem}>
+                                    return <li>
                                         {share.products.map(shareProduct => {
                                             const product = find(product => product.id === shareProduct.value, products);
                                             const link = this.getProductLink(product);
 
-                                            return <Link
-                                                to={link}
-                                                className={styles.shareInfoProductLink}
-                                                href="#" target='_blank'>
-                                                {shareProduct.label}
-                                            </Link>;
+                                            return <li className={styles.shareInfoProductItem}>
+                                                <Link
+                                                    to={link}
+                                                    className={styles.shareInfoProductLink}
+                                                    href="#" target='_blank'>
+                                                    {shareProduct.label}
+                                                </Link>
+                                            </li>;
                                         })}
                                     </li>;
                                 })}
