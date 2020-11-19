@@ -42,6 +42,10 @@
     flex-wrap: wrap;
 }
 
+.priceTagPriceWrapper {
+    margin-right: 15px;
+}
+
 .priceOld {
     padding-right: 25px;
     display: inline-block;
@@ -400,6 +404,16 @@
 .buttons {
     margin-top: 22px;
     display: flex;
+    
+    @media(max-width: 1290px) {
+        flex-direction: column;
+    }
+}
+
+.simpleButtons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
 .btnBuy {
@@ -449,6 +463,10 @@
 .shareInfoWrap {
     position: relative;
     margin-left: 54px;
+
+    @media(max-width: 1290px) {
+        margin-left: 0;
+    }
 }
 
 .shareInfo {
@@ -457,7 +475,7 @@
     right: 0;
     background: whiteBasic;
     box-shadow: 0px 0px 8px rgba(37, 113, 108, 0.2);
-    width: 252px;
+    width: 505px;
     padding: 10px 16px;
 
     &:after {
@@ -469,6 +487,35 @@
         border-width: 22px 11px 0 11px;
         border-color: whiteBasic transparent transparent transparent;
         z-index: 1;
+
+        @media(max-width: 1290px) {
+           left: 134px;
+           right: auto;
+        }
+
+        @media(max-width: 1001px) {
+            display: none;
+        }
+    }
+
+    @media(max-width: 1290px) {
+        width: 100%;
+    }
+
+    @media(max-width: 1001px) {
+        padding: 30px 16px;
+    }
+}
+
+.closePromotion {
+    display: none;
+
+    @media(max-width: 1001px) {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 16px; 
+        cursor: pointer;
     }
 }
 
@@ -526,10 +573,7 @@
     color: greenBasic;
     display: block;
     line-height: 1.25;
-
-    &:before {
-        content: '+';
-    }
+    font-family: GilroyRegular;
 
     &:first-child {
         &:before {
@@ -572,3 +616,5 @@
         }
     }
 }
+
+

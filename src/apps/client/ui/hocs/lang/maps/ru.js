@@ -31,10 +31,11 @@ export default {
         new: 'Новинка',
         onScreen: 'На весь экран',
         selectThisColor: 'Выбрать этот цвет',
-        getShareDiscount: 'Вы получите скидку при покупке этого товара вместе с одним из этих товаров',
+        getShareDiscount1: 'Вы получите скидку ',
+        getShareDiscount2: ' при покупке этого товара вместе с одним из этих товаров',
         groupOfProducts: '/групой товаров',
         orGetSharePresent: 'Или при покупке этого товара Вы гарантировано получаете в подарок:',
-        getSharePresent: 'При покупке этого товара Вы гарантировано получаете в подарок:',
+        getSharePresent: 'При покупке этого товара Вы гарантировано получаете в подарок',
         atChoice: '(на  выбор)',
         share: 'Акция',
         choicePresent: 'Выберите подарок',
@@ -57,6 +58,10 @@ export default {
         softFurniture: 'Мягкая мебель',
         sleepAccessories: 'Аксессуары для сна',
         promotions: 'Акции'
+    },
+    deliveryOffer: {
+        freeDelivery: 'Бесплатная доставка',
+        startingFrom: 'от 4000 грн'
     },
     wishList: {
         title: 'Избранное:',

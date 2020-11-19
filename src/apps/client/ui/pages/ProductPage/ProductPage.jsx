@@ -7,6 +7,7 @@ import find from '@tinkoff/utils/array/find';
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
 import addProductViews from '../../../services/client/addProductViews';
@@ -108,6 +109,7 @@ class ProductPage extends Component {
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
+                <DeliveryOffer mobile/>
                 <Product isPromotion={isPromotion} product={product} subCategory={subCategory}/>
                 <Tab product={product}/>
             </div>);

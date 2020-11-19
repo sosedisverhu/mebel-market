@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import styles from './Partners.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -30,6 +31,7 @@ class Partners extends Component {
         return (
             <section className={styles.partners}>
                 <Breadcrumbs noCategoryPage={text.title}/>
+                <DeliveryOffer mobile/>
                 <div className={styles.partnersContainer}>
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>

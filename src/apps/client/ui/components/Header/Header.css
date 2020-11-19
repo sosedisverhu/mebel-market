@@ -216,6 +216,7 @@
     align-items: center;
     justify-content: center;
     background-color: whiteBasic;
+    position: relative;
 }
 
 .menuBottom {

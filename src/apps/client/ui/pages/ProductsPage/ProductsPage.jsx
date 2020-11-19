@@ -23,6 +23,7 @@ import formatWordDeclension from '../../../utils/formatWordDeclension';
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import Filters from '../../components/Filters/Filters';
 import ProductSort from '../../components/ProductSort/ProductSort';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
@@ -455,6 +456,7 @@ class ProductsPage extends Component {
                         category={category}
                         subCategory={subCategory}
                         noCategoryPage=''/>
+                    <DeliveryOffer mobile/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
                             <div className={styles.btnFilter} onClick={this.handlePopupChange}>
