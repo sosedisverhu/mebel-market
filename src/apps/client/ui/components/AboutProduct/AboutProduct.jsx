@@ -27,8 +27,6 @@ import SizesSelect from '../SizesSelect/SizesSelect';
 import ColorsSelect from '../ColorsSelect/ColorsSelect';
 import outsideClick from '../../hocs/outsideClick';
 
-import cross from './img/cross.svg';
-
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -492,7 +490,7 @@ class AboutProduct extends Component {
                             </ul>
                         </div>}
                         <div className={styles.closePromotion} onClick={this.closeShareInfo}>
-                            <img src={cross} alt="close"/>
+                            <img src="/src/apps/client/ui/components/AboutProduct/img/cross.svg" alt="close"/>
                         </div>
                     </div>}
                     <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>
