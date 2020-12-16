@@ -81,7 +81,7 @@ class Card extends Component {
             langMap,
             activeSizes
         } = this.props;
-        const { categoryAlias, subCategoryAlias } = this.state;
+        const { categoryAlias, subCategoryAlias, isInBasket } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = exist || 'true';
         let minActivePrice = minPrice;
@@ -143,7 +143,42 @@ class Card extends Component {
                     <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
                         {minActualPrice} &#8372;
                     </div>
-
+                    <div className={styles.hoverInformation}>
+                        <button
+                        className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                        onClick={!isInBasket ? this.props.handleBuyClick : this.props.handleOpenBasket}>
+                            {!isInBasket
+                                ? text.buy
+                                : text.inBasket
+                            }
+                        </button>
+                    </div> 
+                    {/* <div className={styles.sizesWrap}>
+                        <div className={styles.sizesTitle}>
+                            {!isOneSize ? text.size : text.oneSize}
+                            <div onClick={this.handleChangePopupSizes()} className={classNames(
+                                styles.sizesTitleMark,
+                                { [styles.visible]: isTableSizes })} >
+                                <img
+                                    className={styles.sizesTitleMarkImg}
+                                    src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
+                                    width="18" height="18" alt={text.sizesMarkDescr} />
+                            </div>
+                        </div>
+                        <SizesSelect
+                            selectIsOpen={selectIsOpen}
+                            activeSize={activeSize}
+                            sizes={sizes}
+                            sizeListIsOpen={sizeListIsOpen}
+                            isPromotion={isPromotion}
+                            lang={lang}
+                            sizeListIsOpenSwitch={this.sizeListIsOpen}
+                            selectIsOpenSwitch={this.selectIsOpen}
+                            selectIsClosedSwitch={this.selectIsClosed}
+                            handleChangeSize={this.handleChangeSize}
+                            additionalClass='aboutProduct'
+                        />
+                    </div> */}
                 </div>
             </Link>);
     }
