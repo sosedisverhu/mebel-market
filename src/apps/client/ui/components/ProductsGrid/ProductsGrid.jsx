@@ -23,10 +23,6 @@ const mapStateToProps = ({ application, data }) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setScrollToCharacteristic: payload => dispatch(setScrollToCharacteristic(payload)),
-        saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
-        saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload)),
-        deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
         openBasket: (payload) => dispatch(openBasket(payload))
     };
 };
@@ -37,32 +33,16 @@ class ProductsGrid extends Component {
         isPromotion: PropTypes.bool,
         activeSizes: PropTypes.array,
         basketIsOpen: PropTypes.bool.isRequired,
-        openBasket: PropTypes.func.isRequired,
+        openBasket: PropTypes.func.isRequired
     };
 
     constructor (props) {
         super(props);
 
         this.state = {
-            isInBasket: false,
-            checkedFeatureIds: {},
-        }
+            checkedFeatureIds: {}
+        };
     }
-
-    handleBuyClickOnCard = () => {
-        const { product } = this.props;
-        const { checkedFeatureIds } = this.state;
-        const activeSize = "Prduct.jsx constructor";
-        const activeColor = "Prduct.jsx constructor";
-        const sharesPresent = activeSize.shares && activeSize.shares.filter(share => share.type === 'present');
-
-        if (sharesPresent && sharesPresent.length) {
-            this.openPopupPresents();
-            return;
-        }
-
-        this.saveProductToBasket(product.id, activeSize, activeColor, checkedFeatureIds);
-    };
 
     handleOpenBasket = () => {
         const { basketIsOpen, openBasket } = this.props;
@@ -84,7 +64,6 @@ class ProductsGrid extends Component {
                         product={product}
                         activeSizes = {activeSizes}
                         handleOpenBasket = {this.handleOpenBasket}
-                        handleBuyClick = {this.handleBuyClickOnCard}
                     />)}
             </div>
         );
