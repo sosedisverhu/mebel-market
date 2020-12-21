@@ -17,6 +17,7 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
+import InputMask from 'react-input-mask';
 
 import saveOrder from '../../../services/client/saveOrder';
 
@@ -24,6 +25,7 @@ import formatMoney from '../../../utils/formatMoney';
 import getProductsPrice from '../../../utils/getProductsPrice';
 import getSharesPrice from '../../../utils/getSharesPrice';
 import getShares from '../../../utils/getShares';
+import { MAX_PHONE_LENGTH } from '../../../constants/constants';
 
 const deliveryOptions = [
     {
@@ -187,6 +189,13 @@ class CheckoutPage extends Component {
         }
     };
 
+    handlePhoneChange = (e) => {
+        const customerTel = e.target.value;
+        this.setState({
+            customerTel
+        });
+    };
+
     handleSubmit = e => {
         e.preventDefault();
         const errors = {};
@@ -202,7 +211,10 @@ class CheckoutPage extends Component {
                     isFormValid = false;
                 }
 
-                if (input.type === 'tel' && this.state[input.name].length < 10) {
+                if (input.type === 'tel' &&
+                  (customerTel === '' ||
+                  customerTel.length - customerTel.replace(/\d/gm, '').length !== MAX_PHONE_LENGTH
+                  )) {
                     errors[`${input.name}Error`] = true;
                 }
 
@@ -297,18 +309,35 @@ class CheckoutPage extends Component {
                     <div className={styles.checkout} ref={this.requiredFieldsStart}>
                         <h2 className={styles.h2}>{text.checkout}</h2>
                         {customerInfo.map((item, i) => {
-                            if (item.name !== 'customerComment') {
+                            if (item.name === 'customerTel') {
                                 return (
-                                    <input
+                                    <InputMask
                                         className={classNames(styles.infoInput, { [styles.checkoutInfoInputError]: this.state[`${item.name}Error`] })}
-                                        key={i}
-                                        type={item.type}
-                                        name={item.name}
-                                        placeholder={item.texts[lang].placeholder}
-                                        value={this.state[item.name]}
-                                        onChange={this.handleChange(item.name)}
-                                        onBlur={item.required ? this.handleBlur(item.name) : noop}
-                                    />);
+                                        mask="+38 (999) 999 99 99"
+                                        onChange={this.handlePhoneChange}>
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            name="phone"
+                                            placeholder="+38 (___) ___ __ __ *"
+                                            type="text"
+                                            autoComplete='off'
+                                        />}
+                                    </InputMask>
+                                );
+                            } else {
+                                if (item.name !== 'customerComment') {
+                                    return (
+                                        <input
+                                            className={classNames(styles.infoInput, { [styles.checkoutInfoInputError]: this.state[`${item.name}Error`] })}
+                                            key={i}
+                                            type={item.type}
+                                            name={item.name}
+                                            placeholder={item.texts[lang].placeholder}
+                                            value={this.state[item.name]}
+                                            onChange={this.handleChange(item.name)}
+                                            onBlur={item.required ? this.handleBlur(item.name) : noop}
+                                        />);
+                                }
                             }
                         })}
                         <div className={styles.deliveryAndPayment}>

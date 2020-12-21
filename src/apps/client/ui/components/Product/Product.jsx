@@ -19,8 +19,7 @@ class Product extends Component {
         product: PropTypes.object.isRequired,
         subCategory: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        isPromotion: PropTypes.bool,
-        subCategory: PropTypes.object.isRequired
+        isPromotion: PropTypes.bool
     };
 
     constructor (props) {
