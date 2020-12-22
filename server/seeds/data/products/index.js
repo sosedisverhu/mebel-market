@@ -161,7 +161,7 @@ module.exports = [
                 shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
                     ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
                     'labore et dolore magna aliqua. Ut enim ad minim veniam',
-                name: ' Кровать « Прага »',
+                name: 'Кровать « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
                 seoTitle: 'bed'
@@ -355,7 +355,7 @@ module.exports = [
                 shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
                     ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
                     'labore et dolore magna aliqua. Ut enim ad minim veniam',
-                name: ' Кровать « Классика »',
+                name: 'Кровать « Классика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
                 seoTitle: 'bed'
@@ -549,7 +549,7 @@ module.exports = [
                 shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
                     ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
                     'labore et dolore magna aliqua. Ut enim ad minim veniam',
-                name: ' Кровать « Глория »',
+                name: 'Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
                 seoTitle: 'bed'
@@ -743,7 +743,7 @@ module.exports = [
                 shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
                     ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
                     'labore et dolore magna aliqua. Ut enim ad minim veniam',
-                name: ' Кровать « Глория »',
+                name: 'Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
                 seoTitle: 'bed'
@@ -937,7 +937,7 @@ module.exports = [
                 shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
                     ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
                     'labore et dolore magna aliqua. Ut enim ad minim veniam',
-                name: ' Матраc « Standart »',
+                name: 'Матраc « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
                 seoTitle: 'matress'
@@ -1007,6 +1007,60 @@ module.exports = [
                     name: '100 x 200',
                     id: 'k681jmde',
                     colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
                         {
                             id: 'k681jp6k',
                             name: 'Цветовая гамма для изделий из ольхи 1',

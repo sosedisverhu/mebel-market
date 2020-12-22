@@ -74,57 +74,69 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 ));
 
 const Share =
-    SortableElement(({ rowIndex, share, handleShareDelete, sizeIndex, handleShareChange, classes, schema, options }) => (
-        <FormGroup className={classes.share} row>
-            <ButtonSortable imageClassName={classes.buttonSortable}/>
-            <div className={classes.shareGroup}>
-                <FormControl variant="outlined" className={classes.shareField}>
-                    <InputLabel>
-                        {schema.labelType || ''}
-                    </InputLabel>
-                    <Select
-                        value={share.type}
-                        onChange={handleShareChange('type', sizeIndex, rowIndex)}
-                        input={<OutlinedInput value={share.type} labelWidth={45} name="Type"/>}
-                    >
-                        {(schema.typeOptions || []).map((option, i) => <MenuItem key={i} value={option.value}>{option.label}</MenuItem>)}
-                    </Select>
-                    {
-                        share.type === 'discount' && <div>
-                            <FormFieldMultiSelect
-                                options={options}
-                                onChange={handleShareChange('products', sizeIndex, rowIndex)}
-                                value={share.products}
-                                schema={{ placeholder: schema.selectPlaceholder }}
-                            />
-                            <TextField
-                                className={classes.shareField}
-                                label={schema.labelValue || ''}
-                                value={share.value || ''}
-                                onChange={handleShareChange('value', sizeIndex, rowIndex)}
-                                margin='normal'
-                                variant='outlined'
-                                type='number'
-                            />
-                        </div>
-                    }
-                    {
-                        share.type === 'present' && <div>
-                            <FormFieldMultiSelect
-                                options={options}
-                                onChange={handleShareChange('products', sizeIndex, rowIndex)}
-                                value={share.products}
-                                schema={{ placeholder: schema.selectPlaceholder }}
-                            />
-                        </div>
-                    }
-                </FormControl>
-            </div>
-            <IconButton aria-label='Delete' onClick={handleShareDelete(sizeIndex, rowIndex)}>
-                <DeleteIcon/>
-            </IconButton>
-        </FormGroup>
-    ));
+    SortableElement(({
+        rowIndex,
+        share,
+        handleShareDelete,
+        sizeIndex,
+        handleShareChange,
+        classes,
+        schema,
+        options
+    }) => {
+        const sortedOpts = options.sort((a, b) => a.label.localeCompare(b.label));
+        return (
+            <FormGroup className={classes.share} row>
+                <ButtonSortable imageClassName={classes.buttonSortable}/>
+                <div className={classes.shareGroup}>
+                    <FormControl variant="outlined" className={classes.shareField}>
+                        <InputLabel>
+                            {schema.labelType || ''}
+                        </InputLabel>
+                        <Select
+                            value={share.type}
+                            onChange={handleShareChange('type', sizeIndex, rowIndex)}
+                            input={<OutlinedInput value={share.type} labelWidth={45} name="Type"/>}
+                        >
+                            {(schema.typeOptions || []).map((option, i) => <MenuItem key={i} value={option.value}>{option.label}</MenuItem>)}
+                        </Select>
+                        {
+                            share.type === 'discount' && <div>
+                                <FormFieldMultiSelect
+                                    options={sortedOpts}
+                                    onChange={handleShareChange('products', sizeIndex, rowIndex)}
+                                    value={share.products}
+                                    schema={{ placeholder: schema.selectPlaceholder }}
+                                />
+                                <TextField
+                                    className={classes.shareField}
+                                    label={schema.labelValue || ''}
+                                    value={share.value || ''}
+                                    onChange={handleShareChange('value', sizeIndex, rowIndex)}
+                                    margin='normal'
+                                    variant='outlined'
+                                    type='number'
+                                />
+                            </div>
+                        }
+                        {
+                            share.type === 'present' && <div>
+                                <FormFieldMultiSelect
+                                    options={sortedOpts}
+                                    onChange={handleShareChange('products', sizeIndex, rowIndex)}
+                                    value={share.products}
+                                    schema={{ placeholder: schema.selectPlaceholder }}
+                                />
+                            </div>
+                        }
+                    </FormControl>
+                </div>
+                <IconButton aria-label='Delete' onClick={handleShareDelete(sizeIndex, rowIndex)}>
+                    <DeleteIcon/>
+                </IconButton>
+            </FormGroup>
+        );
+    });
 
 const Shares = SortableContainer(({ shares, classes, ...rest }) =>
     <div>

@@ -618,4 +618,82 @@
     }
 }
 
+.colorPickerPopup{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    display: none;
+
+    &.active{
+        display: block;
+    }
+}
+
+.colorPickerContent{
+    background: white;
+    width: 90%;
+    max-width: 1260px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cover{
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(35, 35, 35, 0.5);
+    cursor: default;
+}
+
+.colorItem{
+    max-width: 100px;
+    max-height: 50px;
+    overflow: hidden;
+    outline: 2px solid transparent;
+    transition: outline 1s;
+
+    &:hover{
+        outline: 2px solid greenBasic;
+        transition: outline 1s;
+    }
+
+    img{
+        width: 100%;
+    }
+}
+
+.choosenColor{
+    align-self: center;
+    text-align: center;
+    font: 21px GilroyRegular;
+    color: blackLighter;
+    margin-bottom: 6px;
+}
+
+.colorName{
+    font: 16px/18px GilroyRegular;
+    color: blackLighter;
+    margin-bottom: 6px;
+}
+
+.choosenColorImg{
+    max-width: 500px;
+    max-height: none;
+
+    img{
+        width: 100%
+    }
+}
+
 

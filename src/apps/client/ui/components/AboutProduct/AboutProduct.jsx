@@ -96,7 +96,8 @@ class AboutProduct extends Component {
             activePopupColorIndex: null,
             isPopupSizes: false,
             isPopupPresents: false,
-            isShareInfo: false
+            isShareInfo: false,
+            colorPickerIsOpen: false
         };
     }
 
@@ -234,7 +235,17 @@ class AboutProduct extends Component {
         return str.replace(/(?:\r\n|\r|\n)/g, '<br />');
     };
 
-    changeColorListOpen = () => this.setState({ colorListOpen: true });
+    changeColorListOpen = () => {
+        if (this.props.activeSize.colors.length <= 4) {
+            this.setState({ colorListOpen: true });
+        } else {
+            this.setState({ colorPickerIsOpen: true });
+        }
+    }
+
+    handleCloseColorPicker = () => {
+        this.setState({ colorPickerIsOpen: false });
+    }
 
     changeColorListClose = () => this.setState(({ colorListOpen: false }));
 
@@ -320,7 +331,8 @@ class AboutProduct extends Component {
             activePopupColorIndex,
             isPopupSizes,
             isPopupPresents,
-            isShareInfo
+            isShareInfo,
+            colorPickerIsOpen
         } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = propOr('exist', 'true', product);
@@ -359,6 +371,29 @@ class AboutProduct extends Component {
                 </span>
                 <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
                     {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
+                </div>
+            </div>
+            <div className={classNames(styles.colorPickerPopup, { [styles.active]: colorPickerIsOpen })}>
+                <div className={styles.cover} onClick={this.handleCloseColorPicker}/>
+                <div className={styles.colorPickerContent}>
+                    <div className={styles.colorSamples}>
+                        {activeSize.colors.map((item, i) => {
+                            return (
+                                <div onClick={() => { this.handleChangeColor(item); }} key={i}>
+                                    <p className={styles.colorName}>{item.name}</p>
+                                    <div className={styles.colorItem}>
+                                        <img src={item.file} alt="color"/>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    <div className={styles.choosenColor}>
+                        <p>{this.props.activeColor.name}</p>
+                        <div className={styles.choosenColorImg}>
+                            <img src={this.props.activeColor.file} alt="choosenColor"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className={styles.properties}>
