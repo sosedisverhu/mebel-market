@@ -32,8 +32,8 @@ class DeliveryOffer extends Component {
                     <img src="/src/apps/client/ui/components/DeliveryOffer/img/truckDelivery.svg" alt="truck"/>
                 </div>
                 <div className={styles.deliveryTextContent}>
-                    <div className={styles.deliveryText}>{text.freeDelivery}</div>
-                    <div className={styles.deliverySum}>{text.startingFrom}</div>
+                    <div className={styles.deliveryText}>{text.specialOffer1}</div>
+                    <div className={styles.deliverySum}>{text.specialOffer2}</div>
                 </div>
             </div>
         );
