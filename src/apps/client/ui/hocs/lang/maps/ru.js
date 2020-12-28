@@ -60,8 +60,8 @@ export default {
         promotions: 'Акции'
     },
     deliveryOffer: {
-        freeDelivery: 'Бесплатная доставка',
-        startingFrom: 'от 4000 грн'
+        specialOffer1: 'Скидка на кровать 200грн',
+        specialOffer2: 'На кровать с матрасом 400грн'
     },
     wishList: {
         title: 'Избранное:',

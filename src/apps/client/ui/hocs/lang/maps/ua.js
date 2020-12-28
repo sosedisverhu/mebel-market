@@ -60,8 +60,8 @@ export default {
         promotions: 'Акції'
     },
     deliveryOffer: {
-        freeDelivery: 'Безкоштовна доставка',
-        startingFrom: 'від 4000 грн'
+        specialOffer1: 'Знижка на ліжко 200грн',
+        specialOffer2: 'На ліжко з матрацом 400грн'
     },
     wishList: {
         title: 'Обране:',

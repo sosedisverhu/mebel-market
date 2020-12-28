@@ -9,9 +9,9 @@
     right: 60px;
     display: flex;
     align-items: center;
-    display: none; /*  please remove this property to enable on desktop  */
+   
 
-    @media (max-width: 1200px) {
+    @media (max-width:1295px) {
         display: none;
     }
 }
@@ -19,7 +19,7 @@
 .deliveryContainerMobile {
     display: none;
     
-    @media (max-width: 1200px) {
+    @media (max-width: 1295px) {
         position: block;
         top: 50%;
         transform: translateY(-50%);
@@ -31,7 +31,7 @@
         margin-top: 28px;
         justify-content: center;
         border-bottom: 8px solid #F1F1F1;
-        display: none; /*  please remove this property to enable on mobile  */
+        
     }
 }
 
