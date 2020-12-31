@@ -175,26 +175,29 @@ class Card extends Component {
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = exist || 'true';
-        let minActivePrice = minPrice;
-        let minActualPrice = actualPrice;
-        let isDiscount = minActivePrice !== minActualPrice;
+        // let minActivePrice = minPrice;
+        // let minActualPrice = actualPrice;
+        // let isDiscount = minActivePrice !== minActualPrice;
         const isSharePresent = this.getIsShareByType('present');
         const isShareDiscount = this.getIsShareByType('discount');
         const actualSizes = isPromotion
             ? sizes[lang].filter(size => size.colors.some(color => color.action))
             : sizes[lang];
         const isOneSize = actualSizes.length === 1;
+        const resultPrice = (activeSize.colors[0].discountPrice || activeSize.colors[0].price);
+        const resultOldPrice = (activeSize.colors[0].price || activeSize.colors[0].discountPrice);
+        const isDiscount = resultPrice !== resultOldPrice;
 
-        if (activeSizes.length >= 1) {
-            const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
+        // if (activeSizes.length >= 1) {
+        //     const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
 
-            if (activePrices.length) {
-                const minDiscountPrice = activePrices[0].colors[0].discountPrice;
-                minActivePrice = activePrices[0].colors[0].price;
-                minActualPrice = minDiscountPrice || minActivePrice;
-                isDiscount = minActivePrice !== minActualPrice;
-            }
-        }
+        //     if (activePrices.length) {
+        //         const minDiscountPrice = activePrices[0].colors[0].discountPrice;
+        //         minActivePrice = activePrices[0].colors[0].price;
+        //         minActualPrice = minDiscountPrice || minActivePrice;
+        //         isDiscount = minActivePrice !== minActualPrice;
+        //     }
+        // }
 
         return (
             <Link
@@ -233,10 +236,11 @@ class Card extends Component {
                     </p>
 
                     {isDiscount ? <div className={styles.priceOld}>
-                        {minActivePrice} &#8372;
+                        {resultOldPrice} &#8372;
                     </div> : null}
                     <div className={classNames(styles.price, { [styles.discountPrice]: isDiscount })}>
-                        {minActualPrice} &#8372;
+                        {/* {minActualPrice} */}
+                        {resultPrice} &#8372;
                     </div>
                     <div className={styles.hoverInformation} onClick={(e) => { e.preventDefault(); }}>
                         <button

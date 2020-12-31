@@ -63,6 +63,7 @@ class ProductsGrid extends Component {
                         key={product.id}
                         product={product}
                         activeSizes = {activeSizes}
+                        sizes = {product.sizes}
                         handleOpenBasket = {this.handleOpenBasket}
                     />)}
             </div>
