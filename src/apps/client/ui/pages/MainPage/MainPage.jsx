@@ -12,6 +12,7 @@ import Carousel from '../../components/Carousel/Carousel';
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 import MainCategories from '../../components/MainCategories/MainCategories';
 import Advantages from '../../components/Advantages/Advantages';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -58,6 +59,7 @@ class MainPage extends Component {
         return (
             <div>
                 <Carousel/>
+                <DeliveryOffer mobile/>
                 {labels.map((label, i) => {
                     return (
                         <div key={i}>
