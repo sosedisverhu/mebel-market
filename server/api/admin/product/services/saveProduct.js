@@ -17,11 +17,19 @@ export default function saveProduct (req, res) {
     const date = Date.now();
     const views = 0;
 
-    saveProductQuery({ ...product, date, id, views })
+    saveProductQuery({
+        ...product,
+        viewOneColor: product.viewOneColor || false,
+        date,
+        id,
+        views,
+        positionIndexInCategory: date,
+        positionIndexInSubCategory: date
+    })
         .then(product => {
             res.status(OKEY_STATUS_CODE).send(product);
         })
-        .catch((err) => {
+        .catch(err => {
             if (err.code === MONGODB_DUPLICATE_CODE) {
                 return res.status(NOT_FOUND_STATUS_CODE).send({ code: 'duplication' });
             }

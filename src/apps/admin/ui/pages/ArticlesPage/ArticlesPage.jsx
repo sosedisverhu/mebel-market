@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import AdminTable from '../../components/AdminTable/AdminTable.jsx';
 import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
 import { connect } from 'react-redux';
 import getArticles from '../../../services/getArticles';
@@ -23,11 +24,6 @@ const headerRows = [
     { id: 'name', label: 'Название' },
     { id: 'alias', label: 'Alias' },
     { id: 'active', label: 'Active' }
-];
-const tableCells = [
-    { prop: article => pathOr(['texts', DEFAULT_LANG, 'name'], '', article) },
-    { prop: article => <a target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}>{`/articles/${pathOr(['alias'], '', article)}`}</a> },
-    { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
 ];
 
 const materialStyles = theme => ({
@@ -50,10 +46,41 @@ const materialStyles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
         overflowY: 'auto',
-        maxHeight: '100vh'
+        maxHeight: '100vh',
+        '@media (max-width:1300px)': {
+            width: '90%'
+        }
     },
     warningContent: {
         paddingBottom: '0'
+    },
+    columnName: {
+        maxWidth: '400px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        '@media (max-width:1020px)': {
+            maxWidth: '200px'
+        },
+        '@media (max-width:750px)': {
+            maxWidth: '100px'
+        },
+        '@media (max-width:340px)': {
+            maxWidth: '80px'
+        }
+    },
+    columnAlias: {
+        maxWidth: '200px',
+        display: 'block',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        '@media (max-width:850px)': {
+            maxWidth: '100px'
+        },
+        '@media (max-width:400px)': {
+            maxWidth: '50px'
+        }
     }
 });
 
@@ -86,8 +113,20 @@ class ArticlePage extends Component {
         this.state = {
             loading: true,
             formShowed: false,
+            warningFormShowed: false,
             editableArticle: null
         };
+        this.tableCells = [
+            { prop: article => <div className={this.props.classes.columnName}>{pathOr(['texts', DEFAULT_LANG, 'name'], '', article)}</div> },
+            { prop: article =>
+                <a
+                    className={this.props.classes.columnAlias}
+                    target="_blank" href={`/articles/${pathOr(['alias'], '', article)}`}
+                >
+                    {`/articles/${pathOr(['alias'], '', article)}`}
+                </a> },
+            { prop: article => article.hidden ? <CloseIcon/> : <CheckIcon/> }
+        ];
     }
 
     componentDidMount () {
@@ -98,6 +137,12 @@ class ArticlePage extends Component {
                 });
             });
     }
+
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
 
     handleFormDone = () => {
         this.props.getArticles()
@@ -121,13 +166,14 @@ class ArticlePage extends Component {
     handleCloseArticleForm = () => {
         this.setState({
             formShowed: false,
+            warningFormShowed: false,
             editableArticle: null
         });
     };
 
     render () {
         const { classes, articles } = this.props;
-        const { loading, editableArticle, formShowed } = this.state;
+        const { loading, editableArticle, formShowed, warningFormShowed } = this.state;
 
         if (loading) {
             return <div className={classes.loader}>
@@ -138,20 +184,26 @@ class ArticlePage extends Component {
         return <div>
             <AdminTable
                 headerRows={headerRows}
-                tableCells={tableCells}
+                tableCells={this.tableCells}
                 values={articles}
-                headerText='Новости'
-                deleteValueWarningTitle='Вы точно хотите удалить новость?'
-                deleteValuesWarningTitle='Вы точно хотите удалить следующие новости?'
+                headerText='Статьи'
+                deleteValueWarningTitle='Вы точно хотите удалить статью?'
+                deleteValuesWarningTitle='Вы точно хотите удалить следующие статьи?'
                 onDelete={this.props.deleteArticles}
                 onProductClone={this.handleArticleClone}
                 onFormOpen={this.handleFormOpen}
             />
-            <Modal open={formShowed} onClose={this.handleCloseArticleForm} className={classes.modal} disableEnforceFocus>
+            <Modal open={formShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal} disableEnforceFocus>
                 <Paper className={classes.modalContent}>
                     <ArticleForm article={editableArticle} onDone={this.handleFormDone}/>
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && formShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleCloseArticleForm}
+            />
         </div>;
     }
 }

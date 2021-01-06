@@ -1,0 +1,244 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value gray8 from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    overflow-y: auto;
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.popupWrap {
+    height: 100%;
+    text-align: center;
+
+    &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+    }
+}
+
+.popup {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 100%;
+    padding: 30px;
+}
+
+.popupContent {
+    position: relative;
+    background: whiteBasic;
+    padding: 40px 20px;
+    font: 18px/21px GilroyRegular;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 812px;
+    margin: 0 auto;
+    z-index: 110;
+}
+
+.title {
+    font: 24px/28px GilroyRegular;
+    margin: 0 20px;
+    color: blackLight;
+    padding-bottom: 7px;
+    position: relative;
+    text-align: center;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: blackLight;
+    }
+
+    @media (max-width: 600px) {
+        margin: 0;
+    }
+}
+
+.shares {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @media (max-width: 630px) {
+        margin-top: 10px;
+        max-width: 80%;
+    }
+}
+
+.share {
+    width: 208px;
+    margin-top: 20px;
+
+    &.shareManyProducts {
+        width: 100%;
+
+        @media (min-width: 601px) {
+        .shareProductName {
+            display: inline;
+
+            &:before {
+                content: ' +';
+            }
+        }
+        }
+    }
+}
+
+.shareProductCards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.radioLabel {
+    font: 14px/18px GilroyMedium;
+    color: greenBasic;
+    margin-top: 15px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding: 16px 16px 16px 43px;
+    border: 2px solid gray3;
+    transition: background 0.25s ease-in;
+
+    &.active {
+        background: gray3;
+    }
+}
+
+.radioInput {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+
+    &:checked {
+        + .radioContent {
+            .radioCheckmark {
+                background: whiteBasic;
+
+                &:before {
+                    background: blackLight;
+                }
+            }
+        }
+    }
+}
+
+.radioContent {
+    text-align: left;
+}
+
+.radioCheckmark {
+    position: absolute;
+    left: 16px;
+    top: calc(50% - 8px);
+    width: 16px;
+    height: 16px;
+    background: gray3;
+    border-radius: 50%;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        margin-left: -5px;
+        transition: background 0.25s ease-in;
+        background: gray3;
+        border-radius: 50%;
+    }
+}
+
+.shareProductName {
+
+    &:before {
+        content: '+';
+    }
+
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnWithoutPresent {
+    font: 12px/14px GilroyMedium;
+    margin-top: 24px;
+    color: rgba(35, 35, 35, 0.7);
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.btnConfirm {
+    font: 18px/21px GilroyMedium;
+    color: whiteBasic;
+    background: blackLight;
+    border: none;
+    outline: none;
+    padding: 6px 44px;
+    margin-top: 18px;
+    cursor: pointer;
+}
+
+.close {
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    &:after {
+      content: url("./img/close.svg");
+    }
+
+    @media (max-width: 600px) {
+        top: 6px;
+        right: 6px;
+    }
+}

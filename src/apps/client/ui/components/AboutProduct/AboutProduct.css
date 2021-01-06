@@ -5,6 +5,7 @@
 @value redBasic from '../../../../../css/colors.css';
 @value gray0 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value gray6 from '../../../../../css/colors.css';
 
 .root {
     margin-top: 30px;
@@ -20,46 +21,35 @@
     }
 }
 
-.advantagesTitle {
-    margin: 15px 0 10px 0;
-    font: 16px/18px RoundedElegance;
-    cursor: pointer;
-    color: blackLighter;
-}
-
-
 .advantage {
-    position: relative;
-    margin-top: 6px;
-    padding-left: 20px;
-    font: 14px/16px RoundedElegance;
+    margin-top: 16px;
+    font: 14px/21px GilroyRegular;
     color: blackLighter;
-
-    &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 5px;
-        width: 6px;
-        height: 6px;
-        background: greenBasic;
-        border-radius: 50%;
-    }
 }
 
 .details {
     margin-top: 10px;
     display: block;
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     color: blackLighter;
     text-decoration: underline;
     cursor: pointer;
 }
 
+.priceTag {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.priceTagPriceWrapper {
+    margin-right: 15px;
+}
+
 .priceOld {
     padding-right: 25px;
     display: inline-block;
-    font: 25px/41px RoundedElegance;
+    font: 25px/41px GilroyRegular;
     color: gray0;
     text-decoration: line-through;
 }
@@ -67,7 +57,7 @@
 .price {
     margin: 10px 0;
     display: inline-block;
-    font: 36px/41px RoundedElegance;
+    font: 36px/41px GilroyRegular;
     color: blackLight;
 }
 
@@ -75,9 +65,82 @@
     color: redBasic;
 }
 
+.existText {
+    display: inline-block;
+    font: 16px/16px GilroyRegular;
+    text-align: left;
+    color: #25716C;
+    align-self: center;
+    width: 173px;
+    @media (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.notExist {
+    color: #DC4E41;
+}
+
+.properties {
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 1190px) and (min-width: 1001px) {
+        flex-direction: column;
+    }
+
+    @media (max-width: 1000px) {
+        justify-content: flex-start;
+    }
+
+    @media (max-width: 500px) {
+        flex-direction: column;
+        margin: 10px 0 40px 0;
+    }
+}
+
+.sizesWrap {
+    @media (max-width: 500px) {
+        max-width: 202px;
+    }
+}
+
 .sizesTitle {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: blackLighter;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sizesTitleMark {
+    display: none;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    background: whiteBasic;
+    transition: background 0.25s ease-in;
+    border-radius: 50%;
+    position: relative;
+
+    &.visible {
+        display: flex;
+    }
+
+    &:hover {
+        background: blackLight;
+        transition-timing-function: ease-out;
+
+        .sizesTitleMarkImg {
+            filter: brightness(0) invert(1);
+        }
+    }
+}
+
+.sizesTitleMarkImg {
+    position: absolute;
+    left: -1px;
+    top: -1px;
 }
 
 .select {
@@ -85,6 +148,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    max-width: 202px;
 
     &.active .option {
         display: block;
@@ -96,15 +160,22 @@
     }
 }
 
+
+
+.aboutProduct {
+    .activeOption, .option {
+        min-width: 202px;
+    }
+}
+
 .activeOption, .option{
     height: 30px;
-    min-width: 202px;
     padding: 5px 30px 4px 9px;
     position: relative;
     display: inline-block;
     border: 1px solid gray;
     background: whiteBasic;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     overflow: hidden;
     color: blackLight;
     cursor: pointer;
@@ -128,6 +199,31 @@
     }
 }
 
+.activeOption {
+    &:before {
+         content: "";
+         width: 0;
+         height: 0;
+         border-style: solid;
+         border-width: 8px 5px 0 5px;
+         border-color: greenBasic transparent transparent transparent;
+         position: absolute;
+         top: 50%;
+         right: 10px;
+         margin-top: -5px;
+         transition: 0.25s ease-out;
+         transition-property: transform, border-color;
+     }
+}
+
+.oneActiveOption {
+    cursor: default;
+
+    &:before {
+         display: none;
+     }
+}
+
 .option{
     display: none;
     position: absolute;
@@ -135,13 +231,193 @@
     z-index: 1;
 }
 
+.colorWrap {
+    margin: 0 50px;
+    position: relative;
+
+    &.active {
+        .activeColor{
+            &:before{
+                transform: rotate(180deg);
+                border-color: blackLight transparent transparent transparent;
+            }
+        }
+        .colorList {
+            display: block;
+        }
+    }
+
+    @media (max-width: 1190px) {
+        margin: 0 0 0 100px;
+    }
+
+    @media (max-width: 500px) {
+        margin: 15px 0 0 0;
+    }
+}
+
+.colorTitle {
+    font: 16px/18px GilroyRegular;
+    color: blackLighter;
+    margin-bottom: 6px;
+}
+
+.color {
+    width: 121px;
+    height: 28px;
+    box-sizing: content-box;
+    list-style: none;
+    margin-top: 10px;
+    position: relative;
+    border-top: 1px solid gray0;
+    border-bottom: 1px solid gray0;
+
+    &:hover {
+        .view {
+            display: flex;
+        }
+    }
+}
+.activeColor {
+    border: 1px solid gray0;
+    position: relative;
+    margin-top: 0;
+
+    &:before {
+         content: "";
+         width: 0;
+         height: 0;
+         border-style: solid;
+         border-width: 8px 5px 0 5px;
+         border-color: greenBasic transparent transparent transparent;
+         position: absolute;
+         top: 50%;
+         right: 10px;
+         margin-top: -5px;
+         transition: 0.25s ease-out;
+         transition-property: transform, border-color;
+    }
+
+    .view {
+        display: flex;
+    }
+}
+
+.oneActiveColor {
+    &:before {
+        display: none;
+    }
+}
+
+.colorImg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.view {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    left: calc(100% + 1px);
+    top: 0;
+    background: gray3;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    display: none;
+
+    &:before {
+        content: url('./img/view.svg');
+    }
+}
+
+.colorList {
+    border-top: 1px solid gray0;
+    border-left: 1px solid gray0;
+    border-right: 1px solid gray0;
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    background: gray3;
+    z-index: 1;
+    display: none;
+}
+
+.features {
+    margin-top: 22px;
+}
+
+.feature {
+    display: block;
+    font: 16px/18px GilroyRegular;
+    color: blackLight;
+    margin-top: 10px;
+    padding-left: 28px;
+    position: relative;
+    cursor: pointer;
+}
+
+.featureInput {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+
+    &:checked {
+        + .featureCheckmark {
+            &:before {
+                background: greenBasic;
+            }
+        }
+    }
+}
+
+.featureValue {
+    color: redBasic;
+}
+
+.featureCheckmark {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 16px;
+    height: 16px;
+    background: gray3;
+    border: 1px solid greenBasic;
+
+    &:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        margin-left: -5px;
+        transition: background 0.25s ease-in;
+    }
+}
+
 .buttons {
     margin-top: 22px;
     display: flex;
+    
+    @media(max-width: 1290px) {
+        flex-direction: column;
+    }
+}
+
+.simpleButtons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
 }
 
 .btnBuy {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: whiteBasic;
     padding: 6px 10px;
     min-width: 202px;
@@ -183,3 +459,163 @@
         border-color: gray3;
     }
 }
+
+.shareInfoWrap {
+    position: relative;
+    margin-left: 54px;
+
+    @media(max-width: 1290px) {
+        margin-left: 0;
+    }
+}
+
+.shareInfo {
+    position: absolute;
+    bottom: calc(100% + 11px);
+    right: 0;
+    background: whiteBasic;
+    box-shadow: 0px 0px 8px rgba(37, 113, 108, 0.2);
+    width: 505px;
+    padding: 10px 16px;
+    z-index: 3;
+
+    &:after {
+        position: absolute;
+        right: 12px;
+        bottom: -16px;
+        content: '';
+        border-style: solid;
+        border-width: 22px 11px 0 11px;
+        border-color: whiteBasic transparent transparent transparent;
+        z-index: 1;
+
+        @media(max-width: 1290px) {
+           left: 134px;
+           right: auto;
+        }
+
+        @media(max-width: 1001px) {
+            display: none;
+        }
+    }
+
+    @media(max-width: 1290px) {
+        width: 100%;
+    }
+
+    @media(max-width: 1001px) {
+        padding: 30px 16px;
+    }
+}
+
+.closePromotion {
+    display: none;
+
+    @media(max-width: 1001px) {
+        display: block;
+        position: absolute;
+        right: 16px;
+        top: 16px; 
+        cursor: pointer;
+    }
+}
+
+.shareInfoPresent {
+    margin-top: 20px;
+}
+
+.shareInfoDescr {
+    font: 14px/16px GilroyRegular;
+    color: blackLight;
+    margin-top: 8px;
+}
+
+.shareInfoDescrSpan {
+    color: gray6;
+}
+
+.shareInfoProducts {
+    max-height: 140px;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        background: rgba(216, 216, 216, 0.5);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        width: 6px;
+        background: gray0;
+    }
+}
+
+.shareInfoProductItem {
+    font: 14px/16px GilroyRegular;
+    margin-top: 8px;
+    padding-left: 18px;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: greenBasic;
+    }
+}
+
+.shareInfoProductLink {
+    text-decoration: none;
+    color: greenBasic;
+    display: block;
+    line-height: 1.25;
+    font-family: GilroyRegular;
+
+    &:first-child {
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.shareInfoProductDiscount {
+    text-decoration: none;
+    white-space: nowrap;
+    color: redBasic;
+}
+
+.shareInfoBtn {
+    font: 24px/28px GilroyRegular;
+    color: whiteBasic;
+    width: 172px;
+    height: 40px;
+    border: 1px solid redBasic;
+    box-sizing: border-box;
+    background: redBasic;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+
+    &:after {
+        content: url('./img/attentionWhite.svg');
+        position: absolute;
+        top: 7px;
+        right: 16px;
+    }
+
+    &.active {
+        background: whiteBasic;
+        color: redBasic;
+
+        &:after {
+            content: url('./img/attentionRed.svg');
+        }
+    }
+}
+
+

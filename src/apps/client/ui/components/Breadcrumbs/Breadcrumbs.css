@@ -2,20 +2,22 @@
 @value gray1 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 
+.breadcrumbsWrap {
+  padding: 6px 16px;
+  box-sizing: content-box;
+  background: gray3;
+}
+
 .breadcrumbs {
   margin: 0 auto;
   max-width: 1240px;
-  padding: 10px 16px;
-  box-sizing: content-box;
-  background: gray3;
-
-  @media (max-width: 960px) {
-    padding-right: 140px;
-  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: gray1;
 }
 
 .breadcrumb {
-  font: 14px/20px RoundedElegance;
+  font: 14px/28px GilroyRegular;
   color: blackLight;
   text-decoration: none;
   white-space: nowrap;
@@ -33,5 +35,6 @@
 
   &:last-child {
     color: gray1;
+    cursor: default;
   }
 }

@@ -31,7 +31,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дешевих до дорогих'
         },
         id: 'priceMin',
-        sort: (product, nextProduct) => product.price - nextProduct.price
+        sort: (product, nextProduct) => product.minPrice - nextProduct.minPrice
     },
     {
         texts: {
@@ -39,7 +39,7 @@ const SORTING_OPTIONS = [
             ua: 'Від дорогих до дешевих'
         },
         id: 'priceMax',
-        sort: (product, nextProduct) => nextProduct.price - product.price
+        sort: (product, nextProduct) => nextProduct.minPrice - product.minPrice
     },
     {
         texts: {
@@ -69,7 +69,7 @@ class Sort extends Component {
     state = {
         active: false,
         valueOption: SORTING_OPTIONS[0].id
-    }
+    };
 
     handleSelectClose = () => {
         this.setState({ active: false });

@@ -20,7 +20,7 @@
 .content {
     max-width: 1360px;
     margin: 0 auto;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -130,6 +130,7 @@
 .logoWrapper {
     position: relative;
     margin-bottom: 40px;
+    display: block;
 
     &:after {
         position: absolute;
@@ -143,13 +144,13 @@
     }
 }
 
-.logoWrapper {
-    display: block;
+.logoImg {
+    max-width: 180px;
 }
 
 .partnerDescription {
     font-size: 14px;
-    line-height: 16px;
+    line-height: 21px;
     text-align: center;
     color: rgba(35, 35, 35, 0.7);
     max-width: 207px;

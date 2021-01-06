@@ -6,7 +6,7 @@ import updateSlides from './services/updateSlides';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('main'));
 
 router.route('/update-slides')
     .post(updateSlides);

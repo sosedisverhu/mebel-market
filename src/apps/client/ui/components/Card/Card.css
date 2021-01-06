@@ -8,8 +8,8 @@
 .product {
     width: 288px;
     min-width: 288px;
-    height: 365px;
-    max-height: 365px;
+    height: 391px;
+    max-height: 401px;
     margin: 30px 26px 2px 2px;
     position: relative;
     display: flex;
@@ -48,6 +48,12 @@
                 padding: 3px 10px;
             }
 
+            .existText {
+                font-size: 13px;
+                line-height: 15px;
+                padding: 7px 0 4px 0;
+            }
+
             .bottomPanel {
                 padding: 0 9px;
                 height: 100%;
@@ -80,28 +86,54 @@
             width: 200px;
             min-width: 200px;
             margin: 20px 0 0 0;
+
+            .imgWrap {
+                min-height: 200px;
+            }
         }
 
         @media (max-width: 560px) {
             width: 180px;
             min-width: 180px;
+
+            .imgWrap {
+                min-height: 180px;
+            }
         }
 
         @media (max-width: 410px) {
             width: 154px;
             min-width: 154px;
+
+            .imgWrap {
+                min-height: 154px;
+            }
         }
 
         @media (max-width: 350px) {
             width: 134px;
             min-width: 134px;
+
+            .imgWrap {
+                min-height: 134px;
+            }
         }
     }
+}
+
+.imgWrap {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-bottom: 100%;
+    min-height: 134px;
 }
 
 .img {
     width: 100%;
     height: auto;
+    pointer-events: none;
+    margin-bottom: -100%;
 }
 
 .labels {
@@ -111,11 +143,12 @@
 }
 
 .label {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     padding: 0 18px;
     background: greenBasic;
     color: whiteBasic;
-    margin-top: 8px;
+    margin-top: 10px;
+    text-align: center;
 
     @media (max-width: 640px) {
         font-size: 14px;
@@ -133,6 +166,10 @@
     background: whiteBasic;
 }
 
+.share {
+    background: redBasic;
+}
+
 .bottomPanel {
     position: relative;
 
@@ -145,8 +182,19 @@
     }
 }
 
+.existText {
+    font: 16px/16px GilroyRegular;
+    text-align: center;
+    color: #25716C;
+    padding: 10px 0;
+}
+
+.notExist {
+    color: #DC4E41;
+}
+
 .productName {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     padding: 5px 10px;
     text-align: center;
@@ -166,7 +214,7 @@
 }
 
 .price {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     margin-bottom: 15px;
     text-align: center;
@@ -183,7 +231,7 @@
 }
 
 .priceOld {
-    font: 15px/17px RoundedElegance;
+    font: 15px/17px GilroyRegular;
     text-decoration-line: line-through;
     color: gray0;
     position: absolute;

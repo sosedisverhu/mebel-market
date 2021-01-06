@@ -37,8 +37,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 250px;
 
     @media (max-width: 400px) {
+        min-height: unset;
         height: 187px;
     }
 }
@@ -49,7 +51,7 @@
 }
 
 .title {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     color: blackLight;
     position: absolute;
     left: 0;

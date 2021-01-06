@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { withRouter, matchPath, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import find from '@tinkoff/utils/array/find';
 import propOr from '@tinkoff/utils/object/propOr';
+import pathOr from '@tinkoff/utils/object/pathOr';
 import flatten from '@tinkoff/utils/array/flatten';
 import compose from '@tinkoff/utils/function/compose';
 import uniq from '@tinkoff/utils/array/uniq';
@@ -14,29 +15,39 @@ import any from '@tinkoff/utils/array/any';
 import prop from '@tinkoff/utils/object/prop';
 import reduceObj from '@tinkoff/utils/object/reduce';
 import includes from '@tinkoff/utils/array/includes';
+import intersection from '@tinkoff/utils/array/intersection';
 
 import getMinOfArray from '../../../utils/getMinOfArray';
 import getMaxOfArray from '../../../utils/getMaxOfArray';
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import Filters from '../../components/Filters/Filters';
-import ProductFilters from '../../components/ProductFilters/ProductFilters';
+import ProductSort from '../../components/ProductSort/ProductSort';
 import ProductsGrid from '../../components/ProductsGrid/ProductsGrid';
 import styles from './ProductsPage.css';
+import classNames from 'classnames';
 
-const DEFAULT_FILTERS = name => {
-    return [
-        {
-            name: name,
-            type: 'range',
-            min: 0,
-            max: 0,
-            id: 'actualPrice',
-            prop: 'actualPrice'
-        }
-    ];
-};
+const DEFAULT_FILTERS = [
+    {
+        type: 'range',
+        min: 0,
+        max: 0,
+        dimension: '\u20B4',
+        id: 'actualPrice',
+        prop: 'actualPrice'
+    },
+    {
+        type: 'checkbox',
+        id: 'size'
+    },
+    {
+        type: 'checkbox',
+        id: 'color'
+    }
+];
 
 class ProductsPage extends Component {
     static propTypes = {
@@ -49,45 +60,57 @@ class ProductsPage extends Component {
         subCategories: PropTypes.array
     };
 
+    filtersPopup = React.createRef();
+
     static defaultProps = {
         products: [],
         categories: [],
         subCategories: []
     };
 
-    state = {
-        products: [],
-        category: {},
-        subCategory: {},
-        subCategories: [],
-        isCategory: true,
-        isSubCategoryFilters: false,
-        filters: [],
-        filteredProducts: null,
-        filtersMap: {},
-        currentCategoryFiltersName: 'categoryFilters'
-    };
+    constructor (...args) {
+        super(...args);
 
-    componentDidMount () {
-        this.setNewState();
+        this.state = {
+            products: [],
+            category: {},
+            subCategory: {},
+            subCategories: [],
+            isCategory: true,
+            isSubCategoryFilters: false,
+            filters: [],
+            filteredProducts: [],
+            filtersMap: {},
+            currentCategoryFiltersName: 'categoryFilters',
+            popupIsOpen: false,
+            ...this.getNewState()
+        };
     }
 
     componentWillReceiveProps (nextProps) {
         if (this.props.location.pathname !== nextProps.location.pathname) {
-            this.setNewState(nextProps);
+            this.setState({
+                ...this.getNewState(nextProps)
+            });
         }
     }
 
-    setNewState = (props = this.props) => {
+    getNewState = (props = this.props) => {
         const { subCategoryAlias } = this.getMatch(props);
         const category = this.getCategory(props);
+
+        if (!category) {
+            return {
+                isCategory: false
+            };
+        }
+
         const subCategory = subCategoryAlias && this.getSubCategory(props);
 
-        if ((!category) || (subCategoryAlias && !subCategory)) {
-            this.setState({
+        if (subCategoryAlias && !subCategory) {
+            return {
                 isCategory: false
-            });
-            return;
+            };
         }
 
         const { subCategories, langMap } = props;
@@ -96,11 +119,11 @@ class ProductsPage extends Component {
         const currentCategory = isSubCategoryFilters ? subCategory : category;
 
         const filters = currentCategory ? flatten([
-            this.getDefaultFilters(products, langMap),
-            this.getFilters(currentCategory, products, isSubCategoryFilters)
-        ]) : [];
+            this.getDefaultFilters(products, langMap, currentCategory),
+            this.getFilters(currentCategory, products, category, subCategory)
+        ]) : this.getDefaultFilters(products, langMap, currentCategory);
 
-        this.setState({
+        return {
             products,
             category,
             subCategory,
@@ -108,15 +131,23 @@ class ProductsPage extends Component {
             isCategory: true,
             isSubCategoryFilters,
             filters,
-            filteredProducts: null
-        });
+            filteredProducts: products,
+            type: subCategoryAlias ? 'subcategory' : 'category'
+        };
     };
 
     getMatch = (props = this.props) => {
         const { location: { pathname }, langRoute } = props;
-        const subCategoryAlias = pathname.split('').filter(symbol => symbol === '/').length === 2 ? '/:subCategoryAlias' : '';
-        const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
+        let subCategoryAlias = '';
 
+        if (pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length >= 2) {
+            subCategoryAlias = '/:subCategoryAlias';
+        }
+        if (pathname.replace(langRoute, '').split('').filter(symbol => symbol === '/').length === 2 && pathname[pathname.length - 1] === '/') {
+            subCategoryAlias = '';
+        }
+
+        const CATEGORY_PATH = `${langRoute}/:categoryAlias${subCategoryAlias}`;
         return matchPath(pathname, { path: CATEGORY_PATH, exact: true }).params;
     };
 
@@ -137,14 +168,75 @@ class ProductsPage extends Component {
         const { products } = props;
         const filteredProductsByCategory = products.filter(product => product.categoryId === category.id);
 
-        return subCategoryAlias ? filteredProductsByCategory.filter(product => product.subCategoryId === subCategory.id)
-            : filteredProductsByCategory;
+        return subCategoryAlias
+            ? filteredProductsByCategory
+                .filter(product => product.subCategoryId === subCategory.id)
+                .sort((product, nextProduct) => {
+                    if (!subCategoryAlias) {
+                        return product.positionIndexInCategory - nextProduct.positionIndexInCategory;
+                    } else {
+                        return product.positionIndexInSubCategory - nextProduct.positionIndexInSubCategory;
+                    }
+                })
+            : filteredProductsByCategory
+                .sort((product, nextProduct) => {
+                    if (!subCategoryAlias) {
+                        return product.positionIndexInCategory - nextProduct.positionIndexInCategory;
+                    } else {
+                        return product.positionIndexInSubCategory - nextProduct.positionIndexInSubCategory;
+                    }
+                });
     };
 
-    getDefaultFilters = (products, langMap) => {
+    getDefaultFilters = (products, langMap, currentCategory) => {
+        const { lang } = this.props;
         const text = propOr('productsPage', {}, langMap);
-        return DEFAULT_FILTERS(text.price).reduce((filters, filter) => {
+        return DEFAULT_FILTERS.reduce((filters, filter) => {
             switch (filter.type) {
+            case 'checkbox':
+                if (filter.id === 'size' && currentCategory.sizeFilter) {
+                    const options = [];
+                    products.forEach(product => {
+                        product.sizes[lang].forEach(size => {
+                            if (options.every(option => option.name !== size.name.trim())) {
+                                options.push({ id: size.name.trim(), name: size.name.trim() });
+                            }
+                        });
+                    });
+
+                    return options.length > 1 ? [
+                        ...filters,
+                        {
+                            ...filter,
+                            name: text[`filter_${filter.id}`],
+                            options
+                        }
+                    ] : filters;
+                }
+
+                if (filter.id === 'color' && currentCategory.colorFilter) {
+                    const options = [];
+                    products.forEach(product => {
+                        product.sizes[lang].forEach(size => {
+                            size.colors.forEach(color => {
+                                if (options.every(option => option.name !== color.name.trim())) {
+                                    options.push({ id: color.name.trim(), name: color.name.trim() });
+                                }
+                            });
+                        });
+                    });
+
+                    return options.length > 1 ? [
+                        ...filters,
+                        {
+                            ...filter,
+                            name: text[`filter_${filter.id}`],
+                            options
+                        }
+                    ] : filters;
+                }
+
+                return filters;
             case 'range':
                 const prices = compose(
                     uniq,
@@ -158,6 +250,7 @@ class ProductsPage extends Component {
                     ...filters,
                     {
                         ...filter,
+                        name: text[`filter_${filter.id}`],
                         min,
                         max
                     }
@@ -168,21 +261,41 @@ class ProductsPage extends Component {
         }, []);
     };
 
-    getFilters = (category, products, isSubCategoryFilters) => {
+    getFilters = (currentCategory, products, category, subCategory) => {
         const { lang } = this.props;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryName = subCategory ? 'subCategoryFilters' : 'categoryFilters';
+        const currentCategoryFilters = category.filters[lang];
 
-        return (category.filters[lang] || []).reduce((filters, filter) => {
+        if (subCategory) {
+            const requiredCategoryFilters = category.filters[lang].filter(categoryFilter => categoryFilter.viewInAnotherFilters);
+            requiredCategoryFilters.forEach(requiredCategoryFilter => {
+                if (!currentCategoryFilters.find(currentCategoryFilter => currentCategoryFilter.id === requiredCategoryFilter.id)) {
+                    currentCategoryFilters.push(requiredCategoryFilter);
+                }
+            });
+        }
+
+        return (currentCategoryFilters || []).reduce((filters, filter) => {
             switch (filter.type) {
             case 'checkbox':
                 const optionsInProduct = compose(
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang]))
+                    map(product => {
+                        const productFilters = [...product[currentCategoryName]];
+                        if (subCategory) {
+                            const requiredCategoryFilters = category.filters[lang]
+                                .filter(categoryFilter => categoryFilter.viewInAnotherFilters)
+                                .map(categoryFilter => product.categoryFilters.find(filter => filter.id === categoryFilter.id));
+                            productFilters.push(...requiredCategoryFilters);
+                        }
+                        return productFilters.map(productFilter => filter.id === productFilter.id && productFilter.value);
+                    })
                 )(products);
+
                 const options = filterUtil(option =>
-                    any(optionInProduct => option === optionInProduct, optionsInProduct), filter.options.map(filter => filter.name));
+                    any(optionInProduct => option.id === optionInProduct, optionsInProduct), filter.options.map(filter => filter));
 
                 return options.length > 1 ? [
                     ...filters,
@@ -196,7 +309,7 @@ class ProductsPage extends Component {
                     uniq,
                     filterUtil(elem => !!elem),
                     flatten,
-                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value[lang])
+                    map(product => product[currentCategoryName].map(productFilter => filter.id === productFilter.id && productFilter.value)
                     )
                 )(products);
 
@@ -234,30 +347,37 @@ class ProductsPage extends Component {
     };
 
     getFilterValue = (product, filter) => {
-        const { isSubCategoryFilters } = this.state;
-        const currentCategoryName = isSubCategoryFilters ? 'subCategoryFilters' : 'categoryFilters';
-        const { lang } = this.props;
         const productFilterValue = compose(
-            prop(lang),
             prop('value'),
             find(productFilter => productFilter.id === filter.id)
-        )(product[currentCategoryName]);
+        )([...product.categoryFilters, ...product.subCategoryFilters]);
 
         return filter.prop ? product[filter.prop] : productFilterValue;
     };
 
     filter = () => {
+        const { lang } = this.props;
         const { products } = this.state;
         const newFilteredProducts = reduceObj((filteredProducts, { filter, values }) => {
             switch (filter.type) {
             case 'checkbox':
-                return !values.length
-                    ? filteredProducts
-                    : filterUtil(product => {
-                        const value = this.getFilterValue(product, filter);
-
-                        return includes(value, values);
+                if (!values.length) return filteredProducts;
+                if (filter.id === 'size') {
+                    return filterUtil(product => {
+                        return !!intersection(product.sizes[lang].map(size => size.name), values).length;
                     }, filteredProducts);
+                }
+                if (filter.id === 'color') {
+                    return filterUtil(product => {
+                        const sizes = product.sizes[lang];
+                        const colors = flatten(sizes.map(size => size.colors));
+                        return !!intersection(colors.map(color => color.name), values).length;
+                    }, filteredProducts);
+                }
+                return filterUtil(product => {
+                    const value = this.getFilterValue(product, filter);
+                    return includes(value, values);
+                }, filteredProducts);
             case 'range':
                 return filterUtil(product => {
                     const value = this.getFilterValue(product, filter);
@@ -275,33 +395,34 @@ class ProductsPage extends Component {
     };
 
     handleActiveSortClick = (valueOption, optionsArray) => {
-        const { products, filteredProducts } = this.state;
+        const { products, filteredProducts, type } = this.state;
         const sortOption = find(sort => sort.id === valueOption, optionsArray);
 
         this.setState({
-            products: [...products.sort(sortOption.sort)],
-            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort)] : null
+            products: [...products.sort(sortOption.sort(type))],
+            filteredProducts: filteredProducts ? [...filteredProducts.sort(sortOption.sort(type))] : products
         });
     };
 
-    getResultWord = (text, products) => {
-        const { length } = products;
+    handlePopupChange = () => {
+        const { popupIsOpen } = this.state;
 
-        if (length === 11 || length === 12 || length === 13 || length === 14) {
-            return text.much;
-        }
+        document.body.style.overflowY = !popupIsOpen ? 'hidden' : 'visible';
+        document.documentElement.style.overflowY = !popupIsOpen ? 'hidden' : 'visible'; // для Safari на iPhone/iPad
 
-        switch (length % 10) {
-        case 1:
-            return text.one;
-        case 2:
-        case 3:
-        case 4:
-            return text.several;
-        default:
-            return text.much;
-        }
+        this.setState(state => ({ popupIsOpen: !state.popupIsOpen }));
     };
+
+    handleFilterMapChanged = filtersMap => {
+        this.setState({
+            filtersMap
+        }, this.filter);
+    };
+
+    handleFiltersClear = () => {
+        this.handlePopupChange();
+        this.handleFilterMapChanged({});
+    }
 
     render () {
         if (!this.state.isCategory) {
@@ -309,12 +430,12 @@ class ProductsPage extends Component {
         }
 
         const { langMap, langRoute, lang } = this.props;
-        const { products, filteredProducts, category, subCategories, filters, filtersMap } = this.state;
+        const { products, filteredProducts, category, subCategory, subCategories, filters, filtersMap, popupIsOpen } = this.state;
         const text = propOr('productsPage', {}, langMap);
+        const activeSizes = pathOr(['filtersMap', 'size', 'values'], [], this.state);
 
         return (
             <div className={styles.productPage}>
-                <Breadcrumbs category={category}/>
                 <div>
                     <div className={styles.subCategoriesWrap}>
                         <div className={styles.subCategories}>
@@ -331,13 +452,18 @@ class ProductsPage extends Component {
                             })}
                         </div>
                     </div>
+                    <Breadcrumbs
+                        category={category}
+                        subCategory={subCategory}
+                        noCategoryPage=''/>
+                    <DeliveryOffer mobile/>
                     <div className={styles.filterPanelWrap}>
                         <div className={styles.filterPanel}>
-                            <div className={styles.btnFilter}>
+                            <div className={styles.btnFilter} onClick={this.handlePopupChange}>
                                 {text.filterBtn}
                             </div>
                             <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts) || products.length} ${this.getResultWord(text.results, products)}`}
+                                {`${propOr('length', 0, filteredProducts)} ${formatWordDeclension(text.results, products.length)}`}
                             </div>
                             {products.length > 1 &&
                             <Fragment>
@@ -346,13 +472,28 @@ class ProductsPage extends Component {
                                     filters={filters}
                                     onFilter={this.handleFilter}
                                 />
-                                <ProductFilters onFilter={this.handleActiveSortClick}/>
+                                <ProductSort onFilter={this.handleActiveSortClick}/>
                             </Fragment>}
                         </div>
                     </div>
                 </div>
                 <div className={styles.productsSection}>
-                    <ProductsGrid products={filteredProducts || products}/>
+                    <ProductsGrid
+                        products={filteredProducts || products}
+                        activeSizes={activeSizes}
+                    />
+                </div>
+                <div className={classNames(styles.popupContainer, { [styles.active]: popupIsOpen })}>
+                    <div className={styles.cover} onClick={this.handlePopupChange}/>
+                    <div className={styles.popup} ref={this.filtersPopup}>
+                        <div className={styles.popupHeader}>
+                            <button className={styles.popupBtnClear} type='button' onClick={this.handleFiltersClear}>{text.popupBtnClear}</button>
+                            <h3 className={styles.popupTitle}>{text.popupTitle}</h3>
+                            <button className={styles.popupBtnDone} type='button' onClick={this.handlePopupChange}>{text.popupBtnDone}</button>
+                        </div>
+                        <Filters mobile={true} filtersMap={filtersMap} filters={filters} onFilter={this.handleFilter} />
+                        <button className={styles.popupBtnApply} type='button' onClick={this.handlePopupChange}>{text.popupBtnApply}</button>
+                    </div>
                 </div>
             </div>);
     }

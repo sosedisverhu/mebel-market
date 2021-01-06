@@ -45,16 +45,16 @@ const ItemSortable = SortableElement(({ index, isSelectedItem, onFormOpen, handl
         className={classes.row}
     >
         <TableCell className={classes.tabButtonSortable} padding='checkbox'>
-            <ButtonSortable imageClassName={classes.buttonSortable} />
+            <ButtonSortable imageClassName={classes.buttonSortable}/>
         </TableCell>
-        { tableCells.map((tableCell, i) => <TableCell className={classes.tableCell} key={i}>{tableCell.prop(value)}</TableCell>) }
+        {tableCells.map((tableCell, i) => <TableCell className={classes.tableCell} key={i}>{tableCell.prop(value)}</TableCell>)}
         <TableCell padding='checkbox' align='right'>
             <div className={classes.valueActions}>
                 <IconButton onClick={onFormOpen(value)}>
-                    <EditIcon />
+                    <EditIcon/>
                 </IconButton>
                 <IconButton onClick={handleDelete(value)}>
-                    <DeleteIcon />
+                    <DeleteIcon/>
                 </IconButton>
             </div>
         </TableCell>
@@ -92,13 +92,13 @@ const SortableWrapp = SortableContainer((
                         onProductClone={onProductClone}
                         classes={classes}
                         value={value}
-                        index={i}
+                        index={i + page * rowsPerPage}
                     />
                 );
             })}
         {emptyRows > 0 && (
             <TableRow style={{ height: 49 * emptyRows }}>
-                <TableCell colSpan={6} />
+                <TableCell colSpan={6} className={classes.tableCell}/>
             </TableRow>
         )}
     </TableBody>
@@ -106,17 +106,17 @@ const SortableWrapp = SortableContainer((
 
 const materialStyles = theme => ({
     paper: {
-        paddingRight: theme.spacing.unit
+        paddingRight: '0'
     },
     table: {
-        minWidth: 1020
+        width: '100%'
     },
     tableWrapper: {
         overflowX: 'auto'
     },
     row: {
         backgroundColor: '#fff',
-        width: '1912px',
+        width: '100%',
         '&:hover $valueActions': {
             visibility: 'visible'
         }
@@ -124,7 +124,27 @@ const materialStyles = theme => ({
     tabButtonSortable: {
         display: 'table-cell',
         textAlign: 'left',
-        width: '239px'
+        width: '239px',
+        '@media (max-width:1200px)': {
+            width: 'auto'
+        }
+    },
+    tableCell: {
+        color: 'rgba(0, 0, 0, 0.87)',
+        fontSize: '0.8125rem',
+        fontWeight: '400',
+        display: 'table-cell',
+        fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+        textAlign: 'left',
+        width: '438px',
+        '@media (max-width:780px)': {
+            width: 'auto',
+            padding: '4px 12px'
+        },
+        '@media (max-width:460px)': {
+            width: 'auto',
+            padding: '4px 6px'
+        }
     },
     buttonSortable: {
         position: 'relative',
@@ -134,7 +154,27 @@ const materialStyles = theme => ({
     },
     valueActions: {
         display: 'flex',
-        visibility: 'hidden'
+        visibility: 'hidden',
+        '@media (max-width:780px)': {
+            visibility: 'visible'
+        },
+        '@media (max-width:460px)': {
+            flexDirection: 'column'
+        }
+    },
+    tableCellHead: {
+        '@media (max-width:780px)': {
+            width: 'auto',
+            padding: '4px 24px'
+        },
+        '@media (max-width:500px)': {
+            width: 'auto',
+            padding: '4px 12px'
+        },
+        '@media (max-width:460px)': {
+            width: 'auto',
+            padding: '4px 6px'
+        }
     }
 });
 
@@ -152,10 +192,9 @@ class AdminTableSortable extends React.Component {
         onProductClone: PropTypes.func,
         onDelete: PropTypes.func,
         onFormOpen: PropTypes.func,
+        onChange: PropTypes.func,
         onFiltersOpen: PropTypes.func,
-        onDragEnd: PropTypes.func,
-        filters: PropTypes.bool,
-        isSmall: PropTypes.bool
+        filters: PropTypes.bool
     };
 
     static defaultProps = {
@@ -167,11 +206,10 @@ class AdminTableSortable extends React.Component {
         deleteValuesWarningTitle: '',
         onDelete: noop,
         onFormOpen: noop,
+        onChange: noop,
         onFiltersOpen: noop,
         onProductClone: noop,
-        onDragEnd: noop,
-        filters: true,
-        isSmall: false
+        filters: false
     };
 
     constructor (...args) {
@@ -260,14 +298,19 @@ class AdminTableSortable extends React.Component {
 
     onDragEnd = ({ oldIndex, newIndex }) => {
         const { values } = this.state;
-        this.setState({
-            values: arrayMove(values, oldIndex, newIndex)
+        const newValues = arrayMove(values, oldIndex, newIndex).map((value, i) => {
+            return { ...value, positionIndex: i };
         });
-        this.props.onDragEnd(oldIndex, newIndex);
+
+        this.setState({
+            values: newValues
+        });
+
+        this.props.onChange(newValues.map(({ id }) => id));
     };
 
     render () {
-        const { classes, headerRows, tableCells, headerText, deleteValueWarningTitle, deleteValuesWarningTitle, filters, isSmall } = this.props;
+        const { classes, headerRows, tableCells, headerText, deleteValueWarningTitle, deleteValuesWarningTitle, filters } = this.props;
         const { selected, rowsPerPage, page, values, valueForDelete } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, values.length - page * rowsPerPage);
 
@@ -284,19 +327,19 @@ class AdminTableSortable extends React.Component {
                     filters={filters}
                 />
                 <div className={classes.tableWrapper}>
-                    <Table className={!isSmall && classes.table} aria-labelledby='tableTitle'>
+                    <Table className={classes.table} aria-labelledby='tableTitle'>
                         <TableHead>
                             <TableRow>
                                 <TableCell>
                                 </TableCell>
                                 {headerRows.map(
                                     (row, i) => (
-                                        <TableCell key={i}>
+                                        <TableCell key={i} className={classes.tableCellHead}>
                                             {row.label}
                                         </TableCell>
                                     )
                                 )}
-                                <TableCell align='right' />
+                                <TableCell align='right'/>
                             </TableRow>
                         </TableHead>
                         <SortableWrapp
@@ -331,7 +374,7 @@ class AdminTableSortable extends React.Component {
                 >
                     <DialogTitle>{deleteValueWarningTitle}</DialogTitle>
                     <DialogContent className={classes.warningContent}>
-                        <DialogContentText>{ valueForDelete && valueForDelete.name }</DialogContentText>
+                        <DialogContentText>{valueForDelete && valueForDelete.name}</DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleWarningDisagree} color='primary'>

@@ -16,10 +16,14 @@ import { withStyles } from '@material-ui/core/styles';
 import noop from '@tinkoff/utils/function/noop';
 import prop from '@tinkoff/utils/object/prop';
 import format from 'date-fns/format';
+
 import formatMoney from '../../../../client/utils/formatMoney';
+import getSharesPrice from '../../../../client/utils/getSharesPrice';
+import getShareTypeQuantity from '../../../../client/utils/getShareTypeQuantity';
 
 import Form from '../Form/Form';
 import getSchema from './orderFormSchema';
+import styles from '../../../../client/ui/components/AboutProduct/AboutProduct.css';
 
 const mapDispatchToProps = (dispatch) => ({
     editOrder: payload => dispatch(editOrder(payload))
@@ -100,6 +104,16 @@ const materialStyles = theme => ({
         '@media (max-width: 374px)': {
             fontSize: '8.5px'
         }
+    },
+    colorImg: {
+        marginRight: '6px'
+    },
+    p: {
+        marginTop: '7px',
+        lineHeight: '17px'
+    },
+    featureValue: {
+        color: '#DC4E41'
     }
 });
 
@@ -150,8 +164,15 @@ class OrderForm extends Component {
     };
     render () {
         const { classes, statuses } = this.props;
-        const { date, delivery, payment, customer, products } = this.state.order;
-        const productsPrice = products.reduce((sum, { quantity, price, basePrice }) => sum + (quantity * price || quantity * basePrice), 0);
+        const { date, delivery, payment, customer, products, shares } = this.state.order;
+        const productsPrice = products.reduce((sum, { quantity, price, basePrice, properties }) => {
+            const productPrice = price || basePrice;
+            const featuresPrice = properties.features.reduce((sum, { value }) => sum + value, 0);
+
+            return sum + (quantity * (productPrice + featuresPrice));
+        }, 0);
+        const sharesPrice = getSharesPrice(shares);
+        const totalPrice = productsPrice - sharesPrice;
 
         return <div>
             <Typography variant='h5' className={classes.title}>Заказ</Typography>
@@ -218,24 +239,52 @@ class OrderForm extends Component {
                     <TableHead>
                         <TableRow>
                             <TableCell className={classes.rowLabelSmall} colSpan={1}>Название</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={4} align="center">Количество</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={4} align="center">Размер</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="right">Цена за единицу</TableCell>
-                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="right">Всего</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={2}>Артикул</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">Количество</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">Свойства</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Цена за единицу</TableCell>
+                            <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">Всего</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
-                            products.map(({ quantity, price, basePrice, properties, productName: name }, i) => {
+                            products.map(({ product, quantity, price, basePrice, properties, productName: name, productNameRu: nameRu, article }, i) => {
+                                const featuresPrice = properties.features.reduce((sum, { value }) => sum + value, 0);
+                                const unitPrice = (price || basePrice) + featuresPrice;
+                                const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
+                                const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
+
                                 return <TableRow key={i}>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={1}>{name}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={4} align="center">{quantity}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={4} align="center">{properties.size.name}</TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="right">
-                                        {price ? formatMoney(price) : formatMoney(basePrice)}
+                                    <TableCell className={classes.rowLabelSmall} colSpan={1}>{name || nameRu}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">{article || '-'}</TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
+                                        <p>{`Всего: ${quantity}`}</p>
+                                        {!!discountsQuantity && <p>{`(Скидки: ${discountsQuantity} из ${quantity})`}</p>}
+                                        {!!presentsQuantity && <p>{`(Подарки: ${presentsQuantity} из ${quantity})`}</p>}
                                     </TableCell>
-                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="right">
-                                        {formatMoney((price || basePrice) * quantity)}
+                                    <TableCell className={classes.rowLabelSmall} colSpan={2} align="center">
+                                        <p className={classes.p}>Размер: {properties.size.name || properties.size.nameRu}</p>
+                                        <p className={classes.p}>
+                                            Цвет: <img
+                                                src={(properties.color || properties.colorRu).file}
+                                                className={classes.colorImg}
+                                                width="24"
+                                                height="12"
+                                                alt=""
+                                            />
+                                            {(properties.color || properties.colorRu).name}
+                                        </p>
+                                        {properties.features.map(feature => {
+                                            return <p className={classes.p}>+ {feature.name} (<span className={styles.featureValue}>
+                                                {` + ${formatMoney(feature.value)} `}
+                                            </span>)</p>;
+                                        })}
+                                    </TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">
+                                        {formatMoney(unitPrice)}
+                                    </TableCell>
+                                    <TableCell className={classes.rowLabelSmall} colSpan={3} align="right">
+                                        {formatMoney(unitPrice * quantity)}
                                     </TableCell>
                                 </TableRow>;
                             })
@@ -254,16 +303,16 @@ class OrderForm extends Component {
                     </TableHead>
                     <TableBody>
                         <TableRow>
-                            <TableCell className={classes.rowLabel} colSpan={4}>Цена за товары</TableCell>
+                            <TableCell className={classes.rowLabel} colSpan={4}>Цена за товары (без скидки)</TableCell>
                             <TableCell className={classes.rowLabel} align="center">{formatMoney(productsPrice)}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className={classes.rowLabel} colSpan={4}>Цена за доставку</TableCell>
-                            <TableCell className={classes.rowLabel} align="center">{formatMoney(delivery.price || 0)}</TableCell>
+                            <TableCell className={classes.rowLabel} colSpan={4}>Размер скидки</TableCell>
+                            <TableCell className={classes.rowLabel} align="center">{formatMoney(sharesPrice)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.rowLabel} colSpan={4}>Всего</TableCell>
-                            <TableCell className={classes.rowLabel} align="center">{formatMoney(productsPrice + (delivery.price || 0))}</TableCell>
+                            <TableCell className={classes.rowLabel} align="center">{formatMoney(totalPrice)}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

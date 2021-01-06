@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import '../../../client/vendor';
 import '../../css/main.css';
 
 import media from './ui/hocs/media/media.jsx';
 import lang from './ui/hocs/lang/lang.jsx';
-
-import { connect } from 'react-redux';
 
 import Header from './ui/components/Header/Header.jsx';
 import MainPage from './ui/pages/MainPage/MainPage.jsx';
@@ -24,6 +23,8 @@ import ArticlePage from './ui/pages/ArticlePage/ArticlePage.jsx';
 import Contacts from './ui/pages/Contacts/Contacts.jsx';
 import SearchPage from './ui/pages/SearchPage/SearchPage.jsx';
 import Helmet from './ui/components/Helmet/Helmet.jsx';
+import PromotionsPage from './ui/pages/PromotionsPage/PromotionsPage.jsx';
+import CallbackCall from './ui/components/CallbackCall/CallbackCall';
 
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -150,6 +151,8 @@ class App extends Component {
                         <Route exact path={`/:lang(${langs})?/articles`} render={this.renderComponent(Articles)} />
                         <Route exact path={`/:lang(${langs})?/articles/:alias`} render={this.renderComponent(ArticlePage)} />
                         <Route exact path={`/:lang(${langs})?/contacts`} render={this.renderComponent(Contacts)} />
+                        <Route exact path={`/:lang(${langs})?/promotions`} render={this.renderComponent(PromotionsPage)} />
+                        <Route exact path={`/:lang(${langs})?/promotions/:alias`} render={this.renderComponent(ProductPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias`} render={this.renderComponent(ProductsPage)} />
                         <Route exact path={`/:lang(${langs})?/:categoryAlias/:subCategoryAlias/:alias`} render={this.renderComponent(ProductPage)} />
@@ -157,6 +160,7 @@ class App extends Component {
                     </Switch>
                 </div>
                 <Footer />
+                <CallbackCall />
             </div>
         </main>;
     }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 
 import styles from './Contacts.css';
 import mapStyles from './map';
@@ -74,7 +75,7 @@ class Contacts extends Component {
             const win = window.open('https://goo.gl/maps/ZNRRN7CZHSguhPDi6', '_blank');
             win.focus();
         }
-    }
+    };
 
     calculateAndDisplayRoute = (directionsService, directionsRenderer) => {
         const { latitude, longitude } = this.state;
@@ -98,14 +99,14 @@ class Contacts extends Component {
 
         return (
             <section className={styles.contacts}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.title}/>
+                <DeliveryOffer mobile/>
                 <div className={styles.contactsContainer}>
                     <h1 className={styles.title}>{text.title}</h1>
                     <div className={styles.info}>
                         <div className={styles.phonesContainer}>
                             <h2 className={styles.infoTitle}>{text.phonesTitle}</h2>
                             <a className={styles.infoText} href="tel:+380443557720">(044) 355-77-20</a>
-                            <a className={styles.infoText} href="tel:+380500511000">(050) 051-10-00</a>
                             <a className={styles.infoText} href="tel:+380679000522">(067) 900-05-22</a>
                         </div>
                         <div className={styles.emailScheduleContainer}>

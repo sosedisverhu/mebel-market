@@ -20,7 +20,7 @@
 .content {
     max-width: 1360px;
     margin: 0 auto;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +86,7 @@
     margin: 110px 0 168px;
     display: flex;
     font-size: 14px;
-    line-height: 16px;
+    line-height: 21px;
     color: blackLight;
 
     @media (max-width: 600px) {

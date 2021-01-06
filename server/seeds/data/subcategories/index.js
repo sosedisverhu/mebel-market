@@ -915,11 +915,11 @@ module.exports = [
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Модерн'
+                            name: 'Зеленый'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Хай-Тек'
+                            name: 'Сірий'
                         }
                     ]
                 }
@@ -947,11 +947,11 @@ module.exports = [
                     options: [
                         {
                             id: 'fwess65rfw3',
-                            name: 'Модерн'
+                            name: 'Зеленый'
                         },
                         {
                             id: 'fwess65rfw4',
-                            name: 'Хай-Тек'
+                            name: 'Серый'
                         }
                     ]
                 }

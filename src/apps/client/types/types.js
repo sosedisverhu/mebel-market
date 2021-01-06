@@ -1,5 +1,6 @@
 export const // eslint-disable-line one-var
     SET_PRODUCTS = 'SET_PRODUCTS',
+    SET_REVIEWS = 'SET_REVIEWS',
     SET_LANG_MAP = 'SET_LANG_MAP',
     SET_LANG_ROUTE = 'SET_LANG_ROUTE',
     SET_LANG = 'SET_LANG',
@@ -15,4 +16,5 @@ export const // eslint-disable-line one-var
     SET_WISHLIST = 'SET_WISHLIST',
     OPEN_BASKET = 'OPEN_BASKET',
     CLOSE_BASKET = 'CLOSE_BASKET',
-    SET_SEO = 'SET_SEO';
+    SET_SEO = 'SET_SEO',
+    SET_DOMAIN = 'SET_DOMAIN';

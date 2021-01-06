@@ -5,9 +5,12 @@
 
 .gallery {
     margin: 30px 55px 0 0;
-    max-width: 680px;
+    width: 680px;
+    min-width: 680px;
     background: whiteBasic;
     position: relative;
+    z-index: 3;
+    user-select: none;
 
     @media (max-width: 1060px) {
         margin-right: 30px;
@@ -15,6 +18,8 @@
 
     @media (max-width: 1000px) {
         margin: 15px 0 0 0;
+        width: auto;
+        min-width: auto;
     }
 
     @media (max-width: 600px) {
@@ -28,18 +33,131 @@
     padding: 4px 10px;
     top: 6px;
     right: 0;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: whiteBasic;
     background: redBasic;
+    z-index: 1;
 }
 
 .percentage{
     font: 18px/21px HelveticaNeueCyr;
 }
 
+.sliderWrap {
+    position: relative;
+
+    &:hover {
+        .tools {
+            opacity: 1;
+            z-index: 1;
+            transition: opacity 0.2s ease-out;
+        }
+    }
+}
+
+.mainImgWrap {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    @media (max-width: 1024px) {
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}
+
 .mainImg {
     width: 100%;
     height: auto;
+    flex-shrink: 0;
+    z-index: -1;
+}
+
+.slider{
+    position: relative;
+    left: 0;
+    transition: left .5s ease-in-out, height .5s ease-in-out;
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.arrowLeft, .arrowRight {
+    position: absolute;
+    top: 50%;
+    margin-top: -32px;
+    padding: 20px 20px 20px 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: background .5s ease-in;
+    background: none;
+    background-position: -86px;
+    background-repeat: no-repeat;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+        background: linear-gradient(270deg, #25716C 0%, rgba(37, 113, 108, 0) 100%);
+        background-repeat: no-repeat;
+        background-position:0;
+        transition: background .5s ease-out;
+    }
+
+    &:before {
+        position: relative;
+        content: url("./img/arrow.svg");
+    }
+
+    @media (max-width:600px) {
+        padding-right: 16px;
+    }
+}
+
+.arrowLeft {
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.arrowRight {
+    right: 0;
+}
+
+.tools {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.2s ease-in;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
+}
+
+.toolOpen {
+    cursor: pointer;
+    color: whiteBasic;
+    font: 18px/21px GilroyRegular;
+    margin: 15px auto;
+    padding: 5px;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5), 0px 0px 3px #000000, 0px 0px 3px rgba(0, 0, 0, 0.5);
+
+    &:after {
+        content: url('./img/loupe.svg');
+        margin-left: 10px;
+        position: relative;
+        top: 2px;
+    }
 }
 
 .additionalImgs {
@@ -57,18 +175,18 @@
     cursor: pointer;
 
     &:before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        border-radius: 50%;
-        width: 10px;
-        height: 10px;
-        margin-left: -5px;
-        margin-top: -5px;
-        display: none;
-        background: gray1;
-    }
+         content: '';
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         border-radius: 50%;
+         width: 10px;
+         height: 10px;
+         margin-left: -5px;
+         margin-top: -5px;
+         display: none;
+         background: gray1;
+     }
 
     &.active {
         .additionalImg {
@@ -77,8 +195,8 @@
         }
 
         &:before {
-            background: greenBasic;
-        }
+             background: greenBasic;
+         }
     }
 
     @media (max-width: 600px) {
@@ -96,9 +214,11 @@
 .additionalImg {
     width: 100%;
     opacity: 0.6;
+    display: flex;
     transition: opacity 0.2s ease-in;
 
     @media (max-width: 600px) {
         display: none;
     }
 }
+

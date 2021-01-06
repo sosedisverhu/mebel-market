@@ -42,7 +42,10 @@ const materialStyles = theme => ({
         color: theme.palette.text.secondary
     },
     title: {
-        flex: '0 0 auto'
+        flex: '0 0 auto',
+        '@media (max-width:780px)': {
+            width: '95%'
+        }
     },
     itemsNumber: {
         display: 'flex',
@@ -195,7 +198,7 @@ class AdminTableHeader extends Component {
                         {
                             selected.map((category, i) => <ListItem key={i}>
                                 <ListItemText
-                                    primary={category.texts.ru.name}
+                                    primary={category.login ? category.login : category.texts.ru.name}
                                 />
                             </ListItem>)
                         }

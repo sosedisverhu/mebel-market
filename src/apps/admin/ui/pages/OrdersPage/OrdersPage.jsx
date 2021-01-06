@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import classNames from 'classnames';
+import format from 'date-fns/format';
+
+import propEq from '@tinkoff/utils/object/propEq';
+import find from '@tinkoff/utils/array/find';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Modal from '@material-ui/core/Modal';
@@ -17,14 +23,10 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 
-import { connect } from 'react-redux';
 import getOrders from '../../../services/getOrders';
 
-import format from 'date-fns/format';
 import OrderForm from '../../components/OrderForm/OrderForm';
-
-import propEq from '@tinkoff/utils/object/propEq';
-import find from '@tinkoff/utils/array/find';
+import CloseFormDialog from '../../components/CloseFormDialog/CloseFormDialog';
 
 const STATUS_ARRAY = [
     {
@@ -82,7 +84,7 @@ const materialStyles = theme => ({
         maxHeight: '100vh',
         '@media (max-width: 780px)': {
             padding: '15px',
-            maxHeight: '90vh'
+            width: '90%'
         }
     },
     spacer: {
@@ -129,7 +131,7 @@ const materialStyles = theme => ({
         marginTop: theme.spacing.unit * 3
     },
     rowLabel: {
-        '@media (max-width: 780px)': {
+        '@media (max-width: 1000px)': {
             padding: '4px 24px'
         },
         '@media (max-width: 600px)': {
@@ -137,6 +139,16 @@ const materialStyles = theme => ({
         },
         '@media (max-width: 425px)': {
             padding: '2px 6px'
+        }
+    },
+    rowLabel_3: {
+        '@media (max-width: 750px)': {
+            display: 'none'
+        }
+    },
+    rowLabel_2: {
+        '@media (max-width: 450px)': {
+            display: 'none'
         }
     }
 });
@@ -169,6 +181,7 @@ class OrdersPage extends Component {
         this.state = {
             loading: true,
             formShowed: false,
+            warningFormShowed: false,
             editableOrder: null,
             page: 0
         };
@@ -178,13 +191,15 @@ class OrdersPage extends Component {
             { prop: order => order.customer.name },
             { prop: order => order.customer.phone },
             { prop: order => format(order.date, 'HH:mm - dd.MM.yyyy') },
-            { prop: order => {
-                const { value, name } = find(propEq('value', order.status), STATUS_ARRAY);
+            {
+                prop: order => {
+                    const { value, name } = find(propEq('value', order.status), STATUS_ARRAY);
 
-                return <div className={classNames(classes.status, classes[`status__${value}`])}>
-                    {name}
-                </div>;
-            } }
+                    return <div className={classNames(classes.status, classes[`status__${value}`])}>
+                        {name}
+                    </div>;
+                }
+            }
         ];
     }
 
@@ -206,6 +221,12 @@ class OrdersPage extends Component {
         }
     }
 
+    handleChangeFormClose = value => {
+        this.setState({
+            warningFormShowed: value
+        });
+    };
+
     handleFormDone = () => {
         this.props.getOrders()
             .then(this.handleCloseOrderForm);
@@ -221,6 +242,7 @@ class OrdersPage extends Component {
     handleCloseOrderForm = () => {
         this.setState({
             formShowed: false,
+            warningFormShowed: false,
             editableOrder: null
         });
     };
@@ -238,12 +260,12 @@ class OrdersPage extends Component {
 
     render () {
         const { classes, orders } = this.props;
-        const { loading, editableOrder, formShowed, rowsPerPage, page } = this.state;
+        const { loading, editableOrder, formShowed, rowsPerPage, page, warningFormShowed } = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, orders.length - page * rowsPerPage);
 
         if (loading) {
             return <div className={classes.loader}>
-                <CircularProgress />
+                <CircularProgress/>
             </div>;
         }
 
@@ -255,7 +277,7 @@ class OrdersPage extends Component {
                     <Typography variant='h6' id='tableTitle'>
                         Заказы
                     </Typography>
-                    <div className={classes.spacer} />
+                    <div className={classes.spacer}/>
                 </Toolbar>
                 <div className={classes.tableWrapper}>
                     <Table className={classes.table} aria-labelledby='tableTitle'>
@@ -263,7 +285,7 @@ class OrdersPage extends Component {
                             <TableRow>
                                 {headerRows.map(
                                     (row, i) => (
-                                        <TableCell key={i} className={classes.rowLabel}>
+                                        <TableCell key={i} className={classNames(classes.rowLabel, classes[`rowLabel_${i}`])}>
                                             {row.label}
                                         </TableCell>
                                     )
@@ -284,11 +306,13 @@ class OrdersPage extends Component {
                                             className={classes.row}
                                         >
                                             {this.tableCells.map((tableCell, i) =>
-                                                <TableCell key={i} className={classes.rowLabel}>{tableCell.prop(value)}</TableCell>)}
+                                                <TableCell key={i} className={classNames(classes.rowLabel, classes[`rowLabel_${i}`])}>
+                                                    {tableCell.prop(value)}
+                                                </TableCell>)}
                                             <TableCell padding='checkbox' align='right'>
                                                 <div className={classes.valueActions}>
                                                     <IconButton onClick={this.handleFormOpen(value)} className={classes.rowLabel}>
-                                                        <EditIcon />
+                                                        <EditIcon/>
                                                     </IconButton>
                                                 </div>
                                             </TableCell>
@@ -297,7 +321,7 @@ class OrdersPage extends Component {
                                 })}
                             {emptyRows > 0 && (
                                 <TableRow style={{ height: 49 * emptyRows }}>
-                                    <TableCell colSpan={6} />
+                                    <TableCell colSpan={6}/>
                                 </TableRow>
                             )}
                         </TableBody>
@@ -313,7 +337,7 @@ class OrdersPage extends Component {
                     onChangeRowsPerPage={this.handleChangeRowsPerPage}
                 />
             </Paper>
-            <Modal open={formShowed} onClose={this.handleCloseOrderForm} className={classes.modal}>
+            <Modal open={formShowed} onClose={() => this.handleChangeFormClose(true)} className={classes.modal}>
                 <Paper className={classes.modalContent}>
                     <OrderForm
                         statuses={STATUS_ARRAY}
@@ -322,6 +346,12 @@ class OrdersPage extends Component {
                     />
                 </Paper>
             </Modal>
+            <CloseFormDialog
+                open={warningFormShowed && formShowed}
+                text='Вы точно хотите закрыть форму?'
+                onClose={this.handleChangeFormClose}
+                onDone={this.handleCloseOrderForm}
+            />
         </div>;
     }
 }

@@ -1,0 +1,233 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value gray1 from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 11;
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.popupWrap {
+    height: 100%;
+    text-align: center;
+
+    &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+    }
+}
+
+.popup {
+    display: inline-flex;
+    vertical-align: middle;
+    position: relative;
+    width: calc(100% - 120px);
+    max-width: 1240px;
+    max-height: 100vh;
+    padding: 62px 0;
+}
+
+.popupContent {
+    position: relative;
+    font: 18px/21px GilroyRegular;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    z-index: 110;
+}
+
+.gallery {
+    width: 100%;
+    height: calc(100% - 62px);
+}
+
+.sliderWrap {
+    position: relative;
+    height: 100%;
+
+    &:hover {
+        .tools {
+            opacity: 1;
+            z-index: 1;
+            transition: opacity 0.2s ease-out;
+        }
+    }
+}
+
+.mainImages {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    @media (max-width: 1024px) {
+        &:active {
+            cursor: grabbing;
+        }
+    }
+}
+
+.mainImgWrap {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.mainImg {
+    flex-shrink: 0;
+    z-index: -1;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.slider{
+    position: relative;
+    left: 0;
+    transition: left .5s ease-in-out, height .5s ease-in-out;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.arrowLeft, .arrowRight {
+    position: absolute;
+    top: 50%;
+    margin-top: -32px;
+    padding: 20px 20px 20px 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: background .5s ease-in;
+    background: none;
+    background-position: -86px;
+    background-repeat: no-repeat;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+        background: linear-gradient(270deg, #25716C 0%, rgba(37, 113, 108, 0) 100%);
+        background-repeat: no-repeat;
+        background-position:0;
+        transition: background .5s ease-out;
+    }
+
+    &:before {
+        position: relative;
+        content: url("../Gallery/img/arrow.svg");
+    }
+}
+
+.arrowLeft {
+    left: 0;
+    transform: rotate(180deg);
+}
+
+.arrowRight {
+    right: 0;
+}
+
+.additionalImgs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: 600px) {
+        justify-content: center;
+        margin-top: 6px;
+    }
+}
+
+.additionalImgWrap {
+    width: 113px;
+    max-height: 62px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        margin-left: -5px;
+        margin-top: -5px;
+        display: none;
+        background: gray1;
+    }
+
+    &.active {
+        .additionalImg {
+            opacity: 1;
+            transition: opacity 0.2s ease-out;
+        }
+    }
+
+    @media (max-width: 600px) {
+        width: 18px;
+        height: 18px;
+        border-radius: 2px;
+        position: relative;
+
+        &:before {
+            display: block;
+        }
+    }
+}
+
+.additionalImg {
+    width: 100%;
+    opacity: 0.6;
+    display: flex;
+    transition: opacity 0.2s ease-in;
+
+    @media (max-width: 600px) {
+        display: none;
+    }
+}
+
+.close {
+    padding: 10px;
+    cursor: pointer;
+    position: absolute;
+    top: -55px;
+    right: 10px;
+
+    &:after {
+        content: url("./img/close.svg");
+    }
+}

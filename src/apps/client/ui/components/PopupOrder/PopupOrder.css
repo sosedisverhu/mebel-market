@@ -60,7 +60,7 @@
 }
 
 .title {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     padding-bottom: 30px;
     text-align: center;
 
@@ -72,12 +72,12 @@
 }
 
 .addressTitle {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     text-align: center;
 }
 
 .addressText {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     margin: 15px auto 0 auto;
     max-width: 222px;
     text-align: center;
@@ -89,7 +89,7 @@
 }
 
 .phone {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     margin-top: 6px;
     text-align: center;
     display: block;
@@ -98,24 +98,24 @@
 }
 
 .sms {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     text-align: center;
 }
 
 .cardTitle {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     margin-top: 30px;
     text-align: center;
 }
 
 .cardCode {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     margin-top: 10px;
     text-align: center;
 }
 
 .cardDescr {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     margin-top: 5px;
     text-align: center;
 
@@ -127,7 +127,7 @@
 }
 
 .price {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     padding-top: 30px;
     text-align: center;
 
@@ -143,7 +143,7 @@
 }
 
 .link {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     padding: 10px 20px;
     border: none;
     color: whiteBasic;

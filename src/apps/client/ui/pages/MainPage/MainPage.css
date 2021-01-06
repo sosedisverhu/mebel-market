@@ -3,21 +3,18 @@
 @value gray5 from '../../../../../css/colors.css';
 
 .categorySection {
-    background: gray5;
+    background: whiteBasic;
+    min-height: 270px;
 
-    &:nth-child(odd) {
-        background: whiteBasic;
+    &.top {
+        background: gray5;
 
         .title {
             &:before {
                 left: auto;
                 right: 0;
             }
-        }
-    }
 
-    &.top {
-        .title {
             @media (max-width: 600px) {
                 padding-top: 30px;
             }
@@ -26,7 +23,7 @@
 }
 
 .title {
-    font: 36px/41px RoundedElegance;
+    font: 36px/41px GilroyRegular;
     text-align: center;
     color: blackLight;
     margin: 0 auto;

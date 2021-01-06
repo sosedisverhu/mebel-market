@@ -17,6 +17,7 @@ export default function updateSlides (req, res) {
         }
 
         const files = req.files;
+        const lang = req.body.lang;
         const slides = JSON.parse(req.body.slides);
         const removedSlides = JSON.parse(req.body.removedSlides);
         const outdatedSlidesPath = [];
@@ -28,6 +29,7 @@ export default function updateSlides (req, res) {
             return {
                 path: slide.path,
                 link: slide.link,
+                name: slide.name,
                 newTab: !!slide.newTab
             };
         });
@@ -46,9 +48,9 @@ export default function updateSlides (req, res) {
             fs.unlink(path.slice(1), noop);
         });
 
-        updateSlider({ slides: resultSlides, id: SLIDER_ID })
+        updateSlider({ [`slides_${lang}`]: resultSlides, id: SLIDER_ID })
             .then(slider => {
-                res.status(OKEY_STATUS_CODE).send(slider.slides);
+                res.status(OKEY_STATUS_CODE).send(slider);
             })
             .catch(() => {
                 resultSlides.forEach(slide => {

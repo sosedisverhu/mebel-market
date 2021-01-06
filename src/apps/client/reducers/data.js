@@ -1,6 +1,7 @@
 import {
     SET_ARTICLES,
     SET_PRODUCTS,
+    SET_REVIEWS,
     SET_CATEGORIES,
     SET_SUB_CATEGORIES,
     SET_PARTNERS,
@@ -8,19 +9,22 @@ import {
     SET_BASKET,
     SET_WISHLIST,
     OPEN_BASKET,
-    CLOSE_BASKET
+    CLOSE_BASKET,
+    SET_MAIN_SLIDES
 } from '../types/types';
 
 const initialState = {
     labels: ['top', 'discount'],
     articles: [],
     products: [],
+    reviews: [],
     categories: [],
     subCategories: [],
     partners: [],
     basket: [],
     wishlist: [],
-    basketIsOpen: false
+    basketIsOpen: false,
+    slider: {}
 };
 
 export default function (state = initialState, action) {
@@ -31,6 +35,8 @@ export default function (state = initialState, action) {
         return { ...state, scrollToCharacteristic: action.payload };
     case SET_PRODUCTS:
         return { ...state, products: action.payload };
+    case SET_REVIEWS:
+        return { ...state, reviews: action.payload };
     case SET_CATEGORIES:
         return { ...state, categories: action.payload };
     case SET_SUB_CATEGORIES:
@@ -45,6 +51,8 @@ export default function (state = initialState, action) {
         return { ...state, basketIsOpen: true };
     case CLOSE_BASKET:
         return { ...state, basketIsOpen: false };
+    case SET_MAIN_SLIDES:
+        return { ...state, slider: action.payload };
     default:
         return state;
     }

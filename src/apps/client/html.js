@@ -3,17 +3,30 @@ import { GOOGLE_MAPS_KEY } from './constants/constants';
 export default function (html, helmet, preloadedState = {}) {
     return `
     <!doctype html>
-    <html lang='ru'>
+    <html ${helmet.htmlAttributes.toString()}>
         <head>
-            <meta charset="utf-8">
+            <!-- Google Tag Manager -->
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-M59R9QX');</script>
+            <!-- End Google Tag Manager -->
+            <meta http-equiv="content-type" content="text/html; charset=utf-8">
             <meta http-equiv='x-ua-compatible' content='ie=edge'>
             <meta name='viewport' content='width=device-width, initial-scale=1'>
+            <meta name="it-rating" content="it-rat-ea54688a3c94ceb070b4d3455bae5d25">
             ${helmet.title.toString()}
             ${helmet.meta.toString()}
+            ${helmet.link.toString()}
             <link rel='stylesheet' type='text/css' href='/public/client.chunk.css'>
             <link rel='shortcut icon' href='/client/images/favicon.png' type='image/png'>
         </head>
         <body>
+            <!-- Google Tag Manager (noscript) -->
+            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M59R9QX"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            <!-- End Google Tag Manager (noscript) -->
             <div id='app'>${html}</div>
             <script>
                 // WARNING: See the following for security issues around embedding JSON in HTML:

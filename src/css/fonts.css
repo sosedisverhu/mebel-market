@@ -9,8 +9,13 @@
 }
 
 @font-face {
-  font-family: 'RoundedElegance';
-  src: url('./font/RoundedElegance.ttf') format('truetype');
+  font-family: 'GilroyRegular';
+  src: url('./font/Gilroy-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'GilroyMedium';
+  src: url('./font/Gilroy-Medium.ttf') format('truetype');
 }
 
 @font-face {

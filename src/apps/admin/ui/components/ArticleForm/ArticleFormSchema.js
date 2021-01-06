@@ -4,7 +4,7 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
+import FormFieldDate from '../Form/fields/FormFieldDate/FormFieldDate';
 
 export default function ({ data: { title } = {} } = {}) {
     return {
@@ -41,7 +41,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Название'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните название новости' } }
+                    { name: 'required', options: { text: 'Заполните название статьи' } }
                 ]
             },
             {
@@ -52,7 +52,7 @@ export default function ({ data: { title } = {} } = {}) {
                     label: 'Описание'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните описание новости' } }
+                    { name: 'required', options: { text: 'Заполните описание статьи' } }
                 ]
             },
             {
@@ -118,13 +118,22 @@ export default function ({ data: { title } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
+            },
+            {
+                component: FormFieldDate,
+                name: 'date',
+                schema: {
+                    label: 'Дата публикации'
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Выберите дату публикации' } }
+                ]
             },
             {
                 component: FormFieldCheckbox,

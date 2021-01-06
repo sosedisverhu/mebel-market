@@ -26,7 +26,7 @@
 }
 
 .title {
-    font: 34px/41px RoundedElegance;
+    font: 34px/41px GilroyRegular;
     color: blackBasic;
     text-align: center;
     position: relative;
@@ -125,7 +125,7 @@
 }
 
 .advantageTitle {
-    font: 24px/28px RoundedElegance;
+    font: 24px/28px GilroyRegular;
     letter-spacing: 0.03em;
     font-feature-settings: "kern" off;
     color: blackLight;
@@ -152,16 +152,17 @@
 }
 
 .advantageText {
-    font: 16px/18px RoundedElegance;
+    font: 16px/24px GilroyRegular;
     letter-spacing: 0.03em;
     text-align: justify;
     font-feature-settings: "kern" off;
     color: blackLight;
+    width: 100%;
     margin-top: 30px;
 
     @media (max-width: 600px) {
         font-size: 14px;
-        line-height: 16px;
+        line-height: 21px;
         margin-top: 20px;
     }
 }

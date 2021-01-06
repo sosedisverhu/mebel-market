@@ -7,6 +7,9 @@ const SubCategory = new Schema({
     texts: {
         type: {
             name: { type: String, required: true },
+            sizeColumn: { type: String },
+            descriptionColumn: { type: String },
+            valueColumn: { type: String },
             seoTitle: { type: String },
             seoDescription: { type: String },
             seoKeywords: { type: String }
@@ -16,7 +19,9 @@ const SubCategory = new Schema({
     categoryId: { type: String, required: true },
     alias: { type: String, required: true, unique: true },
     positionIndex: { type: Number, required: true, unique: true },
-    filters: { type: Object, required: true }
+    filters: { type: Object, required: true },
+    colorFilter: { type: Boolean, required: true },
+    sizeFilter: { type: Boolean, required: true }
 });
 
 export default mongoose.model('SubCategory', SubCategory);

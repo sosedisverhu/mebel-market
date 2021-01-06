@@ -35,11 +35,16 @@ const materialStyles = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
+        '@media (max-width:780px)': {
+            flexDirection: 'column'
+        }
     },
     featureField: {
-        width: 'calc(50% - 20px)'
-
+        width: 'calc(50% - 20px)',
+        '@media (max-width:780px)': {
+            width: '100%'
+        }
     },
     buttonSortable: {
         position: 'relative',
@@ -59,7 +64,7 @@ const ButtonSortable = SortableHandle(({ imageClassName }) => (
 ));
 
 const Feature =
-    SortableElement(({ rowIndex, feature, validationMessage, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
+    SortableElement(({ rowIndex, feature, handleFeatureDelete, handleFeatureChange, classes, schema }) => (
         <FormGroup className={classes.feature} row>
             <ButtonSortable imageClassName={classes.buttonSortable}/>
             <div className={classes.featureGroup}>
@@ -70,7 +75,6 @@ const Feature =
                     onChange={handleFeatureChange('name', rowIndex)}
                     margin='normal'
                     variant='outlined'
-                    error={!!validationMessage}
                 />
                 <TextField
                     className={classes.featureField}
@@ -79,7 +83,6 @@ const Feature =
                     onChange={handleFeatureChange('value', rowIndex)}
                     margin='normal'
                     variant='outlined'
-                    error={!!validationMessage}
                 />
             </div>
             <IconButton aria-label='Delete' onClick={handleFeatureDelete(rowIndex)}>
@@ -115,7 +118,9 @@ class FormFieldFeaturesDouble extends Component {
         value: [],
         onChange: noop,
         validationMessage: '',
-        schema: {}
+        schema: {},
+        sizeIndex: 0,
+        sizes: []
     };
 
     state = {

@@ -80,11 +80,19 @@ class SubCategoryForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords,
+            ru_sizeColumn: ru.sizeColumn,
+            ua_sizeColumn: ua.sizeColumn,
+            ru_descriptionColumn: ru.descriptionColumn,
+            ua_descriptionColumn: ua.descriptionColumn,
+            ru_valueColumn: ru.valueColumn,
+            ua_valueColumn: ua.valueColumn,
             categoryId: activeCategory.id,
             hidden: (categoryHidden ? false : subCategory.hidden) || false,
             alias: subCategory.alias,
+            sizeFilter: subCategory.sizeFilter,
+            colorFilter: subCategory.colorFilter,
             lang: 'ru',
             ...pick(SUB_CATEGORIES_VALUES, subCategory),
             ua_filters: pathOr(['filters', 'ua'], [], subCategory),
@@ -109,11 +117,19 @@ class SubCategoryForm extends Component {
             ru_seoDescription: ruSeoDescription,
             ua_seoKeywords: uaSeoKeywords,
             ru_seoKeywords: ruSeoKeywords,
+            ru_sizeColumn: ruSizeColumn,
+            ua_sizeColumn: uaSizeColumn,
+            ru_descriptionColumn: ruDescriptionColumn,
+            ua_descriptionColumn: uaDescriptionColumn,
+            ru_valueColumn: ruValueColumn,
+            ua_valueColumn: uaValueColumn,
             hidden,
             categoryId,
             positionIndex,
             id,
             alias,
+            sizeFilter,
+            colorFilter,
             ua_filters: uaFilters,
             ru_filters: ruFilters
         }) => {
@@ -121,15 +137,21 @@ class SubCategoryForm extends Component {
             texts: {
                 ru: {
                     name: ruName,
+                    sizeColumn: ruSizeColumn,
+                    descriptionColumn: ruDescriptionColumn,
+                    valueColumn: ruValueColumn,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 },
                 ua: {
                     name: uaName,
+                    sizeColumn: uaSizeColumn,
+                    descriptionColumn: uaDescriptionColumn,
+                    valueColumn: uaValueColumn,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 }
             },
             filters: {
@@ -140,7 +162,9 @@ class SubCategoryForm extends Component {
             categoryId,
             positionIndex,
             id,
-            alias
+            alias,
+            sizeFilter,
+            colorFilter
         };
     };
 
@@ -157,7 +181,7 @@ class SubCategoryForm extends Component {
         const { filters } = subCategoryPayload;
 
         filters.ua = this.checkOptions(filters.ua);
-        filters.ru = this.checkOptions(filters.ua);
+        filters.ru = this.checkOptions(filters.ru);
 
         (this.id
             ? editSubCategory({ ...subCategoryPayload, id: this.id })

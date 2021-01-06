@@ -21,7 +21,7 @@ import classNames from 'classnames';
 
 const CATEGORIES_VALUES = ['name', 'id', 'hidden', 'positionIndex'];
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveProductsCategory: payload => dispatch(saveProductsCategory(payload)),
     editProductsCategory: payload => dispatch(editProductsCategory(payload)),
     updateCategoryImage: (...payload) => dispatch(updateCategoryImage(...payload))
@@ -78,11 +78,13 @@ class CategoryForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords,
             alias: category.alias || '',
             hidden: category.hidden || false,
             ...pick(CATEGORIES_VALUES, category),
+            sizeFilter: category.sizeFilter,
+            colorFilter: category.colorFilter,
             filters: [],
             ua_filters: pathOr(['filters', 'ua'], [], category),
             ru_filters: pathOr(['filters', 'ru'], [], category),
@@ -113,6 +115,8 @@ class CategoryForm extends Component {
             positionIndex,
             id,
             alias,
+            sizeFilter,
+            colorFilter,
             ua_filters: uaFilters,
             ru_filters: ruFilters
         }) => {
@@ -124,13 +128,13 @@ class CategoryForm extends Component {
                     name: ruName,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 },
                 ua: {
                     name: uaName,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 }
             },
             filters: {
@@ -138,7 +142,9 @@ class CategoryForm extends Component {
                 ru: ruFilters
             },
             id,
-            alias
+            alias,
+            sizeFilter,
+            colorFilter
         };
     };
 
@@ -151,20 +157,16 @@ class CategoryForm extends Component {
     };
 
     handleSubmit = values => {
-        event.preventDefault();
-
         const { id } = this.state;
         const { editProductsCategory, saveProductsCategory, categories, onDone } = this.props;
         const categoryPayload = this.getCategoryPayload(values);
 
-        (
-            id
-                ? editProductsCategory({ ...categoryPayload, id })
-                : saveProductsCategory({
-                    ...categoryPayload,
-                    positionIndex: categoryPayload.positionIndex || categories.length
-                })
-        )
+        (id
+            ? editProductsCategory({ ...categoryPayload, id })
+            : saveProductsCategory({
+                ...categoryPayload,
+                positionIndex: categoryPayload.positionIndex || categories.length
+            }))
             .then(category => {
                 const { files } = values.image;
 
@@ -225,8 +227,8 @@ class CategoryForm extends Component {
                     className={classNames(classes.error, classes.margin)}
                     message={
                         <span id='client-snackbar' className={classes.message}>
-                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)} />
-                            { errorText }
+                            <ErrorIcon className={classNames(classes.icon, classes.iconVariant)}/>
+                            {errorText}
                         </span>
                     }
                 />

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { matchPath } from 'react-router';
+import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import classNames from 'classnames';
@@ -10,8 +11,15 @@ import classNames from 'classnames';
 import LangSwitch from '../LangSwitch/LangSwitch.jsx';
 import Cart from '../Cart/Cart.jsx';
 import WishList from '../WishList/WishList.jsx';
+import DeliveryOffer from '../DeliveryOffer/DeliveryOffer.jsx';
+
+import { LANGS } from '../../../constants/constants';
 
 import styles from './Header.css';
+
+const langs = LANGS
+    .slice(1)
+    .join('|');
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -23,26 +31,39 @@ const mapStateToProps = ({ application, data }) => {
 };
 
 class Header extends Component {
-    state = {
-        mobileMenuOpen: false,
-        searchBarOpen: false,
-        searchText: ''
-    };
-
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
         history: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        categories: PropTypes.array
+        categories: PropTypes.array,
+        location: PropTypes.object.isRequired
     };
 
     static defaultProps = {
         categories: []
     };
 
+    constructor (props) {
+        super(props);
+        this.mobilePopUp = React.createRef();
+
+        this.state = {
+            mobileMenuOpen: false,
+            searchBarOpen: false,
+            searchText: ''
+        };
+    }
+
     handleMobileMenu = () => {
-        document.body.style.overflowY = (!this.state.mobileMenuOpen) ? 'hidden' : 'visible';
+        if (!this.state.mobileMenuOpen) {
+            disableBodyScroll(document.documentElement); // для iOS/macOS
+            disableBodyScroll(this.mobilePopUp.current);
+        } else {
+            clearAllBodyScrollLocks(document.documentElement); // для iOS/macOS
+            clearAllBodyScrollLocks();
+        }
+
         this.setState(state => ({ mobileMenuOpen: !state.mobileMenuOpen }));
     };
 
@@ -71,12 +92,13 @@ class Header extends Component {
     };
 
     render () {
-        const { langRoute, langMap, lang, categories } = this.props;
+        const { langRoute, langMap, lang, categories, location: { pathname } } = this.props;
         const { mobileMenuOpen, searchBarOpen, searchText } = this.state;
         const text = propOr('header', {}, langMap);
+        const isHomePage = !!matchPath(pathname, { path: `/:lang(${langs})?`, exact: true });
 
         return (
-            <div className={styles.header}>
+            <header className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
                         <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
@@ -86,10 +108,12 @@ class Header extends Component {
                                 <span/>
                                 <span/>
                             </button>
-                            <div className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}>
+                            <div ref={this.mobilePopUp}
+                                className={classNames(styles.popupContainer, { [styles.active]: mobileMenuOpen })}
+                            >
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
-                                        {categories.map((category) => {
+                                        {categories.map(category => {
                                             return <Link
                                                 className={styles.mobileMenuItemTop}
                                                 to={`${langRoute}/${category.alias}`}
@@ -100,7 +124,7 @@ class Header extends Component {
                                         })}
                                         <Link
                                             className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}
-                                            to={`${langRoute}/`}
+                                            to={`${langRoute}/promotions`}
                                         >
                                             {text.promotions}
                                         </Link>
@@ -127,20 +151,29 @@ class Header extends Component {
                                         <Link className={styles.mobileMenuItemBottom}
                                             to={`${langRoute}/delivery-and-payment`}>{text.deliveryAndPayment}</Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/partners`}>{text.partners}</Link>
+                                            to={`${langRoute}/partners`}>
+                                            {text.partners}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/articles`}>{text.articles}</Link>
+                                            to={`${langRoute}/articles`}>
+                                            {text.articles}
+                                        </Link>
                                         <Link className={styles.mobileMenuItemBottom}
-                                            to={`${langRoute}/contacts`}>{text.contacts}</Link>
+                                            to={`${langRoute}/contacts`}>
+                                            {text.contacts}
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className={styles.logoWrapper}>
-                            <Link to={`${langRoute}/`}>
-                                <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png"
-                                    alt="mebel market logo"/>
-                            </Link>
+                            {isHomePage
+                                ? <div>
+                                    <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png" alt="mebel market logo"/>
+                                </div>
+                                : <Link to={`${langRoute}/`}>
+                                    <img className={styles.logoImg} src="/src/apps/client/ui/components/Header/img/logo.png" alt="mebel market logo"/>
+                                </Link>}
                         </div>
                         <div className={styles.menuTop}>
                             <NavLink
@@ -194,7 +227,7 @@ class Header extends Component {
                 </div>
                 <div className={styles.headerBottom}>
                     <div className={styles.menuBottom}>
-                        {categories.map((category) => {
+                        {categories.map(category => {
                             return <NavLink
                                 className={styles.menuItemBottom}
                                 activeClassName={styles.active}
@@ -204,11 +237,13 @@ class Header extends Component {
                                 {category.texts[lang].name}
                             </NavLink>;
                         })}
-                        <Link className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
-                            to={`${langRoute}/`}>
+                        <NavLink className={classNames(styles.menuItemBottom, styles.menuItemBottomPromotions)}
+                            activeClassName={classNames(styles.active, styles.activePromotions)}
+                            to={`${langRoute}/promotions`}>
                             {text.promotions}
-                        </Link>
+                        </NavLink>
                     </div>
+                    <DeliveryOffer/>
                     <form className={styles.searchBottom} onSubmit={this.handleSearchSubmit}>
                         <label className={classNames(styles.searchInputWrapperBottom, { [styles.active]: searchBarOpen })}>
                             <input
@@ -222,7 +257,7 @@ class Header extends Component {
                         <button className={styles.searchBtnBottom} type="submit"/>
                     </form>
                 </div>
-            </div>
+            </header>
         );
     }
 }

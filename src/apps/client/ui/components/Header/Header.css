@@ -4,10 +4,10 @@
 @value greenBasic from '../../../../../css/colors.css';
 
 .header {
-    display: flex;
+    display: block;
     background-color: blackLight;
     flex-direction: column;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
 }
 
 .headerTop {
@@ -35,7 +35,7 @@
 }
 
 .logoWrapper {
-    margin-right: 100px;
+    margin-right: 96px;
     min-width: 180px;
 
     @media (max-width: 1230px) {
@@ -54,14 +54,10 @@
 
 .logoImg {
     display: block;
-    max-width: 100%;
+    max-width: 288px;
 
     @media (max-width: 1160px) {
         width: 200px;
-    }
-
-    @media (max-width: 1135px) {
-        width: 180px;
     }
 
     @media (max-width: 600px) {
@@ -74,6 +70,7 @@
 }
 
 .menuTop {
+    white-space: nowrap;
     @media (max-width: 991px) {
         display: none;
     }
@@ -164,7 +161,7 @@
     padding-left: 40%;
     border: none;
     background-color: blackLight;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 16px;
     color: whiteBasic;
     line-height: 18px;
@@ -204,12 +201,12 @@
     padding: 0;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/search.png');
+    background: center no-repeat url('./img/search.svg');
     cursor: pointer;
     transition: .3s ease-out;
 
     &:hover {
-        background-image: url('./img/search-hover.png');
+        background-image: url('./img/search-hover.svg');
     }
 }
 
@@ -219,6 +216,7 @@
     align-items: center;
     justify-content: center;
     background-color: whiteBasic;
+    position: relative;
 }
 
 .menuBottom {
@@ -236,7 +234,6 @@
     text-decoration: none;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
-    position: relative;
 
     &:before {
         content: '';
@@ -250,6 +247,10 @@
     &.active:before {
         background-color: greenBasic;
     }
+
+    &.activePromotions:before {
+         background-color: redBasic;
+     }
 
     &:hover {
         color: greenBasic;
@@ -271,6 +272,11 @@
 .menuItemBottomPromotions {
     color: redBasic;
     text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+
+    &:hover {
+         color: redBasic;
+         text-shadow: -0.2px 0 redBasic, 0 0.2px redBasic, 0.2px 0 redBasic, 0 -0.2px redBasic;
+     }
 }
 
 .searchBottom {
@@ -299,9 +305,9 @@
 }
 
 .searchInputBottom {
-    font-family: RoundedElegance;
-    font-size: 16px;
-    line-height: 18px;
+    font-family: GilroyRegular;
+    font-size: 14px;
+    line-height: 16px;
     width: 213px;
     height: 19px;
     background-color: whiteBasic;
@@ -321,7 +327,7 @@
     height: 18px;
     position: absolute;
     top: 0;
-    background: center no-repeat url('./img/searchBottom.png');
+    background: center no-repeat url('./img/searchBottom.svg');
     margin-left: 17px;
 }
 
@@ -373,7 +379,7 @@
     &.active span:nth-child(1) {
         top: 6px;
         left: 50%;
-        width: 0%;
+        width: 0;
     }
 
     &.active span:nth-child(2) {
@@ -396,15 +402,17 @@
     top: 100px;
     left: 0;
     backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0x);
     width: 100%;
-    height: calc(100% - 99px);
+    height: calc(100vh - 100px);
     max-height: 0;
     overflow-y: auto;
-    z-index: 2;
+    z-index: 40;
     transition: max-height 0.25s ease-out;
 
     &.active {
         background: rgba(255, 255, 255, 0.01);
+        -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         max-height: 10000px;
     }
@@ -452,7 +460,7 @@
     &:after {
         position: absolute;
         content: '';
-        background: url('./img/menuItemArrow.png') center no-repeat;
+        background: url('./img/menuItemArrow.svg') center no-repeat;
         width: 14px;
         height: 100%;
         right: 15px;
@@ -469,7 +477,7 @@
     display: flex;
     align-items: center;
     background-color: whiteBasic;
-    padding: 23px 16px;
+    padding: 23px 68px;
 }
 
 .instagram,

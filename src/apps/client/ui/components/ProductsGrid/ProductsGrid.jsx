@@ -6,18 +6,26 @@ import styles from './ProductsGrid.css';
 
 class ProductsGrid extends Component {
     static propTypes = {
-        products: PropTypes.array.isRequired
+        products: PropTypes.array.isRequired,
+        isPromotion: PropTypes.bool,
+        activeSizes: PropTypes.array
     };
 
     render () {
-        const { products } = this.props;
+        const { products, isPromotion, activeSizes } = this.props;
 
         return (
             <div className={styles.products}>
-                {products.map(product => <Card key={product.id} product={product} />)}
+                {products.map(product =>
+                    <Card
+                        isPromotion={isPromotion}
+                        key={product.id}
+                        product={product}
+                        activeSizes = {activeSizes}
+                    />)}
             </div>
         );
     }
 }
 
-export default (ProductsGrid);
+export default ProductsGrid;

@@ -65,7 +65,17 @@ export default function deleteProductFromBasket (req, res) {
                             return reduce((products, { productId, quantity, properties, id }) => {
                                 const product = find(product => product.id === productId, basketProducts);
 
-                                return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
+
+                                return append({ product, quantity, properties, id }, products);
                             }, [], basket);
                         })
                         .then((basketProducts) => {

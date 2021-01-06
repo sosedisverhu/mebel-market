@@ -12,9 +12,13 @@ import { MAX_QUANTITY } from '../../../constants/constants';
 import deleteFromBasket from '../../../services/client/deleteFromBasket';
 import saveProductsToWishlist from '../../../services/client/saveProductsToWishlist';
 import editProductInBasket from '../../../services/client/editProductInBasket';
+import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 
 import closeBasket from '../../../actions/closeBasket';
 import formatMoney from '../../../utils/formatMoney';
+import getShareTypeQuantity from '../../../utils/getShareTypeQuantity';
+import outsideClick from '../../hocs/outsideClick';
+
 import styles from './CartProduct.css';
 
 const mapStateToProps = ({ application, data }) => {
@@ -32,10 +36,12 @@ const mapDispatchToProps = dispatch => ({
     deleteFromBasket: payload => dispatch(deleteFromBasket(payload)),
     saveProductsToWishlist: payload => dispatch(saveProductsToWishlist(payload)),
     editProductInBasket: payload => dispatch(editProductInBasket(payload)),
-    closeBasket: (payload) => dispatch(closeBasket(payload))
+    closeBasket: (payload) => dispatch(closeBasket(payload)),
+    deleteFromWishlist: (payload) => dispatch(deleteFromWishlist(payload))
 });
 
-class Cart extends Component {
+@outsideClick
+class CartProduct extends Component {
     static propTypes = {
         langRoute: PropTypes.string.isRequired,
         langMap: PropTypes.object.isRequired,
@@ -50,24 +56,45 @@ class Cart extends Component {
         basketItemId: PropTypes.string.isRequired,
         quantity: PropTypes.number.isRequired,
         product: PropTypes.object.isRequired,
-        properties: PropTypes.array.isRequired,
-        wishlist: PropTypes.array.isRequired
+        properties: PropTypes.object.isRequired,
+        wishlist: PropTypes.array.isRequired,
+        deleteFromWishlist: PropTypes.func.isRequired,
+        shares: PropTypes.array,
+        turnOnClickOutside: PropTypes.func,
+        outsideClickEnabled: PropTypes.bool
     };
 
     static defaultProps = {
-        wishlist: []
+        wishlist: [],
+        shares: []
     };
 
-    state = {
-        isInWishList: false
-    };
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            isPresentMessage: false,
+            isDiscountMessage: false
+        };
+
+        this.sharePresent = React.createRef();
+        this.shareDiscount = React.createRef();
+    }
+
+    static getDerivedStateFromProps (props) {
+        const { wishlist, product, properties } = props;
+
+        return wishlist.find(item => item.product.id === product.id && item.properties.size.color.id === properties.size.color.id)
+            ? { isInWishList: true }
+            : { isInWishList: false };
+    }
 
     componentDidMount () {
-        const { product, wishlist } = this.props;
+        const { product, wishlist, properties } = this.props;
 
         this.setState({
             isInWishList: wishlist.some(item => {
-                return item.product.id === product.id;
+                return item.product.id === product.id && item.properties.size.color.id === properties.size.color.id;
             })
         });
     }
@@ -78,7 +105,7 @@ class Cart extends Component {
     };
 
     quantityChange = value => {
-        if (value >= 0 && value <= MAX_QUANTITY) {
+        if ((value >= 0 && value <= MAX_QUANTITY) || value === '') {
             const { basketItemId, editProductInBasket } = this.props;
             editProductInBasket({
                 quantity: value,
@@ -91,14 +118,22 @@ class Cart extends Component {
         this.props.deleteFromBasket(basketItemId);
     };
 
-    handleAddToWishlist = product => () => {
-        this.props.saveProductsToWishlist({
-            productId: product.id
-        }).then(() => {
-            this.setState({
-                isInWishList: true
+    handleAddToWishlist = () => {
+        const { product, properties, saveProductsToWishlist, deleteFromWishlist, wishlist } = this.props;
+        const { isInWishList } = this.state;
+
+        if (!isInWishList) {
+            saveProductsToWishlist({
+                productId: product.id,
+                properties
             });
-        });
+        } else {
+            const wishlistItem = wishlist.find(el => el.product.id === product.id && el.properties.size.color.id === properties.size.color.id);
+
+            if (wishlistItem) {
+                deleteFromWishlist(wishlistItem.id);
+            }
+        }
     };
 
     getCategoriesAlias = (categoryId, subCategoryId) => {
@@ -109,31 +144,103 @@ class Cart extends Component {
         return `${category}/${subCategory}`;
     };
 
+    handleShowPresentMessage = () => {
+        const { isPresentMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isPresentMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isPresentMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.sharePresent.current, () => this.closeMessage('isPresentMessage'));
+    };
+
+    handleShowDiscountMessage = () => {
+        const { isDiscountMessage } = this.state;
+        const { outsideClickEnabled, turnOnClickOutside } = this.props;
+
+        if (isDiscountMessage) {
+            return this.closeMessage();
+        }
+
+        this.setState({ isDiscountMessage: true });
+        !outsideClickEnabled && turnOnClickOutside(this.shareDiscount.current, () => this.closeMessage('isDiscountMessage'));
+    };
+
+    closeMessage = (messageName) => {
+        this.setState({ [messageName]: false });
+    };
+
     render () {
-        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass } = this.props;
-        const { isInWishList } = this.state;
+        const { langRoute, langMap, lang, quantity, product, properties, basketItemId, newClass, shares } = this.props;
+        const { isInWishList, isPresentMessage, isDiscountMessage } = this.state;
         const text = propOr('cart', {}, langMap);
+        const isExist = propOr('exist', 'true', product);
+        const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+        const color = size.colors.find(color => color.id === properties.size.color.id);
+        const isDiscount = !!color.discountPrice;
+        const presentsQuantity = getShareTypeQuantity(shares, product.id, 'present');
+        const discountsQuantity = getShareTypeQuantity(shares, product.id, 'discount');
+        const allFeatures = size.features || [];
+        const checkedFeatureIds = properties.features || {};
+        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+        const featuresPrice = checkedFeatures.reduce((sum, { value }) => sum + value, 0);
+        const resultPrice = (color.discountPrice || color.price) + featuresPrice;
 
         return <div className={classNames(styles.cartItemWrapper, { [styles[newClass]]: newClass })}>
             <div className={styles.cartItem}>
                 <Link
                     className={styles.productImgLink}
                     to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
-                    onClick={this.handlePopupClose}>
-                    <img className={styles.productImg} src={product.avatar} alt=''/>
+                    onClick={this.handlePopupClose}
+                >
+                    <img className={styles.productImg} src={product.avatar} alt='' />
                 </Link>
                 <div className={styles.productInfo}>
                     <div>
+                        {!!presentsQuantity && <div ref={this.sharePresent} className={classNames(
+                            styles.share,
+                            { [styles.active]: isPresentMessage }
+                        )} onClick={this.handleShowPresentMessage}>
+                            {text.present}
+                            {presentsQuantity < quantity && <span>&nbsp;{`(${presentsQuantity} ${text.of} ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>{text.presentDescription}</div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
+                        {!!discountsQuantity && <div ref={this.shareDiscount} className={classNames(
+                            styles.share,
+                            { [styles.active]: isDiscountMessage }
+                        )} onClick={this.handleShowDiscountMessage}>
+                            {text.discount}
+                            {discountsQuantity < quantity && <span>&nbsp;{`(${discountsQuantity} ${text.of} ${quantity})`}</span>}
+                            <div className={styles.shareInfo}>
+                                <div className={styles.shareInfoMessage}>{text.discountDescription}</div>
+                                <span className={styles.shareInfoIcon}/>
+                            </div>
+                        </div>}
                         <div className={styles.productOption}>
                             <Link
                                 className={styles.productNameLink}
                                 to={`${langRoute}/${this.getCategoriesAlias(product.categoryId, product.subCategoryId)}/${product.alias}`}
                                 onClick={this.handlePopupClose}>
-                                <p className={styles.productName}>{product.texts[lang].name}</p>
+                                <p className={styles.productName}>
+                                    {product.texts[lang].name}
+                                </p>
                             </Link>
-                            <p className={styles.productNumber}>(48092)</p>
+                            {!!color.article && <p className={styles.productNumber}>({color.article})</p>}
                         </div>
-                        <p className={styles.productSize}>{text.size} {properties.size.name}</p>
+                        <div className={styles.properties}>
+                            <p className={styles.productSize}>
+                                {text.size} {size.name}
+                            </p>
+                        </div>
+                        {checkedFeatures && <div className={styles.features}>
+                            {checkedFeatures.map(feature => <p className={styles.feature}>{`+ ${feature.name}`}</p>)}
+                        </div>}
+
                         <div className={styles.productQuantity}>
                             <button
                                 type='button'
@@ -144,10 +251,13 @@ class Cart extends Component {
                             <input
                                 className={styles.quantityInput}
                                 type='text'
-                                onChange={(e) => this.quantityChange(e.target.value.replace(/\D/, ''))}
-                                value={quantity}
-                                onBlur={(e) => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
+                                onChange={e => this.quantityChange(e.target.value.replace(/\D/, ''))}
+                                value={quantity !== null ? quantity : ''}
+                                onBlur={e => (e.target.value === '' || +e.target.value === 0) && this.quantityChange(1)}
                             />
+                            <span className={styles.quantityValue}>
+                                {quantity}
+                            </span>
                             <button
                                 type='button'
                                 className={styles.quantityAdd}
@@ -155,19 +265,25 @@ class Cart extends Component {
                                 disabled={quantity >= MAX_QUANTITY}>+
                             </button>
                         </div>
+                        <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                            {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
+                        </div>
+
                         <div className={styles.productPrices}>
-                            {product.discountPrice &&
-                            <p className={styles.productOldPrice}>{formatMoney(product.price)}</p>}
-                            <p className={styles.productPrice}>{formatMoney(product.discountPrice ? product.discountPrice : product.price)}</p>
+                            {isDiscount &&
+                                <p className={styles.productOldPrice}>{formatMoney(color.price)}</p>}
+                            <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
+                                {formatMoney(resultPrice)}
+                            </p>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.buttons}>
                         <button className={classNames(styles.wishBtn, { [styles.activeWishBtn]: isInWishList })}
                             type="button"
-                            onClick={this.handleAddToWishlist(product)}/>
+                            onClick={this.handleAddToWishlist} />
                         <button className={styles.removeBtn}
                             type="button"
-                            onClick={this.removeProduct(basketItemId)}/>
+                            onClick={this.removeProduct(basketItemId)} />
                     </div>
                 </div>
             </div>
@@ -175,4 +291,4 @@ class Cart extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(CartProduct);

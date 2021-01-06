@@ -13,11 +13,19 @@ import each from '@tinkoff/utils/array/each';
 import filter from '@tinkoff/utils/array/filter';
 
 import styles from './CheckoutPage.css';
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import PopupOrder from '../../components/PopupOrder/PopupOrder';
 import CartProduct from '../../components/CartProduct/CartProduct';
-import formatMoney from '../../../utils/formatMoney';
+import InputMask from 'react-input-mask';
 
 import saveOrder from '../../../services/client/saveOrder';
+
+import formatMoney from '../../../utils/formatMoney';
+import getProductsPrice from '../../../utils/getProductsPrice';
+import getSharesPrice from '../../../utils/getSharesPrice';
+import getShares from '../../../utils/getShares';
+import { MAX_PHONE_LENGTH } from '../../../constants/constants';
 
 const deliveryOptions = [
     {
@@ -32,8 +40,7 @@ const deliveryOptions = [
         texts: {
             ru: { option: 'Почтой' },
             ua: { option: 'Поштою' }
-        },
-        price: 125
+        }
     }
 ];
 
@@ -114,11 +121,12 @@ const mapStateToProps = ({ application, data }) => {
         lang: application.lang,
         langMap: application.langMap,
         langRoute: application.langRoute,
+        domain: application.domain,
         basket: data.basket
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     saveOrder: (...payload) => dispatch(saveOrder(...payload))
 });
 
@@ -128,18 +136,33 @@ class CheckoutPage extends Component {
         langMap: PropTypes.object.isRequired,
         langRoute: PropTypes.string.isRequired,
         saveOrder: PropTypes.func.isRequired,
-        basket: PropTypes.object.isRequired
+        basket: PropTypes.array.isRequired,
+        domain: PropTypes.string.isRequired
     };
 
-    state = {
-        deliveryChecked: deliveryOptions[0],
-        paymentChecked: paymentOptions[0],
-        customerName: '',
-        customerTel: '+380',
-        customerEmail: '',
-        customerComment: '',
-        customerAddress: '',
-        orderId: null
+    requiredFieldsStart = React.createRef();
+
+    constructor (...args) {
+        super(...args);
+        const { basket, lang } = this.props;
+
+        this.state = {
+            deliveryChecked: deliveryOptions[0],
+            paymentChecked: paymentOptions[0],
+            customerName: '',
+            customerTel: '+380',
+            customerEmail: '',
+            customerComment: '',
+            customerAddress: '',
+            orderId: null,
+            shares: getShares(basket, lang)
+        };
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.basket !== nextProps.basket) {
+            this.setState({ shares: getShares(nextProps.basket, nextProps.lang) });
+        }
     }
 
     handleChange = fieldName => e => {
@@ -149,12 +172,12 @@ class CheckoutPage extends Component {
     handleDeliveryChange = e => {
         const newDelivery = deliveryOptions.find(delivery => delivery.id === e.target.value);
         this.setState({ deliveryChecked: newDelivery, 'deliveryCheckedError': false });
-    }
+    };
 
     handlePaymentChange = e => {
         const newPayment = paymentOptions.find(payment => payment.id === e.target.value);
         this.setState({ paymentChecked: newPayment, 'paymentCheckedError': false });
-    }
+    };
 
     handleBlur = fieldName => () => {
         const { deliveryChecked } = this.state;
@@ -166,9 +189,17 @@ class CheckoutPage extends Component {
         }
     };
 
+    handlePhoneChange = (e) => {
+        const customerTel = e.target.value;
+        this.setState({
+            customerTel
+        });
+    };
+
     handleSubmit = e => {
         e.preventDefault();
         const errors = {};
+        const { domain, lang } = this.props;
         const { deliveryChecked, paymentChecked, customerName, customerEmail, customerTel, customerAddress, customerComment } = this.state;
         let isFormValid = true;
 
@@ -180,7 +211,10 @@ class CheckoutPage extends Component {
                     isFormValid = false;
                 }
 
-                if (input.type === 'tel' && this.state[input.name].length < 10) {
+                if (input.type === 'tel' &&
+                  (customerTel === '' ||
+                  customerTel.length - customerTel.replace(/\d/gm, '').length !== MAX_PHONE_LENGTH
+                  )) {
                     errors[`${input.name}Error`] = true;
                 }
 
@@ -199,6 +233,7 @@ class CheckoutPage extends Component {
         this.setState(errors);
 
         if (!isFormValid) {
+            this.requiredFieldsStart.current.scrollIntoView({ behavior: 'smooth' });
             return;
         }
 
@@ -211,34 +246,44 @@ class CheckoutPage extends Component {
                 comment: customerComment
             },
             delivery: deliveryChecked,
-            payment: paymentChecked
+            payment: paymentChecked,
+            domain,
+            lang
         })
             .then(({ shortId }) => {
                 this.setState({ orderId: shortId });
             });
-    }
+    };
 
     render () {
         const { langMap, lang, basket, langRoute } = this.props;
+        const { shares } = this.state;
 
         const { deliveryChecked, paymentChecked, orderId } = this.state;
         const comment = find(item => item.name === 'customerComment', customerInfo);
         const text = propOr('checkoutPage', {}, langMap);
-        const productsPrice = basket.reduce((sum, { quantity, product }) => sum + (quantity * product.discountPrice || quantity * product.price), 0);
-        const totalPrice = productsPrice + (deliveryChecked.price || 0);
+
+        const productsPrice = getProductsPrice(basket, lang);
+        const sharesPrice = getSharesPrice(shares);
+        const totalPrice = productsPrice - sharesPrice;
 
         if (!basket.length) {
-            return <section className={styles.noItemsContainer}>
-                <div className={styles.noItemsText}>
-                    {text.noItemsInBasket}
+            return <section className={styles.noItemsContainerWrap}>
+                <Breadcrumbs noCategoryPage={text.checkout} />
+                <div className={styles.noItemsContainer}>
+                    <div className={styles.noItemsText}>
+                        {text.noItemsInBasket}
+                    </div>
+                    <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
+                        <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
+                    </Link>
                 </div>
-                <Link to={`${langRoute}`} className={styles.noItemsTextLink}>
-                    <button className={styles.noItemsTextButton} type="submit">{text.toMain}</button>
-                </Link>
             </section>;
         }
 
         return (<section className={styles.checkoutPage}>
+            <Breadcrumbs noCategoryPage={text.checkout} />
+            <DeliveryOffer mobile/>
             <form className={styles.content} onSubmit={this.handleSubmit}>
                 <div className={styles.contentTop}>
                     <div className={styles.details}>
@@ -251,30 +296,48 @@ class CheckoutPage extends Component {
                                     properties={properties}
                                     basketItemId={basketItemId}
                                     newClass='orderItem'
+                                    shares={shares}
                                     key={i} />
                             )}
                         </div>
                         <div className={styles.priceWrap}>
                             <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
-                            {deliveryChecked.price && <p className={styles.priceRow}>{text.deliveryPrice} <span>{formatMoney(deliveryChecked.price)}</span></p>}
+                            {!!sharesPrice && <p className={styles.priceRow}>{text.shareValue} <span>{formatMoney(sharesPrice)}</span></p>}
                             <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                         </div>
                     </div>
-                    <div className={styles.checkout}>
+                    <div className={styles.checkout} ref={this.requiredFieldsStart}>
                         <h2 className={styles.h2}>{text.checkout}</h2>
                         {customerInfo.map((item, i) => {
-                            if (item.name !== 'customerComment') {
+                            if (item.name === 'customerTel') {
                                 return (
-                                    <input
+                                    <InputMask
                                         className={classNames(styles.infoInput, { [styles.checkoutInfoInputError]: this.state[`${item.name}Error`] })}
-                                        key={i}
-                                        type={item.type}
-                                        name={item.name}
-                                        placeholder={item.texts[lang].placeholder}
-                                        value={this.state[item.name]}
-                                        onChange={this.handleChange(item.name)}
-                                        onBlur={item.required ? this.handleBlur(item.name) : noop}
-                                    />);
+                                        mask="+38 (999) 999 99 99"
+                                        onChange={this.handlePhoneChange}>
+                                        {(inputProps) => <input
+                                            {...inputProps}
+                                            name="phone"
+                                            placeholder="+38 (___) ___ __ __ *"
+                                            type="text"
+                                            autoComplete='off'
+                                        />}
+                                    </InputMask>
+                                );
+                            } else {
+                                if (item.name !== 'customerComment') {
+                                    return (
+                                        <input
+                                            className={classNames(styles.infoInput, { [styles.checkoutInfoInputError]: this.state[`${item.name}Error`] })}
+                                            key={i}
+                                            type={item.type}
+                                            name={item.name}
+                                            placeholder={item.texts[lang].placeholder}
+                                            value={this.state[item.name]}
+                                            onChange={this.handleChange(item.name)}
+                                            onBlur={item.required ? this.handleBlur(item.name) : noop}
+                                        />);
+                                }
                             }
                         })}
                         <div className={styles.deliveryAndPayment}>
@@ -338,7 +401,6 @@ class CheckoutPage extends Component {
                     </div>
                     <div className={classNames(styles.priceWrap, styles.mobile)}>
                         <p className={styles.priceRow}>{text.productPrice} <span>{formatMoney(productsPrice)}</span></p>
-                        {deliveryChecked.price && <p className={styles.priceRow}>{text.deliveryPrice} <span>{formatMoney(deliveryChecked.price)}</span></p>}
                         <p className={styles.priceTotal}>{text.allPrice} <span>{formatMoney(totalPrice)}</span></p>
                     </div>
                 </div>

@@ -7,6 +7,10 @@
 .root {
     padding-bottom: 30px;
     background: gray5;
+
+    @media (max-width: 600px) {
+        padding-bottom: 15px;
+    }
 }
 
 .titles {
@@ -26,7 +30,7 @@
 }
 
 .title {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: gray0;
     position: relative;
     padding: 35px 25px;
@@ -67,6 +71,10 @@
             bottom: 5px;
         }
     }
+    @media (max-width: 340px) {
+        font-size: 15px;
+        line-height: 17px;
+    }
 }
 
 .contentWrap {
@@ -74,14 +82,19 @@
 }
 
 .content {
-    margin: 0 auto;
     max-width: 904px;
+    margin: 0 auto;
     box-sizing: content-box;
     padding: 35px 16px;
+    transition: 0.2s ease-in;
 
     @media (max-width: 600px) {
-        padding: 20px 16px;
+        padding: 20px 16px 15px;
     }
+}
+
+.contentFull {
+    max-width: none;
 }
 
 .description {
@@ -93,7 +106,7 @@
 }
 
 .descriptionTitle {
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     margin-top: 30px;
 
@@ -103,7 +116,7 @@
 }
 
 .descriptionText {
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: rgba(35, 35, 35, 0.7);
     margin-top: 10px;
 
@@ -130,7 +143,7 @@
 
 .characterTitle {
     width: 50%;
-    font: 18px/21px RoundedElegance;
+    font: 18px/21px GilroyRegular;
     color: blackLight;
     padding-right: 10px;
 
@@ -142,7 +155,7 @@
 
 .characterText {
     width: 50%;
-    font: 16px/18px RoundedElegance;
+    font: 16px/18px GilroyRegular;
     color: rgba(35, 35, 35, 0.7);
 
     @media (max-width: 600px) {

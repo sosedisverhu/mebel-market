@@ -17,11 +17,11 @@ import append from '@tinkoff/utils/array/append';
 
 export default function saveWishlistProducts (req, res) {
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
-    const { productId } = req.body;
+    const { productId, properties } = req.body;
 
     if (!id) {
         return saveUserProduct({
-            wishlist: [{ productId, id: uniqid() }],
+            wishlist: [{ productId, properties, id: uniqid() }],
             id: uniqid()
         })
             .then((result) => {
@@ -34,10 +34,20 @@ export default function saveWishlistProducts (req, res) {
                 getProductsByIds(wishlist.map(wishlist => wishlist.id))
                     .then((wishlistProducts) => {
                         return [
-                            reduce((products, { productId, id }) => {
+                            reduce((products, { productId, properties, id }) => {
                                 const product = find(product => product.id === productId, wishlistProducts);
 
-                                return !product || product.hidden ? products : append({ product, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
+
+                                return append({ product, properties, id }, products);
                             }, [], wishlist)
                         ];
                     })
@@ -57,7 +67,7 @@ export default function saveWishlistProducts (req, res) {
         .then(([result]) => {
             if (!result) {
                 return saveUserProduct({
-                    wishlist: [{ productId, id: uniqid() }],
+                    wishlist: [{ productId, properties, id: uniqid() }],
                     id: uniqid()
                 })
                     .then((result) => {
@@ -69,10 +79,20 @@ export default function saveWishlistProducts (req, res) {
 
                         getProductsByIds(wishlist.map(wishlist => wishlist.productId))
                             .then((wishlistProducts) => {
-                                return reduce((products, { productId, id }) => {
+                                return reduce((products, { productId, properties, id }) => {
                                     const product = find(product => product.id === productId, wishlistProducts);
 
-                                    return !product || product.hidden ? products : append({ product, id }, products);
+                                    if (!product || product.hidden) return products;
+
+                                    const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                    if (!size) return products;
+
+                                    const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                    if (!color) return products;
+
+                                    return append({ product, properties, id }, products);
                                 }, [], wishlist);
                             })
                             .then((wishlistProducts) => {
@@ -104,12 +124,12 @@ export default function saveWishlistProducts (req, res) {
             const newWishlist = wishlistRepeatIndexes.reduce((newWishlist, wishlistIndex) => {
                 const wishlistNotUniq = wishlist[wishlistIndex];
 
-                if (wishlistNotUniq.productId === productId) {
+                if (wishlistNotUniq.productId === productId && wishlistNotUniq.properties === properties) {
                     return [...wishlist];
                 }
 
                 return newWishlist;
-            }, [...wishlist, { productId, id: uniqid() }]) || [...wishlist, { productId, id: uniqid() }];
+            }, [...wishlist, { productId, properties, id: uniqid() }]) || [...wishlist, { productId, properties, id: uniqid() }];
 
             return editUserProduct({
                 wishlist: newWishlist,
@@ -120,10 +140,20 @@ export default function saveWishlistProducts (req, res) {
 
                     getProductsByIds(wishlist.map(wishlist => wishlist.productId))
                         .then((wishlistProducts) => {
-                            return reduce((products, { productId, id }) => {
+                            return reduce((products, { productId, properties, id }) => {
                                 const product = find(product => product.id === productId, wishlistProducts);
 
-                                return !product || product.hidden ? products : append({ product, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
+
+                                return append({ product, properties, id }, products);
                             }, [], wishlist);
                         })
                         .then((wishlistProducts) => {

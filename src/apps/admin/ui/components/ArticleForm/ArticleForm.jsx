@@ -18,6 +18,7 @@ import Form from '../Form/Form';
 import getSchema from './ArticleFormSchema';
 import saveArticle from '../../../services/saveArticle';
 import editArticle from '../../../services/editArticle';
+import format from 'date-fns/format';
 
 const NEWS_VALUES = ['name', 'hidden'];
 
@@ -68,7 +69,7 @@ class ArticleForm extends Component {
         const ua = pathOr(['texts', 'ua'], '', article);
 
         this.initialValues = {
-            date: article.date,
+            date: article.date ? format(article.date, 'yyyyy-MM-dd') : format(new Date(), 'yyyyy-MM-dd'),
             ru_name: ru.name || '',
             ua_name: ua.name || '',
             ru_preview: ru.preview || '',
@@ -79,8 +80,8 @@ class ArticleForm extends Component {
             ua_seoTitle: ua.seoTitle || '',
             ru_seoDescription: ru.seoDescription || '',
             ua_seoDescription: ua.seoDescription || '',
-            ru_seoKeywords: { words: ru.seoKeywords && ru.seoKeywords.split(', ') || [], input: '' },
-            ua_seoKeywords: { words: ua.seoKeywords && ua.seoKeywords.split(', ') || [], input: '' },
+            ru_seoKeywords: ru.seoKeywords,
+            ua_seoKeywords: ua.seoKeywords,
             hidden: article.hidden || false,
             alias: article.alias,
             ...pick(NEWS_VALUES, article)
@@ -105,6 +106,7 @@ class ArticleForm extends Component {
             ru_seoDescription: ruSeoDescription,
             ua_seoKeywords: uaSeoKeywords,
             ru_seoKeywords: ruSeoKeywords,
+            date,
             hidden,
             id,
             alias
@@ -117,7 +119,7 @@ class ArticleForm extends Component {
                     content: ruContent,
                     seoTitle: ruSeoTitle,
                     seoDescription: ruSeoDescription,
-                    seoKeywords: ruSeoKeywords.words.join(', ')
+                    seoKeywords: ruSeoKeywords
                 },
                 ua: {
                     name: uaName,
@@ -125,9 +127,10 @@ class ArticleForm extends Component {
                     content: uaContent,
                     seoTitle: uaSeoTitle,
                     seoDescription: uaSeoDescription,
-                    seoKeywords: uaSeoKeywords.words.join(', ')
+                    seoKeywords: uaSeoKeywords
                 }
             },
+            date: +new Date(date),
             hidden,
             id,
             alias

@@ -14,12 +14,13 @@ class FilterSlider extends Component {
     static propTypes = {
         filter: PropTypes.shape({
             name: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired
+            id: PropTypes.string.isRequired,
+            dimension: PropTypes.string
         }),
         filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired
     };
 
     constructor (...args) {
@@ -89,14 +90,48 @@ class FilterSlider extends Component {
 
         this.setState({
             value: {
-                min: value.min < min ? min : value.min,
-                max: value.max > max ? max : value.max
+                min: value.min < min ? min : parseFloat(value.min.toFixed(1)),
+                max: value.max > max ? max : parseFloat(value.max.toFixed(1))
             }
         });
     };
 
+    handleIntroduceValue = (e, valueName) => {
+        const { value, defaultValue } = this.state;
+
+        if (!isNaN(e.target.value) && +e.target.value <= defaultValue.max) {
+            const eTarget = e.target.value !== '' ? +e.target.value : '';
+            const newValue = valueName === 'min' ? { ...value, min: eTarget } : { ...value, max: eTarget };
+
+            this.setState({
+                value: newValue
+            });
+
+            this.props.onFilter(newValue);
+        }
+    };
+
+    priceOnBlur = () => {
+        const { defaultValue, value } = this.state;
+
+        if (value.min > value.max) {
+            this.setState({
+                value: defaultValue
+            });
+            return this.props.onFilter(defaultValue);
+        }
+
+        if (defaultValue.min > value.min) {
+            this.setState({
+                value: { ...value, min: defaultValue.min }
+            });
+        }
+
+        this.props.onFilter(value);
+    };
+
     render () {
-        const { filter: { name } } = this.props;
+        const { filter: { name, dimension } } = this.props;
         const { defaultValue: { min, max }, value, step, active } = this.state;
 
         return (
@@ -104,13 +139,30 @@ class FilterSlider extends Component {
                 <div className={styles.title} onClick={this.handleTitleClick}>
                     {name}
                 </div>
+                <div className={styles.activeValueWrap}>
+                    <div className={styles.activeValue}>
+                        {(+value.min !== +min || +value.max !== +max)
+                            ? <p className={styles.activeValueText}>{`${dimension} ${value.min.toFixed(1)} - ${dimension}  ${value.max.toFixed(1)}`}</p>
+                            : null}
+                    </div>
+                </div>
                 <div className={styles.sliderWrapper}>
                     <div className={styles.customLabels}>
-                        <div className={styles.customLabel}>
-                            {value.min.toFixed(0)}  &#8372;
+                        <div className={styles.customLabelWrap}>
+                            <input className={styles.customLabel}
+                                value={value.min}
+                                onChange={e => this.handleIntroduceValue(e, 'min')}
+                                onBlur={() => this.priceOnBlur()}
+                            />
+                            <span className={styles.dimension}>{dimension}</span>
                         </div>
-                        <div className={styles.customLabel}>
-                            {value.max.toFixed(0)}  &#x20b4;
+                        <div className={styles.customLabelWrap}>
+                            <input className={styles.customLabel}
+                                value={value.max}
+                                onChange={e => this.handleIntroduceValue(e, 'max')}
+                                onBlur={() => this.priceOnBlur()}
+                            />
+                            <span className={styles.dimension}>{dimension}</span>
                         </div>
                     </div>
                     <InputRange
@@ -126,7 +178,7 @@ class FilterSlider extends Component {
                             sliderContainer: styles.sliderContainer,
                             slider: styles.slider
                         }}
-                        formatLabel={value => `${Number((value).toFixed(1))}`}
+                        formatLabel={value => `${Number((value))}`}
                         step={step}
                         value={value}
                         onChange={this.handleInputChange}

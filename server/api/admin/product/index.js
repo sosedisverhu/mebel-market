@@ -8,11 +8,13 @@ import editProduct from './services/editProduct';
 import deleteByIds from './services/deleteByIds';
 import updateFiles from './services/updateFiles';
 import updateAvatar from './services/updateAvatar';
+import updateColor from './services/updateColor';
 import findProductsByName from './services/findProductsByName';
+import editPositions from './services/editProductsPositions';
 
 const router = express.Router();
 
-router.use(verification);
+router.use(verification('products'));
 
 router.route('/all')
     .get(getProducts);
@@ -32,7 +34,13 @@ router.route('/update-files')
 router.route('/update-avatar')
     .post(updateAvatar);
 
+router.route('/update-color')
+    .post(updateColor);
+
 router.route('/find')
     .get(findProductsByName);
+
+router.route('/edit-positions')
+    .post(editPositions);
 
 export default router;

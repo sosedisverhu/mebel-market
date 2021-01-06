@@ -2,7 +2,7 @@
 
 module.exports = [
     {
-        alias: 'prague',
+        alias: 'prague1',
         categoryId: 'category0',
         id: '0',
         subCategoryId: 'subCategory0',
@@ -25,17 +25,132 @@ module.exports = [
         },
         date: 1577182954770,
         hidden: false,
-        discount: 10,
-        discountPrice: 1799,
-        price: 1999,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Prague.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p> В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -43,6 +158,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели. </p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -54,6 +172,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Прага »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -61,20 +182,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'classic',
+        alias: 'classic1',
         categoryId: 'category0',
         id: '1',
         subCategoryId: 'subCategory0',
@@ -97,17 +219,132 @@ module.exports = [
         },
         date: 1577182357741,
         hidden: false,
-        discount: 0,
-        discountPrice: 2799,
-        price: 2799,
-        actualPrice: 2799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Classic.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -115,6 +352,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Классика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -126,6 +366,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Класика »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -133,20 +376,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '100 кг', ru: '100 кг' } },
-            { id: 'zj4p4w34', value: { ua: 1000, ru: 1000 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'f8re765rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory1',
         categoryId: 'category0',
         id: '2',
         subCategoryId: 'subCategory1',
@@ -169,17 +413,132 @@ module.exports = [
         },
         date: 1577181957742,
         hidden: false,
-        discount: 0,
-        discountPrice: 3799,
-        price: 3799,
-        actualPrice: 3799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -187,6 +546,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -198,6 +560,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -205,20 +570,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 18,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '18 місяців', ru: '18 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Дерево', ru: 'Дерево' } },
-            { id: 'za4jh4w34', value: { ua: '200 кг', ru: '200 кг' } },
-            { id: 'zj4p4w34', value: { ua: 4000, ru: 4400 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fre9965rfw' },
+            { id: 'aa3a3aa1w34', value: 'fqwre765rfw' },
+            { id: 'za4jh4w34', value: 'fre7w3dw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'glory',
+        alias: 'glory2',
         categoryId: 'category0',
         id: '3',
         subCategoryId: 'subCategory2',
@@ -241,17 +607,132 @@ module.exports = [
         },
         date: 1577182957744,
         hidden: false,
-        discount: 0,
-        discountPrice: 3799,
-        price: 3799,
-        actualPrice: 3799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>В ногах кровати отсутствует спинка, что делает её визуально более просторной. ' +
@@ -259,6 +740,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Кровать « Глория »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -270,6 +754,9 @@ module.exports = [
                     ' с неё без труда можно встать. Также это облегчает уборку и, при желании, перестановку мебели в комнате.' +
                     ' Элегантность, изысканность и стильное оформление понравятся всем ценителям качественной и' +
                     ' красивой мебели.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Ліжко « Глорія »',
                 seoDescription: 'bed',
                 seoKeywords: '',
@@ -277,20 +764,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'standart',
+        alias: 'standart3',
         categoryId: 'category1',
         id: '4',
         subCategoryId: 'subCategory4',
@@ -313,17 +801,132 @@ module.exports = [
         },
         date: 1577182957146,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -331,6 +934,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матраc « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -342,6 +948,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: ' Матрац « Standart »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -349,20 +958,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'eko-42',
+        alias: 'eko-424',
         categoryId: 'category1',
         id: '5',
         subCategoryId: 'subCategory4',
@@ -385,17 +995,132 @@ module.exports = [
         },
         date: 1577182957747,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -403,6 +1128,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матраc « ЭКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -414,6 +1142,9 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
                 name: 'Матрац « ЕКО-42 »',
                 seoDescription: 'matress',
                 seoKeywords: '',
@@ -421,20 +1152,21 @@ module.exports = [
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P5',
         categoryId: 'category2',
         id: '6',
         subCategoryId: 'subCategory5',
@@ -457,17 +1189,132 @@ module.exports = [
         },
         date: 1577182957748,
         hidden: false,
-        discount: 15,
-        discountPrice: 1799,
-        price: 2000,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -475,7 +1322,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -486,27 +1336,31 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-А »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P6',
         categoryId: 'category2',
         id: '7',
         subCategoryId: 'subCategory6',
@@ -529,17 +1383,132 @@ module.exports = [
         },
         date: 1577182957749,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -547,7 +1516,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -558,27 +1530,31 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Б »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P7',
         categoryId: 'category2',
         id: '8',
         subCategoryId: 'subCategory7',
@@ -601,17 +1577,132 @@ module.exports = [
         },
         date: 1577182957750,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -619,7 +1710,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -630,27 +1724,31 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-В »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P8',
         categoryId: 'category2',
         id: '9',
         subCategoryId: 'subCategory7',
@@ -673,17 +1771,132 @@ module.exports = [
         },
         date: 1577182957751,
         hidden: false,
-        discount: 0,
-        discountPrice: 1799,
-        price: 1799,
-        actualPrice: 1799,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
+        actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -691,7 +1904,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -702,27 +1918,31 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Диван « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Диван « Ультра Люкс-Д »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     },
     {
-        alias: 'ultra-lux-P',
+        alias: 'ultra-lux-P9',
         categoryId: 'category3',
         id: '10',
         subCategoryId: 'subCategory8',
@@ -745,17 +1965,132 @@ module.exports = [
         },
         date: 1577182957752,
         hidden: false,
-        discount: 0,
-        discountPrice: 2000,
-        price: 2000,
+        minDiscount: 33,
+        minDiscountPrice: 2000,
+        minPrice: 3000,
         actualPrice: 2000,
         avatar: '/server/seeds/data/products/images/Glory.png',
         files: ['/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Bed.png', '/server/seeds/data/products/images/Glory.png'],
-        sizes: [
-            { name: 'M', id: 'sizeM' },
-            { name: 'L', id: 'sizeL' },
-            { name: 'XL', id: 'sizeXL' }
-        ],
+        sizes: {
+            ru: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Цветовая гамма для изделий из ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Цветовая гамма для изделий из ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Цветовая гамма для изделий из ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ],
+            ua: [
+                {
+                    name: '100 x 200',
+                    id: 'k681jmde',
+                    colors: [
+                        {
+                            id: 'k681jp6k',
+                            name: 'Кольорова гама для виробів з ольхи 1',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 2000,
+                            discount: 33,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        },
+                        {
+                            id: 'k681jp61',
+                            name: 'Кольорова гама для виробів з ольхи 2',
+                            article: '000002',
+                            price: 5999,
+                            discountPrice: 2999,
+                            discount: 50,
+                            file: '/server/seeds/data/products/images/brown.jpg'
+                        },
+                        {
+                            id: 'k681jp62',
+                            name: 'Red',
+                            article: '000009',
+                            price: 2000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        }
+                    ]
+                },
+                {
+                    name: '150 x 250',
+                    id: 'k681jmd5',
+                    colors: [
+                        {
+                            id: 'k681jp66',
+                            name: 'Red',
+                            article: '000001',
+                            price: 3000,
+                            discountPrice: 0,
+                            discount: 0,
+                            file: '/server/seeds/data/products/images/red.jpg'
+                        },
+                        {
+                            id: 'k681jp67',
+                            name: 'Кольорова гама для виробів з ольхи',
+                            article: '000002',
+                            price: 4999,
+                            discountPrice: 2999,
+                            discount: 40,
+                            file: '/server/seeds/data/products/images/olha.png'
+                        }
+                    ]
+                }
+            ]
+        },
         texts: {
             ru: {
                 description: '<p>Хороший сон – залог крепкого здоровья и приподнятого настроения. ' +
@@ -763,7 +2098,10 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
@@ -774,23 +2112,27 @@ module.exports = [
                     'но и свои финансовые возможности. Пружинный двусторонний матрас бренда Matratex' +
                     ' избавит вас от вечной дилеммы: цена или качество? С матрасом Standart вы сможете получить и то,' +
                     ' и другое.</p>',
-                name: 'Подушка « Ультра Люкс-П »',
+                shortDescription: 'Lorem ipsum dolor sit amet, consectetur' +
+                    ' adipiscing elit, sed do eiusmod tempor incididunt ut ' +
+                    'labore et dolore magna aliqua. Ut enim ad minim veniam',
+                name: 'Подушка « Ультра Люкс-Е »',
                 seoDescription: 'sofa',
                 seoKeywords: '',
                 seoTitle: 'sofa'
             }
         },
         views: 0,
+        warranty: 12,
         categoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Fusion Metal', ru: 'Fusion Metal' } },
-            { id: 'gew3wg43f34', value: { ua: '12 місяців', ru: '12 месяцев' } },
-            { id: 'aa3a3aa1w34', value: { ua: 'Сталь', ru: 'Сталь' } },
-            { id: 'za4jh4w34', value: { ua: '150 кг', ru: '150 кг' } },
-            { id: 'zj4p4w34', value: { ua: 44, ru: 44 } }
+            { id: 'gewgw34', value: 'fwess65rfw' },
+            { id: 'gew3wg43f34', value: 'fwe7ewsf5rfw' },
+            { id: 'aa3a3aa1w34', value: 'fre5u75rfw' },
+            { id: 'za4jh4w34', value: 'fre5005rfw' },
+            { id: 'zj4p4w34', value: 'qwerty' }
         ],
         subCategoryFilters: [
-            { id: 'gewgw34', value: { ua: 'Модерн', ru: 'Модерн' } },
-            { id: 'gewgw35', value: { ua: 'Білий', ru: 'Белый' } }
+            { id: 'gewgw34', value: 'fwess65rfw1' },
+            { id: 'gewgw35', value: 'fwess65rfw4' }
         ]
     }
 ];

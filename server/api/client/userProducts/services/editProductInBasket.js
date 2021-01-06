@@ -24,7 +24,7 @@ export default function editProductInBasket (req, res) {
             basket: [{ productId, quantity, properties, id: uniqid() }],
             id: uniqid()
         })
-            .then((result) => {
+            .then(result => {
                 const { basket, id } = result;
                 const expires = new Date();
 
@@ -32,16 +32,26 @@ export default function editProductInBasket (req, res) {
                 res.cookie(COOKIE_USER_PRODUCT_ID, id, { expires });
 
                 getProductsByIds(basket.map(basket => basket.id))
-                    .then((basketProducts) => {
+                    .then(basketProducts => {
                         return [
                             reduce((products, { productId, quantity, properties, id }) => {
                                 const product = find(product => product.id === productId, basketProducts);
 
-                                return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
+
+                                return append({ product, quantity, properties, id }, products);
                             }, [], basket)
                         ];
                     })
-                    .then((basketProducts) => {
+                    .then(basketProducts => {
                         res.status(OKEY_STATUS_CODE).send({
                             basket: basketProducts,
                             id
@@ -60,7 +70,7 @@ export default function editProductInBasket (req, res) {
                     basket: [{ productId, quantity, properties, id: uniqid() }],
                     id: uniqid()
                 })
-                    .then((result) => {
+                    .then(result => {
                         const { basket, id } = result;
                         const expires = new Date();
 
@@ -72,7 +82,17 @@ export default function editProductInBasket (req, res) {
                                 return reduce((products, { productId, quantity, properties, id }) => {
                                     const product = find(product => product.id === productId, basketProducts);
 
-                                    return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                    if (!product || product.hidden) return products;
+
+                                    const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                    if (!size) return products;
+
+                                    const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                    if (!color) return products;
+
+                                    return append({ product, quantity, properties, id }, products);
                                 }, [], basket);
                             })
                             .then((basketProducts) => {
@@ -94,16 +114,17 @@ export default function editProductInBasket (req, res) {
 
             const newBasket = basket.map(basketItem => {
                 if (basketItem.id === basketItemId) {
-                    basketItem.quantity = quantity || basketItem.quantity;
+                    basketItem.quantity = quantity;
                     basketItem.properties = properties || basketItem.properties;
                 }
                 return basketItem;
             });
+
             return editUserProduct({
                 basket: newBasket,
                 id
             })
-                .then((result) => {
+                .then(result => {
                     const { basket, id } = result;
 
                     getProductsByIds(basket.map(basket => basket.productId))
@@ -111,7 +132,17 @@ export default function editProductInBasket (req, res) {
                             return reduce((products, { productId, quantity, properties, id }) => {
                                 const product = find(product => product.id === productId, basketProducts);
 
-                                return !product || product.hidden ? products : append({ product, quantity, properties, id }, products);
+                                if (!product || product.hidden) return products;
+
+                                const size = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+
+                                if (!size) return products;
+
+                                const color = size.colors.find(color => color.id === properties.size.color.id);
+
+                                if (!color) return products;
+
+                                return append({ product, quantity, properties, id }, products);
                             }, [], basket);
                         })
                         .then((basketProducts) => {

@@ -6,6 +6,7 @@ import styles from './Articles.css';
 
 import Pagination from '../../components/Pagination/Pagination.jsx';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs.jsx';
+import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 import Sort from '../../components/Sort/Sort';
 import propOr from '@tinkoff/utils/object/propOr';
@@ -13,7 +14,6 @@ import propOr from '@tinkoff/utils/object/propOr';
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
-        lang: application.lang,
         articles: data.articles,
         mediaWidth: application.media.width
     };
@@ -22,11 +22,8 @@ const mapStateToProps = ({ application, data }) => {
 class Articles extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        lang: PropTypes.string.isRequired,
         articles: PropTypes.array.isRequired,
-        mediaWidth: PropTypes.number.isRequired,
-        location: PropTypes.object,
-        history: PropTypes.object.isRequired
+        mediaWidth: PropTypes.number.isRequired
     };
 
     state = {
@@ -51,7 +48,7 @@ class Articles extends Component {
         }, 0);
     });
 
-    previousPage = (pageNumber) => {
+    previousPage = pageNumber => {
         const { currentPage } = this.state;
         if (currentPage > 1) {
             this.setState({ currentPage: Number(pageNumber.target.id) - 1 }, () => {
@@ -65,7 +62,7 @@ class Articles extends Component {
         }
     };
 
-    nextPage = (pageNumber) => {
+    nextPage = pageNumber => {
         const { articles } = this.props;
         const { currentPage, postsPerPage } = this.state;
         if (currentPage < articles.length / postsPerPage) {
@@ -89,7 +86,8 @@ class Articles extends Component {
 
         return (
             <section className={styles.articles}>
-                <Breadcrumbs />
+                <Breadcrumbs noCategoryPage={text.searchResult.substring(0, text.searchResult.length - 1)}/>
+                <DeliveryOffer mobile/>
                 {articles.length
                     ? (<div className={styles.panelTopWrapper}>
                         <div className={styles.panelTop}>

@@ -4,30 +4,28 @@ import { connect } from 'react-redux';
 import classNames from 'classnames';
 import outsideClick from '../../hocs/outsideClick.jsx';
 import propOr from '@tinkoff/utils/object/propOr';
-import findIndex from '@tinkoff/utils/array/findIndex';
-import includes from '@tinkoff/utils/array/includes';
 
 import styles from './WishList.css';
 
+import formatWordDeclension from '../../../utils/formatWordDeclension';
 import deleteFromWishlist from '../../../services/client/deleteFromWishlist';
 import saveProductsToBasket from '../../../services/client/saveProductsToBasket';
+import formatMoney from '../../../utils/formatMoney';
 
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
         lang: application.lang,
-        wishlist: data.wishlist
+        windowWidth: application.media.width,
+        wishlist: data.wishlist,
+        basket: data.basket
     };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     deleteFromWishlist: payload => dispatch(deleteFromWishlist(payload)),
     saveProductsToBasket: payload => dispatch(saveProductsToBasket(payload))
 });
-
-const EXCEPTION_NUMBERS_MIN = 11;
-const EXCEPTION_NUMBERS_MAX = 14;
-const CASES_GROUPS = [[0, 5, 6, 7, 8, 9, 10, 11, 12], [1], [2, 3, 4]];
 
 @outsideClick
 class WishList extends Component {
@@ -38,7 +36,9 @@ class WishList extends Component {
         outsideClickEnabled: PropTypes.bool,
         wishlist: PropTypes.array.isRequired,
         deleteFromWishlist: PropTypes.func.isRequired,
-        saveProductsToBasket: PropTypes.func.isRequired
+        saveProductsToBasket: PropTypes.func.isRequired,
+        basket: PropTypes.array.isRequired,
+        windowWidth: PropTypes.number.isRequired
     };
 
     state = {
@@ -64,31 +64,23 @@ class WishList extends Component {
         }
     };
 
-    getWordCaseByNumber (number, cases) {
-        if (number >= EXCEPTION_NUMBERS_MIN && number <= EXCEPTION_NUMBERS_MAX) {
-            return cases[0];
-        }
-
-        const lastNumber = number % 10;
-        const resultIndex = findIndex((group) => includes(lastNumber, group), CASES_GROUPS);
-
-        return cases[resultIndex];
-    }
-
     removeProduct = wishlistItemId => () => {
         this.props.deleteFromWishlist(wishlistItemId);
     };
 
-    handleAddToBasket = product => () => {
+    handleAddToBasket = (product, properties) => () => {
         this.props.saveProductsToBasket({
-            productId: product.id
+            productId: product.id,
+            properties,
+            quantity: 1
         });
     };
 
     render () {
-        const { langMap, lang, wishlist } = this.props;
+        const { langMap, lang, wishlist, basket, windowWidth } = this.props;
         const { active } = this.state;
         const text = propOr('wishList', {}, langMap);
+        const cartText = propOr('cart', {}, langMap);
 
         return (
             <div className={styles.wishList}>
@@ -96,31 +88,45 @@ class WishList extends Component {
                     <span className={styles.quantityAll}>{wishlist.length}</span>
                 </div>
                 <div className={classNames(styles.popupContainer, { [styles.active]: active })}>
-                    <div className={styles.cover} onClick={this.handleClick}/>
+                    <div className={styles.cover} onClick={this.handleClick} />
                     <div className={styles.popup}>
                         <p className={styles.title}>
-                            {text.title} {wishlist.length > 0 &&
-                                <span>
-                                    {wishlist.length}&nbsp;
-                                    {this.getWordCaseByNumber(wishlist.length,
-                                        lang === 'ru' ? ['товаров', 'товар', 'товара'] : ['товарів', 'товар', 'товари'])}
-                                </span>
-                            }
+                            {text.title} {wishlist.length > 0 && <span>
+                                {wishlist.length}&nbsp;{formatWordDeclension(cartText.product, wishlist.length)}
+                            </span>}
                         </p>
                         {wishlist.length > 0
                             ? <div className={styles.productsContainer}>
-                                {wishlist.map(({ product, id: wishlistItemId }, i) =>
-                                    <div className={styles.wishItemWrapper} key={i}>
+                                {wishlist.map(({ product, properties, id: wishlistItemId }, i) => {
+                                    const size = product.sizes[lang].find(productSize => productSize.id === properties.size.id);
+                                    const color = size.colors.find(color => color.id === properties.size.color.id);
+                                    const isManyColors = size.colors.length > 1;
+
+                                    return <div className={styles.wishItemWrapper} key={i}>
                                         <div className={styles.wishItem}>
-                                            <img className={styles.productImg} src={product.avatar} alt=""/>
+                                            <img className={styles.productImg} src={product.avatar} alt="" />
                                             <div className={styles.productInfo}>
                                                 <div>
                                                     <p className={styles.productName}>{product.texts[lang].name.split('« ').join('«').split(' »').join('»')}</p>
-                                                    <p className={styles.productNumber}>Артикул: 48092</p>
-                                                    <p className={styles.productSize}>{text.size} 190 х 200</p>
+                                                    <p className={styles.productNumber}>
+                                                        {!!color.article && <span className={styles.productNumberTitle}>{text.article} </span>}
+                                                        {color.article}
+                                                    </p>
+                                                    <p className={styles.productSize}>{`${text.size} ${size.name}`}</p>
+                                                    {isManyColors && <div className={styles.productColor}>
+                                                        {text.color}
+                                                        <div className={styles.productColorImgWrap}>
+                                                            <img className={styles.productColorImg} src={color.file} alt={color.name}/>
+                                                        </div>
+                                                    </div>}
                                                     <div className={styles.productPrices}>
-                                                        <p className={styles.productOldPrice}>{product.price}&#8372;</p>
-                                                        <p className={styles.productPrice}>{product.discountPrice}&#8372;</p>
+                                                        {color && !!color.discountPrice &&
+                                                        <p className={styles.productOldPrice}>
+                                                            {formatMoney(color.price)}
+                                                        </p>}
+                                                        <p className={classNames(styles.productPrice, styles.productDiscountPrice)}>
+                                                            {formatMoney(color.discountPrice || color.price)}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className={styles.productButtons}>
@@ -130,13 +136,26 @@ class WishList extends Component {
                                                             alt="remove"
                                                         />
                                                     </button>
-                                                    <button className={styles.cartBtn} onClick={this.handleAddToBasket(product)}>{text.cartBtn}</button>
+                                                    {basket.find(item => item.product.id === product.id && item.properties.size.color.id === color.id)
+                                                        ? <button className={classNames(styles.cartBtn, styles.inCartBtn)}>
+                                                            { windowWidth > 500 ? text.inCartBtn : <img
+                                                                className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"
+                                                                alt="cart"
+                                                            />}
+                                                        </button>
+                                                        : <button className={styles.cartBtn} onClick={this.handleAddToBasket(product, properties)}>
+                                                            { windowWidth > 500 ? text.cartBtn : <img
+                                                                className={styles.cartBtnImg} src="/src/apps/client/ui/components/Cart/img/cart.svg"
+                                                                alt="cart"
+                                                            />}
+                                                        </button>}
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>)}
+                                    </div>;
+                                })}
                             </div>
-                            : <p>{text.noProduct}</p>
+                            : <p className={styles.noProducts}>{text.noProduct}</p>
                         }
                         <button className={styles.continueShopping} onClick={this.handlePopupClose}>{text.continueShopping}</button>
                     </div>

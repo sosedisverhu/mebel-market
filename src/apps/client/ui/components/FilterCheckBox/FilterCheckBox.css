@@ -2,6 +2,7 @@
 @value blackLight from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value gray7 from '../../../../../css/colors.css';
 
 .filter {
     &.active {
@@ -23,11 +24,33 @@
             transition: max-height 0.25s ease-in;
         }
     }
+
+    @media (max-width: 600px) {
+        position: relative;
+        padding: 15px 0;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            bottom: 0;
+            width: calc(100% + 32px);
+            height: 1px;
+            background: rgba(216, 216, 216, 0.5);
+        }
+
+        &.active {
+            .title {
+                background: none;
+                color: blackLight;
+            }
+        }
+    }
 }
 
 .title {
     box-sizing: border-box;
-    font: 300 14px/16px RoundedElegance;
+    font: 300 14px/16px GilroyRegular;
     color: blackLight;
     padding: 17px 45px 17px 25px;
     position: relative;
@@ -50,6 +73,35 @@
         transition: 0.25s ease-in;
         transition-property: transform, border-color;
     }
+
+     @media (max-width: 600px) {
+        padding: 0 34px 0 0;
+        width: 100%;
+        font-size: 18px;
+        line-height: 21px;
+
+        &:before {
+            content: url("./img/down.svg");
+             margin-top: -12px;
+             right: 0;
+             border: none;
+             width: auto;
+             height: auto;
+        }
+     }
+}
+
+.activeValue {
+    font: 14px/16px GilroyRegular;
+    color: gray7;
+
+    @media (min-width: 601px) {
+        display: none;
+    }
+}
+
+.activeValueText {
+    padding-top: 11px;
 }
 
 .options {
@@ -61,15 +113,42 @@
     transition: max-height 0.25s ease-out;
     background: greenBasic;
     min-width: 242px;
+
+    @media (max-width: 600px) {
+        position: relative;
+        padding: 0;
+        width: calc(100% + 32px);
+        top: 0;
+        left: -16px;
+        background: none;
+    }
 }
 
 .option {
-    font: 14px/16px RoundedElegance;
+    font: 14px/16px GilroyRegular;
     color: whiteBasic;
     padding: 9px 30px;
     display: block;
     position: relative;
     cursor: pointer;
+
+    @media (max-width: 600px) {
+        padding: 10px 16px 10px 56px;
+        background: greenBasic;
+
+        &:first-child {
+            padding-top: 20px;
+             margin-top: 15px;
+
+            .circle {
+                top: 18px;
+            }
+         }
+
+        &:last-child {
+             padding-bottom: 20px;
+         }
+    }
 }
 
 .input {
@@ -79,14 +158,6 @@
     top: 0;
     width: 0;
     height: 0;
-
-    &:checked {
-        + .circle {
-            &:before {
-                background: blackLight;
-            }
-        }
-    }
 }
 
 .circle {
@@ -111,4 +182,33 @@
         background: whiteBasic;
         border-radius: 50%;
     }
+
+    @media (max-width: 600px) {
+        width: 20px;
+        height: 20px;
+        left: 16px;
+
+        &:before {
+            width: 12px;
+            height: 12px;
+            margin-top: -6px;
+            margin-left: -6px;
+         }
+    }
+}
+
+.inputChecked {
+    &:before {
+         content: '';
+         position: absolute;
+         left: 50%;
+         top: 50%;
+         width: 10px;
+         height: 10px;
+         margin-top: -5px;
+         margin-left: -5px;
+         transition: background 0.25s ease-in;
+         background: blackLight;
+         border-radius: 50%;
+     }
 }

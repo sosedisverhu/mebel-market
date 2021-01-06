@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
 @value gray2 from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 
@@ -40,7 +41,7 @@
 
 .popupContainer {
     position: fixed;
-    z-index: 10;
+    z-index: 40;
     top: 50px;
     left: 0;
     width: 100%;
@@ -49,11 +50,11 @@
     visibility: hidden;
     opacity: 0;
     transition: all 0.5s ease-in-out;
+}
 
-    &.active {
-        visibility: visible;
-        opacity: 1;
-    }
+.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .cover {
@@ -72,10 +73,16 @@
     position: absolute;
     top: 0;
     right: 60px;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        right: 0;
+        min-width: auto;
+    }
 }
 
 .title {
@@ -87,8 +94,12 @@
 }
 
 .productsContainer {
-    max-height: 362px;
+    max-height: 320px;
     overflow-y: auto;
+
+    @media (max-width: 600px) {
+            width: 100%;
+    }
 }
 
 .cartBottomInfo {
@@ -103,7 +114,7 @@
     margin-top: 20px;
     background-color: blackLight;
     cursor: pointer;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 18px;
     line-height: 21px;
     color: whiteBasic;
@@ -118,7 +129,7 @@
 .continueShopping {
     @mixin removeDefaultButton;
     padding: 0;
-    font-family: RoundedElegance;
+    font-family: GilroyRegular;
     font-size: 18px;
     line-height: 21px;
     margin: 20px 0;
@@ -140,10 +151,11 @@
 
 .totalPriceContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 68px;
+    padding: 18px 0;
     background-color: gray2;
 }
 
@@ -151,11 +163,27 @@
     display: flex;
     width: 330px;
     justify-content: space-between;
+
+    @media (max-width: 500px) {
+        padding: 0 16px;
+        width: 100%;
+    }
 }
 
 .totalPrice {
     font-size: 24px;
-    line-height: 28px;
+    line-height: 32px;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
+
+    &.small {
+        font-size: 16px;
+        line-height: 1.5;
+        text-shadow: none;
+    }
+}
+
+.noProducts {
+    text-align: center;
+    padding: 0 16px;
 }

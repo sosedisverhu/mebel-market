@@ -14,7 +14,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import pick from '@tinkoff/utils/object/pick';
 
-const SLIDE_VALUES = ['link', 'path', 'newTab'];
+const SLIDE_VALUES = ['name', 'link', 'path', 'newTab'];
 
 const materialStyles = theme => ({
     uploadInput: {
@@ -127,7 +127,7 @@ class MainSlideForm extends Component {
         const { slide, isWrongDimensions } = this.state;
 
         return <form onSubmit={this.handleSubmit}>
-            <Typography variant='h5'>Slide editing</Typography>
+            <Typography variant='h5'>Редактирование слайда</Typography>
             <div className={classes.imageWrapper}>
                 <img
                     className={classNames(classes.image, { [classes.fileImageError]: isWrongDimensions })}
@@ -145,14 +145,21 @@ class MainSlideForm extends Component {
                 />
                 <label htmlFor='editUploadInput'>
                     <Button variant='contained' component='span' color='default'>
-                        Change photo slide
+                        Изменить фотографию
                         <CloudUploadIcon className={classes.uploadIcon} />
                     </Button>
                 </label>
             </FormControl>
-            {console.log(slide.link)}
             <TextField
-                label='Link'
+                label='Название кнопки'
+                value={slide.name}
+                onChange={this.handleChange('name')}
+                margin='normal'
+                variant='outlined'
+                fullWidth
+            />
+            <TextField
+                label='Ссылка'
                 value={slide.link}
                 onChange={this.handleChange('link')}
                 margin='normal'
@@ -161,7 +168,6 @@ class MainSlideForm extends Component {
             />
             <div>
                 <FormControlLabel
-                    disabled={!slide.link.length}
                     control={
                         <Checkbox
                             checked={slide.newTab}
@@ -169,7 +175,7 @@ class MainSlideForm extends Component {
                             color='primary'
                         />
                     }
-                    label='Open in new tab'
+                    label='Открывать в новой вкладке'
                 />
             </div>
             <FormControl margin='normal'>

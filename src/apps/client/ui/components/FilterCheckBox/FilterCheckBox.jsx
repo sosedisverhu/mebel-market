@@ -19,20 +19,20 @@ class FilterCheckBox extends Component {
         }),
         filtersMap: PropTypes.object.isRequired,
         onFilter: PropTypes.func.isRequired,
-        turnOnClickOutside: PropTypes.func.isRequired,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool.isRequired,
+        turnOnClickOutside: PropTypes.func.isRequired
     };
 
     state = {
         active: false
     };
 
-    handleLabelChecked = option => (event) => {
+    handleLabelChecked = option => e => {
         const { filter: { id }, filtersMap } = this.props;
         const value = propOr('values', [], filtersMap[id]);
         const newValue = [...value];
 
-        if (event.target.checked) {
+        if (e.target.checked) {
             newValue.push(option);
         } else {
             const currentIdIndex = findIndex(valueOption => valueOption === option, value);
@@ -61,6 +61,9 @@ class FilterCheckBox extends Component {
         const { filter: { name, options, id }, filtersMap } = this.props;
         const { active } = this.state;
 
+        const activeOptions = options.filter(option => filtersMap[id] && filtersMap[id].values.indexOf(option.id) !== -1);
+        const activeValues = activeOptions.map(activeOption => activeOption.name);
+
         return (
             <div className={classNames(
                 styles.filter,
@@ -69,20 +72,25 @@ class FilterCheckBox extends Component {
                 <h2 className={styles.title}
                     onClick={this.handleTitleClick}
                 >{name}</h2>
+                <div className={styles.activeValueWrap}>
+                    <div className={styles.activeValue}>
+                        {!!activeValues.length && <p className={styles.activeValueText}>{activeValues.join(', ')}</p>}
+                    </div>
+                </div>
                 <div className={styles.options}>
                     {options.map((option, index) => {
-                        const value = filtersMap[id] ? includes(option, filtersMap[id].values) : false;
+                        const value = filtersMap[id] ? includes(option.id, filtersMap[id].values) : false;
 
                         return (
                             <label key={index} className={styles.option}>
                                 <input
                                     className={styles.input}
                                     type="checkbox"
-                                    onChange={this.handleLabelChecked(option)}
+                                    onChange={this.handleLabelChecked(option.id)}
                                     checked={value}
                                 />
-                                <div className={styles.circle} />
-                                {option}
+                                <div className={classNames(styles.circle, { [styles.inputChecked]: value })} />
+                                {option.name}
                             </label>
                         );
                     })}

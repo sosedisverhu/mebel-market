@@ -8,6 +8,11 @@ import zonedTimeToUtc from 'date-fns-tz/zonedTimeToUtc';
 
 import getProductsByIds from '../../product/queries/getProductsByIds';
 import getBasketProducts from '../../userProducts/queries/getUserProducts';
+import getCategories from '../../category/queries/getAllCategories';
+import getSubCategories from '../../subCategory/queries/getAllSubCategories';
+
+import getCustomerLetterTemplateRU from '../templates/customerLetterRU';
+import getCustomerLetterTemplateUA from '../templates/customerLetterUA';
 
 import {
     NOT_FOUND_STATUS_CODE,
@@ -18,12 +23,15 @@ import {
 import editBasketProduct from '../../userProducts/queries/editUserProduct';
 import sendOrderQuery from '../queries/sendOrderQuery';
 
+import getShares from '../../../../../src/apps/client/utils/getShares';
+
 const SUBJECT = 'Новый заказ';
+const SUBJECT_CLIENT = 'Заказ №';
 
 export default function saveOrder (req, res) {
     const successCallback = () => res.sendStatus(OKEY_STATUS_CODE);
     const failureCallback = () => res.sendStatus(SERVER_ERROR_STATUS_CODE);
-    const { payment, delivery, customer: { name, email, phone, comment, address } = {} } = req.body;
+    const { payment, delivery, customer: { name, email, phone, comment, address } = {}, domain, lang } = req.body;
 
     const id = req.cookies[COOKIE_USER_PRODUCT_ID];
 
@@ -40,24 +48,66 @@ export default function saveOrder (req, res) {
                     const products = reduce((products, { productId, quantity, properties, id }) => {
                         const product = find(product => product.id === productId, baskedProducts);
 
-                        if (!product || product.hidden) {
-                            return products;
-                        }
+                        if (!product || product.hidden) return products;
 
-                        const productName = product.texts.ru.name;
-                        return append({ product, quantity, properties, id, basePrice: product.price, price: product.discountPrice, productName }, products);
+                        const productNameRu = product.texts.ru.name;
+                        const productNameUa = product.texts.ua.name;
+
+                        const sizeRu = product.sizes.ru.find(productSize => productSize.id === properties.size.id);
+                        const sizeUa = product.sizes.ua.find(productSize => productSize.id === properties.size.id);
+
+                        if (!sizeRu) return products;
+
+                        const colorRu = sizeRu.colors.find(color => color.id === properties.size.color.id);
+                        const colorUa = sizeUa.colors.find(color => color.id === properties.size.color.id);
+
+                        if (!colorRu) return products;
+
+                        properties.size.nameRu = sizeRu.name;
+                        properties.colorRu = {
+                            name: colorRu.name,
+                            file: colorRu.file
+                        };
+                        properties.size.color.imgRu = colorRu.name;
+
+                        properties.size.nameUa = sizeUa.name;
+                        properties.colorUa = {
+                            name: colorUa.name,
+                            file: colorUa.file
+                        };
+                        properties.size.color.imgUa = colorUa.name;
+
+                        const allFeatures = sizeRu.features || [];
+                        const checkedFeatureIds = properties.features || {};
+                        const checkedFeatures = allFeatures.filter(feature => checkedFeatureIds[feature.id]);
+                        properties.features = checkedFeatures;
+
+                        return append({
+                            product,
+                            quantity,
+                            properties,
+                            id,
+                            basePrice: colorRu.price,
+                            price: colorRu.discountPrice,
+                            productNameRu,
+                            productNameUa,
+                            article: colorRu.article
+                        }, products);
                     }, [], basket);
+
+                    const shares = getShares(products);
 
                     const order = {
                         id: uniqid(),
                         shortId: uniqid.time(),
                         date: Date.now(),
                         customer: { name, email, phone, comment, address },
-                        delivery: delivery,
-                        payment: payment,
+                        delivery,
+                        payment,
                         products,
                         comment: '',
-                        status: 'new'
+                        status: 'new',
+                        shares
                     };
 
                     const content = `<table>
@@ -96,21 +146,44 @@ export default function saveOrder (req, res) {
                                     <td width='110' style="font-weight: bold">Товары:</td>
                                 </tr>
                                 ${products.map((product) => {
-        return `<tr>
+        const featuresPrice = product.properties.features.reduce((sum, { value }) => sum + value, 0);
+        const unitPrice = (product.price || product.basePrice) + featuresPrice;
+
+        return `                            <tr>
                                                 <td style="font-weight: bold" width='110'>Название</td>
-                                                <td width='110'>${product.productName}</td>
+                                                <td width='110'>${product.productNameRu}</td>
                                             </tr>
+                                            ${product.article
+        ? `<tr>
+                                                <td style="font-weight: bold" width='110'>Артикул</td>
+                                                <td width='110'>${product.article}</td>
+                                            </tr>`
+        : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Цена</td>
-                                                <td width='110'>${product.price || product.basePrice} грн</td>
+                                                <td width='110'>${unitPrice} грн</td>
                                             </tr> 
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Количество</td>
                                                 <td width='110'>${product.quantity} штк.</td>
                                             </tr>
+                                            ${product.properties.features.length
+        ? `<tr>
+                                            <td style="font-weight: bold" width='110'>Дополнительно</td>
+                                            <td width='60'>${product.properties.features.map(feature => {
+        return '+ ' + feature.name + '; <br>';
+    }
+    )}
+                                            </td>
+                                        </tr>`
+        : ''}
                                             <tr>
                                                 <td style="font-weight: bold" width='110'>Размер</td>
-                                                <td width='110'>${product.properties.size.name}</td>
+                                                <td width='110'>${product.properties.size.nameRu}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-weight: bold" width='110'>Цвет</td>
+                                                <td width='110'>${product.properties.colorRu.name}</td>
                                             </tr>`;
     })}
                             </table>`;
@@ -134,6 +207,25 @@ export default function saveOrder (req, res) {
                                 successCallback,
                                 failureCallback
                             );
+                            Promise.all([
+                                getCategories(),
+                                getSubCategories()
+                            ])
+                                .then(values => {
+                                    const categories = values[0];
+                                    const subCategories = values[1];
+                                    const clientMessageContent = lang === 'ru'
+                                        ? getCustomerLetterTemplateRU(order, categories, subCategories, domain, shares)
+                                        : getCustomerLetterTemplateUA(order, categories, subCategories, domain, shares);
+
+                                    sendOrderQuery(
+                                        `${SUBJECT_CLIENT} ${order.shortId}. ${format(zonedTimeToUtc(new Date(), 'Europe/Kiev'), 'HH:mm - dd.MM.yyyy')}`,
+                                        clientMessageContent,
+                                        successCallback,
+                                        failureCallback,
+                                        order.customer.email
+                                    );
+                                });
                         })
                         .catch(() => {
                             res.status(SERVER_ERROR_STATUS_CODE).end();

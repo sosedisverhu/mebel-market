@@ -1,0 +1,165 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value blackLighter from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
+@value gray3 from '../../../../../css/colors.css';
+@value gray8 from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
+
+.root {
+    margin-top: 15px;
+    width: 208px;
+    position: relative;
+
+    &.active, &:hover {
+        .background {
+            background: linear-gradient(0deg, rgba(37, 113, 108, 0.75), rgba(37, 113, 108, 0.75));
+        }
+
+        .properties {
+            display: flex;
+        }
+    }
+}
+
+.imgWrap {
+    display: flex;
+    position: relative;
+}
+
+.img {
+    width: 100%;
+}
+
+.background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    //background: rgba(255, 255, 255, 0.75);
+    transition: background 0.25s ease-in;
+}
+
+.properties {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 25px;
+    display: none;
+}
+
+.sizesWrap {
+    width: 100%;
+}
+
+.sizesTitle {
+    font: 14px/16px GilroyRegular;
+    color: whiteBasic;
+    text-align: left;
+}
+
+.colorWrap {
+    width: 100%;
+    position: relative;
+    margin-top: 10px;
+
+    &.active {
+        .activeColor{
+            &:before{
+                transform: rotate(180deg);
+                border-color: blackLight transparent transparent transparent;
+            }
+        }
+        .colorList {
+            display: block;
+        }
+    }
+
+    @media (max-width: 1190px) {
+        margin: 0 0 0 100px;
+    }
+
+    @media (max-width: 500px) {
+        margin: 15px 0 0 0;
+    }
+}
+
+.colorTitle {
+    font: 14px/16px GilroyRegular;
+    color: whiteBasic;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.color {
+    height: 28px;
+    list-style: none;
+    margin-top: 10px;
+    position: relative;
+    border-top: 1px solid gray0;
+    border-bottom: 1px solid gray0;
+
+    &:hover {
+        .view {
+            display: flex;
+        }
+    }
+}
+.activeColor {
+    border: 1px solid gray0;
+    position: relative;
+    margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 8px 5px 0 5px;
+        border-color: greenBasic transparent transparent transparent;
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        margin-top: -5px;
+        transition: 0.25s ease-out;
+        transition-property: transform, border-color;
+    }
+
+    .view {
+        display: flex;
+    }
+}
+
+.oneActiveColor {
+    &:before {
+        display: none;
+    }
+}
+
+.colorImg {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.colorList {
+    border-top: 1px solid gray0;
+    border-left: 1px solid gray0;
+    border-right: 1px solid gray0;
+    position: absolute;
+    top: calc(100% - 1px);
+    left: 0;
+    background: gray3;
+    z-index: 1;
+    display: none;
+    width: 100%;
+}

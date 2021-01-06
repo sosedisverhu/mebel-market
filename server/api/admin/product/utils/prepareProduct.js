@@ -10,15 +10,19 @@ const VALUES = [
     'files',
     'hidden',
     'date',
-    'discountPrice',
-    'price',
+    'minDiscountPrice',
+    'minPrice',
     'actualPrice',
-    'discount',
+    'minDiscount',
+    'warranty',
     'categoryId',
     'subCategoryId',
     'alias',
     'categoryFilters',
-    'subCategoryFilters'
+    'subCategoryFilters',
+    'labels',
+    'exist',
+    'viewOneColor'
 ];
 
 export default function prepareProduct (body) {

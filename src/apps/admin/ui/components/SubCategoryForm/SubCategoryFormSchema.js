@@ -4,7 +4,6 @@ import FormFieldButton from '../Form/fields/FormFieldButton/FormFieldButton';
 import FormFieldCheckbox from '../Form/fields/FormFieldCheckbox/FormFieldCheckbox';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldFilters from '../Form/fields/FormFieldFilters/FormFieldFilters';
 
 export default function ({ data: { title, categoryHidden } = {} } = {}) {
@@ -68,11 +67,78 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
                     options: [{
                         id: 'notDepend',
                         name: 'depend'
-                    }]
+                    }],
+                    dimension: 'depend'
                 }],
                 validators: [
                     { name: 'filters' }
                 ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'filtersTitle',
+                schema: {
+                    label: 'Дефолтные фильтры для подкатегории',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldCheckbox,
+                name: 'sizeFilter',
+                schema: {
+                    label: 'Включить фильтр по размерам'
+                }
+            },
+            {
+                component: FormFieldCheckbox,
+                name: 'colorFilter',
+                schema: {
+                    label: 'Включить фильтр по цветам'
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'columnsTitle',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название для столбцов таблицы размеров товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'sizeColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца размеров',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'descriptionColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца свойств',
+                    type: 'string'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'valueColumn',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Название столбца значения',
+                    type: 'string'
+                }
             },
             {
                 component: FormFieldDivider,
@@ -111,12 +177,11 @@ export default function ({ data: { title, categoryHidden } = {} } = {}) {
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {

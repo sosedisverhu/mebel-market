@@ -14,11 +14,14 @@ const VALUES = [
     'price',
     'actualPrice',
     'discount',
+    'warranty',
     'categoryId',
     'subCategoryId',
     'alias',
     'categoryFilters',
-    'subCategoryFilters'
+    'subCategoryFilters',
+    'labels',
+    'viewOneColor'
 ];
 
 export default function getProductValues (product) {

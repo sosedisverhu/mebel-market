@@ -6,12 +6,23 @@ import FormFieldFiles from '../Form/fields/FormFieldFiles/FormFieldFiles';
 import FormFieldLangs from '../Form/fields/FormFieldLangs/FormFieldLangs';
 import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
-import FormFieldFeaturesSingular from '../Form/fields/FormFieldFeaturesSingular/FormFieldFeaturesSingular';
+import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
-import FormFieldKeywords from '../Form/fields/FormFieldWords/FormFieldWords';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
+import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
+import FormFieldButtonCopyFilters from '../Form/fields/FormFieldButtonCopyFilters/FormFieldButtonCopyFilters';
+import FormFieldRadios from '../Form/fields/FormFieldRadios/FormFieldRadios';
 
-export default function ({ data: { title, categoriesOptions, subCategoriesOptions, categoryHidden, categoryFilters, subCategoryFilters } = {} } = {}) {
+export default function ({ data: {
+    title,
+    categoriesOptions,
+    subCategoriesOptions,
+    categoryHidden,
+    categoryFilters,
+    subCategoryFilters,
+    categories,
+    allSubCategories
+} = {} } = {}) {
     return {
         fields: [
             {
@@ -44,13 +55,33 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 component: FormFieldTitle,
                 name: 'content-title',
                 schema: {
+                    label: 'Короткое описание',
+                    variant: 'h6'
+                }
+            },
+            {
+                component: FormFieldInput,
+                name: 'shortDescription',
+                valueLangStructure: 'depend',
+                schema: {
+                    label: 'Короткое описание',
+                    multiline: true
+                },
+                validators: [
+                    { name: 'required', options: { text: 'Заполните короткое описание' } }
+                ]
+            },
+            {
+                component: FormFieldTitle,
+                name: 'content-title',
+                schema: {
                     label: 'Описание',
                     variant: 'h6'
                 }
             },
             {
                 component: FormFieldEditor,
-                name: `description`,
+                name: 'description',
                 valueLangStructure: 'depend',
                 schema: {
                     label: 'Описание',
@@ -78,7 +109,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: categoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите категорию новости' } }
+                    { name: 'required', options: { text: 'Выберите категорию товара' } }
                 ]
             },
             {
@@ -89,42 +120,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     options: subCategoriesOptions
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Выберите подкатегорию новости' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'price',
-                schema: {
-                    label: 'Цена',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'required', options: { text: 'Заполните цену товара' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discountPrice',
-                schema: {
-                    label: 'Скидочная цена (грн)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discountPrice', options: { text: 'Введите значение скидки' } }
-                ]
-            },
-            {
-                component: FormFieldInput,
-                name: 'discount',
-                schema: {
-                    label: 'Размер скидки (%)',
-                    type: 'number'
-                },
-                validators: [
-                    { name: 'discount', options: { text: 'Введите процент скидки' } },
-                    { name: 'min', options: { minValue: 0 } },
-                    { name: 'max', options: { maxValue: 100 } }
+                    { name: 'required', options: { text: 'Выберите подкатегорию товара' } }
                 ]
             },
             {
@@ -136,13 +132,46 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 }
             },
             {
-                component: FormFieldFeaturesSingular,
+                component: FormFieldSizes,
                 name: 'sizes',
-                schema: {
-                    name: 'Размер'
-                },
+                valueLangStructure: [{
+                    name: 'notDepend',
+                    article: 'notDepend',
+                    price: 'notDepend',
+                    discountPrice: 'notDepend',
+                    discount: 'notDepend',
+                    id: 'notDepend',
+                    colors: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        article: 'notDepend',
+                        price: 'notDepend',
+                        discountPrice: 'notDepend',
+                        discount: 'notDepend',
+                        file: 'notDepend',
+                        action: 'notDepend'
+                    }],
+                    features: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        value: 'notDepend'
+                    }],
+                    tableSizes: [{
+                        id: 'notDepend',
+                        name: 'depend',
+                        value: 'notDepend'
+                    }],
+                    shares: [{
+                        id: 'notDepend',
+                        type: 'notDepend',
+                        value: 'notDepend',
+                        products: 'notDepend'
+                    }]
+                }],
                 validators: [
-                    { name: 'required', options: { text: 'Заполните размеры товара' } }
+                    { name: 'required', options: { text: 'Добавьте хотя бы 1 размер для товара' } },
+                    { name: 'sizes' },
+                    { name: 'shares' }
                 ]
             },
             {
@@ -151,26 +180,21 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             },
             {
                 component: FormFieldTitle,
-                name: 'characteristics-title',
+                name: 'form-title',
                 schema: {
-                    label: 'Характеристики товара',
+                    label: 'Гарантия на товар',
                     variant: 'h5'
                 }
             },
             {
-                component: FormFieldFeaturesDouble,
-                name: 'characteristics',
-                valueLangStructure: [{
-                    name: 'depend',
-                    value: 'depend',
-                    id: 'notDepend'
-                }],
+                component: FormFieldInput,
+                name: 'warranty',
                 schema: {
-                    name: 'Название характеристики',
-                    value: 'Значения'
+                    label: 'Гарантия (в месяцах)',
+                    type: 'number'
                 },
                 validators: [
-                    { name: 'required', options: { text: 'Заполните характеристики товара' } }
+                    { name: 'required', options: { text: 'Заполните гарантию товара' } }
                 ]
             },
             {
@@ -193,7 +217,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: categoryFilter.name,
                             options: categoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -235,7 +259,7 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                         schema: {
                             label: subCategoryFilter.name,
                             options: subCategoryFilter.options.map(option => ({
-                                value: option.name,
+                                value: option.id,
                                 name: option.name
                             }))
                         },
@@ -257,6 +281,99 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                     ]
                 });
             })),
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldButtonCopyFilters,
+                name: 'copyFilters',
+                schema: {
+                    label: 'Скопировать фильтры в характеристики',
+                    type: 'button',
+                    categories: categories,
+                    allSubCategories: allSubCategories
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'characteristics-title',
+                schema: {
+                    label: 'Характеристики товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldFeaturesDouble,
+                name: 'characteristics',
+                valueLangStructure: [{
+                    name: 'depend',
+                    value: 'depend',
+                    id: 'notDepend'
+                }],
+                schema: {
+                    name: 'Название характеристики',
+                    value: 'Значения'
+                },
+                validators: [
+                    { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'titleExist',
+                schema: {
+                    label: 'Наличие товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldRadios,
+                name: 'exist',
+                validators: [
+                    { name: 'required', options: { text: 'Подтвердите наявность в наличии' } }
+                ],
+                schema: {
+                    options: [
+                        {
+                            label: 'Есть в наличии',
+                            value: 'true'
+                        },
+                        {
+                            label: 'Под заказ',
+                            value: 'false'
+                        }
+                    ]
+                }
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'titleLabels',
+                schema: {
+                    label: 'Лейблы товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldCheckboxes,
+                name: 'labels',
+                schema: {
+                    label: 'Лейбл',
+                    options: [{ label: 'Топ продаж', value: 'top' }, { label: 'Новинка', value: 'new' }]
+                }
+            },
             {
                 component: FormFieldDivider,
                 name: 'divider'
@@ -294,9 +411,6 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
             {
                 component: FormFieldFiles,
                 name: 'files',
-                schema: {
-                    max: 6
-                },
                 validators: [
                     { name: 'requiredFiles', options: { text: 'Добавьте фото' } }
                 ]
@@ -338,17 +452,23 @@ export default function ({ data: { title, categoriesOptions, subCategoriesOption
                 ]
             },
             {
-                component: FormFieldKeywords,
+                component: FormFieldInput,
                 name: 'seoKeywords',
                 valueLangStructure: 'depend',
                 schema: {
-                    label: 'Ключевые слова',
-                    multiline: false
+                    label: 'Ключевые слова'
                 }
             },
             {
                 component: FormFieldDivider,
                 name: 'divider'
+            },
+            {
+                component: FormFieldCheckbox,
+                name: 'viewOneColor',
+                schema: {
+                    label: 'Показывать цвет, если он один'
+                }
             },
             {
                 component: FormFieldCheckbox,

@@ -18,11 +18,13 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Chip from '@material-ui/core/Chip';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import trim from '@tinkoff/utils/string/trim';
 import { withStyles } from '@material-ui/core/styles';
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 
 import arrayMove from '../../../../../utils/arrayMove';
-import trim from '@tinkoff/utils/string/trim';
 import remove from '@tinkoff/utils/array/remove';
 import noop from '@tinkoff/utils/function/noop';
 import uniqid from 'uniqid';
@@ -49,7 +51,11 @@ const Filter = SortableElement((
         editableOptionText,
         editableFilterIndex,
         editableOptionIndex,
-        classes
+        onSortOptionsStart,
+        onSortOptionsEnd,
+        isSortingOptions,
+        classes,
+        schema
     }) => {
     const isEditable = editableFilterIndex === filterIndex;
 
@@ -89,50 +95,74 @@ const Filter = SortableElement((
                                 margin='normal'
                                 variant='outlined'
                             />
-                            {!isEditable
-                                ? <Fab
-                                    size="small"
-                                    color='primary'
-                                    className={classes.actionOptionButton}
-                                    onClick={onFilterOptionAdd(filterIndex)} aria-label="Add"
-                                >
-                                    <AddIcon/>
-                                </Fab>
-                                : <Fragment>
-                                    <Fab
+                            {
+                                !isEditable
+                                    ? <Fab
                                         size="small"
                                         color='primary'
                                         className={classes.actionOptionButton}
-                                        onClick={onFilterOptionEditDone} aria-label="Edit"
+                                        onClick={onFilterOptionAdd(filterIndex)} aria-label="Add"
                                     >
-                                        <CheckIcon/>
+                                        <AddIcon/>
                                     </Fab>
-                                    <Fab
-                                        size="small"
-                                        color='primary'
-                                        className={classes.actionOptionButton}
-                                        onClick={onFilterOptionEditCancel} aria-label="Cancel"
-                                    >
-                                        <CloseIcon/>
-                                    </Fab>
-                                </Fragment>}
-                            <div>
-                                {filter.options &&
-                                filter.options.map((option, i) => {
-                                    return option.name && <Chip
-                                        key={i}
-                                        label={option.name}
-                                        variant={(!isEditable || editableOptionIndex !== i) && 'outlined'}
-                                        color="primary"
-                                        onDelete={onFilterOptionDelete(filterIndex, i)}
-                                        className={classes.chip}
-                                        onClick={onFilterOptionEditStart(filterIndex, i)}
-                                        clickable
-                                    />;
-                                })}
-                            </div>
+                                    : <Fragment>
+                                        <Fab
+                                            size="small"
+                                            color='primary'
+                                            className={classes.actionOptionButton}
+                                            onClick={onFilterOptionEditDone} aria-label="Edit"
+                                        >
+                                            <CheckIcon/>
+                                        </Fab>
+                                        <Fab
+                                            size="small"
+                                            color='primary'
+                                            className={classes.actionOptionButton}
+                                            onClick={onFilterOptionEditCancel} aria-label="Cancel"
+                                        >
+                                            <CloseIcon/>
+                                        </Fab>
+                                    </Fragment>
+                            }
+                            <Options
+                                axis='xy'
+                                options={filter.options}
+                                filterIndex={filterIndex}
+                                isEditable={isEditable}
+                                pressDelay={200}
+                                classes={classes}
+                                onSortStart={onSortOptionsStart}
+                                onSortEnd={onSortOptionsEnd(filterIndex)}
+                                editableOptionIndex={editableOptionIndex}
+                                onFilterOptionEditStart={onFilterOptionEditStart}
+                                onFilterOptionDelete={onFilterOptionDelete}
+                                isSortingOptions={isSortingOptions}
+                                disabled={editableFilterIndex === filterIndex}
+                            />
                         </div>
                     }
+                    {
+                        filter.type === 'range' && <TextField
+                            className={classes.filterField}
+                            label='Размерность'
+                            value={filter.dimension || ''}
+                            onChange={onFilterChange('dimension', filterIndex)}
+                            margin='normal'
+                            variant='outlined'
+                        />
+                    }
+                    { schema.viewInAnotherFilters && <div className={classes.checkbox}>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={filter.viewInAnotherFilters || ''}
+                                    onChange={onFilterChange('viewInAnotherFilters', filterIndex)}
+                                    color='primary'
+                                />
+                            }
+                            label="Показывать фильтр в подкатегории"
+                        />
+                    </div>}
                 </div>
                 <IconButton aria-label='Delete' className={classes.deleteFilterButton} onClick={onFilterDelete(filterIndex)}>
                     <DeleteIcon/>
@@ -142,9 +172,40 @@ const Filter = SortableElement((
     );
 });
 
+const Option = SortableElement((
+    {
+        classes,
+        editableOptionIndex,
+        onFilterOptionDelete,
+        onFilterOptionEditStart,
+        filterIndex,
+        index,
+        option,
+        isEditable,
+        isSortingOptions
+    }) =>
+    <Chip
+        label={option.name}
+        variant={(!isEditable || editableOptionIndex !== index) && 'outlined'}
+        color="primary"
+        onDelete={onFilterOptionDelete(filterIndex, index)}
+        className={classNames(classes.chip, { [classes.optionIsSortable]: isSortingOptions })}
+        onClick={onFilterOptionEditStart(filterIndex, index)}
+        clickable
+    />
+);
+
+const Options = SortableContainer(({ options, classes, ...rest }) =>
+    <div className={classes.optionsWrapp}>
+        {options && options.map((option, i) => <Option key={i} index={i} option={option} classes={classes} {...rest} />)}
+    </div>
+);
+
 const Filters = SortableContainer(({ filters, classes, ...rest }) =>
-    <div>
-        {filters.map((filter, i) => <Filter key={i} index={i} filterIndex={i} filter={filter} {...rest} classes={classes}/>)}
+    <div className={classes.filtersWrapp}>
+        {
+            filters.map((filter, i) => <Filter key={i} index={i} filterIndex={i} filter={filter} {...rest} classes={classes}/>)
+        }
     </div>
 );
 
@@ -224,6 +285,8 @@ const materialStyles = theme => ({
     chip: {
         margin: '4px',
         marginBottom: '19px',
+        zIndex: '3000',
+        background: '#FFFFFF',
         '& span': {
             minWidth: '40px'
         }
@@ -236,6 +299,9 @@ const materialStyles = theme => ({
         display: 'flex',
         margin: '15px',
         justifyContent: 'flex-end'
+    },
+    optionIsSortable: {
+        background: 'none'
     }
 });
 
@@ -243,12 +309,14 @@ class FormFieldFilters extends Component {
     static propTypes = {
         classes: PropTypes.object.isRequired,
         value: PropTypes.array,
-        onChange: PropTypes.func
+        onChange: PropTypes.func,
+        schema: PropTypes.object
     };
 
     static defaultProps = {
         value: [],
-        onChange: noop
+        onChange: noop,
+        schema: {}
     };
 
     state = {
@@ -256,7 +324,8 @@ class FormFieldFilters extends Component {
         newOptionTexts: this.props.value.map(() => ({ id: uniqid(), name: '' })),
         editableOptionText: '',
         editableFilterIndex: null,
-        editableOptionIndex: null
+        editableOptionIndex: null,
+        isSortingOptions: false
     };
 
     handleFilterAdd = () => {
@@ -275,11 +344,15 @@ class FormFieldFilters extends Component {
         });
     };
 
-    handleFilterChange = (prop, i) => event => {
+    handleFilterChange = (prop, i) => (event, checked) => {
         const { value } = this.props;
         const newValue = [...value];
 
-        newValue[i][prop] = event.target.value;
+        if (typeof (checked) === 'boolean') {
+            newValue[i][prop] = checked;
+        } else {
+            newValue[i][prop] = event.target.value;
+        }
 
         if (newValue[i].options === undefined) {
             newValue[i].options = [];
@@ -396,6 +469,12 @@ class FormFieldFilters extends Component {
         });
     };
 
+    onDragOptionsStart = () => {
+        this.setState({
+            isSortingOptions: true
+        });
+    };
+
     onDragEnd = ({ oldIndex, newIndex }) => {
         const { value } = this.props;
 
@@ -405,9 +484,20 @@ class FormFieldFilters extends Component {
         });
     };
 
+    onDragOptionsEnd = (filterIndex) => ({ oldIndex, newIndex }) => {
+        const { value: filters } = this.props;
+
+        filters[filterIndex].options = arrayMove(filters[filterIndex].options, oldIndex, newIndex);
+        this.props.onChange(filters);
+
+        this.setState({
+            isSortingOptions: false
+        });
+    };
+
     render () {
-        const { classes, value } = this.props;
-        const { isSorting, newOptionTexts, editableOptionText, editableFilterIndex, editableOptionIndex } = this.state;
+        const { classes, value, schema } = this.props;
+        const { isSorting, isSortingOptions, newOptionTexts, editableOptionText, editableFilterIndex, editableOptionIndex } = this.state;
 
         return <div className={classes.createFiltersWrapp}>
             <Filters
@@ -424,13 +514,17 @@ class FormFieldFilters extends Component {
                 onFilterOptionEditCancel={this.handleFilterOptionEditCancel}
                 onSortStarТt={this.onDragStart}
                 onSortEnd={this.onDragEnd}
+                onSortOptionsStart={this.onDragOptionsStart}
+                onSortOptionsEnd={this.onDragOptionsEnd}
                 newOptionTexts={newOptionTexts}
                 editableOptionText={editableOptionText}
                 editableFilterIndex={editableFilterIndex}
                 editableOptionIndex={editableOptionIndex}
                 isSorting={isSorting}
+                isSortingOptions={isSortingOptions}
                 useDragHandle
                 classes={classes}
+                schema={schema}
             />
             <div className={classes.buttonWrapp}>
                 <Fab size="small" color='primary' onClick={this.handleFilterAdd} aria-label="Add">
