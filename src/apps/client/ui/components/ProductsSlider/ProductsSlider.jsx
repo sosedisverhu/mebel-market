@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import splitEvery from '@tinkoff/utils/array/splitEvery';
 import noop from '@tinkoff/utils/function/noop';
 
+import isScrolledIntoView from './../../../utils/isScrolledIntoView';
+
 import styles from './ProductsSlider.css';
 import Card from '../Card/Card';
 import Draggable from '../Draggable/Draggable.jsx';
@@ -33,6 +35,8 @@ class ProductsSlider extends Component {
             activeIndex: 0,
             productsInPack: 4,
             productsPacks: [],
+            productsAnimation: false,
+            endAnimation: false,
             left: 0
         };
     }
@@ -42,11 +46,6 @@ class ProductsSlider extends Component {
             this.setWidth();
             this.setProductsPacks(nextProps);
         }
-    }
-
-    componentDidMount () {
-        this.setWidth();
-        this.setProductsPacks();
     }
 
     setWidth = () => {
@@ -82,17 +81,6 @@ class ProductsSlider extends Component {
         this.setState({ productsPacks });
     }
 
-    setActiveIndex = (newIndex) => {
-        const { productsPacks, widthSlide } = this.state;
-        const length = Math.ceil(productsPacks.length);
-
-        if (newIndex > length - 1) newIndex = 0;
-        if (newIndex < 0) newIndex = length - 1;
-        const left = -widthSlide * newIndex;
-
-        this.setState({ activeIndex: newIndex, left });
-    };
-
     handleArrowClick = (addValue) => {
         const { activeIndex } = this.state;
         this.setActiveIndex(activeIndex + addValue);
@@ -124,9 +112,79 @@ class ProductsSlider extends Component {
         this.setActiveIndex(activeIndex + 1);
     };
 
+    componentDidMount () {
+        this.setWidth();
+        this.setProductsPacks();
+        const { products, widthWindow } = this.props;
+        const width = this.products.current.clientWidth;
+
+        let productsNumber = 4;
+        if (widthWindow < 1361) productsNumber = 3;
+        if (widthWindow < 1021) productsNumber = 2;
+        if (widthWindow < 761) productsNumber = 4;
+
+        const productsPacks = splitEvery(productsNumber, products);
+
+        this.setState({ width, productsPacks });
+
+        if (document.readyState === 'complete') {
+            this.handleScroll();
+            document.addEventListener('scroll', this.handleScroll);
+        } else {
+            window.addEventListener('load', () => {
+                this.handleScroll();
+                document.addEventListener('scroll', this.handleScroll);
+            });
+        }
+    }
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.products.current, 'productAnimation');
+    };
+
+    isScrolledIntoView = (elem, stateName) => {
+        if (this.state[stateName]) {
+            return;
+        }
+
+        const isVisible = isScrolledIntoView(elem);
+
+        if (isVisible) {
+            this.setState({ [stateName]: true }, () => {
+                setTimeout(() => stateName === 'productAnimation' ? this.setState({ endAnimation: true }) : null);
+            });
+        }
+    };
+
+    // setActiveIndex = (newIndex) => {
+    //     const { productsPacks } = this.state;
+    //     const length = Math.ceil(productsPacks.length);
+
+    //     if (newIndex > length - 1) newIndex = 0;
+    //     if (newIndex < 0) newIndex = length - 1;
+
+    //     this.setState({ activeIndex: newIndex });
+    // };
+
+    setActiveIndex = (newIndex) => {
+        const { productsPacks, widthSlide } = this.state;
+        const length = Math.ceil(productsPacks.length);
+
+        if (newIndex > length - 1) newIndex = 0;
+        if (newIndex < 0) newIndex = length - 1;
+        const left = -widthSlide * newIndex;
+
+        this.setState({ activeIndex: newIndex, left });
+    };
+
     render () {
+        const { width, activeIndex, productsPacks, productAnimation, endAnimation } = this.state;
+        const left = -1 * (width * activeIndex);
         const { label, widthWindow, isPromotion } = this.props;
-        const { activeIndex, productsPacks, left } = this.state;
         const hidden = productsPacks.length <= 1;
 
         return (
@@ -151,7 +209,15 @@ class ProductsSlider extends Component {
                                         key={product.id}
                                         product={product}
                                         isPromotion={isPromotion}
-                                        setSliderWidth={this.setWidth}/>)}
+                                        setSliderWidth={this.setWidth}
+                                        
+                                        sliderProductVisible={productAnimation}
+                                        
+                                        
+                                        transitionDelay={index}
+                                        endAnimation={endAnimation}
+                                        
+                                        />)}
                                 </div>;
                             })}
                         </div>

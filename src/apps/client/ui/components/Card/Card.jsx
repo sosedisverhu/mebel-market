@@ -32,6 +32,9 @@ class Card extends Component {
         labelClass: PropTypes.string,
         categories: PropTypes.array,
         subCategories: PropTypes.array,
+        sliderProductVisible: PropTypes.bool,
+        endAnimation: PropTypes.bool,
+        transitionDelay: PropTypes.number,
         setSliderWidth: PropTypes.func,
         isPromotion: PropTypes.bool,
         activeSizes: PropTypes.array
@@ -42,6 +45,9 @@ class Card extends Component {
         labelClass: '',
         categories: [],
         subCategories: [],
+        sliderProductVisible: false,
+        endAnimation: false,
+        transitionDelay: 0,
         activeSizes: [],
         setSliderWidth: () => {}
     };
@@ -76,12 +82,19 @@ class Card extends Component {
             labelClass,
             langRoute,
             lang,
+            sliderProductVisible,
+            transitionDelay,
+            endAnimation,
             setSliderWidth,
             isPromotion,
             langMap,
             activeSizes
         } = this.props;
         const { categoryAlias, subCategoryAlias } = this.state;
+        // const isDiscount = price !== actualPrice;
+        const style = {};
+
+        if (transitionDelay) style.transitionDelay = `${transitionDelay * 0.2}s`;
         const text = propOr('product', {}, langMap);
         const isExist = exist || 'true';
         let minActivePrice = minPrice;
@@ -106,8 +119,11 @@ class Card extends Component {
                 className={classNames(
                     styles.product,
                     { [styles[newClass]]: newClass },
-                    { [styles[labelClass]]: labelClass }
+                    { [styles.sliderProductVisible]: sliderProductVisible },
+                    { [styles[labelClass]]: labelClass },
+                    { [styles.noDelay]: endAnimation }
                 )}
+                style={style}
                 to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
                 <div className={styles.labels}>

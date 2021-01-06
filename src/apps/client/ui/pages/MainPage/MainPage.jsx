@@ -58,6 +58,7 @@ class MainPage extends Component {
 
         return (
             <div>
+                {/* <Slider/> */}
                 <Carousel/>
                 <DeliveryOffer mobile/>
                 {labels.map((label, i) => {

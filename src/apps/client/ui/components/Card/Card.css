@@ -245,3 +245,30 @@
         left: 9px;
     }
 }
+
+.sliderProduct {
+    transform: translate3d(0, 102%, 0);
+    transition-duration: .5s;
+}
+
+.sliderProductVisible {
+    transform: translate3d(0, 0, 0);
+}
+
+.noDelay {
+    transition-delay: 0s !important;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translate3d(0, 102%, 0);
+    }
+
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.slideInUp {
+    animation-name: slideInUp;
+}
