@@ -76,8 +76,7 @@ class AboutProduct extends Component {
         activeColor: PropTypes.object.isRequired,
         isPromotion: PropTypes.bool,
         turnOnClickOutside: PropTypes.func,
-        outsideClickEnabled: PropTypes.bool,
-        subCategory: PropTypes.object.isRequired
+        outsideClickEnabled: PropTypes.bool
     };
 
     constructor (props) {

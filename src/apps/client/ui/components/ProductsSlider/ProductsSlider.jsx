@@ -42,6 +42,10 @@ class ProductsSlider extends Component {
             this.setWidth();
             this.setProductsPacks(nextProps);
         }
+        if (nextProps.products !== this.props.products) {
+            this.setWidth();
+            this.setProductsPacks(nextProps);
+        }
     }
 
     componentDidMount () {
