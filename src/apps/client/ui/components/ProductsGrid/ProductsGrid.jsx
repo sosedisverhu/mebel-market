@@ -12,11 +12,7 @@ const mapStateToProps = ({ application, data }) => {
         langMap: application.langMap,
         langRoute: application.langRoute,
         lang: application.lang,
-        wishlist: data.wishlist,
         basket: data.basket,
-        products: data.products,
-        categories: data.categories,
-        subCategories: data.subCategories,
         basketIsOpen: data.basketIsOpen
     };
 };
