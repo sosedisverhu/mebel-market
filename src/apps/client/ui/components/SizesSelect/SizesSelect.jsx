@@ -20,7 +20,8 @@ class SizesSelect extends Component {
         isPromotion: PropTypes.bool,
         lang: PropTypes.string,
         turnOnClickOutside: PropTypes.func,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        isCardSelect: PropTypes.bool
     };
 
     handleOpenSizes = () => {
@@ -35,7 +36,18 @@ class SizesSelect extends Component {
     };
 
     render () {
-        const { selectIsOpen, activeSize, sizes, sizeListIsOpen, isPromotion, lang, sizeListIsOpenSwitch, handleChangeSize, additionalClass } = this.props;
+        const {
+            selectIsOpen,
+            activeSize,
+            sizes,
+            sizeListIsOpen,
+            isPromotion,
+            lang,
+            sizeListIsOpenSwitch,
+            handleChangeSize,
+            additionalClass,
+            isCardSelect
+        } = this.props;
         let sizeCounter = 0;
         const actualSizes = isPromotion
             ? sizes[lang].filter(size => size.colors.some(color => color.action))
@@ -47,7 +59,7 @@ class SizesSelect extends Component {
                 onMouseEnter={() => sizeListIsOpenSwitch()}
                 onClick={this.handleOpenSizes}
             >
-                <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize })}>
+                <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize }, { [styles.cardActiveOption]: isCardSelect })}>
                     {activeSize.name}
                 </li>
                 {actualSizes.map(size => {
@@ -55,9 +67,9 @@ class SizesSelect extends Component {
                         sizeCounter++;
 
                         if (isPromotion && size.colors.every(color => !color.action)) return;
-                        return <li className={styles.option}
+                        return <li className={classNames(styles.option, { [styles.cardOption]: isCardSelect })}
                             onClick={() => handleChangeSize(size)}
-                            style={{ top: `${30 * sizeCounter}px` }}
+                            style={{ top: `${(isCardSelect ? 0 : 30) * sizeCounter}px` }}
                             key={size.id}>
                             {size.name}
                         </li>;

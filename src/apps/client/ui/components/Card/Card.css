@@ -4,6 +4,7 @@
 @value gray0 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
+@value blackLighter from '../../../../../css/colors.css';
 
 .product {
     width: 288px;
@@ -15,7 +16,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: whiteBasic;
     text-decoration: none;
     outline: 2px solid transparent;
@@ -23,6 +24,14 @@
 
     &:hover {
         outline-color: greenBasic;
+
+        .hoverInformation{
+            transition: .3s;
+            max-height: 600px;
+            outline: 2px solid greenBasic;
+            /* overflow: visible; */
+            /* border-top: none; */
+        }
     }
 
     @media (max-width: 640px) {
@@ -244,4 +253,65 @@
         bottom: 9px;
         left: 9px;
     }
+}
+
+.hoverInformation{
+    transition: .3s;
+    transition-delay: .1s;
+    max-height: 0px;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100% ;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    justify-content: center;
+    background: whiteBasic;
+    outline: 2px solid transparent;
+    cursor: default;
+}
+
+.btnBuy {
+    font: 24px/28px GilroyRegular;
+    color: whiteBasic;
+    padding: 6px 10px;
+    min-width: 202px;
+    border: 2px solid transparent;
+    outline: none;
+    background: blackLight;
+    cursor: pointer;
+    transition: .5s ease-out;
+    
+
+    @media (max-width: 640px) {
+        font-size: 16px;
+    }
+
+    &:hover {
+        background-color: greenBasic;
+    }
+
+    &.active {
+        color: blackLight;
+        background-color: whiteBasic;
+        border-bottom:2px solid greenBasic;
+    }
+}
+
+.sizesTitle {
+    font: 16px/18px GilroyRegular;
+    color: blackLighter;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 640px) {
+        font-size: 14px;
+    }
+}
+
+.sizesWrap{
+    margin: 10px auto 15px auto;
 }
