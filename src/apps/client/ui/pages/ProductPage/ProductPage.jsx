@@ -50,15 +50,6 @@ class ProductPage extends Component {
         const { product } = this.state;
 
         product && addProductViews(product.id);
-
-        const similarProducts = this.props.products.filter(item => (
-            item.categoryId === this.state.product.categoryId &&
-            item.subCategoryId === this.state.product.subCategoryId
-        ));
-
-        this.setState({
-            similarProducts
-        });
     };
 
     componentDidUpdate (prevProps) {
@@ -115,7 +106,11 @@ class ProductPage extends Component {
     };
 
     render () {
-        const { category, subCategory, product, isPromotion, similarProducts } = this.state;
+        const { category, subCategory, product, isPromotion } = this.state;
+        const similarProducts = this.props.products.filter(item => (
+            item.categoryId === this.state.product.categoryId &&
+            item.subCategoryId === this.state.product.subCategoryId
+        ));
 
         if (!product) return <NotFoundPage/>;
 
@@ -125,8 +120,10 @@ class ProductPage extends Component {
                 <DeliveryOffer mobile/>
                 <Product isPromotion={isPromotion} product={product} subCategory={subCategory}/>
                 <Tab product={product}/>
-                <p className={styles.sliderTitle}>Похожие товары</p>
-                <ProductsSlider products={similarProducts}/>
+                <section>
+                    <p className={styles.sliderTitle}>Похожие товары</p>
+                    <ProductsSlider products={similarProducts}/>
+                </section>
             </div>);
     }
 }
