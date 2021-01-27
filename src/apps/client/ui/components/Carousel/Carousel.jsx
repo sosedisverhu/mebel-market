@@ -9,7 +9,7 @@ import calcScrollbarWidth from 'scrollbar-width';
 import Draggable from '../Draggable/Draggable.jsx';
 
 import styles from './Carousel.css';
-import propOr from '@tinkoff/utils/object/propOr';
+/* import propOr from '@tinkoff/utils/object/propOr'; */
 import noop from '@tinkoff/utils/function/noop';
 
 const TIME_TO_NEXT_SWITCHING = 8000;
@@ -258,9 +258,9 @@ class Carousel extends Component {
     </div>;
 
     render () {
-        const { slides, langMap, mediaWidth } = this.props;
+        const { slides, /* langMap, */ mediaWidth } = this.props;
         const { activeSlideIndex } = this.state;
-        const text = propOr('mainPage', {}, langMap);
+        /* const text = propOr('mainPage', {}, langMap); */
 
         if (!slides.length) {
             return null;
@@ -284,7 +284,7 @@ class Carousel extends Component {
                 <div className={styles.bottomBlock}>
                     <a className={classNames(styles.text, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                         href={slides[activeSlideIndex].link}
-                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
+                        target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name /* || text.slider */}</a>
                     {slides.length > 1 && <div className={styles.dots}>
                         { slides.map((slide, i) =>
                             <div
@@ -296,7 +296,7 @@ class Carousel extends Component {
             </Draggable>
             <a className={classNames(styles.text, styles.tablet, { [styles.activeText]: !!slides[activeSlideIndex].link })}
                 href={slides[activeSlideIndex].link}
-                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name || text.slider}</a>
+                target={slides[activeSlideIndex].newTab ? '_blank' : '_self'} >{slides[activeSlideIndex].name /* || text.slider */}</a>
         </div>;
     }
 }

@@ -125,6 +125,7 @@
 }
 
 .text {
+    min-height: 61px;
     font: 36px/41px GilroyRegular;
     color: blackLight;
     padding: 10px;
@@ -153,6 +154,7 @@
     }
 
     @media (max-width: 800px) {
+        min-height: unset;
         font-size: 26px;
         line-height: 30px;
     }
