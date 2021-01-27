@@ -13,7 +13,8 @@ const mapStateToProps = ({ application, data }) => {
         langRoute: application.langRoute,
         lang: application.lang,
         basket: data.basket,
-        basketIsOpen: data.basketIsOpen
+        basketIsOpen: data.basketIsOpen,
+        width: application.media.width
     };
 };
 
@@ -29,15 +30,24 @@ class ProductsGrid extends Component {
         isPromotion: PropTypes.bool,
         activeSizes: PropTypes.array,
         basketIsOpen: PropTypes.bool.isRequired,
-        openBasket: PropTypes.func.isRequired
+        openBasket: PropTypes.func.isRequired,
+        width: PropTypes.number.isRequired
     };
 
     constructor (props) {
         super(props);
 
         this.state = {
-            checkedFeatureIds: {}
+            checkedFeatureIds: {},
+            itemsInRow: 4
         };
+    }
+
+    componentDidMount () {
+        const width = this.props.width;
+        this.setState({
+            itemsInRow: width >= 1275 ? 4 : width >= 961 ? 3 : 2
+        });
     }
 
     handleOpenBasket = () => {
@@ -50,18 +60,32 @@ class ProductsGrid extends Component {
 
     render () {
         const { products, isPromotion, activeSizes } = this.props;
+        const { itemsInRow } = this.state;
+        const lastItems = products.length % itemsInRow ? products.length % itemsInRow : itemsInRow;
 
         return (
             <div className={styles.products}>
-                {products.map(product =>
-                    <Card
-                        isPromotion={isPromotion}
-                        key={product.id}
-                        product={product}
-                        activeSizes = {activeSizes}
-                        sizes = {product.sizes}
-                        handleOpenBasket = {this.handleOpenBasket}
-                    />)}
+                {products.map((product, i) => {
+                    return products.length - (i + 1) >= lastItems
+                        ? <Card
+                            isPromotion={isPromotion}
+                            key={product.id}
+                            product={product}
+                            activeSizes = {activeSizes}
+                            sizes = {product.sizes}
+                            handleOpenBasket = {this.handleOpenBasket}
+                        />
+                        : <Card
+                            isPromotion={isPromotion}
+                            key={product.id}
+                            product={product}
+                            activeSizes = {activeSizes}
+                            sizes = {product.sizes}
+                            handleOpenBasket = {this.handleOpenBasket}
+                            lastItem = {true}
+                        />;
+                })
+                }
             </div>
         );
     }
