@@ -127,7 +127,7 @@
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 54px;
     z-index: 10;
     transition: .25s ease .75s;
     opacity: 0;
@@ -189,6 +189,9 @@
 }
 
 .dots {
+    position: absolute;
+    left: 0;
+    bottom: 0;
     display: flex;
     margin: 10px 0;
     width: 100%;
