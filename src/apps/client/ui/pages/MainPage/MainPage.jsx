@@ -14,6 +14,8 @@ import MainCategories from '../../components/MainCategories/MainCategories';
 import Advantages from '../../components/Advantages/Advantages';
 import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer';
 
+import isScrolledIntoView from '../../../utils/isScrolledIntoView';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -31,8 +33,50 @@ class MainPage extends Component {
         products: PropTypes.array.isRequired
     };
 
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            carouselAnimation: false,
+            categoriesAnimation: false,
+            advantagesAnimation: false
+        };
+
+        this.carousel = React.createRef();
+        this.categories = React.createRef();
+        this.advantages = React.createRef();
+    }
+
+    componentDidMount () {
+        this.setState({ isLoading: false },
+            this.handleScroll(),
+            document.addEventListener('scroll', this.handleScroll)
+        );
+    }
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.carousel.current, 'carouselAnimation');
+        this.isScrolledIntoView(this.categories.current, 'categoriesAnimation');
+        this.isScrolledIntoView(this.advantages.current, 'advantagesAnimation');
+    };
+
+    isScrolledIntoView = (elem, state) => {
+        const isVisible = isScrolledIntoView(elem, { offset: 0, full: false });
+
+        if (isVisible) {
+            this.setState({
+                [state]: true
+            });
+        }
+    };
+
     render () {
         const { langMap, lang, products, labels } = this.props;
+        const { carouselAnimation, categoriesAnimation, advantagesAnimation } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
@@ -58,7 +102,9 @@ class MainPage extends Component {
 
         return (
             <div>
-                <Carousel/>
+                <div ref={this.carousel}>
+                    <Carousel carouselAnimation={carouselAnimation}/>
+                </div>
                 <DeliveryOffer mobile/>
                 {labels.map((label, i) => {
                     return (
@@ -71,8 +117,12 @@ class MainPage extends Component {
                             }
                         </div>);
                 })}
-                <MainCategories/>
-                <Advantages/>
+                <div ref={this.categories}>
+                    <MainCategories categoriesAnimation={categoriesAnimation}/>
+                </div>
+                <div ref={this.advantages}>
+                    <Advantages advantagesAnimation={advantagesAnimation}/>
+                </div>
             </div>);
     }
 }

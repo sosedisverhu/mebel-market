@@ -6,14 +6,32 @@
     position: relative;
     overflow: hidden;
     justify-content: center;
+
+    &.animated{
+        .sliderTrack{
+            opacity: 1;
+        }
+
+        .bottomBlock{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .arrowLeft, .arrowRight{
+            opacity: 1;
+        }
+     }
+}
+
+.arrowLeft, .arrowRight{
+    opacity: 0;
+    transition: .25s ease .75s;
 }
 
 .sliderTrack {
-    position: relative;
-    width: 9999px;
-    left: 0;
-    display: flex;
-    align-items: flex-start;
+    width: 100%;
+    transition: .25s ease;
+    opacity: 0;
 
     @media (max-width: 1024px) {
         &:active {
@@ -111,6 +129,10 @@
     left: 0;
     bottom: 0;
     z-index: 10;
+    transition: .25s ease .75s;
+    opacity: 0;
+    transform: translateY(20px);
+
     @media (max-width: 1024px) {
         bottom: 61px;
     }
