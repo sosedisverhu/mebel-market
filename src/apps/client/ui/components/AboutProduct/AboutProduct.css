@@ -168,6 +168,22 @@
     }
 }
 
+.aboutProduct {
+    .cardOption{
+        position: relative;
+
+        @media (max-width: 640px) {
+            min-width: 0px;
+        }
+    }
+
+    .cardActiveOption{
+        @media (max-width: 640px) {
+            min-width: 0px;
+        }
+    }
+}
+
 .activeOption, .option{
     height: 30px;
     padding: 5px 30px 4px 9px;
@@ -617,5 +633,7 @@
         }
     }
 }
+
+
 
 
