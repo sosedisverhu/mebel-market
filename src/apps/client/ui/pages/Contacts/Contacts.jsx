@@ -11,6 +11,10 @@ import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import styles from './Contacts.css';
 import mapStyles from './map';
 
+import classNames from 'classnames';
+
+import isScrolledIntoView from '../../../utils/isScrolledIntoView';
+
 const mapStateToProps = ({ application }) => {
     return {
         langMap: application.langMap
@@ -26,14 +30,45 @@ class Contacts extends Component {
         langMap: PropTypes.object.isRequired
     };
 
-    state = {
-        latitude: COORDS_MARKER[0],
-        longitude: COORDS_MARKER[1]
-    };
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            latitude: COORDS_MARKER[0],
+            longitude: COORDS_MARKER[1],
+            infoAnimation: false,
+            mapAnimation: false
+        };
+
+        this.contactsInfo = React.createRef();
+        this.contactsMap = React.createRef();
+    }
 
     componentDidMount () {
         this.setMap();
+
+        this.handleScroll();
+        document.addEventListener('scroll', this.handleScroll);
     }
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.contactsInfo.current, 'infoAnimation');
+        this.isScrolledIntoView(this.contactsMap.current, 'mapAnimation');
+    };
+
+    isScrolledIntoView = (elem, state) => {
+        const isVisible = isScrolledIntoView(elem, { offset: 200, full: false });
+
+        if (isVisible) {
+            this.setState({
+                [state]: true
+            });
+        }
+    };
 
     setMap () {
         directionsRenderer = new window.google.maps.DirectionsRenderer({ suppressMarkers: true, polylineOptions: { strokeColor: '#000000', strokeWeight: 8 } });
@@ -95,15 +130,18 @@ class Contacts extends Component {
 
     render () {
         const { langMap } = this.props;
+        const { infoAnimation, mapAnimation } = this.state;
         const text = propOr('contacts', {}, langMap);
 
         return (
             <section className={styles.contacts}>
                 <Breadcrumbs noCategoryPage={text.title}/>
                 <DeliveryOffer mobile/>
-                <div className={styles.contactsContainer}>
+                <div className={classNames(styles.contactsContainer, {
+                    [styles.animated]: infoAnimation
+                })}>
                     <h1 className={styles.title}>{text.title}</h1>
-                    <div className={styles.info}>
+                    <div className={styles.info} ref={this.contactsInfo}>
                         <div className={styles.phonesContainer}>
                             <h2 className={styles.infoTitle}>{text.phonesTitle}</h2>
                             <a className={styles.infoText} href="tel:+380443557720">(044) 355-77-20</a>
@@ -124,7 +162,9 @@ class Contacts extends Component {
                             <p className={styles.infoText}>{text.addressText}</p>
                         </div>
                     </div>
-                    <div className={styles.mapContainer}>
+                    <div className={classNames(styles.mapContainer, {
+                        [styles.animated]: mapAnimation
+                    })} ref={this.contactsMap}>
                         <button className={styles.getDirectionsBtn} onClick={this.getDirections}>
                             {text.getDirectionsBtn}
                         </button>

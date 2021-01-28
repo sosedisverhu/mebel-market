@@ -55,10 +55,8 @@ class MainPage extends Component {
     }
 
     componentDidMount () {
-        this.setState({ isLoading: false },
-            this.handleScroll(),
-            document.addEventListener('scroll', this.handleScroll)
-        );
+        this.handleScroll();
+        document.addEventListener('scroll', this.handleScroll);
     }
 
     componentWillUnmount () {
@@ -77,7 +75,7 @@ class MainPage extends Component {
     };
 
     isScrolledIntoView = (elem, state, animation, index) => {
-        const isVisible = isScrolledIntoView(elem, { offset: 300, full: false });
+        const isVisible = isScrolledIntoView(elem, { offset: 200, full: false });
 
         if (isVisible) {
             if (!animation) {

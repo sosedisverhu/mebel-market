@@ -8,6 +8,7 @@ import propOr from '@tinkoff/utils/object/propOr';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import styles from './DeliveryAndPayment.css';
+import classNames from 'classnames';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -20,15 +21,28 @@ class DeliveryAndPayment extends Component {
         langMap: PropTypes.object.isRequired
     };
 
+    state = {
+        animation: false
+    };
+
+    componentDidMount () {
+        setTimeout(() => {
+            this.setState({ animation: true });
+        }, 0);
+    }
+
     render () {
         const { langMap } = this.props;
+        const { animation } = this.state;
         const text = propOr('deliveryAndPayment', {}, langMap);
 
         return (
             <section className={styles.deliveryAndPayment}>
                 <Breadcrumbs noCategoryPage={text.title}/>
                 <DeliveryOffer mobile/>
-                <div className={styles.deliveryAndPaymentContainer}>
+                <div className={classNames(styles.deliveryAndPaymentContainer, {
+                    [styles.animated]: animation
+                })}>
                     <div className={styles.content}>
                         <h1 className={styles.title}>{text.title}</h1>
                         <div className={styles.options}>

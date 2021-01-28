@@ -15,6 +15,17 @@
 .partnersContainer {
     background-color: whiteBasic;
     height: calc(100% - 40px);
+
+    &.animated{
+        .title{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .partnerItem{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
 }
 
 .content {
@@ -38,6 +49,9 @@
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     position: relative;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
 
     @media (max-width: 768px) {
         font-size: 20px;
@@ -100,6 +114,9 @@
     align-items: center;
     width: 20%;
     margin-bottom: 60px;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
 
     @media (max-width: 1170px) {
         width: 33.333%;

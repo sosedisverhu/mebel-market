@@ -17,6 +17,17 @@
     background-color: whiteBasic;
     font-family: GilroyRegular;
 
+    &.animated{
+        .title{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .info{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
+
     @media (max-width: 1279px) {
         padding: 0 16px;
     }
@@ -29,6 +40,9 @@
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     position: relative;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
 
     @media (max-width: 768px) {
         font-size: 20px;
@@ -74,6 +88,9 @@
 }
 
 .info {
+    transition: .5s ease .75s;
+    opacity: 0;
+    transform: translateY(20px);
     margin-top: 30px;
 
     @media (max-width: 600px) {
@@ -145,10 +162,17 @@
     color: blackLight;
     text-decoration: none;
     margin-bottom: 10px;
+    transition: .3s ease;
 
     &:last-child {
         margin-bottom: 0;
     }
+}
+
+a.infoText{
+    &:hover{
+         color: greenBasic;
+     }
 }
 
 .mapContainer {
@@ -158,6 +182,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+
+    &.animated{
+        opacity: 1;
+        transform: translateY(0);
+     }
 
     @media (max-width: 600px) {
         width: 100vw;
