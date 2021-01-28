@@ -242,6 +242,12 @@
         }
     }
 
+    &:hover{
+        &:before{
+            background: rgba(37, 113, 108, .5);
+         }
+     }
+
     @media (max-width: 600px) {
         padding: 5px;
         width: 8px;
@@ -266,11 +272,29 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
+    transition: background .25s ease;
+    background: rgba(255, 255, 255, 0);
+
+    &:hover{
+         background: rgba(255, 255, 255, .15);
+
+        @media (max-width: 800px){
+            background: rgba(255, 255, 255, 0);
+        }
+     }
+
+    &:active{
+         background: rgba(255, 255, 255, .25);
+
+        @media (max-width: 800px){
+            background: rgba(255, 255, 255, 0);
+        }
+     }
 
     &:before {
          position: relative;
      }
-
+/*
     &:hover {
         &:before {
             top: 1px;
@@ -278,10 +302,10 @@
     }
 
     &:active {
-    &:before {
-         top: 2px;
-    }
-}
+        &:before {
+             top: 2px;
+        }
+    }*/
 
     @media (max-width: 600px) {
         opacity: 0;
@@ -296,7 +320,7 @@
          content: url("./img/left.png");
      }
 
-    &:hover {
+    /*&:hover {
         &:before {
             left: -1px;
         }
@@ -306,7 +330,7 @@
         &:before {
             left: -2px;
         }
-    }
+    }*/
 }
 
 .arrowRight {
@@ -316,7 +340,7 @@
          content: url("./img/right.png");
      }
 
-    &:hover {
+    /*&:hover {
         &:before {
             left: 1px;
         }
@@ -326,5 +350,5 @@
         &:before {
             left: 2px;
         }
-    }
+    }*/
 }

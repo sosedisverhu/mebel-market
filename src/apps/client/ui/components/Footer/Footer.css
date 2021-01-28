@@ -35,7 +35,12 @@
 .youtube {
     width: 36px;
     height: 36px;
+    filter: drop-shadow(0px 0px 1px transparent);
     transition: .3s ease-out;
+
+    &:hover{
+         filter: drop-shadow(0px 0px 1px rgba(37, 113, 108, 1));
+     }
 }
 
 .instagramLink,
@@ -50,9 +55,9 @@
 .facebook {
     background-image: url("./img/facebook.svg");
 
-    &:hover {
+/*    &:hover {
         background-image: url("./img/facebook-hover.svg");
-    }
+    }*/
 }
 
 .youtube {
@@ -88,10 +93,24 @@
     color: blackLight;
     margin-top: 2px;
     padding-bottom: 2px;
+    position: relative;
 
-    &:hover {
-        border-bottom: 2px solid greenBasic;
-        padding-bottom: 0;
+    &:before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+         left: 50%;
+         transform: translateX(-50%);
+         transition: width .3s ease;
+        height: 2px;
+        width: 0;
+        background: greenBasic;
+     }
+
+    &:hover{
+        &:before{
+             width: 100%;
+         }
     }
 }
 
@@ -148,6 +167,11 @@
     line-height: 16px;
     margin-top: 10px;
     color: blackLight;
+    transition: color .3s ease;
+
+    &:hover{
+        color: greenBasic;
+     }
 
     @media (max-width: 992px) {
         margin-bottom: 10px;

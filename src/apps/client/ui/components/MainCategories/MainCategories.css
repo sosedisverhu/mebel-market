@@ -37,6 +37,16 @@
     opacity: 0;
     transform: translateY(20px);
 
+    &:hover{
+        .title{
+            width: 100%;
+        }
+
+        .img{
+            transform: scale(1.05);
+        }
+    }
+
     @media (max-width: 825px) {
         width: 100%;
     }
@@ -58,6 +68,8 @@
 .img {
     width: 100%;
     height: auto;
+    transform: scale(1);
+    transition: .5s ease;
 }
 
 .title {
@@ -73,6 +85,7 @@
     align-items: center;
     background: whiteBasic;
     justify-content: space-between;
+    transition: width .5s ease;
 
     &:after {
         content: '';

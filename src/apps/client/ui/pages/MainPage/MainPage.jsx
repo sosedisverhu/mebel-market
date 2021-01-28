@@ -77,7 +77,7 @@ class MainPage extends Component {
     };
 
     isScrolledIntoView = (elem, state, animation, index) => {
-        const isVisible = isScrolledIntoView(elem, { offset: 0, full: false });
+        const isVisible = isScrolledIntoView(elem, { offset: 300, full: false });
 
         if (isVisible) {
             if (!animation) {

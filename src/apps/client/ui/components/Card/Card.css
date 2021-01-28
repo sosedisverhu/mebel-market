@@ -32,6 +32,10 @@
             /* overflow: visible; */
             /* border-top: none; */
         }
+
+        .img{
+            transform: scale(1.05);
+        }
     }
 
     @media (max-width: 640px) {
@@ -136,6 +140,7 @@
     align-items: center;
     padding-bottom: 100%;
     min-height: 134px;
+    overflow: hidden;
 }
 
 .img {
@@ -143,6 +148,8 @@
     height: auto;
     pointer-events: none;
     margin-bottom: -100%;
+    transform: scale(1);
+    transition: .3s ease;
 }
 
 .labels {
@@ -203,16 +210,37 @@
 }
 
 .productName {
+    margin: 0 auto;
+    width: fit-content;
     font: 18px/21px GilroyRegular;
     color: blackLight;
     padding: 5px 10px;
     text-align: center;
-    text-decoration: underline transparent;
     transition: .3s ease-out;
+    position: relative;
+
+    &:before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: greenBasic;
+        height: 1px;
+        width: 0;
+        transition: width .3s ease-out;
+     }
 
     .product:hover & {
         color: greenBasic;
-        text-decoration-color: greenBasic;
+
+        &:before{
+            width: calc(100% - 20px);
+
+            @media (max-width: 640px){
+                width: 100%;
+            }
+         }
     }
 
     @media (max-width: 640px) {

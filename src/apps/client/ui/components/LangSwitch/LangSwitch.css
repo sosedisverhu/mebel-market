@@ -33,6 +33,7 @@
     padding: 10px 0 10px 10px;
     background: blackLight;
     border-radius: 0 0 5px 5px;
+    transition: background-color .3s ease;
 }
 
 .activeLang {
@@ -63,7 +64,7 @@
     width: 100%;
 
     .lang:hover {
-        color: greenBasic;
+        background-color: greenBasic;
     }
 }
 

@@ -55,11 +55,17 @@
 }
 
 .subCategory {
+    background-color: transparent;
     padding: 0 30px;
     font: 16px/38px GilroyRegular;
     color: blackLight;
     text-decoration: none;
     position: relative;
+    transition: .3s ease;
+
+    &:hover{
+         color: greenBasic;
+     }
 
     &.active {
         background-color: greenBasic;
