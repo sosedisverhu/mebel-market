@@ -162,7 +162,7 @@
 .productsSection {
     display: flex;
     justify-content: center;
-    padding-bottom: 133px;
+    padding-bottom: 30px;
     background: gray3;
     overflow: hidden;
 }

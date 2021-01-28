@@ -50,6 +50,11 @@
     }
 
     &.sliderProduct {
+        .hoverInformation{
+            top: auto;
+            bottom: 100%;
+        }
+
         @media (max-width: 760px) {
             width: 200px;
             min-width: 200px;
@@ -342,4 +347,9 @@
 
 .sizesWrap{
     margin: 10px auto 15px auto;
+}
+
+.lastItem{
+    top: auto;
+    bottom: 100%;
 }
