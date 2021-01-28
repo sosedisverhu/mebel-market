@@ -48,7 +48,8 @@ class Card extends Component {
         activeSizes: PropTypes.array,
         basket: PropTypes.array,
         handleOpenBasket: PropTypes.func,
-        saveProductsToBasket: PropTypes.func
+        saveProductsToBasket: PropTypes.func,
+        lastItem: PropTypes.bool
     };
 
     static defaultProps = {
@@ -57,7 +58,8 @@ class Card extends Component {
         categories: [],
         subCategories: [],
         activeSizes: [],
-        setSliderWidth: () => {}
+        setSliderWidth: () => {},
+        lastItem: false
     };
 
     state = {
@@ -170,7 +172,8 @@ class Card extends Component {
             setSliderWidth,
             isPromotion,
             langMap,
-            activeSizes
+            activeSizes,
+            lastItem
         } = this.props;
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
         const text = propOr('product', {}, langMap);
@@ -227,10 +230,10 @@ class Card extends Component {
                 <div className={styles.imgWrap}>
                     <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
                 </div>
-                <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
-                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
-                </div>
                 <div className={styles.bottomPanel}>
+                    <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                        {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
+                    </div>
                     <p className={styles.productName}>
                         {texts[lang].name}
                     </p>
@@ -242,7 +245,7 @@ class Card extends Component {
                         {/* {minActualPrice} */}
                         {resultPrice} &#8372;
                     </div>
-                    <div className={styles.hoverInformation} onClick={(e) => { e.preventDefault(); }}>
+                    <div className={classNames(styles.hoverInformation, { [styles.lastItem]: lastItem })} onClick={(e) => { e.preventDefault(); }}>
                         <button
                             className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
                             onClick={!isInBasket ? this.handleBuyClickOnCard : this.props.handleOpenBasket}>

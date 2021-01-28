@@ -315,3 +315,8 @@
 .sizesWrap{
     margin: 10px auto 15px auto;
 }
+
+.lastItem{
+    top: auto;
+    bottom: 100%;
+}
