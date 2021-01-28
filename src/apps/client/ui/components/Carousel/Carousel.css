@@ -38,9 +38,14 @@
             cursor: grabbing;
         }
     }
+
+    @media (max-width: 800px){
+        height: auto !important;
+    }
 }
 
 .slide {
+    outline: none;
     display: inline-block;
     position: relative;
     width: 100vw;
@@ -176,7 +181,7 @@
     }
 
     @media (max-width: 800px) {
-        min-height: unset;
+        min-height: 50px;
         font-size: 26px;
         line-height: 30px;
     }
@@ -185,6 +190,7 @@
         font-size: 16px;
         line-height: 18px;
         padding: 8px;
+        min-height: 34px;
     }
 }
 
@@ -197,8 +203,13 @@
     width: 100%;
     justify-content: center;
 
+    @media (max-width: 800px){
+        bottom: 50px;
+    }
+
     @media (max-width: 600px) {
         margin: 5px 0;
+        bottom: 34px;
     }
 }
 
