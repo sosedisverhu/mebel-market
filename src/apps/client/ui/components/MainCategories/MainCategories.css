@@ -4,6 +4,13 @@
 
 .categoriesWrap {
     background: gray5;
+
+    &.animated{
+        .category{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
 }
 
 .categories {
@@ -26,6 +33,9 @@
     width: calc(50% - 15px);
     position: relative;
     margin-top: 30px;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
 
     @media (max-width: 825px) {
         width: 100%;

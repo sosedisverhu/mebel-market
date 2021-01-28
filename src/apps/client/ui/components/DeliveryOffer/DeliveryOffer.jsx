@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './DeliveryOffer.css';
+import classNames from 'classnames';
 
 const mapStateToProps = ({ application, data }) => {
     return {
@@ -15,19 +16,33 @@ const mapStateToProps = ({ application, data }) => {
 class DeliveryOffer extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
-        mobile: PropTypes.bool.isRequired
+        mobile: PropTypes.bool.isRequired,
+        deliveryAnimation: PropTypes.bool
     };
 
     static defaultProps = {
         mobile: false
     };
 
+    state = {
+        deliveryAnimation: false
+    };
+
+    componentWillReceiveProps (nextProps, nextContext) {
+        if (this.props.deliveryAnimation !== nextProps.deliveryAnimation) {
+            this.setState({ deliveryAnimation: nextProps.deliveryAnimation });
+        }
+    }
+
     render () {
         const { mobile, langMap } = this.props;
+        const { deliveryAnimation } = this.state;
         const text = propOr('deliveryOffer', {}, langMap);
 
         return (
-            <div className={mobile ? styles.deliveryContainerMobile : styles.deliveryContainer}>
+            <div className={classNames(mobile ? styles.deliveryContainerMobile : styles.deliveryContainer, {
+                [styles.animated]: mobile && deliveryAnimation
+            })}>
                 <div className={styles.deliveryIcon}>
                     <img src="/src/apps/client/ui/components/DeliveryOffer/img/truckDelivery.svg" alt="truck"/>
                 </div>

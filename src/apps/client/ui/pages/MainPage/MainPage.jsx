@@ -39,12 +39,14 @@ class MainPage extends Component {
         this.state = {
             carouselAnimation: false,
             categoriesAnimation: false,
-            advantagesAnimation: false
+            advantagesAnimation: false,
+            deliveryAnimation: false
         };
 
         this.carousel = React.createRef();
         this.categories = React.createRef();
         this.advantages = React.createRef();
+        this.delivery = React.createRef();
     }
 
     componentDidMount () {
@@ -62,6 +64,7 @@ class MainPage extends Component {
         this.isScrolledIntoView(this.carousel.current, 'carouselAnimation');
         this.isScrolledIntoView(this.categories.current, 'categoriesAnimation');
         this.isScrolledIntoView(this.advantages.current, 'advantagesAnimation');
+        this.isScrolledIntoView(this.delivery.current, 'deliveryAnimation');
     };
 
     isScrolledIntoView = (elem, state) => {
@@ -76,7 +79,7 @@ class MainPage extends Component {
 
     render () {
         const { langMap, lang, products, labels } = this.props;
-        const { carouselAnimation, categoriesAnimation, advantagesAnimation } = this.state;
+        const { carouselAnimation, categoriesAnimation, advantagesAnimation, deliveryAnimation } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
@@ -105,7 +108,9 @@ class MainPage extends Component {
                 <div ref={this.carousel}>
                     <Carousel carouselAnimation={carouselAnimation}/>
                 </div>
-                <DeliveryOffer mobile/>
+                <div ref={this.delivery}>
+                    <DeliveryOffer mobile deliveryAnimation={deliveryAnimation}/>
+                </div>
                 {labels.map((label, i) => {
                     return (
                         <div key={i}>
