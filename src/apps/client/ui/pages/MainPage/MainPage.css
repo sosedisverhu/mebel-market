@@ -6,6 +6,17 @@
     background: whiteBasic;
     min-height: 270px;
 
+    &.animated{
+        .title{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slider{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
+
     &.top {
         background: gray5;
 
@@ -30,6 +41,9 @@
     padding-top: 8px;
     max-width: 1244px;
     position: relative;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
 
     &:before {
         content: '';
@@ -51,4 +65,10 @@
             width: 20%;
         }
     }
+}
+
+.slider{
+    transition: .5s ease .75s;
+    opacity: 0;
+    transform: translateY(20px);
 }

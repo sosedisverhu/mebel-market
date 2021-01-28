@@ -36,17 +36,22 @@ class MainPage extends Component {
     constructor (props) {
         super(props);
 
+        const labels = {};
+        this.props.labels.forEach((label, i) => { labels[i] = false; });
+
         this.state = {
             carouselAnimation: false,
             categoriesAnimation: false,
             advantagesAnimation: false,
-            deliveryAnimation: false
+            deliveryAnimation: false,
+            labelAnimation: labels
         };
 
         this.carousel = React.createRef();
         this.categories = React.createRef();
         this.advantages = React.createRef();
         this.delivery = React.createRef();
+        this.labels = this.props.labels.map(() => React.createRef());
     }
 
     componentDidMount () {
@@ -65,21 +70,34 @@ class MainPage extends Component {
         this.isScrolledIntoView(this.categories.current, 'categoriesAnimation');
         this.isScrolledIntoView(this.advantages.current, 'advantagesAnimation');
         this.isScrolledIntoView(this.delivery.current, 'deliveryAnimation');
+
+        this.labels.forEach((label, i) => {
+            this.isScrolledIntoView(label.current, 'labelAnimation', 'labels', i);
+        });
     };
 
-    isScrolledIntoView = (elem, state) => {
+    isScrolledIntoView = (elem, state, animation, index) => {
         const isVisible = isScrolledIntoView(elem, { offset: 0, full: false });
 
         if (isVisible) {
-            this.setState({
-                [state]: true
-            });
+            if (!animation) {
+                this.setState({
+                    [state]: true
+                });
+            } else {
+                this.setState({
+                    [state]: {
+                        ...this.state[state],
+                        [index]: true
+                    }
+                });
+            }
         }
     };
 
     render () {
         const { langMap, lang, products, labels } = this.props;
-        const { carouselAnimation, categoriesAnimation, advantagesAnimation, deliveryAnimation } = this.state;
+        const { carouselAnimation, categoriesAnimation, advantagesAnimation, deliveryAnimation, labelAnimation } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
@@ -113,11 +131,15 @@ class MainPage extends Component {
                 </div>
                 {labels.map((label, i) => {
                     return (
-                        <div key={i}>
+                        <div key={i} ref={this.labels[i]}>
                             {productsResult[label] &&
-                            <section key={label} className={classNames(styles.categorySection, styles[label])}>
+                            <section key={label} className={classNames(styles.categorySection, styles[label], {
+                                [styles.animated]: labelAnimation[i]
+                            })}>
                                 <h2 className={styles.title}>{text[label]}</h2>
-                                <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
+                                <div className={styles.slider}>
+                                    <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
+                                </div>
                             </section>
                             }
                         </div>);
