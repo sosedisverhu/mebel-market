@@ -35,23 +35,31 @@
     position: relative;
     padding: 35px 25px;
     cursor: pointer;
+    transition: color .3s ease;
 
     &:before {
         content: "";
         position: absolute;
         bottom: 32px;
-        left: 25px;
-        width: calc(100% - 50px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
         height: 2px;
         background: greenBasic;
-        display: none;
+        transition: width .3s ease;
     }
+
+     &:hover{
+        &:before{
+             width: calc(100% - 50px);
+         }
+      }
 
     &.active {
         color: blackLight;
 
         &:before {
-            display: block;
+             width: calc(100% - 50px);
         }
     }
 

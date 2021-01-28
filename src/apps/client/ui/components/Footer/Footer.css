@@ -33,13 +33,27 @@
 .instagram,
 .facebook,
 .youtube {
+    display: flex;
+    align-items: center;
+    justify-self: center;
     width: 36px;
     height: 36px;
-    filter: drop-shadow(0px 0px 1px transparent);
-    transition: .3s ease-out;
+    border-radius: 50%;
+    position: relative;
+
+    svg{
+        path{
+            fill: blackLight;
+            transition: .3s ease;
+        }
+    }
 
     &:hover{
-         filter: drop-shadow(0px 0px 1px rgba(37, 113, 108, 1));
+        svg{
+            path{
+                fill: greenBasic;
+            }
+        }
      }
 }
 
@@ -48,20 +62,27 @@
     margin-right: 30px;
 }
 
-.instagram {
-    background-image: url("./img/instagram.svg");
-}
-
-.facebook {
-    background-image: url("./img/facebook.svg");
-
-/*    &:hover {
-        background-image: url("./img/facebook-hover.svg");
-    }*/
-}
-
 .youtube {
-    background-image: url("./img/youtube.svg");
+    svg{
+        path{
+            &:nth-child(2){
+                fill: none;
+                stroke: blackLight;
+                 transition: .3s ease;
+             }
+        }
+    }
+
+    &:hover{
+        svg{
+            path{
+                &:nth-child(2){
+                     fill: none;
+                     stroke: greenBasic;
+                 }
+            }
+        }
+    }
 }
 
 .developedWrapper {

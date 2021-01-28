@@ -96,7 +96,7 @@ class ProductsSlider extends Component {
         if (newIndex === lastSlideIndex && widthWindow >= 760) {
             extraSpace = widthSlide / productsInPack * extraProducts;
         }
-        console.log(extraProducts, extraSpace);
+
 
         const left = -widthSlide * newIndex + extraSpace;
 
