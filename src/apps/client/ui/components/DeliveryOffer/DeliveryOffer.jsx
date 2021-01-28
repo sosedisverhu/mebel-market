@@ -21,12 +21,17 @@ class DeliveryOffer extends Component {
     };
 
     static defaultProps = {
-        mobile: false
+        mobile: false,
+        deliveryAnimation: true
     };
 
-    state = {
-        deliveryAnimation: false
-    };
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            deliveryAnimation: this.props.deliveryAnimation
+        };
+    }
 
     componentWillReceiveProps (nextProps, nextContext) {
         if (this.props.deliveryAnimation !== nextProps.deliveryAnimation) {
