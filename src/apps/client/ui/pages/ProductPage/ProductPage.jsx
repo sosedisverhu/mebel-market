@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { matchPath, withRouter } from 'react-router-dom';
 
 import find from '@tinkoff/utils/array/find';
+import propOr from '@tinkoff/utils/object/propOr';
 
 import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
 
@@ -140,10 +141,13 @@ class ProductPage extends Component {
 
     render () {
         const { category, subCategory, product, isPromotion, sliderAnimation, infoAnimation, productAnimation } = this.state;
+        const { langMap } = this.props;
         const similarProducts = this.props.products.filter(item => (
             item.categoryId === this.state.product.categoryId &&
-            item.subCategoryId === this.state.product.subCategoryId
+            item.subCategoryId === this.state.product.subCategoryId &&
+            item.id !== this.state.product.id
         ));
+        const text = propOr('product', {}, langMap);
 
         if (!product) return <NotFoundPage/>;
 
@@ -160,7 +164,7 @@ class ProductPage extends Component {
                 <section ref={this.slider} className={classNames(styles.slider, {
                     [styles.animated]: sliderAnimation
                 })}>
-                    <p className={styles.sliderTitle}>Похожие товары</p>
+                    {similarProducts.length ? <p className={styles.sliderTitle}>{text.similarProducts}</p> : undefined}
                     <div className={styles.sliderWrapper}>
                         <ProductsSlider products={similarProducts}/>
                     </div>

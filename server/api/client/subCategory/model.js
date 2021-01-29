@@ -20,8 +20,8 @@ const SubCategory = new Schema({
     alias: { type: String, required: true, unique: true },
     positionIndex: { type: Number, required: true, unique: true },
     filters: { type: Object, required: true },
-    colorFilter: { type: Boolean, required: true },
-    sizeFilter: { type: Boolean, required: true }
+    colorFilter: { type: Boolean, required: true, default: false },
+    sizeFilter: { type: Boolean, required: true, default: false }
 });
 
 export default mongoose.model('SubCategory', SubCategory);
