@@ -5,12 +5,16 @@ import { matchPath, withRouter } from 'react-router-dom';
 
 import find from '@tinkoff/utils/array/find';
 
+import ProductsSlider from '../../components/ProductsSlider/ProductsSlider';
+
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs';
 import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer.jsx';
 import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
 import addProductViews from '../../../services/client/addProductViews';
+
+import styles from './ProductPage.css';
 
 const PATH_NAME_REGEX = /\/promotions\/*/;
 
@@ -103,6 +107,10 @@ class ProductPage extends Component {
 
     render () {
         const { category, subCategory, product, isPromotion } = this.state;
+        const similarProducts = this.props.products.filter(item => (
+            item.categoryId === this.state.product.categoryId &&
+            item.subCategoryId === this.state.product.subCategoryId
+        ));
 
         if (!product) return <NotFoundPage/>;
 
@@ -112,6 +120,10 @@ class ProductPage extends Component {
                 <DeliveryOffer mobile/>
                 <Product isPromotion={isPromotion} product={product} subCategory={subCategory}/>
                 <Tab product={product}/>
+                <section>
+                    <p className={styles.sliderTitle}>Похожие товары</p>
+                    <ProductsSlider products={similarProducts}/>
+                </section>
             </div>);
     }
 }
