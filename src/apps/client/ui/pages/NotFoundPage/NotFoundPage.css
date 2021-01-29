@@ -2,6 +2,7 @@
 @value blackLight from '../../../../../css/colors.css';
 @value whiteBasic from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .root {
     height: 100%;
@@ -108,6 +109,11 @@
     color: whiteBasic;
     background: blackLight;
     text-decoration: none;
+    transition: background .3s ease;
+
+    &:hover{
+         background: greenBasic;
+     }
 
     @media (max-width: 710px) {
         margin-top: 60px;

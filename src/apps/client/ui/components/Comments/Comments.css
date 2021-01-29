@@ -2,6 +2,7 @@
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
 @value gray0 from '../../../../../css/colors.css';
+@value gray2 from '../../../../../css/colors.css';
 @value gray3 from '../../../../../css/colors.css';
 @value greenBasic from '../../../../../css/colors.css';
 
@@ -358,9 +359,20 @@
     margin-right: 20px;
     background-color: blackLight;
     color: whiteBasic;
+    transition: .3s ease;
+
+    &:hover{
+        background: greenBasic;
+     }
 }
 
 .cancelBtn {
     background-color: gray3;
     color: gray0;
+    transition: .3s ease;
+
+    &:hover{
+         background-color: gray2;
+         color: blackLight;
+    }
 }

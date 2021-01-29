@@ -4,6 +4,13 @@
 
 .categoriesWrap {
     background: gray5;
+
+    &.animated{
+        .category{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
 }
 
 .categories {
@@ -26,6 +33,19 @@
     width: calc(50% - 15px);
     position: relative;
     margin-top: 30px;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+
+    &:hover{
+        .title{
+            width: 100%;
+        }
+
+        .img{
+            transform: scale(1.05);
+        }
+    }
 
     @media (max-width: 825px) {
         width: 100%;
@@ -48,6 +68,8 @@
 .img {
     width: 100%;
     height: auto;
+    transform: scale(1);
+    transition: .5s ease;
 }
 
 .title {
@@ -63,6 +85,7 @@
     align-items: center;
     background: whiteBasic;
     justify-content: space-between;
+    transition: width .5s ease;
 
     &:after {
         content: '';

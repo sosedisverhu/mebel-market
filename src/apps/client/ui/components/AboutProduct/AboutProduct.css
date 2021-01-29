@@ -19,6 +19,30 @@
     @media (max-width: 600px) {
         margin-top: 0;
     }
+
+    &.animated{
+        .middle{
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bottom{
+            opacity: 1;
+            transform: translateY(0);
+        }
+     }
+}
+
+.middle{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s ease .25s;
+}
+
+.bottom{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s ease .5s;
 }
 
 .advantage {

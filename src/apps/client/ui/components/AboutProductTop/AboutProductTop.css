@@ -3,6 +3,10 @@
 @value gray0 from '../../../../../css/colors.css';
 
 .root {
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+
     &.mobile {
         display: none;
     }
@@ -16,6 +20,11 @@
             display: block;
         }
     }
+
+    &.animated{
+        opacity: 1;
+        transform: translateY(0);
+     }
 }
 
 .name {

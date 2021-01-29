@@ -211,6 +211,9 @@ class Card extends Component {
                 )}
                 to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
+                <div className={styles.imgWrap}>
+                    <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
+                </div>
                 <div className={styles.labels}>
                     {labels.sort().reverse().map(label => {
                         return <div key={label} className={classNames(styles.label, styles[label])}>
@@ -226,9 +229,6 @@ class Card extends Component {
                     {isShareDiscount && <div className={classNames(styles.label, styles.share)}>
                         {text.shareDiscount}
                     </div>}
-                </div>
-                <div className={styles.imgWrap}>
-                    <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
                 </div>
                 <div className={styles.bottomPanel}>
                     <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>

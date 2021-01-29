@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import propOr from '@tinkoff/utils/object/propOr';
 
 import styles from './Advantages.css';
+import classNames from 'classnames';
 
 const mapStateToProps = ({ application }) => {
     return {
@@ -14,14 +15,28 @@ const mapStateToProps = ({ application }) => {
 
 class Advantages extends Component {
     static propTypes = {
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        advantagesAnimation: PropTypes.bool.isRequired
     };
+
+    state = {
+        advantagesAnimation: false
+    };
+
+    componentWillReceiveProps (nextProps, nextContext) {
+        if (this.props.advantagesAnimation !== nextProps.advantagesAnimation) {
+            this.setState({ advantagesAnimation: nextProps.advantagesAnimation });
+        }
+    }
 
     render () {
         const { langMap } = this.props;
+        const { advantagesAnimation } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
-        return <div className={styles.root}>
+        return <div className={classNames(styles.root, {
+            [styles.animated]: advantagesAnimation
+        })}>
             <div className={styles.contentWrap}>
                 <div className={styles.content}>
                     <h2 className={styles.title}>{text.title}</h2>

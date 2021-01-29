@@ -1,6 +1,7 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
 @value blackLighter from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .article {
     max-width: 605px;
@@ -41,6 +42,11 @@
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
     margin-bottom: 20px;
+    transition: .3s ease;
+
+    &:hover{
+        color: greenBasic;
+     }
 
     @media (max-width: 600px) {
         font-size: 18px;
@@ -51,6 +57,10 @@
 
 .titleUnderline {
     border-bottom: 1px solid blackLight;
+
+    &:hover{
+         border-bottom: 1px solid greenBasic;
+    }
 }
 
 .article p {
@@ -82,6 +92,7 @@
     color: blackLighter;
     cursor: pointer;
     position: relative;
+    transition: .3s ease;
 
     &:after {
         position: absolute;
@@ -91,7 +102,16 @@
         width: 100%;
         height: 1px;
         background-color: blackLighter;
+         transition: .3s ease;
     }
+
+     &:hover{
+        color: greenBasic;
+
+        &:after{
+             background-color: greenBasic;
+         }
+      }
 
     @media (max-width: 600px) {
         font-size: 16px;

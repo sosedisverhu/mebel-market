@@ -39,9 +39,13 @@
         padding-bottom: 96px;
     }
 
-    @media (max-width: 600px) {
-        padding-bottom: 30px;
+    &.allShown{
+         padding-bottom: 30px;
     }
+
+ /*   @media (max-width: 600px) {
+        padding-bottom: 30px;
+    }*/
 }
 
 .articlesContainer {
@@ -51,4 +55,26 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    transition: .5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+
+    &.animated{
+        opacity: 1;
+         transform: translateY(0);
+     }
+}
+
+.paginationContainer{
+    transition: .5s ease .75s;
+    opacity: 0;
+    transform: translateY(20px);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+    &.animated{
+         opacity: 1;
+         transform: translateY(0);
+    }
 }

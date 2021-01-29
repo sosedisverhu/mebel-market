@@ -11,6 +11,8 @@ import ArticlePreview from '../../components/ArticlePreview/ArticlePreview';
 import Sort from '../../components/Sort/Sort';
 import propOr from '@tinkoff/utils/object/propOr';
 
+import classNames from 'classnames';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -28,8 +30,15 @@ class Articles extends Component {
 
     state = {
         currentPage: 1,
-        postsPerPage: 6
+        postsPerPage: 6,
+        animation: false
     };
+
+    componentDidMount () {
+        setTimeout(() => {
+            this.setState({ animation: true });
+        }, 0);
+    }
 
     static getDerivedStateFromProps (props) {
         const { mediaWidth } = props;
@@ -79,13 +88,15 @@ class Articles extends Component {
 
     render () {
         const { articles, langMap } = this.props;
-        const { currentPage, postsPerPage } = this.state;
+        const { currentPage, postsPerPage, animation } = this.state;
         const indexOfLastPost = currentPage * postsPerPage;
         const indexOfFirstPost = indexOfLastPost - postsPerPage;
         const text = propOr('articles', {}, langMap);
 
         return (
-            <section className={styles.articles}>
+            <section className={classNames(styles.articles, {
+                [styles.allShown]: articles.length <= postsPerPage
+            })}>
                 <Breadcrumbs noCategoryPage={text.searchResult.substring(0, text.searchResult.length - 1)}/>
                 <DeliveryOffer mobile/>
                 {articles.length
@@ -96,21 +107,27 @@ class Articles extends Component {
                         </div>
                     </div>)
                     : null}
-                <div className={styles.articlesContainer}>
+                <div className={classNames(styles.articlesContainer, {
+                    [styles.animated]: animation
+                })}>
                     {articles.slice(indexOfFirstPost, indexOfLastPost).map(article =>
                         <ArticlePreview key={article.id} article={article} />
                     )}
                 </div>
-                {articles.length > postsPerPage &&
-                    <Pagination
-                        postsPerPage={postsPerPage}
-                        totalPosts={articles.length}
-                        currentPage={currentPage}
-                        paginate={this.paginate}
-                        previousPage={this.previousPage}
-                        nextPage={this.nextPage}
-                    />
-                }
+                <div className={classNames(styles.paginationContainer, {
+                    [styles.animated]: animation
+                })}>
+                    {articles.length > postsPerPage &&
+                        <Pagination
+                            postsPerPage={postsPerPage}
+                            totalPosts={articles.length}
+                            currentPage={currentPage}
+                            paginate={this.paginate}
+                            previousPage={this.previousPage}
+                            nextPage={this.nextPage}
+                        />
+                    }
+                </div>
             </section>
         );
     }

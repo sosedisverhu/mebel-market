@@ -91,19 +91,22 @@
     &:before {
         content: '';
         position: absolute;
-        width: 100%;
+        width: 0;
         height: 2px;
-        background-color: transparent;
+        background-color: whiteBasic;
         bottom: -5px;
+         left: 50%;
+         transform: translateX(-50%);
         pointer-events: none;
+        transition: width .3s ease;
     }
 
     &:hover:before {
-        background-color: whiteBasic;
+         width: 100%;
     }
 
     &.active:before {
-        background-color: whiteBasic;
+         width: 100%;
     }
 }
 
@@ -232,29 +235,41 @@
     line-height: 18px;
     letter-spacing: 0.05em;
     text-decoration: none;
+    transition: color .3s ease;
     color: blackLight;
     text-shadow: -0.2px 0 blackLight, 0 0.2px blackLight, 0.2px 0 blackLight, 0 -0.2px blackLight;
 
     &:before {
         content: '';
         position: absolute;
-        width: 100%;
+        width: 0;
         height: 2px;
-        background-color: transparent;
+        background-color: greenBasic;
         bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: width .3s ease;
     }
 
     &.active:before {
-        background-color: greenBasic;
+        width: 100%;
     }
 
+     &.menuItemBottomPromotions:before{
+          background-color: redBasic;
+      }
+
     &.activePromotions:before {
-         background-color: redBasic;
+         width: 100%;
      }
 
     &:hover {
         color: greenBasic;
         text-shadow: -0.2px 0 greenBasic, 0 0.2px greenBasic, 0.2px 0 greenBasic, 0 -0.2px greenBasic;
+
+        &:before{
+             width: 100%;
+         }
     }
 
     &:last-child {

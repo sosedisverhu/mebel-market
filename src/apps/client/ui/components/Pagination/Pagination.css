@@ -1,5 +1,6 @@
 @value whiteBasic from '../../../../../css/colors.css';
 @value blackLight from '../../../../../css/colors.css';
+@value greenBasic from '../../../../../css/colors.css';
 
 .pagination {
     position: absolute;
@@ -25,6 +26,12 @@
     font-family: GilroyRegular;
     font-size: 18px;
     line-height: 21px;
+    transition: .3s ease;
+
+    &:hover{
+        background-color: greenBasic;
+        color: whiteBasic;
+     }
 
     &:first-of-type {
         margin-left: 50px;
@@ -37,6 +44,11 @@
     &.active {
         background-color: blackLight;
         color: whiteBasic;
+
+        &:hover{
+            background-color: greenBasic;
+            color: whiteBasic;
+        }
     }
 }
 

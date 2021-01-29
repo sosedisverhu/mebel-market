@@ -14,6 +14,8 @@ import MainCategories from '../../components/MainCategories/MainCategories';
 import Advantages from '../../components/Advantages/Advantages';
 import DeliveryOffer from '../../components/DeliveryOffer/DeliveryOffer';
 
+import isScrolledIntoView from '../../../utils/isScrolledIntoView';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -31,8 +33,69 @@ class MainPage extends Component {
         products: PropTypes.array.isRequired
     };
 
+    constructor (props) {
+        super(props);
+
+        const labels = {};
+        this.props.labels.forEach((label, i) => { labels[i] = false; });
+
+        this.state = {
+            carouselAnimation: false,
+            categoriesAnimation: false,
+            advantagesAnimation: false,
+            deliveryAnimation: false,
+            labelAnimation: labels
+        };
+
+        this.carousel = React.createRef();
+        this.categories = React.createRef();
+        this.advantages = React.createRef();
+        this.delivery = React.createRef();
+        this.labels = this.props.labels.map(() => React.createRef());
+    }
+
+    componentDidMount () {
+        this.handleScroll();
+        document.addEventListener('scroll', this.handleScroll);
+    }
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.carousel.current, 'carouselAnimation');
+        this.isScrolledIntoView(this.categories.current, 'categoriesAnimation');
+        this.isScrolledIntoView(this.advantages.current, 'advantagesAnimation');
+        this.isScrolledIntoView(this.delivery.current, 'deliveryAnimation');
+
+        this.labels.forEach((label, i) => {
+            this.isScrolledIntoView(label.current, 'labelAnimation', 'labels', i);
+        });
+    };
+
+    isScrolledIntoView = (elem, state, animation, index) => {
+        const isVisible = isScrolledIntoView(elem, { offset: 200, full: false });
+
+        if (isVisible) {
+            if (!animation) {
+                this.setState({
+                    [state]: true
+                });
+            } else {
+                this.setState({
+                    [state]: {
+                        ...this.state[state],
+                        [index]: true
+                    }
+                });
+            }
+        }
+    };
+
     render () {
         const { langMap, lang, products, labels } = this.props;
+        const { carouselAnimation, categoriesAnimation, advantagesAnimation, deliveryAnimation, labelAnimation } = this.state;
         const text = propOr('mainPage', {}, langMap);
 
         const productsResult = products
@@ -58,21 +121,33 @@ class MainPage extends Component {
 
         return (
             <div>
-                <Carousel/>
-                <DeliveryOffer mobile/>
+                <div ref={this.carousel}>
+                    <Carousel carouselAnimation={carouselAnimation}/>
+                </div>
+                <div ref={this.delivery}>
+                    <DeliveryOffer mobile deliveryAnimation={deliveryAnimation}/>
+                </div>
                 {labels.map((label, i) => {
                     return (
-                        <div key={i}>
+                        <div key={i} ref={this.labels[i]}>
                             {productsResult[label] &&
-                            <section key={label} className={classNames(styles.categorySection, styles[label])}>
+                            <section key={label} className={classNames(styles.categorySection, styles[label], {
+                                [styles.animated]: labelAnimation[i]
+                            })}>
                                 <h2 className={styles.title}>{text[label]}</h2>
-                                <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
+                                <div className={styles.slider}>
+                                    <ProductsSlider label={label} isPromotion={label === 'discount'} products={productsResult[label]}/>
+                                </div>
                             </section>
                             }
                         </div>);
                 })}
-                <MainCategories/>
-                <Advantages/>
+                <div ref={this.categories}>
+                    <MainCategories categoriesAnimation={categoriesAnimation}/>
+                </div>
+                <div ref={this.advantages}>
+                    <Advantages advantagesAnimation={advantagesAnimation}/>
+                </div>
             </div>);
     }
 }

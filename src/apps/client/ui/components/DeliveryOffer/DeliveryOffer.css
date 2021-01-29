@@ -18,8 +18,14 @@
 
 .deliveryContainerMobile {
     display: none;
+
+    &.animated{
+        opacity: 1;
+     }
     
     @media (max-width: 1295px) {
+        opacity: 0;
+        transition: .5s ease;
         position: block;
         top: 50%;
         transform: translateY(-50%);

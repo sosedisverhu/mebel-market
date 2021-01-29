@@ -83,16 +83,26 @@ class ProductsSlider extends Component {
             this.setState({ activeIndex: productsPacks.length - 1 });
         }
 
-        this.setState({ productsPacks });
+        this.setState({ productsPacks, productsInPack: productsNumber });
     }
 
     setActiveIndex = (newIndex) => {
-        const { productsPacks, widthSlide } = this.state;
+        const { productsPacks, widthSlide, productsInPack } = this.state;
+        const { products, widthWindow } = this.props;
         const length = Math.ceil(productsPacks.length);
 
         if (newIndex > length - 1) newIndex = 0;
         if (newIndex < 0) newIndex = length - 1;
-        const left = -widthSlide * newIndex;
+
+        const lastSlideIndex = Math.ceil(products.length / productsInPack) - 1;
+        const extraProducts = products.length % productsInPack;
+        let extraSpace = 0;
+        if (newIndex === lastSlideIndex && widthWindow >= 760) {
+            extraSpace = widthSlide / productsInPack * extraProducts;
+        }
+
+
+        const left = -widthSlide * newIndex + extraSpace;
 
         this.setState({ activeIndex: newIndex, left });
     };

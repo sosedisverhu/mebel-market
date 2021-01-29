@@ -33,9 +33,28 @@
 .instagram,
 .facebook,
 .youtube {
+    display: flex;
+    align-items: center;
+    justify-self: center;
     width: 36px;
     height: 36px;
-    transition: .3s ease-out;
+    border-radius: 50%;
+    position: relative;
+
+    svg{
+        path{
+            fill: blackLight;
+            transition: .3s ease;
+        }
+    }
+
+    &:hover{
+        svg{
+            path{
+                fill: greenBasic;
+            }
+        }
+     }
 }
 
 .instagramLink,
@@ -43,20 +62,27 @@
     margin-right: 30px;
 }
 
-.instagram {
-    background-image: url("./img/instagram.svg");
-}
-
-.facebook {
-    background-image: url("./img/facebook.svg");
-
-    &:hover {
-        background-image: url("./img/facebook-hover.svg");
-    }
-}
-
 .youtube {
-    background-image: url("./img/youtube.svg");
+    svg{
+        path{
+            &:nth-child(2){
+                fill: none;
+                stroke: blackLight;
+                 transition: .3s ease;
+             }
+        }
+    }
+
+    &:hover{
+        svg{
+            path{
+                &:nth-child(2){
+                     fill: none;
+                     stroke: greenBasic;
+                 }
+            }
+        }
+    }
 }
 
 .developedWrapper {
@@ -88,10 +114,24 @@
     color: blackLight;
     margin-top: 2px;
     padding-bottom: 2px;
+    position: relative;
 
-    &:hover {
-        border-bottom: 2px solid greenBasic;
-        padding-bottom: 0;
+    &:before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+         left: 50%;
+         transform: translateX(-50%);
+         transition: width .3s ease;
+        height: 2px;
+        width: 0;
+        background: greenBasic;
+     }
+
+    &:hover{
+        &:before{
+             width: 100%;
+         }
     }
 }
 
@@ -148,6 +188,11 @@
     line-height: 16px;
     margin-top: 10px;
     color: blackLight;
+    transition: color .3s ease;
+
+    &:hover{
+        color: greenBasic;
+     }
 
     @media (max-width: 992px) {
         margin-bottom: 10px;
