@@ -19,7 +19,12 @@ class Product extends Component {
         product: PropTypes.object.isRequired,
         subCategory: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
-        isPromotion: PropTypes.bool
+        isPromotion: PropTypes.bool,
+        productAnimation: PropTypes.bool
+    };
+
+    static defaultProps = {
+        productAnimation: true
     };
 
     constructor (props) {
@@ -38,8 +43,15 @@ class Product extends Component {
 
         this.state = {
             activeSize,
-            activeColor
+            activeColor,
+            productAnimation: this.props.productAnimation
         };
+    }
+
+    componentWillReceiveProps (nextProps, nextContext) {
+        if (this.props.productAnimation !== nextProps.productAnimation) {
+            this.setState({ productAnimation: nextProps.productAnimation });
+        }
     }
 
     handleSizeChange = activeSize => {
@@ -59,11 +71,11 @@ class Product extends Component {
 
     render () {
         const { product, isPromotion, subCategory } = this.props;
-        const { activeSize, activeColor } = this.state;
+        const { activeSize, activeColor, productAnimation } = this.state;
 
         return <div className={styles.product}>
-            <AboutProductTop newClass='mobile' product={product} article={activeColor.article} />
-            <Gallery discount={activeColor.discount} photos={product.files} />
+            <AboutProductTop newClass='mobile' product={product} article={activeColor.article} productAnimation={productAnimation}/>
+            <Gallery discount={activeColor.discount} photos={product.files} productAnimation={productAnimation}/>
             <AboutProduct
                 product={product}
                 changeSize={this.handleSizeChange}
@@ -71,7 +83,9 @@ class Product extends Component {
                 activeSize={activeSize}
                 activeColor={activeColor}
                 isPromotion={isPromotion}
-                subCategory={subCategory}/>
+                subCategory={subCategory}
+                productAnimation={productAnimation}
+            />
         </div>;
     }
 }

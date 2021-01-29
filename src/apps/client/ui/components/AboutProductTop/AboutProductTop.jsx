@@ -22,15 +22,18 @@ class AboutProductTop extends Component {
         product: PropTypes.object.isRequired,
         article: PropTypes.string.isRequired,
         newClass: PropTypes.string,
-        isExist: PropTypes.string
+        isExist: PropTypes.string,
+        productAnimation: PropTypes.bool.isRequired
     };
 
     render () {
-        const { newClass, langMap, lang, product, article } = this.props;
+        const { newClass, langMap, lang, product, article, productAnimation } = this.props;
         const text = propOr('aboutProductTop', {}, langMap);
         const isExist = propOr('exist', 'true', product);
 
-        return <div className={classNames(styles.root, { [styles[newClass]]: newClass })}>
+        return <div className={classNames(styles.root, { [styles[newClass]]: newClass }, {
+            [styles.animated]: productAnimation
+        })}>
             <h1 className={styles.name}>
                 {product.texts[lang].name}
             </h1>

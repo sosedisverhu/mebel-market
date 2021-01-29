@@ -43,12 +43,14 @@ class Tab extends Component {
         tabs: PropTypes.array.isRequired,
         product: PropTypes.object.isRequired,
         scroll: PropTypes.bool.isRequired,
-        setScrollToCharacteristic: PropTypes.func.isRequired
+        setScrollToCharacteristic: PropTypes.func.isRequired,
+        infoAnimation: PropTypes.bool
     };
 
     static defaultProps = {
         tabs: [],
-        scroll: false
+        scroll: false,
+        infoAnimation: true
     };
 
     constructor (props) {
@@ -105,10 +107,12 @@ class Tab extends Component {
     }
 
     render () {
-        const { tabs } = this.props;
+        const { tabs, infoAnimation } = this.props;
         const { activeId } = this.state;
 
-        return <div className={styles.root}>
+        return <div className={classNames(styles.root, {
+            [styles.animated]: infoAnimation
+        })}>
             <div ref={this.tabTitles} className={styles.titles}>
                 {tabs.map(({ id, title }) => {
                     return <h2

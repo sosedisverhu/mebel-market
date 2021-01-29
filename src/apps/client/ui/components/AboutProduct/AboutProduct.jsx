@@ -76,7 +76,8 @@ class AboutProduct extends Component {
         activeColor: PropTypes.object.isRequired,
         isPromotion: PropTypes.bool,
         turnOnClickOutside: PropTypes.func,
-        outsideClickEnabled: PropTypes.bool
+        outsideClickEnabled: PropTypes.bool,
+        productAnimation: PropTypes.bool.isRequired
     };
 
     constructor (props) {
@@ -307,7 +308,7 @@ class AboutProduct extends Component {
     };
 
     render () {
-        const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory, products } = this.props;
+        const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory, products, productAnimation } = this.props;
         const {
             sizes,
             sizeListIsOpen,
@@ -341,8 +342,10 @@ class AboutProduct extends Component {
         const sharesDiscount = shares.filter(share => share.type === 'discount');
         const sharesPresent = shares.filter(share => share.type === 'present');
 
-        return <div className={styles.root}>
-            <AboutProductTop article={activeColor.article} product={product} />
+        return <div className={classNames(styles.root, {
+            [styles.animated]: productAnimation
+        })}>
+            <AboutProductTop article={activeColor.article} product={product} productAnimation={productAnimation}/>
             {shortDescription &&
                 <p className={styles.advantage} dangerouslySetInnerHTML={{ __html: this.convertNewLinesToBr(shortDescription) }} />}
             <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>

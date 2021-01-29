@@ -26,7 +26,8 @@ class Gallery extends Component {
         mediaWidth: PropTypes.number.isRequired,
         location: PropTypes.object.isRequired,
         discount: PropTypes.number,
-        langMap: PropTypes.object.isRequired
+        langMap: PropTypes.object.isRequired,
+        productAnimation: PropTypes.bool.isRequired
     };
 
     static defaultProps = {
@@ -177,12 +178,14 @@ class Gallery extends Component {
     };
 
     render () {
-        const { photos, discount, mediaWidth, langMap } = this.props;
+        const { photos, discount, mediaWidth, langMap, productAnimation } = this.props;
         const { sliderHeight, activeSlideIndex, isPopup } = this.state;
         const text = propOr('product', {}, langMap);
 
         return (
-            <div className={styles.gallery}>
+            <div className={classNames(styles.gallery, {
+                [styles.animated]: productAnimation
+            })}>
                 {discount ? <div className={styles.discount}>{discount}<span className={styles.percentage}>%</span></div> : null}
                 <div className={styles.sliderWrap}>
                     <Draggable

@@ -14,7 +14,10 @@ import Product from '../../components/Product/Product';
 import Tab from '../../components/Tab/Tab';
 import addProductViews from '../../../services/client/addProductViews';
 
+import isScrolledIntoView from '../../../utils/isScrolledIntoView';
+
 import styles from './ProductPage.css';
+import classNames from 'classnames';
 
 const PATH_NAME_REGEX = /\/promotions\/*/;
 
@@ -42,15 +45,45 @@ class ProductPage extends Component {
             category,
             subCategory,
             product,
-            isPromotion
+            isPromotion,
+            productAnimation: false,
+            infoAnimation: false,
+            sliderAnimation: false
         };
+
+        this.product = React.createRef();
+        this.info = React.createRef();
+        this.slider = React.createRef();
     }
+
+    handleScroll = () => {
+        this.isScrolledIntoView(this.product.current, 'productAnimation');
+        this.isScrolledIntoView(this.info.current, 'infoAnimation');
+        this.isScrolledIntoView(this.slider.current, 'sliderAnimation');
+    };
+
+    isScrolledIntoView = (elem, state) => {
+        const isVisible = isScrolledIntoView(elem, { offset: 200, full: false });
+
+        if (isVisible) {
+            this.setState({
+                [state]: true
+            });
+        }
+    };
 
     componentDidMount () {
         const { product } = this.state;
 
         product && addProductViews(product.id);
+
+        this.handleScroll();
+        document.addEventListener('scroll', this.handleScroll);
     };
+
+    componentWillUnmount () {
+        document.removeEventListener('scroll', this.handleScroll);
+    }
 
     componentDidUpdate (prevProps) {
         if (this.props.location.pathname !== prevProps.location.pathname) {
@@ -106,7 +139,7 @@ class ProductPage extends Component {
     };
 
     render () {
-        const { category, subCategory, product, isPromotion } = this.state;
+        const { category, subCategory, product, isPromotion, sliderAnimation, infoAnimation, productAnimation } = this.state;
         const similarProducts = this.props.products.filter(item => (
             item.categoryId === this.state.product.categoryId &&
             item.subCategoryId === this.state.product.subCategoryId
@@ -118,11 +151,19 @@ class ProductPage extends Component {
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
                 <DeliveryOffer mobile/>
-                <Product isPromotion={isPromotion} product={product} subCategory={subCategory}/>
-                <Tab product={product}/>
-                <section>
+                <div ref={this.product}>
+                    <Product isPromotion={isPromotion} product={product} subCategory={subCategory} productAnimation={productAnimation}/>
+                </div>
+                <div ref={this.info}>
+                    <Tab product={product} infoAnimation={infoAnimation}/>
+                </div>
+                <section ref={this.slider} className={classNames(styles.slider, {
+                    [styles.animated]: sliderAnimation
+                })}>
                     <p className={styles.sliderTitle}>Похожие товары</p>
-                    <ProductsSlider products={similarProducts}/>
+                    <div className={styles.sliderWrapper}>
+                        <ProductsSlider products={similarProducts}/>
+                    </div>
                 </section>
             </div>);
     }
