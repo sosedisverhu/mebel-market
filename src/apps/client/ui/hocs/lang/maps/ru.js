@@ -42,7 +42,13 @@ export default {
         withoutPresent: 'Спасибо, подарок не нужен',
         withPresent: 'Подтвердить',
         sharePresent: '+ Подарок',
-        shareDiscount: 'Акция'
+        shareDiscount: 'Акция',
+        similarProducts: 'Похожие товары'
+    },
+    tab: {
+        description: 'Описание',
+        characteristic: 'Характеристики',
+        comments: 'Отзывы'
     },
     breadcrumbs: {
         main: 'Главная'

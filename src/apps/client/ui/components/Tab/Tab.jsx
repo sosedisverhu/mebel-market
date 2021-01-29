@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import classNames from 'classnames';
 
+import propOr from '@tinkoff/utils/object/propOr';
+
 import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristic';
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
 import Comments from '../Comments/Comments';
@@ -13,18 +15,16 @@ import styles from './Tab.css';
 const mapStateToProps = ({ data, application }) => {
     return {
         lang: application.lang,
+        langMap: application.langMap,
         tabs: [
             {
-                id: 'description',
-                title: 'Описание'
+                id: 'description'
             },
             {
-                id: 'characteristic',
-                title: 'Характеристики'
+                id: 'characteristic'
             },
             {
-                id: 'comments',
-                title: 'Отзывы'
+                id: 'comments'
             }
         ],
         scroll: data.scrollToCharacteristic
@@ -40,6 +40,7 @@ const mapDispatchToProps = dispatch => {
 class Tab extends Component {
     static propTypes = {
         lang: PropTypes.string.isRequired,
+        langMap: PropTypes.object.isRequired,
         tabs: PropTypes.array.isRequired,
         product: PropTypes.object.isRequired,
         scroll: PropTypes.bool.isRequired,
@@ -105,17 +106,18 @@ class Tab extends Component {
     }
 
     render () {
-        const { tabs } = this.props;
+        const { tabs, langMap } = this.props;
         const { activeId } = this.state;
+        const text = propOr('tab', {}, langMap);
 
         return <div className={styles.root}>
             <div ref={this.tabTitles} className={styles.titles}>
-                {tabs.map(({ id, title }) => {
+                {tabs.map(({ id }) => {
                     return <h2
                         key={id}
                         className={classNames(styles.title, { [styles.active]: activeId === id })}
                         onClick={() => this.handleChange(id)}>
-                        {title}
+                        {text[id]}
                     </h2>;
                 })}
             </div>

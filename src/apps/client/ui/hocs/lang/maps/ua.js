@@ -42,7 +42,16 @@ export default {
         withoutPresent: 'Дякую, подарунок не потрібен',
         withPresent: 'Підтвердити',
         sharePresent: '+ Подарунок',
-        shareDiscount: 'Акція'
+        shareDiscount: 'Акція',
+        similarProducts: 'Схожі товари',
+        description: '',
+        characteristic: '',
+        comments: ''
+    },
+    tab: {
+        description: 'Опис',
+        characteristic: 'Характеристики',
+        comments: 'Відгуки'
     },
     breadcrumbs: {
         main: 'Головна'
