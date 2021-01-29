@@ -102,7 +102,7 @@ class Carousel extends Component {
         </div>
         <div className={styles.contentWrapper}>
             {
-                slide.title &&
+                (slide.title && slide.title !== 'false') &&
                 <div className={styles.content}>
                     <h2 className={styles.title}>{ slide.title }</h2>
                     <div className={styles.goldLine}/>
