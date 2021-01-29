@@ -21,45 +21,34 @@
     }
 
     &.animated{
-        .advantage{
+        .middle{
             opacity: 1;
             transform: translateY(0);
         }
 
-        .details{
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .priceTag{
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .properties{
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .features{
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .buttons{
+        .bottom{
             opacity: 1;
             transform: translateY(0);
         }
      }
 }
 
+.middle{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s ease .25s;
+}
+
+.bottom{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s ease .5s;
+}
+
 .advantage {
     margin-top: 16px;
     font: 14px/21px GilroyRegular;
     color: blackLighter;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease .5s;
 }
 
 .details {
@@ -69,18 +58,12 @@
     color: blackLighter;
     text-decoration: underline;
     cursor: pointer;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease .75s;
 }
 
 .priceTag {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease 1s;
 }
 
 .priceTagPriceWrapper {
@@ -125,9 +108,6 @@
 .properties {
     display: flex;
     justify-content: space-between;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease 1.25s;
 
     @media (max-width: 1190px) and (min-width: 1001px) {
         flex-direction: column;
@@ -406,9 +386,6 @@
 
 .features {
     margin-top: 22px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease 1.5s;
 }
 
 .feature {
@@ -465,9 +442,6 @@
 }
 
 .buttons {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: .5s ease 1.75s;
     margin-top: 22px;
     display: flex;
     

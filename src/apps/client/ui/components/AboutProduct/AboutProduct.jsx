@@ -346,174 +346,178 @@ class AboutProduct extends Component {
             [styles.animated]: productAnimation
         })}>
             <AboutProductTop article={activeColor.article} product={product} productAnimation={productAnimation}/>
-            {shortDescription &&
+            <div className={styles.middle}>
+                {shortDescription &&
                 <p className={styles.advantage} dangerouslySetInnerHTML={{ __html: this.convertNewLinesToBr(shortDescription) }} />}
-            <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
-            <div className={styles.priceTag}>
-                <span className={styles.priceTagPriceWrapper}>
-                    {isDiscount &&
+                <div className={styles.details} onClick={this.scrollToTitles}>{text.details}</div>
+                <div className={styles.priceTag}>
+                    <span className={styles.priceTagPriceWrapper}>
+                        {isDiscount &&
                     <span className={styles.priceOld}>
                         {formatMoney(activeColor.price)}
                     </span>}
-                    <span className={classNames(styles.price, styles.discountPrice)}>
-                        {formatMoney(resultPrice)}
+                        <span className={classNames(styles.price, styles.discountPrice)}>
+                            {formatMoney(resultPrice)}
+                        </span>
                     </span>
-                </span>
-                <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
-                    {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
-                </div>
-            </div>
-            <div className={styles.properties}>
-                <div className={styles.sizesWrap}>
-                    <div className={styles.sizesTitle}>
-                        {!isOneSize ? text.size : text.oneSize}
-                        <div onClick={this.handleChangePopupSizes()} className={classNames(
-                            styles.sizesTitleMark,
-                            { [styles.visible]: isTableSizes })} >
-                            <img
-                                className={styles.sizesTitleMarkImg}
-                                src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
-                                width="18" height="18" alt={text.sizesMarkDescr} />
-                        </div>
+                    <div className={classNames(styles.existText, { [styles.notExist]: isExist === 'false' })}>
+                        {isExist === 'true' ? langMap.exist.inStock : langMap.exist.order}
                     </div>
-                    <SizesSelect
-                        selectIsOpen={selectIsOpen}
-                        activeSize={activeSize}
-                        sizes={sizes}
-                        sizeListIsOpen={sizeListIsOpen}
-                        isPromotion={isPromotion}
-                        lang={lang}
-                        sizeListIsOpenSwitch={this.sizeListIsOpen}
-                        selectIsOpenSwitch={this.selectIsOpen}
-                        selectIsClosedSwitch={this.selectIsClosed}
-                        handleChangeSize={this.handleChangeSize}
-                        additionalClass='aboutProduct'
-                    />
                 </div>
-                {(!isOneColor || product.viewOneColor) && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
-                    <div className={styles.colorTitle}>
-                        {text.chooseColor}
-                    </div>
-                    <ColorsSelect
-                        styles={styles}
-                        activeSize={activeSize}
-                        isPromotion={isPromotion}
-                        activeColor={activeColor}
-                        handleChangeColor={this.handleChangeColor}
-                        changeColorListOpen={this.changeColorListOpen}
-                        changeColorListClose={this.changeColorListClose}
-                        handleChangePopup={this.handleChangePopup}
-                        colorListOpen={colorListOpen}
-                        withPopup
-                    />
-                </div>}
             </div>
-            <div className={styles.features}>
-                {features && features.map(feature => {
-                    return <label key={feature.id} className={styles.feature}>
-                        <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
-                            onChange={this.handleCheckboxChange} name={feature.id} />
-                        <span className={styles.featureCheckmark} />
-                        {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
-                    </label>;
-                })}
-            </div>
-            <div className={styles.buttons}>
-                <div className={styles.simpleButtons}>
-                    <button
-                        className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
-                        onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
-                        {!isInBasket
-                            ? text.buy
-                            : text.inBasket
-                        }
-                    </button>
-                    <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
-                        onClick={this.handleAddToWishlist}/>
-                </div>
-                {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
-                    {isShareInfo && <div className={styles.shareInfo}>
-                        {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
-                            <div className={styles.shareInfoDescr}>
-                                {text.getShareDiscount1}
-                                {sharesDiscount.map(share => {
-                                    return <span className={styles.shareInfoProductDiscount}>
-                                                (<span className={styles.shareInfoProductDiscountValue}>
-                                            {` - ${formatMoney(share.value)} `}
-                                        </span>)
-                                    </span>;
-                                })}
-                                {text.getShareDiscount2}
-                                {sharesDiscount.some(share => share.products.length > 1) && text.groupOfProducts}
-                                :
+            <div className={styles.bottom}>
+                <div className={styles.properties}>
+                    <div className={styles.sizesWrap}>
+                        <div className={styles.sizesTitle}>
+                            {!isOneSize ? text.size : text.oneSize}
+                            <div onClick={this.handleChangePopupSizes()} className={classNames(
+                                styles.sizesTitleMark,
+                                { [styles.visible]: isTableSizes })} >
+                                <img
+                                    className={styles.sizesTitleMarkImg}
+                                    src="/src/apps/client/ui/components/AboutProduct/img/questionMarkWhite.svg"
+                                    width="18" height="18" alt={text.sizesMarkDescr} />
                             </div>
-                            <ul className={styles.shareInfoProducts}>
-                                {sharesDiscount.map(share => {
-                                    return <li>
-                                        {share.products.map(shareProduct => {
-                                            const product = find(product => product.id === shareProduct.value, products);
-                                            const link = this.getProductLink(product);
-
-                                            return <li className={styles.shareInfoProductItem}>
-                                                <Link
-                                                    to={link}
-                                                    className={styles.shareInfoProductLink}
-                                                    href="#" target='_blank'>
-                                                    {shareProduct.label}
-                                                </Link>
-                                            </li>;
-                                        })}
-                                    </li>;
-                                })}
-                            </ul>
-                        </div>}
-                        {!!sharesPresent.length && <div className={styles.shareInfoPresent}>
-                            <div className={styles.shareInfoDescr}>
-                                {sharesDiscount.length ? text.getSharePresent : text.getSharePresent}
-                                <span className={styles.shareInfoDescrSpan}>&nbsp;{text.atChoice}</span></div>
-                            <ul className={styles.shareInfoProducts}>
-                                {sharesPresent.map(share => {
-                                    return <li>
-                                        {share.products.map(shareProduct => {
-                                            const product = find(product => product.id === shareProduct.value, products);
-                                            const link = this.getProductLink(product);
-
-                                            return <li className={styles.shareInfoProductItem}>
-                                                <Link
-                                                    to={link}
-                                                    className={styles.shareInfoProductLink}
-                                                    href="#" target='_blank'>
-                                                    {shareProduct.label}
-                                                </Link>
-                                            </li>;
-                                        })}
-                                    </li>;
-                                })}
-                            </ul>
-                        </div>}
-                        <div className={styles.closePromotion} onClick={this.closeShareInfo}>
-                            <img src="/src/apps/client/ui/components/AboutProduct/img/cross.svg" alt="close"/>
                         </div>
+                        <SizesSelect
+                            selectIsOpen={selectIsOpen}
+                            activeSize={activeSize}
+                            sizes={sizes}
+                            sizeListIsOpen={sizeListIsOpen}
+                            isPromotion={isPromotion}
+                            lang={lang}
+                            sizeListIsOpenSwitch={this.sizeListIsOpen}
+                            selectIsOpenSwitch={this.selectIsOpen}
+                            selectIsClosedSwitch={this.selectIsClosed}
+                            handleChangeSize={this.handleChangeSize}
+                            additionalClass='aboutProduct'
+                        />
+                    </div>
+                    {(!isOneColor || product.viewOneColor) && <div className={classNames(styles.colorWrap, { [styles.active]: colorListOpen })}>
+                        <div className={styles.colorTitle}>
+                            {text.chooseColor}
+                        </div>
+                        <ColorsSelect
+                            styles={styles}
+                            activeSize={activeSize}
+                            isPromotion={isPromotion}
+                            activeColor={activeColor}
+                            handleChangeColor={this.handleChangeColor}
+                            changeColorListOpen={this.changeColorListOpen}
+                            changeColorListClose={this.changeColorListClose}
+                            handleChangePopup={this.handleChangePopup}
+                            colorListOpen={colorListOpen}
+                            withPopup
+                        />
                     </div>}
-                    <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>
-                        {text.share}
-                    </button>
-                </div>}
+                </div>
+                <div className={styles.features}>
+                    {features && features.map(feature => {
+                        return <label key={feature.id} className={styles.feature}>
+                            <input type="checkbox" checked={checkedFeatureIds[feature.id]} className={styles.featureInput}
+                                onChange={this.handleCheckboxChange} name={feature.id} />
+                            <span className={styles.featureCheckmark} />
+                            {feature.name} (<span className={styles.featureValue}>{` + ${formatMoney(feature.value)} `}</span>)
+                        </label>;
+                    })}
+                </div>
+                <div className={styles.buttons}>
+                    <div className={styles.simpleButtons}>
+                        <button
+                            className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
+                            onClick={!isInBasket ? this.handleBuyClick : this.handleOpenBasket}>
+                            {!isInBasket
+                                ? text.buy
+                                : text.inBasket
+                            }
+                        </button>
+                        <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
+                            onClick={this.handleAddToWishlist}/>
+                    </div>
+                    {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
+                        {isShareInfo && <div className={styles.shareInfo}>
+                            {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
+                                <div className={styles.shareInfoDescr}>
+                                    {text.getShareDiscount1}
+                                    {sharesDiscount.map(share => {
+                                        return <span className={styles.shareInfoProductDiscount}>
+                                                (<span className={styles.shareInfoProductDiscountValue}>
+                                                {` - ${formatMoney(share.value)} `}
+                                            </span>)
+                                        </span>;
+                                    })}
+                                    {text.getShareDiscount2}
+                                    {sharesDiscount.some(share => share.products.length > 1) && text.groupOfProducts}
+                                :
+                                </div>
+                                <ul className={styles.shareInfoProducts}>
+                                    {sharesDiscount.map(share => {
+                                        return <li>
+                                            {share.products.map(shareProduct => {
+                                                const product = find(product => product.id === shareProduct.value, products);
+                                                const link = this.getProductLink(product);
+
+                                                return <li className={styles.shareInfoProductItem}>
+                                                    <Link
+                                                        to={link}
+                                                        className={styles.shareInfoProductLink}
+                                                        href="#" target='_blank'>
+                                                        {shareProduct.label}
+                                                    </Link>
+                                                </li>;
+                                            })}
+                                        </li>;
+                                    })}
+                                </ul>
+                            </div>}
+                            {!!sharesPresent.length && <div className={styles.shareInfoPresent}>
+                                <div className={styles.shareInfoDescr}>
+                                    {sharesDiscount.length ? text.getSharePresent : text.getSharePresent}
+                                    <span className={styles.shareInfoDescrSpan}>&nbsp;{text.atChoice}</span></div>
+                                <ul className={styles.shareInfoProducts}>
+                                    {sharesPresent.map(share => {
+                                        return <li>
+                                            {share.products.map(shareProduct => {
+                                                const product = find(product => product.id === shareProduct.value, products);
+                                                const link = this.getProductLink(product);
+
+                                                return <li className={styles.shareInfoProductItem}>
+                                                    <Link
+                                                        to={link}
+                                                        className={styles.shareInfoProductLink}
+                                                        href="#" target='_blank'>
+                                                        {shareProduct.label}
+                                                    </Link>
+                                                </li>;
+                                            })}
+                                        </li>;
+                                    })}
+                                </ul>
+                            </div>}
+                            <div className={styles.closePromotion} onClick={this.closeShareInfo}>
+                                <img src="/src/apps/client/ui/components/AboutProduct/img/cross.svg" alt="close"/>
+                            </div>
+                        </div>}
+                        <button className={classNames(styles.shareInfoBtn, { [styles.active]: isShareInfo })} onClick={this.handleShowShareInfo}>
+                            {text.share}
+                        </button>
+                    </div>}
+                </div>
+                {activePopupColorIndex !== null && <PopupColor
+                    colors={actualColors}
+                    activeIndex={activePopupColorIndex}
+                    closePopup={this.handleChangePopup}
+                    handleChangeColor={this.handleChangeColor}
+                />}
+                {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
+                {isPopupPresents && <PopupPresents
+                    shares={sharesPresent}
+                    closePopup={this.handleClosePopupPresents}
+                    isPromotion={isPromotion}
+                    disagree={this.handleWithoutPresentsClick}
+                    agree={this.handleWithPresentsClick} />}
+                {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
             </div>
-            {activePopupColorIndex !== null && <PopupColor
-                colors={actualColors}
-                activeIndex={activePopupColorIndex}
-                closePopup={this.handleChangePopup}
-                handleChangeColor={this.handleChangeColor}
-            />}
-            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
-            {isPopupPresents && <PopupPresents
-                shares={sharesPresent}
-                closePopup={this.handleClosePopupPresents}
-                isPromotion={isPromotion}
-                disagree={this.handleWithoutPresentsClick}
-                agree={this.handleWithPresentsClick} />}
-            {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
         </div>;
     }
 }
