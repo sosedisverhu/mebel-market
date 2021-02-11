@@ -101,7 +101,6 @@ class ProductsSlider extends Component {
             extraSpace = widthSlide / productsInPack * extraProducts;
         }
 
-
         const left = -widthSlide * newIndex + extraSpace;
 
         this.setState({ activeIndex: newIndex, left });

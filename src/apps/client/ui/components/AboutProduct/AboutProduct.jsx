@@ -84,6 +84,7 @@ class AboutProduct extends Component {
         super(props);
 
         this.shareInfo = React.createRef();
+        this.bottomSection = React.createRef();
 
         this.state = {
             sizes: this.props.product.sizes,
@@ -102,6 +103,8 @@ class AboutProduct extends Component {
 
     componentDidMount () {
         const { wishlist, product, activeColor } = this.props;
+
+        this.bottomSection.current.style.transform = 'unset';
 
         this.setState({
             isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.color.id === activeColor.id))
@@ -365,7 +368,7 @@ class AboutProduct extends Component {
                     </div>
                 </div>
             </div>
-            <div className={styles.bottom}>
+            <div className={styles.bottom} ref={this.bottomSection}>
                 <div className={styles.properties}>
                     <div className={styles.sizesWrap}>
                         <div className={styles.sizesTitle}>
