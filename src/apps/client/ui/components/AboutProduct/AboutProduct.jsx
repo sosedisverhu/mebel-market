@@ -103,7 +103,7 @@ class AboutProduct extends Component {
     componentDidMount () {
         const { wishlist, product, activeColor } = this.props;
 
-        document.getElementById('bottomSection').style.transform = 'unset'
+        document.getElementById('bottomSection').style.transform = 'unset';
 
         this.setState({
             isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.color.id === activeColor.id))
