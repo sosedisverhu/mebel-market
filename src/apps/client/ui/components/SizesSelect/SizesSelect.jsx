@@ -62,19 +62,21 @@ class SizesSelect extends Component {
                 <li className={classNames(styles.activeOption, { [styles.oneActiveOption]: isOneSize }, { [styles.cardActiveOption]: isCardSelect })}>
                     {activeSize.name}
                 </li>
-                {actualSizes.map(size => {
-                    if (size.id !== activeSize.id && sizeListIsOpen) {
-                        sizeCounter++;
+                <div className={styles.otherSizes}>
+                    {actualSizes.map((size, i) => {
+                        if (size.id !== activeSize.id && sizeListIsOpen) {
+                            sizeCounter++;
 
-                        if (isPromotion && size.colors.every(color => !color.action)) return;
-                        return <li className={classNames(styles.option, { [styles.cardOption]: isCardSelect })}
-                            onClick={() => handleChangeSize(size)}
-                            style={{ top: `${(isCardSelect ? 0 : 30) * sizeCounter}px` }}
-                            key={size.id}>
-                            {size.name}
-                        </li>;
-                    }
-                })}
+                            if (isPromotion && size.colors.every(color => !color.action)) return;
+                            return <li className={classNames(styles.option, { [styles.cardOption]: isCardSelect })}
+                                onClick={() => handleChangeSize(size)}
+                                style={{ bottom: `${(isCardSelect ? 0 : 30) * sizeCounter}px` }}
+                                key={size.id}>
+                                {size.name}
+                            </li>;
+                        }
+                    })}
+                </div>
             </ul>);
     }
 }

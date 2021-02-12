@@ -658,6 +658,12 @@
     }
 }
 
+.otherSizes{
+    overflow-y: scroll;
+    max-height: 60px;
+    position: absolute;
+    bottom: 30px;
+}
 
 
 
