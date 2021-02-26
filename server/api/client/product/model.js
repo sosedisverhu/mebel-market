@@ -16,6 +16,7 @@ const Product = new Schema({
     },
     views: { type: Number, required: true },
     characteristics: { type: { characteristics: { type: Array, required: true } } },
+    features: { type: { features: { type: Array, required: true } } },
     sizes: { type: Object, required: true },
     avatar: { type: String },
     files: [{ type: String, required: true }],

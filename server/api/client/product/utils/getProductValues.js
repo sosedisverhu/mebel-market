@@ -5,6 +5,7 @@ const VALUES = [
     'texts',
     'views',
     'characteristics',
+    'features',
     'sizes',
     'avatar',
     'files',

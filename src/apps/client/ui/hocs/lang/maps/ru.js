@@ -48,7 +48,8 @@ export default {
     tab: {
         description: 'Описание',
         characteristic: 'Характеристики',
-        comments: 'Отзывы'
+        comments: 'Отзывы',
+        features: 'Особенности'
     },
     breadcrumbs: {
         main: 'Главная'
