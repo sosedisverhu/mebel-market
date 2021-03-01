@@ -1,0 +1,336 @@
+@value whiteBasic from '../../../../../css/colors.css';
+@value redBasic from '../../../../../css/colors.css';
+@value blackLight from '../../../../../css/colors.css';
+@value gray0 from '../../../../../css/colors.css';
+
+.root {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    overflow-y: auto;
+    label {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid #000;
+    }
+}
+
+.cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(66, 66, 66, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.popupWrap {
+    height: 100%;
+    text-align: left;
+    &:after {
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 100%;
+        content: '';
+    }
+}
+
+.popup {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    width: 100%;
+    padding: 30px;
+
+    @media (max-width: 550px) {
+        padding: 16px;
+    }
+}
+
+.popupContent {
+    position: relative;
+    background: whiteBasic;
+    font: 18px/21px GilroyRegular;
+    display: flex;
+    width: 100%;
+    height: 494px;
+    max-width: 640px;
+    margin: 0 auto;
+    z-index: 110;
+    overflow: hidden;
+}
+
+.escape {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 10;
+}
+
+.userInfo {
+    padding: 23px 0 39px 55px;
+    position: relative;
+    z-index: 3;
+
+    @media (max-width: 450px) {
+        padding: 23px 25px 39px 25px;
+    }
+}
+
+.title {
+    font-family: GilroyMedium;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    letter-spacing: 0.72px;
+    color: blackLight;
+    margin-bottom: 9px;
+}
+
+.dataField {
+    width: 100%;
+    max-width: 274px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+.form {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    input {
+        font: 16px/19px GilroyRegular;
+        color: blackLight;
+        width: 100%;
+        height: 45px;
+        padding-top: 20px;
+        margin-top: 10px;
+        border: none;
+        outline: none;
+    }
+
+    input:focus + .labelName .contentName,
+    input:valid + .labelName .contentName,
+    input:focus + .labelPhone .contentName,
+    input:valid + .labelPhone .contentName {
+        transform: translateY(-180%);
+        font: 12px/14px GilroyRegular;
+        color: gray0;
+    }
+}
+
+.invalidField{
+    border-color:redBasic !important;
+}
+
+.errorMessage {
+    margin-top: 10px;
+    color: redBasic;
+    font: 13px/15px GilroyRegular;
+    text-align: left;
+}
+
+.submit {
+    width: 100%;
+    font: 16px/19px GilroyRegular;
+    letter-spacing: 0.02em;
+    border: none;
+    color: whiteBasic;
+    background: blackLight;
+    padding: 13px 0;
+    cursor: pointer;
+}
+.successfulSubmit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    font-size: 0;
+    outline: none;
+    border: 1px solid black;
+    background: whiteBasic;
+    img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+    }
+}
+.contentName {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.size{
+    display: flex;
+    margin-bottom: 16px;
+
+    div:first-child{
+            margin-right: 25px;
+    }
+}
+
+.sizeInput{
+    width: fit-content;
+    position: relative;
+    height: 24px;
+
+    input{
+        width: 30px;
+        height: 100%;
+        border: 1px solid #4F4F4F;
+        margin: 0 9px 0 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    label{
+        position: relative;
+        border-bottom: none;
+        font: 14px/16px GilroyRegular;
+        letter-spacing: 0.02em;
+        color: blackLight;
+    }
+}
+
+.description{
+    font: 12px/14px GilroyRegular;
+    font-style: italic;
+    letter-spacing: 0.02em;
+    color: #828282;   
+    text-align: left;
+}
+
+.subtitle{
+    font: 14px/16px GilroyRegular;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    color: blackLight;
+    margin-bottom: 16px;
+}
+
+.inputBlock{
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.agreement{
+
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin: 12px 0 22px 0;
+    cursor: pointer;
+    font-size: 22px;
+    pointer-events: all;
+    user-select: none;
+    font-family: GilroyRegular;
+    font-style: italic;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.02em;
+    color: #828282;
+    border: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #4F4F4F;
+    transform: translateY(-50%);
+  }
+
+  .checkboxInvalid{
+    border: 1px solid redBasic;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.sideImg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    @media (max-width: 550px) {
+        right: auto;
+        left: 60%;
+    }
+}
