@@ -71,7 +71,7 @@ class ProductsGrid extends Component {
                             isPromotion={isPromotion}
                             key={product.id}
                             product={product}
-                            activeSizes = {activeSizes}
+                            activeSizes = {[...activeSizes]}
                             sizes = {product.sizes}
                             handleOpenBasket = {this.handleOpenBasket}
                         />
