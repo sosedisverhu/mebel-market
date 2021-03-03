@@ -17,4 +17,5 @@ export const // eslint-disable-line one-var
     OPEN_BASKET = 'OPEN_BASKET',
     CLOSE_BASKET = 'CLOSE_BASKET',
     SET_SEO = 'SET_SEO',
-    SET_DOMAIN = 'SET_DOMAIN';
+    SET_DOMAIN = 'SET_DOMAIN',
+    SET_ALL_SHARES = 'SET_ALL_SHARES';
