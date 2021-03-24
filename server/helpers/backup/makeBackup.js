@@ -9,5 +9,6 @@ backup({
     uri: DATABASE_URL,
     root: BACKUPS_FOLDER,
     parser: 'json',
+    collections: ['admins', 'articles', 'categories', 'mainsliders', 'partners', 'products', 'seos', 'subcategories', 'orders', 'reviews'],
     tar: `dump-${format(new Date(), 'yyyy-MM-dd')}.tar`
 });

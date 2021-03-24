@@ -65,6 +65,7 @@ export default function backups () {
             uri: DATABASE_URL,
             root: BACKUPS_FOLDER,
             parser: 'json',
+            collections: ['admins', 'articles', 'categories', 'mainsliders', 'partners', 'products', 'seos', 'subcategories', 'orders', 'reviews'],
             tar: dumpName
         });
     });

@@ -25,6 +25,7 @@ export default function download (req, res) {
             uri: DATABASE_URL,
             root: TEMP_FOLDER,
             parser: 'json',
+            collections: ['admins', 'articles', 'categories', 'mainsliders', 'partners', 'products', 'seos', 'subcategories', 'orders', 'reviews'],
             tar: dumpName,
             callback: (err) => {
                 if (err) {
