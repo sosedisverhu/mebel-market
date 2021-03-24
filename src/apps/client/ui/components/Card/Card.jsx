@@ -8,7 +8,6 @@ import classNames from 'classnames';
 import propOr from '@tinkoff/utils/object/propOr';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import find from '@tinkoff/utils/array/find';
-import includes from '@tinkoff/utils/array/includes';
 
 import SizesSelect from '../SizesSelect/SizesSelect';
 
@@ -164,7 +163,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, minDiscount, actualPrice, minPrice, alias, labels, sizes, exist },
+            product: { texts, avatar, minDiscount, alias, labels, sizes, exist },
             newClass,
             labelClass,
             langRoute,
@@ -172,7 +171,6 @@ class Card extends Component {
             setSliderWidth,
             isPromotion,
             langMap,
-            activeSizes,
             lastItem
         } = this.props;
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;

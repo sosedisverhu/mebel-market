@@ -24,6 +24,7 @@ import MainSliderPage from './ui/pages/MainSliderPage/MainSliderPage';
 import OrdersPage from './ui/pages/OrdersPage/OrdersPage.jsx';
 import CredentialsPage from './ui/pages/CredentialsPage/CredentialsPage.jsx';
 import AdminPage from './ui/pages/AdminPage/AdminPage.jsx';
+import DatabasePage from './ui/pages/DatabasePage/DatabasePage.jsx';
 
 import '../../../client/vendor';
 import '../../css/main.css';
@@ -95,6 +96,7 @@ class App extends Component {
                 {includes('seo', sections) && <Route exact path='/admin/seo' component={SeoPage}/>}
                 {includes('admins', sections) && <Route exact path='/admin/admins' component={AdminPage}/>}
                 {includes('credentials', sections) && <Route exact path='/admin/credentials' component={CredentialsPage}/>}
+                <Route exact path='/admin/db' component={DatabasePage} />
             </Switch>
         </main>;
     }

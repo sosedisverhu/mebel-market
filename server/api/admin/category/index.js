@@ -11,7 +11,7 @@ import updateImage from './services/updateImage';
 
 const router = express.Router();
 
-router.use(verification('products'));
+router.use(verification('*'));
 
 router.route('/all')
     .get(getCategories);

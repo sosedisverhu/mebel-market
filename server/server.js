@@ -37,6 +37,9 @@ import clientOrderApi from './api/client/order';
 import adminOrderApi from './api/admin/order';
 import clientSearchApi from './api/client/search';
 import clientFormApi from './api/client/form';
+import adminDbApi from './api/admin/db';
+
+import backups from './helpers/backup/backups';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -71,6 +74,7 @@ app.use(helmet());
 
 // mongodb
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
+backups();
 
 // redirects
 // app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
@@ -122,6 +126,7 @@ app.use('/api/client/main-slider', clientMainSliderApi);
 app.use('/api/client/order', clientOrderApi);
 app.use('/api/admin/order', adminOrderApi);
 app.use('/api/client/form', clientFormApi);
+app.use('/api/admin/db', adminDbApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {
