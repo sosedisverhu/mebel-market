@@ -171,6 +171,6 @@ app.listen(PORT, function () {
     console.log('listening on port', PORT); // eslint-disable-line no-console
 });
 
-const httpsServer = https.createServer(credentials, app);
+// const httpsServer = https.createServer(credentials, app);
 
-httpsServer.listen(HTTPS_PORT);
+// httpsServer.listen(HTTPS_PORT);
