@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import propOr from '@tinkoff/utils/object/propOr';
 import pathOr from '@tinkoff/utils/object/pathOr';
 import find from '@tinkoff/utils/array/find';
+import isEmpty from '@tinkoff/utils/is/empty';
 
 import SizesSelect from '../SizesSelect/SizesSelect';
 
@@ -76,6 +77,39 @@ class Card extends Component {
         this.setState({
             categoryAlias: (find(category => category.id === product.categoryId, categories) || {}).alias,
             subCategoryAlias: (find(subCategory => subCategory.id === product.subCategoryId, subCategories) || {}).alias
+        });
+    }
+
+    componentWillReceiveProps (nextProps) {
+        if (this.props.activeSizes.length === 0) {
+            return this.setState({
+                activeSize: this.props.product.sizes[this.props.lang][0],
+                activeColor: this.props.product.sizes[this.props.lang][0].colors[0]
+            });
+        }
+
+        const findMatches = function (arr1, arr2) {
+            return arr1.filter(function (item) {
+                return arr2.indexOf(item.name) !== -1;
+            });
+        };
+
+        const choosenSizes = findMatches(this.props.product.sizes[this.props.lang], this.props.activeSizes);
+
+        const cheapestVariant = choosenSizes.reduce((acc, size) => {
+            const cheapestColor = size.colors.reduce(function (colorAcc, currentColor) {
+                return (colorAcc.price < currentColor.price ? colorAcc : currentColor);
+            });
+
+            return (
+                cheapestColor.price < acc.activeColor.price
+                    ? { activeColor: cheapestColor, activeSize: size }
+                    : acc);
+        }, { activeColor: { price: 999999999 }, activeSize: {} });
+
+        this.setState({
+            activeSize: cheapestVariant.activeSize,
+            activeColor: cheapestVariant.activeColor
         });
     }
 
@@ -184,10 +218,10 @@ class Card extends Component {
             ? sizes[lang].filter(size => size.colors.some(color => color.action))
             : sizes[lang];
         const isOneSize = actualSizes.length === 1;
-        const resultPrice = (activeSize.colors[0].discountPrice || activeSize.colors[0].price);
-        const resultOldPrice = (activeSize.colors[0].price || activeSize.colors[0].discountPrice);
+        const resultPrice = !isEmpty(activeSize) && (activeSize.colors[0].discountPrice || activeSize.colors[0].price);
+        const resultOldPrice = !isEmpty(activeSize) && (activeSize.colors[0].price || activeSize.colors[0].discountPrice);
         const isDiscount = resultPrice !== resultOldPrice;
-
+        console.log(activeSizes);
         // if (activeSizes.length >= 1) {
         //     const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
 
@@ -276,4 +310,4 @@ class Card extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Card));
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

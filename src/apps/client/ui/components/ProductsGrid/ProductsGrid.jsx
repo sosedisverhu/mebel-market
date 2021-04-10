@@ -53,12 +53,12 @@ class ProductsGrid extends Component {
 
         return (
             <div className={styles.products}>
-                {products.map(product => {
+                {products.map((product, i) => {
                     return <Card
                         isPromotion={isPromotion}
-                        key={product.id}
+                        key={product.id + i}
                         product={product}
-                        activeSizes = {activeSizes}
+                        activeSizes = {[...activeSizes]}
                         sizes = {product.sizes}
                         handleOpenBasket = {this.handleOpenBasket}
                     />;
