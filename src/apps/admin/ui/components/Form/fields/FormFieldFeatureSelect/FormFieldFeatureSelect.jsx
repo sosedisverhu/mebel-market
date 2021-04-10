@@ -10,7 +10,8 @@ const materialStyles = {
     root: {
         marginTop: '16px',
         marginBottom: '8px',
-        width: 'calc(100% - 60px)'
+        width: 'calc(100% - 60px)',
+        fontFamily: 'Roboto, Helvetica, Arial, sans-serif'
     }
 };
 

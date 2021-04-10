@@ -80,7 +80,7 @@ const Feature =
                         value={FEATURE_TYPES[feature.featureType]}
                         schema={{ placeholder: 'Тип' }}
                     />
-                    {feature.featureType && <img src={FEATURE_TYPES[feature.featureType].photo} alt="photo"/>}
+                    {feature.featureType && <img src={FEATURE_TYPES[+feature.featureType].photo} alt="photo"/>}
                 </div>
                 <TextField
                     className={classes.featureField}
@@ -157,7 +157,7 @@ class FormFieldFeature extends Component {
 
     handleFeatureChange = (prop, i) => event => {
         const { value } = this.props;
-
+        console.log(event);
         if (prop === 'featureType') {
             value[i][prop] = event.value;
         } else {

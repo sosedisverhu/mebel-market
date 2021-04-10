@@ -26,10 +26,10 @@ const mapStateToProps = ({ data, application }) => {
                 id: 'characteristic'
             },
             {
-                id: 'comments'
+                id: 'features'
             },
             {
-                id: 'features'
+                id: 'comments'
             }
         ],
         scroll: data.scrollToCharacteristic
@@ -110,7 +110,7 @@ class Tab extends Component {
             return (
                 <div>
                     <div className={styles.featuresContainer}>
-                        {product.features[lang].features.map((feature) => {
+                        {product.features && product.features[lang].features.map((feature) => {
                             return <div className={styles.featureBlock}>
                                 <img src={FEATURE_TYPES[feature.featureType].photo} alt="icon"/>
                                 <div className={styles.featureText}>
@@ -134,7 +134,7 @@ class Tab extends Component {
     }
 
     render () {
-        const { tabs, langMap, infoAnimation } = this.props;
+        const { tabs, langMap, infoAnimation, product } = this.props;
         const { activeId } = this.state;
         const text = propOr('tab', {}, langMap);
 
@@ -143,6 +143,9 @@ class Tab extends Component {
         })}>
             <div ref={this.tabTitles} className={styles.titles}>
                 {tabs.map(({ id }) => {
+                    if (id === 'features' && !product.features) {
+                        return null;
+                    }
                     return <h2
                         key={id}
                         className={classNames(styles.title, { [styles.active]: activeId === id })}
