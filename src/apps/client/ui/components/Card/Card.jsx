@@ -47,8 +47,7 @@ class Card extends Component {
         activeSizes: PropTypes.array,
         basket: PropTypes.array,
         handleOpenBasket: PropTypes.func,
-        saveProductsToBasket: PropTypes.func,
-        lastItem: PropTypes.bool
+        saveProductsToBasket: PropTypes.func
     };
 
     static defaultProps = {
@@ -57,8 +56,7 @@ class Card extends Component {
         categories: [],
         subCategories: [],
         activeSizes: [],
-        setSliderWidth: () => {},
-        lastItem: false
+        setSliderWidth: () => {}
     };
 
     state = {
@@ -171,6 +169,7 @@ class Card extends Component {
             setSliderWidth,
             isPromotion,
             langMap,
+            activeSizes,
             lastItem
         } = this.props;
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
@@ -243,7 +242,7 @@ class Card extends Component {
                         {/* {minActualPrice} */}
                         {resultPrice} &#8372;
                     </div>
-                    <div className={classNames(styles.hoverInformation, { [styles.lastItem]: lastItem })} onClick={(e) => { e.preventDefault(); }}>
+                    <div className={styles.hoverInformation} onClick={(e) => { e.preventDefault(); }}>
                         <button
                             className={classNames(styles.btnBuy, { [styles.active]: isInBasket })}
                             onClick={!isInBasket ? this.handleBuyClickOnCard : this.props.handleOpenBasket}>
