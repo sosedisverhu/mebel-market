@@ -30,7 +30,9 @@ import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import getLangRouteParts from './utils/getLangRouteParts';
 import getLangFromRoute from './utils/getLangFromRoute';
 
-import { LANGS } from './constants/constants';
+import setAllShares from './actions/setAllShares';
+
+import { LANGS, DEFAULT_LANG } from './constants/constants';
 
 import styles from './App.css';
 
@@ -38,12 +40,17 @@ const langs = LANGS
     .slice(1)
     .join('|');
 
-const mapStateToProps = ({ application }) => {
+const mapStateToProps = ({ application, data }) => {
     return {
         lang: application.lang,
-        langRoute: application.langRoute
+        langRoute: application.langRoute,
+        products: data.products
     };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+    setAllShares: payload => dispatch(setAllShares(payload))
+});
 
 @lang
 @media
@@ -51,12 +58,27 @@ class App extends Component {
     static propTypes = {
         lang: PropTypes.string,
         langRoute: PropTypes.string,
-        location: PropTypes.object
+        location: PropTypes.object,
+        products: PropTypes.array,
+        setAllShares: PropTypes.func.isRequired
     };
 
     static defaultProps = {
         langRoute: ''
     };
+
+    componentDidMount () {
+        const allShares = this.props.products.reduce((arr, product) => {
+            product.sizes[DEFAULT_LANG].map((size) => {
+                if (size.shares) {
+                    return size.shares.map((share) => { arr.push({ share, product }); });
+                }
+            });
+            return arr;
+        }, []);
+
+        this.props.setAllShares(allShares);
+    }
 
     componentWillReceiveProps (nextProps) {
         if (this.props.location !== nextProps.location) {
@@ -106,4 +128,4 @@ class App extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
