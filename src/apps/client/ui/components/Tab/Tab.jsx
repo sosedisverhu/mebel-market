@@ -10,6 +10,8 @@ import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristi
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
 import Comments from '../Comments/Comments';
 
+import { FEATURE_TYPES } from '../../../../admin/constants/constants';
+
 import styles from './Tab.css';
 
 const mapStateToProps = ({ data, application }) => {
@@ -25,6 +27,9 @@ const mapStateToProps = ({ data, application }) => {
             },
             {
                 id: 'comments'
+            },
+            {
+                id: 'features'
             }
         ],
         scroll: data.scrollToCharacteristic
@@ -99,6 +104,27 @@ class Tab extends Component {
                                 <p className={styles.characterText}>{characteristic.value}</p>
                             </div>);
                     })}
+                </div>);
+        }
+        case 'features': {
+            return (
+                <div>
+                    <div className={styles.featuresContainer}>
+                        {product.features[lang].features.map((feature) => {
+                            return <div className={styles.featureBlock}>
+                                <img src={FEATURE_TYPES[feature.featureType].photo} alt="icon"/>
+                                <div className={styles.featureText}>
+                                    <p className={styles.featureTitle}>
+                                        {feature.name}
+                                    </p>
+                                    <p className={styles.featureDescription}>
+                                        {feature.value}
+                                    </p>
+                                </div>
+                            </div>;
+                        })}
+                    </div>
+
                 </div>);
         }
         case 'comments': {

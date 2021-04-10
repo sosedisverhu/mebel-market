@@ -6,6 +6,7 @@ import max from './max';
 import min from './min';
 import featuresSingular from './featuresSingular';
 import featuresDouble from './featuresDouble';
+import features from './features';
 import requiredFiles from './requiredFiles';
 import discountPrice from './discountPrice';
 import discount from './discount';
@@ -19,6 +20,7 @@ export default {
     phone,
     featuresSingular,
     featuresDouble,
+    features,
     isNumber,
     max,
     min,

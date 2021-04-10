@@ -8,6 +8,7 @@ import FormFieldDivider from '../Form/fields/FormFieldDivider/FormFieldDivider';
 import FormFieldSelect from '../Form/fields/FormFieldSelect/FormFieldSelect.jsx';
 import FormFieldSizes from '../Form/fields/FormFieldSizes/FormFieldSizes';
 import FormFieldFeaturesDouble from '../Form/fields/FormFieldFeaturesDouble/FormFieldFeaturesDouble';
+import FormFieldFeature from '../Form/fields/FormFieldFeature/FormFieldFeature';
 import FormFieldEditor from '../Form/fields/FormFieldEditor/FormFieldEditor';
 import FormFieldCheckboxes from '../Form/fields/FormFieldCheckboxes/FormFieldCheckboxes';
 import FormFieldButtonCopyFilters from '../Form/fields/FormFieldButtonCopyFilters/FormFieldButtonCopyFilters';
@@ -321,6 +322,36 @@ export default function ({ data: {
                 },
                 validators: [
                     { name: 'featuresDouble', options: { text: 'Заполните характеристики товара' } }
+                ]
+            },
+            {
+                component: FormFieldDivider,
+                name: 'divider'
+            },
+            {
+                component: FormFieldTitle,
+                name: 'characteristics-title',
+                schema: {
+                    label: 'Особенности товара',
+                    variant: 'h5'
+                }
+            },
+            {
+                component: FormFieldFeature,
+                name: 'features',
+                valueLangStructure: [{
+                    name: 'depend',
+                    value: 'depend',
+                    featureType: 'notDepend',
+                    id: 'notDepend'
+                }],
+                schema: {
+                    name: 'Название',
+                    value: 'Описание',
+                    featureType: 'Тип'
+                },
+                validators: [
+                    { name: 'features', options: { text: 'Заполните все поля' } }
                 ]
             },
             {

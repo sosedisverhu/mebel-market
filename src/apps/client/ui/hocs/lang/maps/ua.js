@@ -51,7 +51,8 @@ export default {
     tab: {
         description: 'Опис',
         characteristic: 'Характеристики',
-        comments: 'Відгуки'
+        comments: 'Відгуки',
+        features: 'Особливості'
     },
     breadcrumbs: {
         main: 'Головна'

@@ -120,6 +120,8 @@ class ProductForm extends Component {
             ua_seoKeywords: ua.seoKeywords,
             ru_characteristics: pathOr(['characteristics', 'ru', 'characteristics'], [], product),
             ua_characteristics: pathOr(['characteristics', 'ua', 'characteristics'], [], product),
+            ru_features: pathOr(['features', 'ru', 'features'], [], product),
+            ua_features: pathOr(['features', 'ua', 'features'], [], product),
             ru_sizes: pathOr(['ru'], '', productSizes) || [],
             ua_sizes: pathOr(['ua'], '', productSizes) || [],
             avatar: { files: product.avatar ? [product.avatar] : [] },
@@ -178,6 +180,8 @@ class ProductForm extends Component {
             ru_seoKeywords: ruSeoKeywords,
             ru_characteristics: ruCharacteristics,
             ua_characteristics: uaCharacteristics,
+            ru_features: ruFeatures,
+            ua_features: uaFeatures,
             ru_sizes: ruSizes,
             ua_sizes: uaSizes,
             hidden,
@@ -353,6 +357,14 @@ class ProductForm extends Component {
                 },
                 ua: {
                     characteristics: uaCharacteristics
+                }
+            },
+            features: {
+                ru: {
+                    features: ruFeatures
+                },
+                ua: {
+                    features: uaFeatures
                 }
             },
             sizes,
