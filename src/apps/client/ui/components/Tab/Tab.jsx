@@ -143,7 +143,7 @@ class Tab extends Component {
         })}>
             <div ref={this.tabTitles} className={styles.titles}>
                 {tabs.map(({ id }) => {
-                    if (id === 'features' && !product.features) {
+                    if (id === 'features' && (!product.features || !product.features.length)) {
                         return null;
                     }
                     return <h2
