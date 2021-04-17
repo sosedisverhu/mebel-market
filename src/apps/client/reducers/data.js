@@ -10,7 +10,8 @@ import {
     SET_WISHLIST,
     OPEN_BASKET,
     CLOSE_BASKET,
-    SET_MAIN_SLIDES
+    SET_MAIN_SLIDES,
+    SET_ALL_SHARES
 } from '../types/types';
 
 const initialState = {
@@ -24,7 +25,8 @@ const initialState = {
     basket: [],
     wishlist: [],
     basketIsOpen: false,
-    slider: {}
+    slider: {},
+    allShares: []
 };
 
 export default function (state = initialState, action) {
@@ -53,6 +55,8 @@ export default function (state = initialState, action) {
         return { ...state, basketIsOpen: false };
     case SET_MAIN_SLIDES:
         return { ...state, slider: action.payload };
+    case SET_ALL_SHARES:
+        return { ...state, allShares: action.payload };
     default:
         return state;
     }

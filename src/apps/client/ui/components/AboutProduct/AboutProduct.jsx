@@ -37,7 +37,8 @@ const mapStateToProps = ({ application, data }) => {
         products: data.products,
         categories: data.categories,
         subCategories: data.subCategories,
-        basketIsOpen: data.basketIsOpen
+        basketIsOpen: data.basketIsOpen,
+        allShares: data.allShares
     };
 };
 
@@ -77,7 +78,8 @@ class AboutProduct extends Component {
         isPromotion: PropTypes.bool,
         turnOnClickOutside: PropTypes.func,
         outsideClickEnabled: PropTypes.bool,
-        productAnimation: PropTypes.bool.isRequired
+        productAnimation: PropTypes.bool.isRequired,
+        allShares: PropTypes.array.isRequired
     };
 
     constructor (props) {
@@ -97,7 +99,8 @@ class AboutProduct extends Component {
             activePopupColorIndex: null,
             isPopupSizes: false,
             isPopupPresents: false,
-            isShareInfo: false
+            isShareInfo: false,
+            productShares: []
         };
     }
 
@@ -109,6 +112,16 @@ class AboutProduct extends Component {
         this.setState({
             isInWishlist: !!(wishlist.find(item => item.product.id === product.id) && !!wishlist.find(item => item.properties.size.color.id === activeColor.id))
         });
+
+        if (this.props.allShares.length) {
+            this.getOwnShares();
+        }
+    }
+
+    componentDidUpdate (prevProps) {
+        if (prevProps.allShares.length !== this.props.allShares.length) {
+            this.getOwnShares();
+        }
     }
 
     static getDerivedStateFromProps (props) {
@@ -125,6 +138,22 @@ class AboutProduct extends Component {
     scrollToTitles = () => {
         this.props.setScrollToCharacteristic(true);
     };
+
+    getOwnShares = () => {
+        const { allShares, product } = this.props;
+        const productShares = allShares.reduce((acc, item) => {
+            item.share.products.map(innerItem => {
+                if (innerItem.value === product.id && !find(i => i.id === item.product.id, acc)) {
+                    return acc.push(item.product);
+                }
+            });
+            return acc;
+        }, []);
+
+        this.setState({
+            productShares
+        });
+    }
 
     sizeListIsOpen = () => {
         this.setState({
@@ -323,7 +352,8 @@ class AboutProduct extends Component {
             activePopupColorIndex,
             isPopupSizes,
             isPopupPresents,
-            isShareInfo
+            isShareInfo,
+            productShares
         } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = propOr('exist', 'true', product);
@@ -437,7 +467,7 @@ class AboutProduct extends Component {
                         <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                             onClick={this.handleAddToWishlist}/>
                     </div>
-                    {!!(sharesDiscount.length || sharesPresent.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
+                    {(!!(sharesDiscount.length || sharesPresent.length) || productShares.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
                         {isShareInfo && <div className={styles.shareInfo}>
                             {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
                                 <div className={styles.shareInfoDescr}>
@@ -493,6 +523,24 @@ class AboutProduct extends Component {
                                                     </Link>
                                                 </li>;
                                             })}
+                                        </li>;
+                                    })}
+                                </ul>
+                            </div>}
+                            {!!productShares.length && <div className={styles.shareInfoPresent}>
+                                <div className={styles.shareInfoDescr}>
+                                    {text.sharedProducts}
+                                </div>
+                                <ul className={styles.shareInfoProducts}>
+                                    {productShares.map(share => {
+                                        const link = this.getProductLink(share);
+                                        return <li>
+                                            <Link
+                                                to={link}
+                                                className={styles.shareInfoProductLink}
+                                                href="#" target='_blank'>
+                                                {share.texts[lang].name}
+                                            </Link>
                                         </li>;
                                     })}
                                 </ul>
