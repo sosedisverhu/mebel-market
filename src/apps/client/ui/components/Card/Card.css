@@ -29,7 +29,7 @@
             transition: .3s;
             max-height: 600px;
             outline: 2px solid greenBasic;
-            /* overflow: visible; */
+             overflow: visible;
             /* border-top: none; */
         }
 
@@ -316,7 +316,7 @@
     background: blackLight;
     cursor: pointer;
     transition: .5s ease-out;
-    
+
 
     @media (max-width: 640px) {
         font-size: 16px;

@@ -302,6 +302,7 @@ class Card extends Component {
                                 handleChangeSize={this.handleChangeSize}
                                 additionalClass='aboutProduct'
                                 isCardSelect = {true}
+                                invert
                             />
                         </div>
                     </div>

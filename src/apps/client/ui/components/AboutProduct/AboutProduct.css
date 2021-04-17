@@ -444,7 +444,7 @@
 .buttons {
     margin-top: 22px;
     display: flex;
-    
+
     @media(max-width: 1290px) {
         flex-direction: column;
     }
@@ -555,7 +555,7 @@
         display: block;
         position: absolute;
         right: 16px;
-        top: 16px; 
+        top: 16px;
         cursor: pointer;
     }
 }
@@ -659,8 +659,8 @@
 }
 
 .otherSizes{
+    z-index: 99999;
     overflow-y: scroll;
-    max-height: 60px;
     position: absolute;
     bottom: 30px;
 }
