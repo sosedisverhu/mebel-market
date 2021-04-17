@@ -29,7 +29,7 @@
             transition: .3s;
             max-height: 600px;
             outline: 2px solid greenBasic;
-             overflow: auto;
+             overflow: visible;
             /* border-top: none; */
         }
 

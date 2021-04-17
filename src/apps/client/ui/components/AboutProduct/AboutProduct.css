@@ -660,7 +660,6 @@
 
 .otherSizes{
     z-index: 99999;
-    overflow-y: scroll;
     position: absolute;
     bottom: 30px;
 }
