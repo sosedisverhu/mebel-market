@@ -467,7 +467,7 @@ class AboutProduct extends Component {
                         <button className={classNames(styles.btnWishList, { [styles.active]: isInWishlist })}
                             onClick={this.handleAddToWishlist}/>
                     </div>
-                    {(!!(sharesDiscount.length || sharesPresent.length) || productShares.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
+                    {!!((sharesDiscount.length || sharesPresent.length) || productShares.length) && <div ref={this.shareInfo} className={styles.shareInfoWrap}>
                         {isShareInfo && <div className={styles.shareInfo}>
                             {!!sharesDiscount.length && <div className={styles.shareInfoDiscount}>
                                 <div className={styles.shareInfoDescr}>
