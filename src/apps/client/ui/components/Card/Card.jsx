@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import classNames from 'classnames';
@@ -80,37 +80,39 @@ class Card extends Component {
         });
     }
 
-    componentWillReceiveProps (nextProps) {
-        if (this.props.activeSizes.length === 0) {
-            return this.setState({
-                activeSize: this.props.product.sizes[this.props.lang][0],
-                activeColor: this.props.product.sizes[this.props.lang][0].colors[0]
+    componentDidUpdate (prevProps, prevState, snapshot) {
+        if (prevProps.activeSizes !== this.props.activeSizes) {
+            if (this.props.activeSizes.length === 0) {
+                return this.setState({
+                    activeSize: this.props.product.sizes[this.props.lang][0],
+                    activeColor: this.props.product.sizes[this.props.lang][0].colors[0]
+                });
+            }
+
+            const findMatches = function (arr1, arr2) {
+                return arr1.filter(function (item) {
+                    return arr2.indexOf(item.name) !== -1;
+                });
+            };
+
+            const choosenSizes = findMatches(this.props.product.sizes[this.props.lang], this.props.activeSizes);
+
+            const cheapestVariant = choosenSizes.reduce((acc, size) => {
+                const cheapestColor = size.colors.reduce(function (colorAcc, currentColor) {
+                    return (colorAcc.price < currentColor.price ? colorAcc : currentColor);
+                });
+
+                return (
+                    cheapestColor.price < acc.activeColor.price
+                        ? { activeColor: cheapestColor, activeSize: size }
+                        : acc);
+            }, { activeColor: { price: 999999999 }, activeSize: {} });
+
+            this.setState({
+                activeSize: cheapestVariant.activeSize,
+                activeColor: cheapestVariant.activeColor
             });
         }
-
-        const findMatches = function (arr1, arr2) {
-            return arr1.filter(function (item) {
-                return arr2.indexOf(item.name) !== -1;
-            });
-        };
-
-        const choosenSizes = findMatches(this.props.product.sizes[this.props.lang], this.props.activeSizes);
-
-        const cheapestVariant = choosenSizes.reduce((acc, size) => {
-            const cheapestColor = size.colors.reduce(function (colorAcc, currentColor) {
-                return (colorAcc.price < currentColor.price ? colorAcc : currentColor);
-            });
-
-            return (
-                cheapestColor.price < acc.activeColor.price
-                    ? { activeColor: cheapestColor, activeSize: size }
-                    : acc);
-        }, { activeColor: { price: 999999999 }, activeSize: {} });
-
-        this.setState({
-            activeSize: cheapestVariant.activeSize,
-            activeColor: cheapestVariant.activeColor
-        });
     }
 
     static getDerivedStateFromProps (props, state) {
@@ -202,9 +204,7 @@ class Card extends Component {
             lang,
             setSliderWidth,
             isPromotion,
-            langMap,
-            activeSizes,
-            lastItem
+            langMap
         } = this.props;
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
         const text = propOr('product', {}, langMap);
@@ -221,7 +221,6 @@ class Card extends Component {
         const resultPrice = !isEmpty(activeSize) && (activeSize.colors[0].discountPrice || activeSize.colors[0].price);
         const resultOldPrice = !isEmpty(activeSize) && (activeSize.colors[0].price || activeSize.colors[0].discountPrice);
         const isDiscount = resultPrice !== resultOldPrice;
-        console.log(activeSizes);
         // if (activeSizes.length >= 1) {
         //     const activePrices = sizes.ru.filter(({ name }) => includes(name, activeSizes));
 
