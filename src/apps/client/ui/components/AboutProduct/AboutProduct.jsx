@@ -20,6 +20,7 @@ import openBasket from '../../../actions/openBasket';
 
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
+import CustomSizePopup from '../CustomSizePopup/CustomSizePopup';
 import PopupSizes from '../PopupSizes/PopupSizes';
 import PopupPresents from '../PopupPresents/PopupPresents';
 import styles from './AboutProduct.css';
@@ -100,6 +101,7 @@ class AboutProduct extends Component {
             isPopupSizes: false,
             isPopupPresents: false,
             isShareInfo: false,
+            isCustomSizeOpen: false,
             productShares: []
         };
     }
@@ -339,9 +341,18 @@ class AboutProduct extends Component {
         this.setState({ isPopupPresents: false });
     };
 
+    handleCloseCustomSize = () => () => {
+        this.setState((state) => ({ isCustomSizeOpen: !state.isCustomSizeOpen }));
+    };
+
+    handleOpenCustomSize = () => {
+        this.setState((state) => ({ isCustomSizeOpen: !state.isCustomSizeOpen }));
+    }
+
     render () {
         const { product, langMap, lang, activeSize, activeColor, isPromotion, subCategory, products, productAnimation } = this.props;
         const {
+            isCustomSizeOpen,
             sizes,
             sizeListIsOpen,
             selectIsOpen,
@@ -443,6 +454,9 @@ class AboutProduct extends Component {
                             withPopup
                         />
                     </div>}
+                    <div className={styles.customSizeBtn} onClick={this.handleOpenCustomSize}>
+                            Свой размер
+                    </div>
                 </div>
                 <div className={styles.features}>
                     {features && features.map(feature => {
@@ -569,6 +583,7 @@ class AboutProduct extends Component {
                     agree={this.handleWithPresentsClick} />}
                 {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
             </div>
+            {isCustomSizeOpen && <CustomSizePopup closePopup = {this.handleCloseCustomSize}/>}
         </div>;
     }
 }
