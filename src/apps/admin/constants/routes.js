@@ -7,5 +7,6 @@ export default [
     { id: 'partners', section: 'partners', path: '/admin/partners', exact: true, title: 'Партнёры' },
     { id: 'reviews', section: 'reviews', path: '/admin/reviews', exact: true, title: 'Комментарии' },
     { id: 'seo', section: 'seo', path: '/admin/seo', exact: true, title: 'SEO' },
-    { id: 'admin', section: 'admins', path: '/admin/admins', exact: true, title: 'Админы' }
+    { id: 'admin', section: 'admins', path: '/admin/admins', exact: true, title: 'Админы' },
+    { id: 'db', path: 'db', exact: true, title: 'База данных', notMenu: true }
 ];

@@ -9,7 +9,7 @@
 .footerContainer {
     max-width: 1360px;
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 50px 60px;
     height: 86px;
     position: relative;
     display: flex;

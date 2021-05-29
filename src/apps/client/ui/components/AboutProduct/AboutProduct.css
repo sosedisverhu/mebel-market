@@ -445,7 +445,7 @@
 .buttons {
     margin-top: 22px;
     display: flex;
-    
+
     @media(max-width: 1290px) {
         flex-direction: column;
     }
@@ -556,7 +556,7 @@
         display: block;
         position: absolute;
         right: 16px;
-        top: 16px; 
+        top: 16px;
         cursor: pointer;
     }
 }
@@ -667,6 +667,12 @@
     width: 100%;
     margin-top: 15px;
     text-align: center;
+}
+
+.otherSizes{
+    z-index: 99999;
+    position: absolute;
+    bottom: 30px;
 }
 
 

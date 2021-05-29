@@ -9,4 +9,4 @@ server/compiled/
 webpackAssets.json
 src/apps/admin/files
 *.DS_Store
-
+server/api/admin/db/temp

@@ -37,6 +37,7 @@ export default {
         orGetSharePresent: 'Или при покупке этого товара Вы гарантировано получаете в подарок:',
         getSharePresent: 'При покупке этого товара Вы гарантировано получаете в подарок',
         atChoice: '(на  выбор)',
+        sharedProducts: 'Товар учавствует в акции при покупке следующих товаров:',
         share: 'Акция',
         choicePresent: 'Выберите подарок',
         withoutPresent: 'Спасибо, подарок не нужен',
@@ -48,7 +49,8 @@ export default {
     tab: {
         description: 'Описание',
         characteristic: 'Характеристики',
-        comments: 'Отзывы'
+        comments: 'Отзывы',
+        features: 'Особенности'
     },
     breadcrumbs: {
         main: 'Главная'

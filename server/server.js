@@ -10,7 +10,7 @@ import helmet from 'helmet';
 import compression from 'compression';
 import expressStaticGzip from 'express-static-gzip';
 import { renderToString } from 'react-dom/server';
-// import { redirectToHTTPS } from 'express-http-to-https';
+import { redirectToHTTPS } from 'express-http-to-https';
 
 import map from '@tinkoff/utils/array/map';
 
@@ -37,6 +37,9 @@ import clientOrderApi from './api/client/order';
 import adminOrderApi from './api/admin/order';
 import clientSearchApi from './api/client/search';
 import clientFormApi from './api/client/form';
+import adminDbApi from './api/admin/db';
+
+import backups from './helpers/backup/backups';
 
 import { DATABASE_URL } from './constants/constants';
 import actions from './actions';
@@ -60,7 +63,7 @@ const credentials = {
     ]
 };
 
-// const ignoreHttpsHosts = [/localhost:(\d{4})/];
+const ignoreHttpsHosts = [/localhost:(\d{4})/];
 
 const rootPath = path.resolve(__dirname, '..');
 const PORT = process.env.PORT || 3000;
@@ -71,9 +74,10 @@ app.use(helmet());
 
 // mongodb
 mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
+backups();
 
 // redirects
-// app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
+app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
 
 // static
 app.get(/\.chunk\.(js|css)$/, expressStaticGzip(rootPath, {
@@ -122,6 +126,7 @@ app.use('/api/client/main-slider', clientMainSliderApi);
 app.use('/api/client/order', clientOrderApi);
 app.use('/api/admin/order', adminOrderApi);
 app.use('/api/client/form', clientFormApi);
+app.use('/api/admin/db', adminDbApi);
 
 // admin
 app.get(/^\/admin/, function (req, res) {

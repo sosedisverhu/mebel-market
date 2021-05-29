@@ -12,6 +12,7 @@ export default function (html, helmet, preloadedState = {}) {
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-M59R9QX');</script>
             <!-- End Google Tag Manager -->
+            <meta name="google-site-verification" content="cyym3xN8uWDfgOeFyHd5TEJxiW6pSdwnRAzCO_oWovQ" />
             <meta http-equiv="content-type" content="text/html; charset=utf-8">
             <meta http-equiv='x-ua-compatible' content='ie=edge'>
             <meta name='viewport' content='width=device-width, initial-scale=1'>
