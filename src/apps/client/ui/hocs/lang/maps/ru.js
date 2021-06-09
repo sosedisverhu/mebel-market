@@ -44,7 +44,8 @@ export default {
         withPresent: 'Подтвердить',
         sharePresent: '+ Подарок',
         shareDiscount: 'Акция',
-        similarProducts: 'Похожие товары'
+        similarProducts: 'Похожие товары',
+        features: 'Особенности'
     },
     tab: {
         description: 'Описание',

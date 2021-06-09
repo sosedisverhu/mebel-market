@@ -19,6 +19,7 @@ import isScrolledIntoView from '../../../utils/isScrolledIntoView';
 
 import styles from './ProductPage.css';
 import classNames from 'classnames';
+import {FEATURE_TYPES} from "../../../../admin/constants/constants";
 
 const PATH_NAME_REGEX = /\/promotions\/*/;
 
@@ -141,7 +142,7 @@ class ProductPage extends Component {
 
     render () {
         const { category, subCategory, product, isPromotion, sliderAnimation, infoAnimation, productAnimation } = this.state;
-        const { langMap } = this.props;
+        const { langMap, lang } = this.props;
         const similarProducts = this.props.products.filter(item => (
             item.categoryId === this.state.product.categoryId &&
             item.subCategoryId === this.state.product.subCategoryId &&
@@ -150,13 +151,36 @@ class ProductPage extends Component {
         const text = propOr('product', {}, langMap);
 
         if (!product) return <NotFoundPage/>;
-
+        console.log(product);
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
                 <DeliveryOffer mobile productPage={true}/>
                 <div ref={this.product}>
                     <Product isPromotion={isPromotion} product={product} subCategory={subCategory} productAnimation={productAnimation}/>
+                    {
+                        product.features &&
+                        <div>
+                            <div className={classNames(styles.featuresContainer, {
+                                [styles.animated]: productAnimation
+                            })}>
+                                <div className={styles.title}>{text.features}</div>
+                                {product.features && product.features[lang].features.map((feature) => {
+                                    return <div className={styles.featureBlock}>
+                                        <img src={FEATURE_TYPES[feature.featureType].photo} alt="icon"/>
+                                        <div className={styles.featureText}>
+                                            <p className={styles.featureTitle}>
+                                                {feature.name}
+                                            </p>
+                                            <p className={styles.featureDescription}>
+                                                {feature.value}
+                                            </p>
+                                        </div>
+                                    </div>;
+                                })}
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div ref={this.info}>
                     <Tab product={product} infoAnimation={infoAnimation}/>

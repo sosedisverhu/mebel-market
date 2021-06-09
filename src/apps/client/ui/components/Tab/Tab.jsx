@@ -10,8 +10,6 @@ import setScrollToCharacteristic from '../../../actions/setScrollToCharacteristi
 import StyleRenderer from '../StyleRenderer/StyleRenderer';
 import Comments from '../Comments/Comments';
 
-import { FEATURE_TYPES } from '../../../../admin/constants/constants';
-
 import styles from './Tab.css';
 
 const mapStateToProps = ({ data, application }) => {
@@ -24,9 +22,6 @@ const mapStateToProps = ({ data, application }) => {
             },
             {
                 id: 'characteristic'
-            },
-            {
-                id: 'features'
             },
             {
                 id: 'comments'
@@ -106,27 +101,6 @@ class Tab extends Component {
                     })}
                 </div>);
         }
-        case 'features': {
-            return (
-                <div>
-                    <div className={styles.featuresContainer}>
-                        {product.features && product.features[lang].features.map((feature) => {
-                            return <div className={styles.featureBlock}>
-                                <img src={FEATURE_TYPES[feature.featureType].photo} alt="icon"/>
-                                <div className={styles.featureText}>
-                                    <p className={styles.featureTitle}>
-                                        {feature.name}
-                                    </p>
-                                    <p className={styles.featureDescription}>
-                                        {feature.value}
-                                    </p>
-                                </div>
-                            </div>;
-                        })}
-                    </div>
-
-                </div>);
-        }
         case 'comments': {
             return <Comments productId={product.id}/>;
         }
@@ -134,7 +108,7 @@ class Tab extends Component {
     }
 
     render () {
-        const { tabs, langMap, infoAnimation, product } = this.props;
+        const { tabs, langMap, infoAnimation } = this.props;
         const { activeId } = this.state;
         const text = propOr('tab', {}, langMap);
 
@@ -143,9 +117,6 @@ class Tab extends Component {
         })}>
             <div ref={this.tabTitles} className={styles.titles}>
                 {tabs.map(({ id }) => {
-                    if (id === 'features' && (!product.features || !product.features.length)) {
-                        return null;
-                    }
                     return <h2
                         key={id}
                         className={classNames(styles.title, { [styles.active]: activeId === id })}

@@ -47,7 +47,8 @@ export default {
         similarProducts: 'Схожі товари',
         description: '',
         characteristic: '',
-        comments: ''
+        comments: '',
+        features: 'Особливості'
     },
     tab: {
         description: 'Опис',
