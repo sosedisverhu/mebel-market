@@ -46,6 +46,8 @@
     img{
         height: fit-content;
         margin-right: 23px;
+        width: auto;
+        max-height: 40px;
     }
 }
 
