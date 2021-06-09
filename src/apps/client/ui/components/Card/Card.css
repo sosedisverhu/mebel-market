@@ -39,7 +39,8 @@
     }
 
     @media (max-width: 640px) {
-        width: calc(50% - 10px);
+        width: 100%;
+        max-height: unset;
         min-width: 100px;
         height: auto;
         margin: 20px 0 0 0;
