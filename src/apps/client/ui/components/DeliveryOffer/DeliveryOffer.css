@@ -39,6 +39,15 @@
         border-bottom: 8px solid #F1F1F1;
         
     }
+
+    @media (max-width: 600px){
+        position: sticky;
+        z-index: 100;
+        top: 0;
+        transform: none;
+        margin-top: unset;
+        margin-bottom: 28px;
+    }
 }
 
 .deliveryTextContent {
