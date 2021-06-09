@@ -46,7 +46,11 @@
         top: 0;
         transform: none;
         margin-top: unset;
-        margin-bottom: 28px;
+        margin-bottom: 40px;
+
+        &.product{
+            margin-bottom: 0;
+         }
     }
 }
 

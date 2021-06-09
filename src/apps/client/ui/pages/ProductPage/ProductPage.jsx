@@ -154,7 +154,7 @@ class ProductPage extends Component {
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
-                <DeliveryOffer mobile/>
+                <DeliveryOffer mobile productPage={true}/>
                 <div ref={this.product}>
                     <Product isPromotion={isPromotion} product={product} subCategory={subCategory} productAnimation={productAnimation}/>
                 </div>
