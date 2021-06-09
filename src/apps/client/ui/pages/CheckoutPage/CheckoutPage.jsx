@@ -41,6 +41,13 @@ const deliveryOptions = [
             ru: { option: 'Почтой' },
             ua: { option: 'Поштою' }
         }
+    },
+    {
+        id: 'address',
+        texts: {
+            ru: { option: 'Адресная доставка' },
+            ua: { option: 'Адресна доставка' }
+        }
     }
 ];
 
@@ -64,6 +71,13 @@ const paymentOptions = [
         texts: {
             ru: { option: 'На карту' },
             ua: { option: 'На картку' }
+        }
+    },
+    {
+        id: 'courier',
+        texts: {
+            ru: { option: 'Курьеру' },
+            ua: { option: 'Кур\'єру' }
         }
     }
 ];

@@ -161,7 +161,6 @@ textarea {
 .radioLabel {
     font: 16px/18px GilroyRegular;
     color: gray6;
-    color: rgba(35, 35, 35, 0.3);
     padding: 0 0 0 22px;
     margin-top: 15px;
     display: block;
