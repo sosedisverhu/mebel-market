@@ -42,7 +42,7 @@
 
     @media (max-width: 600px){
         position: sticky;
-        z-index: 100;
+        z-index: 10;
         top: 0;
         transform: none;
         margin-top: unset;

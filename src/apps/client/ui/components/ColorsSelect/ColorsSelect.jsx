@@ -15,26 +15,38 @@ class ColorsSelect extends Component {
         changeColorListOpen: PropTypes.func,
         changeColorListClose: PropTypes.func,
         handleChangeColor: PropTypes.func,
+        popupAllOpen: PropTypes.func,
         colorListOpen: PropTypes.bool,
         isPromotion: PropTypes.bool,
         turnOnClickOutside: PropTypes.func,
         outsideClickEnabled: PropTypes.bool,
-        withPopup: PropTypes.bool
+        withPopup: PropTypes.bool,
+        withPopupAll: PropTypes.bool,
+        popupColorsOpened: PropTypes.bool
     };
 
     static defaultProps = {
         handleChangePopup: noop,
-        withPopup: false
+        popupAllOpen: noop,
+        withPopup: false,
+        withPopupAll: false
     };
 
     handleOpenColors = () => {
-        const { outsideClickEnabled, turnOnClickOutside, changeColorListOpen, changeColorListClose, colorListOpen } = this.props;
+        const { outsideClickEnabled, turnOnClickOutside, changeColorListOpen, changeColorListClose, colorListOpen,
+            withPopupAll, popupAllOpen, popupColorsOpened } = this.props;
 
-        if (colorListOpen) {
-            changeColorListClose();
+        if (!withPopupAll) {
+            if (colorListOpen) {
+                changeColorListClose();
+            } else {
+                changeColorListOpen();
+                !outsideClickEnabled && turnOnClickOutside(this, changeColorListClose);
+            }
         } else {
-            changeColorListOpen();
-            !outsideClickEnabled && turnOnClickOutside(this, changeColorListClose);
+            if (!popupColorsOpened) {
+                popupAllOpen();
+            }
         }
     };
 
@@ -47,8 +59,8 @@ class ColorsSelect extends Component {
 
         return (
             <div className={styles.colorsWrapper}>
-                <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })} onClick={this.handleOpenColors}>
-                    <img className={styles.colorImg} src={activeColor.file} alt={activeColor.name} />
+                <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })}>
+                    <img className={styles.colorImg} src={activeColor.file} alt={activeColor.name} onClick={this.handleOpenColors}/>
                     {withPopup && <div className={styles.view} onClick={() => handleChangePopup(activeColorIndex)} />}
                 </div>
                 <ul className={styles.colorList}>

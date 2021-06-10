@@ -20,6 +20,7 @@ import openBasket from '../../../actions/openBasket';
 
 import AboutProductTop from '../AboutProductTop/AboutProductTop';
 import PopupColor from '../PopupColor/PopupColor';
+import PopupColorAll from '../PopupColorAll/PopupColorAll';
 import PopupSizes from '../PopupSizes/PopupSizes';
 import PopupPresents from '../PopupPresents/PopupPresents';
 import styles from './AboutProduct.css';
@@ -100,7 +101,8 @@ class AboutProduct extends Component {
             isPopupSizes: false,
             isPopupPresents: false,
             isShareInfo: false,
-            productShares: []
+            productShares: [],
+            colorsPopupIsOpened: false
         };
     }
 
@@ -279,6 +281,10 @@ class AboutProduct extends Component {
         });
     };
 
+    handleChangePopupAll = () => {
+        this.setState({ colorsPopupIsOpened: !this.state.colorsPopupIsOpened, colorListOpen: false });
+    };
+
     handleChangePopupSizes = () => () => {
         this.setState((state) => ({ isPopupSizes: !state.isPopupSizes }));
     };
@@ -353,7 +359,8 @@ class AboutProduct extends Component {
             isPopupSizes,
             isPopupPresents,
             isShareInfo,
-            productShares
+            productShares,
+            colorsPopupIsOpened
         } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = propOr('exist', 'true', product);
@@ -374,6 +381,7 @@ class AboutProduct extends Component {
         const shares = activeSize.shares || [];
         const sharesDiscount = shares.filter(share => share.type === 'discount');
         const sharesPresent = shares.filter(share => share.type === 'present');
+        const activeColorIndex = actualColors.findIndex(color => activeColor.id === color.id);
 
         return <div className={classNames(styles.root, {
             [styles.animated]: productAnimation
@@ -441,6 +449,9 @@ class AboutProduct extends Component {
                             handleChangePopup={this.handleChangePopup}
                             colorListOpen={colorListOpen}
                             withPopup
+                            popupAllOpen={this.handleChangePopupAll}
+                            withPopupAll={true}
+                            popupColorsOpened={colorsPopupIsOpened}
                         />
                     </div>}
                 </div>
@@ -558,6 +569,12 @@ class AboutProduct extends Component {
                     colors={actualColors}
                     activeIndex={activePopupColorIndex}
                     closePopup={this.handleChangePopup}
+                    handleChangeColor={this.handleChangeColor}
+                />}
+                {colorsPopupIsOpened && <PopupColorAll
+                    colors={actualColors}
+                    activeIndex={activeColorIndex}
+                    closePopup={this.handleChangePopupAll}
                     handleChangeColor={this.handleChangeColor}
                 />}
                 {isPopupSizes && <PopupSizes sizes={actualSizes} closePopup={this.handleChangePopupSizes} subCategory={subCategory} />}
