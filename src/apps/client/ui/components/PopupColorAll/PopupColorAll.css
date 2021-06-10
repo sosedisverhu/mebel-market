@@ -130,7 +130,6 @@
     align-items: center;
     flex-shrink: 0;
     overflow: hidden;
-    border: 1px solid red;
 
     @media (max-width: 1024px) {
         &:active {
