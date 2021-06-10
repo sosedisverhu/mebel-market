@@ -61,6 +61,10 @@ const materialStyles = {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    icon: {
+        maxWidth: '40px',
+        height: 'auto'
     }
 };
 
@@ -80,7 +84,7 @@ const Feature =
                         value={FEATURE_TYPES[feature.featureType]}
                         schema={{ placeholder: 'Тип' }}
                     />
-                    {feature.featureType && <img src={FEATURE_TYPES[+feature.featureType].photo} alt="photo"/>}
+                    {feature.featureType && <img className={classes.icon} src={FEATURE_TYPES[+feature.featureType].photo} alt="photo"/>}
                 </div>
                 <TextField
                     className={classes.featureField}

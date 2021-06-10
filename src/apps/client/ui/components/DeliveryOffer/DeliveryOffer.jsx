@@ -17,7 +17,8 @@ class DeliveryOffer extends Component {
     static propTypes = {
         langMap: PropTypes.object.isRequired,
         mobile: PropTypes.bool.isRequired,
-        deliveryAnimation: PropTypes.bool
+        deliveryAnimation: PropTypes.bool,
+        productPage: PropTypes.bool
     };
 
     static defaultProps = {
@@ -40,13 +41,14 @@ class DeliveryOffer extends Component {
     }
 
     render () {
-        const { mobile, langMap } = this.props;
+        const { mobile, langMap, productPage } = this.props;
         const { deliveryAnimation } = this.state;
         const text = propOr('deliveryOffer', {}, langMap);
 
         return (
             <div className={classNames(mobile ? styles.deliveryContainerMobile : styles.deliveryContainer, {
-                [styles.animated]: mobile && deliveryAnimation
+                [styles.animated]: mobile && deliveryAnimation,
+                [styles.product]: productPage
             })}>
                 <div className={styles.deliveryIcon}>
                     <img src="/src/apps/client/ui/components/DeliveryOffer/img/truckDelivery.svg" alt="truck"/>

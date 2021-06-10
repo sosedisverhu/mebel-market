@@ -1,3 +1,5 @@
+@value blackLight from '../../../../../css/colors.css';
+
 .sliderTitle{
     text-align: center;
     font: 36px/54px GilroyRegular;
@@ -25,4 +27,66 @@
             transform: translateY(0);
         }
      }
+}
+
+.featuresContainer{
+    opacity: 0;
+    transform: translateY(20px);
+    transition: .5s ease 1s;
+    box-sizing: content-box;
+    margin: 0 auto;
+    max-width: 1240px;
+    padding: 0 16px 30px 16px;
+
+    &.animated{
+        opacity: 1;
+        transform: translateY(0);
+     }
+
+    img{
+        height: fit-content;
+        margin-right: 23px;
+        width: auto;
+        max-height: 40px;
+    }
+}
+
+
+.featureBlock{
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child){
+         margin-bottom: 20px;
+    }
+}
+
+.featureTitle{
+    font-family: GilroyRegular;
+    font-size: 18px;
+    line-height: 21px;
+    color: #232323;
+    margin-bottom: 10px;
+}
+
+.featureDescription{
+    font-family: GilroyRegular;
+    font-size: 16px;
+    line-height: 18px;
+    color: rgba(35, 35, 35, 0.7);
+}
+
+.title{
+    margin-bottom: 20px;
+    font: 36px/54px GilroyRegular;
+    color: blackLight;
+
+    @media (max-width: 1000px) {
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 24px;
+        line-height: 36px;
+    }
 }

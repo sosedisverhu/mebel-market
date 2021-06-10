@@ -436,45 +436,43 @@ class ProductsPage extends Component {
 
         return (
             <div className={styles.productPage}>
-                <div>
-                    <div className={styles.subCategoriesWrap}>
-                        <div className={styles.subCategories}>
-                            {subCategories.map(subCategory => {
-                                return (
-                                    <NavLink
-                                        className={styles.subCategory}
-                                        activeClassName={styles.active}
-                                        to={`${langRoute}/${category.alias}/${subCategory.alias}`}
-                                        key={subCategory.id}
-                                    >
-                                        {subCategory.texts[lang].name}
-                                    </NavLink>);
-                            })}
-                        </div>
+                <div className={styles.subCategoriesWrap}>
+                    <div className={styles.subCategories}>
+                        {subCategories.map(subCategory => {
+                            return (
+                                <NavLink
+                                    className={styles.subCategory}
+                                    activeClassName={styles.active}
+                                    to={`${langRoute}/${category.alias}/${subCategory.alias}`}
+                                    key={subCategory.id}
+                                >
+                                    {subCategory.texts[lang].name}
+                                </NavLink>);
+                        })}
                     </div>
-                    <Breadcrumbs
-                        category={category}
-                        subCategory={subCategory}
-                        noCategoryPage=''/>
-                    <DeliveryOffer mobile/>
-                    <div className={styles.filterPanelWrap}>
-                        <div className={styles.filterPanel}>
-                            <div className={styles.btnFilter} onClick={this.handlePopupChange}>
-                                {text.filterBtn}
-                            </div>
-                            <div className={styles.results}>
-                                {`${propOr('length', 0, filteredProducts)} ${formatWordDeclension(text.results, products.length)}`}
-                            </div>
-                            {products.length > 1 &&
-                            <Fragment>
-                                <Filters
-                                    filtersMap={filtersMap}
-                                    filters={filters}
-                                    onFilter={this.handleFilter}
-                                />
-                                <ProductSort onFilter={this.handleActiveSortClick}/>
-                            </Fragment>}
+                </div>
+                <Breadcrumbs
+                    category={category}
+                    subCategory={subCategory}
+                    noCategoryPage=''/>
+                <DeliveryOffer mobile/>
+                <div className={styles.filterPanelWrap}>
+                    <div className={styles.filterPanel}>
+                        <div className={styles.btnFilter} onClick={this.handlePopupChange}>
+                            {text.filterBtn}
                         </div>
+                        <div className={styles.results}>
+                            {`${propOr('length', 0, filteredProducts)} ${formatWordDeclension(text.results, products.length)}`}
+                        </div>
+                        {products.length > 1 &&
+                        <Fragment>
+                            <Filters
+                                filtersMap={filtersMap}
+                                filters={filters}
+                                onFilter={this.handleFilter}
+                            />
+                            <ProductSort onFilter={this.handleActiveSortClick}/>
+                        </Fragment>}
                     </div>
                 </div>
                 <div className={styles.productsSection}>
