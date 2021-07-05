@@ -280,7 +280,6 @@ class Card extends Component {
                 </div>
                 <div className={styles.labels}>
                     {labels.sort().reverse().map(label => {
-                        console.log('label', label);
                         return <div key={label} className={classNames(styles.label, styles[label])}>
                             {text[label]}
                         </div>;
