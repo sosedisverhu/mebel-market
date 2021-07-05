@@ -19,7 +19,7 @@ import isScrolledIntoView from '../../../utils/isScrolledIntoView';
 
 import styles from './ProductPage.css';
 import classNames from 'classnames';
-import {FEATURE_TYPES} from "../../../../admin/constants/constants";
+import { FEATURE_TYPES } from '../../../../admin/constants/constants';
 
 const PATH_NAME_REGEX = /\/promotions\/*/;
 

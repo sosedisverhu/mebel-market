@@ -26,7 +26,8 @@ const mapStateToProps = ({ application, data }) => {
         langRoute: application.langRoute,
         langMap: application.langMap,
         lang: application.lang,
-        categories: data.categories
+        categories: data.categories,
+        subCategories: data.subCategories
     };
 };
 
@@ -37,11 +38,13 @@ class Header extends Component {
         history: PropTypes.object.isRequired,
         lang: PropTypes.string.isRequired,
         categories: PropTypes.array,
-        location: PropTypes.object.isRequired
+        location: PropTypes.object.isRequired,
+        subCategories: PropTypes.array
     };
 
     static defaultProps = {
-        categories: []
+        categories: [],
+        subCategories: []
     };
 
     constructor (props) {
@@ -51,11 +54,15 @@ class Header extends Component {
         this.state = {
             mobileMenuOpen: false,
             searchBarOpen: false,
-            searchText: ''
+            searchText: '',
+            isOpenSubcategory: ''
         };
     }
 
-    handleMobileMenu = () => {
+    handleMobileMenu = (event) => {
+        if (event.target.classList.contains(styles.mainCategory)) {
+            return;
+        }
         if (!this.state.mobileMenuOpen) {
             disableBodyScroll(document.documentElement); // для iOS/macOS
             disableBodyScroll(this.mobilePopUp.current);
@@ -91,9 +98,15 @@ class Header extends Component {
         });
     };
 
+    toggleSubcategories = (id) => {
+        this.setState((prevState) => ({
+            isOpenSubcategory: prevState.isOpenSubcategory === id ? '' : id
+        }));
+    }
+
     render () {
-        const { langRoute, langMap, lang, categories, location: { pathname } } = this.props;
-        const { mobileMenuOpen, searchBarOpen, searchText } = this.state;
+        const { langRoute, langMap, lang, categories, location: { pathname }, subCategories } = this.props;
+        const { mobileMenuOpen, searchBarOpen, searchText, isOpenSubcategory } = this.state;
         const text = propOr('header', {}, langMap);
         const isHomePage = !!matchPath(pathname, { path: `/:lang(${langs})?`, exact: true });
 
@@ -101,7 +114,7 @@ class Header extends Component {
             <header className={styles.header}>
                 <div className={styles.headerTop}>
                     <div className={styles.content}>
-                        <div className={styles.mobileMenu} onClick={this.handleMobileMenu}>
+                        <div className={styles.mobileMenu} onClick={(e) => this.handleMobileMenu(e)}>
                             <button className={classNames(styles.mobileMenuBtn, { [styles.active]: mobileMenuOpen })}>
                                 <span/>
                                 <span/>
@@ -114,13 +127,34 @@ class Header extends Component {
                                 <div className={classNames(styles.popupMobile, { [styles.active]: mobileMenuOpen })}>
                                     <div className={styles.mobileMenuTop}>
                                         {categories.map(category => {
-                                            return <Link
+                                            const preparedSubcategories = subCategories.filter(subCategory => subCategory.categoryId === category.id);
+                                            return <div
                                                 className={styles.mobileMenuItemTop}
-                                                to={`${langRoute}/${category.alias}`}
                                                 key={category.id}
                                             >
-                                                {category.texts[lang].name}
-                                            </Link>;
+                                                <div className={classNames(styles.mainCategory, { [styles.open]: isOpenSubcategory === category.id })}
+                                                    onClick={() => this.toggleSubcategories(category.id)}>
+                                                    {category.texts[lang].name}
+                                                </div>
+                                                <div className={classNames(styles.subCategoryWrap, { [styles.open]: isOpenSubcategory === category.id })}>
+                                                    <Link
+                                                        className={styles.subCategoryItem}
+                                                        to={`${langRoute}/${category.alias}`}
+                                                    >
+                                                        <span className={styles.all}>{text.all}</span>
+                                                        <span className={styles.allCategory}>{category.texts[lang].name}</span>
+                                                    </Link>
+                                                    {
+                                                        preparedSubcategories.map(subCategory => {
+                                                            return <Link
+                                                                to={`${langRoute}/${category.alias}/${subCategory.alias}`}
+                                                                className={styles.subCategoryItem}>
+                                                                {subCategory.texts[lang].name}
+                                                            </Link>;
+                                                        })
+                                                    }
+                                                </div>
+                                            </div>;
                                         })}
                                         <Link
                                             className={classNames(styles.mobileMenuItemTop, styles.menuItemTopPromotions)}

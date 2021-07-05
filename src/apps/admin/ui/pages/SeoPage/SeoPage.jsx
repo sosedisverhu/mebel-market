@@ -116,7 +116,8 @@ const PAGES = [
     { title: 'Статьи', page: 'articles' },
     { title: 'Контакты', page: 'contacts' },
     { title: 'Поиск', page: 'search' },
-    { title: 'Акции', page: 'promotions' }
+    { title: 'Акции', page: 'promotions' },
+    { title: 'Заказы', page: 'order' }
 ];
 
 const mapDispatchToProps = (dispatch) => ({

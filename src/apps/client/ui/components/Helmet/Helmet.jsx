@@ -28,7 +28,8 @@ const STATIC_ROUTES = [
     { id: 'articles', path: `/:lang(${langs})?/articles`, exact: true },
     { id: 'contacts', path: `/:lang(${langs})?/contacts`, exact: true },
     { id: 'search', path: `/:lang(${langs})?/search`, exact: true },
-    { id: 'promotions', path: `/:lang(${langs})?/promotions`, exact: true }
+    { id: 'promotions', path: `/:lang(${langs})?/promotions`, exact: true },
+    { id: 'order', path: `/:lang(${langs})?/order`, exact: true }
 ];
 
 const NOT_FOUND_META = {

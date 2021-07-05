@@ -29,6 +29,7 @@ export default {
         tableSizesRowTitle: 'Розмір товару',
         top: 'Топ продаж',
         new: 'Новинка',
+        delivery: 'Бзкоштовна доставка',
         onScreen: 'На весь екран',
         selectThisColor: 'Вибрати даний колір',
         getShareDiscount1: 'Ви отримаєте знижку ',
@@ -69,7 +70,8 @@ export default {
         mattresses: 'Матраци',
         softFurniture: `М'які меблі`,
         sleepAccessories: 'Аксесуари для сну',
-        promotions: 'Акції'
+        promotions: 'Акції',
+        all: 'Всі'
     },
     deliveryOffer: {
         specialOffer1: 'Знижка на ліжко 200грн',

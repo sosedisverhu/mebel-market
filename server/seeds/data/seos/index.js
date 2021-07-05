@@ -90,5 +90,20 @@ module.exports = [
                 seoKeywords: 'Пошук, Пошук, Пошук'
             }
         }
+    },
+    {
+        name: 'order',
+        texts: {
+            ru: {
+                seoTitle: 'Заказы',
+                seoDescription: 'Заказы, Заказы, Заказы',
+                seoKeywords: 'Заказы, Заказы, Заказы'
+            },
+            ua: {
+                seoTitle: 'Замовлення',
+                seoDescription: 'Замовлення, Замовлення, Замовлення',
+                seoKeywords: 'Замовлення, Замовлення, Замовлення'
+            }
+        }
     }
 ];

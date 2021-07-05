@@ -29,6 +29,7 @@ export default {
         tableSizesRowTitle: 'Размер товара',
         top: 'Топ продаж',
         new: 'Новинка',
+        delivery: 'Бесплатная доставка',
         onScreen: 'На весь экран',
         selectThisColor: 'Выбрать этот цвет',
         getShareDiscount1: 'Вы получите скидку ',
@@ -66,7 +67,8 @@ export default {
         mattresses: 'Матрасы',
         softFurniture: 'Мягкая мебель',
         sleepAccessories: 'Аксессуары для сна',
-        promotions: 'Акции'
+        promotions: 'Акции',
+        all: 'Все'
     },
     deliveryOffer: {
         specialOffer1: 'Скидка на кровать 200грн',

@@ -4,7 +4,7 @@
     margin-right: -30px;
     width: 1272px;
     padding: 0 16px;
-    box-sizing: content-box;
+    box-sizing: border-box;
 
     @media (max-width: 1274px) {
         width: 954px;
