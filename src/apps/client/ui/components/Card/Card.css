@@ -224,9 +224,8 @@
     padding: 10px 0;
 
     @media (max-width: 640px) {
-        font-size: 24px;
+        font-size: 16px;
         line-height: 18px;
-        margin-bottom: 12px;
     }
 }
 

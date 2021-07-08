@@ -186,7 +186,7 @@ class Gallery extends Component {
             <div className={classNames(styles.gallery, {
                 [styles.animated]: productAnimation
             })}>
-                {discount ? <div className={styles.discount}>{discount}<span className={styles.percentage}>%</span></div> : null}
+                {discount ? <div className={styles.discount}>-{discount}<span className={styles.percentage}>%</span></div> : null}
                 <div className={styles.sliderWrap}>
                     <Draggable
                         onDragStart={mediaWidth < 1024 ? this.handleDragStart : noop}

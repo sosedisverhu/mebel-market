@@ -151,7 +151,7 @@ class ProductPage extends Component {
         const text = propOr('product', {}, langMap);
 
         if (!product) return <NotFoundPage/>;
-        console.log(product);
+
         return (
             <div>
                 <Breadcrumbs category={category || {}} subCategory={subCategory || {}} product={product}/>
