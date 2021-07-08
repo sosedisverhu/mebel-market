@@ -402,7 +402,11 @@ export default function ({ data: {
                 name: 'labels',
                 schema: {
                     label: 'Лейбл',
-                    options: [{ label: 'Топ продаж', value: 'top' }, { label: 'Новинка', value: 'new' }]
+                    options: [
+                        { label: 'Топ продаж', value: 'top' },
+                        { label: 'Новинка', value: 'new' },
+                        { label: 'Бесплатная доставка', value: 'delivery' }
+                    ]
                 }
             },
             {

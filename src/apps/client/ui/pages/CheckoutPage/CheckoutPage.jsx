@@ -124,8 +124,8 @@ const customerInfo = [
         name: 'customerComment',
         required: false,
         texts: {
-            ru: { placeholder: 'Комментарий' },
-            ua: { placeholder: 'Коментар' }
+            ru: { placeholder: 'Здесь Вы можете оставить свой адрес, отделение почты либо комментарий' },
+            ua: { placeholder: 'Тут Ви можете залишити свою адресу, відділення пошти або коментар' }
         }
     }
 ];

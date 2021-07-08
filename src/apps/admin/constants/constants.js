@@ -15,8 +15,8 @@ export const FEATURE_TYPES = [
     { value: '11', label: 'Кокос', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/coconut.png' },
     { value: '12', label: 'Еко', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/eco.png' },
     { value: '13', label: 'Карточки', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/labels.png' },
-    { value: '13', label: 'Температура', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/cold.png' },
-    { value: '14', label: 'Вес', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/weight.png' },
-    { value: '15', label: 'Толщина', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/thick.png' }
+    { value: '14', label: 'Температура', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/cold.png' },
+    { value: '15', label: 'Вес', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/weight.png' },
+    { value: '16', label: 'Толщина', photo: '/src/apps/admin/ui/components/Form/fields/FormFieldFeature/img/thick.png' }
 
 ];

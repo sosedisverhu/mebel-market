@@ -16,6 +16,8 @@ import saveProductsToBasket from '../../../services/client/saveProductsToBasket'
 
 import styles from './Card.css';
 
+import Slider from 'react-slick';
+
 const mapStateToProps = ({ application, data }) => {
     return {
         langMap: application.langMap,
@@ -60,16 +62,21 @@ class Card extends Component {
         setSliderWidth: () => {}
     };
 
-    state = {
-        category: {},
-        subCategory: {},
-        lang: PropTypes.string.isRequired,
-        selectIsOpen: false,
-        sizeListIsOpen: true,
-        activeSize: this.props.product.sizes[this.props.lang][0],
-        activeColor: this.props.product.sizes[this.props.lang][0].colors[0],
-        isInBasket: false
-    };
+    constructor (props) {
+        super(props);
+        this.state = {
+            category: {},
+            subCategory: {},
+            lang: PropTypes.string.isRequired,
+            selectIsOpen: false,
+            sizeListIsOpen: true,
+            activeSize: this.props.product.sizes[this.props.lang][0],
+            activeColor: this.props.product.sizes[this.props.lang][0].colors[0],
+            isInBasket: false
+        };
+
+        this.sliderRef = React.createRef();
+    }
 
     componentDidMount () {
         const { product, categories, subCategories } = this.props;
@@ -78,6 +85,23 @@ class Card extends Component {
             categoryAlias: (find(category => category.id === product.categoryId, categories) || {}).alias,
             subCategoryAlias: (find(subCategory => subCategory.id === product.subCategoryId, subCategories) || {}).alias
         });
+
+        const slider = this.sliderRef.current;
+        if (slider) {
+            slider.querySelector('.slick-track').style.display = 'flex';
+            const nextArrow = slider.querySelector('.slick-arrow.slick-next');
+            const prevArrow = slider.querySelector('.slick-arrow.slick-prev');
+
+            if (prevArrow) {
+                prevArrow.classList.add(styles.prevArrow);
+                prevArrow.textContent = '';
+            }
+
+            if (nextArrow) {
+                nextArrow.classList.add(styles.nextArrow);
+                nextArrow.textContent = '';
+            }
+        }
     }
 
     componentDidUpdate (prevProps, prevState, snapshot) {
@@ -197,7 +221,7 @@ class Card extends Component {
 
     render () {
         const {
-            product: { texts, avatar, minDiscount, alias, labels, sizes, exist },
+            product: { texts, avatar, minDiscount, alias, labels, sizes, exist, files },
             newClass,
             labelClass,
             langRoute,
@@ -206,6 +230,7 @@ class Card extends Component {
             isPromotion,
             langMap
         } = this.props;
+        const isSliderProduct = newClass === 'sliderProduct';
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = exist || 'true';
@@ -231,7 +256,13 @@ class Card extends Component {
         //         isDiscount = minActivePrice !== minActualPrice;
         //     }
         // }
-
+        const settings = {
+            dots: false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
         return (
             <Link
                 className={classNames(
@@ -241,8 +272,21 @@ class Card extends Component {
                 )}
                 to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
-                <div className={styles.imgWrap}>
+                <div className={classNames(styles.imgWrap, {
+                    [styles.imgWrapSliderProduct]: isSliderProduct
+                })}>
                     <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
+                </div>
+                <div className={classNames(styles.cardSliderContainer, {
+                    [styles.cardSliderContainerSliderProduct]: isSliderProduct
+                })} ref={this.sliderRef}>
+                    <Slider {...settings}>
+                        {files.map((file, i) => {
+                            return <div>
+                                <img key={i} src={file} alt='photo' className={styles.sliderImg}/>
+                            </div>;
+                        })}
+                    </Slider>
                 </div>
                 <div className={styles.labels}>
                     {labels.sort().reverse().map(label => {

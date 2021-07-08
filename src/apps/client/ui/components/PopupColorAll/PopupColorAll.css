@@ -124,7 +124,7 @@
 }
 
 .mainImgWrap {
-    width: 100%;
+    width: 380px;
     position: relative;
     display: flex;
     align-items: center;
@@ -139,8 +139,8 @@
 }
 
 .mainImg {
-    width: 100%;
-    height: auto;
+    width: 380px;
+    height: 380px;
     flex-shrink: 0;
     z-index: -1;
 }

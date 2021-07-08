@@ -61,7 +61,7 @@ class ColorsSelect extends Component {
             <div className={styles.colorsWrapper}>
                 <div className={classNames(styles.color, styles.activeColor, { [styles.oneActiveColor]: isOneColor })}>
                     <img className={styles.colorImg} src={activeColor.file} alt={activeColor.name} onClick={this.handleOpenColors}/>
-                    {withPopup && <div className={styles.view} onClick={() => handleChangePopup(activeColorIndex)} />}
+                    {/* {withPopup && <div className={styles.view} onClick={() => handleChangePopup(activeColorIndex)} />} */}
                 </div>
                 <ul className={styles.colorList}>
                     {actualColors.map((color, i) => {

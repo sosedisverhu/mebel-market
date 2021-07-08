@@ -147,6 +147,16 @@
     padding-bottom: 100%;
     min-height: 134px;
     overflow: hidden;
+
+    @media(max-width: 640px) {
+        display: none;
+    }
+}
+
+.imgWrapSliderProduct {
+    @media(max-width: 640px) {
+        display: flex;
+    }
 }
 
 .img {
@@ -173,10 +183,14 @@
     text-align: center;
 
     @media (max-width: 640px) {
-        font-size: 14px;
+        font-size: 21px;
         line-height: 16px;
-        padding: 3px 10px;
+        padding: 5px 10px;
     }
+}
+
+.delivery {
+    background: #6a78cc
 }
 
 .percentage{
@@ -196,8 +210,7 @@
     position: relative;
 
     @media (max-width: 640px) {
-        padding: 0 9px;
-        height: 100%;
+        padding: 20px 9px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -209,6 +222,12 @@
     text-align: center;
     color: #25716C;
     padding: 10px 0;
+
+    @media (max-width: 640px) {
+        font-size: 24px;
+        line-height: 18px;
+        margin-bottom: 12px;
+    }
 }
 
 .notExist {
@@ -250,9 +269,9 @@
     }
 
     @media (max-width: 640px) {
-        font-size: 13px;
-        line-height: 15px;
-        padding: 7px 0 5px 0;
+        font-size: 18px;
+        line-height: 20px;
+        padding: 7px 0 12px 0;
     }
 }
 
@@ -263,9 +282,9 @@
     text-align: center;
 
     @media (max-width: 640px) {
-        font-size: 13px;
-        line-height: 15px;
-        margin-bottom: 7px;
+        font-size: 21px;
+        line-height: 18px;
+        margin-bottom: 12px;
     }
 }
 
@@ -282,7 +301,7 @@
     left: 50px;
 
     @media (max-width: 640px) {
-        font-size: 10px;
+        font-size: 16px;
         line-height: 11px;
         bottom: 9px;
         left: 9px;
@@ -347,4 +366,66 @@
 
 .sizesWrap{
     margin: 10px auto 15px auto;
+}
+
+.cardSliderContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: none;
+
+    @media(max-width: 640px) {
+        display: block;
+    }
+}
+
+.cardSliderContainerSliderProduct {
+    @media(max-width: 640px) {
+        display: none;
+    }
+}
+
+.sliderImg {
+    width: 100%;
+}
+
+.nextArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    z-index: 1;
+    padding: 20px 20px 20px 50px;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+
+    &:before {
+        position: relative;
+        content: url("./img/arrow.svg");
+    }
+}
+
+.prevArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    left: 0;
+    z-index: 1;
+    padding: 20px 20px 20px 50px;
+    cursor: pointer;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+
+    &:before {
+        position: relative;
+        content: url("./img/arrow.svg");
+    }
 }
