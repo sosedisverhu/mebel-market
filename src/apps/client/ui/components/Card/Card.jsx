@@ -92,10 +92,15 @@ class Card extends Component {
             const nextArrow = slider.querySelector('.slick-arrow.slick-next');
             const prevArrow = slider.querySelector('.slick-arrow.slick-prev');
 
-            nextArrow.classList.add(styles.nextArrow);
-            prevArrow.classList.add(styles.prevArrow);
-            nextArrow.textContent = '';
-            prevArrow.textContent = '';
+            if (prevArrow) {
+                prevArrow.classList.add(styles.prevArrow);
+                prevArrow.textContent = '';
+            }
+
+            if (nextArrow) {
+                nextArrow.classList.add(styles.nextArrow);
+                nextArrow.textContent = '';
+            }
         }
     }
 
@@ -225,6 +230,7 @@ class Card extends Component {
             isPromotion,
             langMap
         } = this.props;
+        const isSliderProduct = newClass === 'sliderProduct';
         const { categoryAlias, subCategoryAlias, isInBasket, selectIsOpen, sizeListIsOpen, activeSize } = this.state;
         const text = propOr('product', {}, langMap);
         const isExist = exist || 'true';
@@ -266,14 +272,18 @@ class Card extends Component {
                 )}
                 to={`${langRoute}/${isPromotion ? 'promotions' : categoryAlias + '/' + subCategoryAlias}/${alias}`}
             >
-                <div className={styles.imgWrap}>
+                <div className={classNames(styles.imgWrap, {
+                    [styles.imgWrapSliderProduct]: isSliderProduct
+                })}>
                     <img className={styles.img} src={avatar} width='220' height='220' alt='' onLoad={setSliderWidth}/>
                 </div>
-                <div className={styles.cardSliderContainer} ref={this.sliderRef}>
+                <div className={classNames(styles.cardSliderContainer, {
+                    [styles.cardSliderContainerSliderProduct]: isSliderProduct
+                })} ref={this.sliderRef}>
                     <Slider {...settings}>
                         {files.map((file, i) => {
                             return <div>
-                                <img key={i} src={file} alt='photo' />
+                                <img key={i} src={file} alt='photo' className={styles.sliderImg}/>
                             </div>;
                         })}
                     </Slider>

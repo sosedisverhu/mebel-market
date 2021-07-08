@@ -68,7 +68,8 @@ export default {
         softFurniture: 'Мягкая мебель',
         sleepAccessories: 'Аксессуары для сна',
         promotions: 'Акции',
-        all: 'Все'
+        all: 'Все',
+        allFeminine: 'Вся'
     },
     deliveryOffer: {
         specialOffer1: 'Скидка на кровать 200грн',

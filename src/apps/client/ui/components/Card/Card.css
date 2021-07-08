@@ -153,6 +153,12 @@
     }
 }
 
+.imgWrapSliderProduct {
+    @media(max-width: 640px) {
+        display: flex;
+    }
+}
+
 .img {
     width: 100%;
     height: auto;
@@ -184,7 +190,7 @@
 }
 
 .delivery {
-    background: rgb(68, 68, 201);
+    background: #6a78cc
 }
 
 .percentage{
@@ -204,8 +210,7 @@
     position: relative;
 
     @media (max-width: 640px) {
-        padding: 0 9px;
-        height: 100%;
+        padding: 20px 9px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -373,6 +378,16 @@
     @media(max-width: 640px) {
         display: block;
     }
+}
+
+.cardSliderContainerSliderProduct {
+    @media(max-width: 640px) {
+        display: none;
+    }
+}
+
+.sliderImg {
+    width: 100%;
 }
 
 .nextArrow {

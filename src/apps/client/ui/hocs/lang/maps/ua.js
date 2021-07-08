@@ -71,7 +71,8 @@ export default {
         softFurniture: `М'які меблі`,
         sleepAccessories: 'Аксесуари для сну',
         promotions: 'Акції',
-        all: 'Всі'
+        all: 'Всі',
+        allFeminine: 'Всі'
     },
     deliveryOffer: {
         specialOffer1: 'Знижка на ліжко 200грн',

@@ -128,21 +128,25 @@ class Header extends Component {
                                     <div className={styles.mobileMenuTop}>
                                         {categories.map(category => {
                                             const preparedSubcategories = subCategories.filter(subCategory => subCategory.categoryId === category.id);
+                                            const categoryName = category.texts[lang].name;
+
                                             return <div
                                                 className={styles.mobileMenuItemTop}
                                                 key={category.id}
                                             >
                                                 <div className={classNames(styles.mainCategory, { [styles.open]: isOpenSubcategory === category.id })}
                                                     onClick={() => this.toggleSubcategories(category.id)}>
-                                                    {category.texts[lang].name}
+                                                    {categoryName}
                                                 </div>
                                                 <div className={classNames(styles.subCategoryWrap, { [styles.open]: isOpenSubcategory === category.id })}>
                                                     <Link
                                                         className={styles.subCategoryItem}
                                                         to={`${langRoute}/${category.alias}`}
                                                     >
-                                                        <span className={styles.all}>{text.all}</span>
-                                                        <span className={styles.allCategory}>{category.texts[lang].name}</span>
+                                                        <span className={styles.all}>
+                                                            {categoryName[categoryName.length - 1] === 'ь' ? text.allFeminine : text.all}
+                                                        </span>
+                                                        <span className={styles.allCategory}>{categoryName}</span>
                                                     </Link>
                                                     {
                                                         preparedSubcategories.map(subCategory => {
