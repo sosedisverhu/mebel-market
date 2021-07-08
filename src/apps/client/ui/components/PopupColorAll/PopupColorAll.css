@@ -136,6 +136,10 @@
             cursor: grabbing;
         }
     }
+
+    @media (max-width: 500px) {
+        width: 100%;
+    }
 }
 
 .mainImg {
@@ -143,6 +147,11 @@
     height: 380px;
     flex-shrink: 0;
     z-index: -1;
+
+    @media (max-width: 500px) {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .slider{
