@@ -54,6 +54,8 @@ import { StaticRouter } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import App from '../src/apps/client/App.jsx';
 
+const prodDomain = 'mebelmarket.ua';
+
 const credentials = {
     key: fs.readFileSync('server/https/private.key'),
     cert: fs.readFileSync('server/https/mebelmarket_ua.crt'),
@@ -77,6 +79,14 @@ mongoose.connect(DATABASE_URL, { useNewUrlParser: true, useFindAndModify: false,
 backups();
 
 // redirects
+if (process.env.NODE_ENV !== 'development') {
+    app.use((req, res, next) => {
+        if (prodDomain !== req.get('host')) {
+            res.redirect(301, `https://${prodDomain}${req.url}`);
+        }
+        next();
+    });
+}
 app.use(redirectToHTTPS(ignoreHttpsHosts, [], 301));
 
 // static
